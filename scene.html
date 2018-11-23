@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<script src="scene.js"></script>
+	<script src="scene_.js"></script>
+	<script src="sceneLi.js"></script>
+	<script src="sceneList.js"></script>
+</head>
+<body>
+	
+	<script>
+		
+		var sceneList = new SceneList();	//crea una lista de escenas vacia
+		var scene 	= new Scene("hola");	//crea una escena 
+		var scene_ = new Scene_(new SceneLi(),sceneList);	//crea el controlador de escenas			
+		
+		scene_.add(scene); // añade una escena a la lista y actualiza vista
+		document.body.appendChild(scene_.getView().get()); 
+		
+	</script>
+	
+</body>
+</html>

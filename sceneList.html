@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+
+	<script src="sceneList.js"></script>
+	<script src="sceneList_.js"></script>
+	<script src="sceneListDiv.js"></script>
+	<script src="scene.js"></script>
+	<script src="scene_.js"></script>
+	<script src="sceneLi.js"></script>
+	<script src="history.js"></script>
+	<script src="command.js"></script>
+	<script src="./commands/addSceneCmd.js"></script>
+	<script src="./commands/removeSceneCmd.js"></script>
+</head>
+<body>
+	
+	<script>
+	
+		var sceneList_ = new SceneList_(new SceneListDiv());
+      	
+		document.body.appendChild(sceneList_.getView().get());
+			
+	</script>
+	
+</body>
+</html>
