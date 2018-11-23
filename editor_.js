@@ -26,8 +26,6 @@ class Editor_ {
 
     addScene(scene) {
         var scene_=new Scene_ (new SceneLi(),this);
-        if (scene.getPos()== -1) scene.pos=this.model.list.length;
-      //  console.log(scene.getPos());
         scene_.create(scene);
         this.sceneList_.view.addScene(scene_.getView()); //actualiza la vista de la lista de escenas
     }
