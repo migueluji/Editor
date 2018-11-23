@@ -3,7 +3,7 @@ class RemoveSceneCmd extends Command {
         super();
         this.type="RemoveSceneCmd";
         this.name="Remove Scene: "+ sceneID;
-        this.scene=this.editor.model.list[this.editor.model.list.findIndex(i=>i.ID == sceneID)];
+        this.scene=this.editor.sceneList_.model.list[this.editor.sceneList_.model.list.findIndex(i=>i.ID == sceneID)];
     }
     execute (){
         this.editor.removeScene(this.scene);

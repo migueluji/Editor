@@ -1,26 +1,27 @@
 class SceneLi {
+
     constructor() {
 		 this.li = document.createElement("li");
-		 this.li.innerHTML ="<input type='checkbox'/><label></label>";
+		 this.li.innerHTML ="<label></label><input type='checkbox'/>";
     }
 	
 	removeListener(handler) {
 		 this.li.querySelector("input").addEventListener("click",this.removeID.bind(this,handler));
    }
 	
-   get() {
+   getHtml() {
 		return this.li;
     }
     
     set(model) {
 		this.li.id="ID"+model.getID();
-		this.li.querySelector("label").innerHTML=model.getName(); 
+		var s =model.getPos()+" "+model.getName();
+		this.li.querySelector("label").innerHTML=s; 
     }
 	
 	 removeID(handler){
 		var sceneID=this.li.id.substring(2);
-		 //console.log("SceneLi:",sceneID);
-		 handler(sceneID); 
+		handler(sceneID); 
 	 }
     
 	 remove() { 

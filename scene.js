@@ -1,8 +1,9 @@
 class Scene {
 	
-    constructor(name) {
+    constructor(pos) {
         this.ID = (new Date()).getTime();
-        this.name = name;
+        this.name = "scene ";
+        this.pos= pos;
     }
    
     getID() {
@@ -11,6 +12,10 @@ class Scene {
     
     getName() {
         return this.name;
+    }
+
+    getPos(){
+        return this.pos;
     }
     
 }

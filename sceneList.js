@@ -4,11 +4,16 @@ class SceneList{
         this.list= [];
     }
     
-    add(scene) {
+    addScene(scene) {
         this.list.push(scene);
     }
     
-	remove(sceneID) {
+	removeScene(sceneID) {
 		this.list.splice(this.list.findIndex(i => i.ID == sceneID),1);
-	}
+    }
+
+    lenght (){
+        return this.lenght;
+    }
+    
 }
