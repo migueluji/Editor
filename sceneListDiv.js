@@ -4,7 +4,6 @@ class SceneListDiv {
 		 this.div = document.createElement("div");
 		 this.div.innerHTML =
 				"<ul id='scenelist'></ul>"+
-				"<input id='sceneinput' placeholder='Introduce nueva escena …'/>" +
 				 "<input id='addscene' type='submit' value='Add'/>";
     }
 	
