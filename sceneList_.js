@@ -1,9 +1,9 @@
 class SceneList_ {
     
-    constructor(view,editor_) {
+    constructor(view,model,cmdManager) {
         this.view = view;
-        this.model = editor_.model;  
-        this.view.addSceneListener(editor_.addSceneCmd.bind(editor_));
+        this.model = model;  
+        this.view.addSceneListener(cmdManager.addSceneCmd.bind(cmdManager));
     }
 
     getView() {

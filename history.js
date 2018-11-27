@@ -16,7 +16,7 @@ class History {
             cmd=this.undos.pop();
             cmd.undo();
             this.redos.push(cmd);
-            console.log("history.undo [",this.redos.length,"] ",cmd.name);
+            console.log("history.undo [",this.undos.length,"] ",cmd.name);
         }
         return cmd;
     }

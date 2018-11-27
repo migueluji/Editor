@@ -1,9 +1,9 @@
 class Scene_ {
 
-    constructor(sceneLi,editor_) {
-		this.model = editor_.model; // el modelo es la lista de escenas
-		this.view = sceneLi; // crea la estructura de la vista
-        this.view.removeListener(editor_.removeSceneCmd.bind(editor_));
+    constructor(view,model,cmdManager) {
+		this.model = model; // el modelo es la lista de escenas
+        this.view = view; // crea la estructura de la vista
+        this.view.removeSceneListener(cmdManager.removeSceneCmd.bind(cmdManager));
     }
     
     create (scene) { // actualiza el modelo y la vista 

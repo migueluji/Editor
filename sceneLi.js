@@ -5,7 +5,7 @@ class SceneLi {
 		 this.li.innerHTML ="<label></label><input type='checkbox'/>";
     }
 	
-	removeListener(handler) {
+	removeSceneListener(handler) {
 		 this.li.querySelector("input").addEventListener("click",this.removeID.bind(this,handler));
    }
 	
