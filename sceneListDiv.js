@@ -18,15 +18,13 @@ class SceneListDiv {
 	set(handler) {
 		var items = this.div.querySelector("#scenelist").getElementsByTagName("li");
 		var pos = items.length;
-	//	var newSceneName = this.div.querySelector("#sceneinput").value;
-	//	this.div.querySelector("#sceneinput").value="";
 		handler(pos);
     }
 
-    addScene(sceneView) {
-		 this.div.querySelector("#scenelist").appendChild(sceneView.getHtml());
+    addScene(sceneView,scenePos) {
+		this.div.querySelector("#scenelist").insertBefore(sceneView.getHtml(),this.div.querySelector("#scenelist").childNodes[scenePos]);
 	}
-	
+
 	removeScene(sceneID){
 		this.div.querySelector("#ID"+sceneID).remove();
 	}

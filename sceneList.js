@@ -5,15 +5,11 @@ class SceneList{
     }
     
     addScene(scene) {
-        this.list.push(scene);
+        this.list.splice(scene.pos,0,scene); // añade scene en la posición scene.pos eliminando 0 elementos
     }
     
 	removeScene(sceneID) {
-		this.list.splice(this.list.findIndex(i => i.ID == sceneID),1);
+		this.list.splice(this.list.findIndex(i => i.id == sceneID),1);
     }
 
-    lenght (){
-        return this.lenght;
-    }
-    
 }

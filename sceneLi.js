@@ -13,14 +13,14 @@ class SceneLi {
 		return this.li;
     }
     
-    set(model) {
-		this.li.id="ID"+model.getID();
-		var s =model.getPos()+" "+model.getName();
-		this.li.querySelector("label").innerHTML=s; 
+    set(scene) {
+		this.li.id="ID"+scene.id;
+		this.li.querySelector("label").innerHTML=scene.name;
     }
 	
 	 removeID(handler){
 		var sceneID=this.li.id.substring(2);
+		console.log("removeID",sceneID);
 		handler(sceneID); 
 	 }
     

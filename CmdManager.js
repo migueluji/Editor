@@ -10,6 +10,7 @@ class CmdManager {
     }
 
     removeSceneCmd(sceneID) {
+        console.log("removeSceneCmd",sceneID);
         var cmd =new RemoveSceneCmd(sceneID);
         this.history.execute(cmd);
     }

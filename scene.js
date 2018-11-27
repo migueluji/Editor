@@ -1,21 +1,25 @@
 class Scene {
 	
     constructor(pos) {
-        this.ID = (new Date()).getTime();
-        this.name = "scene ";
-        this.pos= pos;
+        this._id = (new Date()).getTime();
+        this._name = "scene ";
+        this._pos= pos;
     }
    
-    getID() {
-        return this.ID;
+    get id() {
+        return this._id;
     }
-    
-    getName() {
-        return this.name;
+  
+    get name() {
+        return this._name;
     }
 
-    getPos(){
-        return this.pos;
+    set name(name){
+        this._name=name;
+    }
+
+    get pos(){
+        return this._pos;
     }
     
 }

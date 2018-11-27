@@ -16,13 +16,21 @@ class Editor_ {
 
     addScene(scene) {
         var scene_=new Scene_ (new SceneLi(),this.model,this.cmdManager);
+        if (scene.name==="scene "){//si la escena se crea por primera vez, no como resultado de un undo
+            var index = scene.pos+1;
+            scene.name="scene "+index;
+            while(this.model.list.findIndex(i=>i.name==scene.name)!== -1){
+                index++;
+                scene.name="scene "+index;
+            }
+        }
         scene_.create(scene);
-        this.sceneList_.view.addScene(scene_.getView()); //actualiza la vista de la lista de escenas
+        this.sceneList_.view.addScene(scene_.getView(),scene.pos); //actualiza la vista de la lista de escenas
     }
 
     removeScene(scene){
-        this.sceneList_.model.removeScene(scene.ID);
-        this.sceneList_.view.removeScene(scene.ID);
+        this.sceneList_.model.removeScene(scene.id);
+        this.sceneList_.view.removeScene(scene.id);
     }
 
     getView() {
