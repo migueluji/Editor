@@ -1,15 +1,19 @@
 class SceneList{
 	
     constructor() {
-        this.list= [];
+        this._list= [];
     }
     
-    addScene(scene) {
-        this.list.splice(scene.pos,0,scene); // añade scene en la posición scene.pos eliminando 0 elementos
+    get list(){
+        return this._list;
+    }
+
+    addScene(scene,pos) {
+        this._list.splice(pos,0,scene); // añade scene en la posición index eliminando 0 elementos
     }
     
 	removeScene(sceneID) {
-		this.list.splice(this.list.findIndex(i => i.id == sceneID),1);
-    }
+        this._list.splice(this._list.findIndex(i => i.id == sceneID),1);
+    } 
 
 }

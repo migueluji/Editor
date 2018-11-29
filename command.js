@@ -1,4 +1,5 @@
 class Command {
+    
     constructor(editorRef){
         if(editorRef!== undefined){
           Command.editor=editorRef;
@@ -7,4 +8,5 @@ class Command {
         this.type="";
         this.name="";
     }
+
 }

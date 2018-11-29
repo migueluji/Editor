@@ -1,22 +1,22 @@
 class EditorDiv {
 
     constructor() {   
-		 this.div = document.createElement("div");
-		 this.div.innerHTML =
+		 this._html = document.createElement("div");
+		 this._html.innerHTML =
 				 "<input id='undo' type='submit' value='Undo'/>"+
 				 "<input id='redo' type='submit' value='Redo'/>";
     }
 	
+	get html() {  
+        return this._html;
+	}
+
 	undoListener(handler) {
-		this.div.querySelector("#undo").addEventListener("click",handler);
+		this._html.querySelector("#undo").addEventListener("click",handler);
 	}
 
 	redoListener(handler) {
-		this.div.querySelector("#redo").addEventListener("click",handler);
-	}
-
-	get() {  
-        return this.div;
+		this._html.querySelector("#redo").addEventListener("click",handler);
 	}
 	
 }
