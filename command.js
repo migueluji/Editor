@@ -4,9 +4,9 @@ class Command {
         if(editorRef!== undefined){
           Command.editor=editorRef;
         }
-        this.editor= Command.editor;
-        this.type="";
-        this.name="";
+        this._editor= Command.editor;
+        this._type="";
+        this._name="";
     }
 
 }

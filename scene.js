@@ -8,6 +8,10 @@ class Scene {
     get id() {
         return this._id;
     }
+
+    set id(value){
+        this._id=value;
+    }
   
     get name() {
         return this._name;
@@ -15,14 +19,6 @@ class Scene {
 
     set name(name){
         this._name=name;
-    }
-
-    get pos(){
-        return this._pos;
-    }
-
-    set pos(pos){
-        this._pos=pos;
     }
     
 }

@@ -3,8 +3,8 @@ class SceneListDiv {
     constructor() {   
 		 this._html = document.createElement("div");
 		 this._html.innerHTML =
-				"<ul id='scenelist'></ul>"+
-				 "<input id='addscene' type='submit' value='Add'/>";
+		 	"<input id='addscene' type='submit' value='Add'/>"+
+			"<ul id='scenelist'></ul>" ;
     }
 	
 	get html() {  

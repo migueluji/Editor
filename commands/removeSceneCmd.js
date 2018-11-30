@@ -2,18 +2,18 @@ class RemoveSceneCmd extends Command {
     
     constructor (sceneID){
         super();
-        this.type="RemoveSceneCmd";
-        this.name="Remove Scene: "+sceneID;
-        this.pos=this.editor.model.list.findIndex(i => i.id == sceneID);
-        this.scene=this.editor.model.list[this.pos];
+        this._pos=this._editor.model.list.findIndex(i => i.id == sceneID);
+        this._scene=this._editor.model.list[this._pos];
+        this._type="RemoveSceneCmd";
+        this._name="Remove Scene: "+sceneID;
     }
     
     execute (){
-        this.editor.removeScene(this.scene.id);
+        this._editor.removeScene(this._scene.id);
     }
     
     undo(){
-        this.editor.addScene(this.scene,this.pos);
+        this._editor.addScene(this._scene,this._pos);
     }
 
 }

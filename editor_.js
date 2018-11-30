@@ -23,14 +23,6 @@ class Editor_ {
 
     addScene(scene,pos) {  
         var scene_=new Scene_ (new SceneLi(),this._model,this.cmdManager);
-        if (scene.name===""){//si la escena se crea por primera vez, no como resultado de un undo
-            var index = pos+1;
-            scene.name="scene "+index;
-            while(this._model.list.findIndex(i=>i.name==scene.name)!== -1){
-                index++;
-                scene.name="scene "+index;
-            }
-        }
         scene_.create(scene,pos);
         this.sceneList_.view.addScene(scene_.view,pos); //actualiza la vista de la lista de escenas
     }
