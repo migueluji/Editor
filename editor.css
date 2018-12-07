@@ -24,3 +24,11 @@ body{
     padding: 0px 16px;
     height: 48px;
 }
+.mdc-list-item.mdc-ripple-upgraded {
+    margin:0px;
+    padding-left:16px;
+}
+.over{
+    border: 1px  solid lightgray;
+    opacity: 0.5;
+}

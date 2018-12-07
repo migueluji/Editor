@@ -30,12 +30,7 @@ class EditorView {
     }
     
     drawerHandler(){
-        var drawer=this.html.querySelector(".mdc-drawer");
-        if (drawer.classList.contains("mdc-drawer--open")){
-            drawer.classList.replace("mdc-drawer--open","mdc-drawer--close")
-        }
-        else{
-            drawer.classList.replace("mdc-drawer--close","mdc-drawer--open")
-        };
+        const drawer = mdc.drawer.MDCDrawer.attachTo(this._html.querySelector('.mdc-drawer'));
+        drawer.open= drawer.open ? false : true;
     }
 }
