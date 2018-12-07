@@ -1,0 +1,26 @@
+body{
+    margin:0;
+}
+.mdc-top-app-bar{
+    position: absolute;
+}
+.editor-frame-root{
+    display: flex;
+    height: 100vh;
+}
+.mdc-drawer-app-content{
+    width:100%;
+}
+.mdc-top-app-bar{
+    position: relative;
+}
+.mdc-menu-surface--anchor{
+    position:relative; 
+    z-index:100; 
+    transform:translate(130px,-55px);
+}
+.mdc-menu .mdc-list-item {
+    margin: 0px;
+    padding: 0px 16px;
+    height: 48px;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="theme-color" content="#000000">
+	<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+	<title>Gamesonomy Editor</title>
+	
+	<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"></link>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="editor.css"></link>
+
+	<script src="editor_.js"></script>
+	<script src="editorView.js"></script>
+	<script src="appBar_.js"></script>
+	<script src="appBarView.js"></script>
+	<script src="sceneList.js"></script>
+	<script src="sceneList_.js"></script>
+	<script src="sceneListView.js"></script>
+	<script src="scene.js"></script>
+	<script src="scene_.js"></script>
+	<script src="sceneView.js"></script>
+	<script src="history.js"></script>
+	<script src="command.js"></script>
+	<script src="cmdManager.js"></script>
+	<script src="./commands/addSceneCmd.js"></script>
+	<script src="./commands/duplicateSceneCmd.js"></script>
+	<script src="./commands/moveSceneCmd.js"></script>
+	<script src="./commands/removeSceneCmd.js"></script>
+
+</head>
+<body class="mdc-typography">
+
+	<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+	<script>
+
+		var editor_ = new Editor_(new EditorView(),new SceneList());
+		document.body.appendChild(editor_.view.html);
+
+	</script>
+	
+</body>
+</html>

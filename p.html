@@ -1,0 +1,39 @@
+<!-- Required styles for MDC Web -->
+<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+
+<!-- Render textfield component -->
+<div class="mdc-text-field">
+ <input type="text" id="my-text-field" class="mdc-text-field__input">
+ <label class="mdc-floating-label" for="my-text-field">Hint text aaaas</label>
+ <div class="mdc-line-ripple"></div>
+</div>
+
+<div class="mdc-menu mdc-menu-surface" tabindex="-1">
+       <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
+         <li class="mdc-list-item" role="menuitem">
+           <span class="mdc-list-item__text">A Menu Item</span>
+         </li>
+         <li class="mdc-list-item" role="menuitem">
+           <span class="mdc-list-item__text">Another Menu Item</span>
+         </li>
+       </ul>
+</div>
+
+
+
+
+<!-- Required MDC Web JavaScript library -->
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<!-- Instantiate single textfield component rendered in the document -->
+<script>
+   var z = mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
+   console.log(mdc);
+
+   const menu = mdc.menu.MDCMenu.attachTo(document.querySelector('.mdc-menu'));
+   console.log(menu);
+
+   menu.open = false;
+
+   //console.log(b);
+
+</script>
