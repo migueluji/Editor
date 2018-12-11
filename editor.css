@@ -57,10 +57,12 @@ body{
 .scene-properties{
     background-color: aqua;
     height: 100%;
+    width: 320px;
 }
 .game-properties{
     background-color: orange;
     height: 100%;
+    width: 320px;
 }
 .actor-list{
     background-color: greenyellow;
