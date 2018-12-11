@@ -1,11 +1,11 @@
 class AppBar_ {
     
-    constructor(view,model,cmdManager) {
-        this._view = new AppBarView();
+    constructor(view,model) {
+        this._view = view;
         this._model = model;  
-        this._view.drawerListener(view.drawerHandler.bind(view));
-        this._view.undoListener(cmdManager.undo.bind(cmdManager));
-        this._view.redoListener(cmdManager.redo.bind(cmdManager));
+        this._view.drawerListener();
+        this._view.undoListener(CmdManager.undo.bind(CmdManager));
+        this._view.redoListener(CmdManager.redo.bind(CmdManager));
     }
 
     get view() {

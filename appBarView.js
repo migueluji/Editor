@@ -24,8 +24,8 @@ class AppBarView {
         return this._html;
 	}
 
-	drawerListener(drawerHandler) {
-		this._html.querySelector("#drawer").addEventListener("click",drawerHandler);
+	drawerListener() {
+		this._html.querySelector("#drawer").addEventListener("click",this.drawerHandler.bind(this));
 	}
 
 	undoListener(undo) {
@@ -35,5 +35,10 @@ class AppBarView {
 	redoListener(redo) {
 		this._html.querySelector("#redo").addEventListener("click",redo);
 	}
+
+    drawerHandler(){
+        const drawer = mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
+        drawer.open= drawer.open ? false : true;
+    }
 	
 }

@@ -1,12 +1,13 @@
 class Scene_ {
 
-    constructor(view,model,cmdManager) {
+    constructor(view,model) {
         this._view = view; // crea la estructura de la vista
         this._model = model; // el modelo es la lista de escenas
         this._view.menuSceneListener();
-        this._view.duplicateSceneListener(cmdManager.duplicateSceneCmd.bind(cmdManager));
-        this._view.removeSceneListener(cmdManager.removeSceneCmd.bind(cmdManager));
-        this._view.dragSceneListeners(cmdManager.moveSceneCmd.bind(cmdManager));
+        this._view.propertiesSceneListener();
+        this._view.duplicateSceneListener(CmdManager.duplicateSceneCmd.bind(CmdManager));
+        this._view.removeSceneListener(CmdManager.removeSceneCmd.bind(CmdManager));
+        this._view.dragSceneListeners(CmdManager.moveSceneCmd.bind(CmdManager));
     }
     
     get view() {

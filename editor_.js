@@ -2,14 +2,16 @@ class Editor_ {
     
     constructor(view,model) {
         this._view = view;
-        this._model = model;  
-        this.cmdManager = new CmdManager(this);
-
-        this.appBar_ =new AppBar_(this._view,this._model,this.cmdManager);
-        this._view.createAppBar(this.appBar_.view.html);
-
-        this.sceneList_ = new SceneList_(new SceneListView(),this._model,this.cmdManager);
-        this._view.createDrawer(this.sceneList_.view.html);
+        this._model = model;
+                
+        this.appBar_ =new AppBar_(new AppBarView(),this._model);
+        this._view.html=this.appBar_.view.html;
+  
+        this.sideSheet_ =new SideSheet_(new SideSheetView(),this._model);
+        this._view.html=this.sideSheet_.view.html;
+  
+        this.sceneList_ = new SceneList_(new SceneListView(),this._model);
+        this._view.html=this.sceneList_.view.html;
     }
     
     get view() {

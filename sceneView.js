@@ -14,7 +14,7 @@ class SceneView {
 				'<div class="mdc-menu-surface--anchor">'+
 					'<div class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
 						'<ul class="mdc-list" role="menu" aria-hidden="true">'+
-							'<li class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Properties</li>'+
+							'<li id="properties" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Properties</li>'+
 							'<li class="mdc-list-divider" role="separator"></li>'+
 							'<li id="duplicate" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Duplicate</li>'+
 							'<li id="delete" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Delete</li>'+
@@ -42,6 +42,10 @@ class SceneView {
 		this._html.querySelector("#more").addEventListener("click",this.menuSceneHandler.bind(this));
 	}
 
+	propertiesSceneListener (){
+		this._html.querySelector("#properties").addEventListener("click",this.propertiesSceneHandler.bind(this));
+	}
+
 	duplicateSceneListener(duplicateSceneCmd){
 		this._html.querySelector('#duplicate').addEventListener("click",this.duplicateSceneHandler.bind(this,duplicateSceneCmd));
 	}
@@ -64,6 +68,10 @@ class SceneView {
 		menu.open = true;
 	}
 
+	propertiesSceneHandler(){
+		SideSheetView.openSheetHandler(".scene-properties");
+	}
+
 	duplicateSceneHandler(duplicateSceneCmd){
 		duplicateSceneCmd(this._html.id);
 	}
@@ -77,10 +85,8 @@ class SceneView {
 	}
 
 	dragoverSceneHandler(e){
-		if (e.preventDefault) {
-			e.preventDefault(); // Necessary. Allows us to drop.
-		  }
-		  this._html.classList.add('over');
+		e.preventDefault();
+		this._html.classList.add('over');
 	};
 
 	dragleaveSceneHandler(e){
@@ -94,7 +100,7 @@ class SceneView {
 		var element= document.createElement("div");
 		element.innerHTML=e.dataTransfer.getData('text/html');
 		element=element.firstElementChild;
-		this.moveSceneCmd(element.id,this.position(this._html,this._html.parentNode)+1);
+		this.moveSceneCmd(element.id,this.position(this._html,this._html.parentNode));
 		this._html.classList.remove("over");
 	};
 
@@ -110,7 +116,7 @@ class SceneView {
 				count++;
 			}
 		}
-		return count;
+		return count++;
 	}
 }
 

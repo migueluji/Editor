@@ -1,15 +1,21 @@
+html{
+    height: 100%;
+}
 body{
     margin:0;
+    height: 100%;
 }
 .mdc-top-app-bar{
     position: absolute;
 }
 .editor-frame-root{
+    overflow: hidden;
     display: flex;
-    height: 100vh;
+    height: 100%;
 }
 .mdc-drawer-app-content{
     width:100%;
+    height: 100%;
 }
 .mdc-top-app-bar{
     position: relative;
@@ -17,7 +23,8 @@ body{
 .mdc-menu-surface--anchor{
     position:relative; 
     z-index:100; 
-    transform:translate(130px,-55px);
+    transform:translate(130px,-48px);
+    width: 0px;
 }
 .mdc-menu .mdc-list-item {
     margin: 0px;
@@ -31,4 +38,31 @@ body{
 .over{
     border: 1px  solid lightgray;
     opacity: 0.5;
+}
+.main-content{
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+.canvas{
+    height: 100%;
+    width: 100%;
+    background-color: green;
+}
+.side-sheet{
+    width: 320px;
+    height: 100%;
+    background-color: yellow;
+}
+.scene-properties{
+    background-color: aqua;
+    height: 100%;
+}
+.game-properties{
+    background-color: orange;
+    height: 100%;
+}
+.actor-list{
+    background-color: greenyellow;
+    height: 100%;
 }

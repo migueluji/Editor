@@ -10,6 +10,7 @@ class AddSceneCmd extends Command {
     }
 
     _newName (pos){
+       
         pos = pos+1;
         var name="scene "+pos;
         while(this._editor.model.list.findIndex(i=>i.name==name)!== -1){
