@@ -10,29 +10,26 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="editor.css"></link>
 
-	<script src="editor_.js"></script>
-	<script src="editorView.js"></script>
-	<script src="appBar_.js"></script>
-	<script src="appBarView.js"></script>
-	<script src="sideSheet_.js"></script>
-	<script src="sideSheetView.js"></script>
-	<script src="sceneList.js"></script>
-	<script src="sceneList_.js"></script>
-	<script src="sceneListView.js"></script>
-	<script src="sceneProperties_.js"></script>
-	<script src="scenePropertiesView.js"></script>
-	<script src="gameProperties_.js"></script>
-	<script src="gamePropertiesView.js"></script>
-	<script src="scene.js"></script>
-	<script src="scene_.js"></script>
-	<script src="sceneView.js"></script>
-	<script src="history.js"></script>
-	<script src="command.js"></script>
-	<script src="cmdManager.js"></script>
-	<script src="./commands/addSceneCmd.js"></script>
-	<script src="./commands/duplicateSceneCmd.js"></script>
-	<script src="./commands/moveSceneCmd.js"></script>
-	<script src="./commands/removeSceneCmd.js"></script>
+	<script src="Editor.js"></script>
+	<script src="EditorView.js"></script>
+	<script src="AppBarView.js"></script>
+	<script src="DrawerHeaderView.js"></script>
+	<script src="SideSheetView.js"></script>
+	<script src="Game.js"></script>
+	<script src="DrawerScenesView.js"></script>
+	<script src="ScenePropertiesView.js"></script>
+	<script src="GamePropertiesView.js"></script>
+	<script src="GamePropertiesSettingsView.js"></script>
+	<script src="GamePropertiesSoundView.js"></script>
+	<script src="Scene.js"></script>
+	<script src="SceneView.js"></script>
+	<script src="./commands/History.js"></script>
+	<script src="./commands/Command.js"></script>
+	<script src="./commands/CmdManager.js"></script>
+	<script src="./commands/AddSceneCmd.js"></script>
+	<script src="./commands/DuplicateSceneCmd.js"></script>
+	<script src="./commands/MoveSceneCmd.js"></script>
+	<script src="./commands/RemoveSceneCmd.js"></script>
 
 </head>
 <body class="mdc-typography">
@@ -40,10 +37,9 @@
 	<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 	<script>
 
-
-		var editor_ = new Editor_(new EditorView(),new SceneList());
-		new CmdManager(editor_);
-		document.body.appendChild(editor_.view.html);
+		var editor = new Editor(new EditorView(),new Game());
+		new CmdManager(editor);
+		document.body.appendChild(editor.view.html);
 
 	</script>
 	

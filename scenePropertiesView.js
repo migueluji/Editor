@@ -3,6 +3,7 @@ class ScenePropertiesView {
     constructor() {   
 		 this._html = document.createElement("div");
 		 this._html.className +="scene-properties";
+		 this._html.style.display="none";
 		 this._html.innerHTML =
 						'<header class="mdc-top-app-bar--dense">'+
 							'<div class="mdc-top-app-bar__row">'+
@@ -14,14 +15,11 @@ class ScenePropertiesView {
 								'</section>'+
 							'</div>'+
 						'</header>';
+		this._html.querySelector("#closebutton").addEventListener("click",SideSheetView.closeSheetHandler);
     }
 	
 	get html() {  
         return this._html;
-	}
-
-	closeScenePropertiesListener(closeSheetHandler) {
-		this._html.querySelector("#closebutton").addEventListener("click",closeSheetHandler);
 	}
 
 }

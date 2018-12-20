@@ -17,28 +17,18 @@ class AppBarView {
 							'<button id="play" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" aria-label="Play" style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">play_circle_filled</button>'+
 						'</section>'+
 					'</div>';
-
+		this._html.querySelector("#drawer").addEventListener("click",this.drawerHandler.bind(this));
+		this._html.querySelector("#undo").addEventListener("click",CmdManager.undo.bind(CmdManager));
+		this._html.querySelector("#redo").addEventListener("click",CmdManager.redo.bind(CmdManager));
     }
 	
 	get html() {  
         return this._html;
 	}
 
-	drawerListener() {
-		this._html.querySelector("#drawer").addEventListener("click",this.drawerHandler.bind(this));
-	}
-
-	undoListener(undo) {
-		this._html.querySelector("#undo").addEventListener("click",undo);
-	}
-
-	redoListener(redo) {
-		this._html.querySelector("#redo").addEventListener("click",redo);
-	}
-
     drawerHandler(){
         const drawer = mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
         drawer.open= drawer.open ? false : true;
-    }
+	}
 	
 }

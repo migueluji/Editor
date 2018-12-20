@@ -5,17 +5,28 @@ body{
     margin:0;
     height: 100%;
 }
-.mdc-top-app-bar{
-    position: absolute;
-}
 .editor-frame-root{
     overflow: hidden;
     display: flex;
     height: 100%;
 }
+.mdc-drawer__header{
+    border-bottom: 1px solid lightgray
+}
 .mdc-drawer-app-content{
     width:100%;
     height: 100%;
+    display:flex;
+    flex-direction: column;
+}
+.add-scene-button{
+    position: absolute;
+    transform: translate(28px, -28px);
+}
+.add-property-button{
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
 }
 .mdc-top-app-bar{
     position: relative;
@@ -47,24 +58,66 @@ body{
 .canvas{
     height: 100%;
     width: 100%;
-    background-color: green;
 }
 .side-sheet{
     width: 320px;
     height: 100%;
-    background-color: yellow;
+    border-left: 1px solid lightgray;
 }
 .scene-properties{
-    background-color: aqua;
     height: 100%;
     width: 320px;
 }
 .game-properties{
-    background-color: orange;
     height: 100%;
     width: 320px;
+    display: flex;
+    flex-direction: column;
+}
+.properties-list{
+    padding: 0px;
+    height: 100%;
+    overflow-y: auto;
 }
 .actor-list{
     background-color: greenyellow;
     height: 100%;
+}
+.properties-section{
+    border-bottom:1px solid lightgray;
+}
+.properties-section-title{
+    color:#6200ee ;
+    font-size: 1.1rem;
+}
+#expandbutton{
+    padding-left: 0px;
+    width: 36px;
+}
+.properties-panel.open{
+    display: block;
+}
+.properties-panel{
+    padding: 0px 16px 16px 16px;
+    display: none;
+}
+.properties-bar{
+    border-bottom: 1px solid lightgray;
+}
+.two-properties{
+    display: inline-flex;
+    flex: 1 1 auto;
+}
+.mdc-text-field:not(.mdc-text-field--disabled) {
+     background-color: white;
+}
+.text-field--full{
+    width: 100%;
+    margin:4px 0px;
+}
+.text-field--end{
+    margin: 4px 0px 4px 4px;
+}
+.text-field--start{
+    margin: 4px 4px 4px 0px;
 }

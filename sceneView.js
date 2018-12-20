@@ -21,45 +21,28 @@ class SceneView {
 						'</ul>'+
 					'</div>'+
 				'</div>';
-			this.moveSceneCmd=null;
+			this._html.querySelector("#more").addEventListener("click",this.menuSceneHandler.bind(this));
+			this._html.querySelector("#properties").addEventListener("click",this.propertiesSceneHandler.bind(this));
+			this._html.querySelector('#duplicate').addEventListener("click",this.duplicateSceneHandler.bind(this,CmdManager.duplicateSceneCmd.bind(CmdManager)));
+			this._html.querySelector('#delete').addEventListener("click",this.removeSceneHandler.bind(this,CmdManager.removeSceneCmd.bind(CmdManager)));
+			this._html.addEventListener("dragstart",this.dragstartSceneHandler.bind(this));
+			this._html.addEventListener("dragover",this.dragoverSceneHandler.bind(this));
+			this._html.addEventListener("dragleave",this.dragleaveSceneHandler.bind(this));
+			this._html.addEventListener("drop",this.dropSceneHandler.bind(this));
+			this.moveSceneCmd=CmdManager.moveSceneCmd.bind(CmdManager); //guardo la función para usarla en el handler
 	}
 	
 	get html() {
 		return this._html;
   	}
     
-  	set html(scene) {
+  	addView(scene) {
 		this._html.id=scene.id;
 		this._html.querySelector(".mdc-list-item__text").innerHTML='<span>'+scene.name+'</span>';
 	}
 	  
 	remove() { 
 		this._html.remove();
-	}
-
-// Listeners
-	menuSceneListener(){
-		this._html.querySelector("#more").addEventListener("click",this.menuSceneHandler.bind(this));
-	}
-
-	propertiesSceneListener (){
-		this._html.querySelector("#properties").addEventListener("click",this.propertiesSceneHandler.bind(this));
-	}
-
-	duplicateSceneListener(duplicateSceneCmd){
-		this._html.querySelector('#duplicate').addEventListener("click",this.duplicateSceneHandler.bind(this,duplicateSceneCmd));
-	}
-
-	removeSceneListener(removeSceneCmd) {
-		this._html.querySelector('#delete').addEventListener("click",this.removeSceneHandler.bind(this,removeSceneCmd));
-	}
-
-	dragSceneListeners(moveSceneCmd) {
-		this._html.addEventListener("dragstart",this.dragstartSceneHandler.bind(this));
-		this._html.addEventListener("dragover",this.dragoverSceneHandler.bind(this));
-		this._html.addEventListener("dragleave",this.dragleaveSceneHandler.bind(this));
-		this.moveSceneCmd=moveSceneCmd; //guardo la función para usarla en el handler
-		this._html.addEventListener("drop",this.dropSceneHandler.bind(this));
 	}
 
 // Handlers
@@ -100,12 +83,12 @@ class SceneView {
 		var element= document.createElement("div");
 		element.innerHTML=e.dataTransfer.getData('text/html');
 		element=element.firstElementChild;
-		this.moveSceneCmd(element.id,this.position(this._html,this._html.parentNode));
+		this.moveSceneCmd(element.id,this._position(this._html,this._html.parentNode));
 		this._html.classList.remove("over");
 	};
 
 // Utilities
-	position(element,parent){
+	_position(element,parent){
 		var count=-1;
 		var child=parent.firstChild;
 		if (child) {
