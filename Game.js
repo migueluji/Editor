@@ -11,9 +11,18 @@ class Game {
         this.start=  0;
         this.pan= 0;
         this.loop= true;
-        
-        this.sceneList=[];
-        this.id ="id"+(new Date()).valueOf();
+
+        this.sceneList=
+            [{
+                "id": "id1234567890000",
+                "name": "Start",
+            },
+            {
+                "id": "id1234567890001",
+                "name":"End",
+            }
+        ];
+       
     }
 
     addScene(scene,pos) {

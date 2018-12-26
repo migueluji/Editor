@@ -4,12 +4,12 @@ class SceneView {
 			this._html = document.createElement("li");
 			this._html.setAttribute("draggable","true");
 			this._html.innerHTML =
-				'<div class="mdc-list-item mdc-ripple-upgraded">'+
+				'<div class="mdc-list-item mdc-ripple-upgraded" role="option" aria-selected="false">'+
 					'<span class="mdc-list-item__graphic material-icons" aria-hidden="true">panorama_wide_angle</span>'+
 					'<span class="mdc-list-item__text">'+
 						'<span></span>'+
 					'</span>'+
-					'<button id="more" class="mdc-button mdc-list-item__meta material-icons" aria-hidden="true">more_vert</button>'+
+					'<button id="more" class="mdc-button mdc-list-item__meta material-icons">more_vert</button>'+
 				'</div>'+
 				'<div class="mdc-menu-surface--anchor">'+
 					'<div class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
@@ -23,13 +23,14 @@ class SceneView {
 				'</div>';
 			this._html.querySelector("#more").addEventListener("click",this.menuSceneHandler.bind(this));
 			this._html.querySelector("#properties").addEventListener("click",this.propertiesSceneHandler.bind(this));
-			this._html.querySelector('#duplicate').addEventListener("click",this.duplicateSceneHandler.bind(this,CmdManager.duplicateSceneCmd.bind(CmdManager)));
-			this._html.querySelector('#delete').addEventListener("click",this.removeSceneHandler.bind(this,CmdManager.removeSceneCmd.bind(CmdManager)));
+			this._html.querySelector('#duplicate').addEventListener("click",this.duplicateSceneHandler.bind(this));
+			this._html.querySelector('#delete').addEventListener("click",this.removeSceneHandler.bind(this,));
 			this._html.addEventListener("dragstart",this.dragstartSceneHandler.bind(this));
 			this._html.addEventListener("dragover",this.dragoverSceneHandler.bind(this));
 			this._html.addEventListener("dragleave",this.dragleaveSceneHandler.bind(this));
 			this._html.addEventListener("drop",this.dropSceneHandler.bind(this));
-			this.moveSceneCmd=CmdManager.moveSceneCmd.bind(CmdManager); //guardo la función para usarla en el handler
+			this._html.addEventListener("click",this.selectSceneHandler.bind(this));
+			this.menu = mdc.menu.MDCMenu.attachTo(this._html.querySelector('.mdc-menu'));
 	}
 	
 	get html() {
@@ -46,21 +47,34 @@ class SceneView {
 	}
 
 // Handlers
+	selectSceneHandler(e){
+		if (e.srcElement.nodeName=="DIV"){ //solo selecciona la escena si se hace click fuera del botón
+			Command.selectSceneCmd(this._html.id);
+		}
+	}
+
 	menuSceneHandler(){
-		const menu = mdc.menu.MDCMenu.attachTo(this._html.querySelector('.mdc-menu'));
-		menu.open = true;
+		this.menu.open = true;
 	}
 
 	propertiesSceneHandler(){
 		SideSheetView.openSheetHandler(".scene-properties");
+		Command.selectSceneCmd(this._html.id);
 	}
 
-	duplicateSceneHandler(duplicateSceneCmd){
-		duplicateSceneCmd(this._html.id);
+	duplicateSceneHandler(){
+		CmdManager.duplicateSceneCmd(this._html.id);
 	}
 
-	removeSceneHandler (removeSceneCmd){
-		removeSceneCmd(this._html.id); 
+	removeSceneHandler (){
+		var text =document.querySelector("#"+this._html.id).firstChild.firstChild.nextSibling.innerText;
+		if (confirm('Are you sure you want to delete "'+text+'" scene?')){
+			var parent =document.querySelector("#"+this._html.id).parentNode;
+			CmdManager.removeSceneCmd(this._html.id); 
+			if (parent.firstChild==null){ // si no hay scenas creamos una
+				CmdManager.addSceneCmd(0);
+			}
+		}
 	}
 
 	dragstartSceneHandler(e){
@@ -83,8 +97,11 @@ class SceneView {
 		var element= document.createElement("div");
 		element.innerHTML=e.dataTransfer.getData('text/html');
 		element=element.firstElementChild;
-		this.moveSceneCmd(element.id,this._position(this._html,this._html.parentNode));
+		CmdManager.moveSceneCmd(element.id,this._position(this._html,this._html.parentNode));
 		this._html.classList.remove("over");
+		if (element.querySelector(".mdc-list-item--sceneselected")){
+			Command.selectSceneCmd(element.id); 
+		}
 	};
 
 // Utilities

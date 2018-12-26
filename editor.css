@@ -23,6 +23,9 @@ body{
     position: absolute;
     transform: translate(28px, -28px);
 }
+.mdc-list-item--sceneselected{
+    background-color: #ede3fa;
+}
 .add-property-button{
     position: absolute;
     bottom: 16px;
@@ -33,9 +36,12 @@ body{
 }
 .mdc-menu-surface--anchor{
     position:relative; 
-    z-index:100; 
+    z-index:2; 
     transform:translate(130px,-48px);
     width: 0px;
+}
+.mdc-fab{
+    z-index: 2;
 }
 .mdc-menu .mdc-list-item {
     margin: 0px;

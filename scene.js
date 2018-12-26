@@ -1,7 +1,7 @@
 class Scene {
 	
     constructor() {
-        this.id ="id"+(new Date()).getTime();
+        this.id ="id"+(new Date()).valueOf();
         this.name = "";
     }
    

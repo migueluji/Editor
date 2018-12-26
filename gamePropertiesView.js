@@ -36,4 +36,8 @@ class GamePropertiesView {
 		children.parentNode.replaceChild(html,children);
 	}
 
+	updateGameProperty(property,value){
+		this._html.querySelector("#"+property).value=value;
+	}
+
 }
