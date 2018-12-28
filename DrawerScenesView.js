@@ -10,19 +10,13 @@ class DrawerScenesView {
 			'</button>'+
 			'<ul  style="padding-top:32px" role="listbox" class="mdc-list  mdc-list--avatar-list">'+ //mdc-list--two-line
 			'</ul>';
-		this._html.querySelector("#addscene").addEventListener("click",this.addSceneHandler.bind(this));
+		this._html.querySelector("#addscene").addEventListener("click",this._addSceneHandler.bind(this));
 		this._init(sceneList);
-//		const list=mdc.list.MDCList.attachTo(this._html.querySelector('.mdc-list'));
-//		list.singleSelection=true;
     }
 	
 	get html() {  
         return this._html;
 	}
-     
-	addSceneHandler() {
-		CmdManager.addSceneCmd(this._html.querySelectorAll(".mdc-list-item__text").length)
-  	}
 
   	addScene(sceneView,scenePos) {
 		this._html.querySelector(".mdc-list").insertBefore(sceneView.html,this._html.querySelector(".mdc-list").childNodes[scenePos]);
@@ -32,15 +26,21 @@ class DrawerScenesView {
 		this._html.querySelector("#"+sceneID).remove();
 	}
 
-	updateSelectedScene(id){
+	updateSelectedScene(sceneID){
 		var selectedScenes=this._html.querySelectorAll(".mdc-list-item--sceneselected");
 		selectedScenes.forEach(element => {
 			element.classList.remove("mdc-list-item--sceneselected");
 		});
-		var listItem=this._html.querySelector('#'+id).firstChild;
+		var listItem=this._html.querySelector('#'+sceneID).firstChild;
 		listItem.className +=" mdc-list-item--sceneselected";
 	}
-	
+
+//Handlers
+	_addSceneHandler() {
+		CmdManager.addSceneCmd(this._html.querySelectorAll(".mdc-list-item__text").length)  
+	}
+
+//Utilities
 	_init(sceneList){
 		var scenePos=1;
 		sceneList.forEach(scene => {

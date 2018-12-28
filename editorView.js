@@ -14,7 +14,7 @@ class EditorView {
                         '<div class="canvas"></div>'+
                         '<aside class="side-sheet"></aside>'+
                     '</div>'+
-                '</div>';     
+                '</div>';
      }
 	
 	get html() {  

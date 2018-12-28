@@ -65,6 +65,21 @@ body{
     height: 100%;
     width: 100%;
 }
+.dialog-full-screen{
+    z-index:100;
+    position:absolute;
+    background-color:rgba(0,0,0,0.2);
+    width:100%;
+    height:100%;
+}
+.mdc-card{
+    padding: 0px 16px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
 .side-sheet{
     width: 320px;
     height: 100%;
@@ -91,6 +106,10 @@ body{
 }
 .properties-section{
     border-bottom:1px solid lightgray;
+    background-color:white;
+}
+.properties-section.properties-section--disable{
+    background-color:rgba(0,0,0,0.05);
 }
 .properties-section-title{
     color:#6200ee ;
@@ -114,8 +133,21 @@ body{
     display: inline-flex;
     flex: 1 1 auto;
 }
+.mdc-text-field{
+    width: 100%;
+}
+.mdc-form-field{
+    width: 100%;
+}
+.mdc-form-field>label{
+    padding-left: 16px;
+    color: rgba(0,0,0,0.6);
+}
 .mdc-text-field:not(.mdc-text-field--disabled) {
-     background-color: white;
+    background-color: white;
+}
+.mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate)~.mdc-checkbox__background {
+    background-color: white;
 }
 .text-field--full{
     width: 100%;

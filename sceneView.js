@@ -30,7 +30,7 @@ class SceneView {
 			this._html.addEventListener("dragleave",this.dragleaveSceneHandler.bind(this));
 			this._html.addEventListener("drop",this.dropSceneHandler.bind(this));
 			this._html.addEventListener("click",this.selectSceneHandler.bind(this));
-			this.menu = mdc.menu.MDCMenu.attachTo(this._html.querySelector('.mdc-menu'));
+			this._menu = mdc.menu.MDCMenu.attachTo(this._html.querySelector('.mdc-menu'));
 	}
 	
 	get html() {
@@ -48,13 +48,13 @@ class SceneView {
 
 // Handlers
 	selectSceneHandler(e){
-		if (e.srcElement.nodeName=="DIV"){ //solo selecciona la escena si se hace click fuera del botón
+		if (e.srcElement.nodeName=="DIV"){ //solo selecciona la escena si se hace click fuera del botón "more"
 			Command.selectSceneCmd(this._html.id);
 		}
 	}
 
 	menuSceneHandler(){
-		this.menu.open = true;
+		this._menu.open = true;
 	}
 
 	propertiesSceneHandler(){

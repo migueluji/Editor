@@ -32,6 +32,11 @@ class CmdManager {
         this.history.execute(cmd);
     }
 
+    static addGamePropertyCmd(property,type,value){
+        var cmd = new AddGamePropertyCmd(property,type,value);
+        this.history.execute(cmd);
+    }
+
     static undo(){
         this.history.undo();
     }

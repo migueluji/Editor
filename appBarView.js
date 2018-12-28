@@ -27,12 +27,14 @@ class AppBarView {
         return this._html;
 	}
 
-    drawerHandler(){
-        const drawer = mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
-        drawer.open= drawer.open ? false : true;
-	}
-	
-	updateSceneName(sceneName){
+	updateSceneName(sceneName) {
 		this._html.querySelector("#sceneName").innerText=sceneName;
 	}
+	
+// Handlers
+    drawerHandler() {
+        const drawer = mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
+        drawer.open = drawer.open ? false : true;
+	}
+	
 }

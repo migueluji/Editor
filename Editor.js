@@ -18,10 +18,14 @@ class Editor {
   
         //Game Properties
         this._gamePropertiesView = new GamePropertiesView();
-            this._gamePropertiesSettingsView= new GamePropertiesSettingsView(gameModel);
-            this._gamePropertiesSoundView= new GamePropertiesSoundView(gameModel);
+            this._gamePropertiesSettingsView= new GamePropertiesSettingsView();
+            this._gamePropertiesSoundView= new GamePropertiesSoundView();
+            this._gamePropertiesNewView = new GamePropertiesNewView();
+        console.log(this._gamePropertiesNewView.html);
         this._gamePropertiesView.addView(this._gamePropertiesSettingsView.html);
         this._gamePropertiesView.addView(this._gamePropertiesSoundView.html);
+        this._gamePropertiesView.addView(this._gamePropertiesNewView.html);
+        this._gamePropertiesView._init(gameModel.properties); // inicializa la vista con las propiedades iniciales dle juego
 
         //Scene Properties
         this._scenePropertiesView = new ScenePropertiesView();
@@ -34,8 +38,19 @@ class Editor {
 
     }
 
+    addGameProperty(property,type,value){
+        this.model.newProperties.push({"property":property,"type":type, "value":value });
+    }
+
+    removeGameProperty(property){
+       this.model.newProperties.splice(this.model.newProperties.findIndex(i=> i["property"]==property),1);
+    }
+
     changeGameProperty(property,value){
+        this.model[property]=value;
         this._gamePropertiesView.updateGameProperty(property,value);
+        if (property == "name") this._draverHeaderView.updateSceneName(value);
+        if (property == "play") this._gamePropertiesSoundView.onClickHandler();
     }
 
     selectScene(sceneID){
@@ -58,18 +73,15 @@ class Editor {
     removeScene(sceneID){
         this.model.removeScene(sceneID);
         this._drawerScenesView.removeScene(sceneID);
-        if(sceneID!=this.selectedScene){
-            this.selectScene(this.selectedScene);
-        }
-        else {
+        if(sceneID==this.selectedScene){
             if (this.model.sceneList.length==this.selectedSceneIndex ){
-                if (this.selectedSceneIndex>0){ //si hay scenas qque sleccionar
+                if (this.selectedSceneIndex>0){ //si hay scenas que seleccionar
                     this.selectScene(this.model.sceneList[this.selectedSceneIndex-1].id);
                 }
             }
             else {
                 this.selectScene(this.model.sceneList[this.selectedSceneIndex].id);
-            }
+            }    
         }
 
     }

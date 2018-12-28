@@ -1,14 +1,14 @@
 class GamePropertiesSoundView {
 
-    constructor(gameModel) {   
+    constructor() {   
 		 this._html = document.createElement("li");
-		 this._html.className +="game-properties-sound properties-section";
+		 this._html.className +="game-properties-sound properties-section properties-section--disable";
 		 this._html.innerHTML =
 			'<li class="mdc-list-item mdc-ripple-upgraded properties-section-title">'+
 				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
 				'Sound'+
 				'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
-					'<input type="checkbox" class="mdc-checkbox__native-control">'+
+					'<input id="play" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
 					'<div class="mdc-checkbox__background">'+
 						'<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">'+
 							'<path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>'+
@@ -40,23 +40,48 @@ class GamePropertiesSoundView {
 						'<label class="mdc-floating-label" for="text-field-filled">Pan</label>'+
 							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="loop" type="number" value="1" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Loop</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
+					'<div class="mdc-form-field">'+
+						'<label class="text-check-label">Loop</label>'+
+						'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
+							'<input id="loop" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
+							'<div class="mdc-checkbox__background">'+
+								'<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">'+
+									'<path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>'+
+								'</svg>'+
+							'</div>'+
+						'</div>'+
 					'</div>'+	
+				'</div>'+
 			'</div>';	
-		
-			var textFields=this._html.querySelectorAll('.mdc-text-field');
-			textFields.forEach(element => {	
-				mdc.textField.MDCTextField.attachTo(element);
-				element.firstChild.addEventListener("change",this.onChangeInputHandler.bind(this,element.firstChild));
-			}); 
-			this._html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));
-			this._init(gameModel);    }
+
+		var textFields=this._html.querySelectorAll('.mdc-text-field');
+		textFields.forEach(element => {	
+			mdc.textField.MDCTextField.attachTo(element);
+			element.firstChild.addEventListener("change",this.onChangeInputHandler.bind(this,element.firstChild));
+		}); 
+
+		var checkboxes=this._html.querySelectorAll(".mdc-checkbox");
+		checkboxes.forEach(element => {	
+			element.firstChild.addEventListener("change",this.onChangeInputHandler.bind(this,element.firstChild));
+		}); 
+		var play=this._html.querySelector("#play");
+		play.addEventListener("click",this.onClickHandler.bind(this,play));
+
+		this._html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));
+	}
 	
 	get html() {  
         return this._html;
+	}
+
+// Handlers
+	onClickHandler(){
+		if (this.html.querySelector("#play").checked) {
+			this.html.classList.remove("properties-section--disable");
+		}
+		else {
+			this.html.className+=" properties-section--disable";
+		}
 	}
 
 	propertyGroupHandler(){
@@ -69,18 +94,14 @@ class GamePropertiesSoundView {
 	onChangeInputHandler(element){
 		var property=element.id;
 		var value =this.html.querySelector("#"+property).value;
-		console.log("vista",property,value);
+		if (element.id=="play") {
+			value =this.html.querySelector("#play").checked; // control del checkbox
+		}
+		if (element.id=="loop") {
+			value =this.html.querySelector("#loop").checked; // control del checkbox
+		}
+		this.onClickHandler();
 		CmdManager.changeGamePropertyCmd(property,value);
 	}
 
-	_init (gameModel){
-		this._html.querySelector("#sound").value=gameModel.sound;
-		this._html.querySelector("#volume").value=gameModel.volume;
-		this._html.querySelector("#start").value=gameModel.start;
-		this._html.querySelector("#pan").value=gameModel.pan;
-		this._html.querySelector("#loop").value=gameModel.loop;
-	}
-
-
 }
-
