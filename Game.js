@@ -10,7 +10,7 @@ class Game {
         this.start=  0;
         this.pan= 0;
         this.loop= false;
-        this.newProperties=[];
+        this.tagList=[];
         this.imageList=[];
         this.soundList=[];
         this.fontList=[];
@@ -24,6 +24,8 @@ class Game {
                                 "name":"End",
                             }
                         ];
+        this.a=34;
+        this.pasa=true;
     }
 
     get properties(){
@@ -32,6 +34,20 @@ class Game {
             play:this.play, sound:this.sound, volume:this.volume, start:this.start, pan:this.pan, loop:this.loop, //music
         }
         return(obj);
+    }
+
+    get newProperties(){
+        var obj=Object.assign({},this);
+        var properties=this.properties;
+        Object.keys(properties).forEach(element => {
+			delete obj[element];
+        });
+        delete obj.imageList;
+        delete obj.soundList;
+        delete obj.fontList;
+        delete obj.sceneList;
+        delete obj.tagList;
+        return (obj);
     }
 
     addScene(scene,pos) {

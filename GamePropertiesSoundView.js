@@ -65,7 +65,7 @@ class GamePropertiesSoundView {
 			element.firstChild.addEventListener("change",this.onChangeInputHandler.bind(this,element.firstChild));
 		}); 
 		var play=this._html.querySelector("#play");
-		play.addEventListener("click",this.onClickHandler.bind(this,play));
+		play.addEventListener("click",this.onClickHandler.bind(this));
 
 		this._html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));
 	}
@@ -76,12 +76,8 @@ class GamePropertiesSoundView {
 
 // Handlers
 	onClickHandler(){
-		if (this.html.querySelector("#play").checked) {
-			this.html.classList.remove("properties-section--disable");
-		}
-		else {
-			this.html.className+=" properties-section--disable";
-		}
+		(this.html.querySelector("#play").checked) ?	this.html.classList.remove("properties-section--disable"):
+														this.html.classList.add("properties-section--disable");
 	}
 
 	propertyGroupHandler(){
@@ -92,16 +88,9 @@ class GamePropertiesSoundView {
 	}
 
 	onChangeInputHandler(element){
-		var property=element.id;
-		var value =this.html.querySelector("#"+property).value;
-		if (element.id=="play") {
-			value =this.html.querySelector("#play").checked; // control del checkbox
-		}
-		if (element.id=="loop") {
-			value =this.html.querySelector("#loop").checked; // control del checkbox
-		}
-		this.onClickHandler();
-		CmdManager.changeGamePropertyCmd(property,value);
+		this._property=element.id;
+		(element.type !=="number")  ?   this._value=Boolean(element.checked): this._value=Number(element.value);
+		CmdManager.changeGamePropertyCmd(this._property,this._value);
 	}
 
 }

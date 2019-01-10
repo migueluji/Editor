@@ -49,11 +49,9 @@ class GamePropertiesSettingsView {
 	}
 
 	onChangeInputHandler(element){
-		var property=element.id;
-		var value =this.html.querySelector("#"+property).value;
-		console.log("vista",property,value);
-		CmdManager.changeGamePropertyCmd(property,value);
+		this._property=element.id;
+		(element.type !=="number")  ?   this._value=Boolean(element.checked): this._value=Number(element.value);
+		CmdManager.changeGamePropertyCmd(this._property,this._value);	
 	}
-
 }
 

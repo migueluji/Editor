@@ -1,6 +1,6 @@
 class NewPropertyDialogView {
 
-    constructor(sceneName) {   
+    constructor() {   
 		 this._html = document.createElement("div");
 		 this._html.className +="dialog-full-screen";
 		 this._html.innerHTML =
@@ -43,10 +43,8 @@ class NewPropertyDialogView {
 					'</div>'+
 				'</div>';
 	
-		var textFields=this._html.querySelectorAll('.mdc-text-field');
-		textFields.forEach(element => {	
-			mdc.textField.MDCTextField.attachTo(element);
-		}); 
+		var textField=this._html.querySelector('.mdc-text-field');
+		mdc.textField.MDCTextField.attachTo(textField);
 
 		this._html.querySelector("#okbutton").addEventListener("click",this.okButtonHandler.bind(this));
 		this._html.querySelector("#cancelbutton").addEventListener("click",this.cancelButtonHandler.bind(this));
@@ -63,15 +61,14 @@ class NewPropertyDialogView {
 			this.html.querySelector("#error").innerText="Required field"
 		}
 		else {
-			var type=""; 
 			var value=null;
 			if(this.html.querySelector("#number").checked){
-				type="number"; value=0;
+				value=0;
 			} 
 			else{
-				type="boolean"; value="false";
+				value=false;
 			}
-			CmdManager.addGamePropertyCmd(name,type,value);
+			CmdManager.addGamePropertyCmd(name,value);
 			this.cancelButtonHandler();
 		}
 	}

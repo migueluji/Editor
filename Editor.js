@@ -20,12 +20,11 @@ class Editor {
         this._gamePropertiesView = new GamePropertiesView();
             this._gamePropertiesSettingsView= new GamePropertiesSettingsView();
             this._gamePropertiesSoundView= new GamePropertiesSoundView();
-            this._gamePropertiesNewView = new GamePropertiesNewView();
-        console.log(this._gamePropertiesNewView.html);
+            this._gamePropertiesNewView = new GamePropertiesNewView(gameModel.newProperties);
         this._gamePropertiesView.addView(this._gamePropertiesSettingsView.html);
         this._gamePropertiesView.addView(this._gamePropertiesSoundView.html);
         this._gamePropertiesView.addView(this._gamePropertiesNewView.html);
-        this._gamePropertiesView._init(gameModel.properties); // inicializa la vista con las propiedades iniciales dle juego
+        this._gamePropertiesView.init(gameModel.properties); // inicializa la vista con las propiedades iniciales dle juego
 
         //Scene Properties
         this._scenePropertiesView = new ScenePropertiesView();
@@ -38,12 +37,18 @@ class Editor {
 
     }
 
-    addGameProperty(property,type,value){
-        this.model.newProperties.push({"property":property,"type":type, "value":value });
+    addGameProperty(property,value,position){
+        console.log("add",property,value,position,this.model);
+        this.model[property]=value;
+        var propertyNumberView = new PropertyView(property,value);
+        this._gamePropertiesNewView.addProperty(propertyNumberView.html,position);
+        console.log("add+",property,value,position,this.model);
     }
 
     removeGameProperty(property){
-       this.model.newProperties.splice(this.model.newProperties.findIndex(i=> i["property"]==property),1);
+        delete this.model[property];
+        this._gamePropertiesNewView.removeProperty(property);
+        console.log("remove",this.model);
     }
 
     changeGameProperty(property,value){
@@ -51,6 +56,7 @@ class Editor {
         this._gamePropertiesView.updateGameProperty(property,value);
         if (property == "name") this._draverHeaderView.updateSceneName(value);
         if (property == "play") this._gamePropertiesSoundView.onClickHandler();
+        console.log("change",this.model,property,value);
     }
 
     selectScene(sceneID){

@@ -34,10 +34,16 @@ body{
 .mdc-top-app-bar{
     position: relative;
 }
-.mdc-menu-surface--anchor{
+.menu-scene{
     position:relative; 
     z-index:2; 
     transform:translate(130px,-48px);
+    width: 0px;
+}
+.menu-new-property{
+    position:relative; 
+    z-index:2; 
+    transform:translate(200px,-58px);
     width: 0px;
 }
 .mdc-fab{
@@ -123,7 +129,7 @@ body{
     display: block;
 }
 .properties-panel{
-    padding: 0px 16px 16px 16px;
+    padding: 8px 16px 8px 16px;
     display: none;
 }
 .properties-bar{
@@ -132,6 +138,9 @@ body{
 .two-properties{
     display: inline-flex;
     flex: 1 1 auto;
+}
+.new-property{
+    padding: 16px 8px 16px 16px;
 }
 .mdc-text-field{
     width: 100%;

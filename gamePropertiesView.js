@@ -34,17 +34,14 @@ class GamePropertiesView {
 	}
 
 	addView(html) {
-		console.log(html.classList[0]);
 		var children=this._html.querySelector("."+html.classList[0]);
-		console.log("children",children);
 		children.parentNode.replaceChild(html,children);
 	}
 
 	updateGameProperty(property,value) {
-		this._html.querySelector("#"+property).value=value;
-		this._html.querySelector("#"+property).focus();
-		if(property=="play") this._html.querySelector("#play").checked=value;
-		if(property=="loop") this._html.querySelector("#loop").checked=value;
+		var element=this._html.querySelector("#"+property);
+		(element.type==="checkbox") ? element.value=element.checked=Boolean(value) : element.value=value;
+		element.focus();
 	}
 
 //Handlers
@@ -52,15 +49,16 @@ class GamePropertiesView {
 		var dialog = new NewPropertyDialogView();
 		var node=document.querySelector(".editor-frame-root");
 		node.appendChild(dialog.html);
+		dialog.html.querySelector("#propertyname").focus();
 	}
 
 //Utilities
-	_init(gameModel){
-		Object.keys(gameModel).forEach(element => {
-			this._html.querySelector("#"+element).value=gameModel[element];
+	init(gameProperties){
+		Object.keys(gameProperties).forEach(element => {
+			this._html.querySelector("#"+element).value=gameProperties[element];
 		});
-		gameModel.play ? this._html.querySelector("#play").checked=true : this._html.querySelector("#play").checked=false;
-		gameModel.loop ? this._html.querySelector("#loop").checked=true : this._html.querySelector("#loop").checked=false;
+		gameProperties.play ? this._html.querySelector("#play").checked=true : this._html.querySelector("#play").checked=false;
+		gameProperties.loop ? this._html.querySelector("#loop").checked=true : this._html.querySelector("#loop").checked=false;
 	}
 
 }

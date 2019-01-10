@@ -11,7 +11,7 @@ class SceneView {
 					'</span>'+
 					'<button id="more" class="mdc-button mdc-list-item__meta material-icons">more_vert</button>'+
 				'</div>'+
-				'<div class="mdc-menu-surface--anchor">'+
+				'<div class="mdc-menu-surface--anchor menu-scene">'+
 					'<div class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
 						'<ul class="mdc-list" role="menu" aria-hidden="true">'+
 							'<li id="properties" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Properties</li>'+

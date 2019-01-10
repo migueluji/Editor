@@ -32,8 +32,13 @@ class CmdManager {
         this.history.execute(cmd);
     }
 
-    static addGamePropertyCmd(property,type,value){
-        var cmd = new AddGamePropertyCmd(property,type,value);
+    static addGamePropertyCmd(property,value){
+        var cmd = new AddGamePropertyCmd(property,value);
+        this.history.execute(cmd);
+    }
+
+    static removeGamePropertyCmd(property,value){
+        var cmd = new RemoveGamePropertyCmd(property,value);
         this.history.execute(cmd);
     }
 
