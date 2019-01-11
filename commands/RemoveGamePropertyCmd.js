@@ -4,9 +4,17 @@ class RemoveGamePropertyCmd extends Command {
         super();
         this.property=property;
         this.value=value;
-        this.position=0;
-        this.list=this.editor.view.html.querySelector(".game-properties-new");
-        console.log("cmd",this.list);
+        this.position=this._newPosition();
+    }
+
+    _newPosition (){
+        var propertyList=this.editor.view.html.querySelector(".game-properties-new");
+        var list=propertyList.querySelectorAll(".new-property");
+        var i=0;
+        while ( i < list.length && !(list[i].querySelector("#"+this.property))) {
+           i++;
+        }
+        return i;
     }
 
     execute (){  

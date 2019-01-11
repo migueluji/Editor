@@ -14,15 +14,14 @@ class SceneView {
 				'<div class="mdc-menu-surface--anchor menu-scene">'+
 					'<div class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
 						'<ul class="mdc-list" role="menu" aria-hidden="true">'+
-							'<li id="properties" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Properties</li>'+
-							'<li class="mdc-list-divider" role="separator"></li>'+
+							'<li id="rename" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Rename</li>'+
 							'<li id="duplicate" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Duplicate</li>'+
 							'<li id="delete" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Delete</li>'+
 						'</ul>'+
 					'</div>'+
 				'</div>';
 			this._html.querySelector("#more").addEventListener("click",this.menuSceneHandler.bind(this));
-			this._html.querySelector("#properties").addEventListener("click",this.propertiesSceneHandler.bind(this));
+			this._html.querySelector("#rename").addEventListener("click",this.renameSceneHandler.bind(this));
 			this._html.querySelector('#duplicate').addEventListener("click",this.duplicateSceneHandler.bind(this));
 			this._html.querySelector('#delete').addEventListener("click",this.removeSceneHandler.bind(this,));
 			this._html.addEventListener("dragstart",this.dragstartSceneHandler.bind(this));
@@ -57,9 +56,11 @@ class SceneView {
 		this._menu.open = true;
 	}
 
-	propertiesSceneHandler(){
-		SideSheetView.openSheetHandler(".scene-properties");
-		Command.selectSceneCmd(this._html.id);
+	renameSceneHandler(){
+		var dialog = new RenameSceneDialogView(this._html.id);
+		var editorFrame=document.querySelector(".editor-frame-root");
+		editorFrame.appendChild(dialog.html);
+		dialog.html.querySelector("#scenename").focus();
 	}
 
 	duplicateSceneHandler(){

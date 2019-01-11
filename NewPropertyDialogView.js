@@ -1,6 +1,6 @@
 class NewPropertyDialogView {
 
-    constructor() {   
+    constructor(type) {   
 		 this._html = document.createElement("div");
 		 this._html.className +="dialog-full-screen";
 		 this._html.innerHTML =
@@ -43,8 +43,10 @@ class NewPropertyDialogView {
 					'</div>'+
 				'</div>';
 	
+		this._type=type;
 		var textField=this._html.querySelector('.mdc-text-field');
 		mdc.textField.MDCTextField.attachTo(textField);
+		textField.addEventListener("keypress",this.keyPressHandler.bind(this));
 
 		this._html.querySelector("#okbutton").addEventListener("click",this.okButtonHandler.bind(this));
 		this._html.querySelector("#cancelbutton").addEventListener("click",this.cancelButtonHandler.bind(this));
@@ -55,22 +57,46 @@ class NewPropertyDialogView {
 	}
 
 // Handlers
-	okButtonHandler(){
+	keyPressHandler(e){
+		var chr = String.fromCharCode(e.which);
 		var name=this.html.querySelector("#propertyname").value;
+		var filter="abcdefghijklmnñopqrstuvwxyz1234567890";
+		if ((filter.indexOf(chr) < 0) || (name.length >= 15)){
+			e.preventDefault();
+		}	
+		return true;
+	}
+
+	okButtonHandler(){
+		var input=this.html.querySelector("#propertyname");
+		var name=input.value; 
+		var panel=document.querySelector("."+this._type);
 		if (name=="") {
 			this.html.querySelector("#error").innerText="Required field"
 		}
 		else {
-			var value=null;
-			if(this.html.querySelector("#number").checked){
-				value=0;
-			} 
-			else{
-				value=false;
+			if ("abcdefghijklmnñopqrstuvwxyz".indexOf(name[0]) < 0)	{
+				this.html.querySelector("#error").innerText="The first character need to be a letter";
 			}
-			CmdManager.addGamePropertyCmd(name,value);
-			this.cancelButtonHandler();
+			else{
+				if (panel.querySelector("#"+name)){
+					this.html.querySelector("#error").innerText="This property name already exists"
+				}
+				else{
+					var value=null;
+					if(this.html.querySelector("#number").checked){
+						value=0;
+					} 
+					else{
+						value=false;
+					}
+					CmdManager.addGamePropertyCmd(name,value);
+					this.cancelButtonHandler();
+				}
+			}
+
 		}
+		input.focus();
 	}
 
 	cancelButtonHandler(){

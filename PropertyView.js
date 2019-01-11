@@ -24,7 +24,7 @@ class PropertyView {
 
 		this._html.querySelector("#property").value=value;
 		this._html.querySelector("#property").id=property;
-		this._html.querySelector("#label").innerText=property;
+		this._html.querySelector("#label").innerText=property.charAt(0).toUpperCase()+property.slice(1); // primer caracter en mayusculas
 
 		var text=this._html.querySelector('.mdc-text-field');
 		if (text != null) {
@@ -34,6 +34,7 @@ class PropertyView {
 		else{
 			var checkbox=this._html.querySelector(".mdc-checkbox");
 			checkbox.firstChild.addEventListener("change",this.onChangeInputHandler.bind(this,checkbox.firstChild));
+			value ? this._html.querySelector("#"+property).checked=true : this._html.querySelector("#"+property).checked=false;
 		}
 
 		this._html.querySelector("#more").addEventListener("click",this.menuNewPropertyHandler.bind(this));

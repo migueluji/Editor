@@ -11,7 +11,7 @@ class GamePropertiesSettingsView {
 			'<div class="properties-panel">'+
 				'<div class="mdc-text-field mdc-ripple-upgraded text-field--full">'+
 					'<input id="name" type="text" value="value" class="mdc-text-field__input">'+
-					'<label class="mdc-floating-label" for="text-field-filled">Game name</label>'+
+					'<label class="mdc-floating-label" for="text-field-filled">Game Name</label>'+
 					'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 				'</div>'+
 				'<div class="two-properties">'+	
@@ -26,8 +26,31 @@ class GamePropertiesSettingsView {
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 				'</div>'+
+				'<div class="two-properties">'+	
+					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
+						'<input id="cameraX" type="number" value="0"  class="mdc-text-field__input">'+
+						'<label class="mdc-floating-label" for="text-field-filled">Camera X</label>'+
+						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
+					'</div>'+	
+					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
+						'<input id="cameraY" type="number" value="0"  class="mdc-text-field__input">'+
+						'<label class="mdc-floating-label" for="text-field-filled">Camera Y</label>'+
+						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
+					'</div>'+	
+				'</div>'+	
+				'<div class="two-properties">'+	
+					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
+						'<input id="cameraRotation" type="number" value="0"  class="mdc-text-field__input">'+
+						'<label class="mdc-floating-label" for="text-field-filled">Camera Rotation</label>'+
+						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
+					'</div>'+	
+					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
+						'<input id="cameraZoom" type="number" value="0"  class="mdc-text-field__input">'+
+						'<label class="mdc-floating-label" for="text-field-filled">Camera Zoom</label>'+
+						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
+					'</div>'+	
+				'</div>'+					
 			'</div>';
-
 		var textFields=this._html.querySelectorAll('.mdc-text-field');
 		textFields.forEach(element => {	
 			mdc.textField.MDCTextField.attachTo(element);
@@ -50,7 +73,11 @@ class GamePropertiesSettingsView {
 
 	onChangeInputHandler(element){
 		this._property=element.id;
-		(element.type !=="number")  ?   this._value=Boolean(element.checked): this._value=Number(element.value);
+		switch (element.type){
+			case "checkbox"	: 	this._value=Boolean(element.checked); break;
+			case "number" : 	this._value=Number(element.value); break;
+			case "text" : 		this._value=String(element.value); break;
+		}		
 		CmdManager.changeGamePropertyCmd(this._property,this._value);	
 	}
 }

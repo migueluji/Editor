@@ -27,6 +27,11 @@ class CmdManager {
         this.history.execute(cmd);
     }
 
+    static renameSceneCmd(sceneID,name) {
+        var cmd =new RenameSceneCmd(sceneID,name);
+        this.history.execute(cmd);
+    }
+
     static changeGamePropertyCmd(property,value){
         var cmd = new ChangeGamePropertyCmd(property,value);
         this.history.execute(cmd);

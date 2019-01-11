@@ -1,14 +1,14 @@
-class GamePropertiesSoundView {
+class GamePropertiesPhysicsView {
 
     constructor() {   
 		 this._html = document.createElement("li");
-		 this._html.className +="game-properties-sound properties-section properties-section--disable";
+		 this._html.className +="game-properties-physics properties-section properties-section--disable";
 		 this._html.innerHTML =
 			'<li class="mdc-list-item mdc-ripple-upgraded properties-section-title">'+
 				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
-				'Sound'+
+				'Physics'+
 				'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
-					'<input id="play" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
+					'<input id="physics" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
 					'<div class="mdc-checkbox__background">'+
 						'<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">'+
 							'<path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>'+
@@ -17,40 +17,17 @@ class GamePropertiesSoundView {
 				'</div>'+
 			'</li>'+
 			'<div class="properties-panel">'+
-				'<div class="mdc-text-field mdc-ripple-upgraded text-field--full">'+
-					'<input id="sound" type="text" value="value" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Sound File</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-				'</div>'+
 				'<div class="two-properties">'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="volume" type="number" value="1" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Volume</label>'+
+						'<input id="gravityX" type="number" value="1" class="mdc-text-field__input">'+
+						'<label class="mdc-floating-label" for="text-field-filled">Gravity X</label>'+
 							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="start" type="number" value="0" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Start</label>'+
+						'<input id="gravityY" type="number" value="0" class="mdc-text-field__input">'+
+						'<label class="mdc-floating-label" for="text-field-filled">Gravity Y</label>'+
 							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 						'</div>'+	
-				'</div>'+
-				'<div class="two-properties">'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="pan" type="number" value="0" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Pan</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
-					'<div class="mdc-form-field">'+
-						'<label class="text-check-label">Loop</label>'+
-						'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
-							'<input id="loop" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
-							'<div class="mdc-checkbox__background">'+
-								'<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">'+
-									'<path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>'+
-								'</svg>'+
-							'</div>'+
-						'</div>'+
-					'</div>'+	
 				'</div>'+
 			'</div>';	
 
@@ -64,8 +41,8 @@ class GamePropertiesSoundView {
 		checkboxes.forEach(element => {	
 			element.firstChild.addEventListener("change",this.onChangeInputHandler.bind(this,element.firstChild));
 		}); 
-		var play=this._html.querySelector("#play");
-		play.addEventListener("click",this.onClickHandler.bind(this));
+		var physics=this._html.querySelector("#physics");
+		physics.addEventListener("click",this.onClickHandler.bind(this));
 
 		this._html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));
 	}
@@ -76,7 +53,7 @@ class GamePropertiesSoundView {
 
 // Handlers
 	onClickHandler(){
-		(this.html.querySelector("#play").checked) ?	this.html.classList.remove("properties-section--disable"):
+		(this.html.querySelector("#physics").checked) ?	this.html.classList.remove("properties-section--disable"):
 														this.html.classList.add("properties-section--disable");
 	}
 
@@ -92,7 +69,7 @@ class GamePropertiesSoundView {
 		switch (element.type){
 			case "checkbox": 	this._value=Boolean(element.checked); break;
 			case "number" : 	this._value=Number(element.value); break;
-			case "text" : 		this._value=String(element.value); break;
+			case "text" : 		this._value=element.value; break;
 		}
 		CmdManager.changeGamePropertyCmd(this._property,this._value);
 	}

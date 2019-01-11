@@ -8,10 +8,9 @@ class DrawerScenesView {
 				 'style="--mdc-ripple-fg-size:33px; --mdc-ripple-fg-scale:2.70291; --mdc-ripple-fg-translate-start:5.5px, 19.6875px; --mdc-ripple-fg-translate-end:11.5px, 11.5px;">'+
 					 '<i class="mdc-fab__icon material-icons">add</i>'+
 			'</button>'+
-			'<ul  style="padding-top:32px" role="listbox" class="mdc-list  mdc-list--avatar-list">'+ //mdc-list--two-line
-			'</ul>';
-		this._html.querySelector("#addscene").addEventListener("click",this._addSceneHandler.bind(this));
-		this._init(sceneList);
+			'<ul style="padding-top:32px" class="mdc-list  mdc-list--avatar-list"></ul>';
+		this._html.querySelector("#addscene").addEventListener("click",this.addSceneHandler.bind(this));
+		this.init(sceneList);
     }
 	
 	get html() {  
@@ -26,6 +25,11 @@ class DrawerScenesView {
 		this._html.querySelector("#"+sceneID).remove();
 	}
 
+	renameScene(sceneID,sceneName)	{
+		var element =this._html.querySelector("#"+sceneID);
+		element.querySelector(".mdc-list-item__text").firstChild.innerText=sceneName;
+	}
+
 	updateSelectedScene(sceneID){
 		var selectedScenes=this._html.querySelectorAll(".mdc-list-item--sceneselected");
 		selectedScenes.forEach(element => {
@@ -36,12 +40,12 @@ class DrawerScenesView {
 	}
 
 //Handlers
-	_addSceneHandler() {
+	addSceneHandler() {
 		CmdManager.addSceneCmd(this._html.querySelectorAll(".mdc-list-item__text").length)  
 	}
 
 //Utilities
-	_init(sceneList){
+	init(sceneList){
 		var scenePos=1;
 		sceneList.forEach(scene => {
 			var sceneView = new SceneView();

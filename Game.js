@@ -4,12 +4,19 @@ class Game {
         this.name = "Mario Car";
         this.width= 800;
         this.height= 640;
-        this.play= false;
+        this.cameraX=0;
+        this.cameraY=0;
+        this.cameraRotation=0;
+        this.cameraZoom=1;
+        this.play= true;
         this.sound= "sound.mp4";
         this.volume= 1;
         this.start=  0;
         this.pan= 0;
-        this.loop= false;
+        this.loop= true;
+        this.physics=true;
+        this.gravityX=0.0;
+        this.gravityY=-9.8;
         this.tagList=[];
         this.imageList=[];
         this.soundList=[];
@@ -30,8 +37,13 @@ class Game {
 
     get properties(){
         var obj={
-            name:this.name, width:this.width, height:this.height, //settings
-            play:this.play, sound:this.sound, volume:this.volume, start:this.start, pan:this.pan, loop:this.loop, //music
+            // Settings
+            name:this.name, width:this.width, height:this.height, 
+            cameraX:this.cameraX, cameraY:this.cameraY, cameraRotation:this.cameraRotation, cameraZoom:this.cameraZoom,
+            // Sound
+            play:this.play, sound:this.sound, volume:this.volume, start:this.start, pan:this.pan, loop:this.loop, 
+            // Physics
+            physics:this.physics, gravityX: this.gravityX, gravityY:this.gravityY
         }
         return(obj);
     }
