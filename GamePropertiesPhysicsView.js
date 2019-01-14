@@ -31,16 +31,6 @@ class GamePropertiesPhysicsView {
 				'</div>'+
 			'</div>';	
 
-		var textFields=this._html.querySelectorAll('.mdc-text-field');
-		textFields.forEach(element => {	
-			mdc.textField.MDCTextField.attachTo(element);
-			element.firstChild.addEventListener("change",this.onChangeInputHandler.bind(this,element.firstChild));
-		}); 
-
-		var checkboxes=this._html.querySelectorAll(".mdc-checkbox");
-		checkboxes.forEach(element => {	
-			element.firstChild.addEventListener("change",this.onChangeInputHandler.bind(this,element.firstChild));
-		}); 
 		var physics=this._html.querySelector("#physics");
 		physics.addEventListener("click",this.onClickHandler.bind(this));
 
@@ -63,15 +53,4 @@ class GamePropertiesPhysicsView {
 		element.classList.toggle("open");
 		element.classList.contains("open") ? expandButton.innerHTML='expand_less' : expandButton.innerHTML='expand_more';
 	}
-
-	onChangeInputHandler(element){
-		this._property=element.id;
-		switch (element.type){
-			case "checkbox": 	this._value=Boolean(element.checked); break;
-			case "number" : 	this._value=Number(element.value); break;
-			case "text" : 		this._value=element.value; break;
-		}
-		CmdManager.changeGamePropertyCmd(this._property,this._value);
-	}
-
 }

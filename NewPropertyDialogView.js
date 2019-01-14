@@ -50,7 +50,8 @@ class NewPropertyDialogView {
 
 		this._html.querySelector("#okbutton").addEventListener("click",this.okButtonHandler.bind(this));
 		this._html.querySelector("#cancelbutton").addEventListener("click",this.cancelButtonHandler.bind(this));
-    }
+		this._html.addEventListener("click",this.cancelBackgroundHandler.bind(this));
+	}
 	
 	get html() {  
         return this._html;
@@ -102,6 +103,10 @@ class NewPropertyDialogView {
 	cancelButtonHandler(){
 		var node=document.querySelector(".dialog-full-screen");
 		node.parentNode.removeChild(node);
+	}
+
+	cancelBackgroundHandler(e){
+		if (e.target===this._html)	this.cancelButtonHandler();
 	}
 
 }

@@ -15,21 +15,10 @@ class Editor {
         this._drawerScenesView= new DrawerScenesView(gameModel.sceneList);
         this.view.addView(this._drawerScenesView.html);
         this.view.addView(this._drawerHeaderView.html);
-  
-        //Game Properties
-        this._gamePropertiesView = new GamePropertiesView();
-            this._gamePropertiesSettingsView= new GamePropertiesSettingsView();
-            this._gamePropertiesSoundView= new GamePropertiesSoundView();
-            this._gamePropertiesPhysicsView= new GamePropertiesPhysicsView();
-            this._gamePropertiesNewView = new GamePropertiesNewView(gameModel.newProperties);
-        this._gamePropertiesView.addView(this._gamePropertiesSettingsView.html);
-        this._gamePropertiesView.addView(this._gamePropertiesSoundView.html);
-        this._gamePropertiesView.addView(this._gamePropertiesPhysicsView.html);
-        this._gamePropertiesView.addView(this._gamePropertiesNewView.html);
-        this._gamePropertiesView.init(gameModel.properties); // inicializa la vista con las propiedades iniciales dle juego
 
         //Side Sheet
         this._sideSheetView=new SideSheetView();
+            this._gamePropertiesView = new GamePropertiesView(gameModel);
             this._sideSheetView.addView(this._gamePropertiesView.html);
         this.view.addView(this._sideSheetView.html);
 
@@ -38,20 +27,18 @@ class Editor {
     addGameProperty(property,value,position){
         this.model[property]=value;
         var propertyNumberView = new PropertyView(property,value);
-        this._gamePropertiesNewView.addProperty(propertyNumberView.html,position);
+        this._gamePropertiesView._newPropertiesView.addProperty(propertyNumberView.html,position);
      }
 
     removeGameProperty(property){
         delete this.model[property];
-        this._gamePropertiesNewView.removeProperty(property);
+        this._gamePropertiesView._newPropertiesView.removeProperty(property);
     }
 
     changeGameProperty(property,value){
         this.model[property]=value;
         this._gamePropertiesView.updateGameProperty(property,value);
         if (property == "name") this._drawerHeaderView.updateSceneName(value);
-        if (property == "play") this._gamePropertiesSoundView.onClickHandler();
-        if (property == "physics") this._gamePropertiesPhysicsView.onClickHandler();
     }
 
     addScene(scene,pos) {  

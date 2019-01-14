@@ -1,6 +1,6 @@
 class GamePropertiesView {
 
-    constructor() {   
+    constructor(gameModel) {   
 		 this._html = document.createElement("div");
 		 this._html.className +="game-properties";
 		 this._html.style.display="none";
@@ -28,7 +28,10 @@ class GamePropertiesView {
 			'</ul>';
 		this._html.querySelector("#closebutton").addEventListener("click",SideSheetView.closeSheetHandler);
 		this._html.querySelector("#addproperty").addEventListener("click",this.addPropertyHandler.bind(this));
-    }
+		
+		this.createFrame(gameModel);
+		this.init(gameModel);
+	}
 	
 	get html() {  
         return this._html;
@@ -42,7 +45,32 @@ class GamePropertiesView {
 	updateGameProperty(property,value) {
 		var element=this._html.querySelector("#"+property);
 		(element.type==="checkbox") ? element.value=element.checked=Boolean(value) : element.value=value;
+		if (property == "play") this._soundView.onClickHandler();
+      	if (property == "physics") this._physicsView.onClickHandler();
 		element.focus();
+	}
+
+//Frame
+	createFrame(gameModel){
+		this._settingsView= new GamePropertiesSettingsView();
+		this.addView(this._settingsView.html);
+		this._soundView= new GamePropertiesSoundView();
+		this.addView(this._soundView.html);
+		this._physicsView= new GamePropertiesPhysicsView();
+		this.addView(this._physicsView.html);
+		this._newPropertiesView= new GamePropertiesNewView(gameModel.newProperties);
+		this.addView(this._newPropertiesView.html);
+
+		var textFields=this._html.querySelectorAll('.mdc-text-field');
+		textFields.forEach(element => {	
+			mdc.textField.MDCTextField.attachTo(element);
+		}); 
+
+		var inputs=this._html.querySelectorAll("input");
+		inputs.forEach(element=>{
+			element.addEventListener("change",this.onChangeInputHandler.bind(this,element));
+		})
+
 	}
 
 //Handlers
@@ -53,13 +81,20 @@ class GamePropertiesView {
 		dialog.html.querySelector("#propertyname").focus();
 	}
 
+	onChangeInputHandler(element){
+		this._property=element.id;
+		switch (element.type){
+			case "checkbox": 	this._value=Boolean(element.checked); break;
+			case "number" : 	this._value=Number(element.value); break;
+			case "text" : 		this._value=String(element.value); break;
+		}
+		CmdManager.changeGamePropertyCmd(this._property,this._value);
+	}
+
 //Utilities
-	init(gameProperties){
-		Object.keys(gameProperties).forEach(element => {
-			this._html.querySelector("#"+element).value=gameProperties[element];
-			if(typeof(gameProperties[element])==="boolean"){ //marca las propiedades booleanas
-				gameProperties[element] ? this._html.querySelector("#"+element).checked=true : this._html.querySelector("#"+element).checked=false;
-			}
+	init(gameModel){
+		Object.keys(gameModel.properties).forEach(element => {
+			this.updateGameProperty(element,gameModel.properties[element]);
 		});
 	}
 

@@ -8,7 +8,7 @@ class Game {
         this.cameraY=0;
         this.cameraRotation=0;
         this.cameraZoom=1;
-        this.play= true;
+        this.play= false;
         this.sound= "sound.mp4";
         this.volume= 1;
         this.start=  0;
