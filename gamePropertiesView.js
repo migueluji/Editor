@@ -86,8 +86,9 @@ class GamePropertiesView {
 		switch (element.type){
 			case "checkbox": 	this._value=Boolean(element.checked); break;
 			case "number" : 	this._value=Number(element.value); break;
-			case "text" : 		this._value=String(element.value); break;
+			case "text" : 		this._value=String(element.value).trim(); break;
 		}
+		if (element.id==="name" && this._value==="") this._value="Untitle Game";
 		CmdManager.changeGamePropertyCmd(this._property,this._value);
 	}
 

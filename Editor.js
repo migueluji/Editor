@@ -38,7 +38,7 @@ class Editor {
     changeGameProperty(property,value){
         this.model[property]=value;
         this._gamePropertiesView.updateGameProperty(property,value);
-        if (property == "name") this._drawerHeaderView.updateSceneName(value);
+        if (property === "name") this._drawerHeaderView.updateGameName(value);
     }
 
     addScene(scene,pos) {  
@@ -69,6 +69,7 @@ class Editor {
     renameScene(sceneID,sceneName){
         this.model.sceneList[this.model.sceneList.findIndex(i=>i.id===sceneID)].name=sceneName;
         this._drawerScenesView.renameScene(sceneID,sceneName);
+        if(this.selectedScene===sceneID)this._appBarView.updateSceneName(sceneName);
     }
 
     selectScene(sceneID){

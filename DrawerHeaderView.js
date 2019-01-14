@@ -11,16 +11,16 @@ class DrawerHeaderView {
                 '<i class="material-icons mdc-button_icon">settings</i>'+
             '</button>';
         this._html.querySelector("#gameProperties").addEventListener("click",this.gamePropertiesHandler.bind(this));
-        this.updateSceneName(gameName);
+        this.updateGameName(gameName);
     }
 	
 	get html() {  
         return this._html;
     }
 
-    updateSceneName (gameName){
-        this.html.querySelector("#gameName").innerText=gameName;
-    }
+    updateGameName (gameName){
+        this.html.querySelector("#gameName").textContent=gameName;
+      }
 
 // Handlers
     gamePropertiesHandler(){

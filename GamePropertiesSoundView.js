@@ -24,19 +24,19 @@ class GamePropertiesSoundView {
 				'</div>'+
 				'<div class="two-properties">'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="volume" type="number" value="1" class="mdc-text-field__input">'+
+						'<input id="volume" min="0" step="0.1" type="number" value="1" class="mdc-text-field__input">'+
 						'<label class="mdc-floating-label" for="text-field-filled">Volume</label>'+
 							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="start" type="number" value="0" class="mdc-text-field__input">'+
+						'<input id="start" min="0" step="0.1" type="number" value="0" class="mdc-text-field__input">'+
 						'<label class="mdc-floating-label" for="text-field-filled">Start</label>'+
 							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 						'</div>'+	
 				'</div>'+
 				'<div class="two-properties">'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="pan" type="number" value="0" class="mdc-text-field__input">'+
+						'<input id="pan" step="0.1" min="-1" max="1" type="number" value="0" class="mdc-text-field__input">'+
 						'<label class="mdc-floating-label" for="text-field-filled">Pan</label>'+
 							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
