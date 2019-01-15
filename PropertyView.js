@@ -70,7 +70,7 @@ class PropertyView {
 		var html=document.createElement('div');
 		html.className +="mdc-text-field mdc-ripple-upgraded text-field--full";
 		html.innerHTML=
-			'<input id="property" type="number" class="mdc-text-field__input">'+
+			'<input id="property" type="number" step="0.1" class="mdc-text-field__input">'+
 			'<label id="label" class="mdc-floating-label" for="text-field-filled"></label>'+
 			'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>';
 		return html;

@@ -16,12 +16,12 @@ class GamePropertiesSettingsView {
 				'</div>'+
 				'<div class="two-properties">'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="width" min="1" type="number" value="0"  class="mdc-text-field__input">'+
+						'<input id="width" min="1" type="number" value="1"  class="mdc-text-field__input">'+
 						'<label class="mdc-floating-label" for="text-field-filled">Width</label>'+
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="height" min="1" type="number" value="0"  class="mdc-text-field__input">'+
+						'<input id="height" min="1" type="number" value="1"  class="mdc-text-field__input">'+
 						'<label class="mdc-floating-label" for="text-field-filled">Height</label>'+
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
@@ -45,7 +45,7 @@ class GamePropertiesSettingsView {
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="cameraZoom" min="0.1" step="0.1" type="number" value="0"  class="mdc-text-field__input">'+
+						'<input id="cameraZoom" min="0" step="0.1" type="number" value="0"  class="mdc-text-field__input">'+
 						'<label class="mdc-floating-label" for="text-field-filled">Camera Zoom</label>'+
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	

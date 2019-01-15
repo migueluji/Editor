@@ -58,8 +58,6 @@ class GamePropertiesView {
 		this.addView(this._soundView.html);
 		this._physicsView= new GamePropertiesPhysicsView();
 		this.addView(this._physicsView.html);
-		this._newPropertiesView= new GamePropertiesNewView(gameModel.newProperties);
-		this.addView(this._newPropertiesView.html);
 
 		var textFields=this._html.querySelectorAll('.mdc-text-field');
 		textFields.forEach(element => {	
@@ -70,6 +68,9 @@ class GamePropertiesView {
 		inputs.forEach(element=>{
 			element.addEventListener("change",this.onChangeInputHandler.bind(this,element));
 		})
+
+		this._newPropertiesView= new GamePropertiesNewView(gameModel.newProperties);
+		this.addView(this._newPropertiesView.html);
 
 	}
 
@@ -89,6 +90,7 @@ class GamePropertiesView {
 			case "text" : 		this._value=String(element.value).trim(); break;
 		}
 		if (element.id==="name" && this._value==="") this._value="Untitle Game";
+		console.log(this._property,this._value);
 		CmdManager.changeGamePropertyCmd(this._property,this._value);
 	}
 
