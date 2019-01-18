@@ -95,7 +95,7 @@ body{
     height: 100%;
     width: 320px;
 }
-.game-properties{
+.side-sheet-content{
     height: 100%;
     width: 320px;
     display: flex;
@@ -136,6 +136,7 @@ body{
     border-bottom: 1px solid lightgray;
 }
 .two-properties{
+    width: 100%;
     display: inline-flex;
     flex: 1 1 auto;
 }
@@ -167,4 +168,9 @@ body{
 }
 .text-field--start{
     margin: 4px 4px 4px 0px;
+}
+.upload-button{
+    top: 10px;
+    position: absolute;
+    right: 8px;
 }

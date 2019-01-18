@@ -19,18 +19,35 @@ class Game {
         this.gravityY=-9.8;
         this.tagList=[];
         this.imageList=[];
-        this.soundList=[];
+        this.soundList=[
+            {
+                "id": "id1234567890002",
+                "name":"player.mp4"
+            },
+            {
+                "id": "id1234567890002",
+                "name":"live.mp4"
+            },
+            {
+                "id": "id1234567890002",
+                "name":"music.mp4"
+            },
+            {
+                "id": "id1234567890002",
+                "name":"impact.mp4"
+            },
+        ];
         this.fontList=[];
         this.sceneList=[    
-                            {
-                                "id": "id1234567890000",
-                                "name": "Start",
-                            },
-                            {
-                                "id": "id1234567890001",
-                                "name":"End",
-                            }
-                        ];
+            {
+                "id": "id1234567890000",
+                "name": "Start",
+            },
+            {
+                "id": "id1234567890001",
+                "name":"End",
+            }
+        ];
         this.a=34;
         this.pasa=true;
     }

@@ -10,4 +10,8 @@ class Command {
     static selectSceneCmd(sceneID){
         this.editor.selectScene(sceneID);
     }
+
+    static selectSoundCmd(soundID){
+        this.editor.selectSound(soundID);
+    }
 }

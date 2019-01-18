@@ -2,7 +2,7 @@ class GamePropertiesView {
 
     constructor(gameModel) {   
 		 this._html = document.createElement("div");
-		 this._html.className +="game-properties";
+		 this._html.className +="game-properties side-sheet-content";
 		 this._html.style.display="none";
 		 this._html.innerHTML =
 			'<header class="mdc-top-app-bar--dense properties-bar">'+
@@ -90,7 +90,6 @@ class GamePropertiesView {
 			case "text" : 		this._value=String(element.value).trim(); break;
 		}
 		if (element.id==="name" && this._value==="") this._value="Untitle Game";
-		console.log(this._property,this._value);
 		CmdManager.changeGamePropertyCmd(this._property,this._value);
 	}
 

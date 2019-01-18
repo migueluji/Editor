@@ -20,10 +20,13 @@ class Editor {
         this._sideSheetView=new SideSheetView();
             this._gamePropertiesView = new GamePropertiesView(gameModel);
             this._sideSheetView.addView(this._gamePropertiesView.html);
+            this._soundSelectionView = new SoundSelectionView(gameModel.soundList,gameModel.sound);
+            this._sideSheetView.addView(this._soundSelectionView.html);
         this.view.addView(this._sideSheetView.html);
 
     }
 
+// Game
     addGameProperty(property,value,position){
         this.model[property]=value;
         var propertyNumberView = new PropertyView(property,value);
@@ -41,6 +44,7 @@ class Editor {
         if (property === "name") this._drawerHeaderView.updateGameName(value);
     }
 
+ //Scenes
     addScene(scene,pos) {  
         var sceneView = new SceneView();
         sceneView.addView(scene);
@@ -77,5 +81,10 @@ class Editor {
         this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
         this._drawerScenesView.updateSelectedScene(sceneID);
         this._appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
+     }
+
+// sounds
+     selectSound(soundID){
+         console.log("sound selected",soundID);
      }
 }

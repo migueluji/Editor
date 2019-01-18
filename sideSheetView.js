@@ -6,6 +6,7 @@ class SideSheetView {
 		 this._html.style.display="none";
 		 this._html.innerHTML =
 				 '<div class="game-properties"></div>'+
+				 '<div class="sound-selection"></div>'+
 				 '<div class="cast"></div>';
     }
 	
@@ -23,9 +24,11 @@ class SideSheetView {
 	}
 
 	static openSheetHandler(name){
+		console.log(name);
 		document.querySelector(".game-properties").style.display="none";
+		document.querySelector(".sound-selection").style.display="none";
 		document.querySelector(".side-sheet").style.display="block";
-		document.querySelector(name).style.display="block";
+		document.querySelector("."+name).style.display="block";
 	}
 
 }

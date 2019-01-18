@@ -24,7 +24,7 @@ class DrawerHeaderView {
 
 // Handlers
     gamePropertiesHandler(){
-          SideSheetView.openSheetHandler(".game-properties");
+          SideSheetView.openSheetHandler("game-properties");
     }
 
 }

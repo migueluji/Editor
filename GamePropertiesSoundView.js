@@ -17,10 +17,13 @@ class GamePropertiesSoundView {
 				'</div>'+
 			'</li>'+
 			'<div class="properties-panel">'+
-				'<div class="mdc-text-field mdc-ripple-upgraded text-field--full">'+
-					'<input id="sound" type="text" value="value" class="mdc-text-field__input">'+
+				'<div class="mdc-text-field mdc-text-field--with-trailing-icon mdc-ripple-upgraded text-field--full">'+
+					'<input id="sound" type="text" value="value" class="mdc-text-field__input" disabled>'+ //sound file
 						'<label class="mdc-floating-label" for="text-field-filled">Sound File</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
+						'<button id="soundbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
+							'<i class="material-icons mdc-button_icon">folder</i>'+
+						'</button>'+
+						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 				'</div>'+
 				'<div class="two-properties">'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
@@ -57,6 +60,9 @@ class GamePropertiesSoundView {
 		var play=this._html.querySelector("#play");
 		play.addEventListener("click",this.onClickHandler.bind(this));
 
+		var soundButton=this._html.querySelector("#soundbutton");
+		soundButton.addEventListener("click",this.onClickSoundButton.bind(this));
+
 		this._html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));
 	}
 	
@@ -68,6 +74,10 @@ class GamePropertiesSoundView {
 	onClickHandler(){
 		(this.html.querySelector("#play").checked) ?	this.html.classList.remove("properties-section--disable"):
 														this.html.classList.add("properties-section--disable");
+	}
+
+	onClickSoundButton(){
+		SideSheetView.openSheetHandler("sound-selection");
 	}
 
 	propertyGroupHandler(){
