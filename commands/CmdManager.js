@@ -47,6 +47,16 @@ class CmdManager {
         this.history.execute(cmd);
     }
 
+    static removeSoundCmd(soundID){
+        var cmd = new RemoveSoundCmd(soundID);
+        this.history.execute(cmd);
+    }
+
+    static addSoundCmd(soundName){
+        var cmd = new AddSoundCmd(soundName);
+        this.history.execute(cmd);
+    }
+
     static undo(){
         this.history.undo();
     }

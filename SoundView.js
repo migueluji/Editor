@@ -28,9 +28,10 @@ class SoundView {
 
 // Handlers
 	selectSoundHandler(e){
-		Command.selectSoundCmd(this._html.id);
+		var name =this._html.firstChild.nextSibling.firstChild.textContent;
+		var selected=this._html.querySelector(".image-list--selected");
+		(selected != null) ? 	CmdManager.changeGamePropertyCmd("sound","Undefined") : 
+								CmdManager.changeGamePropertyCmd("sound",name);
 	}
 
 }
-
-

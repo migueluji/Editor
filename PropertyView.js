@@ -2,7 +2,6 @@ class PropertyView {
 
     constructor(property,value) {   
 		 this._html = document.createElement("li");
-	//	 this._html.setAttribute("id",property);
 		 this._html.innerHTML =
 			'<div class="new-property mdc-list-item mdc-ripple-upgraded">'+
 				// aqui se inserta la propiedad

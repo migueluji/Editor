@@ -24,7 +24,6 @@ class SideSheetView {
 	}
 
 	static openSheetHandler(name){
-		console.log(name);
 		document.querySelector(".game-properties").style.display="none";
 		document.querySelector(".sound-selection").style.display="none";
 		document.querySelector(".side-sheet").style.display="block";

@@ -9,7 +9,7 @@ class Game {
         this.cameraRotation=0;
         this.cameraZoom=1;
         this.play= false;
-        this.sound= "sound.mp4";
+        this.sound = "sound.mp4";
         this.volume= 1;
         this.start=  0;
         this.pan= 0;
@@ -25,16 +25,20 @@ class Game {
                 "name":"player.mp4"
             },
             {
-                "id": "id1234567890002",
+                "id": "id1234567890003",
                 "name":"live.mp4"
             },
             {
-                "id": "id1234567890002",
-                "name":"music.mp4"
+                "id": "id1234567890004",
+                "name":"gamemusic.mp4"
             },
             {
-                "id": "id1234567890002",
+                "id": "id1234567890005",
                 "name":"impact.mp4"
+            },
+            {
+                "id": "id1234567890006",
+                "name":"sound.mp4"
             },
         ];
         this.fontList=[];
@@ -71,9 +75,7 @@ class Game {
         Object.keys(properties).forEach(element => {
 			delete obj[element];
         });
-        delete obj.imageList;
-        delete obj.soundList;
-        delete obj.fontList;
+        delete obj.imageList; delete obj.soundList;  delete obj.fontList;
         delete obj.sceneList;
         delete obj.tagList;
         return (obj);
@@ -85,6 +87,14 @@ class Game {
     
     removeScene(sceneID) {
         this.sceneList.splice(this.sceneList.findIndex(i => i.id == sceneID),1);
+    } 
+    
+    addSound(sound) {
+        this.soundList.push(sound);
+    } 
+
+    removeSound(soundID) {
+        this.soundList.splice(this.soundList.findIndex(i => i.id == soundID),1);
     } 
     
 }

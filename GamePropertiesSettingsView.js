@@ -60,13 +60,6 @@ class GamePropertiesSettingsView {
 	}
 
 // Handlers
-	propertyGroupHandler(){
-		var element=this._html.querySelector(".properties-panel");
-		var expandButton=this._html.querySelector("#expandbutton");
-		element.classList.toggle("open");
-		element.classList.contains("open") ? expandButton.innerHTML='expand_less' : expandButton.innerHTML='expand_more';
-	}
-
 	keyPressHandler(e){
 		var chr = String.fromCharCode(e.which);
 		var name=this.html.querySelector("#name").value;
@@ -75,6 +68,13 @@ class GamePropertiesSettingsView {
 			e.preventDefault();
 		}	
 		return true;
+	}
+
+	propertyGroupHandler(){
+		var element=this._html.querySelector(".properties-panel");
+		var expandButton=this._html.querySelector("#expandbutton");
+		element.classList.toggle("open");
+		element.classList.contains("open") ? expandButton.innerHTML='expand_less' : expandButton.innerHTML='expand_more';
 	}
 }
 

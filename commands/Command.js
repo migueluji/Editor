@@ -13,5 +13,5 @@ class Command {
 
     static selectSoundCmd(soundID){
         this.editor.selectSound(soundID);
-    }
+     }
 }

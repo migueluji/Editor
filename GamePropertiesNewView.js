@@ -7,7 +7,6 @@ class GamePropertiesNewView {
 			textFields.forEach(element => {	
 				mdc.textField.MDCTextField.attachTo(element);
 		}); 
-
 		this.init(newProperties);
 	}
 
