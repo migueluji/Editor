@@ -1,8 +1,8 @@
 class PropertyView {
 
     constructor(property,value) {   
-		 this._html = document.createElement("li");
-		 this._html.innerHTML =
+		 this.html = document.createElement("li");
+		 this.html.innerHTML =
 			'<div class="new-property mdc-list-item mdc-ripple-upgraded">'+
 				// aqui se inserta la propiedad
 				'<button id="more" class="mdc-button mdc-list-item__meta material-icons">more_vert</button>'+
@@ -17,33 +17,29 @@ class PropertyView {
 
 		this._property=property;
 		this._value=value;
-		var list=this._html.querySelector(".new-property");
+		var list=this.html.querySelector(".new-property");
 		(typeof(value)==='number') ?	list.insertBefore(this.newNumberPropertyView(),list.childNodes[0]) :
 									  	list.insertBefore(this.newBooleanPropertyView(),list.childNodes[0]);
 
-		this._html.querySelector("#property").value=value;
-		this._html.querySelector("#property").id=property;
-		this._html.querySelector("#label").innerText=property.charAt(0).toUpperCase()+property.slice(1); // primer caracter en mayusculas
+		this.html.querySelector("#property").value=value;
+		this.html.querySelector("#property").id=property;
+		this.html.querySelector("#label").innerText=property.charAt(0).toUpperCase()+property.slice(1); // primer caracter en mayusculas
 
-		var text=this._html.querySelector('.mdc-text-field');
+		var text=this.html.querySelector('.mdc-text-field');
 		if (text != null) {
 			mdc.textField.MDCTextField.attachTo(text);
 			text.firstChild.addEventListener("change",this.onChangeInputHandler.bind(this,text.firstChild));
 		}
 		else{
-			var checkbox=this._html.querySelector(".mdc-checkbox");
+			var checkbox=this.html.querySelector(".mdc-checkbox");
 			checkbox.firstChild.addEventListener("change",this.onChangeInputHandler.bind(this,checkbox.firstChild));
-			value ? this._html.querySelector("#"+property).checked=true : this._html.querySelector("#"+property).checked=false;
+			value ? this.html.querySelector("#"+property).checked=true : this.html.querySelector("#"+property).checked=false;
 		}
 
-		this._html.querySelector("#more").addEventListener("click",this.menuNewPropertyHandler.bind(this));
-		this._html.querySelector('#delete').addEventListener("click",this.removeNewPropertyHandler.bind(this,));
-		this._menu = mdc.menu.MDCMenu.attachTo(this._html.querySelector('.mdc-menu'));
+		this.html.querySelector("#more").addEventListener("click",this.menuNewPropertyHandler.bind(this));
+		this.html.querySelector('#delete').addEventListener("click",this.removeNewPropertyHandler.bind(this,));
+		this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
 
-	}
-
-	get html() {  
-        return this._html;
 	}
 
 //Handler
@@ -54,7 +50,7 @@ class PropertyView {
 	}
 
 	menuNewPropertyHandler(){
-		this._menu.open = true;
+		this.menu.open = true;
 	}
 
 	removeNewPropertyHandler(){

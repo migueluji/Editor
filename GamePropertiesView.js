@@ -1,10 +1,10 @@
 class GamePropertiesView {
 
     constructor(gameModel) {   
-		 this._html = document.createElement("div");
-		 this._html.className +="game-properties side-sheet-content";
-		 this._html.style.display="none";
-		 this._html.innerHTML =
+		 this.html = document.createElement("div");
+		 this.html.className +="game-properties side-sheet-content";
+		 this.html.style.display="none";
+		 this.html.innerHTML =
 			'<header class="mdc-top-app-bar--dense properties-bar">'+
 				'<div class="mdc-top-app-bar__row">'+
 					'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">'+
@@ -26,24 +26,20 @@ class GamePropertiesView {
 						'<i class="mdc-fab__icon material-icons">add</i>'+
 				'</button>'+
 			'</ul>';
-		this._html.querySelector("#closebutton").addEventListener("click",SideSheetView.closeSheetHandler);
-		this._html.querySelector("#addproperty").addEventListener("click",this.addPropertyHandler.bind(this));
+		this.html.querySelector("#closebutton").addEventListener("click",SideSheetView.closeSheetHandler);
+		this.html.querySelector("#addproperty").addEventListener("click",this.addPropertyHandler.bind(this));
 		
 		this.createFrame(gameModel);
 		this.init(gameModel);
 	}
-	
-	get html() {  
-        return this._html;
-	}
 
 	addView(html) {
-		var children=this._html.querySelector("."+html.classList[0]);
+		var children=this.html.querySelector("."+html.classList[0]);
 		children.parentNode.replaceChild(html,children);
 	}
 
 	updateGameProperty(property,value) {
-		var element=this._html.querySelector("#"+property);
+		var element=this.html.querySelector("#"+property);
 		(element.type==="checkbox") ? element.value=element.checked=Boolean(value) : element.value=value;
 		if (property == "play") this._soundView.onClickHandler();
       	if (property == "physics") this._physicsView.onClickHandler();
@@ -59,12 +55,12 @@ class GamePropertiesView {
 		this._physicsView= new GamePropertiesPhysicsView();
 		this.addView(this._physicsView.html);
 
-		var textFields=this._html.querySelectorAll('.mdc-text-field');
+		var textFields=this.html.querySelectorAll('.mdc-text-field');
 		textFields.forEach(element => {	
 			mdc.textField.MDCTextField.attachTo(element);
 		}); 
 
-		var inputs=this._html.querySelectorAll("input");
+		var inputs=this.html.querySelectorAll("input");
 		inputs.forEach(element=>{
 			element.addEventListener("change",this.onChangeInputHandler.bind(this,element));
 		})

@@ -1,77 +1,73 @@
 class SceneView {
 
     constructor() {
-			this._html = document.createElement("li");
-			this._html.setAttribute("draggable","true");
-			this._html.innerHTML =
-				'<div class="mdc-list-item mdc-ripple-upgraded" role="option" aria-selected="false">'+
-					'<span class="mdc-list-item__graphic material-icons" aria-hidden="true">panorama_wide_angle</span>'+
-					'<span class="mdc-list-item__text">'+
-						'<span></span>'+
-					'</span>'+
-					'<button id="more" class="mdc-button mdc-list-item__meta material-icons">more_vert</button>'+
+		this.html = document.createElement("li");
+		this.html.setAttribute("draggable","true");
+		this.html.innerHTML =
+			'<div class="mdc-list-item mdc-ripple-upgraded" role="option" aria-selected="false">'+
+				'<span class="mdc-list-item__graphic material-icons" aria-hidden="true">panorama_wide_angle</span>'+
+				'<span class="mdc-list-item__text">'+
+					'<span></span>'+
+				'</span>'+
+				'<button id="more" class="mdc-button mdc-list-item__meta material-icons">more_vert</button>'+
+			'</div>'+
+			'<div class="mdc-menu-surface--anchor menu-scene">'+
+				'<div class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
+					'<ul class="mdc-list" role="menu" aria-hidden="true">'+
+						'<li id="rename" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Rename</li>'+
+						'<li id="duplicate" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Duplicate</li>'+
+						'<li id="delete" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Delete</li>'+
+					'</ul>'+
 				'</div>'+
-				'<div class="mdc-menu-surface--anchor menu-scene">'+
-					'<div class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
-						'<ul class="mdc-list" role="menu" aria-hidden="true">'+
-							'<li id="rename" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Rename</li>'+
-							'<li id="duplicate" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Duplicate</li>'+
-							'<li id="delete" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Delete</li>'+
-						'</ul>'+
-					'</div>'+
-				'</div>';
-			this._html.querySelector("#more").addEventListener("click",this.menuSceneHandler.bind(this));
-			this._html.querySelector("#rename").addEventListener("click",this.renameSceneHandler.bind(this));
-			this._html.querySelector('#duplicate').addEventListener("click",this.duplicateSceneHandler.bind(this));
-			this._html.querySelector('#delete').addEventListener("click",this.removeSceneHandler.bind(this,));
-			this._html.addEventListener("dragstart",this.dragstartSceneHandler.bind(this));
-			this._html.addEventListener("dragover",this.dragoverSceneHandler.bind(this));
-			this._html.addEventListener("dragleave",this.dragleaveSceneHandler.bind(this));
-			this._html.addEventListener("drop",this.dropSceneHandler.bind(this));
-			this._html.addEventListener("click",this.selectSceneHandler.bind(this));
-			this._menu = mdc.menu.MDCMenu.attachTo(this._html.querySelector('.mdc-menu'));
+			'</div>';
+		this.html.querySelector("#more").addEventListener("click",this.menuSceneHandler.bind(this));
+		this.html.querySelector("#rename").addEventListener("click",this.renameSceneHandler.bind(this));
+		this.html.querySelector('#duplicate').addEventListener("click",this.duplicateSceneHandler.bind(this));
+		this.html.querySelector('#delete').addEventListener("click",this.removeSceneHandler.bind(this,));
+		this.html.addEventListener("dragstart",this.dragstartSceneHandler.bind(this));
+		this.html.addEventListener("dragover",this.dragoverSceneHandler.bind(this));
+		this.html.addEventListener("dragleave",this.dragleaveSceneHandler.bind(this));
+		this.html.addEventListener("drop",this.dropSceneHandler.bind(this));
+		this.html.addEventListener("click",this.selectSceneHandler.bind(this));
+		this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
 	}
-	
-	get html() {
-		return this._html;
-  	}
     
   	addView(scene) {
-		this._html.id=scene.id;
-		this._html.querySelector(".mdc-list-item__text").innerHTML='<span>'+scene.name+'</span>';
+		this.html.id=scene.id;
+		this.html.querySelector(".mdc-list-item__text").innerHTML='<span>'+scene.name+'</span>';
 	}
 	  
 	remove() { 
-		this._html.remove();
+		this.html.remove();
 	}
 
 // Handlers
 	selectSceneHandler(e){
 		if (e.srcElement.nodeName=="DIV"){ //solo selecciona la escena si se hace click fuera del botón "more"
-			Command.selectSceneCmd(this._html.id);
+			Command.selectSceneCmd(this.html.id);
 		}
 	}
 
 	menuSceneHandler(){
-		this._menu.open = true;
+		this.menu.open = true;
 	}
 
 	renameSceneHandler(){
-		var dialog = new RenameSceneDialogView(this._html.id);
+		var dialog = new RenameSceneDialogView(this.html.id);
 		var editorFrame=document.querySelector(".editor-frame-root");
 		editorFrame.appendChild(dialog.html);
 		dialog.html.querySelector("#scenename").focus();
 	}
 
 	duplicateSceneHandler(){
-		CmdManager.duplicateSceneCmd(this._html.id);
+		CmdManager.duplicateSceneCmd(this.html.id);
 	}
 
 	removeSceneHandler (){
-		var text =document.querySelector("#"+this._html.id).firstChild.firstChild.nextSibling.innerText;
+		var text =document.querySelector("#"+this.html.id).firstChild.firstChild.nextSibling.innerText;
 		if (confirm('Are you sure you want to delete "'+text+'" scene?')){
-			var parent =document.querySelector("#"+this._html.id).parentNode;
-			CmdManager.removeSceneCmd(this._html.id); 
+			var parent =document.querySelector("#"+this.html.id).parentNode;
+			CmdManager.removeSceneCmd(this.html.id); 
 			if (parent.firstChild==null){ // si no hay scenas creamos una
 				CmdManager.addSceneCmd(0);
 			}
@@ -79,16 +75,16 @@ class SceneView {
 	}
 
 	dragstartSceneHandler(e){
-		e.dataTransfer.setData('text/html', this._html.outerHTML);
+		e.dataTransfer.setData('text/html', this.html.outerHTML);
 	}
 
 	dragoverSceneHandler(e){
 		e.preventDefault();
-		this._html.classList.add('over');
+		this.html.classList.add('over');
 	};
 
 	dragleaveSceneHandler(e){
-		this._html.classList.remove("over");
+		this.html.classList.remove("over");
 	};
 
 	dropSceneHandler(e){
@@ -98,15 +94,15 @@ class SceneView {
 		var element= document.createElement("div");
 		element.innerHTML=e.dataTransfer.getData('text/html');
 		element=element.firstElementChild;
-		CmdManager.moveSceneCmd(element.id,this._position(this._html,this._html.parentNode));
-		this._html.classList.remove("over");
+		CmdManager.moveSceneCmd(element.id,this.position(this.html,this.html.parentNode));
+		this.html.classList.remove("over");
 		if (element.querySelector(".mdc-list-item--sceneselected")){
 			Command.selectSceneCmd(element.id); 
 		}
 	};
 
 // Utilities
-	_position(element,parent){
+	position(element,parent){
 		var count=-1;
 		var child=parent.firstChild;
 		if (child) {

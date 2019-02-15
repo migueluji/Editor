@@ -1,35 +1,31 @@
 class SoundView {
 
     constructor() {
-			this._html = document.createElement("li");
-			this._html.className +="mdc-image-list__item";
-			this._html.innerHTML =
+			this.html = document.createElement("li");
+			this.html.className +="mdc-image-list__item";
+			this.html.innerHTML =
 				'<div class="mdc-image-list__image-aspect-container">'+
 					'<img class="mdc-image-list__image" src="./images/sound.png">'+
 				'</div>'+
 				'<div class="mdc-image-list__supporting">'+
 					'<span class="mdc-image-list__label">Text label</span>'+
 				'</div>';
-			this._html.addEventListener("click",this.selectSoundHandler.bind(this));
+			this.html.addEventListener("click",this.selectSoundHandler.bind(this));
 	}
-	
-	get html() {
-		return this._html;
-  	}
-    
+
   	addView(sound) {
-		this._html.id=sound.id;
-		this._html.querySelector(".mdc-image-list__supporting").firstChild.innerHTML=sound.name;
+		this.html.id=sound.id;
+		this.html.querySelector(".mdc-image-list__supporting").firstChild.innerHTML=sound.name;
 	}
 
 	remove() { 
-		this._html.remove();
+		this.html.remove();
 	}
 
 // Handlers
 	selectSoundHandler(e){
-		var name =this._html.firstChild.nextSibling.firstChild.textContent;
-		var selected=this._html.querySelector(".image-list--selected");
+		var name =this.html.firstChild.nextSibling.firstChild.textContent;
+		var selected=this.html.querySelector(".image-list--selected");
 		(selected != null) ? 	CmdManager.changeGamePropertyCmd("sound","Undefined") : 
 								CmdManager.changeGamePropertyCmd("sound",name);
 	}

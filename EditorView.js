@@ -1,9 +1,9 @@
 class EditorView {
 
     constructor() {   
-		 this._html = document.createElement("div");
-		 this._html.className +="editor-frame-root";
-		 this._html.innerHTML =
+		 this.html = document.createElement("div");
+		 this.html.className +="editor-frame-root";
+		 this.html.innerHTML =
             '<aside class="mdc-drawer mdc-drawer--dismissible mdc-drawer--open">'+ //DRAWER
                 '<div class="mdc-drawer__header"></div>'+ //header
                 '<div class="mdc-drawer__content"></div>'+ //content
@@ -16,13 +16,9 @@ class EditorView {
                 '</div>'+
             '</div>';
      }
-	
-	get html() {  
-        return this._html;
-    }
 
     addView(html){
-		var children=this._html.querySelector("."+html.classList[0]);
+		var children=this.html.querySelector("."+html.classList[0]);
 		children.parentNode.replaceChild(html,children);
 	}
 

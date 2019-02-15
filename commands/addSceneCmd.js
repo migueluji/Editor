@@ -3,13 +3,13 @@ class AddSceneCmd extends Command {
     constructor (pos){
         super();
         this.scene= new Scene();
-        this.scene.name=this._newName(pos);
+        this.scene.name=this.newName(pos);
         this.pos=pos;
         this.type="AddSceneCmd";
         this.name="Add Scene: "+this.scene.id;
     }
 
-    _newName (pos){
+    newName (pos){
         pos = pos+1;
         var name="Scene "+pos;
         while(this.editor.model.sceneList.findIndex(i=>i.name==name)!== -1){

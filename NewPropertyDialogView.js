@@ -1,9 +1,9 @@
 class NewPropertyDialogView {
 
     constructor(type) {   
-		 this._html = document.createElement("div");
-		 this._html.className +="dialog-full-screen";
-		 this._html.innerHTML =
+		 this.html = document.createElement("div");
+		 this.html.className +="dialog-full-screen";
+		 this.html.innerHTML =
 				'<div class="mdc-card">'+
 					'<h2 class="demo-card__title mdc-typography--headline6">Introduce new property    </h2>'+
 					'<div class=text-field-container">'+
@@ -44,17 +44,13 @@ class NewPropertyDialogView {
 				'</div>';
 	
 		this._type=type;
-		var textField=this._html.querySelector('.mdc-text-field');
+		var textField=this.html.querySelector('.mdc-text-field');
 		mdc.textField.MDCTextField.attachTo(textField);
 		textField.addEventListener("keypress",this.keyPressHandler.bind(this));
 
-		this._html.querySelector("#okbutton").addEventListener("click",this.okButtonHandler.bind(this));
-		this._html.querySelector("#cancelbutton").addEventListener("click",this.cancelButtonHandler.bind(this));
-		this._html.addEventListener("click",this.cancelBackgroundHandler.bind(this));
-	}
-	
-	get html() {  
-        return this._html;
+		this.html.querySelector("#okbutton").addEventListener("click",this.okButtonHandler.bind(this));
+		this.html.querySelector("#cancelbutton").addEventListener("click",this.cancelButtonHandler.bind(this));
+		this.html.addEventListener("click",this.cancelBackgroundHandler.bind(this));
 	}
 
 // Handlers
@@ -106,7 +102,7 @@ class NewPropertyDialogView {
 	}
 
 	cancelBackgroundHandler(e){
-		if (e.target===this._html)	this.cancelButtonHandler();
+		if (e.target===this.html)	this.cancelButtonHandler();
 	}
 
 }

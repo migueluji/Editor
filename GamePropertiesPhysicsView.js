@@ -1,9 +1,9 @@
 class GamePropertiesPhysicsView {
 
     constructor() {   
-		 this._html = document.createElement("li");
-		 this._html.className +="game-properties-physics properties-section properties-section--disable";
-		 this._html.innerHTML =
+		 this.html = document.createElement("li");
+		 this.html.className +="game-properties-physics properties-section properties-section--disable";
+		 this.html.innerHTML =
 			'<li class="mdc-list-item mdc-ripple-upgraded properties-section-title">'+
 				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
 				'Physics'+
@@ -31,14 +31,10 @@ class GamePropertiesPhysicsView {
 				'</div>'+
 			'</div>';	
 
-		var physics=this._html.querySelector("#physics");
+		var physics=this.html.querySelector("#physics");
 		physics.addEventListener("click",this.onClickHandler.bind(this));
 
-		this._html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));
-	}
-	
-	get html() {  
-        return this._html;
+		this.html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));
 	}
 
 // Handlers
@@ -48,8 +44,8 @@ class GamePropertiesPhysicsView {
 	}
 
 	propertyGroupHandler(){
-		var element=this._html.querySelector(".properties-panel");
-		var expandButton=this._html.querySelector("#expandbutton");
+		var element=this.html.querySelector(".properties-panel");
+		var expandButton=this.html.querySelector("#expandbutton");
 		element.classList.toggle("open");
 		element.classList.contains("open") ? expandButton.innerHTML='expand_less' : expandButton.innerHTML='expand_more';
 	}

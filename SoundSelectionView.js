@@ -1,10 +1,10 @@
 class SoundSelectionView {
 
     constructor(soundList,soundID) {   
-		 this._html = document.createElement("div");
-		 this._html.className +="sound-selection side-sheet-content";
-		 this._html.style.display="none";
-		 this._html.innerHTML =
+		 this.html = document.createElement("div");
+		 this.html.className +="sound-selection side-sheet-content";
+		 this.html.style.display="none";
+		 this.html.innerHTML =
 			'<header class="mdc-top-app-bar--dense properties-bar">'+
 				'<div class="mdc-top-app-bar__row">'+
 					'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">'+
@@ -21,20 +21,16 @@ class SoundSelectionView {
 			'<ul class="mdc-image-list">'+
 					// aqui van los sonidos
 			'</ul>';
-		this._html.querySelector("#exitbutton").addEventListener("click",this.exitSheetHandler.bind(this));
-		this._html.querySelector("#uploadbutton").addEventListener("click",this.uploadSoundHandler.bind(this));
-		this._html.querySelector("#deletebutton").addEventListener("click",this.removeSoundHandler.bind(this));
-		this._html.querySelector("#files").addEventListener("change",this.fileBrowserHandler.bind(this));
-		this._selectedSound=null;
+		this.html.querySelector("#exitbutton").addEventListener("click",this.exitSheetHandler.bind(this));
+		this.html.querySelector("#uploadbutton").addEventListener("click",this.uploadSoundHandler.bind(this));
+		this.html.querySelector("#deletebutton").addEventListener("click",this.removeSoundHandler.bind(this));
+		this.html.querySelector("#files").addEventListener("change",this.fileBrowserHandler.bind(this));
+		this.selectedSound=null;
 		this.init(soundList,soundID);
 	}
 
-	get html() {  
-        return this._html;
-	}
-
 	addSound(soundView){
-		var list = this._html.querySelector(".mdc-image-list");
+		var list = this.html.querySelector(".mdc-image-list");
 		var name = soundView.html.firstChild.nextSibling.textContent;
 		var i=0;
 		while (i<list.childNodes.length && name > list.childNodes[i].firstChild.nextSibling.textContent) {
@@ -44,36 +40,36 @@ class SoundSelectionView {
 	}
 
 	removeSound(soundID){
-		this._html.querySelector("#"+soundID).remove();
+		this.html.querySelector("#"+soundID).remove();
 	}
 
 	updateSelectedSound(soundID){
-		(this._selectedSound === soundID) ? this._selectedSound=null : this._selectedSound=soundID;
-		var selectedSounds=this._html.querySelectorAll(".image-list--selected");
+		(this.selectedSound === soundID) ? this.selectedSound=null : this.selectedSound=soundID;
+		var selectedSounds=this.html.querySelectorAll(".image-list--selected");
 		selectedSounds.forEach(element=>{
 			element.classList.remove("image-list--selected");
 		});			
-		if (this._selectedSound !== null) {
-			var listItem=this._html.querySelector("#"+soundID).firstChild;
+		if (this.selectedSound !== null) {
+			var listItem=this.html.querySelector("#"+soundID).firstChild;
 			listItem.className+= " image-list--selected";
 		}
 	}
 
 //Handlers
 	exitSheetHandler(){
-		this._html.style.display="none";
+		this.html.style.display="none";
 		SideSheetView.openSheetHandler("game-properties");
 	}
 
 	uploadSoundHandler(e){
-		var element = this._html.querySelector("#files")
+		var element = this.html.querySelector("#files")
 		element.value="";
 		element.click();
 	}
 
 	fileBrowserHandler(evt){
 		var files = evt.target.files;
-		var list =this._html.querySelectorAll(".mdc-image-list__label");
+		var list =this.html.querySelectorAll(".mdc-image-list__label");
 		for( var i=0; i<files.length;i++){
 			var j=0;
 			while((j<list.length) && (files[i].name!=list[j].innerText)){
@@ -92,10 +88,10 @@ class SoundSelectionView {
 	}
 
 	removeSoundHandler(){
-		if (this._selectedSound){ // si hay sonido seleccionado
-			var text=document.querySelector("#"+this._selectedSound).firstChild.nextSibling.textContent;
+		if (this.selectedSound){ // si hay sonido seleccionado
+			var text=document.querySelector("#"+this.selectedSound).firstChild.nextSibling.textContent;
 			if (confirm('Are you sure you want to delete "'+text+'" sound?')){
-				CmdManager.removeSoundCmd(this._selectedSound);
+				CmdManager.removeSoundCmd(this.selectedSound);
 			}
 		}
 	}

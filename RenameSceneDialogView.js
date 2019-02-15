@@ -1,9 +1,9 @@
 class RenameSceneDialogView {
 
     constructor(sceneID) {   
-		 this._html = document.createElement("div");
-		 this._html.className +="dialog-full-screen";
-		 this._html.innerHTML =
+		 this.html = document.createElement("div");
+		 this.html.className +="dialog-full-screen";
+		 this.html.innerHTML =
 				'<div class="mdc-card">'+
 					'<h2 class="demo-card__title mdc-typography--headline6">Rename scene    </h2>'+
 					'<div class=text-field-container">'+
@@ -21,19 +21,15 @@ class RenameSceneDialogView {
 						'<button id="okbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded">Ok</button>'+
 					'</div>'+
 				'</div>';
-		this._sceneID=sceneID;
-		var textField=this._html.querySelector('.mdc-text-field');
+		this.sceneID=sceneID;
+		var textField=this.html.querySelector('.mdc-text-field');
 		mdc.textField.MDCTextField.attachTo(textField);
 		textField.addEventListener("keypress",this.keyPressHandler.bind(this));
 
-		this._html.querySelector("#okbutton").addEventListener("click",this.okButtonHandler.bind(this));
-		this._html.querySelector("#cancelbutton").addEventListener("click",this.cancelButtonHandler.bind(this));
-		this._html.addEventListener("click",this.cancelBackgroundHandler.bind(this));
-    }
-	
-	get html() {  
-        return this._html;
-	}
+		this.html.querySelector("#okbutton").addEventListener("click",this.okButtonHandler.bind(this));
+		this.html.querySelector("#cancelbutton").addEventListener("click",this.cancelButtonHandler.bind(this));
+		this.html.addEventListener("click",this.cancelBackgroundHandler.bind(this));
+  }
 
 // Handlers
 	keyPressHandler(e){
@@ -64,7 +60,7 @@ class RenameSceneDialogView {
 				this.html.querySelector("#error").innerText="This scene name already exists"
 			}
 			else{
-				CmdManager.renameSceneCmd(this._sceneID,name);
+				CmdManager.renameSceneCmd(this.sceneID,name);
 				this.cancelButtonHandler();
 			}
 		}
@@ -77,7 +73,7 @@ class RenameSceneDialogView {
 	}
 
 	cancelBackgroundHandler(e){
-		if (e.target===this._html)	this.cancelButtonHandler();
+		if (e.target===this.html)	this.cancelButtonHandler();
 	}
 
 }

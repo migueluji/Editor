@@ -1,21 +1,17 @@
 class SideSheetView {
 
     constructor() {   
-		 this._html = document.createElement("aside");
-		 this._html.className +="side-sheet";
-		 this._html.style.display="none";
-		 this._html.innerHTML =
+		 this.html = document.createElement("aside");
+		 this.html.className +="side-sheet";
+		 this.html.style.display="none";
+		 this.html.innerHTML =
 				 '<div class="game-properties"></div>'+
 				 '<div class="sound-selection"></div>'+
 				 '<div class="cast"></div>';
     }
-	
-	get html() {  
-        return this._html;
-	}
 
 	addView(html){
-		var children=this._html.querySelector("."+html.classList[0]);
+		var children=this.html.querySelector("."+html.classList[0]);
 		children.parentNode.replaceChild(html,children);
 	}
 

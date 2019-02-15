@@ -1,9 +1,9 @@
 class GamePropertiesSoundView {
 
     constructor() {   
-		 this._html = document.createElement("li");
-		 this._html.className +="game-properties-sound properties-section properties-section--disable";
-		 this._html.innerHTML =
+		 this.html = document.createElement("li");
+		 this.html.className +="game-properties-sound properties-section properties-section--disable";
+		 this.html.innerHTML =
 			'<li class="mdc-list-item mdc-ripple-upgraded properties-section-title">'+
 				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
 				'Sound'+
@@ -57,17 +57,13 @@ class GamePropertiesSoundView {
 				'</div>'+
 			'</div>';	
 
-		var play=this._html.querySelector("#play");
+		var play=this.html.querySelector("#play");
 		play.addEventListener("click",this.onClickHandler.bind(this));
 
-		var soundButton=this._html.querySelector("#soundbutton");
+		var soundButton=this.html.querySelector("#soundbutton");
 		soundButton.addEventListener("click",this.onClickSoundButton.bind(this));
 
-		this._html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));
-	}
-	
-	get html() {  
-        return this._html;
+		this.html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));
 	}
 
 // Handlers
@@ -81,8 +77,8 @@ class GamePropertiesSoundView {
 	}
 
 	propertyGroupHandler(){
-		var element=this._html.querySelector(".properties-panel");
-		var expandButton=this._html.querySelector("#expandbutton");
+		var element=this.html.querySelector(".properties-panel");
+		var expandButton=this.html.querySelector("#expandbutton");
 		element.classList.toggle("open");
 		element.classList.contains("open") ? expandButton.innerHTML='expand_less' : expandButton.innerHTML='expand_more';
 	}
