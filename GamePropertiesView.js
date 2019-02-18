@@ -41,19 +41,19 @@ class GamePropertiesView {
 	updateGameProperty(property,value) {
 		var element=this.html.querySelector("#"+property);
 		(element.type==="checkbox") ? element.value=element.checked=Boolean(value) : element.value=value;
-		if (property == "play") this._soundView.onClickHandler();
-      	if (property == "physics") this._physicsView.onClickHandler();
+		if (property == "play") this.soundView.onClickHandler();
+      	if (property == "physics") this.physicsView.onClickHandler();
 		element.focus();
 	}
 
 //Frame
 	createFrame(gameModel){
-		this._settingsView= new GamePropertiesSettingsView();
-		this.addView(this._settingsView.html);
-		this._soundView= new GamePropertiesSoundView();
-		this.addView(this._soundView.html);
-		this._physicsView= new GamePropertiesPhysicsView();
-		this.addView(this._physicsView.html);
+		this.settingsView= new GamePropertiesSettingsView();
+		this.addView(this.settingsView.html);
+		this.soundView= new GamePropertiesSoundView();
+		this.addView(this.soundView.html);
+		this.physicsView= new GamePropertiesPhysicsView();
+		this.addView(this.physicsView.html);
 
 		var textFields=this.html.querySelectorAll('.mdc-text-field');
 		textFields.forEach(element => {	
@@ -65,9 +65,8 @@ class GamePropertiesView {
 			element.addEventListener("change",this.onChangeInputHandler.bind(this,element));
 		})
 
-		this._newPropertiesView= new GamePropertiesNewView(gameModel.newProperties);
-		this.addView(this._newPropertiesView.html);
-
+		this.newPropertiesView= new GamePropertiesNewView(gameModel.newProperties);
+		this.addView(this.newPropertiesView.html);
 	}
 
 //Handlers
@@ -79,14 +78,14 @@ class GamePropertiesView {
 	}
 
 	onChangeInputHandler(element){
-		this._property=element.id;
+		this.property=element.id;
 		switch (element.type){
-			case "checkbox": 	this._value=Boolean(element.checked); break;
-			case "number" : 	this._value=Number(element.value); break;
-			case "text" : 		this._value=String(element.value).trim(); break;
+			case "checkbox": 	this.value=Boolean(element.checked); break;
+			case "number" : 	this.value=Number(element.value); break;
+			case "text" : 		this.value=String(element.value).trim(); break;
 		}
-		if (element.id==="name" && this._value==="") this._value="Untitled Game";
-		CmdManager.changeGamePropertyCmd(this._property,this._value);
+		if (element.id==="name" && this.value==="") this.value="Untitled Game";
+		CmdManager.changeGamePropertyCmd(this.property,this.value);
 	}
 
 //Utilities

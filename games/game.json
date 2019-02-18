@@ -1,0 +1,55 @@
+{
+    "name": "Mario Bros",
+    "width": 800,
+    "height": 480,
+    "cameraX": 0,
+    "cameraY": 0,
+    "cameraRotation": 0,
+    "cameraZoom": 1,
+    "play": false,
+    "sound": "player.mp4",
+    "volume": 1,
+    "start":  0,
+    "pan": 0,
+    "loop": true,
+    "physics": true,
+    "gravityX": 0.0,
+    "gravityY": -9.8,
+    "tagList": [],
+    "imageList": [],
+    "soundList": [
+        {
+            "id": "id1234567890002",
+            "name":"player.mp4"
+        },
+        {
+            "id": "id1234567890003",
+            "name":"live.mp4"
+        },
+        {
+            "id": "id1234567890004",
+            "name":"gamemusic.mp4"
+        },
+        {
+            "id": "id1234567890005",
+            "name":"impact.mp4"
+        },
+        {
+            "id": "id1234567890006",
+            "name":"sound.mp4"
+        },
+    ],
+    "fontList": [],
+    "sceneList": [    
+        {
+            "id": "id1234567890000",
+            "name": "Start",
+        },
+        {
+            "id": "id1234567890001",
+            "name":"End",
+        }
+    ],
+    "a": 34,
+    "live": true,
+}

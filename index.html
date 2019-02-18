@@ -42,12 +42,15 @@
 	<script src="./commands/RemoveGamePropertyCmd.js"></script>
 	<script src="./commands/RemoveSoundCmd.js"></script>
 	<script src="./commands/AddSoundCmd.js"></script>
+	<script src="./File.js"></script>
 </head>
 <body class="mdc-typography">
 
 	<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 	<script>
 
+		var file =new File("./games/games.json");
+		file.load();
 		var editor = new Editor(new EditorView(),new Game());
 		new CmdManager(editor);
 		document.body.appendChild(editor.view.html);
