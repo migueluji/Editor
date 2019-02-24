@@ -11,7 +11,15 @@ class Command {
         this.editor.selectScene(sceneID);
     }
 
+    static selectActorCmd(actorID){
+        this.editor.selectActor(actorID);
+    }
+
     static selectSoundCmd(soundID){
         this.editor.selectSound(soundID);
-     }
+    }
+
+    static saveGame(){
+        this.editor.saveGame();
+    }
 }

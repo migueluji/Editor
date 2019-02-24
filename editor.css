@@ -26,6 +26,9 @@ body{
 .mdc-list-item--sceneselected{
     background-color: #ede3fa;
 }
+.mdc-list-item--actorselected{
+    background-color: #ede3fa;
+}
 .add-property-button{
     position: absolute;
     bottom: 16px;
@@ -38,6 +41,12 @@ body{
     position:relative; 
     z-index:2; 
     transform:translate(130px,-48px);
+    width: 0px;
+}
+.menu-actor{
+    position:relative; 
+    z-index:2; 
+    transform:translate(300px,-48px);
     width: 0px;
 }
 .menu-new-property{
@@ -181,4 +190,7 @@ body{
 .image-list--selected{
     border: 8px solid #6200ee38;
     margin: -8px;
+}
+.cast{
+    overflow-y:auto;
 }

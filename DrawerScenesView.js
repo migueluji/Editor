@@ -14,7 +14,8 @@ class DrawerScenesView {
   }
 
   addScene(sceneView,scenePos) {
-		this.html.querySelector(".mdc-list").insertBefore(sceneView.html,this.html.querySelector(".mdc-list").childNodes[scenePos]);
+		var element = this.html.querySelector(".mdc-list");
+		element.insertBefore(sceneView.html,element.childNodes[scenePos]);
 	}
 
 	removeScene(sceneID){
@@ -49,6 +50,6 @@ class DrawerScenesView {
 			this.addScene(sceneView,scenePos);
 			scenePos++;
 		});	
-    this.updateSelectedScene(sceneList[0].id);
+		this.updateSelectedScene(sceneList[0].id);
 	}
 }

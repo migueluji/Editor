@@ -1,59 +1,12 @@
 class Game {
 	
-    constructor(gameData) {
-        this.name = "Mario Car";
-        this.width= 800;
-        this.height= 640;
-        this.cameraX=0;
-        this.cameraY=0;
-        this.cameraRotation=0;
-        this.cameraZoom=1;
-        this.play= false;
-        this.sound = "player.mp4";
-        this.volume= 1;
-        this.start=  0;
-        this.pan= 0;
-        this.loop= true;
-        this.physics=true;
-        this.gravityX=0.0;
-        this.gravityY=-9.8;
-        this.tagList=[];
-        this.imageList=[];
-        this.soundList=[
-            {
-                "id": "id1234567890002",
-                "name":"player.mp4"
-            },
-            {
-                "id": "id1234567890003",
-                "name":"live.mp4"
-            },
-            {
-                "id": "id1234567890004",
-                "name":"gamemusic.mp4"
-            },
-            {
-                "id": "id1234567890005",
-                "name":"impact.mp4"
-            },
-            {
-                "id": "id1234567890006",
-                "name":"sound.mp4"
-            },
-        ];
-        this.fontList=[];
-        this.sceneList=[    
-            {
-                "id": "id1234567890000",
-                "name": "Start",
-            },
-            {
-                "id": "id1234567890001",
-                "name":"End",
-            }
-        ];
-        this.a=34;
-        this.pasa=true;
+    constructor(game) {
+        Object.assign(this,game);
+        if (this.soundList) this.soundList.forEach((sound,i) => this.soundList[i]=new Asset(sound));
+        if (this.imageList) this.imageList.forEach((image,i) => this.imageList[i]=new Asset(image));
+        if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]=new Asset(font));
+        this.sceneList.forEach((scene,i) => this.sceneList[i]=new Scene(scene));
+        console.log(this);
     }
 
     get properties(){
@@ -96,5 +49,26 @@ class Game {
     removeSound(soundID) {
         this.soundList.splice(this.soundList.findIndex(i => i.id == soundID),1);
     } 
-    
 }
+
+ /*     this.name           = game.name             || "New Game";  
+        this.width          = game.width            || 800;         
+        this.height         = game.height           || 480;         
+        this.cameraX        = game.cameraX          || 0;           
+        this.cameraY        = game.cameraY          || 0;           
+        this.cameraRotation = game.cameraRotation   || 0;           
+        this.cameraZoom     = game.cameraZoom       || 1;          
+        this.play           = game.play             || false;       
+        this.sound          = game.sound            || "Undefined"; 
+        this.volume         = game.volume           || 1;           
+        this.start          = game.start            || 0;          
+        this.pan            = game.pan              || 0;          
+        this.loop           = game.loop             || false;       
+        this.physics        = game.physics          || false;       
+        this.gravityX       = game.gravityX         || 0.0;         
+        this.gravityY       = game.gravityY         || -9.8;        
+        this.tagList = [];
+        this.imageList = [];
+        this.soundList = [];
+        this.fontList = [];
+        this.sceneList =[]; */   

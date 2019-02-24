@@ -1,14 +1,14 @@
-class RenameSceneDialogView {
+class RenameActorDialogView {
 
-    constructor(sceneID) {   
+    constructor(actorID) {   
 		 this.html = document.createElement("div");
 		 this.html.className +="dialog-full-screen";
 		 this.html.innerHTML =
 				'<div class="mdc-card">'+
-					'<h2 class="demo-card__title mdc-typography--headline6">Rename scene    </h2>'+
+					'<h2 class="demo-card__title mdc-typography--headline6">Rename actor    </h2>'+
 					'<div class=text-field-container">'+
 						'<div class="mdc-text-field mdc-ripple-upgraded text-field--full">'+
-							'<input id="scenename" type="text"  class="mdc-text-field__input">'+
+							'<input id="actorname" type="text"  class="mdc-text-field__input">'+
 							'<label class="mdc-floating-label">New name</label>'+
 							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 						'</div>'+
@@ -21,7 +21,7 @@ class RenameSceneDialogView {
 						'<button id="okbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded">Ok</button>'+
 					'</div>'+
 				'</div>';
-		this.sceneID=sceneID;
+		this.actorID=actorID;
 		var textField=this.html.querySelector('.mdc-text-field');
 		mdc.textField.MDCTextField.attachTo(textField);
 		textField.addEventListener("keypress",this.keyPressHandler.bind(this));
@@ -34,7 +34,7 @@ class RenameSceneDialogView {
 // Handlers
 	keyPressHandler(e){
 		var chr = String.fromCharCode(e.which);
-		var name=this.html.querySelector("#scenename").value;
+		var name=this.html.querySelector("#actorname").value;
 		var filter=" abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 		if ((filter.indexOf(chr) < 0) || (name.length >= 15)){
 			e.preventDefault();
@@ -43,23 +43,23 @@ class RenameSceneDialogView {
 	}
 
 	okButtonHandler(){
-		var input=this.html.querySelector("#scenename");
+		var input=this.html.querySelector("#actorname");
 		var name=input.value.trim();
-		var panel=document.querySelector(".mdc-drawer__content");
-		var sceneList=panel.querySelectorAll(".mdc-list-item__text");
+		var panel=document.querySelector(".cast");
+		var actorList=panel.querySelectorAll(".mdc-list-item__text");
 		var exist=false;
 		if (name=="") {
 			this.html.querySelector("#error").innerText="Required field"
 		}
 		else {
-			sceneList.forEach(element=>{
+			actorList.forEach(element=>{
 				if (element.firstChild.innerText===name) exist=true;
 			});
 			if (exist){
-				this.html.querySelector("#error").innerText="This scene name already exists"
+				this.html.querySelector("#error").innerText="This actor name already exists"
 			}
 			else{
-				CmdManager.renameSceneCmd(this.sceneID,name);
+				CmdManager.renameActorCmd(this.actorID,name);
 				this.cancelButtonHandler();
 			}
 		}

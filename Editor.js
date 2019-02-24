@@ -4,9 +4,11 @@ class Editor {
         this.view = editorView;
         this.model = gameModel;
         this.selectedScene=gameModel.sceneList[0].id;
+ //       this.selectedActor=null;
         var index=gameModel.soundList.findIndex(i => i.name == gameModel.sound);
         (index !== -1) ? this.selectedSound=gameModel.soundList[index].id : this.selectedSound=null;
         this.selectedSceneIndex=0;
+  //      this.selectedActorIndex=0;
         
         //App Bar
         this.appBarView=new AppBarView(gameModel.sceneList[0].name);
@@ -24,11 +26,17 @@ class Editor {
             this.sideSheetView.addView(this.gamePropertiesView.html);
             this.soundSelectionView = new SoundSelectionView(gameModel.soundList,this.selectedSound);
             this.sideSheetView.addView(this.soundSelectionView.html);
+            this.castView = new CastView(this.model.sceneList[this.selectedSceneIndex].actorList);
+            this.sideSheetView.addView(this.castView.html);
         this.view.addView(this.sideSheetView.html);
 
     }
 
 // Game
+    saveGame(){
+        File.save(this.model.name+".json",JSON.stringify(this.model, null, '\t'));
+    }
+
     addGameProperty(property,value,position){
         this.model[property]=value;
         var propertyNumberView = new PropertyView(property,value);
@@ -59,7 +67,7 @@ class Editor {
         if (pos==0){
             this.selectScene(scene.id);
         }
-    }
+     }
 
     removeScene(sceneID){
         this.model.removeScene(sceneID);
@@ -87,7 +95,33 @@ class Editor {
         this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
         this.drawerScenesView.updateSelectedScene(sceneID);
         this.appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
+        this.castView = new CastView(this.model.sceneList[this.selectedSceneIndex].actorList);
+        this.sideSheetView.addView(this.castView.html);
      }
+
+// Actor
+     addActor(actor,pos){
+        var actorView = new ActorView();
+        actorView.addView(actor);
+        this.model.sceneList[this.selectedSceneIndex].addActor(actor,pos);
+        this.castView.addActor(actorView,pos);
+     }
+
+     removeActor(actorID){
+        this.model.sceneList[this.selectedSceneIndex].removeActor(actorID);
+        this.castView.removeActor(actorID);
+     }
+
+     renameActor(actorID,actorName){
+        var scene=this.model.sceneList[this.selectedSceneIndex];
+        var index=scene.actorList.findIndex(i=>i.id===actorID);
+        scene.actorList[index].name=actorName;
+        this.castView.renameActor(actorID,actorName);
+    }
+
+    selectActor(actorID){
+         this.castView.updateSelectedActor(actorID);
+    }
 
 // sounds
      addSound(sound){
@@ -107,7 +141,7 @@ class Editor {
       }
 
      selectSound(soundID){
-        (this.selectedSound===soundID || soundID==null) ?  this.selectedSound=null : this.selectedSound=soundID;
+    //  (this.selectedSound===soundID || soundID==null) ?  this.selectedSound=null : this.selectedSound=soundID;
         this.soundSelectionView.updateSelectedSound(soundID);
     }
 }

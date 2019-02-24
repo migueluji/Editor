@@ -1,26 +1,25 @@
 class File {
-    
-    constructor(URL) {
-        this.URL=URL;
-    }
 
-    load() {
+
+    load(URL) {
         var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = this.ready.bind(xhr, event, this.model);
-        xhr.open("GET", this.URL, true);
-        xhr.send(); 
+        xhr.onreadystatechange = this.ready.bind(xhr);
+        xhr.open("GET", URL, true);
+        xhr.send();
     }
 
-    ready(xhr, fileModel, event) {
-
-     //   if(this.readyState === this.DONE) {
-        if(this.readyState==4 && this.status==200){
-            var myObj =JSON.parse(this.repsonseText);
-            console.log("Json parsed data is: " + JSON.stringify(myObj));
-       }
-            //fileModel.JSON = JSON.parse(String(this.response));
-            //fileModel.loaded = true;
-            //player.onFileLoaded();
+    ready() {
+       if(this.readyState == this.DONE && this.status == 200){
+           var json=JSON.parse(this.responseText);
+            app.onFileLoaded(json);   
+        }
     }
 
+    static save(url,file) {
+        var a = document.createElement("a");
+        var blob = new Blob([file], {type: 'text/plain'});
+        a.href = URL.createObjectURL(blob);
+        a.download = url;
+        a.click();
+     }
 }

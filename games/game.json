@@ -15,41 +15,63 @@
     "physics": true,
     "gravityX": 0.0,
     "gravityY": -9.8,
-    "tagList": [],
-    "imageList": [],
+    "tagList": ["player","enemy"],
+    "imageList": [
+        {
+            "id": "id1234567",
+            "name": "image.jpg"
+        }
+    ],
     "soundList": [
         {
-            "id": "id1234567890002",
+            "id": "id1234567890008",
             "name":"player.mp4"
+        },
+        {
+            "id": "id1234567890007",
+            "name":"sin.mp4"
+        },
+        {
+            "id": "id1234567890004",
+            "name":"pop.mp4"
+        },
+        {
+            "id": "id1234567890002",
+            "name":"lalala.mp4"
         },
         {
             "id": "id1234567890003",
             "name":"live.mp4"
-        },
-        {
-            "id": "id1234567890004",
-            "name":"gamemusic.mp4"
-        },
-        {
-            "id": "id1234567890005",
-            "name":"impact.mp4"
-        },
-        {
-            "id": "id1234567890006",
-            "name":"sound.mp4"
-        },
+        }
     ],
-    "fontList": [],
     "sceneList": [    
         {
             "id": "id1234567890000",
             "name": "Start",
+            "actorList": [
+                {
+                    "id": "id1234567890034",
+                    "name": "Actor 1"
+                },
+                {
+                    "id": "id1234567890024",
+                    "name": "Actor 2"
+                },
+                {
+                    "id": "id1234567890014",
+                    "name": "Actor 4"
+                }
+            ]
+        },
+        {
+            "id": "id1234567890007",
+            "name":"Level 1"
         },
         {
             "id": "id1234567890001",
-            "name":"End",
+            "name":"End"
         }
     ],
-    "a": 34,
-    "live": true,
+    "points": 34,
+    "live": true
 }

@@ -5,7 +5,7 @@ class RemoveSceneCmd extends Command {
         this.pos=this.editor.model.sceneList.findIndex(i => i.id == sceneID);
         this.scene=this.editor.model.sceneList[this.pos];
         this.type="RemoveSceneCmd";
-        this.name="Remove Scene: "+sceneID;
+        this.name="Remove Scene: " + sceneID;
     }
     
     execute (){
