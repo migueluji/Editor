@@ -36,15 +36,6 @@ class ActorView {
 		this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
 	}
    
-  addView(actor) {
-		this.html.id=actor.id;
-		this.html.querySelector(".mdc-list-item__text").innerHTML='<span>'+actor.name+'</span>';
-	}
-	/*
-	remove() { 
-		this.html.remove();
-	}
-*/
 // Handlers
 	selectActorHandler(e){
 		if (e.srcElement.nodeName=="DIV"){ //solo selecciona la escena si se hace click fuera del botón "more"
