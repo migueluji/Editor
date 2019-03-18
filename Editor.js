@@ -3,7 +3,7 @@ class Editor {
     constructor(editorView,gameModel) {
         this.view = editorView;
         this.model = gameModel;
-        this.selectedScene=gameModel.sceneList[0].id;
+ //       this.selectedScene=gameModel.sceneList[0].id;
  //       this.selectedActor=null;
         var index=gameModel.soundList.findIndex(i => i.name == gameModel.sound);
         (index !== -1) ? this.selectedSound=gameModel.soundList[index].id : this.selectedSound=null;
@@ -28,8 +28,9 @@ class Editor {
             this.sideSheetView.addView(this.soundSelectionView.html);
             this.castView = new CastView(this.model.sceneList[this.selectedSceneIndex].actorList);
             this.sideSheetView.addView(this.castView.html);
+            this.actorPropertiesView = new ActorPropertiesView(this.model.sceneList[this.selectedSceneIndex].actorList[0]);
+            this.sideSheetView.addView(this.actorPropertiesView.html);
         this.view.addView(this.sideSheetView.html);
-
     }
 
 // Game
@@ -67,13 +68,14 @@ class Editor {
         if (pos==0){
             this.selectScene(scene.id);
         }
-     }
+    }
 
     removeScene(sceneID){
+        var sceneSelectedID=this.model.sceneList[this.selectedSceneIndex].id;
         this.model.removeScene(sceneID);
         this.drawerScenesView.removeScene(sceneID);
-        if(sceneID==this.selectedScene){
-            if (this.model.sceneList.length==this.selectedSceneIndex ){
+        if(sceneID==sceneSelectedID){
+             if (this.model.sceneList.length==this.selectedSceneIndex ){
                 if (this.selectedSceneIndex>0){ //si hay scenas que seleccionar
                     this.selectScene(this.model.sceneList[this.selectedSceneIndex-1].id);
                 }
@@ -87,32 +89,43 @@ class Editor {
     renameScene(sceneID,sceneName){
         this.model.sceneList[this.model.sceneList.findIndex(i=>i.id===sceneID)].name=sceneName;
         this.drawerScenesView.renameScene(sceneID,sceneName);
-        if(this.selectedScene===sceneID)this.appBarView.updateSceneName(sceneName);
-    }
+        var selectedSceneName=this.model.sceneList[this.selectedSceneIndex].name;
+        if(selectedSceneName===sceneName) this.appBarView.updateSceneName(sceneName);
+      }
 
     selectScene(sceneID){
-        this.selectedScene=sceneID;
         this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
         this.drawerScenesView.updateSelectedScene(sceneID);
         this.appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
-        this.castView = new CastView(this.model.sceneList[this.selectedSceneIndex].actorList);
-        this.sideSheetView.addView(this.castView.html);
+        if (SideSheetView.displayed=="cast"){
+            this.castView = new CastView(this.model.sceneList[this.selectedSceneIndex].actorList);
+            this.sideSheetView.addView(this.castView.html);
+        } 
+        else if (SideSheetView.displayed=="actor-properties"){
+            SideSheetView.closeSheetHandler();
+        };
      }
 
 // Actor
-     addActor(actor,pos){
+     addActor(sceneID,actorPos,actor){
+        this.selectScene(sceneID); //necesario para los comandos de deshacer
         var actorView = new ActorView();
         actorView.addView(actor);
-        this.model.sceneList[this.selectedSceneIndex].addActor(actor,pos);
-        this.castView.addActor(actorView,pos);
-     }
+        this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
+        this.model.sceneList[this.selectedSceneIndex].addActor(actor,actorPos);
+        this.castView.addActor(actorView,actorPos);    
+      }
 
-     removeActor(actorID){
+     removeActor(sceneID,actorID){
+        this.selectScene(sceneID); //necesario para los comandos de deshacer
+        this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
         this.model.sceneList[this.selectedSceneIndex].removeActor(actorID);
         this.castView.removeActor(actorID);
      }
 
-     renameActor(actorID,actorName){
+     renameActor(sceneID,actorID,actorName){
+        this.selectScene(sceneID); //necesario para los comandos de deshacer
+        this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
         var scene=this.model.sceneList[this.selectedSceneIndex];
         var index=scene.actorList.findIndex(i=>i.id===actorID);
         scene.actorList[index].name=actorName;
@@ -120,7 +133,24 @@ class Editor {
     }
 
     selectActor(actorID){
-         this.castView.updateSelectedActor(actorID);
+        console.log(SideSheetView.displayed);
+        this.selectedActorIndex=this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.id==actorID);
+        this.castView.updateSelectedActor(actorID);
+  //      if (SideSheetView.displayed=="actor-properties"){ //solo se actualiza la vista si es necesario
+            this.actorPropertiesView = new ActorPropertiesView(this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex]);
+            this.sideSheetView.addView(this.actorPropertiesView.html);
+     //       SideSheetView.openSheetHandler("actor-properties");
+    //    }
+      }
+
+      changeActorProperty(scenePos,actorPos,property,value){
+        this.model.sceneList[scenePos].actorList[actorPos][property]=value;
+        this.actorPropertiesView.updateActorProperty(property,value);
+ /*       if (property === "sound") {
+            (value == "Undefined") ?    this.selectSound(null) :
+                                        this.selectSound(this.model.soundList[this.model.soundList.findIndex(i => i.name == this.model.sound)].id);
+         }
+         */
     }
 
 // sounds

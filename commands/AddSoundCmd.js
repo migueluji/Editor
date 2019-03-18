@@ -2,7 +2,7 @@ class AddSoundCmd extends Command {
     
     constructor (soundName){
         super();
-        this.sound={id:"id"+(new Date()).valueOf(), name:soundName};
+        this.sound={"id":Utils.id(), "name":soundName};
         this.selectedSound=this.editor.selectedSound;
         this.type="AddSoundCmd";
         this.name="Add Sound: "+this.sound.id;

@@ -61,23 +61,33 @@ class CmdManager {
     }
 
 // Actor
-    static addActorCmd(actorPos) {
-        var cmd =new AddActorCmd(actorPos);
+    static addActorCmd(sceneID,actorPos) {
+        var cmd =new AddActorCmd(sceneID,actorPos);
         this.history.execute(cmd);
     }
 
-    static removeActorCmd(actorID) {
-        var cmd =new RemoveActorCmd(actorID);
+    static removeActorCmd(sceneID,actorID) {
+        var cmd =new RemoveActorCmd(sceneID,actorID);
         this.history.execute(cmd);
     }
 
-    static duplicateActorCmd(actorID) {
-        var cmd =new DuplicateActorCmd(actorID);
+    static duplicateActorCmd(sceneID,actorID) {
+        var cmd =new DuplicateActorCmd(sceneID,actorID);
         this.history.execute(cmd);
     }
 
-    static renameActorCmd(actorID,actorName) {
-        var cmd =new RenameActorCmd(actorID,actorName);
+    static moveActorCmd(sceneID,actorID,actorPos) {
+        var cmd =new MoveActorCmd(sceneID,actorID,actorPos);
+        this.history.execute(cmd);
+    }
+
+    static renameActorCmd(sceneID,actorID,actorName) {
+        var cmd =new RenameActorCmd(sceneID,actorID,actorName);
+        this.history.execute(cmd);
+    }
+
+    static changeActorPropertyCmd(sceneID,actorID,property,value){
+        var cmd = new ChangeActorPropertyCmd(sceneID,actorID,property,value);
         this.history.execute(cmd);
     }
 

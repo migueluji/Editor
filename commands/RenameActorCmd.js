@@ -1,7 +1,8 @@
 class RenameActorCmd extends Command {
     
-    constructor (actorID,actorName){
+    constructor (sceneID,actorID,actorName){
         super();
+        this.sceneID=sceneID;
         this.actorID=actorID;
         this.actorName=actorName;
         var scene = this.editor.model.sceneList[this.editor.selectedSceneIndex];
@@ -11,11 +12,11 @@ class RenameActorCmd extends Command {
     }
     
     execute (){
-        this.editor.renameActor(this.actorID,this.actorName);
+        this.editor.renameActor(this.sceneID,this.actorID,this.actorName);
     }
     
     undo(){
-        this.editor.renameActor(this.actorID,this.actorOldName);
+        this.editor.renameActor(this.sceneID,this.actorID,this.actorOldName);
     }
 
 }

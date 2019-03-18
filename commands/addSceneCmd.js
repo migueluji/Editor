@@ -2,7 +2,7 @@ class AddSceneCmd extends Command {
 
     constructor (pos){
         super();
-        this.scene= new Scene({"name":this.newName(pos),"id":"id"+(new Date()).valueOf()});
+        this.scene= new Scene({"id":Utils.id(),"name":this.newName(pos),"actorList":[]});
         this.pos=pos;
         this.type="AddSceneCmd";
         this.name="Add Scene: "+this.scene.id;

@@ -53,7 +53,8 @@ class CastView {
 
 // Handlers
 	addActorHandler(){
-		CmdManager.addActorCmd(this.html.querySelectorAll(".mdc-list-item__text").length);
+		var sceneID=document.querySelector(".mdc-list-item--sceneselected").parentElement.id;
+		CmdManager.addActorCmd(sceneID,this.html.querySelectorAll(".mdc-list-item__text").length);
 	}
 
 // Utils
@@ -65,7 +66,6 @@ class CastView {
 			this.addActor(actorView,actorPos);
 			actorPos++;
 		})
-		//this.updateSelectedActor(cast[0].id);
 	}
 
 }

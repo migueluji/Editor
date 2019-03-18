@@ -24,27 +24,37 @@ class ActorView {
 				'</div>'+
 			'</div>';
 		this.html.querySelector("#more").addEventListener("click",this.menuActorHandler.bind(this));
+		this.html.querySelector("#properties").addEventListener("click",this.propertiesActorHandler.bind(this));
 		this.html.querySelector("#rename").addEventListener("click",this.renameActorHandler.bind(this));
 		this.html.querySelector('#duplicate').addEventListener("click",this.duplicateActorHandler.bind(this));
 		this.html.querySelector('#delete').addEventListener("click",this.removeActorHandler.bind(this));
-/*	this.html.addEventListener("dragstart",this.dragstartSceneHandler.bind(this));
-		this.html.addEventListener("dragover",this.dragoverSceneHandler.bind(this));
-		this.html.addEventListener("dragleave",this.dragleaveSceneHandler.bind(this));
-		this.html.addEventListener("drop",this.dropSceneHandler.bind(this));
-*/	this.html.addEventListener("click",this.selectActorHandler.bind(this));
+  	this.html.addEventListener("dragstart",this.dragstartActorHandler.bind(this));
+		this.html.addEventListener("dragover",this.dragoverActorHandler.bind(this));
+		this.html.addEventListener("dragleave",this.dragleaveActorHandler.bind(this));
+		this.html.addEventListener("drop",this.dropActorHandler.bind(this));
+	  this.html.addEventListener("click",this.selectActorHandler.bind(this));
 
 		this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
 	}
    
+  addView(actor) {
+		this.html.id=actor.id;
+		this.html.querySelector(".mdc-list-item__text").innerHTML='<span>'+actor.name+'</span>';
+	}
+
 // Handlers
 	selectActorHandler(e){
-		if (e.srcElement.nodeName=="DIV"){ //solo selecciona la escena si se hace click fuera del botón "more"
-			Command.selectActorCmd(this.html.id);
-		}
+			if (e.srcElement.nodeName!="LI"){ //solo selecciona el actor si se hace click fuera de la lista del menu
+				Command.selectActorCmd(this.html.id);
+			}
 	}
 
 	menuActorHandler(){
 		this.menu.open = true;
+	}
+
+	propertiesActorHandler(){
+		SideSheetView.openSheetHandler("actor-properties");
 	}
 
 	renameActorHandler(){
@@ -55,41 +65,43 @@ class ActorView {
 	}
 
 	duplicateActorHandler(){
-		CmdManager.duplicateActorCmd(this.html.id);
+		var sceneSelected=document.querySelector(".mdc-list-item--sceneselected").parentElement.id;
+		CmdManager.duplicateActorCmd(sceneSelected,this.html.id);
 	}
 
 	removeActorHandler(){
+		var sceneSelected=document.querySelector(".mdc-list-item--sceneselected").parentElement.id;
 		var text =document.querySelector("#"+this.html.id).firstChild.firstChild.nextSibling.innerText;
 		if (confirm('Are you sure you want to delete "'+text+'" actor?')){
-			var parent =document.querySelector("#"+this.html.id).parentNode;
-			CmdManager.removeActorCmd(this.html.id); 
+				CmdManager.removeActorCmd(sceneSelected,this.html.id); 
 		}
 	}
-/*
-	dragstartSceneHandler(e){
+
+	dragstartActorHandler(e){
 		e.dataTransfer.setData('text/html', this.html.outerHTML);
 	}
 
-	dragoverSceneHandler(e){
+	dragoverActorHandler(e){
 		e.preventDefault();
 		this.html.classList.add('over');
 	};
 
-	dragleaveSceneHandler(e){
+	dragleaveActorHandler(e){
 		this.html.classList.remove("over");
 	};
 
-	dropSceneHandler(e){
+	dropActorHandler(e){
 		if(e.stopPropagation){
 			e.stopPropagation();
 		}
 		var element= document.createElement("div");
 		element.innerHTML=e.dataTransfer.getData('text/html');
 		element=element.firstElementChild;
-		CmdManager.moveSceneCmd(element.id,this.position(this.html,this.html.parentNode));
+		var sceneSelected=document.querySelector(".mdc-list-item--sceneselected").parentElement.id;
+		CmdManager.moveActorCmd(sceneSelected,element.id,this.position(this.html,this.html.parentNode));
 		this.html.classList.remove("over");
-		if (element.querySelector(".mdc-list-item--sceneselected")){
-			Command.selectSceneCmd(element.id); 
+		if (element.querySelector(".mdc-list-item--actorselected")){
+		//	Command.selectActorCmd(element.id); 
 		}
 	};
 
@@ -107,7 +119,6 @@ class ActorView {
 		}
 		return count++;
 	}
-	*/
 }
 
 

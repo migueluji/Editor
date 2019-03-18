@@ -37,6 +37,8 @@ class AppBarView {
 
 	castHandler(){
 		SideSheetView.openSheetHandler("cast");
+	//	var sceneID=document.querySelector(".mdc-list-item--sceneselected").parentElement.id;
+	//	Command.selectSceneCmd(sceneID);
 	}
 
 	saveHandler(){

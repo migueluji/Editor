@@ -18,12 +18,12 @@ class GamePropertiesSoundView {
 			'</li>'+
 			'<div class="properties-panel">'+
 				'<div class="mdc-text-field mdc-text-field--with-trailing-icon mdc-ripple-upgraded text-field--full">'+
-					'<input id="sound" type="text" value="value" class="mdc-text-field__input" disabled>'+ //sound file
+					'<input id="sound" type="text" value="value" class="mdc-text-field__input">'+ //sound file
 						'<label class="mdc-floating-label" for="text-field-filled">Sound File</label>'+
 						'<button id="soundbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
 							'<i class="material-icons mdc-button_icon">folder</i>'+
 						'</button>'+
-						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
+					'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 				'</div>'+
 				'<div class="two-properties">'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
@@ -61,6 +61,7 @@ class GamePropertiesSoundView {
 		play.addEventListener("click",this.onClickHandler.bind(this));
 
 		var soundButton=this.html.querySelector("#soundbutton");
+		console.log(soundButton);
 		soundButton.addEventListener("click",this.onClickSoundButton.bind(this));
 
 		this.html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));
@@ -73,6 +74,7 @@ class GamePropertiesSoundView {
 	}
 
 	onClickSoundButton(){
+		console.log("soundButton");
 		SideSheetView.openSheetHandler("sound-selection");
 	}
 

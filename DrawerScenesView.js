@@ -13,7 +13,7 @@ class DrawerScenesView {
 		this.init(sceneList);
   }
 
-  addScene(sceneView,scenePos) {
+  	addScene(sceneView,scenePos) {
 		var element = this.html.querySelector(".mdc-list");
 		element.insertBefore(sceneView.html,element.childNodes[scenePos]);
 	}

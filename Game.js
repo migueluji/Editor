@@ -6,7 +6,6 @@ class Game {
         if (this.imageList) this.imageList.forEach((image,i) => this.imageList[i]=new Asset(image));
         if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]=new Asset(font));
         this.sceneList.forEach((scene,i) => this.sceneList[i]=new Scene(scene));
-        console.log(this);
     }
 
     get properties(){

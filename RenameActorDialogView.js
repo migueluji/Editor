@@ -59,7 +59,8 @@ class RenameActorDialogView {
 				this.html.querySelector("#error").innerText="This actor name already exists"
 			}
 			else{
-				CmdManager.renameActorCmd(this.actorID,name);
+				var sceneSelected=document.querySelector(".mdc-list-item--sceneselected").parentElement.id;
+				CmdManager.renameActorCmd(sceneSelected,this.actorID,name);
 				this.cancelButtonHandler();
 			}
 		}

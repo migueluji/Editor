@@ -1,77 +1,104 @@
 {
-    "name": "Mario Bros",
-    "width": 800,
-    "height": 480,
-    "cameraX": 0,
-    "cameraY": 0,
-    "cameraRotation": 0,
-    "cameraZoom": 1,
-    "play": false,
-    "sound": "player.mp4",
-    "volume": 1,
-    "start":  0,
-    "pan": 0,
-    "loop": true,
-    "physics": true,
-    "gravityX": 0.0,
-    "gravityY": -9.8,
-    "tagList": ["player","enemy"],
-    "imageList": [
-        {
-            "id": "id1234567",
-            "name": "image.jpg"
-        }
-    ],
-    "soundList": [
-        {
-            "id": "id1234567890008",
-            "name":"player.mp4"
-        },
-        {
-            "id": "id1234567890007",
-            "name":"sin.mp4"
-        },
-        {
-            "id": "id1234567890004",
-            "name":"pop.mp4"
-        },
-        {
-            "id": "id1234567890002",
-            "name":"lalala.mp4"
-        },
-        {
-            "id": "id1234567890003",
-            "name":"live.mp4"
-        }
-    ],
-    "sceneList": [    
-        {
-            "id": "id1234567890000",
-            "name": "Start",
-            "actorList": [
-                {
-                    "id": "id1234567890034",
-                    "name": "Actor 1"
-                },
-                {
-                    "id": "id1234567890024",
-                    "name": "Actor 2"
-                },
-                {
-                    "id": "id1234567890014",
-                    "name": "Actor 4"
-                }
-            ]
-        },
-        {
-            "id": "id1234567890007",
-            "name":"Level 1"
-        },
-        {
-            "id": "id1234567890001",
-            "name":"End"
-        }
-    ],
-    "points": 34,
-    "live": true
+	"name": "Mario Bros",
+	"width": 800,
+	"height": 480,
+	"cameraX": 0,
+	"cameraY": 0,
+	"cameraRotation": 0,
+	"cameraZoom": 1,
+	"play": false,
+	"sound": "player.mp4",
+	"volume": 1,
+	"start": 0,
+	"pan": 0,
+	"loop": false,
+	"physics": true,
+	"gravityX": 0,
+	"gravityY": -9.8,
+	"tagList": [
+		"player",
+		"enemy"
+	],
+	"imageList": [
+		{
+			"id": "_1234567",
+			"name": "image.jpg"
+		}
+	],
+	"soundList": [
+		{
+			"id": "_1234567890008",
+			"name": "player.mp4"
+		},
+		{
+			"id": "_1234567890007",
+			"name": "sin.mp4"
+		},
+		{
+			"id": "_1234567890004",
+			"name": "pop.mp4"
+		},
+		{
+			"id": "_1234567890002",
+			"name": "lalala.mp4"
+		},
+		{
+			"id": "_1234567890003",
+			"name": "live.mp4"
+		}
+	],
+	"sceneList": [
+		{
+			"id": "_15510883884035595151381192160",
+			"name": "Start",
+			"actorList": [
+				{
+					"id": "_15510884179469936971423239389",
+					"name": "Actor 1",
+					"x":100,
+					"y":99,
+					"width":50,
+					"height":59,
+					"scaleX": 1,
+					"scaleY": 0.5,
+					"rotation": 30,
+					"screen": true
+				},
+				{
+					"id": "_15510884187483724645860623896",
+					"name": "Actor 2"
+				},
+				{
+					"id": "_15510884194967055353027074027",
+					"name": "Actor 3"
+				}
+			]
+		},
+		{
+			"id": "_15510884000529820939255083476",
+			"name": "Level 1",
+			"actorList": [
+				{
+					"id": "_15510884225967462171711017873",
+					"name": "Actor 1"
+				},
+				{
+					"id": "_15510884234760783788112553860",
+					"name": "Actor 2"
+				}
+			]
+		},
+		{
+			"id": "_15510884012027860725808037956",
+			"name": "End",
+			"actorList": [
+				{
+					"id": "_15510884253345989107127731434",
+					"name": "Actor 1"
+				}
+			]
+		}
+	],
+	"points": 34,
+	"live": true
 }

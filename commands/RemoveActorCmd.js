@@ -1,20 +1,22 @@
 class RemoveActorCmd extends Command {
 
-    constructor (actorID){
+    constructor (sceneID,actorID){
         super();
-        var scene = this.editor.model.sceneList[this.editor.selectedSceneIndex];
-        this.pos=scene.actorList.findIndex(i => i.id == actorID);
+        this.sceneID=sceneID;
+        this.actorID=actorID;
+        var scene = this.editor.model.sceneList[this.editor.model.sceneList.findIndex(i => i.id == sceneID)];
+        this.pos= scene.actorList.findIndex(i => i.id == actorID);
         this.actor=scene.actorList[this.pos];
         this.type="RemoveActorCmd";
         this.name="Remove Actor: " + actorID;
     }
 
     execute (){  
-        this.editor.removeActor(this.actor.id);
+        this.editor.removeActor(this.sceneID,this.actor.id);
     }
     
     undo(){
-        this.editor.addActor(this.actor,this.pos);
-    }
+        this.editor.addActor(this.sceneID,this.pos,this.actor);
+     }
 
 }
