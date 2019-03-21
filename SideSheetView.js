@@ -30,7 +30,6 @@ class SideSheetView {
 		document.querySelector(".side-sheet").style.display="block";
 		document.querySelector("."+name).style.display="block";
 		this.displayed=name;
-		console.log(this.displayed);
 	}
 
 }

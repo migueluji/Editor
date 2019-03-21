@@ -44,8 +44,14 @@ class ActorView {
 
 // Handlers
 	selectActorHandler(e){
+			
 			if (e.srcElement.nodeName!="LI"){ //solo selecciona el actor si se hace click fuera de la lista del menu
-				Command.selectActorCmd(this.html.id);
+				if(e.srcElement.classList.contains("mdc-list-item--actorselected")){
+					Command.selectActorCmd(null);
+				}
+				else {
+					Command.selectActorCmd(this.html.id);
+				}
 			}
 	}
 
@@ -54,7 +60,7 @@ class ActorView {
 	}
 
 	propertiesActorHandler(){
-		SideSheetView.openSheetHandler("actor-properties");
+		Command.openActorPropertiesCmd();
 	}
 
 	renameActorHandler(){
@@ -101,7 +107,7 @@ class ActorView {
 		CmdManager.moveActorCmd(sceneSelected,element.id,this.position(this.html,this.html.parentNode));
 		this.html.classList.remove("over");
 		if (element.querySelector(".mdc-list-item--actorselected")){
-		//	Command.selectActorCmd(element.id); 
+				Command.selectActorCmd(element.id); 
 		}
 	};
 

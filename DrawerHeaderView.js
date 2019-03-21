@@ -10,6 +10,7 @@ class DrawerHeaderView {
             '<button id="gameProperties" class="mdc-button mdc-button-upgraded" style="left:75%">'+
                 '<i class="material-icons mdc-button_icon">settings</i>'+
             '</button>';
+    //    this.html.querySelector("#gameProperties").addEventListener("click",this.gamePropertiesHandler.bind(this));
         this.html.querySelector("#gameProperties").addEventListener("click",this.gamePropertiesHandler.bind(this));
         this.updateGameName(gameName);
     }
@@ -20,7 +21,8 @@ class DrawerHeaderView {
 
 // Handlers
     gamePropertiesHandler(){
-          SideSheetView.openSheetHandler("game-properties");
+    //  SideSheetView.openSheetHandler("game-properties");
+        Command.openGamePropertiesCmd();
     }
 
 }

@@ -22,7 +22,7 @@ class CastView {
 		this.html.querySelector("#closebutton").addEventListener("click",SideSheetView.closeSheetHandler);
 		this.html.querySelector("#addactor").addEventListener("click",this.addActorHandler.bind(this));
 		this.selectedActor=null;
-		if (cast) this.init(cast);
+	//	if (cast) this.update(cast);
 	}
 
 	addActor(actorView,actorPos){
@@ -40,7 +40,7 @@ class CastView {
 	}
 
 	updateSelectedActor(actorID){
-		(this.selectedActor === actorID) ? this.selectedActor=null : this.selectedActor=actorID;
+		this.selectedActor=actorID;
 		var selectedActors=this.html.querySelectorAll(".mdc-list-item--actorselected");
 		selectedActors.forEach(element => {
 			element.classList.remove("mdc-list-item--actorselected");
@@ -58,9 +58,13 @@ class CastView {
 	}
 
 // Utils
-	init(cast){
+	update(cast){
+		var element =this.html.querySelector(".mdc-list "); 
+		while (element.firstChild){ // elimina todos los elementos de la lista
+			element.removeChild(element.firstChild);
+		};
 		var actorPos=1;
-		cast.forEach(actor=>{
+		cast.forEach(actor=>{ // añade los nuevos elementos a la lista
 			var actorView = new ActorView();
 			actorView.addView(actor);
 			this.addActor(actorView,actorPos);

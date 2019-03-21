@@ -8,7 +8,7 @@ class ActorPropertiesSettingsView {
 				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
 				'Settings'+
 			'</li>'+
-			'<div class="properties-panel open">'+
+			'<div class="properties-panel">'+
 				'<div class="mdc-text-field mdc-ripple-upgraded text-field--full">'+
 					'<input id="name" pattern="[A-Za-z0-9 ]+" type="text" value="value" class="mdc-text-field__input">'+
 					'<label class="mdc-floating-label" for="text-field-filled">Actor Name</label>'+
@@ -16,36 +16,36 @@ class ActorPropertiesSettingsView {
 				'</div>'+
 				'<div class="two-properties">'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="x" min="1" type="number" value="1"  class="mdc-text-field__input">'+
+						'<input id="x"  type="number" value="0"  class="mdc-text-field__input">'+
 						'<label class="mdc-floating-label" for="text-field-filled">X</label>'+
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="y" min="1" type="number" value="1"  class="mdc-text-field__input">'+
+						'<input id="y" type="number" value="0"  class="mdc-text-field__input">'+
 						'<label class="mdc-floating-label" for="text-field-filled">Y</label>'+
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 				'</div>'+
 				'<div class="two-properties">'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="width" type="number" value="0"  class="mdc-text-field__input">'+
+						'<input id="width" min="1" type="number" value="50"  class="mdc-text-field__input">'+
 						'<label class="mdc-floating-label" for="text-field-filled">Width</label>'+
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="height" min="0" step="0.1" type="number" value="0"  class="mdc-text-field__input">'+
+						'<input id="height" min="1" type="number" value="50"  class="mdc-text-field__input">'+
 						'<label class="mdc-floating-label" for="text-field-filled">Height</label>'+
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 				'</div>'+		
 				'<div class="two-properties">'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="scaleX" type="number" value="0"  class="mdc-text-field__input">'+
+						'<input id="scaleX" min="0" type="number" value="1"  class="mdc-text-field__input">'+
 						'<label class="mdc-floating-label" for="text-field-filled">Scale X</label>'+
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="scaleY" min="0" step="0.1" type="number" value="0"  class="mdc-text-field__input">'+
+						'<input id="scaleY" min="0" type="number" value="1"  class="mdc-text-field__input">'+
 						'<label class="mdc-floating-label" for="text-field-filled">Scale Y</label>'+
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	

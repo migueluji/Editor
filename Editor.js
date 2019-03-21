@@ -3,12 +3,9 @@ class Editor {
     constructor(editorView,gameModel) {
         this.view = editorView;
         this.model = gameModel;
- //       this.selectedScene=gameModel.sceneList[0].id;
- //       this.selectedActor=null;
         var index=gameModel.soundList.findIndex(i => i.name == gameModel.sound);
         (index !== -1) ? this.selectedSound=gameModel.soundList[index].id : this.selectedSound=null;
         this.selectedSceneIndex=0;
-  //      this.selectedActorIndex=0;
         
         //App Bar
         this.appBarView=new AppBarView(gameModel.sceneList[0].name);
@@ -33,16 +30,12 @@ class Editor {
         this.view.addView(this.sideSheetView.html);
     }
 
-// Game
-    saveGame(){
-        File.save(this.model.name+".json",JSON.stringify(this.model, null, '\t'));
-    }
-
+// GAME
     addGameProperty(property,value,position){
         this.model[property]=value;
         var propertyNumberView = new PropertyView(property,value);
         this.gamePropertiesView.newPropertiesView.addProperty(propertyNumberView.html,position);
-     }
+    }
 
     removeGameProperty(property){
         delete this.model[property];
@@ -59,7 +52,16 @@ class Editor {
          }
     }
 
- //Scenes
+/* Game editor commands */
+    openGameProperties(){
+        SideSheetView.openSheetHandler("game-properties");
+    }
+
+    saveGame(){
+        File.save(this.model.name+".json",JSON.stringify(this.model, null, '\t'));
+    }
+
+//SCENES
     addScene(scene,pos) {  
         var sceneView = new SceneView();
         sceneView.addView(scene);
@@ -93,37 +95,43 @@ class Editor {
         if(selectedSceneName===sceneName) this.appBarView.updateSceneName(sceneName);
       }
 
+ /* Scene editor commands */
     selectScene(sceneID){
         this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
         this.drawerScenesView.updateSelectedScene(sceneID);
         this.appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
         if (SideSheetView.displayed=="cast"){
-            this.castView = new CastView(this.model.sceneList[this.selectedSceneIndex].actorList);
-            this.sideSheetView.addView(this.castView.html);
+            this.openCast();
         } 
         else if (SideSheetView.displayed=="actor-properties"){
             SideSheetView.closeSheetHandler();
         };
      }
 
-// Actor
-     addActor(sceneID,actorPos,actor){
+     openCast(){
+        this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList);
+        SideSheetView.openSheetHandler("cast");
+     }
+
+// ACTOR
+    addActor(sceneID,actorPos,actor){
         this.selectScene(sceneID); //necesario para los comandos de deshacer
         var actorView = new ActorView();
         actorView.addView(actor);
         this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
         this.model.sceneList[this.selectedSceneIndex].addActor(actor,actorPos);
         this.castView.addActor(actorView,actorPos);    
-      }
+        this.selectActor(actor.id);
+    }
 
-     removeActor(sceneID,actorID){
+    removeActor(sceneID,actorID){
         this.selectScene(sceneID); //necesario para los comandos de deshacer
         this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
         this.model.sceneList[this.selectedSceneIndex].removeActor(actorID);
         this.castView.removeActor(actorID);
-     }
+    }
 
-     renameActor(sceneID,actorID,actorName){
+    renameActor(sceneID,actorID,actorName){
         this.selectScene(sceneID); //necesario para los comandos de deshacer
         this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
         var scene=this.model.sceneList[this.selectedSceneIndex];
@@ -132,18 +140,7 @@ class Editor {
         this.castView.renameActor(actorID,actorName);
     }
 
-    selectActor(actorID){
-        console.log(SideSheetView.displayed);
-        this.selectedActorIndex=this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.id==actorID);
-        this.castView.updateSelectedActor(actorID);
-  //      if (SideSheetView.displayed=="actor-properties"){ //solo se actualiza la vista si es necesario
-            this.actorPropertiesView = new ActorPropertiesView(this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex]);
-            this.sideSheetView.addView(this.actorPropertiesView.html);
-     //       SideSheetView.openSheetHandler("actor-properties");
-    //    }
-      }
-
-      changeActorProperty(scenePos,actorPos,property,value){
+    changeActorProperty(scenePos,actorPos,property,value){
         this.model.sceneList[scenePos].actorList[actorPos][property]=value;
         this.actorPropertiesView.updateActorProperty(property,value);
  /*       if (property === "sound") {
@@ -153,25 +150,37 @@ class Editor {
          */
     }
 
-// sounds
-     addSound(sound){
+/* Actor editor commands */
+    selectActor(actorID){
+        this.selectedActorIndex=this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.id==actorID);
+        this.castView.updateSelectedActor(actorID);
+    }
+
+    openActorProperties(){
+        this.actorPropertiesView.update(this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex]);
+        SideSheetView.openSheetHandler("actor-properties");
+    }
+
+// SOUNDS
+    addSound(sound){
         var soundView = new SoundView(sound);
         soundView.addView(sound);
         this.model.addSound(sound);
         this.model.sound=sound.name;
         this.soundSelectionView.addSound(soundView);
         this.gamePropertiesView.updateGameProperty("sound",this.model.sound);
-      }
+    }
 
-     removeSound(soundID){
+    removeSound(soundID){
         this.model.removeSound(soundID);
         this.model.sound="Undefined";
         this.soundSelectionView.removeSound(soundID);
         this.gamePropertiesView.updateGameProperty("sound",this.model.sound);
-      }
-
-     selectSound(soundID){
-    //  (this.selectedSound===soundID || soundID==null) ?  this.selectedSound=null : this.selectedSound=soundID;
-        this.soundSelectionView.updateSelectedSound(soundID);
     }
+
+/* Sounds editor commands */
+    selectSound(soundID){
+         this.soundSelectionView.updateSelectedSound(soundID);
+    }
+
 }

@@ -1,8 +1,8 @@
-class GamePropertiesSoundView {
+class ActorPropertiesSoundView {
 
     constructor() {   
 		 this.html = document.createElement("li");
-		 this.html.className +="game-properties-sound properties-section properties-section--disable";
+		 this.html.className +="actor-properties-sound properties-section";
 		 this.html.innerHTML =
 			'<li class="mdc-list-item mdc-ripple-upgraded properties-section-title">'+
 				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
@@ -19,7 +19,7 @@ class GamePropertiesSoundView {
 			'<div class="properties-panel">'+
 				'<div class="mdc-text-field mdc-text-field--with-trailing-icon mdc-ripple-upgraded text-field--full">'+
 					'<input id="sound" type="text" value="value" class="mdc-text-field__input">'+ //sound file
-						'<label class="mdc-floating-label" for="text-field-filled">Sound File</label>'+
+						'<label class="mdc-floating-label" for="text-field-filled">Sound</label>'+
 						'<button id="soundbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
 							'<i class="material-icons mdc-button_icon">folder</i>'+
 						'</button>'+

@@ -17,6 +17,10 @@ class ActorPropertiesView {
 			'</header>'+
 			'<ul class="mdc-list properties-list">'+
 				'<li class="actor-properties-settings"></li>'+
+				'<li class="actor-properties-render"></li>'+
+				'<li class="actor-properties-text"></li>'+
+				'<li class="actor-properties-sound"></li>'+
+				'<li class="actor-properties-physics"></li>'+
 				'<li style="height:44px"></li>'+
 				'<button id="addproperty" class="mdc-fab mdc-ripple-upgraded add-property-button" aria-label="Add Actor"'+
 					'style="background:red; --mdc-ripple-fg-size:33px; --mdc-ripple-fg-scale:2.70291; --mdc-ripple-fg-translate-start:5.5px, 19.6875px; --mdc-ripple-fg-translate-end:11.5px, 11.5px;">'+
@@ -26,18 +30,23 @@ class ActorPropertiesView {
 		this.html.querySelector("#closebutton").addEventListener("click",SideSheetView.closeSheetHandler);
 		this.html.querySelector("#addproperty").addEventListener("click",this.addPropertyHandler.bind(this));
 		this.createFrame(actorModel);
-		this.init(actorModel);
+		this.update(actorModel);
 	}
 
 	addView(html) {
+		console.log(html.classList[0]);
 		var children=this.html.querySelector("."+html.classList[0]);
 		children.parentNode.replaceChild(html,children);
 	}
 
 	updateActorProperty(property,value) {
 		var element=this.html.querySelector("#"+property);
+		console.log(element,property,value);
 		(element.type==="checkbox") ? element.value=element.checked=Boolean(value) : element.value=value;
-     // 	if (property == "physics") this.physicsView.onClickHandler();
+		if (property == "visible") this.renderView.onClickHandler();
+		if (property == "write") this.textView.onClickHandler();
+		if (property == "play") this.soundView.onClickHandler();
+		if (property == "active") this.physicsView.onClickHandler();
 		element.focus();
 	}
 
@@ -45,10 +54,14 @@ class ActorPropertiesView {
 	createFrame(actorModel){
 		this.settingsView= new ActorPropertiesSettingsView();
 		this.addView(this.settingsView.html);
-//		this.soundView= new GamePropertiesSoundView();
-//		this.addView(this.soundView.html);
-//		this.physicsView= new GamePropertiesPhysicsView();
-//		this.addView(this.physicsView.html);
+		this.renderView= new ActorPropertiesSpriteView();
+		this.addView(this.renderView.html);
+		this.textView= new ActorPropertiesTextView();
+		this.addView(this.textView.html);
+		this.soundView= new ActorPropertiesSoundView();
+		this.addView(this.soundView.html);
+		this.physicsView= new ActorPropertiesPhysicsView();
+		this.addView(this.physicsView.html);
 
 		var textFields=this.html.querySelectorAll('.mdc-text-field');
 		textFields.forEach(element => {	
@@ -86,7 +99,7 @@ class ActorPropertiesView {
 	}
 
 //Utilities
-	init(actorModel){
+	update(actorModel){
 		Object.keys(actorModel.properties).forEach(element => {
 			this.updateActorProperty(element,actorModel.properties[element]);
 		});
