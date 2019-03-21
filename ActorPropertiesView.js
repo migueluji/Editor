@@ -34,14 +34,17 @@ class ActorPropertiesView {
 	}
 
 	addView(html) {
-		console.log(html.classList[0]);
 		var children=this.html.querySelector("."+html.classList[0]);
 		children.parentNode.replaceChild(html,children);
 	}
 
+	updateActorName(name){
+		var title = this.html.querySelector(".mdc-toolbar__title");
+		title.innerText=name;
+	}
+
 	updateActorProperty(property,value) {
 		var element=this.html.querySelector("#"+property);
-		console.log(element,property,value);
 		(element.type==="checkbox") ? element.value=element.checked=Boolean(value) : element.value=value;
 		if (property == "visible") this.renderView.onClickHandler();
 		if (property == "write") this.textView.onClickHandler();
@@ -100,6 +103,7 @@ class ActorPropertiesView {
 
 //Utilities
 	update(actorModel){
+		this.updateActorName(actorModel.name);
 		Object.keys(actorModel.properties).forEach(element => {
 			this.updateActorProperty(element,actorModel.properties[element]);
 		});

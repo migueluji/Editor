@@ -10,7 +10,6 @@ class Actor {
     get properties(){
         var obj={
             // Settings
-            name:this.name, 
             x:this.x || 0, y:this.y || 0, 
             width:this.width || 50, height:this.height || 50, 
             scaleX:this.scaleX || 1, scaleY:this.scaleY || 1, 

@@ -12,7 +12,7 @@
 	"start": 0,
 	"pan": 0,
 	"loop": false,
-	"physics": true,
+	"active": true,
 	"gravityX": 0,
 	"gravityY": -9.8,
 	"tagList": [

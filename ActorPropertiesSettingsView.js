@@ -9,11 +9,6 @@ class ActorPropertiesSettingsView {
 				'Settings'+
 			'</li>'+
 			'<div class="properties-panel">'+
-				'<div class="mdc-text-field mdc-ripple-upgraded text-field--full">'+
-					'<input id="name" pattern="[A-Za-z0-9 ]+" type="text" value="value" class="mdc-text-field__input">'+
-					'<label class="mdc-floating-label" for="text-field-filled">Actor Name</label>'+
-					'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-				'</div>'+
 				'<div class="two-properties">'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
 						'<input id="x"  type="number" value="0"  class="mdc-text-field__input">'+
@@ -70,22 +65,11 @@ class ActorPropertiesSettingsView {
 				'</div>'+				
 			'</div>';
 		this.html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));
-		this.html.querySelector("#name").addEventListener("keypress",this.keyPressHandler.bind(this));
+//		this.html.querySelector("#name").addEventListener("keypress",this.keyPressHandler.bind(this));
 
 	}
 
 // Handlers
-
-
-	keyPressHandler(e){
-		var chr = String.fromCharCode(e.which);
-		var name=this.html.querySelector("#name").value;
-		var filter=" abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-		if ((filter.indexOf(chr) < 0) || (name.length >= 15)){
-			e.preventDefault();
-		}	
-		return true;
-	}
 
 	propertyGroupHandler(){
 		var element=this.html.querySelector(".properties-panel");

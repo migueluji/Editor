@@ -8,7 +8,7 @@ class GamePropertiesView {
 			'<header class="mdc-top-app-bar--dense properties-bar">'+
 				'<div class="mdc-top-app-bar__row">'+
 					'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">'+
-						'<span class="mdc-toolbar__title">Game Properties</span>'+
+						'<span class="mdc-toolbar__title">Game</span>'+
 					'</section>'+
 					'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">'+
 						'<button id="closebutton" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" aria-label="close" style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">close</button>'+
@@ -42,7 +42,7 @@ class GamePropertiesView {
 		var element=this.html.querySelector("#"+property);
 		(element.type==="checkbox") ? element.value=element.checked=Boolean(value) : element.value=value;
 		if (property == "play") this.soundView.onClickHandler();
-      	if (property == "physics") this.physicsView.onClickHandler();
+      	if (property == "active") this.physicsView.onClickHandler();
 		element.focus();
 	}
 

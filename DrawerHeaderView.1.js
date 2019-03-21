@@ -4,19 +4,16 @@ class DrawerHeaderView {
 		this.html = document.createElement("div");
 		this.html.className +="mdc-drawer__header";
 		this.html.innerHTML =
-            '<img style="width:100%; padding-top:24px" src="./images/gamesonomy.png"></img>'+
-            '<div class="two-properties">'+	
-					'<div style="width:75%"class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="name"  type="text" value="Untitled Game" style="border-bottom:0px" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Game Name</label>'+
-						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
-					'<div style="width:25%;position:relative">'+
-	                    '<button id="gameProperties" class="mdc-button mdc-button-upgraded upload-button" style="right:-8px;top:16px">'+
-                            '<i class="material-icons mdc-button_icon">settings</i>'+
-                        '</button>'+					
-                    '</div>'+	
-			'</div>'+	
+            '<img style="width:100%; padding-top:24px; margin-bottom:-16px" src="./images/gamesonomy.png"></img>'+
+            '<h6 class="mdc-drawer__subtitle"></h6>'+
+            '<div class="mdc-text-field mdc-text-field--with-trailing-icon mdc-ripple-upgraded text-field--full">'+
+            '<input id="name" type="text" value="value" class="mdc-text-field__input">'+ //sound file
+                '<label class="mdc-floating-label" for="text-field-filled">Game Name</label>'+
+                '<button id="gameProperties" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
+                    '<i class="material-icons mdc-button_icon">settings</i>'+
+                '</button>'+
+            '<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
+            '</div>'+
             '<h6 class="mdc-drawer__subtitle"></h6>';
         var element=this.html.querySelector('.mdc-text-field');
         mdc.textField.MDCTextField.attachTo(element);
@@ -42,7 +39,7 @@ class DrawerHeaderView {
 		var chr = String.fromCharCode(e.which);
 		var name=this.html.querySelector("#name").value;
 		var filter=" abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-		if ((filter.indexOf(chr) < 0) || (name.length >= 16)){
+		if ((filter.indexOf(chr) < 0) || (name.length >= 15)){
 			e.preventDefault();
 		}	
 		return true;

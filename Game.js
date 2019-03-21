@@ -1,6 +1,7 @@
 class Game {
 	
     constructor(game) {
+        this.name=game.name || "Untitled Game"
         Object.assign(this,game);
         if (this.soundList) this.soundList.forEach((sound,i) => this.soundList[i]=new Asset(sound));
         if (this.imageList) this.imageList.forEach((image,i) => this.imageList[i]=new Asset(image));
@@ -11,12 +12,12 @@ class Game {
     get properties(){
         var obj={
             // Settings
-            name:this.name, width:this.width, height:this.height, 
+            width:this.width, height:this.height, 
             cameraX:this.cameraX, cameraY:this.cameraY, cameraRotation:this.cameraRotation, cameraZoom:this.cameraZoom,
             // Sound
             play:this.play, sound:this.sound, volume:this.volume, start:this.start, pan:this.pan, loop:this.loop, 
             // Physics
-            physics:this.physics, gravityX: this.gravityX, gravityY:this.gravityY
+            active:this.active, gravityX: this.gravityX, gravityY:this.gravityY
         }
         return(obj);
     }
@@ -27,6 +28,7 @@ class Game {
         Object.keys(properties).forEach(element => {
 			delete obj[element];
         });
+        delete obj.name;
         delete obj.imageList; delete obj.soundList;  delete obj.fontList;
         delete obj.sceneList;
         delete obj.tagList;

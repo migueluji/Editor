@@ -44,8 +44,8 @@ class Editor {
 
     changeGameProperty(property,value){
         this.model[property]=value;
-        this.gamePropertiesView.updateGameProperty(property,value);
         if (property === "name") this.drawerHeaderView.updateGameName(value);
+        else this.gamePropertiesView.updateGameProperty(property,value);
         if (property === "sound") {
             (value == "Undefined") ?    this.selectSound(null) :
                                         this.selectSound(this.model.soundList[this.model.soundList.findIndex(i => i.name == this.model.sound)].id);
@@ -97,15 +97,13 @@ class Editor {
 
  /* Scene editor commands */
     selectScene(sceneID){
+        var currentSelectedSceneIndex= this.selectedSceneIndex;
         this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
         this.drawerScenesView.updateSelectedScene(sceneID);
         this.appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
-        if (SideSheetView.displayed=="cast"){
-            this.openCast();
-        } 
-        else if (SideSheetView.displayed=="actor-properties"){
-            SideSheetView.closeSheetHandler();
-        };
+        if (SideSheetView.displayed=="cast") this.openCast();
+        else if (SideSheetView.displayed=="actor-properties")
+            if (currentSelectedSceneIndex != this.selectedSceneIndex) SideSheetView.closeSheetHandler();
      }
 
      openCast(){
@@ -137,8 +135,12 @@ class Editor {
         var scene=this.model.sceneList[this.selectedSceneIndex];
         var index=scene.actorList.findIndex(i=>i.id===actorID);
         scene.actorList[index].name=actorName;
-        this.castView.renameActor(actorID,actorName);
+        if (SideSheetView.displayed=="cast")
+            this.castView.renameActor(actorID,actorName);
+        else if (SideSheetView.displayed=="actor-properties")
+            this.actorPropertiesView.updateActorName(actorName);
     }
+
 
     changeActorProperty(scenePos,actorPos,property,value){
         this.model.sceneList[scenePos].actorList[actorPos][property]=value;

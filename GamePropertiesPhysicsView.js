@@ -8,7 +8,7 @@ class GamePropertiesPhysicsView {
 				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
 				'Physics'+
 				'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
-					'<input id="physics" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
+					'<input id="active" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
 					'<div class="mdc-checkbox__background">'+
 						'<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">'+
 							'<path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>'+
@@ -31,15 +31,15 @@ class GamePropertiesPhysicsView {
 				'</div>'+
 			'</div>';	
 
-		var physics=this.html.querySelector("#physics");
-		physics.addEventListener("click",this.onClickHandler.bind(this));
+		var active=this.html.querySelector("#active");
+		active.addEventListener("click",this.onClickHandler.bind(this));
 
 		this.html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));
 	}
 
 // Handlers
 	onClickHandler(){
-		(this.html.querySelector("#physics").checked) ?	this.html.classList.remove("properties-section--disable"):
+		(this.html.querySelector("#active").checked) ?	this.html.classList.remove("properties-section--disable"):
 														this.html.classList.add("properties-section--disable");
 	}
 
