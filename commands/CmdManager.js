@@ -29,8 +29,8 @@ class CmdManager {
         this.history.execute(cmd);
     }
 
-    static removeGamePropertyCmd(property,value){
-        var cmd = new RemoveGamePropertyCmd(property,value);
+    static removeGamePropertyCmd(property,value,pos){
+        var cmd = new RemoveGamePropertyCmd(property,value,pos);
         this.history.execute(cmd);
     }
 
@@ -88,6 +88,16 @@ class CmdManager {
 
     static changeActorPropertyCmd(sceneID,actorID,property,value){
         var cmd = new ChangeActorPropertyCmd(sceneID,actorID,property,value);
+        this.history.execute(cmd);
+    }
+
+    static addActorPropertyCmd(sceneID,actorID,property,value){
+        var cmd = new AddActorPropertyCmd(sceneID,actorID,property,value);
+        this.history.execute(cmd);
+    }
+
+    static removeActorPropertyCmd(sceneID,actorID,property,value,pos){
+        var cmd = new RemoveActorPropertyCmd(sceneID,actorID,property,value,pos);
         this.history.execute(cmd);
     }
 

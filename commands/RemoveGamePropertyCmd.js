@@ -1,20 +1,10 @@
 class RemoveGamePropertyCmd extends Command {
 
-    constructor (property,value){
+    constructor (property,value,pos){
         super();
         this.property=property;
         this.value=value;
-        this.position=this._newPosition();
-    }
-
-    _newPosition (){
-        var propertyList=this.editor.view.html.querySelector(".game-properties-new");
-        var list=propertyList.querySelectorAll(".new-property");
-        var i=0;
-        while ( i < list.length && !(list[i].querySelector("#"+this.property))) {
-           i++;
-        }
-        return i;
+        this.pos=pos;
     }
 
     execute (){  
@@ -22,7 +12,7 @@ class RemoveGamePropertyCmd extends Command {
     }
     
     undo(){
-        this.editor.addGameProperty(this.property,this.value,this.position);
+        this.editor.addGameProperty(this.property,this.value,this.pos);
     }
 
 }

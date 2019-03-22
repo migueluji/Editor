@@ -32,9 +32,10 @@ class Editor {
 
 // GAME
     addGameProperty(property,value,position){
+        console.log("addGameP",property,value,position);
         this.model[property]=value;
-        var propertyNumberView = new PropertyView(property,value);
-        this.gamePropertiesView.newPropertiesView.addProperty(propertyNumberView.html,position);
+        var propertyView = new NewPropertyView(property,value);
+        this.gamePropertiesView.newPropertiesView.addProperty(propertyView.html,position);
     }
 
     removeGameProperty(property){
@@ -150,6 +151,19 @@ class Editor {
                                         this.selectSound(this.model.soundList[this.model.soundList.findIndex(i => i.name == this.model.sound)].id);
          }
          */
+    }
+
+    addActorProperty(scenePos,actorPos,property,value,position){
+        console.log("addProperty",scenePos,actorPos,property,value,position);
+        this.model.sceneList[scenePos].actorList[actorPos][property]=value;
+        this.propertyView = new NewPropertyView(property,value);
+        this.actorPropertiesView.newPropertiesView.addProperty(this.propertyView.html,position);
+    }
+
+    removeActorProperty(scenePos,actorPos,property,value){
+        console.log("removeProperty",scenePos,actorPos,property,value);
+        delete this.model.sceneList[scenePos].actorList[actorPos][property];
+        this.actorPropertiesView.newPropertiesView.removeProperty(property);
     }
 
 /* Actor editor commands */

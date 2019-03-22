@@ -40,4 +40,17 @@ class Actor {
         }
         return(obj);
     }
+
+    get newProperties(){
+        var obj=Object.assign({},this);
+        var properties=this.properties;
+        Object.keys(properties).forEach(element => {
+			delete obj[element];
+        });
+        delete obj.id;
+        delete obj.name;
+        delete obj.ruleList;
+        delete obj.tagList;
+        return (obj);
+    }
 } 

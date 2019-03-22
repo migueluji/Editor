@@ -1,8 +1,8 @@
-class GamePropertiesNewView {
+class NewPropertiesView {
 
     constructor(newProperties) {   
 		this.html = document.createElement("li");
-		this.html.className +="game-properties-new";
+		this.html.className +="properties-new";
 		var textFields=this.html.querySelectorAll('.mdc-text-field');
 			textFields.forEach(element => {	
 				mdc.textField.MDCTextField.attachTo(element);
@@ -28,12 +28,12 @@ class GamePropertiesNewView {
 		Object.entries(newProperties).forEach(element => {
 			property=element[0];
 			value=element[1];
-			var propertyView = new PropertyView(property,value);
+			var propertyView = new NewPropertyView(property,value);
 			this.addProperty(propertyView.html,position);
 			position++;
 			if (value!=="number") {
 				value ? this.html.querySelector("#"+property).checked=true : this.html.querySelector("#"+property).checked=false;
 			}
-        });
+    });
 	}
 }

@@ -19,9 +19,9 @@ class GamePropertiesView {
 				'<li class="game-properties-settings"></li>'+
 				'<li class="game-properties-sound"></li>'+
 				'<li class="game-properties-physics"></li>'+						
-				'<li class="game-properties-new"></li>'+
+				'<li class="properties-new"></li>'+
 				'<li style="height:44px"></li>'+
-				'<button id="addproperty" class="mdc-fab mdc-ripple-upgraded add-property-button" aria-label="Add Scene"'+
+				'<button id="addproperty" style="background:blue" class="mdc-fab mdc-ripple-upgraded add-property-button" aria-label="Add Scene"'+
 					'style="--mdc-ripple-fg-size:33px; --mdc-ripple-fg-scale:2.70291; --mdc-ripple-fg-translate-start:5.5px, 19.6875px; --mdc-ripple-fg-translate-end:11.5px, 11.5px;">'+
 						'<i class="mdc-fab__icon material-icons">add</i>'+
 				'</button>'+
@@ -65,7 +65,7 @@ class GamePropertiesView {
 			element.addEventListener("change",this.onChangeInputHandler.bind(this,element));
 		})
 
-		this.newPropertiesView= new GamePropertiesNewView(gameModel.newProperties);
+		this.newPropertiesView= new NewPropertiesView(gameModel.newProperties);
 		this.addView(this.newPropertiesView.html);
 	}
 

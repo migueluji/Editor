@@ -64,10 +64,10 @@ class ActorView {
 	}
 
 	renameActorHandler(){
-		var dialog = new RenameActorDialogView(this.html.id);
+		var dialog = new RenameDialogView("actor",this.html.id);
 		var editorFrame=document.querySelector(".editor-frame-root");
 		editorFrame.appendChild(dialog.html);
-		dialog.html.querySelector("#actorname").focus();
+		dialog.html.querySelector("input").focus();
 	}
 
 	duplicateActorHandler(){

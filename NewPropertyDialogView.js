@@ -43,7 +43,10 @@ class NewPropertyDialogView {
 					'</div>'+
 				'</div>';
 	
-		this._type=type;
+		this.type=type;
+		this.name=null;
+		this.value=null;
+		console.log(type);
 		var textField=this.html.querySelector('.mdc-text-field');
 		mdc.textField.MDCTextField.attachTo(textField);
 		textField.addEventListener("keypress",this.keyPressHandler.bind(this));
@@ -66,28 +69,27 @@ class NewPropertyDialogView {
 
 	okButtonHandler(){
 		var input=this.html.querySelector("#propertyname");
-		var name=input.value; 
-		var panel=document.querySelector("."+this._type);
-		if (name=="") {
+		this.name=input.value; 
+		var panel=document.querySelector("."+this.type);
+		if (this.name=="") {
 			this.html.querySelector("#error").innerText="Required field"
 		}
 		else {
-			if ("abcdefghijklmnñopqrstuvwxyz".indexOf(name[0]) < 0)	{
+			if ("abcdefghijklmnñopqrstuvwxyz".indexOf(this.name[0]) < 0)	{
 				this.html.querySelector("#error").innerText="The first character need to be a letter";
 			}
 			else{
-				if (panel.querySelector("#"+name)){
+				if (panel.querySelector("#"+this.name)){
 					this.html.querySelector("#error").innerText="This property name already exists"
 				}
 				else{
-					var value=null;
-					if(this.html.querySelector("#number").checked){
-						value=0;
-					} 
-					else{
-						value=false;
+					(this.html.querySelector("#number").checked) ? this.value=0 : this.value=false;
+					if (this.type=="game-properties") CmdManager.addGamePropertyCmd(this.name,this.value);
+					else {
+						var actorID=document.querySelector(".mdc-list-item--actorselected").parentNode.id;
+						var sceneID=document.querySelector(".mdc-list-item--sceneselected").parentNode.id;
+						CmdManager.addActorPropertyCmd(sceneID,actorID,this.name,this.value);
 					}
-					CmdManager.addGamePropertyCmd(name,value);
 					this.cancelButtonHandler();
 				}
 			}

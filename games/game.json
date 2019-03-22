@@ -62,7 +62,9 @@
 					"scaleX": 1,
 					"scaleY": 0.5,
 					"rotation": 30,
-					"screen": true
+					"screen": true,
+					"lives": 3,
+					"on": false
 				},
 				{
 					"id": "_15510884187483724645860623896",

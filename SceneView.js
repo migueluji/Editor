@@ -49,10 +49,10 @@ class SceneView {
 	}
 
 	renameSceneHandler(){
-		var dialog = new RenameSceneDialogView(this.html.id);
+		var dialog = new RenameDialogView("scene",this.html.id);
 		var editorFrame=document.querySelector(".editor-frame-root");
 		editorFrame.appendChild(dialog.html);
-		dialog.html.querySelector("#scenename").focus();
+		dialog.html.querySelector("#input").focus();
 	}
 
 	duplicateSceneHandler(){

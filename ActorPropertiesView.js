@@ -21,6 +21,7 @@ class ActorPropertiesView {
 				'<li class="actor-properties-text"></li>'+
 				'<li class="actor-properties-sound"></li>'+
 				'<li class="actor-properties-physics"></li>'+
+				'<li class="properties-new"></li>'+
 				'<li style="height:44px"></li>'+
 				'<button id="addproperty" class="mdc-fab mdc-ripple-upgraded add-property-button" aria-label="Add Actor"'+
 					'style="background:red; --mdc-ripple-fg-size:33px; --mdc-ripple-fg-scale:2.70291; --mdc-ripple-fg-translate-start:5.5px, 19.6875px; --mdc-ripple-fg-translate-end:11.5px, 11.5px;">'+
@@ -76,13 +77,13 @@ class ActorPropertiesView {
 			element.addEventListener("change",this.onChangeInputHandler.bind(this,element));
 		})
 
-//		this.newPropertiesView= new GamePropertiesNewView(gameModel.newProperties);
-//		this.addView(this.newPropertiesView.html);
+		this.newPropertiesView= new NewPropertiesView(actorModel.newProperties);
+		this.addView(this.newPropertiesView.html);
 	}
 
 //Handlers
 	addPropertyHandler(){
-		var dialog = new NewPropertyDialogView("game-properties");
+		var dialog = new NewPropertyDialogView("actor-properties");
 		var editorFrame=document.querySelector(".editor-frame-root");
 		editorFrame.appendChild(dialog.html);
 		dialog.html.querySelector("#propertyname").focus();

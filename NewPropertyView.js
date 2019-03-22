@@ -1,4 +1,4 @@
-class PropertyView {
+class NewPropertyView {
 
     constructor(property,value) {   
 		 this.html = document.createElement("li");
@@ -14,12 +14,19 @@ class PropertyView {
 					'</ul>'+
 				'</div>';
 			'</div>';
+		this.property=property;
+		this.value=value;
+		this.createFrame(property,value);
 
-		this._property=property;
-		this._value=value;
+		this.html.querySelector("#more").addEventListener("click",this.menuNewPropertyHandler.bind(this));
+		this.html.querySelector('#delete').addEventListener("click",this.removeNewPropertyHandler.bind(this,));
+		this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
+	}
+
+	createFrame(property,value){
 		var list=this.html.querySelector(".new-property");
 		(typeof(value)==='number') ?	list.insertBefore(this.newNumberPropertyView(),list.childNodes[0]) :
-									  	list.insertBefore(this.newBooleanPropertyView(),list.childNodes[0]);
+										list.insertBefore(this.newBooleanPropertyView(),list.childNodes[0]);
 
 		this.html.querySelector("#property").value=value;
 		this.html.querySelector("#property").id=property;
@@ -35,18 +42,21 @@ class PropertyView {
 			checkbox.firstChild.addEventListener("change",this.onChangeInputHandler.bind(this,checkbox.firstChild));
 			value ? this.html.querySelector("#"+property).checked=true : this.html.querySelector("#"+property).checked=false;
 		}
-
-		this.html.querySelector("#more").addEventListener("click",this.menuNewPropertyHandler.bind(this));
-		this.html.querySelector('#delete').addEventListener("click",this.removeNewPropertyHandler.bind(this,));
-		this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
-
 	}
+
 
 //Handler
 	onChangeInputHandler(element){
-		this._property=element.id;
-		(element.type !=="number")  ?   this._value=Boolean(element.checked): this._value=Number(element.value);
-		CmdManager.changeGamePropertyCmd(this._property,this._value);
+		this.property=element.id;
+		(element.type !=="number")  ?   this.value=Boolean(element.checked): this.value=Number(element.value);
+		var panel=this.html.parentNode.parentNode.parentNode;
+		if (panel.classList.contains("game-properties"))
+			CmdManager.changeGamePropertyCmd(this.property,this.value);
+		else {
+			var sceneID=document.querySelector(".mdc-list-item--sceneselected").parentElement.id;
+			var actorID=document.querySelector(".mdc-list-item--actorselected").parentElement.id;
+			CmdManager.changeActorPropertyCmd(sceneID,actorID,this.property,this.value);
+		}
 	}
 
 	menuNewPropertyHandler(){
@@ -54,9 +64,21 @@ class PropertyView {
 	}
 
 	removeNewPropertyHandler(){
-		var text =this._property;
-		if (confirm('Are you sure you want to delete "'+text+'" property?')){
-			CmdManager.removeGamePropertyCmd(this._property,this._value); 
+		if (confirm('Are you sure you want to delete "'+this.property+'" property?')){
+			var panel=this.html.parentNode.parentNode.parentNode;
+			var list=panel.querySelectorAll(".new-property");
+			this.pos=0;
+			while ( this.pos < list.length && !(list[this.pos].querySelector("#"+this.property))) {
+			   this.pos++;
+			}
+			if(panel.classList.contains("game-properties")) {
+				CmdManager.removeGamePropertyCmd(this.property,this.value,this.pos); 
+			}
+			else {
+				var sceneID=document.querySelector(".mdc-list-item--sceneselected").parentElement.id;
+				var actorID=document.querySelector(".mdc-list-item--actorselected").parentElement.id;
+				CmdManager.removeActorPropertyCmd(sceneID,actorID,this.property,this.value,this.pos);
+			}
 		}
 	}
 

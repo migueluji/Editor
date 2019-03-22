@@ -7,7 +7,7 @@ class DrawerHeaderView {
             '<img style="width:100%; padding-top:24px; margin-bottom:-16px" src="./images/gamesonomy.png"></img>'+
             '<h6 class="mdc-drawer__subtitle"></h6>'+
             '<div class="mdc-text-field mdc-text-field--with-trailing-icon mdc-ripple-upgraded text-field--full">'+
-            '<input id="name" type="text" value="value" class="mdc-text-field__input">'+ //sound file
+            '<input id="name" type="text" value="value" class="mdc-text-field__input">'+
                 '<label class="mdc-floating-label" for="text-field-filled">Game Name</label>'+
                 '<button id="gameProperties" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
                     '<i class="material-icons mdc-button_icon">settings</i>'+
