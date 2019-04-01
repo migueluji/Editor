@@ -1,6 +1,5 @@
 class File {
 
-
     load(URL) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = this.ready.bind(xhr);

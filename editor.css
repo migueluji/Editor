@@ -23,11 +23,20 @@ body{
     position: absolute;
     transform: translate(28px, -28px);
 }
-.mdc-list-item--sceneselected{
+.mdc-button::before{
+    background-color: white;
+}
+.sceneselected{
     background-color: #ede3fa;
 }
-.mdc-list-item--actorselected{
+.actorselected{
     background-color: #ede3fa;
+}
+.scriptselected{
+    background-color: #ede3fa;
+}
+.properties-new{
+    padding-bottom: 56px;
 }
 .add-property-button{
     position: absolute;
@@ -44,6 +53,12 @@ body{
     width: 0px;
 }
 .menu-actor{
+    position:relative; 
+    z-index:2; 
+    transform:translate(300px,-48px);
+    width: 0px;
+}
+.menu-script{
     position:relative; 
     z-index:2; 
     transform:translate(300px,-48px);
@@ -115,9 +130,12 @@ body{
     height: 100%;
     overflow-y: auto;
 }
-.actor-list{
-    background-color: greenyellow;
+.list{
     height: 100%;
+    overflow-y: auto;
+}
+.list-bottom{
+    margin-bottom: 56px;
 }
 .properties-section{
     border-bottom:1px solid lightgray;
@@ -191,6 +209,13 @@ body{
     border: 8px solid #6200ee38;
     margin: -8px;
 }
-.cast{
-    overflow-y:auto;
+.mdc-image-list__image-aspect-container .mdc-image-list__image  {
+    width:100%;
+    height: auto;
+    top: 0px;
+    bottom: 0px;
+    margin: auto;
+}
+.mdc-image-list{
+    margin:0px;
 }

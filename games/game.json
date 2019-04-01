@@ -21,8 +21,16 @@
 	],
 	"imageList": [
 		{
-			"id": "_1234567",
-			"name": "image.jpg"
+		"id": "_15533626446808360745224876013",
+		"name": "planeRed1.png"
+		},
+		{
+		"id": "_15533626446808360745224876012",
+		"name": "planeYellow1.png"
+		},
+		{
+		"id": "_15533626548019165161148952010",
+		"name": "planeBlue1.png"
 		}
 	],
 	"soundList": [
@@ -47,6 +55,16 @@
 			"name": "live.mp4"
 		}
 	],
+	"fontList": [
+		{
+			"id": "_12345678900081",
+			"name": "arial.ttf"
+		},
+		{
+			"id": "_12345678900071",
+			"name": "verdana.ttf"
+		}
+	],
 	"sceneList": [
 		{
 			"id": "_15510883884035595151381192160",
@@ -63,12 +81,26 @@
 					"scaleY": 0.5,
 					"rotation": 30,
 					"screen": true,
+					"sound": "lalala.mp4",
+					"image":"planeRed1.png",
+					"font": "arial.ttf",
 					"lives": 3,
-					"on": false
+					"on": false,
+					"scriptList":[
+						{
+							"id": "_15510884179469936971423234",
+							"name": "Move the player"
+						},
+						{
+							"id": "_15510884179469936971423232",
+							"name": "Destroy enemy"
+						}
+					]
 				},
 				{
 					"id": "_15510884187483724645860623896",
-					"name": "Actor 2"
+					"name": "Actor 2",
+					"tutu": true
 				},
 				{
 					"id": "_15510884194967055353027074027",
@@ -92,13 +124,7 @@
 		},
 		{
 			"id": "_15510884012027860725808037956",
-			"name": "End",
-			"actorList": [
-				{
-					"id": "_15510884253345989107127731434",
-					"name": "Actor 1"
-				}
-			]
+			"name": "End"
 		}
 	],
 	"points": 34,

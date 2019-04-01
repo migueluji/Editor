@@ -3,9 +3,9 @@ class Editor {
     constructor(editorView,gameModel) {
         this.view = editorView;
         this.model = gameModel;
-        var index=gameModel.soundList.findIndex(i => i.name == gameModel.sound);
-        (index !== -1) ? this.selectedSound=gameModel.soundList[index].id : this.selectedSound=null;
         this.selectedSceneIndex=0;
+        this.selectedActorIndex=0;
+        this.selectedScriptIndex=0;
         
         //App Bar
         this.appBarView=new AppBarView(gameModel.sceneList[0].name);
@@ -21,40 +21,40 @@ class Editor {
         this.sideSheetView=new SideSheetView();
             this.gamePropertiesView = new GamePropertiesView(gameModel);
             this.sideSheetView.addView(this.gamePropertiesView.html);
-            this.soundSelectionView = new SoundSelectionView(gameModel.soundList,this.selectedSound);
+            this.soundSelectionView = new SoundSelectionView(gameModel.soundList);
             this.sideSheetView.addView(this.soundSelectionView.html);
-            this.castView = new CastView(this.model.sceneList[this.selectedSceneIndex].actorList);
+            this.imageSelectionView = new ImageSelectionView(gameModel.imageList);
+            this.sideSheetView.addView(this.imageSelectionView.html);
+            this.fontSelectionView = new FontSelectionView(gameModel.fontList);
+            this.sideSheetView.addView(this.fontSelectionView.html);
+            this.castView = new CastView();
             this.sideSheetView.addView(this.castView.html);
             this.actorPropertiesView = new ActorPropertiesView(this.model.sceneList[this.selectedSceneIndex].actorList[0]);
             this.sideSheetView.addView(this.actorPropertiesView.html);
+            this.actorScriptsView = new ActorScriptsView();
+            this.sideSheetView.addView(this.actorScriptsView.html);
         this.view.addView(this.sideSheetView.html);
     }
 
 // GAME
     addGameProperty(property,value,position){
-        console.log("addGameP",property,value,position);
         this.model[property]=value;
-        var propertyView = new NewPropertyView(property,value);
-        this.gamePropertiesView.newPropertiesView.addProperty(propertyView.html,position);
+        this.openGameProperties();
     }
 
     removeGameProperty(property){
         delete this.model[property];
-        this.gamePropertiesView.newPropertiesView.removeProperty(property);
+        this.openGameProperties();
     }
 
     changeGameProperty(property,value){
         this.model[property]=value;
-        if (property === "name") this.drawerHeaderView.updateGameName(value);
-        else this.gamePropertiesView.updateGameProperty(property,value);
-        if (property === "sound") {
-            (value == "Undefined") ?    this.selectSound(null) :
-                                        this.selectSound(this.model.soundList[this.model.soundList.findIndex(i => i.name == this.model.sound)].id);
-         }
-    }
+        this.openGameProperties();
+     }
 
 /* Game editor commands */
     openGameProperties(){
+        this.gamePropertiesView.update(this.model);
         SideSheetView.openSheetHandler("game-properties");
     }
 
@@ -64,28 +64,23 @@ class Editor {
 
 //SCENES
     addScene(scene,pos) {  
+        this.model.addScene(scene,pos);
         var sceneView = new SceneView();
         sceneView.addView(scene);
-        this.model.addScene(scene,pos);
         this.drawerScenesView.addScene(sceneView,pos);
-        if (pos==0){
-            this.selectScene(scene.id);
-        }
+        this.selectScene(scene.id);
     }
 
     removeScene(sceneID){
-        var sceneSelectedID=this.model.sceneList[this.selectedSceneIndex].id;
         this.model.removeScene(sceneID);
         this.drawerScenesView.removeScene(sceneID);
-        if(sceneID==sceneSelectedID){
-             if (this.model.sceneList.length==this.selectedSceneIndex ){
-                if (this.selectedSceneIndex>0){ //si hay scenas que seleccionar
-                    this.selectScene(this.model.sceneList[this.selectedSceneIndex-1].id);
-                }
+        if(this.model.sceneList.length==this.selectedSceneIndex){
+            if (this.selectedSceneIndex>0) {//si hay escenas que seleccionar
+                this.selectScene(this.model.sceneList[this.selectedSceneIndex-1].id);
             }
-            else {
-                this.selectScene(this.model.sceneList[this.selectedSceneIndex].id);
-            }    
+        }
+        else {
+            this.selectScene(this.model.sceneList[this.selectedSceneIndex].id);
         }
     }
  
@@ -93,18 +88,17 @@ class Editor {
         this.model.sceneList[this.model.sceneList.findIndex(i=>i.id===sceneID)].name=sceneName;
         this.drawerScenesView.renameScene(sceneID,sceneName);
         var selectedSceneName=this.model.sceneList[this.selectedSceneIndex].name;
-        if(selectedSceneName===sceneName) this.appBarView.updateSceneName(sceneName);
-      }
+        if (selectedSceneName === sceneName) this.appBarView.updateSceneName(sceneName);
+    }
 
  /* Scene editor commands */
     selectScene(sceneID){
-        var currentSelectedSceneIndex= this.selectedSceneIndex;
         this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
         this.drawerScenesView.updateSelectedScene(sceneID);
         this.appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
         if (SideSheetView.displayed=="cast") this.openCast();
-        else if (SideSheetView.displayed=="actor-properties")
-            if (currentSelectedSceneIndex != this.selectedSceneIndex) SideSheetView.closeSheetHandler();
+        else if (SideSheetView.displayed=="actor-properties" || SideSheetView.displayed=="actor-scripts")
+            SideSheetView.closeSheetHandler();
      }
 
      openCast(){
@@ -114,56 +108,94 @@ class Editor {
 
 // ACTOR
     addActor(sceneID,actorPos,actor){
+        var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
+        this.model.sceneList[scenePos].addActor(actor,actorPos);
         this.selectScene(sceneID); //necesario para los comandos de deshacer
-        var actorView = new ActorView();
-        actorView.addView(actor);
-        this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
-        this.model.sceneList[this.selectedSceneIndex].addActor(actor,actorPos);
-        this.castView.addActor(actorView,actorPos);    
+        this.openCast();
         this.selectActor(actor.id);
     }
 
     removeActor(sceneID,actorID){
+        var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
+        this.model.sceneList[scenePos].removeActor(actorID);
         this.selectScene(sceneID); //necesario para los comandos de deshacer
-        this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
-        this.model.sceneList[this.selectedSceneIndex].removeActor(actorID);
-        this.castView.removeActor(actorID);
+        this.openCast();
     }
 
     renameActor(sceneID,actorID,actorName){
+        var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
+        var actorPos = this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID); 
+        this.model.sceneList[scenePos].actorList[actorPos].name=actorName;
         this.selectScene(sceneID); //necesario para los comandos de deshacer
-        this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
-        var scene=this.model.sceneList[this.selectedSceneIndex];
-        var index=scene.actorList.findIndex(i=>i.id===actorID);
-        scene.actorList[index].name=actorName;
-        if (SideSheetView.displayed=="cast")
-            this.castView.renameActor(actorID,actorName);
-        else if (SideSheetView.displayed=="actor-properties")
-            this.actorPropertiesView.updateActorName(actorName);
+        this.openCast();
+        this.selectActor(actorID);
     }
 
-
-    changeActorProperty(scenePos,actorPos,property,value){
+    changeActorProperty(sceneID,actorID,property,value){
+        var scenePos=this.model.sceneList.findIndex(i => i.id == sceneID);
+        var actorPos=this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID); 
         this.model.sceneList[scenePos].actorList[actorPos][property]=value;
+        this.selectScene(sceneID);
+        this.selectActor(actorID);
+        (property=="name")?this.openCast():this.openActorProperties();
         this.actorPropertiesView.updateActorProperty(property,value);
- /*       if (property === "sound") {
-            (value == "Undefined") ?    this.selectSound(null) :
-                                        this.selectSound(this.model.soundList[this.model.soundList.findIndex(i => i.name == this.model.sound)].id);
-         }
-         */
     }
 
-    addActorProperty(scenePos,actorPos,property,value,position){
-        console.log("addProperty",scenePos,actorPos,property,value,position);
+    addActorProperty(sceneID,actorID,property,value){
+        var scenePos=this.model.sceneList.findIndex(i => i.id == sceneID);
+        var actorPos=this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID); 
         this.model.sceneList[scenePos].actorList[actorPos][property]=value;
-        this.propertyView = new NewPropertyView(property,value);
-        this.actorPropertiesView.newPropertiesView.addProperty(this.propertyView.html,position);
+        this.selectScene(sceneID);
+        this.selectActor(actorID);
+        this.openActorProperties();
     }
 
-    removeActorProperty(scenePos,actorPos,property,value){
-        console.log("removeProperty",scenePos,actorPos,property,value);
+    removeActorProperty(sceneID,actorID,property){
+        var scenePos=this.model.sceneList.findIndex(i => i.id == sceneID);
+        var actorPos=this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID); 
         delete this.model.sceneList[scenePos].actorList[actorPos][property];
-        this.actorPropertiesView.newPropertiesView.removeProperty(property);
+        this.selectScene(sceneID);
+        this.selectActor(actorID);
+        this.openActorProperties();
+    }
+
+    addScript(sceneID,actorID,scriptPos,script){
+        var scenePos=this.model.sceneList.findIndex(i => i.id == sceneID);
+        var actorPos=this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID); 
+        this.model.sceneList[scenePos].actorList[actorPos].addScript(script,scriptPos);
+        this.selectScene(sceneID);
+        this.selectActor(actorID);
+        this.openActorScripts();
+        this.selectScript(script.id);
+    }
+
+    removeScript(sceneID,actorID,scriptID){
+        var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
+        var actorPos = this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID); 
+        var scriptPos = this.model.sceneList[scenePos].actorList[actorPos].scriptList.findIndex(i=>i.id==scriptID);
+        this.model.sceneList[scenePos].actorList[actorPos].removeScript(scriptID);
+        this.selectScene(sceneID);
+        this.selectActor(actorID);
+        this.openActorScripts();
+        if (this.model.sceneList[scenePos].actorList[actorPos].scriptList.length==scriptPos){
+            if(scriptPos>0){
+                this.selectScript(this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos-1].id);
+            }
+        }
+        else {
+            this.selectScript(this.model.sceneList[scenePos].actorList[actorPos].scriptList[this.selectedScriptIndex].id);
+        }
+    }
+
+    renameScript(sceneID,actorID,scriptID,scriptName){
+        var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
+        var actorPos = this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID); 
+        var scriptPos = this.model.sceneList[scenePos].actorList[actorPos].scriptList.findIndex(i=>i.id==scriptID);
+        this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].name=scriptName;
+        this.selectScene(sceneID); //necesario para los comandos de deshacer
+        this.selectActor(actorID);
+        this.openActorScripts();
+        this.selectScript(scriptID);
     }
 
 /* Actor editor commands */
@@ -177,21 +209,30 @@ class Editor {
         SideSheetView.openSheetHandler("actor-properties");
     }
 
+    selectScript(scriptID){
+        this.selectedScriptIndex=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].scriptList.findIndex(i=>i.id==scriptID);
+        this.actorScriptsView.updateSelectedScript(scriptID);
+    }
+
+    openActorScripts(){
+        var scriptList=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].scriptList;
+        var actorName=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].name;
+        this.actorScriptsView.update(actorName,scriptList);
+        SideSheetView.openSheetHandler("actor-scripts");
+        if (scriptList.length>0) this.selectScript(scriptList[scriptList.length-1].id);
+    }
+
 // SOUNDS
     addSound(sound){
-        var soundView = new SoundView(sound);
+        var soundView = new SoundView();
         soundView.addView(sound);
         this.model.addSound(sound);
-        this.model.sound=sound.name;
         this.soundSelectionView.addSound(soundView);
-        this.gamePropertiesView.updateGameProperty("sound",this.model.sound);
     }
 
     removeSound(soundID){
         this.model.removeSound(soundID);
-        this.model.sound="Undefined";
         this.soundSelectionView.removeSound(soundID);
-        this.gamePropertiesView.updateGameProperty("sound",this.model.sound);
     }
 
 /* Sounds editor commands */
@@ -199,4 +240,74 @@ class Editor {
          this.soundSelectionView.updateSelectedSound(soundID);
     }
 
+    openSounds(actorID){
+        this.soundSelectionView.actorID=actorID // null si se abren los sonidos desde las propiedades del juego
+        this.soundSelectionView.selectedSound=null; // inicializa el sonido seleccionado a null
+        if (actorID==null){
+            this.soundSelectionView.elementSound=this.model.sound;
+            var index=this.model.soundList.findIndex(i => i.name == this.model.sound);
+           (index !== -1) ? this.selectedSound=this.model.soundList[index].id : this.selectedSound=null;
+        }
+        else {
+            this.soundSelectionView.elementSound=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].sound;
+            var index=this.model.soundList.findIndex(i=> i.name == this.soundSelectionView.elementSound);
+            (index !== -1) ? this.selectedSound=this.model.soundList[index].id : this.selectedSound=null;
+        }
+        this.selectSound(this.selectedSound);
+        SideSheetView.openSheetHandler("sound-selection");
+     }
+
+// IMAGES
+    addImage(image){
+        var imageView = new ImageView();
+        imageView.addView(image);
+        this.model.addImage(image);
+        this.imageSelectionView.addImage(imageView);
+    }
+
+    removeImage(imageID){
+        this.model.removeImage(imageID);
+        this.imageSelectionView.removeImage(imageID);
+    }
+
+/* Images editor commands */
+    selectImage(imageID){
+        this.imageSelectionView.updateSelectedImage(imageID);
+    }
+
+    openImages(){
+        this.imageSelectionView.selectedImage=null; // inicializa la imagen seleccionada a null
+        this.imageSelectionView.actorImage=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].image;
+        var index=this.model.imageList.findIndex(i=> i.name == this.imageSelectionView.actorImage);
+        (index !== -1) ? this.selectedImage=this.model.imageList[index].id : this.selectedImage=null;
+        this.selectImage(this.selectedImage);
+        SideSheetView.openSheetHandler("image-selection");
+    }
+
+// FONTS
+    addFont(font){
+        var fontView = new FontView();
+        fontView.addView(font);
+        this.model.addFont(font);
+        this.fontSelectionView.addFont(fontView);
+    }
+
+    removeFont(fontID){
+        this.model.removeFont(fontID);
+        this.fontSelectionView.removeFont(fontID);
+    }
+
+/* Fonts editor commands */
+    selectFont(fontID){
+        this.fontSelectionView.updateSelectedFont(fontID);
+    }
+
+    openFonts(){
+        this.fontSelectionView.selectedFont=null;
+        this.fontSelectionView.actorFont=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].font;
+        var index=this.model.fontList.findIndex(i=> i.name == this.fontSelectionView.actorFont);
+        (index !== -1) ? this.selectedFont=this.model.fontList[index].id : this.selectedFont=null;
+        this.selectFont(this.selectedFont);
+        SideSheetView.openSheetHandler("font-selection");
+    }
 }

@@ -5,6 +5,8 @@ class ChangeGamePropertyCmd extends Command {
         this.property=property;
         this.value=value;
         this.oldValue=this.editor.model[property];
+        this.type="ChangeGamePropertyCmd";
+        this.name="Change Game Property: "+this.property;
     }
 
     execute (){  

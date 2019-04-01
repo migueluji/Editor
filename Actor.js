@@ -3,8 +3,10 @@ class Actor {
     constructor(actor) {
         this.id=actor.id;
         this.name=actor.name;
+        this.scriptList=[];
         Object.assign(this,this.properties); //inicialización de propiedades
         Object.assign(this,actor);
+        if (this.scriptList) this.scriptList.forEach((script,i) => this.scriptList[i]=new Script(script));
     }
 
     get properties(){
@@ -14,6 +16,7 @@ class Actor {
             width:this.width || 50, height:this.height || 50, 
             scaleX:this.scaleX || 1, scaleY:this.scaleY || 1, 
             rotation:this.rotation || 0, screen:this.screen || false,
+            collider:this.collider || "Box", tags:this.tags || "",
             // Sprite
             visible:this.visible || false, image:this.image || undefined,
             color:this.color || "#ffffff", opacity:this.opacity || 1,
@@ -49,8 +52,16 @@ class Actor {
         });
         delete obj.id;
         delete obj.name;
-        delete obj.ruleList;
+        delete obj.scriptList;
         delete obj.tagList;
         return (obj);
     }
+
+    addScript(script,pos){
+        this.scriptList.splice(pos,0,script);
+    }
+
+    removeScript(scriptID){
+        this.scriptList.splice(this.scriptList.findIndex(i=>i.id==scriptID),1);
+    } 
 } 

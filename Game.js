@@ -50,6 +50,22 @@ class Game {
     removeSound(soundID) {
         this.soundList.splice(this.soundList.findIndex(i => i.id == soundID),1);
     } 
+
+    addImage(image) {
+        this.imageList.push(image);
+    } 
+
+    removeImage(imageID) {
+        this.imageList.splice(this.imageList.findIndex(i => i.id == imageID),1);
+    } 
+
+    addFont(font) {
+        this.fontList.push(font);
+    } 
+
+    removeFont(fontID) {
+        this.fontList.splice(this.fontList.findIndex(i => i.id == fontID),1);
+    } 
 }
 
  /*     this.name           = game.name             || "New Game";  

@@ -5,6 +5,8 @@ class AddGamePropertyCmd extends Command {
         this.property=property;
         this.value=value;
         this.position=Object.keys(this.editor.model.newProperties).length;
+        this.type="AddGamePropertyCmd";
+        this.name="Add Game Property: "+this.property;
     }
 
     execute (){  

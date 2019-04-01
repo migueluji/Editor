@@ -1,7 +1,8 @@
 class Scene {
     constructor(scene) {
+        this.actorList=[];
         Object.assign(this,scene);
-        this.actorList.forEach((actor,i) => this.actorList[i]=new Actor(actor));
+        if (this.actorList) this.actorList.forEach((actor,i) => this.actorList[i]=new Actor(actor));
     }
 
     addActor(actor,pos){

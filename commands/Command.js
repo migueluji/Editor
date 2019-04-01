@@ -34,9 +34,38 @@ class Command {
         this.editor.openActorProperties();
     }
 
+    static selectScriptCmd(scriptID){
+        this.editor.selectScript(scriptID);
+    }
+
+    static openActorScriptsCmd(){
+        this.editor.openActorScripts();
+    }
+
 // SOUNDS
     static selectSoundCmd(soundID){
         this.editor.selectSound(soundID);
     }
 
+    static openSoundsCmd(actorID){
+        this.editor.openSounds(actorID);
+    }
+
+// IMAGES
+    static selectImageCmd(imageID){
+        this.editor.selectImage(imageID);
+    }
+
+    static openImagesCmd(){
+        this.editor.openImages();
+    }
+
+// FONTS
+    static selectFontCmd(fontID){
+        this.editor.selectFont(fontID);
+    }
+
+    static openFontsCmd(){
+        this.editor.openFonts();
+    }
 }

@@ -12,24 +12,53 @@
 
 	<script src="App.js"></script>
 	<script src="Editor.js"></script>
-	<script src="EditorView.js"></script>
-	<script src="AppBarView.js"></script>
-	<script src="DrawerHeaderView.js"></script>
-	<script src="SideSheetView.js"></script>
 	<script src="Game.js"></script>
-	<script src="DrawerScenesView.js"></script>
-	<script src="GamePropertiesView.js"></script>
-	<script src="GamePropertiesSettingsView.js"></script>
-	<script src="GamePropertiesSoundView.js"></script>
-	<script src="GamePropertiesPhysicsView.js"></script>
-	<script src="NewPropertiesView.js"></script>
 	<script src="Scene.js"></script>
-	<script src="SceneView.js"></script>
-	<script src="RenameDialogView.js"></script>
-	<script src="NewPropertyDialogView.js"></script>
-	<script src="NewPropertyView.js"></script>
-	<script src="SoundSelectionView.js"></script>
-	<script src="SoundView.js"></script>
+	<script src="Actor.js"></script>
+	<script src="Asset.js"></script>
+	<script src="Script.js"></script>
+	<script src="File.js"></script>
+	<script src="Utils.js"></script>
+
+	<script src="./views/EditorView.js"></script>
+	<script src="./views/AppBarView.js"></script>
+	<script src="./views/SideSheetView.js"></script>
+
+	<script src="./dialogs/RenameDialogView.js"></script>
+	<script src="./dialogs/NewPropertyDialogView.js"></script>
+
+	<script src="./drawer/DrawerHeaderView.js"></script>
+	<script src="./drawer/DrawerScenesView.js"></script>
+	<script src="./drawer/SceneView.js"></script>
+
+	<script src="./cast/CastView.js"></script>
+	<script src="./cast/ActorView.js"></script>
+
+	<script src="./gameProperties/GamePropertiesView.js"></script>
+	<script src="./gameProperties/GamePropertiesSettingsView.js"></script>
+	<script src="./gameProperties/GamePropertiesSoundView.js"></script>
+	<script src="./gameProperties/GamePropertiesPhysicsView.js"></script>
+
+	<script src="./actorProperties/ActorPropertiesView.js"></script>
+	<script src="./actorProperties/ActorPropertiesSettingsView.js"></script>
+	<script src="./actorProperties/ActorPropertiesSpriteView.js"></script>
+	<script src="./actorProperties/ActorPropertiesTextView.js"></script>
+	<script src="./actorProperties/ActorPropertiesSoundView.js"></script>
+	<script src="./actorProperties/ActorPropertiesPhysicsView.js"></script>
+
+	<script src="./newProperties/NewPropertiesView.js"></script>
+	<script src="./newProperties/NewPropertyView.js"></script>
+
+	<script src="./actorScripts/ActorScriptsView.js"></script>
+	<script src="./actorScripts/ScriptView.js"></script>
+
+	<script src="./assetSelection/SoundSelectionView.js"></script>
+	<script src="./assetSelection/ImageSelectionView.js"></script>
+	<script src="./assetSelection/FontSelectionView.js"></script>
+	<script src="./assetSelection/SoundView.js"></script>
+	<script src="./assetSelection/ImageView.js"></script>
+	<script src="./assetSelection/FontView.js"></script>
+
 	<script src="./commands/History.js"></script>
 	<script src="./commands/Command.js"></script>
 	<script src="./commands/CmdManager.js"></script>
@@ -43,6 +72,10 @@
 	<script src="./commands/RemoveGamePropertyCmd.js"></script>
 	<script src="./commands/RemoveSoundCmd.js"></script>
 	<script src="./commands/AddSoundCmd.js"></script>
+	<script src="./commands/AddImageCmd.js"></script>
+	<script src="./commands/AddFontCmd.js"></script>
+	<script src="./commands/RemoveImageCmd.js"></script>
+	<script src="./commands/RemoveFontCmd.js"></script>
 	<script src="./commands/AddActorCmd.js"></script>
 	<script src="./commands/RemoveActorCmd.js"></script>
 	<script src="./commands/DuplicateActorCmd.js"></script>
@@ -51,18 +84,11 @@
 	<script src="./commands/ChangeActorPropertyCmd.js"></script>
 	<script src="./commands/AddActorPropertyCmd.js"></script>
 	<script src="./commands/RemoveActorPropertyCmd.js"></script>
-	<script src="./File.js"></script>
-	<script src="./Asset.js"></script>
-	<script src="./Actor.js"></script>
-	<script src="./CastView.js"></script>
-	<script src="./ActorView.js"></script>
-	<script src="./ActorPropertiesView.js"></script>
-	<script src="./ActorPropertiesSettingsView.js"></script>
-	<script src="./ActorPropertiesSpriteView.js"></script>
-	<script src="./ActorPropertiesTextView.js"></script>
-	<script src="./ActorPropertiesSoundView.js"></script>
-	<script src="./ActorPropertiesPhysicsView.js"></script>
-	<script src="./Utils.js"></script>
+	<script src="./commands/AddScriptCmd.js"></script>
+	<script src="./commands/RenameScriptCmd.js"></script>
+	<script src="./commands/DuplicateScriptCmd.js"></script>
+	<script src="./commands/RemoveScriptCmd.js"></script>
+	<script src="./commands/MoveScriptCmd.js"></script>
 
 </head>
 <body class="mdc-typography">

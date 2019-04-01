@@ -18,6 +18,25 @@ class CmdManager {
         this.history.execute(cmd);
     }
 
+    static addImageCmd(imageName){
+        var cmd = new AddImageCmd(imageName);
+        this.history.execute(cmd);
+    }
+
+    static removeImageCmd(imageID){
+        var cmd = new RemoveImageCmd(imageID);
+        this.history.execute(cmd);
+    }
+
+    static addFontCmd(fontName){
+        var cmd = new AddFontCmd(fontName);
+        this.history.execute(cmd);
+    }
+
+    static removeFontCmd(fontID){
+        var cmd = new RemoveFontCmd(fontID);
+        this.history.execute(cmd);
+    }
 // Game
     static changeGamePropertyCmd(property,value){
         var cmd = new ChangeGamePropertyCmd(property,value);
@@ -98,6 +117,31 @@ class CmdManager {
 
     static removeActorPropertyCmd(sceneID,actorID,property,value,pos){
         var cmd = new RemoveActorPropertyCmd(sceneID,actorID,property,value,pos);
+        this.history.execute(cmd);
+    }
+
+    static addScriptCmd(sceneID,actorID,scriptPos){
+        var cmd =new AddScriptCmd(sceneID,actorID,scriptPos);
+        this.history.execute(cmd);
+    }
+
+    static renameScriptCmd(sceneID,actorID,scriptID,scriptName) {
+        var cmd =new RenameScriptCmd(sceneID,actorID,scriptID,scriptName);
+        this.history.execute(cmd);
+    }
+
+    static duplicateScriptCmd (sceneID,actorID,scriptID){
+        var cmd =new DuplicateScriptCmd(sceneID,actorID,scriptID);
+        this.history.execute(cmd);
+    }
+
+    static removeScriptCmd (sceneID,actorID,scriptID){
+        var cmd =new RemoveScriptCmd(sceneID,actorID,scriptID);
+        this.history.execute(cmd);
+    }
+
+    static moveScriptCmd (sceneID,actorID,scriptID,scriptPos){
+        var cmd = new MoveScriptCmd(sceneID,actorID,scriptID,scriptPos);
         this.history.execute(cmd);
     }
 

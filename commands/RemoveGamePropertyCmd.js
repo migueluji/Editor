@@ -5,6 +5,8 @@ class RemoveGamePropertyCmd extends Command {
         this.property=property;
         this.value=value;
         this.pos=pos;
+        this.type="RemoveGamePropertyCmd";
+        this.name="Remove Game Property: " + property;
     }
 
     execute (){  
