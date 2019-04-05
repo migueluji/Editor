@@ -24,13 +24,43 @@
     border-radius: 6px;
 }
 .button-text{
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: bold;
 }
 .do-button{
-    background-color:#004ba0;
+    background-color:#6200ee;
 }
 .if-button{
-    background-color:rgb(255,200,0);
+    background-color:#018786;
     bottom: 86px;
+}
+.selection-item.mdc-image-list__item{
+    margin: auto;;
+}
+.action-circle{
+    background-color: #6200ee;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    padding-bottom: 0px;
+    margin: auto;
+}
+.condition-circle{
+    background-color: #018786;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    padding-bottom: 0px;
+    margin: auto;
+}
+.selection-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    color: white;
+}
+.selection-label{
+    margin: auto;
 }

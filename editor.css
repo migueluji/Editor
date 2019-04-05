@@ -20,8 +20,10 @@ body{
     flex-direction: column;
 }
 .add-scene-button{
-    position: absolute;
-    transform: translate(28px, -28px);
+    margin-top: 16px;
+    margin-bottom: 8px;
+    width: 64%;
+    left: 18%;
 }
 .mdc-button::before{
     background-color: white;

@@ -6,10 +6,10 @@ class ScriptCanvasView {
       //   this.html.style.display="none";
          this.html.innerHTML =
          '<button id="addif" class="if-button mdc-fab mdc-ripple-upgraded add-property-button">'+
-             '<span class="button-text">if</span>'+
+             '<span class="button-text">IF</span>'+
         '</button>'+
         '<button id="adddo" class="do-button mdc-fab mdc-ripple-upgraded add-property-button">'+
-            '<span class="button-text">do</span>'+
+            '<span class="button-text">DO</span>'+
         '</button>'+
           '<div class="scritp-background">'+
             '<div class="init">'+
@@ -25,12 +25,27 @@ class ScriptCanvasView {
             '</div>'+
         '</div>';
 
+        this.html.querySelector("#adddo").addEventListener("click",this.addDoHandler.bind(this));
+        this.html.querySelector("#addif").addEventListener("click",this.addIfHandler.bind(this));
 
      }
 
     addView(html){
 		var children=this.html.querySelector("."+html.classList[0]);
 		children.parentNode.replaceChild(html,children);
+    }
+
+// Handlers
+    addDoHandler(){
+        var dialog = new DoSelectionView();
+		var editorFrame=document.querySelector(".editor-frame-root");
+		editorFrame.appendChild(dialog.html);
+    }
+
+    addIfHandler(){
+        var dialog = new IfSelectionView();
+		var editorFrame=document.querySelector(".editor-frame-root");
+		editorFrame.appendChild(dialog.html);
     }
 
 }

@@ -12,6 +12,7 @@ class ActorPropertiesView {
 					'</section>'+
 					'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">'+
 						'<button id="codebutton" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">code</button>'+
+						'<button id="addproperty" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">add_circle_outline</button>'+
 						'<button id="closebutton" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">close</button>'+
 					'</section>'+
 				'</div>'+
@@ -23,9 +24,6 @@ class ActorPropertiesView {
 				'<li class="actor-properties-sound"></li>'+
 				'<li class="actor-properties-physics"></li>'+
 				'<li class="properties-new"></li>'+
-				'<button id="addproperty" class="mdc-fab mdc-ripple-upgraded add-property-button">'+
-					'<i class="mdc-fab__icon material-icons">add</i>'+
-				'</button>'+
 			'</ul>';
 		this.html.querySelector("#codebutton").addEventListener("click",Command.openActorScriptsCmd.bind(Command));
 		this.html.querySelector("#closebutton").addEventListener("click",SideSheetView.closeSheetHandler);

@@ -4,10 +4,11 @@ class DrawerScenesView {
 		this.html = document.createElement("div");
 		this.html.className +="mdc-drawer__content";
 		this.html.innerHTML =
-			'<button id="addscene" class="mdc-fab mdc-ripple-upgraded add-scene-button">'+
-					 '<i class="mdc-fab__icon material-icons">add</i>'+
-			'</button>'+
-			'<ul style="padding-top:32px" class="mdc-list  mdc-list--avatar-list"></ul>';
+			'<button id="addscene" class="mdc-button mdc-button--unelevated mdc-ripple-upgraded  add-scene-button">'+
+					 '<i class="material-icons mdc-button__icon">add</i>'+
+					 '<span class="mdc-button__label">add scene</span>'+
+			'</button>'+ 
+			'<ul class="mdc-list  mdc-list--avatar-list"></ul>';
 		this.html.querySelector("#addscene").addEventListener("click",this.addSceneHandler.bind(this));
 		this.init(sceneList);
   }

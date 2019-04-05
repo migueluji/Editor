@@ -7,19 +7,17 @@ class CastView {
 		 this.html.innerHTML =
 		 '<header class="mdc-top-app-bar--dense properties-bar">'+
 		 '<div class="mdc-top-app-bar__row">'+
-			 '<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">'+
+			'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">'+
 				 '<span class="mdc-toolbar__title">Cast</span>'+
 			 '</section>'+
-			 '<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">'+
-				 '<button id="closebutton" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" aria-label="close">close</button>'+
+			'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">'+
+		 		'<button id="addactor" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">add_circle_outline</button>'+
+				'<button id="closebutton" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">close</button>'+
 			 '</section>'+
 		 '</div>'+
 		'</header>'+
 		'<div class="list">'+
 			'<ul class="list-bottom mdc-list  mdc-list--avatar-list"></ul>'+ 
-			'<button id="addactor" class="mdc-fab mdc-ripple-upgraded add-property-button">'+
-					'<i class="mdc-fab__icon material-icons">add</i>'+
-			'</button>'+
 		'</div>';
 		this.html.querySelector("#closebutton").addEventListener("click",SideSheetView.closeSheetHandler);
 		this.html.querySelector("#addactor").addEventListener("click",this.addActorHandler.bind(this));
