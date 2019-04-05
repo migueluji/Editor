@@ -94,6 +94,11 @@ body{
 .canvas{
     height: 100%;
     width: 100%;
+    background-color: #ede3fa;
+}
+.scriptcanvas{
+    margin: 0px auto;
+    display: table;
 }
 .dialog-full-screen{
     z-index:100;
@@ -218,4 +223,7 @@ body{
 }
 .mdc-image-list{
     margin:0px;
+}
+.open{
+    display: block;
 }

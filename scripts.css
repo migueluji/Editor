@@ -1,0 +1,36 @@
+.scriptcanvas{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.init {
+    margin: 64px auto 16px auto;
+    width: 16px;
+    height: 16px;
+    background-color: greenyellow;
+    border-radius: 16px;
+    border: 2px solid lightgray;
+}
+.nodelist{
+    margin: 16px;
+    min-width: 168px;
+    min-height: 48px;
+}
+.end{
+    margin: 16px auto;
+    width: 36px;
+    height: 25px;
+    background-color: lightgray;
+    border-radius: 6px;
+}
+.button-text{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.do-button{
+    background-color:#004ba0;
+}
+.if-button{
+    background-color:rgb(255,200,0);
+    bottom: 86px;
+}

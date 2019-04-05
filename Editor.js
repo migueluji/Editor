@@ -17,6 +17,9 @@ class Editor {
         this.view.addView(this.drawerScenesView.html);
         this.view.addView(this.drawerHeaderView.html);
 
+        this.scriptCanvasView = new ScriptCanvasView();
+        this.view.addView(this.scriptCanvasView.html);
+
         //Side Sheet
         this.sideSheetView=new SideSheetView();
             this.gamePropertiesView = new GamePropertiesView(gameModel);
@@ -207,6 +210,7 @@ class Editor {
     openActorProperties(){
         this.actorPropertiesView.update(this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex]);
         SideSheetView.openSheetHandler("actor-properties");
+        this.view.openCanvas("canvas");
     }
 
     selectScript(scriptID){
@@ -220,6 +224,7 @@ class Editor {
         this.actorScriptsView.update(actorName,scriptList);
         SideSheetView.openSheetHandler("actor-scripts");
         if (scriptList.length>0) this.selectScript(scriptList[scriptList.length-1].id);
+        this.view.openCanvas("scriptcanvas");
     }
 
 // SOUNDS

@@ -11,15 +11,21 @@ class EditorView {
             '<div class="mdc-drawer-app-content">'+ //DRAWER CONTENT
                 '<header class="mdc-top-app-bar"></header>'+ // top-app-bar
                 '<div class="main-content">'+ //canvas + settings
-                    '<div class="canvas"></div>'+
+                    '<div class="canvas" style="display:none"></div>'+
+                    '<div class="scriptcanvas" style="display:block"></div>'+
                     '<aside class="side-sheet"></aside>'+
                 '</div>'+
             '</div>';
      }
 
     addView(html){
-		var children=this.html.querySelector("."+html.classList[0]);
+ 		var children=this.html.querySelector("."+html.classList[0]);
 		children.parentNode.replaceChild(html,children);
+    }
+    
+	openCanvas(name){
+		this.html.querySelector(".canvas").style.display="none";
+        this.html.querySelector(".scriptcanvas").style.display="none";
+		this.html.querySelector("."+name).style.display="block";
 	}
-
 }

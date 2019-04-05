@@ -4,8 +4,7 @@ class DrawerScenesView {
 		this.html = document.createElement("div");
 		this.html.className +="mdc-drawer__content";
 		this.html.innerHTML =
-			'<button id="addscene" class="mdc-fab mdc-ripple-upgraded add-scene-button" aria-label="Add Scene"'+
-				 'style="--mdc-ripple-fg-size:33px; --mdc-ripple-fg-scale:2.70291; --mdc-ripple-fg-translate-start:5.5px, 19.6875px; --mdc-ripple-fg-translate-end:11.5px, 11.5px;">'+
+			'<button id="addscene" class="mdc-fab mdc-ripple-upgraded add-scene-button">'+
 					 '<i class="mdc-fab__icon material-icons">add</i>'+
 			'</button>'+
 			'<ul style="padding-top:32px" class="mdc-list  mdc-list--avatar-list"></ul>';
