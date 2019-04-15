@@ -15,6 +15,7 @@
     margin: 16px;
     min-width: 168px;
     min-height: 48px;
+    border: 2px dashed red;
 }
 .end{
     margin: 16px auto;
@@ -35,7 +36,8 @@
     bottom: 86px;
 }
 .selection-item.mdc-image-list__item{
-    margin: auto;;
+    margin: auto;
+    padding: 4px;
 }
 .action-circle{
     background-color: #6200ee;
@@ -60,7 +62,68 @@
     width: 56px;
     height: 56px;
     color: white;
+    cursor: default;
 }
 .selection-label{
     margin: auto;
+    cursor: default;
+}
+.node{
+    overflow: hidden;
+    padding: 16px 0px;
+    display: flex;
+}
+.condition {
+    margin: auto;
+    display: inline-block;
+}
+.cuadro {
+    position: absolute;
+    margin-top: 24px;
+    background-color: white;
+    border: 2px solid lightgray;
+    border-radius: 12px;
+}
+.element {
+    overflow: visible;
+    width: 168px;
+    height: 48px;
+    margin: auto;
+}
+.mdc-chip {
+    height: 48px;
+    width: 168px;
+    padding: 0px;
+    border-radius: 24px;
+    background-color: rgb(235,235,235);
+}
+.if {
+    background-color: rgb(255,200,0);
+}
+.circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+.nodeIcon{
+    color: white;
+    font-weight: bod;
+    position: absolute;
+    transform: translate(12px,12px);
+}
+.cancelIcon {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+}
+.nodelabel{
+    width: 80px;
+    height: auto;
+    margin: -20px auto 0px 8px;
+}
+.no{
+    float:left;
+}
+.yes{
+    float:right;
 }

@@ -11,8 +11,8 @@ class EditorView {
             '<div class="mdc-drawer-app-content">'+ //DRAWER CONTENT
                 '<header class="mdc-top-app-bar"></header>'+ // top-app-bar
                 '<div class="main-content">'+ //canvas + settings
-                    '<div class="canvas" style="display:none"></div>'+
-                    '<div class="scriptcanvas" style="display:block"></div>'+
+                    '<div class="canvas" style="display:block"></div>'+
+                    '<div class="scriptcanvas" style="display:none"></div>'+
                     '<aside class="side-sheet"></aside>'+
                 '</div>'+
             '</div>';

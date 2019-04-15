@@ -7,12 +7,12 @@ class IfSelectionView {
 		 '<div class="mdc-card">'+
 		 '<h2 id="title" class="demo-card__title mdc-typography--headline6">Select Condition</h2>'+
 		 '<ul style="width:320px;margin-bottom: 8px;" class="mdc-image-list">'+
-			 '<li class="selection-item mdc-image-list__item">'+
+			 '<li id="compare" class="selection-item mdc-image-list__item">'+
 				 '<div class="condition-circle mdc-image-list__image-aspect-container">'+
-					 '<i class="selection-icon material-icons">edit</i>'+ 
+					 '<i class="selection-icon material-icons">code</i>'+ 
 				 '</div>'+
 				 '<div class="mdc-image-list__supporting">'+
-					 '<span class="selection-label mdc-image-list__label">code</span>'+//compare
+					 '<span class="selection-label mdc-image-list__label">Compare</span>'+//compare
 				 '</div>'+
 			 '</li>'+
 			 '<li class="selection-item mdc-image-list__item">'+
@@ -41,7 +41,7 @@ class IfSelectionView {
 			 '</li>'+
 			 '<li class="selection-item mdc-image-list__item">'+
 				 '<div class="condition-circle mdc-image-list__image-aspect-container">'+
-					 '<i class="selection-icon material-icons">volume_up</i>'+
+					 '<i class="selection-icon material-icons">touch_app</i>'+
 				 '</div>'+
 				 '<div class="mdc-image-list__supporting">'+
 					 '<span class="selection-label mdc-image-list__label">Touch</span>'+//touch
@@ -58,15 +58,36 @@ class IfSelectionView {
 		 '</ul>'+
 	 '<div>';
 		this.html.addEventListener("click",this.cancelBackgroundHandler.bind(this));
+		this.html.querySelector("#compare").addEventListener("click",this.addConditionHandler.bind(this,"compare"));
+		this.type="compare";
+		this.nodeID=null;
   }
 
 // Handlers
+	addConditionHandler(type){
+		var sceneID=document.querySelector(".sceneselected").id;
+		var actorID=document.querySelector(".actorselected").id;
+		var scriptID=document.querySelector(".scriptselected").id;
+		var nodeListID = document.querySelector(".nodelistselected").id;
+
+		var node=document.querySelector(".nodeselected");
+		(node) ? this.nodeID=node.id: this.nodeID=null;
+		var position=0;
+
+		CmdManager.addConditionCmd(sceneID,actorID,scriptID,nodeListID,position,type,null);
+		this.closeDialog();
+	}
 
 	cancelBackgroundHandler(e){
 		if (e.target===this.html)	{
-			var node=document.querySelector(".dialog-full-screen");
-			node.parentNode.removeChild(node);
+			this.closeDialog();
 		}
+	}
+
+// Utils
+	closeDialog(){
+		var node=document.querySelector(".dialog-full-screen");
+		node.parentNode.removeChild(node);
 	}
 
 }

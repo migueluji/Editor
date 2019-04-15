@@ -93,7 +93,24 @@
 						},
 						{
 							"id": "_15510884179469936971423232",
-							"name": "Destroy enemy"
+							"name": "Destroy enemy",
+							"nodeList" :[
+								{
+									"id":"_0000000000000000",
+									"type": "Compare",
+									"expression": { "text":"player.lives>0","scope":{"player":"_15510884179469936971423239389"}},
+									"nodeListTrue" : [
+										{
+											"id": "_011",
+											"type": "Check",
+											"expression" : {"text":"actor1.on","scope":{"actor1":"_15510884179469936971423239389"}},
+											"nodeListTrue": null,
+											"nodeListFalse": null				
+										}
+									],
+									"nodeListFalse" : null
+								}
+							]
 						}
 					]
 				},

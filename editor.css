@@ -37,6 +37,9 @@ body{
 .scriptselected{
     background-color: #ede3fa;
 }
+.selected{
+    background-color: #ede3fa;
+}
 .properties-new{
     padding-bottom: 56px;
 }

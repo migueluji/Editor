@@ -64,4 +64,25 @@ class Actor {
     removeScript(scriptID){
         this.scriptList.splice(this.scriptList.findIndex(i=>i.id==scriptID),1);
     } 
+
+    addCondition(scriptID,nodeListID,position,condition){
+
+        var scriptPos = this.scriptList.findIndex(i=>i.id==scriptID);  
+        var nodeList =null;
+        (nodeListID=="") ?  nodeList=this.scriptList[scriptPos].nodeList : 
+                            nodeList=this.find(this.scriptList[scriptPos],nodeListID);
+        nodeList.splice(position,0,condition);
+      }
+
+    find(script,nodeListID){
+        script.nodeList.forEach(i=>{
+            if (i.id==nodeListID) {
+                return i.id;
+            }
+            else {
+                this.find(i.nodeListTrue,nodeListID);
+                this.find(i.nodeListFalse,nodeListID);
+            }
+        })
+    }
 } 

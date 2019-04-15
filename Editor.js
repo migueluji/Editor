@@ -40,7 +40,7 @@ class Editor {
     }
 
 // GAME
-    addGameProperty(property,value,position){
+    addGameProperty(property,value){
         this.model[property]=value;
         this.openGameProperties();
     }
@@ -225,6 +225,8 @@ class Editor {
         SideSheetView.openSheetHandler("actor-scripts");
         if (scriptList.length>0) this.selectScript(scriptList[scriptList.length-1].id);
         this.view.openCanvas("scriptcanvas");
+        this.scriptCanvasView.update(this.scriptCanvasView.html,scriptList[this.selectedScriptIndex].nodeList); // paso el html para la recursion
+
     }
 
 // SOUNDS
@@ -314,5 +316,13 @@ class Editor {
         (index !== -1) ? this.selectedFont=this.model.fontList[index].id : this.selectedFont=null;
         this.selectFont(this.selectedFont);
         SideSheetView.openSheetHandler("font-selection");
+    }
+
+// SCRIPTING
+    addCondition(sceneID,actorID,scriptID,nodeListID,position,condition){
+      var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
+      var actorPos = this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID);
+      this.model.sceneList[scenePos].actorList[actorPos].addCondition(scriptID,nodeListID,position,condition);
+
     }
 }

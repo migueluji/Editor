@@ -145,6 +145,11 @@ class CmdManager {
         this.history.execute(cmd);
     }
 
+    static addConditionCmd(sceneID,actorID,scriptID,nodeListID,position,type,expresion){
+        var cmd = new AddConditionCmd(sceneID,actorID,scriptID,nodeListID,position,type,expresion);
+        this.history.execute(cmd);
+    }
+
 // Utils
     static undo(){
         this.history.undo();

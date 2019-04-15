@@ -4,13 +4,12 @@ class AddGamePropertyCmd extends Command {
         super();
         this.property=property;
         this.value=value;
-        this.position=Object.keys(this.editor.model.newProperties).length;
         this.type="AddGamePropertyCmd";
         this.name="Add Game Property: "+this.property;
     }
 
     execute (){  
-        this.editor.addGameProperty(this.property,this.value,this.position);
+        this.editor.addGameProperty(this.property,this.value);
     }
     
     undo(){
