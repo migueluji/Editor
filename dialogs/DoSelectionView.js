@@ -1,13 +1,15 @@
 class DoSelectionView {
 
-    constructor() {   
+    constructor(nodeID,insertPoint) {  
+		 this.nodeID=nodeID;
+		 this.insertPoint=insertPoint;
 		 this.html = document.createElement("div");
 		 this.html.className +="dialog-full-screen";
 		 this.html.innerHTML =
 				'<div class="mdc-card">'+
 					'<h2 id="title" class="demo-card__title mdc-typography--headline6">Select Action</h2>'+
 					'<ul style="width:320px;margin-bottom: 8px;" class="mdc-image-list">'+
-						'<li class="selection-item mdc-image-list__item">'+
+						'<li id="edit" class="selection-item mdc-image-list__item">'+
 							'<div class="action-circle mdc-image-list__image-aspect-container">'+
 								'<i class="selection-icon material-icons">edit</i>'+ 
 							'</div>'+
@@ -15,7 +17,7 @@ class DoSelectionView {
 								'<span class="selection-label mdc-image-list__label">Edit</span>'+//edit
 							'</div>'+
 						'</li>'+
-						'<li class="selection-item mdc-image-list__item">'+
+						'<li id="spawn" class="selection-item mdc-image-list__item">'+
 							'<div class="action-circle mdc-image-list__image-aspect-container">'+
 								'<i class="selection-icon material-icons">person_add</i>'+ 
 							'</div>'+
@@ -130,14 +132,32 @@ class DoSelectionView {
 					'</ul>'+
 				'<div>';
 		this.html.addEventListener("click",this.cancelBackgroundHandler.bind(this));
-  }
-
+		var elements= this.html.querySelectorAll("li");
+		elements.forEach(element=> element.addEventListener("click",this.addActionHandler.bind(this)));
+	}
+	
 // Handlers
-
-		cancelBackgroundHandler(e){
-			if (e.target===this.html)	{
-				var node=document.querySelector(".dialog-full-screen");
-				node.parentNode.removeChild(node);
-			}
+	addActionHandler(e){
+		if (e.target.tagName== "I"){
+			var type= e.target.parentNode.nextSibling.firstChild.innerHTML;
+			var sceneID=document.querySelector(".sceneselected").id;
+			var actorID=document.querySelector(".actorselected").id;
+			var scriptID=document.querySelector(".scriptselected").id;
+			CmdManager.addNodeCmd(sceneID,actorID,scriptID,this.nodeID,this.insertPoint,type);
+			this.closeDialog();
 		}
+	}	
+
+	cancelBackgroundHandler(e){
+		if (e.target===this.html)	{
+			var node=document.querySelector(".dialog-full-screen");
+			node.parentNode.removeChild(node);
+		}
+	}
+
+	// Utils
+	closeDialog(){
+		var node=document.querySelector(".dialog-full-screen");
+		node.parentNode.removeChild(node);
+	}
 }

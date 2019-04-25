@@ -67,11 +67,11 @@
 	],
 	"sceneList": [
 		{
-			"id": "_15510883884035595151381192160",
+			"id": "_scene1",
 			"name": "Start",
 			"actorList": [
 				{
-					"id": "_15510884179469936971423239389",
+					"id": "_actor1",
 					"name": "Actor 1",
 					"x":100,
 					"y":99,
@@ -92,23 +92,29 @@
 							"name": "Move the player"
 						},
 						{
-							"id": "_15510884179469936971423232",
+							"id": "_script2",
 							"name": "Destroy enemy",
 							"nodeList" :[
 								{
-									"id":"_0000000000000000",
+									"id":"_nodo1",
 									"type": "Compare",
 									"expression": { "text":"player.lives>0","scope":{"player":"_15510884179469936971423239389"}},
 									"nodeListTrue" : [
 										{
-											"id": "_011",
+											"id": "_nodo11",
 											"type": "Check",
 											"expression" : {"text":"actor1.on","scope":{"actor1":"_15510884179469936971423239389"}},
-											"nodeListTrue": null,
-											"nodeListFalse": null				
+											"nodeListTrue": [],
+											"nodeListFalse": []				
 										}
 									],
-									"nodeListFalse" : null
+									"nodeListFalse" : [
+										{
+											"id" : "_nodo10",
+											"type": "Edit",
+											"expression": {"text":"actor1.x","scope":{"actor1":"_21"}}
+										}
+									]
 								}
 							]
 						}

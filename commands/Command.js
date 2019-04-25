@@ -42,6 +42,14 @@ class Command {
         this.editor.openActorScripts();
     }
 
+    static closeActorScriptsCmd(){
+        this.editor.closeActorScripts();
+    }
+
+    static selectNodeCmd(nodeID){
+        this.editor.selectNode(nodeID);
+    }
+
 // SOUNDS
     static selectSoundCmd(soundID){
         this.editor.selectSound(soundID);

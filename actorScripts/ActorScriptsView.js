@@ -21,7 +21,7 @@ class ActorScriptsView {
 			'<ul class="list-bottom mdc-list  mdc-list--avatar-list"></ul>'+ 
 		'</div>';
 		this.html.querySelector("#propertiesbutton").addEventListener("click",Command.openActorPropertiesCmd.bind(Command));
-		this.html.querySelector("#closebutton").addEventListener("click",SideSheetView.closeSheetHandler);
+		this.html.querySelector("#closebutton").addEventListener("click",Command.closeActorScriptsCmd.bind(Command));
 		this.html.querySelector("#addscript").addEventListener("click",this.addScriptHandler.bind(this));
 	}
 

@@ -145,8 +145,13 @@ class CmdManager {
         this.history.execute(cmd);
     }
 
-    static addConditionCmd(sceneID,actorID,scriptID,nodeListID,position,type,expresion){
-        var cmd = new AddConditionCmd(sceneID,actorID,scriptID,nodeListID,position,type,expresion);
+    static addNodeCmd(sceneID,actorID,scriptID,nodeID,insertPoint,type){
+        var cmd = new AddNodeCmd(sceneID,actorID,scriptID,nodeID,insertPoint,type);
+        this.history.execute(cmd);
+    }
+
+    static removeNodeCmd(sceneID,actorID,scriptID,nodeID){
+        var cmd = new RemoveNodeCmd(sceneID,actorID,scriptID,nodeID);
         this.history.execute(cmd);
     }
 

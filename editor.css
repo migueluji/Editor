@@ -124,6 +124,8 @@ body{
     width: 320px;
     height: 100%;
     border-left: 1px solid lightgray;
+    background: white;
+    z-index: 5;
 }
 .scene-properties{
     height: 100%;

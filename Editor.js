@@ -1,6 +1,7 @@
 class Editor {
     
     constructor(editorView,gameModel) {
+        console.log(gameModel);
         this.view = editorView;
         this.model = gameModel;
         this.selectedSceneIndex=0;
@@ -58,7 +59,8 @@ class Editor {
 /* Game editor commands */
     openGameProperties(){
         this.gamePropertiesView.update(this.model);
-        SideSheetView.openSheetHandler("game-properties");
+        SideSheetView.openSheetHandler("game-properties");            
+        this.view.openCanvas("canvas");
     }
 
     saveGame(){
@@ -99,6 +101,7 @@ class Editor {
         this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
         this.drawerScenesView.updateSelectedScene(sceneID);
         this.appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
+        this.view.openCanvas("canvas");
         if (SideSheetView.displayed=="cast") this.openCast();
         else if (SideSheetView.displayed=="actor-properties" || SideSheetView.displayed=="actor-scripts")
             SideSheetView.closeSheetHandler();
@@ -107,6 +110,7 @@ class Editor {
      openCast(){
         this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList);
         SideSheetView.openSheetHandler("cast");
+        this.view.openCanvas("canvas");
      }
 
 // ACTOR
@@ -216,6 +220,8 @@ class Editor {
     selectScript(scriptID){
         this.selectedScriptIndex=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].scriptList.findIndex(i=>i.id==scriptID);
         this.actorScriptsView.updateSelectedScript(scriptID);
+        var scriptList=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].scriptList;
+        this.scriptCanvasView.update(scriptList[this.selectedScriptIndex].nodeList); 
     }
 
     openActorScripts(){
@@ -223,10 +229,22 @@ class Editor {
         var actorName=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].name;
         this.actorScriptsView.update(actorName,scriptList);
         SideSheetView.openSheetHandler("actor-scripts");
-        if (scriptList.length>0) this.selectScript(scriptList[scriptList.length-1].id);
-        this.view.openCanvas("scriptcanvas");
-        this.scriptCanvasView.update(this.scriptCanvasView.html,scriptList[this.selectedScriptIndex].nodeList); // paso el html para la recursion
+        if (scriptList.length>0) {
+            this.view.openCanvas("scriptcanvas");
+            this.selectScript(scriptList[scriptList.length-1].id);
+        }
+        else {
+            this.view.openCanvas("canvas");
+        }
+    }
 
+    closeActorScripts(){
+        SideSheetView.closeSheetHandler();
+        this.view.openCanvas("canvas");
+    };
+
+    selectNode(nodeID){
+        this.scriptCanvasView.updateSelectedNode(nodeID);
     }
 
 // SOUNDS
@@ -318,11 +336,22 @@ class Editor {
         SideSheetView.openSheetHandler("font-selection");
     }
 
-// SCRIPTING
-    addCondition(sceneID,actorID,scriptID,nodeListID,position,condition){
+// SCRIPTING this.sceneID,this.actorID,this.scriptID,this.nodeID,this.if
+    addNode(sceneID,actorID,scriptID,nodeID,insertPoint,condition){
       var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
       var actorPos = this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID);
-      this.model.sceneList[scenePos].actorList[actorPos].addCondition(scriptID,nodeListID,position,condition);
+      var scriptPos =  this.model.sceneList[scenePos].actorList[actorPos].scriptList.findIndex(i=>i.id==scriptID);
+      this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].addNode(nodeID,insertPoint,condition);
+      this.scriptCanvasView.update(this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].nodeList);
+      this.selectNode(condition.id);
+    }
 
+    removeNode (sceneID,actorID,scriptID,nodeID){
+        var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
+        var actorPos = this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID);
+        var scriptPos =  this.model.sceneList[scenePos].actorList[actorPos].scriptList.findIndex(i=>i.id==scriptID);
+        this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].removeNode(nodeID);
+        this.scriptCanvasView.update(this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].nodeList);
+        this.selectNode(null);
     }
 }

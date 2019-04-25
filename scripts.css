@@ -3,6 +3,11 @@
     width: 100%;
     position: relative;
 }
+.script-background{
+    position: absolute;
+    width: 10000px;
+    height: 10000px;
+}
 .init {
     margin: 64px auto 16px auto;
     width: 16px;
@@ -12,13 +17,12 @@
     border: 2px solid lightgray;
 }
 .nodelist{
-    margin: 16px;
+    margin: 16px 8px;
     min-width: 168px;
     min-height: 48px;
-    border: 2px dashed red;
 }
 .end{
-    margin: 16px auto;
+    margin: 16px auto 64px auto;
     width: 36px;
     height: 25px;
     background-color: lightgray;
@@ -75,7 +79,7 @@
 }
 .condition {
     margin: auto;
-    display: inline-block;
+ //   display: inline-block;
 }
 .cuadro {
     position: absolute;
@@ -98,7 +102,10 @@
     background-color: rgb(235,235,235);
 }
 .if {
-    background-color: rgb(255,200,0);
+    background-color: #018786;
+}
+.do {
+    background-color:#6200ee;
 }
 .circle {
     width: 48px;
@@ -126,4 +133,16 @@
 }
 .yes{
     float:right;
+}
+.notext{
+    position: absolute;
+    transform:translateX(-30px);
+    display: none;
+    color: gray;
+}
+.yestext{
+    position: absolute;
+    transform:translateX(178px);
+    display: none;
+    color:gray;
 }
