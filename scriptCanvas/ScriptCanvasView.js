@@ -14,7 +14,7 @@ class ScriptCanvasView {
         '</button>'+
           '<div class="script-background">'+
             '<div class="init">'+
-                '<svg style="position: relative; z-index: -1" height="10px" width="50px">'+
+                '<svg style="pointer-events:none;position: relative; z-index: -1" height="10px" width="50px">'+
                     '<line id="rule-line" x1="8" y1="8" x2="8" y2="400" style="stroke:lightgray;stroke-width:2"></line>'+
                 '</svg>'+
             '</div>'+
@@ -38,19 +38,21 @@ class ScriptCanvasView {
     }
 
     updateSelectedNode(nodeID){
-        // deselecciona etiquetas yes, no
+          // deselecciona etiquetas yes, no
         var listno =this.html.querySelectorAll(".notext");
         var listyes =this.html.querySelectorAll(".yestext");
         listno.forEach(element=> element.style.display="none");
         listyes.forEach(element=> element.style.display="none");
         // deselecciona antiguo nodo
-        var nodeSelected=this.html.querySelector(".nodeselected");
-        var chipSelected=this.html.querySelector(".mdc-elevation--z6");
-		if (nodeSelected && chipSelected) {
-            nodeSelected.classList.remove("nodeselected");
-            chipSelected.classList.remove("mdc-elevation--z6");
-        }
-		if (nodeID!=null)  { // selecciona el nuevo nodo
+        var nodesSelected=this.html.querySelectorAll(".nodeselected");
+        var chipsSelected=this.html.querySelectorAll(".mdc-elevation--z6");
+		nodesSelected.forEach(i=>i.classList.remove("nodeselected"));
+        chipsSelected.forEach(i=>i.classList.remove("mdc-elevation--z6"));
+        // cierra ventanas de tarjetas
+        var cards=this.html.querySelectorAll(".action-card");
+        cards.forEach(i=>i.classList.remove("open"));
+        // selecciona el nuevo nodo
+		if (nodeID!=null)  {
             var node = this.html.querySelector("#"+nodeID);
             var chip = node.querySelector(".mdc-chip");
             node.classList.add("nodeselected");
@@ -70,7 +72,7 @@ class ScriptCanvasView {
                 }
                 else this.selected=null;
             } 
-            else this.selected=null;
+            else this.selected="no";
         }
         else {
             this.selected="no";
@@ -79,41 +81,50 @@ class ScriptCanvasView {
 
 // Handlers
     unselectNodeHandler(e){
-        var target= e.target;
-        var element= this.html.querySelector(".mdc-elevation--z6");
-        do{
-            if (element==target) return;
-            target=target.parentNode;
-        } while (target)
-       if(e.target.tagName!="BUTTON" && e.target.tagName!="SPAN") Command.selectNodeCmd(null);
+        if (e.target.classList[0]=="script-background") {
+            if (e.target.querySelector(".open")==null){
+                e.preventDefault();
+                Command.selectNodeCmd(null);
+            }  
+        }
     }
 
     mouseDowndHandler(e){
-        e.preventDefault();
-        this.x0=e.clientX;
-        this.y0=e.clientY;
-        this.down=true;
+        console.log("mouse down");
+        if (e.target.classList[0]=="script-background") {
+            e.preventDefault();
+            this.x0=e.clientX;
+            this.y0=e.clientY;
+            this.down=true;
+        }
     }
 
     mouseUpHandler(e){
-        e.preventDefault();
-        this.down=false;
-        this.posx=this.x;
-        this.posy=this.y;
+        console.log("mouse up");
+        if (e.target.classList[0]=="script-background") {
+            e.preventDefault();
+            this.down=false;
+            this.posx=this.x;
+            this.posy=this.y;
+        }
     }
     
     mouseMoveHandler(e){
+        console.log("mouse move");
         e.preventDefault();
-        if(this.down){
-            this.x1=e.clientX;
-            this.y1=e.clientY;
-            this.x=this.x1-this.x0;
-            this.y=this.y1-this.y0;
-            var element=this.html.querySelector(".script-background");
-            this.x=this.x+this.posx;
-            this.y=this.y+this.posy;
-            element.style.transform="translate("+this.x+"px,"+this.y+"px)";
-        }
+        if (e.target.classList[0]=="script-background") {
+            if(this.down){
+                this.x1=e.clientX;
+                this.y1=e.clientY;
+                this.x=this.x1-this.x0;
+                this.y=this.y1-this.y0;
+                var element=this.html.querySelector(".script-background");
+                this.x=this.x+this.posx;
+                this.y=this.y+this.posy;
+                element.style.transform="translate("+this.x+"px,"+this.y+"px)";
+                console.log( element.style.transform);
+            }
+        }  
     }
 
     addDoHandler(){

@@ -12,11 +12,16 @@ class Script {
         }
         else {
             var founded=this.findNode(null,null,this.nodeList,nodeID); // parentID y side = null
-//            console.log(nodeID,insertPoint,condition,founded);
             var actualNodeList=founded.list;
             var pos=founded.pos;
-            var position=null;
+            var position=0;
             switch (insertPoint) {
+                case "rightStart" :{
+                    actualNodeList[pos].nodeListTrue.splice(position,0,condition); break;  
+                }
+                case "leftStart" : {
+                    actualNodeList[pos].nodeListFalse.splice(position,0,condition); break; 
+                }
                 case "right" : {
                     position = actualNodeList[pos].nodeListTrue.length;
                     actualNodeList[pos].nodeListTrue.splice(position,0,condition); break;  
@@ -30,7 +35,6 @@ class Script {
                 }
             }
         }
-
     
     }
 
@@ -39,15 +43,22 @@ class Script {
         founded.list.splice(founded.pos,1);
     }
 
+    changeNodeExpression(nodeID,expression){
+        var founded=this.findNode(null,null,this.nodeList,nodeID);
+        founded.list[founded.pos].expression=expression;
+    }
+
 // utils
     assignNodes(nodeList){
         if (nodeList) nodeList.forEach((node,i)=>{
             if (node.hasOwnProperty("nodeListTrue")) { // si es un IF
+                nodeList[i]= new If(node);
                 if(node.nodeListTrue) this.assignNodes(node.nodeListTrue);
                 if(node.nodeListFalse)this.assignNodes(node.nodeListFalse);
-                nodeList[i]= new If(node); 
             }
-            else nodeList[i]=new Do(node);
+            else {
+                nodeList[i]=new Do(node);
+            }
         });
     }
 

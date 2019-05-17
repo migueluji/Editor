@@ -28,7 +28,7 @@ class ActorPropertiesView {
 		this.html.querySelector("#codebutton").addEventListener("click",Command.openActorScriptsCmd.bind(Command));
 		this.html.querySelector("#closebutton").addEventListener("click",SideSheetView.closeSheetHandler);
 		this.html.querySelector("#addproperty").addEventListener("click",this.addPropertyHandler.bind(this));
-		this.createFrame(actorModel);
+		this.createFrame();
 	}
 
 	addView(html) {
@@ -52,7 +52,7 @@ class ActorPropertiesView {
 	}
 
 //Frame
-	createFrame(actorModel){
+	createFrame(){
 		this.settingsView= new ActorPropertiesSettingsView();
 		this.addView(this.settingsView.html);
 		this.spriteView= new ActorPropertiesSpriteView();
@@ -68,7 +68,6 @@ class ActorPropertiesView {
 		textFields.forEach(element => {	
 			mdc.textField.MDCTextField.attachTo(element);
 		}); 
-
 		var inputs=this.html.querySelectorAll("input");
 		inputs.forEach(element=>{
 			element.addEventListener("change",this.onChangeInputHandler.bind(this,element));

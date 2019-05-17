@@ -1,59 +1,56 @@
-class DoView {
+class DoView extends NodeView {
 
     constructor() {   
-		 this.html = document.createElement("div");
-		 this.html.className +="node element";
-		 this.html.innerHTML =
+		super();
+		this.html = document.createElement("div");
+		this.html.className +="node element";
+		this.html.innerHTML=
 			'<div class="mdc-chip">'+
-				'<div class="circle do">'+
-					'<i class="nodeIcon material-icons mdc-chip_icon">code</i>'+
-				'</div>'+
-				'<span class="nodelabel mdc-list-item__text">'+
-					'<span class="mdc-list-item__primary-text">Line item</span>'+
-					'<span class="mdc-list-item__secondary-text">player.lives</span>'+
-				'</span>'+
-				'<i class="cancelIcon ge-chip-button material-icons">cancel</i>'+
+			'</div>'+
+			'<div class="mdc-card">'+
 			'</div>';
-
-		this.html.querySelector(".mdc-chip").addEventListener("click",this.selectNodeHandler.bind(this));
-		this.html.querySelector(".cancelIcon").addEventListener("click",this.closeNodeHandler.bind(this));
-
 	}
 
 	addView(node){
 		this.html.id=node.id;
-		this.html.querySelector(".mdc-list-item__primary-text").innerHTML=node.type;
+		var chip=new ChipView(this.html.id);
+		var children = this.html.querySelector(".mdc-chip");
+		children.parentNode.replaceChild(chip.html,children);
+		this.html.querySelector(".circle").classList.add("do");
+
+		var card=new CardView(this.html.id);
+		card.html.querySelector(".card-title").classList.add("do");
+		children = this.html.querySelector(".mdc-card");
+		children.parentNode.replaceChild(card.html,children);
+
+		var labels=this.html.querySelectorAll(".mdc-list-item__primary-text");
+		labels.forEach(i=>i.innerHTML=node.type);
 		this.html.querySelector(".mdc-list-item__secondary-text").innerHTML=node.expression.text;
+		
+		var icon=null; 
+		var view=null;
 		switch(node.type){
-			case "Edit" : this.html.querySelector(".nodeIcon").innerHTML="edit";break;
-			case "Spawn" : this.html.querySelector(".nodeIcon").innerHTML="person_add";break;
-			case "Delete" : this.html.querySelector(".nodeIcon").innerHTML="delete";break;
-			case "Animate" : this.html.querySelector(".nodeIcon").innerHTML="movie_creation";break;
-			case "Play" : this.html.querySelector(".nodeIcon").innerHTML="volume_up";break;
-			case "Move" : this.html.querySelector(".nodeIcon").innerHTML="navigation";break;
-			case "Move To" : this.html.querySelector(".nodeIcon").innerHTML="place";break;
-			case "Rotate" : this.html.querySelector(".nodeIcon").innerHTML="rotate_left";break;
-			case "Rotate To" : this.html.querySelector(".nodeIcon").innerHTML="rotate_90_degrees_ccw";break;
-			case "Push" : this.html.querySelector(".nodeIcon").innerHTML="call_made";break;
-			case "Push To" : this.html.querySelector(".nodeIcon").innerHTML="keyboard_tab";break;
-			case "Torque" : this.html.querySelector(".nodeIcon").innerHTML="sync";break;
-			case "Go To" : this.html.querySelector(".nodeIcon").innerHTML="input";break;
-			case "Add" : this.html.querySelector(".nodeIcon").innerHTML="present_to_all";break;
-			case "Remove" : this.html.querySelector(".nodeIcon").innerHTML="cancel_presentation";break;
+			case "Edit" : icon="edit"; view = new EditView(node.expression);break;
+			// case "Spawn" : icon="person_add";view = new SpawnView(node.expression);break;
+			// case "Delete" : icon="delete";view = new DeleteView(node.expression);break;
+			// case "Animate" : icon="movie_creation";view = new AnimateView(node.expression);break;
+			// case "Play" : icon="volume_up";view = new PlayView(node.expression);break;
+			// case "Move" : icon="navigation";view = new MoveView(node.expression);break;
+			// case "Move To" : icon="place";view = new MoveToView(node.expression);break;
+			// case "Rotate" : icon="rotate_left";view = new RotateView(node.expression);break;
+			// case "Rotate To" : icon="rotate_90_degrees_ccw";view = new EditView(node.expression);break;
+			// case "Push" : icon="call_made";view = new RotateToView(node.expression);break;
+			// case "Push To" : icon="keyboard_tab";view = new PushView(node.expression);break;
+			// case "Torque" : icon="sync";view = new TorqueView(node.expression);break;
+			// case "Go To" : icon="input";view = new GoToView(node.expression);break;
+			// case "Add" : icon="present_to_all";view = new AddView(node.expression);break;
+			// case "Remove" : icon="cancel_presentation";view = new RemoveView(node.expression);break;
+			default: icon="edit"; view = new EditView(node.expression);break;
 		 }
-	}
-
-// Handlers
-	selectNodeHandler(e){
-		if(e.target.tagName=="SPAN" ){
-			Command.selectNodeCmd(this.html.id);
-		}
-	}
-
-	closeNodeHandler(){
-		var sceneID=document.querySelector(".sceneselected").id;
-		var actorID=document.querySelector(".actorselected").id;
-		var scriptID=document.querySelector(".scriptselected").id;
-		CmdManager.removeNodeCmd(sceneID,actorID,scriptID,this.html.id);
+		
+		var icons=this.html.querySelectorAll(".nodeIcon");
+		icons.forEach(i=>i.innerHTML=icon);
+		var insertPoint = this.html.querySelector(".mdc-card__actions");
+		insertPoint.parentNode.replaceChild(view.html,insertPoint);
 	}
 }

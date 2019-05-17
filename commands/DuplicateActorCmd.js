@@ -6,9 +6,10 @@ class DuplicateActorCmd extends Command {
         var index = this.editor.model.sceneList.findIndex(i=> i.id == sceneID);
         this.pos= this.editor.model.sceneList[index].actorList.findIndex(i => i.id == actorID);
         var actor = this.editor.model.sceneList[index].actorList[this.pos];
-        this.actor = new Actor(actor);
+        var actorJSON = JSON.parse(JSON.stringify(actor));
+        this.actor = new Actor(actorJSON);
         this.actor.id = Utils.id();
-        this.actor.name = "Copy of "+actor.name
+        this.actor.name = "Copy of "+actor.name;
         this.type="DuplicateActorCmd";
         this.name="Duplicate Actor: "+ this.actor.id;
     }

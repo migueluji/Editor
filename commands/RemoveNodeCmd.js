@@ -12,11 +12,11 @@ class RemoveNodeCmd extends Command {
         var script=this.editor.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos];
 
         var founded = script.findNode(null,null,script.nodeList,nodeID);
-        this.if = founded.list[founded.pos];
-        if (founded.list.length==1 || founded.pos==0) { //si borro el ultimo elemento
+        this.node = founded.list[founded.pos];
+        if (founded.pos==0) { //si borro el ultimo elemento
             this.nodeID=founded.parentID;
-            if (founded.side=="right") this.insertPoint="right";
-            else if (founded.side=="left") this.insertPoint="left";
+            if (founded.side=="right") this.insertPoint="rightStart"; //caso especial inserto en primer lugar
+            else if (founded.side=="left") this.insertPoint="leftStart"; //caso especial inserto en primer lugar
         }
         else {
             this.nodeID=founded.list[founded.pos-1].id; // anterior en la lista e insercción down
@@ -27,10 +27,10 @@ class RemoveNodeCmd extends Command {
     }
 
     execute (){  
-        this.editor.removeNode(this.sceneID,this.actorID,this.scriptID,this.if.id);
+        this.editor.removeNode(this.sceneID,this.actorID,this.scriptID,this.node.id);
     }
      
     undo(){
-         this.editor.addNode(this.sceneID,this.actorID,this.scriptID,this.nodeID,this.insertPoint,this.if);
+         this.editor.addNode(this.sceneID,this.actorID,this.scriptID,this.nodeID,this.insertPoint,this.node);
     }
 }

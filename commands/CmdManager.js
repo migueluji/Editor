@@ -155,6 +155,11 @@ class CmdManager {
         this.history.execute(cmd);
     }
 
+    static changeNodeExpression (sceneID,actorID,scriptID,nodeID,expression){
+        var cmd = new ChangeNodeExpressionCmd(sceneID,actorID,scriptID,nodeID,expression);
+        this.history.execute(cmd);
+    }
+
 // Utils
     static undo(){
         this.history.undo();

@@ -4,17 +4,23 @@ class DuplicateSceneCmd extends Command {
         super();
         this.pos=this.editor.model.sceneList.findIndex(i => i.id == sceneID);
         var scene= this.editor.model.sceneList[this.pos];
-        this.scene=new Scene(scene);
+        var sceneJSON = JSON.parse(JSON.stringify(scene));
+        this.scene=new Scene(sceneJSON);
         this.scene.id=Utils.id()
         this.scene.name="Copy of "+scene.name;
-        var actorList=[];
-        scene.actorList.forEach((actor,i)=> {
-            actorList[i] = new Actor(actor);
-            actorList[i].id = Utils.id()+"hola";
-         });
-        this.scene.actorList=actorList;
         this.type="DuplicateSceneCmd";
-        this.name="Duplicate Scene: "+this.scene.id;
+        this.name="Duplicate Scene: " + this.scene.id;
+    }
+    
+    assignNodesID(nodeList){
+        if (nodeList) nodeList.forEach(node=>{
+            node.id=Utils.id();
+            node.type ="dup"+node.type;
+            if (node.hasOwnProperty("nodeListTrue")) { // si es un IF
+                if(node.nodeListTrue) this.assignNodesID(node.nodeListTrue);
+                if(node.nodeListFalse)this.assignNodesID(node.nodeListFalse);
+            }
+        });
     }
     
     execute (){

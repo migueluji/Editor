@@ -103,8 +103,7 @@ class Editor {
         this.appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
         this.view.openCanvas("canvas");
         if (SideSheetView.displayed=="cast") this.openCast();
-        else if (SideSheetView.displayed=="actor-properties" || SideSheetView.displayed=="actor-scripts")
-            SideSheetView.closeSheetHandler();
+        else if (SideSheetView.displayed!="game-properties") SideSheetView.closeSheetHandler();
      }
 
      openCast(){
@@ -337,13 +336,17 @@ class Editor {
     }
 
 // SCRIPTING this.sceneID,this.actorID,this.scriptID,this.nodeID,this.if
-    addNode(sceneID,actorID,scriptID,nodeID,insertPoint,condition){
+    addNode(sceneID,actorID,scriptID,nodeID,insertPoint,node){
       var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
       var actorPos = this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID);
       var scriptPos =  this.model.sceneList[scenePos].actorList[actorPos].scriptList.findIndex(i=>i.id==scriptID);
-      this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].addNode(nodeID,insertPoint,condition);
+      this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].addNode(nodeID,insertPoint,node);
       this.scriptCanvasView.update(this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].nodeList);
-      this.selectNode(condition.id);
+      this.selectScene(sceneID); //necesario para los comandos de deshacer
+      this.selectActor(actorID);
+      this.openActorScripts();
+      this.selectScript(scriptID);
+      this.selectNode(node.id);
     }
 
     removeNode (sceneID,actorID,scriptID,nodeID){
@@ -352,6 +355,23 @@ class Editor {
         var scriptPos =  this.model.sceneList[scenePos].actorList[actorPos].scriptList.findIndex(i=>i.id==scriptID);
         this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].removeNode(nodeID);
         this.scriptCanvasView.update(this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].nodeList);
+        this.selectScene(sceneID); //necesario para los comandos de deshacer
+        this.selectActor(actorID);
+        this.openActorScripts();
+        this.selectScript(scriptID);
         this.selectNode(null);
+    }
+
+    changeNodeExpression(sceneID,actorID,scriptID,nodeID,expression){
+        var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
+        var actorPos = this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID);
+        var scriptPos =  this.model.sceneList[scenePos].actorList[actorPos].scriptList.findIndex(i=>i.id==scriptID);
+        this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].changeNodeExpression(nodeID,expression);
+        this.scriptCanvasView.update(this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].nodeList);
+        this.selectScene(sceneID); //necesario para los comandos de deshacer
+        this.selectActor(actorID);
+        this.openActorScripts();
+        this.selectScript(scriptID);
+        this.selectNode(nodeID);
     }
 }

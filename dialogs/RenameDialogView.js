@@ -21,6 +21,7 @@ class RenameDialogView {
 						'<button id="okbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded">Ok</button>'+
 					'</div>'+
 				'</div>';
+				
 		this.element=element;
 		this.elementID=elementID;
 		this.panel=null;
@@ -40,7 +41,7 @@ class RenameDialogView {
 		var chr = String.fromCharCode(e.which);
 		var name=this.html.querySelector("#input").value;
 		var filter=" abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-		if ((filter.indexOf(chr) < 0) || (name.length >= 15)){
+		if ((filter.indexOf(chr) < 0) || (name.length >= 20)){
 			e.preventDefault();
 		}	
 		return true;

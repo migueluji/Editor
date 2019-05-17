@@ -98,12 +98,12 @@
 								{
 									"id":"_nodo1",
 									"type": "Compare",
-									"expression": { "text":"player.lives>0","scope":{"player":"_15510884179469936971423239389"}},
+									"expression": { "text":"player.lives>0"},
 									"nodeListTrue" : [
 										{
 											"id": "_nodo11",
 											"type": "Check",
-											"expression" : {"text":"actor1.on","scope":{"actor1":"_15510884179469936971423239389"}},
+											"expression" : {"text":"actor1.on"},
 											"nodeListTrue": [],
 											"nodeListFalse": []				
 										}
@@ -112,7 +112,7 @@
 										{
 											"id" : "_nodo10",
 											"type": "Edit",
-											"expression": {"text":"actor1.x","scope":{"actor1":"_21"}}
+											"expression": {"text":"actor1.x=actor1.x+1"}
 										}
 									]
 								}

@@ -234,3 +234,7 @@ body{
 .open{
     display: block;
 }
+
+:not(.mdc-list--non-interactive)>:not(.mdc-list-item--disabled).mdc-list-item::before, :not(.mdc-list--non-interactive)>:not(.mdc-list-item--disabled).mdc-list-item::after {
+    background-color:transparent; 
+}

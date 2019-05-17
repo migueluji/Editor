@@ -15,11 +15,13 @@
     background-color: greenyellow;
     border-radius: 16px;
     border: 2px solid lightgray;
+    pointer-events:none;
 }
 .nodelist{
     margin: 16px 8px;
     min-width: 168px;
     min-height: 48px;
+    pointer-events:none;
 }
 .end{
     margin: 16px auto 64px auto;
@@ -27,6 +29,7 @@
     height: 25px;
     background-color: lightgray;
     border-radius: 6px;
+    pointer-events:none;
 }
 .button-text{
     font-size: 1em;
@@ -76,17 +79,20 @@
     overflow: hidden;
     padding: 16px 0px;
     display: flex;
+    pointer-events:none;
 }
 .condition {
     margin: auto;
- //   display: inline-block;
+    display: inline-block;
+    pointer-events:none;
 }
 .cuadro {
     position: absolute;
     margin-top: 24px;
-    background-color: white;
+    background:white;
     border: 2px solid lightgray;
     border-radius: 12px;
+    pointer-events:none;
 }
 .element {
     overflow: visible;
@@ -100,6 +106,7 @@
     padding: 0px;
     border-radius: 24px;
     background-color: rgb(235,235,235);
+    pointer-events: auto;
 }
 .if {
     background-color: #018786;
@@ -117,16 +124,19 @@
     font-weight: bod;
     position: absolute;
     transform: translate(12px,12px);
+    pointer-events:none;
 }
-.cancelIcon {
+.chipIcon {
     position: absolute;
     right: 12px;
     top: 12px;
+    pointer-events:auto;
 }
 .nodelabel{
     width: 80px;
     height: auto;
     margin: -20px auto 0px 8px;
+    pointer-events:none;
 }
 .no{
     float:left;
@@ -145,4 +155,29 @@
     transform:translateX(178px);
     display: none;
     color:gray;
+}
+.action-card{
+    background-color:white;
+    width: 200px;
+    transform: translateX(0px);
+    left: auto;
+    top: auto;
+    padding: 0px;
+    display: none;
+    z-index: 10;
+    pointer-events: all;
+}
+.action-card.open{
+    display: block;
+}
+.card-title{
+    flex-direction: row;
+    color: white;
+}
+.card-title_label{
+    margin-top:16px;
+}
+.mdc-card__actions.node-panel {
+    flex-direction: column;
+    background-color: rgb(235,235,235);
 }

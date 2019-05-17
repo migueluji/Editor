@@ -6,7 +6,7 @@ class Actor {
         this.scriptList=[];
         Object.assign(this,this.properties); //inicialización de propiedades
         Object.assign(this,actor);
-        if (this.scriptList) {this.scriptList.forEach((script,i) => this.scriptList[i]=new Script(script));
+        if (this.scriptList) {this.scriptList.forEach((script,i) => this.scriptList[i] = new Script(script));
         }
     }
 
