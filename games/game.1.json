@@ -1,0 +1,253 @@
+{
+	"name": "Mario Bros",
+	"width": 800,
+	"height": 480,
+	"cameraX": 0,
+	"cameraY": 0,
+	"cameraRotation": 0,
+	"cameraZoom": 1,
+	"play": false,
+	"sound": "player.mp4",
+	"volume": 1,
+	"start": 0,
+	"pan": 0,
+	"loop": false,
+	"active": true,
+	"gravityX": 0,
+	"gravityY": -9.8,
+	"tagList": [
+		"player",
+		"enemy"
+	],
+	"imageList": [
+		{
+		"id": "_15533626446808360745224876013",
+		"name": "planeRed1.png"
+		},
+		{
+		"id": "_15533626446808360745224876012",
+		"name": "planeYellow1.png"
+		},
+		{
+		"id": "_15533626548019165161148952010",
+		"name": "planeBlue1.png"
+		}
+	],
+	"soundList": [
+		{
+			"id": "_1234567890008",
+			"name": "player.mp4"
+		},
+		{
+			"id": "_1234567890007",
+			"name": "sin.mp4"
+		},
+		{
+			"id": "_1234567890004",
+			"name": "pop.mp4"
+		},
+		{
+			"id": "_1234567890002",
+			"name": "lalala.mp4"
+		},
+		{
+			"id": "_1234567890003",
+			"name": "live.mp4"
+		}
+	],
+	"fontList": [
+		{
+			"id": "_12345678900081",
+			"name": "arial.ttf"
+		},
+		{
+			"id": "_12345678900071",
+			"name": "verdana.ttf"
+		}
+	],
+	"sceneList": [
+		{
+			"id": "_scene1",
+			"name": "Start",
+			"actorList": [
+				{
+					"id": "_actor1",
+					"name": "Actor 1",
+					"x":100,
+					"y":99,
+					"width":50,
+					"height":59,
+					"scaleX": 1,
+					"scaleY": 0.5,
+					"rotation": 30,
+					"screen": true,
+					"sound": "lalala.mp4",
+					"image":"planeRed1.png",
+					"font": "arial.ttf",
+					"lives": 3,
+					"on": false,
+					"scriptList":[
+						{
+							"id": "_15510884179469936971423234",
+							"name": "Move the player"
+						},
+						{
+							"id": "_script2",
+							"name": "Destroy enemy",
+							"nodeList" :[
+								{
+									"id":"_nodo1",
+									"type": "Compare",
+									"parameters": {"Value 1":"game.x","Operation":"<=","Value 2":"20"},
+									"nodeListTrue" : [
+										{
+											"id": "_nodo11",
+											"type": "Check",
+											"parameters" : {"Property":"actor.visible","Value":true},
+											"nodeListTrue": [],
+											"nodeListFalse": []				
+										},
+										{
+											"id": "_nodo211",
+											"type": "Collision",
+											"parameters" : {"Tag":"enemy"},
+											"nodeListTrue": [],
+											"nodeListFalse": []				
+										},
+										{
+											"id": "_nodo311",
+											"type": "Timer",
+											"parameters" : {"Seconds": 10},
+											"nodeListTrue": [],
+											"nodeListFalse": []				
+										},
+										{
+											"id": "_nodo411",
+											"type": "Touch",
+											"parameters" : {"Mode":"down","On Actor":true},
+											"nodeListTrue": [],
+											"nodeListFalse": []				
+										},
+										{
+											"id": "_nodo511",
+											"type": "Keyboard",
+											"parameters" : {"Key":"A","Key Mode":"down"},
+											"nodeListTrue": [],
+											"nodeListFalse": []				
+										}
+									],
+									"nodeListFalse" : [
+										{
+											"id" : "_nodo104",
+											"type": "Edit",
+											"parameters": {"Property":"actor.x","Value":100}
+										},
+										{
+											"id" : "_nodo10",
+											"type": "Spawn",
+											"parameters": {"Actor":"Player","X":100, "Y":100, "Angle":90}
+										},
+										{
+											"id" : "_nodo100",
+											"type": "Delete",
+											"parameters": {}
+										},
+										{
+											"id" : "_nodo101",
+											"type": "Animate",
+											"parameters": {"Animation":"image1.jpg, image2.jpg, image3.jpg","Fps":24}
+										},
+										{
+											"id" : "_nodo102",
+											"type": "Play",
+											"parameters": {"Sound":"lalala.mp4","Volume":1, "Start":0, "Pan":0}
+										},
+										{
+											"id" : "_nodo103",
+											"type": "Move",
+											"parameters": {"Speed":300,"Angle":45}
+										},
+										{
+											"id" : "_nodo105",
+											"type": "Move To",
+											"parameters": {"Speed":200,"X":100, "Y":100}
+										},
+										{
+											"id" : "_nodo106",
+											"type": "Rotate",
+											"parameters": {"Speed":200,"Pivot X":100, "Pivot Y":100}
+										},
+										{
+											"id" : "_nodo107",
+											"type": "Rotate To",
+											"parameters": {"Speed":200,"X":100, "Y":100,"Pivot X":100, "Pivot Y":100}
+										},
+										{
+											"id" : "_nodo108",
+											"type": "Push",
+											"parameters": {"Force":200,"Angle":30}
+										},
+										{
+											"id" : "_nodo109",
+											"type": "Push To",
+											"parameters": {"Force":200,"X":100, "Y":100}
+										},
+										{
+											"id" : "_nodo110",
+											"type": "Torque",
+											"parameters": {"Angle":90}
+										},
+										{
+											"id" : "_nodo111",
+											"type": "Go To",
+											"parameters": {"Scene":"Scene 1"}
+										},
+										{
+											"id" : "_nodo112",
+											"type": "Add",
+											"parameters": {"Scene":"Scene 2", "Stop":true}
+										},
+										{
+											"id" : "_nodo113",
+											"type": "Remove",
+											"parameters": {}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": "_15510884187483724645860623896",
+					"name": "Actor 2",
+					"tutu": true
+				},
+				{
+					"id": "_15510884194967055353027074027",
+					"name": "Actor 3"
+				}
+			]
+		},
+		{
+			"id": "_15510884000529820939255083476",
+			"name": "Level 1",
+			"actorList": [
+				{
+					"id": "_15510884225967462171711017873",
+					"name": "Actor 1"
+				},
+				{
+					"id": "_15510884234760783788112553860",
+					"name": "Actor 2"
+				}
+			]
+		},
+		{
+			"id": "_15510884012027860725808037956",
+			"name": "End"
+		}
+	],
+	"points": 34,
+	"live": true
+}
