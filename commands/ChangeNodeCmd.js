@@ -1,12 +1,12 @@
-class ChangeNodeExpressionCmd extends Command {
+class ChangeNodeCmd extends Command {
 
-    constructor (sceneID,actorID,scriptID,nodeID,expression){
+    constructor (sceneID,actorID,scriptID,nodeID,parameters){
         super();
         this.sceneID=sceneID;
         this.actorID=actorID;
         this.scriptID=scriptID;
         this.nodeID=nodeID;
-        this.expression=expression;
+        this.parameters=parameters;
 
         var scenePos=this.editor.model.sceneList.findIndex(i => i.id == sceneID);
         var actorPos=this.editor.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID);
@@ -15,18 +15,18 @@ class ChangeNodeExpressionCmd extends Command {
         var founded = script.findNode(null,null,script.nodeList,nodeID);
         var node = founded.list[founded.pos];
 
-        this.oldExpression=node.expression;
+        this.oldParameters=node.parameters;
 
-        this.type="ChangeNodeExpressionCmd";
-        this.name="Change Node Expression: "+this.expression;
+        this.type="ChangeNodeCmd";
+        this.name="Change Node: "+this.parameters;
     }
 
     execute (){  
-        this.editor.changeNodeExpression(this.sceneID,this.actorID,this.scriptID,this.nodeID,this.expression);
+        this.editor.changeNode(this.sceneID,this.actorID,this.scriptID,this.nodeID,this.parameters);
     }
     
     undo(){
-        this.editor.changeNodeExpression(this.sceneID,this.actorID,this.scriptID,this.nodeID,this.oldExpression);
+        this.editor.changeNode(this.sceneID,this.actorID,this.scriptID,this.nodeID,this.oldParameters);
     }
 
 }

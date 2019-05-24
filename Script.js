@@ -43,9 +43,9 @@ class Script {
         founded.list.splice(founded.pos,1);
     }
 
-    changeNodeExpression(nodeID,expression){
+    changeNode(nodeID,parameters){
         var founded=this.findNode(null,null,this.nodeList,nodeID);
-        founded.list[founded.pos].expression=expression;
+        founded.list[founded.pos].parameters=parameters;
     }
 
 // utils

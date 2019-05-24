@@ -155,8 +155,8 @@ class CmdManager {
         this.history.execute(cmd);
     }
 
-    static changeNodeExpression (sceneID,actorID,scriptID,nodeID,expression){
-        var cmd = new ChangeNodeExpressionCmd(sceneID,actorID,scriptID,nodeID,expression);
+    static changeNode (sceneID,actorID,scriptID,nodeID,parameters){
+        var cmd = new ChangeNodeCmd(sceneID,actorID,scriptID,nodeID,parameters);
         this.history.execute(cmd);
     }
 

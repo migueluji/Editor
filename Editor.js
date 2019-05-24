@@ -7,6 +7,7 @@ class Editor {
         this.selectedSceneIndex=0;
         this.selectedActorIndex=0;
         this.selectedScriptIndex=0;
+        this.previousNodeSelected=null;
         
         //App Bar
         this.appBarView=new AppBarView(gameModel.sceneList[0].name);
@@ -243,6 +244,7 @@ class Editor {
     };
 
     selectNode(nodeID){
+        this.previousNodeSelected=nodeID;
         this.scriptCanvasView.updateSelectedNode(nodeID);
     }
 
@@ -362,11 +364,11 @@ class Editor {
         this.selectNode(null);
     }
 
-    changeNodeExpression(sceneID,actorID,scriptID,nodeID,expression){
+    changeNode(sceneID,actorID,scriptID,nodeID,parameters){
         var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
         var actorPos = this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID);
         var scriptPos =  this.model.sceneList[scenePos].actorList[actorPos].scriptList.findIndex(i=>i.id==scriptID);
-        this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].changeNodeExpression(nodeID,expression);
+        this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].changeNode(nodeID,parameters);
         this.scriptCanvasView.update(this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].nodeList);
         this.selectScene(sceneID); //necesario para los comandos de deshacer
         this.selectActor(actorID);

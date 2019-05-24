@@ -1,6 +1,6 @@
 class ScriptCanvasView {
 
-    constructor(nodeList) {   
+    constructor() {   
 		 this.html = document.createElement("div");
          this.html.className +="scriptcanvas";
          this.html.style.display="none";
@@ -111,8 +111,8 @@ class ScriptCanvasView {
     
     mouseMoveHandler(e){
         console.log("mouse move");
-        e.preventDefault();
         if (e.target.classList[0]=="script-background") {
+            e.preventDefault();
             if(this.down){
                 this.x1=e.clientX;
                 this.y1=e.clientY;
@@ -143,6 +143,7 @@ class ScriptCanvasView {
 
 // Utilities
     update(nodeList){
+        this.selected="no";
         var list =this.html.querySelector(".nodelist"); 
 		while (list.firstChild){ // elimina todos los elementos de la lista
 			list.removeChild(list.firstChild);
@@ -163,7 +164,7 @@ class ScriptCanvasView {
         var nodeView;
         nodeList.forEach(node=>{
             nodePos++;
-            if (node instanceof If) nodeView = new IfView()
+            if (node instanceof If) nodeView = new IfView();
             else nodeView = new DoView();
             nodeView.addView(node);
             this.addNode(html,nodeView.html,nodePos); 

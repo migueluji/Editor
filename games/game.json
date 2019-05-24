@@ -98,21 +98,119 @@
 								{
 									"id":"_nodo1",
 									"type": "Compare",
-									"expression": { "text":"player.lives>0"},
+									"parameters": {"Value 1":"game.x","Operation":"<=","Value 2":"20"},
 									"nodeListTrue" : [
 										{
 											"id": "_nodo11",
 											"type": "Check",
-											"expression" : {"text":"actor1.on"},
+											"parameters" : {"Property":"actor.visible","Value":true},
+											"nodeListTrue": [],
+											"nodeListFalse": []				
+										},
+										{
+											"id": "_nodo211",
+											"type": "Collision",
+											"parameters" : {"Tag":"enemy"},
+											"nodeListTrue": [],
+											"nodeListFalse": []				
+										},
+										{
+											"id": "_nodo311",
+											"type": "Timer",
+											"parameters" : {"Seconds": 10},
+											"nodeListTrue": [],
+											"nodeListFalse": []				
+										},
+										{
+											"id": "_nodo411",
+											"type": "Touch",
+											"parameters" : {"Mode":"down","On Actor":true},
+											"nodeListTrue": [],
+											"nodeListFalse": []				
+										},
+										{
+											"id": "_nodo511",
+											"type": "Keyboard",
+											"parameters" : {"Key":"A","Key Mode":"down"},
 											"nodeListTrue": [],
 											"nodeListFalse": []				
 										}
 									],
 									"nodeListFalse" : [
 										{
-											"id" : "_nodo10",
+											"id" : "_nodo104",
 											"type": "Edit",
-											"expression": {"text":"actor1.x=actor1.x+1"}
+											"parameters": {"Property":"actor.x","Value":100}
+										},
+										{
+											"id" : "_nodo10",
+											"type": "Spawn",
+											"parameters": {"Actor":"Player","X":100, "Y":100, "Angle":90}
+										},
+										{
+											"id" : "_nodo100",
+											"type": "Delete",
+											"parameters": {}
+										},
+										{
+											"id" : "_nodo101",
+											"type": "Animate",
+											"parameters": {"Animation":"image1.jpg, image2.jpg, image3.jpg","Fps":24}
+										},
+										{
+											"id" : "_nodo102",
+											"type": "Play",
+											"parameters": {"Sound":"lalala.mp4","Volume":1, "Start":0, "Pan":0}
+										},
+										{
+											"id" : "_nodo103",
+											"type": "Move",
+											"parameters": {"Speed":300,"Angle":45}
+										},
+										{
+											"id" : "_nodo105",
+											"type": "Move To",
+											"parameters": {"Speed":200,"X":100, "Y":100}
+										},
+										{
+											"id" : "_nodo106",
+											"type": "Rotate",
+											"parameters": {"Speed":200,"Pivot X":100, "Pivot Y":100}
+										},
+										{
+											"id" : "_nodo107",
+											"type": "Rotate To",
+											"parameters": {"Speed":200,"X":100, "Y":100,"Pivot X":100, "Pivot Y":100}
+										},
+										{
+											"id" : "_nodo108",
+											"type": "Push",
+											"parameters": {"Force":200,"Angle":30}
+										},
+										{
+											"id" : "_nodo109",
+											"type": "Push To",
+											"parameters": {"Force":200,"X":100, "Y":100}
+										},
+										{
+											"id" : "_nodo110",
+											"type": "Torque",
+											"parameters": {"Angle":90}
+										},
+										{
+											"id" : "_nodo111",
+											"type": "Go To",
+											"parameters": {"Scene":"Scene 1"}
+										},
+										{
+											"id" : "_nodo112",
+											"type": "Add",
+											"parameters": {"Scene":"Scene 2", "Stop":true}
+										},
+										{
+											"id" : "_nodo113",
+											"type": "Remove",
+											"parameters": {}
 										}
 									]
 								}
