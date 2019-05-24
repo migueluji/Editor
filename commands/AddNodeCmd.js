@@ -30,7 +30,7 @@ class AddNodeCmd extends Command {
 			case "Push" :       parameters= new Object({"Force":0,"Angle":0});break;
 			case "Push To" :    parameters= new Object({"Force":0,"X":0,"Y":0});break;
 			case "Torque" :     parameters= new Object({"Angle":0});break;
-			case "Go To" :      parameters= new Object({"Go To":null});break;
+			case "Go To" :      parameters= new Object({"Scene":null});break;
 			case "Add" :        parameters= new Object({"Add":null,"Stop":false});break;
 	        case "Remove" :     parameters= new Object({});break;
         }
