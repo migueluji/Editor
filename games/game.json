@@ -78,9 +78,9 @@
 									"id": "_15586856911528986388357662354",
 									"type": "Compare",
 									"parameters": {
-										"Value 1": null,
+										"Value_1": null,
 										"Operation": "<",
-										"Value 2": null
+										"Value_2": null
 									},
 									"nodeListTrue": [
 										{
@@ -167,8 +167,8 @@
 														"Speed": 0,
 														"X": 0,
 														"Y": 0,
-														"Pivot X": 0,
-														"Pivot Y": 0
+														"Pivot_X": 0,
+														"Pivot_Y": 0
 													}
 												}
 											]
@@ -187,7 +187,7 @@
 											"type": "Touch",
 											"parameters": {
 												"Mode": "down",
-												"On Actor": true
+												"On_Actor": true
 											},
 											"nodeListTrue": [
 												{
@@ -206,8 +206,8 @@
 													"type": "Rotate",
 													"parameters": {
 														"Speed": 0,
-														"Pivot X": 0,
-														"Pivot Y": 0
+														"Pivot_X": 0,
+														"Pivot_Y": 0
 													}
 												}
 											]
@@ -227,7 +227,7 @@
 											"type": "Keyboard",
 											"parameters": {
 												"Key": null,
-												"Key Mode": "down"
+												"Key_Mode": "down"
 											},
 											"nodeListTrue": [
 												{
@@ -276,9 +276,9 @@
 									"id": "_nodo1",
 									"type": "Compare",
 									"parameters": {
-										"Value 1": "game.x",
+										"Value_1": "game.x",
 										"Operation": "<=",
-										"Value 2": "20"
+										"Value_2": "20"
 									},
 									"nodeListTrue": [
 										{

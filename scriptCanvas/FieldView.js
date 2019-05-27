@@ -8,7 +8,7 @@ class FieldView  {
 			'<label class="mdc-floating-label">Key</label>'+
 			'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>';
 		this.html.querySelector("input").value=value;
-		this.html.querySelector("label").textContent=key;	
+		this.html.querySelector("label").textContent=key.replace("_"," ");	
 		this.html.querySelector("input").id=key;		
 	}
 }
