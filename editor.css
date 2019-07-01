@@ -25,9 +25,6 @@ body{
     width: 64%;
     left: 18%;
 }
-.mdc-button::before{
-    background-color: white;
-}
 .sceneselected{
     background-color: #ede3fa;
 }
@@ -234,7 +231,20 @@ body{
 .open{
     display: block;
 }
-
 :not(.mdc-list--non-interactive)>:not(.mdc-list-item--disabled).mdc-list-item::before, :not(.mdc-list--non-interactive)>:not(.mdc-list-item--disabled).mdc-list-item::after {
     background-color:transparent; 
+}
+
+
+
+
+.mdc-top-app-bar__action-item, .mdc-top-app-bar__navigation-icon {
+    padding: 12px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.mdc-toolbar__title{
+    padding: 18px;
+    font-size: 1.25em;
 }

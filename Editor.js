@@ -19,6 +19,8 @@ class Editor {
         this.view.addView(this.drawerScenesView.html);
         this.view.addView(this.drawerHeaderView.html);
 
+        this.canvasView = new CanvasView();
+        this.view.addView(this.canvasView.html);
         this.scriptCanvasView = new ScriptCanvasView();
         this.view.addView(this.scriptCanvasView.html);
 

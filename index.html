@@ -27,6 +27,8 @@
 	<script src="./views/AppBarView.js"></script>
 	<script src="./views/SideSheetView.js"></script>
 
+	<script src="./canvas/canvasView.js"></script>
+
 	<script src="./scriptCanvas/ScriptCanvasView.js"></script>
 	<script src="./scriptCanvas/NodeView.js"></script>
 	<script src="./scriptCanvas/ChipView.js"></script>
@@ -107,6 +109,8 @@
 	<script src="./commands/RemoveNodeCmd.js"></script>
 	<script src="./commands/ChangeNodeCmd.js"></script>
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js"></script>
+
 </head>
 <body class="mdc-typography">
 
@@ -115,6 +119,13 @@
 
 		var app=new App("./games/game.json");
 
+	</script>
+	<script type="text/javascript">
+		let type = "WebGL"
+		if(!PIXI.utils.isWebGLSupported()){
+			type = "canvas"
+		}
+		PIXI.utils.sayHello(type);
 	</script>
 	
 </body>

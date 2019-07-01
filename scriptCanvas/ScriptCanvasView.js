@@ -6,22 +6,22 @@ class ScriptCanvasView {
          this.html.style.display="none";
          this.html.style.transform="";
          this.html.innerHTML =
-         '<button id="addif" class="if-button mdc-fab mdc-ripple-upgraded add-property-button">'+
-             '<span class="button-text">IF</span>'+
-        '</button>'+
-        '<button id="adddo" class="do-button mdc-fab mdc-ripple-upgraded add-property-button">'+
-            '<span class="button-text">DO</span>'+
-        '</button>'+
-          '<div class="script-background">'+
-            '<div class="init">'+
-                '<svg style="pointer-events:none;position: relative; z-index: -1" height="10px" width="50px">'+
-                    '<line id="rule-line" x1="8" y1="8" x2="8" y2="400" style="stroke:lightgray;stroke-width:2"></line>'+
-                '</svg>'+
-            '</div>'+
-            '<div class="nodelist"></div>'+
-            '<div class="end">'+
-            '</div>'+
-        '</div>';
+            '<button id="addif" class="if-button mdc-fab mdc-ripple-upgraded add-property-button">'+
+                '<span class="button-text">IF</span>'+
+            '</button>'+
+            '<button id="adddo" class="do-button mdc-fab mdc-ripple-upgraded add-property-button">'+
+                '<span class="button-text">DO</span>'+
+            '</button>'+
+            '<div class="script-background">'+
+                '<div class="init">'+
+                    '<svg style="pointer-events:none;position: relative; z-index: -1" height="10px" width="50px">'+
+                        '<line id="rule-line" x1="8" y1="8" x2="8" y2="400" style="stroke:lightgray;stroke-width:2"></line>'+
+                    '</svg>'+
+                '</div>'+
+                '<div class="nodelist"></div>'+
+                '<div class="end">'+
+                '</div>'+
+            '</div>';
         this.html.querySelector("#adddo").addEventListener("click",this.addDoHandler.bind(this));
         this.html.querySelector("#addif").addEventListener("click",this.addIfHandler.bind(this));
         this.html.addEventListener("mousemove",this.mouseMoveHandler.bind(this));
