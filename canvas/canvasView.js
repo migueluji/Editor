@@ -1,6 +1,7 @@
 class CanvasView {
 
-    constructor() {   
+    constructor(game) {  
+        this.game=game; 
 		 this.html = document.createElement("div");
          this.html.className +="canvas";
          this.html.style.display="block";
@@ -17,19 +18,24 @@ class CanvasView {
         app.renderer.backgroundColor = 0x061639;
         app.renderer.view.style.position = "absolute";
         app.renderer.view.style.display = "block";
-        app.renderer.autoResize = true;
+        app.renderer.autoResize = true;  
       
       //  app.renderer.resize(window.innerWidth, window.innerHeight);
 
         this.app=app;
-        this.update();
+        this.update(this.game);
        
 		//Add the canvas that Pixi automatically created for you to the HTML document
 		this.html.querySelector(".canvas").appendChild(app.view);
     }
 
-    update(){
+    update(game){
         this.app.renderer.resize(window.innerWidth, window.innerHeight);
+        game.sceneList[0].actorList.forEach(actor => {
+            console.log(actor,PIXI.Texture);
+            var sprite= new PIXI.Sprite(game.imageList[0].texture);
+            this.app.stage.addChild(sprite);
+        });
     }
 
     addActorHandler(){

@@ -11,6 +11,7 @@ class GamePropertiesView {
 						'<span class="mdc-toolbar__title">Game</span>'+
 					'</section>'+
 					'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">'+
+						'<button id="addproperty" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">add_circle_outline</button>'+
 						'<button id="closebutton" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">close</button>'+
 					'</section>'+
 				'</div>'+
@@ -20,9 +21,6 @@ class GamePropertiesView {
 				'<li class="game-properties-sound"></li>'+
 				'<li class="game-properties-physics"></li>'+						
 				'<li class="properties-new"></li>'+
-				'<button id="addproperty"  class="mdc-fab mdc-ripple-upgraded add-property-button">'+
-					'<i class="mdc-fab__icon material-icons">add</i>'+
-				'</button>'+
 			'</ul>';
 		this.html.querySelector("#closebutton").addEventListener("click",SideSheetView.closeSheetHandler);
 		this.html.querySelector("#addproperty").addEventListener("click",this.addPropertyHandler.bind(this));	
@@ -35,6 +33,7 @@ class GamePropertiesView {
 	}
 
 	updateGameProperty(property,value) {
+		console.log(property,value);
 		var element=this.html.querySelector("#"+property);
 		(element.type==="checkbox") ? element.value=element.checked=Boolean(value) : element.value=value;
 		if (property == "play") this.soundView.onClickHandler();

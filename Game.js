@@ -5,9 +5,9 @@ class Game {
         Object.assign(this,game);
         if (this.soundList) this.soundList.forEach((sound,i) => this.soundList[i]=new Asset(sound));
         if (this.imageList) this.imageList.forEach((image,i) => {
-            this.imageList[i]=new Asset(image);
-            //this.imageList[i].texture = new PIXI.Texture.from("./images/"+this.imageList[i].name);
-            });
+            this.imageList[i]= new Asset(image);
+            this.imageList[i].texture = new PIXI.Texture.from("./images/"+image.name);
+        });
         if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]=new Asset(font));
         this.sceneList.forEach((scene,i) => this.sceneList[i]=new Scene(scene));
     }
