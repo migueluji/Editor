@@ -2,32 +2,36 @@ class CanvasView {
 
     constructor(game) {  
         this.game=game; 
-		 this.html = document.createElement("div");
-         this.html.className +="canvas";
-         this.html.style.display="block";
-         this.html.style.transform="";
-         this.html.innerHTML =
+		this.html = document.createElement("div");
+        this.html.className +="canvas";
+        this.html.style.display="block";
+        this.html.style.transform="";
+        this.html.innerHTML =
             '<button id="addactor" class="do-button mdc-fab mdc-ripple-upgraded add-property-button">'+
                 '<i class="material-icons">add</i>'+
-            '</button>'+
-            '<div class="canvas"></div>';
+            '</button>';
         this.html.querySelector("#addactor").addEventListener("click",this.addActorHandler.bind(this));
         window.addEventListener("resize",this.update.bind(this));
-
-       var app = new PIXI.Application();
-        app.renderer.backgroundColor = 0x061639;
-        app.renderer.view.style.position = "absolute";
-        app.renderer.view.style.display = "block";
-        app.renderer.autoResize = true;  
-      
-      //  app.renderer.resize(window.innerWidth, window.innerHeight);
-
-        this.app=app;
-        this.update(this.game);
        
-		//Add the canvas that Pixi automatically created for you to the HTML document
-		this.html.querySelector(".canvas").appendChild(app.view);
+        this.init(game);
+        this.update(game);
     }
+
+    init(game){
+        this.app = new PIXI.Application();
+        this.app.renderer.backgroundColor = 0x061639;
+        this.app.renderer.view.style.position = "absolute";
+        this.app.renderer.view.style.display = "block"; 
+        this.html.appendChild(this.app.view);
+
+        const loader = new PIXI.Loader("./images",game.imageList.length);
+        loader.add(game.imageList);
+        loader.load();
+        loader.onLoad.add((loader,resource) => console.log(resource.name, " loaded"));
+
+    }
+
+
 
     update(game){
         this.app.renderer.resize(window.innerWidth, window.innerHeight);

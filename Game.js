@@ -3,14 +3,23 @@ class Game {
     constructor(game) {
         this.name=game.name || "Untitled Game"
         Object.assign(this,game);
+        // if (this.imageList){
+        //     const sprites={};
+        //     this.loader = new PIXI.Loader("./images",this.imageList.length);
+        //     this.loader.add(this.imageList);
+        //     this.loader.load(this.imageLoadComplete.bind(this));            
+        // }
         if (this.soundList) this.soundList.forEach((sound,i) => this.soundList[i]=new Asset(sound));
-        if (this.imageList) this.imageList.forEach((image,i) => {
-            this.imageList[i]= new Asset(image);
-            this.imageList[i].texture = new PIXI.Texture.from("./images/"+image.name);
-        });
         if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]=new Asset(font));
         this.sceneList.forEach((scene,i) => this.sceneList[i]=new Scene(scene));
     }
+
+    // imageLoadComplete(){
+    //     var sprite = new PIXI.sprite(
+    //         //this.loader.resources[].texture;
+    //     );
+    //     console.log("image list load complete...",this.loader);
+    // }
 
     get properties(){
         var obj={
@@ -70,25 +79,3 @@ class Game {
         this.fontList.splice(this.fontList.findIndex(i => i.id == fontID),1);
     } 
 }
-
- /*     this.name           = game.name             || "New Game";  
-        this.width          = game.width            || 800;         
-        this.height         = game.height           || 480;         
-        this.cameraX        = game.cameraX          || 0;           
-        this.cameraY        = game.cameraY          || 0;           
-        this.cameraRotation = game.cameraRotation   || 0;           
-        this.cameraZoom     = game.cameraZoom       || 1;          
-        this.play           = game.play             || false;       
-        this.sound          = game.sound            || "Undefined"; 
-        this.volume         = game.volume           || 1;           
-        this.start          = game.start            || 0;          
-        this.pan            = game.pan              || 0;          
-        this.loop           = game.loop             || false;       
-        this.physics        = game.physics          || false;       
-        this.gravityX       = game.gravityX         || 0.0;         
-        this.gravityY       = game.gravityY         || -9.8;        
-        this.tagList = [];
-        this.imageList = [];
-        this.soundList = [];
-        this.fontList = [];
-        this.sceneList =[]; */   
