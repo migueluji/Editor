@@ -16,8 +16,7 @@ class DrawerHeaderView {
                             '<i class="material-icons mdc-button_icon">settings</i>'+
                         '</button>'+					
                     '</div>'+	
-			'</div>'+	
-            '<h6 class="mdc-drawer__subtitle"></h6>';
+			'</div>';
         var element=this.html.querySelector('.mdc-text-field');
         mdc.textField.MDCTextField.attachTo(element);
 

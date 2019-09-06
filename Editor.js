@@ -102,19 +102,20 @@ class Editor {
 
  /* Scene editor commands */
     selectScene(sceneID){
-        this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
-        this.drawerScenesView.updateSelectedScene(sceneID);
-        this.appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
-        this.view.openCanvas("canvas");
-        if (SideSheetView.displayed=="cast") this.openCast();
+       this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
+       this.drawerScenesView.updateSelectedScene(sceneID);
+       this.appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
+       this.canvasView.update(); // actualiza el canvas
+      // this.openCast();
+        if (SideSheetView.isOpenCast()) this.openCast();
         else if (SideSheetView.displayed!="game-properties") SideSheetView.closeSheetHandler();
      }
 
-     openCast(){
+    openCast(){
         this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList);
         SideSheetView.openSheetHandler("cast");
-        this.view.openCanvas("canvas");
-     }
+      //  this.view.openCanvas("canvas");
+    }
 
 // ACTOR
     addActor(sceneID,actorPos,actor){

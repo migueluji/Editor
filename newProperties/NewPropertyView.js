@@ -19,7 +19,7 @@ class NewPropertyView {
 		this.createFrame(property,value);
 
 		this.html.querySelector("#more").addEventListener("click",this.menuNewPropertyHandler.bind(this));
-		this.html.querySelector('#delete').addEventListener("click",this.removeNewPropertyHandler.bind(this,));
+		this.html.querySelector('#delete').addEventListener("click",this.removeNewPropertyHandler.bind(this));
 		this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
 	}
 

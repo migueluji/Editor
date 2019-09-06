@@ -24,7 +24,7 @@ class GamePropertiesView {
 			'</ul>';
 		this.html.querySelector("#closebutton").addEventListener("click",SideSheetView.closeSheetHandler);
 		this.html.querySelector("#addproperty").addEventListener("click",this.addPropertyHandler.bind(this));	
-		this.createFrame(gameModel);
+		this.createFrame();
 	}
 
 	addView(html) {
@@ -33,7 +33,6 @@ class GamePropertiesView {
 	}
 
 	updateGameProperty(property,value) {
-		console.log(property,value);
 		var element=this.html.querySelector("#"+property);
 		(element.type==="checkbox") ? element.value=element.checked=Boolean(value) : element.value=value;
 		if (property == "play") this.soundView.onClickHandler();
@@ -42,7 +41,7 @@ class GamePropertiesView {
 	}
 
 //Frame
-	createFrame(gameModel){
+	createFrame(){
 		this.settingsView= new GamePropertiesSettingsView();
 		this.addView(this.settingsView.html);
 		this.soundView= new GamePropertiesSoundView();

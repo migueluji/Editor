@@ -32,7 +32,7 @@ class AppBarView {
 // Handlers
   drawerHandler() {
         const drawer = mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
-        drawer.open = drawer.open ? false : true;
+		drawer.open = drawer.open ? false : true;	
 	}
 
 }

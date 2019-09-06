@@ -11,8 +11,7 @@ class SideSheetView {
 				 '<div class="font-selection"></div>'+
 				 '<div class="cast"></div>'+
 				 '<div class="actor-properties"></div>'+
-				 '<div class="actor-scripts"></div>';
-		this.displayed=null;	
+				 '<div class="actor-scripts"></div>';	
     }
 
 	addView(html){
@@ -20,13 +19,17 @@ class SideSheetView {
 		children.parentNode.replaceChild(html,children);
 	}
 
+	static isOpenCast(){
+		return(document.querySelector(".cast").style.display!="none");
+	}
+
 	static closeSheetHandler(){
 		document.querySelector(".side-sheet").style.display="none";
-		this.displayed=null;	
+		document.querySelector(".cast").style.display="none";
+		document.querySelector(".actor-scripts").style.display="none";
 	}
 
 	static openSheetHandler(name){
-		this.displayed=name;
 		document.querySelector(".game-properties").style.display="none";
 		document.querySelector(".sound-selection").style.display="none";
 		document.querySelector(".image-selection").style.display="none";
