@@ -117,6 +117,11 @@ class Editor {
       //  this.view.openCanvas("canvas");
     }
 
+    drawerToggle (){
+        this.appBarView.drawerToogle();
+        this.canvasView.update();
+    }
+
 // ACTOR
     addActor(sceneID,actorPos,actor){
         var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);

@@ -38,23 +38,23 @@ class CanvasView {
     update(){
         
         var sceneID=document.querySelector(".sceneselected").id;
-        var drawer=document.querySelector(".mdc-drawer");
-        console.log("UPDATE CANVAS",drawer.clientWidth);
-        var offset=0;
-        (drawer.clientWidth>0) ? offset=drawer.clientWidth : offset=0;
-
+        var drawerApp=document.querySelector(".mdc-drawer-app-content");
+       
+        console.log("UPDATE CANVAS",drawerApp.getBoundingClientRect().x);
+        var offsetX=-drawerApp.getBoundingClientRect().x;
+    
         this.app.stage.removeChildren(); // se eliminan todos los objetos
-        var width=this.html.clientWidth;
-        var height=this.html.clientHeight;
-        this.app.renderer.resize(window.innerWidth,window.innerHeight);
-  //      this.app.renderer.resize(width,height);
-        console.log(width, height, " -- ", window.innerWidth, window.innerHeight);
+        var width=window.innerWidth;
+        var height=window.innerHeight;
+        this.app.renderer.resize(width,height);
+        console.log(this.html.clientWidth, this.html.clientHeight, " -- ", window.innerWidth, window.innerHeight);
 
         const graphics = new PIXI.Graphics();
         graphics.lineStyle(2, 0xDDDDDD, 1);
-        var baseWidth = width/2-this.game.width/2.0;
-        var baseHeight =height/2-this.game.height/2;
-        graphics.drawRect(offset+baseWidth,baseHeight,this.game.width,this.game.height);
+        var centerX = width/2.0;
+        var centerY = height/2.0;
+        graphics.drawRect(offsetX+centerX-this.game.width/2.0,centerY-this.game.height/2.0,this.game.width,this.game.height);
+//        console.log("CENTRO",baseWidth,baseHeight);
         this.app.stage.addChild(graphics);
 
         var scenePos=this.game.sceneList.findIndex(i => i.id == sceneID);
@@ -62,8 +62,9 @@ class CanvasView {
             if (actor.image!=undefined){
                 var texture = this.loader.resources[actor.image].texture;
                 var sprite= new PIXI.Sprite(texture);
-                sprite.x= offset+width/2-actor.width/2+actor.x;
-                sprite.y=height/2-actor.height/2-actor.y;
+                sprite.x=offsetX+centerX+actor.x-actor.width/2.0;
+                sprite.y=centerY-actor.y-actor.height/2.0;
+                console.log(sprite.x,sprite.y,sprite.texture);
                 this.app.stage.addChild(sprite); 
             } 
         });

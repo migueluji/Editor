@@ -25,6 +25,10 @@ class Command {
         this.editor.openCast();
     }
 
+    static drawerToggleCmd(){
+        this.editor.drawerToggle();
+    }
+
 // ACTORS
     static selectActorCmd(actorID){
         this.editor.selectActor(actorID);

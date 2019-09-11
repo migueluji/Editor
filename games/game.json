@@ -308,10 +308,10 @@
 							"name": "Destroy enemy"
 						}
 					],
-					"x": 0,
-					"y": 0,
-					"width": 50,
-					"height": 59,
+					"x": -400,
+					"y": -240,
+					"width": 88,
+					"height": 73,
 					"scaleX": 1,
 					"scaleY": 0.5,
 					"rotation": 30,

@@ -18,7 +18,7 @@ class AppBarView {
 			'</section>'+
 		'</div>';
 		this.updateSceneName(sceneName);	
-		this.html.querySelector("#drawer").addEventListener("click",this.drawerHandler.bind(this));
+		this.html.querySelector("#drawer").addEventListener("click",Command.drawerToggleCmd.bind(Command));
 		this.html.querySelector("#save").addEventListener("click",Command.saveGameCmd.bind(Command));
 		this.html.querySelector("#undo").addEventListener("click",CmdManager.undo.bind(CmdManager));
 		this.html.querySelector("#redo").addEventListener("click",CmdManager.redo.bind(CmdManager));
@@ -29,8 +29,7 @@ class AppBarView {
 		this.html.querySelector("#sceneName").innerText=sceneName;
 	}
 	
-// Handlers
-  drawerHandler() {
+ 	drawerToogle() {
         const drawer = mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
 		drawer.open = drawer.open ? false : true;	
 	}
