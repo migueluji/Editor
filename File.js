@@ -14,9 +14,9 @@ class File {
         }
     }
 
-    static save(url,file) {
+    static save(url,json) {
         var a = document.createElement("a");
-        var blob = new Blob([file], {type: 'text/plain'});
+        var blob = new Blob([json], {type: 'text/plain'});
         a.href = URL.createObjectURL(blob);
         a.download = url;
         a.click();
