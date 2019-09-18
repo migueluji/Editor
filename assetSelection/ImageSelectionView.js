@@ -60,12 +60,15 @@ class ImageSelectionView {
 //Handlers
 	exitSheetHandler(){		
 		var element=this.html.querySelector("#"+this.selectedImage);
+		console.log(element,element.firstChild.firstChild.width);
 		var name=null;
 		(element==null) ? name="Undefined" : name=element.firstChild.nextSibling.firstChild.textContent;
 		if (this.actorImage !== name){
 			var sceneID=document.querySelector(".sceneselected").id;
 			var actorID=document.querySelector(".actorselected").id;
 			CmdManager.changeActorPropertyCmd(sceneID,actorID,"image",name);
+			CmdManager.changeActorPropertyCmd(sceneID,actorID,"width",element.firstChild.firstChild.width);
+			CmdManager.changeActorPropertyCmd(sceneID,actorID,"height",element.firstChild.firstChild.height);
 		}
 		this.html.style.display="none";
 		SideSheetView.openSheetHandler("actor-properties");

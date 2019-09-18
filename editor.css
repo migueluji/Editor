@@ -5,6 +5,9 @@ body{
     margin:0;
     height: 100%;
 }
+button{
+    outline:0;
+}
 .editor-frame-root{
     overflow: hidden;
     display: flex;
@@ -219,8 +222,6 @@ body{
     margin: -8px;
 }
 .mdc-image-list__image-aspect-container .mdc-image-list__image  {
-    width:100%;
-    height: auto;
     top: 0px;
     bottom: 0px;
     margin: auto;

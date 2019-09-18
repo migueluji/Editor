@@ -16,7 +16,9 @@ class ImageView {
   	addView(image) {
 		this.html.id=image.id;
 		this.html.querySelector(".mdc-image-list__label").innerHTML=image.name;
-		this.html.querySelector(".mdc-image-list__image").src="./images/"+image.name;
+		var img = this.html.querySelector(".mdc-image-list__image");
+		img.src="./images/"+image.name;
+		(img.width>img.height) ? img.style.height="auto" : img.style.width="auto";
 	}
 
 	remove() { 

@@ -1,6 +1,6 @@
 class CastView {
 
-    constructor() {   
+    constructor(cast) {   
 		 this.html = document.createElement("div");
 		 this.html.className +="cast side-sheet-content";
 		 this.html.style.display="none";
@@ -21,6 +21,7 @@ class CastView {
 		'</div>';
 		this.html.querySelector("#closebutton").addEventListener("click",SideSheetView.closeSheetHandler);
 		this.html.querySelector("#addactor").addEventListener("click",this.addActorHandler.bind(this));
+		this.update(cast);
 	}
 
 	addActor(actorView,actorPos){

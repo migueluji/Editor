@@ -34,7 +34,7 @@ class Editor {
             this.sideSheetView.addView(this.imageSelectionView.html);
             this.fontSelectionView = new FontSelectionView(gameModel.fontList);
             this.sideSheetView.addView(this.fontSelectionView.html);
-            this.castView = new CastView();
+            this.castView = new CastView(this.model.sceneList[this.selectedSceneIndex].actorList);
             this.sideSheetView.addView(this.castView.html);
             this.actorPropertiesView = new ActorPropertiesView(this.model.sceneList[this.selectedSceneIndex].actorList[0]);
             this.sideSheetView.addView(this.actorPropertiesView.html);
@@ -106,20 +106,21 @@ class Editor {
        this.drawerScenesView.updateSelectedScene(sceneID);
        this.appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
        this.canvasView.update(); // actualiza el canvas
-      // this.openCast();
-        if (SideSheetView.isOpenCast()) this.openCast();
-        else if (SideSheetView.displayed!="game-properties") SideSheetView.closeSheetHandler();
+       if (SideSheetView.isOpenCast()) this.openCast();
+       else if (SideSheetView.displayed!="game-properties") SideSheetView.closeSheetHandler();
      }
 
     openCast(){
         this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList);
+        var actorID=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].id;
+        this.castView.updateSelectedActor(actorID);
         SideSheetView.openSheetHandler("cast");
-      //  this.view.openCanvas("canvas");
     }
 
     drawerToggle (){
         this.appBarView.drawerToogle();
-        this.canvasView.update();
+        var actorID=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].id;
+        this.canvasView.update(actorID);
     }
 
 // ACTOR
@@ -216,8 +217,15 @@ class Editor {
 
 /* Actor editor commands */
     selectActor(actorID){
+        console.log("editor select actor",actorID,);
         this.selectedActorIndex=this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.id==actorID);
-        this.castView.updateSelectedActor(actorID);
+        if (SideSheetView.isOpenCast()) {
+            this.castView.updateSelectedActor(actorID);
+        }
+        else {
+            if (SideSheetView.isOpenActorProperties()) this.openActorProperties();
+        }
+        this.canvasView.update(actorID);
     }
 
     openActorProperties(){
