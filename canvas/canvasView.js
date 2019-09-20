@@ -62,15 +62,9 @@ class CanvasView {
         // Carga los actores de la scena actual como SPRITES
         var scenePos=this.game.sceneList.findIndex(i => i.id == sceneID);
         this.game.sceneList[scenePos].actorList.forEach(actor => {
-            if (actor.image!=undefined){
-                var texture = this.loader.resources[actor.image].texture;
-                var guizmo;
-                (actorID==actor.id) ? guizmo=true : guizmo=false;
-            } 
-            else {
-                var texture=null;
-                var guizmo=true;
-            }
+            var texture = this.loader.resources[actor.image].texture;
+            var guizmo=false;
+            (actorID==actor.id) ? guizmo=true : guizmo=false;
             var displayActor= new DisplayActor(actor.properties,texture,guizmo);
             displayActor.id=actor.id;            
             displayActor.x=offsetX+centerX+actor.x;

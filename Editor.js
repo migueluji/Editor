@@ -151,11 +151,53 @@ class Editor {
     changeActorProperty(sceneID,actorID,property,value){
         var scenePos=this.model.sceneList.findIndex(i => i.id == sceneID);
         var actorPos=this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID); 
+        var width=this.model.sceneList[scenePos].actorList[actorPos]["width"];
+        var height=this.model.sceneList[scenePos].actorList[actorPos]["height"];
+        var originalWidth=width;
+        var originalHeight=height;
+
+        switch  (property) {
+            case "tileX": {
+                var tileX=this.model.sceneList[scenePos].actorList[actorPos]["tileX"];
+                originalWidth = width/tileX;
+                this.model.sceneList[scenePos].actorList[actorPos]["width"] = Math.round(originalWidth*value);
+                break;
+                }
+            case "tileY":{
+                var tileY=this.model.sceneList[scenePos].actorList[actorPos]["tileY"];;
+                originalHeight = height/tileY;
+                this.model.sceneList[scenePos].actorList[actorPos]["height"] = Math.round(originalHeight*value);          
+                break;
+            }
+            case "width":{
+                var scaleX =this.model.sceneList[scenePos].actorList[actorPos]["scaleX"];
+                originalWidth = width/scaleX;
+                this.model.sceneList[scenePos].actorList[actorPos]["scaleX"] = (value/originalWidth).toFixed(2);
+                break;
+            }
+            case "height":{
+                var scaleY =this.model.sceneList[scenePos].actorList[actorPos]["scaleY"];
+                originalHeight = height/scaleY;
+                this.model.sceneList[scenePos].actorList[actorPos]["scaleY"] = (value/originalHeight).toFixed(2);
+                break;
+            }
+            case "scaleX":{
+                var scaleX =this.model.sceneList[scenePos].actorList[actorPos]["scaleX"];
+                originalWidth = width/scaleX;
+                this.model.sceneList[scenePos].actorList[actorPos]["width"] = Math.round(originalWidth*value);
+                break;
+            }
+            case "scaleY":{
+                var scaleY =this.model.sceneList[scenePos].actorList[actorPos]["scaleY"];
+                originalHeight = height/scaleY;
+                this.model.sceneList[scenePos].actorList[actorPos]["height"] = Math.round(originalHeight*value);
+                break;
+            }
+        }
         this.model.sceneList[scenePos].actorList[actorPos][property]=value;
         this.selectScene(sceneID);
         this.selectActor(actorID);
-        (property=="name")?this.openCast():this.openActorProperties();
-        this.actorPropertiesView.updateActorProperty(property,value);
+        (property=="name")?this.openCast():this.openActorProperties()
     }
 
     addActorProperty(sceneID,actorID,property,value){
@@ -217,7 +259,7 @@ class Editor {
 
 /* Actor editor commands */
     selectActor(actorID){
-        console.log("editor select actor",actorID,);
+      //  console.log("editor select actor",actorID,);
         this.selectedActorIndex=this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.id==actorID);
         if (SideSheetView.isOpenCast()) {
             this.castView.updateSelectedActor(actorID);
