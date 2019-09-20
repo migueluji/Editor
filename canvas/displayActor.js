@@ -3,7 +3,6 @@ class DisplayActor extends PIXI.Container {
     constructor(actor,texture,guizmo) {
         super();
 
-   //     console.log("tex",texture);
         var tilingSprite;
         if (texture) {
             tilingSprite = new PIXI.TilingSprite(texture, texture.width, texture.height);
@@ -13,10 +12,7 @@ class DisplayActor extends PIXI.Container {
             this.addChild(tilingSprite);
         }
 
-           // console.log("actor",actor.x,texture,this.width,actor.width,tilingSprite.width);
-          //  this.displayGuizmo(tilingSprite.width,tilingSprite.height);
-       
-  
+        if (guizmo) this.displayGuizmo(tilingSprite.width,tilingSprite.height);
         this.width=actor.width;
         this.height=actor.height;
         this.angle=-actor.rotation;
