@@ -16,7 +16,7 @@ class DisplayActor extends PIXI.Container {
         this.width=actor.width;
         this.height=actor.height;
         this.angle=-actor.rotation;
-        //
+        
     }
 
     displayGuizmo(width,height){
