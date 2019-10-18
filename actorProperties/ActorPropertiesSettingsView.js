@@ -8,7 +8,7 @@ class ActorPropertiesSettingsView {
 				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
 				'Settings'+
 			'</li>'+
-			'<div class="properties-panel">'+
+			'<div class="properties-panel open">'+
 				'<div class="two-properties">'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
 						'<input id="x"  type="number" value="0"  class="mdc-text-field__input">'+

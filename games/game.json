@@ -317,7 +317,7 @@
 					"width": 88,
 					"height": 73,
 					"scaleX": 1,
-					"scaleY": 0.5,
+					"scaleY": 1,
 					"rotation": 30,
 					"screen": true,
 					"collider": "Box",

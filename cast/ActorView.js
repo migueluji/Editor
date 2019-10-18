@@ -115,6 +115,7 @@ class ActorView {
 		element.innerHTML=e.dataTransfer.getData('text/html');
 		element=element.firstElementChild;
 		var sceneSelected=document.querySelector(".sceneselected").id;
+		console.log(sceneSelected,element.id,this.position(this.html,this.html.parentNode));
 		CmdManager.moveActorCmd(sceneSelected,element.id,this.position(this.html,this.html.parentNode));
 		this.html.classList.remove("over");
 		if (element.querySelector(".actorselected")){
