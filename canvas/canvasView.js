@@ -19,6 +19,8 @@ class CanvasView {
         this.offsetX=0;
         this.lastPosition=null;
         this.selected=false;
+        this.actorSelected=null;
+        this.displayObject=null;
 
         this.initApp();
         this.loadImageList(imageList);
@@ -79,30 +81,15 @@ class CanvasView {
         graphics.lineStyle(20, 0xDDDDDD, 1, 1, true);
         graphics.drawRect(offsetX+centerX-this.width/2.0,centerY-this.height/2.0,this.width,this.height);
         this.app.stage.addChild(graphics);
-
-        // const graphics1 = new PIXI.Graphics();
-        // graphics1.lineStyle(20, 0xDDDDDD, 1, 1, true);
-        // graphics1.drawRect(this.app.stage.hitArea.x,this.app.stage.hitArea.y,this.app.stage.hitArea.width,this.app.stage.hitArea.height);
-        // this.app.stage.addChild(graphics1);
     }
 
     updateSelectedActor(actorID){
-        
-        if (this.selected) this.graphics.destroy();
-        else this.selected=true;
+    
+            (this.selected) ? this.displayObject.removeGizmo() : this.selected=true;
 
-        var graphics=this.graphics;
-        var displayObjectIndex =this.app.stage.children.findIndex(i=>i.id==actorID);
-        var displayObject = this.app.stage.children[displayObjectIndex];
-        var graphics = new PIXI.Graphics();
-        graphics.lineStyle(1, 0xDDDDDD, 1, 0, true);
-
-        graphics.drawRect(-displayObject.width/2.0,-displayObject.height/2.0,displayObject.width,displayObject.height);
-        graphics.angle=displayObject.angle;
-        graphics.position= displayObject.position;
-   
-        this.app.stage.addChild(graphics);
-        this.graphics=graphics;
+            var displayObjectIndex =this.app.stage.children.findIndex(i=>i.id==actorID);
+            this.displayObject = this.app.stage.children[displayObjectIndex];
+            this.displayObject.createGizmo();
     }
 
 // Handlers
@@ -115,6 +102,7 @@ class CanvasView {
         stage.hitArea = new PIXI.Rectangle(-stage.x/stage.scale.x-100,-stage.y/stage.scale.y-100,window.innerWidth/stage.scale.x+200,window.innerHeight/stage.scale.y+200);
         this.stage=stage;
         this.update(actorList);
+        Command.selectActorCmd(this.displayObject.id);
     }
 
     mouseStageDown(e){
@@ -149,6 +137,7 @@ class CanvasView {
         var drawerApp=document.querySelector(".mdc-drawer-app-content");
         var offsetX=drawerApp.getBoundingClientRect().x;
         this.zoom(e.deltaY,e.offsetX+offsetX,e.offsetY);
+        Command.selectActorCmd(this.displayObject.id);
     }
 
 // Utils
@@ -165,12 +154,5 @@ class CanvasView {
         this.app.stage=stage;
         this.app.stage.hitArea = new PIXI.Rectangle(-stage.x/newScale.x-100,-stage.y/newScale.y-100,window.innerWidth/newScale.x+200,window.innerHeight/newScale.y+200);
         this.update(this.actorList);
-    }
-
-    displayGuizmo(width,height){
-        const graphics = new PIXI.Graphics();
-        graphics.lineStyle(1, 0xDDDDDD, 1, 0, true);
-        graphics.drawRect(-width/2.0,-height/2.0,width,height);
-        this.app.stage.addChild(graphics);
     }
 }

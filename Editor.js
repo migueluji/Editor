@@ -160,8 +160,8 @@ class Editor {
         var originalHeight=height;
         switch  (property) {
             case "position": {
-                this.model.sceneList[scenePos].actorList[actorPos]["x"]=value.x;
-                this.model.sceneList[scenePos].actorList[actorPos]["y"]=value.y;
+                this.model.sceneList[scenePos].actorList[actorPos]["x"]=Math.round(value.x);
+                this.model.sceneList[scenePos].actorList[actorPos]["y"]=Math.round(value.y);
             }
             case "tileX": {
                 var tileX=this.model.sceneList[scenePos].actorList[actorPos]["tileX"];
