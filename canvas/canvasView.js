@@ -69,10 +69,11 @@ class CanvasView {
         var actor=null;
         for (let i=actorList.length -1; i>=0; i--){
             actor=actorList[i];
-            var texture = this.loader.resources[actor.image].texture;
+            var texture = null;
+            if (actor.image) texture = this.loader.resources[actor.image].texture;
             var displayActor= new DisplayActor(actor,texture);      
-            displayActor.x=offsetX+centerX+actor.x;
-            displayActor.y=centerY-actor.y;
+            displayActor.x= offsetX+centerX+actor.x;
+            displayActor.y= centerY-actor.y;
             this.app.stage.addChild(displayActor); 
         }
 
@@ -84,12 +85,17 @@ class CanvasView {
     }
 
     updateSelectedActor(actorID){
-    
-            (this.selected) ? this.displayObject.removeGizmo() : this.selected=true;
+            if (actorID){
+                (this.selected) ? this.displayObject.removeGizmo() : this.selected=true;
 
-            var displayObjectIndex =this.app.stage.children.findIndex(i=>i.id==actorID);
-            this.displayObject = this.app.stage.children[displayObjectIndex];
-            this.displayObject.createGizmo();
+                var displayObjectIndex =this.app.stage.children.findIndex(i=>i.id==actorID);
+                this.displayObject = this.app.stage.children[displayObjectIndex];
+                this.displayObject.createGizmo();
+            }
+            else{
+                this.displayObject.removeGizmo();
+                this.selected=false;
+            }
     }
 
 // Handlers
@@ -106,9 +112,11 @@ class CanvasView {
     }
 
     mouseStageDown(e){
+        console.log("mouseStageDown",e.target);
         if (e.target instanceof DisplayActor == false){
             this.origenX=e.data.global.x-this.app.stage.x;
             this.origenY=e.data.global.y-this.app.stage.y;
+            Command.selectActorCmd(null);
         }
     }
 
@@ -137,7 +145,7 @@ class CanvasView {
         var drawerApp=document.querySelector(".mdc-drawer-app-content");
         var offsetX=drawerApp.getBoundingClientRect().x;
         this.zoom(e.deltaY,e.offsetX+offsetX,e.offsetY);
-        Command.selectActorCmd(this.displayObject.id);
+        if (this.displayObject) Command.selectActorCmd(this.displayObject.id);
     }
 
 // Utils

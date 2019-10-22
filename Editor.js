@@ -267,7 +267,8 @@ class Editor {
 
 /* Actor editor commands */
     selectActor(actorID){
-        this.selectedActorIndex=this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.id==actorID);
+        if (actorID) this.selectedActorIndex=this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.id==actorID);
+        else this.selectedActorIndex=null;
         if (SideSheetView.isOpenActorProperties()) this.openActorProperties();
         if (SideSheetView.isOpenCast()) this.castView.updateSelectedActor(actorID);
         this.canvasView.updateSelectedActor(actorID);
