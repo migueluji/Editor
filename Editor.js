@@ -121,8 +121,9 @@ class Editor {
         this.appBarView.drawerToogle();
         var actorID=null;
         if (this.selectedActorIndex!=null) actorID=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].id;
-       this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList);
-       if (actorID) this.canvasView.updateSelectedActor(actorID);
+      // this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList);
+        this.canvasView.updateStage();
+        if (actorID) this.canvasView.updateSelectedActor(actorID);
     }
 
 // ACTOR
@@ -150,6 +151,7 @@ class Editor {
     }
 
     changeActorProperty(sceneID,actorID,property,value){
+        console.log("change",actorID,property,value);
         var scenePos=this.model.sceneList.findIndex(i => i.id == sceneID);
         var actorPos=this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID); 
         var width=this.model.sceneList[scenePos].actorList[actorPos]["width"];
@@ -158,6 +160,7 @@ class Editor {
         var scaleY=this.model.sceneList[scenePos].actorList[actorPos]["scaleY"];
         var originalWidth=width;
         var originalHeight=height;
+        console.log("change",actorID,property,value,width);
         switch  (property) {
             case "position": {
                 this.model.sceneList[scenePos].actorList[actorPos]["x"]=Math.round(value.x);

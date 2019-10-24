@@ -1,6 +1,6 @@
 class DisplayActor extends PIXI.Container {
 
-    constructor(actor,texture) {
+    constructor(stage,actor,texture) {
         super();
 
         this.id=actor.id;  
@@ -8,7 +8,7 @@ class DisplayActor extends PIXI.Container {
         this.interactive=true;
         this.buttonMode=true;
         this.x=actor.x;
-        this.y=actor.y;
+        this.y=-actor.y;
 
         if (texture) {
             this.tilingSprite = new PIXI.TilingSprite(texture,texture.width,texture.height);
@@ -16,7 +16,7 @@ class DisplayActor extends PIXI.Container {
             this.tilingSprite.height=this.tilingSprite.texture.height*actor.tileY;
         }
         else {
-            this.tilingSprite = new PIXI.TilingSprite(PIXI.Texture.EMPTY,50,50);
+         //   this.tilingSprite = new PIXI.TilingSprite(PIXI.Texture.EMPTY,50,50);
             this.tilingSprite.width=50*actor.tileX;
             this.tilingSprite.height=50*actor.tileY;
         }
@@ -31,6 +31,8 @@ class DisplayActor extends PIXI.Container {
             .on('pointerup',this.onPointerUp.bind(this))
             .on('pointerupoutside',this.onPointerUp.bind(this))
             .on('pointermove',this.onPointerMove.bind(this));
+
+        stage.addChild(this);
     }
 
     removeGizmo(){
@@ -43,7 +45,7 @@ class DisplayActor extends PIXI.Container {
      
         this.points=this.computePoints(0,0,this.width,this.height);
         var scale= {x:this.parent.scale.x,y:this.parent.scale.y};
-        console.log(this.points,scale);
+       
         this.OBB = new PIXI.Graphics(); // Oriented Bounding Box
         this.OBB.lineStyle(1, 0xDDDDDD, 1, 0, true);
         this.OBB.moveTo(this.points[0].x,this.points[0].y);
@@ -76,11 +78,11 @@ class DisplayActor extends PIXI.Container {
 // Handlers
 
     gScale2(e){
-        console.log("scaling");
         this.operation ="scaling";
         this.origenScaling=e.data.getLocalPosition(this.parent);
         this.originalWidth=this.width;
-        this.origialX=this.x;
+        this.originalX=this.x;
+        console.log("scaling",this.width,this.x,this.origenScaling);
         e.stopPropagation();
     }
 
@@ -109,15 +111,10 @@ class DisplayActor extends PIXI.Container {
             case "rotating":
                 this.angle = 90 -Math.atan2(this.origenRotation.y-newPosition.y,newPosition.x-this.origenRotation.x)*180/Math.PI; break;
             case "scaling" :
-                
-                this.width=this.originalWidth+(newPosition.x-this.origenScaling.x);
-                this.x = this.origialX + (this.width-this.originalWidth)/2.0;
-                var scale=this.width/this.originalWidth;
-                var index= this.parent.children.findIndex(i=>i.id==this.id);
-                //this.gScaleUR.width= this.gScaleUR.width/scale;
-                this.removeChild(this.gScaleUR);
-                //this.gScaleUR.width=this.gScaleUR.width/scale;
-                console.log(this.parent.children[index].gScaleUR,this.width,newPosition.x,this.origenScaling.x);
+                this.removeGizmo();
+                this.tilingSprite.scale.x=(this.originalWidth+(newPosition.x-this.origenScaling.x))/this.originalWidth;
+                this.x = this.originalX + (newPosition.x-this.origenScaling.x)/2.0;
+                this.createGizmo();
                 break;            
         }
     }
@@ -128,14 +125,14 @@ class DisplayActor extends PIXI.Container {
         switch (this.operation) {
             case "dragging":
                     if (newPosition.x!=this.origen.x || newPosition.y!=this.origen.y){
-                        var drawerApp=document.querySelector(".mdc-drawer-app-content");
-                        var offsetX = -drawerApp.getBoundingClientRect().x/this.parent.scale.x;
-                        var xValue=this.x-window.innerWidth/2.0-offsetX;
-                        var yValue=window.innerHeight/2.0-this.y;
-                        CmdManager.changeActorPropertyCmd(sceneID,this.id,"position",{x:xValue,y:yValue});
+                        CmdManager.changeActorPropertyCmd(sceneID,this.id,"position",{x:this.x,y:-this.y});
                     }; break;
             case "rotating":
                     CmdManager.changeActorPropertyCmd(sceneID,this.id,"rotation",-this.angle); break;
+            case "scaling":
+                    CmdManager.changeActorPropertyCmd(sceneID,this.id,"scaleX",this.tilingSprite.scale.x.toFixed(2)); 
+                    CmdManager.changeActorPropertyCmd(sceneID,this.id,"x",this.x);
+                    break;
         } 
         this.operation=null;
         this.data=null;
@@ -143,7 +140,6 @@ class DisplayActor extends PIXI.Container {
 
 // Utils
     computePoints(x,y,w,h){
-        console.log(x,y,w.h);
         var p=[];
         p[0]={x:x-w/2,y:y-h/2};
         p[1]={x:x,y:y-h/2};
