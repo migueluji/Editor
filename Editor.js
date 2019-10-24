@@ -165,6 +165,7 @@ class Editor {
             case "position": {
                 this.model.sceneList[scenePos].actorList[actorPos]["x"]=Math.round(value.x);
                 this.model.sceneList[scenePos].actorList[actorPos]["y"]=Math.round(value.y);
+                break;
             }
             case "tileX": {
                 var tileX=this.model.sceneList[scenePos].actorList[actorPos]["tileX"];
@@ -209,6 +210,7 @@ class Editor {
         this.selectActor(actorID);
         if (property=="name")this.openCast();
         if (isOpen) this.openActorProperties();
+        console.log( width,this.model.sceneList[scenePos].actorList[actorPos]["width"]);
     }
 
     addActorProperty(sceneID,actorID,property,value){
@@ -272,8 +274,9 @@ class Editor {
     selectActor(actorID){
         if (actorID) this.selectedActorIndex=this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.id==actorID);
         else this.selectedActorIndex=null;
-        if (SideSheetView.isOpenActorProperties()) this.openActorProperties();
-        if (SideSheetView.isOpenCast()) this.castView.updateSelectedActor(actorID);
+        if (SideSheetView.isOpenActorProperties() && actorID!=null) this.openActorProperties();
+        if (actorID==null && !SideSheetView.isOpenCast()) SideSheetView.closeSheetHandler();
+        this.castView.updateSelectedActor(actorID);
         this.canvasView.updateSelectedActor(actorID);
     }
 

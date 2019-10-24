@@ -9,7 +9,8 @@ class ChangeActorPropertyCmd extends Command {
         this.scenePos=this.editor.model.sceneList.findIndex(i => i.id == sceneID);
         this.actorPos=this.editor.model.sceneList[this.scenePos].actorList.findIndex(i=>i.id==actorID);
         if (property=="position"){ // Cambio de x e y a la vez
-            this.oldValue={x:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["x"],y:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["y"]};
+            this.oldValue={ x:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["x"],
+                            y:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["y"]};
         }
         else this.oldValue=this.editor.model.sceneList[this.scenePos].actorList[this.actorPos][property];
         this.type="ChangeActorPropertyCmd";

@@ -16,7 +16,7 @@ class DisplayActor extends PIXI.Container {
             this.tilingSprite.height=this.tilingSprite.texture.height*actor.tileY;
         }
         else {
-         //   this.tilingSprite = new PIXI.TilingSprite(PIXI.Texture.EMPTY,50,50);
+            this.tilingSprite = new PIXI.TilingSprite(PIXI.Texture.EMPTY,50,50);
             this.tilingSprite.width=50*actor.tileX;
             this.tilingSprite.height=50*actor.tileY;
         }
