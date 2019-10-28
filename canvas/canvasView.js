@@ -19,6 +19,7 @@ class CanvasView {
         this.mouseDown=false;
         this.width=width;
         this.height=height;
+        this.diff={x:0,y:0}
         
         this.loadImages(imageList);
     }
@@ -60,8 +61,10 @@ class CanvasView {
         this.app.renderer.resize(window.innerWidth,window.innerHeight);
         this.app.stage.x = window.innerWidth/2.0-this.drawerOffset;
         this.app.stage.y = window.innerHeight/2.0-32;
+  
+        this.app.stage.scale.y=-1; //cambio eje y
         this.hitArea(this.app.stage);
-
+        
         this.update(this.actorList); 
     }
 
@@ -80,8 +83,15 @@ class CanvasView {
             actor=actorList[i];
             var texture = null;
             if (actor.image) texture = this.loader.resources[actor.image].texture;
-            new DisplayActor(this.app.stage,actor,texture);      
+            new DisplayActor(this.app.stage,actor,texture); 
         }
+
+        const graphics1 = new PIXI.Graphics();
+        graphics1.lineStyle(20, 0xDD0000, 1, 1, true);
+        graphics1.drawRect(this.app.stage.hitArea.x,this.app.stage.hitArea.y,
+                            this.app.stage.hitArea.width,this.app.stage.hitArea.height);
+        this.app.stage.addChild(graphics1);
+    
     }
 
     updateSelectedActor(actorID){
@@ -103,16 +113,16 @@ class CanvasView {
     }
 
     resize(actorList){
-        var stage=this.app.stage;
-        this.hitArea(this.app.stage);
-        this.stage=stage;
+        var drawerApp=document.querySelector(".mdc-drawer-app-content");
+        this.drawerOffset = drawerApp.getBoundingClientRect().x;
+        this.app.renderer.resize(window.innerWidth,window.innerHeight);
         this.update(actorList);
         if (this.selected) Command.selectActorCmd(this.displayObject.id);
     }
 
     mouseStageDown(e){
         if (e.target instanceof DisplayActor == false){
-            this.pointer={x:e.data.global.x,y:e.data.global.y};
+            this.position0={x:e.data.global.x,y:e.data.global.y};
             this.stage={x:this.app.stage.x,y:this.app.stage.y};
             this.mouseDown=true;
             Command.selectActorCmd(null);
@@ -120,16 +130,17 @@ class CanvasView {
     }
 
     mouseStageUp(){
-        this.hitArea(this.app.stage);
+        this.app.stage.hitArea.x -=this.diff.x;
+        this.app.stage.hitArea.y +=this.diff.y;
         this.mouseDown=false;
     }
 
     mouseStageMove(e){
        if (this.mouseDown){ 
-         var newPosition=e.data.global;
-         var diff={x:newPosition.x-this.pointer.x,y:newPosition.y-this.pointer.y};
-         this.app.stage.x = this.stage.x+diff.x;
-         this.app.stage.y = this.stage.y+diff.y;
+         var position1={x:e.data.global.x,y:e.data.global.y};
+         this.diff={x:position1.x-this.position0.x,y:position1.y-this.position0.y};
+         this.app.stage.x = this.stage.x+this.diff.x;
+         this.app.stage.y = this.stage.y+this.diff.y;
        }
     }
 
@@ -140,11 +151,10 @@ class CanvasView {
 
 // Utils
     hitArea(stage){
-        var x=-stage.x/stage.scale.x;
-        var y=-stage.y/stage.scale.y;
+        console.log(stage.scale.x);
         var width=window.innerWidth/stage.scale.x;
         var height=window.innerHeight/stage.scale.y;
-        this.app.stage.hitArea = new PIXI.Rectangle(x,y,width,height);
+        this.app.stage.hitArea = new PIXI.Rectangle(-width*5,height*5,width*10,-height*10);
     }
 
     zoom (s,x,y){
@@ -158,6 +168,6 @@ class CanvasView {
         stage.scale.x = newScale.x;
         stage.scale.y = newScale.y;
         this.app.stage=stage;
-        this.hitArea(this.app.stage);
+        this.hitArea(stage);
     }
 }

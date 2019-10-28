@@ -151,7 +151,6 @@ class Editor {
     }
 
     changeActorProperty(sceneID,actorID,property,value){
-        console.log("change",actorID,property,value);
         var scenePos=this.model.sceneList.findIndex(i => i.id == sceneID);
         var actorPos=this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID); 
         var width=this.model.sceneList[scenePos].actorList[actorPos]["width"];
@@ -160,7 +159,7 @@ class Editor {
         var scaleY=this.model.sceneList[scenePos].actorList[actorPos]["scaleY"];
         var originalWidth=width;
         var originalHeight=height;
-        console.log("change",actorID,property,value,width);
+    //    console.log("change",actorID,property,value);
         switch  (property) {
             case "position": {
                 this.model.sceneList[scenePos].actorList[actorPos]["x"]=Math.round(value.x);
@@ -210,7 +209,6 @@ class Editor {
         this.selectActor(actorID);
         if (property=="name")this.openCast();
         if (isOpen) this.openActorProperties();
-        console.log( width,this.model.sceneList[scenePos].actorList[actorPos]["width"]);
     }
 
     addActorProperty(sceneID,actorID,property,value){
