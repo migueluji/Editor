@@ -153,57 +153,41 @@ class Editor {
     changeActorProperty(sceneID,actorID,property,value){
         var scenePos=this.model.sceneList.findIndex(i => i.id == sceneID);
         var actorPos=this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID); 
-        var width=this.model.sceneList[scenePos].actorList[actorPos]["width"];
-        var height=this.model.sceneList[scenePos].actorList[actorPos]["height"];
-        var scaleX=this.model.sceneList[scenePos].actorList[actorPos]["scaleX"];
-        var scaleY=this.model.sceneList[scenePos].actorList[actorPos]["scaleY"];
-        var originalWidth=width;
-        var originalHeight=height;
-    //    console.log("change",actorID,property,value);
-        switch  (property) {
-            case "position": {
-                this.model.sceneList[scenePos].actorList[actorPos]["x"]=Math.round(value.x);
-                this.model.sceneList[scenePos].actorList[actorPos]["y"]=Math.round(value.y);
+        var actor = this.model.sceneList[scenePos].actorList[actorPos];
+        switch  (true) {
+            case property=="position": 
+                actor.x=Math.round(value.x);
+                actor.y=Math.round(value.y);
                 break;
-            }
-            case "tileX": {
-                var tileX=this.model.sceneList[scenePos].actorList[actorPos]["tileX"];
-                originalWidth = width/tileX/scaleX;
-                this.model.sceneList[scenePos].actorList[actorPos]["width"] = Math.round(originalWidth*scaleX*value);
+            case property=="scale":
+                console.log(value);
+                actor.x=Math.round(value.x);
+                actor.y=Math.round(value.y);
+                actor.rotation=Math.round(value.rotation);
+                actor.width=Math.round(actor.width/actor.scaleX*value.scaleX);
+                actor.height=Math.round(actor.height/actor.scaleY*value.scaleY);
+                actor.scaleX=Number(value.scaleX).toFixed(2);
+                actor.scaleY= Number(value.scaleY).toFixed(2);
                 break;
-                }
-            case "tileY":{
-                var tileY=this.model.sceneList[scenePos].actorList[actorPos]["tileY"];
-                originalHeight = height/tileY/scaleY;
-                this.model.sceneList[scenePos].actorList[actorPos]["height"] = Math.round(originalHeight*scaleY*value);          
+            case property=="tileX" || property=="scaleX": 
+                actor.width=Math.round(actor.width/actor.tileX*value);
+                console.log(actor.width);
                 break;
-            }
-            case "width":{
-                var scaleX =this.model.sceneList[scenePos].actorList[actorPos]["scaleX"];
-                originalWidth = width/scaleX;
-                this.model.sceneList[scenePos].actorList[actorPos]["scaleX"] = (value/originalWidth).toFixed(2);
+            case property=="tileY" || property=="scaleY":
+                actor.height=Math.round(actor.height/actor.tileY*value);
                 break;
-            }
-            case "height":{
-                var scaleY =this.model.sceneList[scenePos].actorList[actorPos]["scaleY"];
-                originalHeight = height/scaleY;
-                this.model.sceneList[scenePos].actorList[actorPos]["scaleY"] = (value/originalHeight).toFixed(2);
+            case property=="width":
+                actor.scaleX=(value*actor.scaleX/actor.width).toFixed(2);
                 break;
-            }
-            case "scaleX":{
-                var scaleX =this.model.sceneList[scenePos].actorList[actorPos]["scaleX"];
-                originalWidth = width/scaleX;
-                this.model.sceneList[scenePos].actorList[actorPos]["width"] = Math.round(originalWidth*value);
+            case property=="height":
+                actor.scaleY=(value*actor.scaleY/actor.height).toFixed(2);
                 break;
-            }
-            case "scaleY":{
-                var scaleY =this.model.sceneList[scenePos].actorList[actorPos]["scaleY"];
-                originalHeight = height/scaleY;
-                this.model.sceneList[scenePos].actorList[actorPos]["height"] = Math.round(originalHeight*value);
+            case property=="rotation":
+                value=Math.round(value);
                 break;
-            }
         }
-        this.model.sceneList[scenePos].actorList[actorPos][property]=value;
+        if (property in this.model.sceneList[scenePos].actorList[actorPos])
+             this.model.sceneList[scenePos].actorList[actorPos][property]=value;
         var isOpen = SideSheetView.isOpenActorProperties();
         this.selectScene(sceneID);
         this.selectActor(actorID);

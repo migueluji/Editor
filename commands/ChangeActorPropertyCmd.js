@@ -8,11 +8,21 @@ class ChangeActorPropertyCmd extends Command {
         this.value=value;
         this.scenePos=this.editor.model.sceneList.findIndex(i => i.id == sceneID);
         this.actorPos=this.editor.model.sceneList[this.scenePos].actorList.findIndex(i=>i.id==actorID);
-        if (property=="position"){ // Cambio de x e y a la vez
-            this.oldValue={ x:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["x"],
-                            y:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["y"]};
+        switch (property) {
+            case "position" :
+                this.oldValue={ x:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["x"],
+                                y:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["y"]};
+                break;
+            case "scale" :
+                this.oldValue={ x:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["x"],
+                                y:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["y"],
+                                scaleX:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["scaleX"],
+                                scaleY:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["scaleY"]};
+                break;
+            default:
+                this.oldValue=this.editor.model.sceneList[this.scenePos].actorList[this.actorPos][property];
+                break;
         }
-        else this.oldValue=this.editor.model.sceneList[this.scenePos].actorList[this.actorPos][property];
         this.type="ChangeActorPropertyCmd";
         this.name="Change Actor Property: "+this.property;
     }

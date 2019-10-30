@@ -9,7 +9,7 @@ class CanvasView {
             '<button id="addactor" class="do-button mdc-fab mdc-ripple-upgraded add-property-button">'+
                 '<i class="material-icons">add</i>'+
             '</button>';
-        this.html.querySelector("#addactor").addEventListener("click",this.addActorHandler.bind(this));
+        this.html.querySelector("#addactor").addEventListener("click",this.addActorHandler.bind(this,actorList));
         this.html.addEventListener("wheel",this.mouseStageWheel.bind(this));
         window.addEventListener("resize",this.resize.bind(this,actorList));
        
@@ -86,11 +86,11 @@ class CanvasView {
             new DisplayActor(this.app.stage,actor,texture); 
         }
 
-        const graphics1 = new PIXI.Graphics();
-        graphics1.lineStyle(20, 0xDD0000, 1, 1, true);
-        graphics1.drawRect(this.app.stage.hitArea.x,this.app.stage.hitArea.y,
-                            this.app.stage.hitArea.width,this.app.stage.hitArea.height);
-        this.app.stage.addChild(graphics1);
+        // const graphics1 = new PIXI.Graphics();
+        // graphics1.lineStyle(20, 0xDD0000, 1, 1, true);
+        // graphics1.drawRect(this.app.stage.hitArea.x,this.app.stage.hitArea.y,
+        //                     this.app.stage.hitArea.width,this.app.stage.hitArea.height);
+        // this.app.stage.addChild(graphics1);
     
     }
 
@@ -108,8 +108,9 @@ class CanvasView {
     }
 
 // Handlers
-    addActorHandler(){
-        console.log("Add Actor");
+    addActorHandler(actorList){
+        var sceneID=document.querySelector(".sceneselected").id;
+		CmdManager.addActorCmd(sceneID,actorList.length);
     }
 
     resize(actorList){
@@ -151,7 +152,6 @@ class CanvasView {
 
 // Utils
     hitArea(stage){
-        console.log(stage.scale.x);
         var width=window.innerWidth/stage.scale.x;
         var height=window.innerHeight/stage.scale.y;
         this.app.stage.hitArea = new PIXI.Rectangle(-width*5,height*5,width*10,-height*10);

@@ -51,7 +51,6 @@ class Actor {
         Object.keys(properties).forEach(element => {
 			delete obj[element];
         });
-        delete obj.position;
         delete obj.id;
         delete obj.name;
         delete obj.scriptList;

@@ -9,21 +9,17 @@ class DisplayActor extends PIXI.Container {
         this.buttonMode=true;
         this.x=actor.x;
         this.y=actor.y;
+        this.texture= texture || PIXI.Texture.EMPTY;
+        this.w= texture.width || 50;
+        this.h= texture.height || 50;
 
-        if (texture) {
-            this.tilingSprite = new PIXI.TilingSprite(texture,texture.width,texture.height);
-            this.tilingSprite.width=this.tilingSprite.texture.width*actor.tileX;
-            this.tilingSprite.height=this.tilingSprite.texture.height*actor.tileY;
-        }
-        else {
-            this.tilingSprite = new PIXI.TilingSprite(PIXI.Texture.EMPTY,50,50);
-            this.tilingSprite.width=50*actor.tileX;
-            this.tilingSprite.height=50*actor.tileY;
-        }
-
-        this.tilingSprite.scale.x=actor.scaleX;
-        this.tilingSprite.scale.y=-actor.scaleY; // cambio eje y gira la escala del sprite
+        this.tilingSprite = new PIXI.TilingSprite(this.texture,this.w,this.h);
+        this.tilingSprite.width=this.tilingSprite.texture.width*actor.tileX;
+        this.tilingSprite.height=this.tilingSprite.texture.height*actor.tileY;
+        (actor.flipX) ? this.tilingSprite.scale.x=-actor.scaleX : this.tilingSprite.scale.x=actor.scaleX; 
+        (actor.flipY) ? this.tilingSprite.scale.y=actor.scaleY : this.tilingSprite.scale.y=-actor.scaleY; // axis change and rotate the sprite scale
         this.tilingSprite.anchor.set(0.5);
+
         this.addChild(this.tilingSprite);
 
         this
@@ -33,126 +29,95 @@ class DisplayActor extends PIXI.Container {
             .on('pointermove',this.onPointerMove.bind(this));
 
         stage.addChild(this);
-        console.log("constructor",this.tilingSprite.height,this.height);
+        this.operation=null;
     }
 
     removeGizmo(){
-        this.removeChild(this.OBB);
-        this.removeChild(this.gRotation);
-        this.removeChild(this.gScaleUR);
+        this.removeChild(this.gizmo);
     }
 
     createGizmo(){
-     
-        this.points=this.computePoints(0,0,this.width,this.height);
-        var scale= {x:this.parent.scale.x,y:this.parent.scale.y};
-       
-        this.OBB = new PIXI.Graphics(); // Oriented Bounding Box
-        this.OBB.lineStyle(1, 0xDDDDDD, 1, 0, true);
-        this.OBB.moveTo(this.points[1].x,this.points[1].y);
-        this.OBB.lineTo(this.points[3].x,this.points[3].y);
-        this.OBB.lineTo(this.points[8].x,this.points[8].y);
-        this.OBB.lineTo(this.points[6].x,this.points[6].y);
-        this.OBB.closePath();
-        this.OBB.moveTo(this.points[2].x,this.points[2].y);
-        this.OBB.lineTo(this.points[0].x,this.points[0].y);
-        this.addChild(this.OBB);
+        this.gizmo=new PIXI.Container();
+        this.addChild(this.gizmo);
 
-        this.gScaleUR = new PIXI.Graphics();
-        this.gScaleUR.beginFill(0xDDDDDD);
-        this.gScaleUR.drawCircle(this.points[3].x,this.points[3].y,4.0/this.parent.scale.x);
-        this.gScaleUR.endFill();
-        this.gScaleUR.interactive=true;
-        this.gScaleUR.on("pointerdown",this.scaleStart.bind(this));
-        this.addChild(this.gScaleUR);
-        
-        this.gRotation = new PIXI.Graphics(); // Rotation gizmo
-        this.gRotation.lineStyle(1, 0xDDDDDD, 1, 0, true);
-        this.gRotation.beginFill(0xDDDDDD);
-        this.gRotation.drawCircle(0,this.points[0].y,4.0/this.parent.scale.x);
-        this.gRotation.endFill();
-        this.gRotation.interactive=true;
-        this.gRotation.on("pointerdown",this.rotateStart.bind(this));
-        this.addChild(this.gRotation);
-        console.log("create gizmo",this.tilingSprite.height,this.height);
+        this.points=this.computePoints(0,0,this.width,this.height);
+
+        this.createOBB(this.points);
+        this.createHandler(this.points[0],"circle",this.initRotationHandler,{x:this.x,y:this.y});
+        this.createHandler(this.points[1],"circle",this.initScaleHandler,this.points[8]);
+        this.createHandler(this.points[3],"circle",this.initScaleHandler,this.points[6]);
     }
 
 // Handlers
 
-    scaleStart(e){
+    initScaleHandler(pivot,e){
+    //    console.log("initScale3",this,e,pivot);
         this.operation ="scaling";
-        this.p0=e.data.getLocalPosition(this.parent); 
-        this.size0={w:this.tilingSprite.width*this.tilingSprite.scale.x,h:this.tilingSprite.height*-this.tilingSprite.scale.y};
-        this.scale0={x:this.tilingSprite.scale.x,y:this.tilingSprite.scale.y};
-        this.position0={x:this.x,y:this.y};
+        this.mouseDown=e.data.getLocalPosition(this.parent); 
 
-        var p={x:-this.size0.w/2,y:-this.size0.h/2};
+        this.initSize={w:this.tilingSprite.width*this.tilingSprite.scale.x,h:this.tilingSprite.height*-this.tilingSprite.scale.y};
+        this.initScale={x:this.tilingSprite.scale.x,y:this.tilingSprite.scale.y};
+        this.initAngle=this.angle;
 
-        var newx= p.x*Math.cos(this.rotation)-p.y*Math.sin(this.rotation);
-        var newy= p.x*Math.sin(this.rotation)+p.y*Math.cos(this.rotation);
+        var pivotX= pivot.x*Math.cos(this.rotation)-pivot.y*Math.sin(this.rotation);
+        var pivotY= pivot.x*Math.sin(this.rotation)+pivot.y*Math.cos(this.rotation);
+        this.initPivot={x:this.x+pivotX,y:this.y+pivotY};
 
-        this.origen={x:this.x+newx,y:this.y+newy};
-
-        this.angle0=this.angle;
-        console.log("scale start",this.tilingSprite.height,this.height,this.size0.h);
         e.stopPropagation();
     }
 
-    rotateStart(e){
+    initRotationHandler(pivot,e){
         this.operation="rotating";
-        this.position0={x:this.x,y:this.y};
+        this.mouseDown={x:pivot.x,y:pivot.y}; // pivot = this.x,this.y
         e.stopPropagation();
     }
 
     onPointerDown (e){
         this.operation="dragging";
-        this.point0=e.data.getLocalPosition(this.parent);
-        this.offset={x:this.point0.x-this.x,y:this.point0.y-this.y};
+        this.mouseDown=e.data.getLocalPosition(this.parent);
+        this.initPosition={x:this.x,y:this.y};
         Command.selectActorCmd(this.id);
         e.stopPropagation();
     }
 
     onPointerMove(e){
-        var p1= e.data.getLocalPosition(this.parent);
+        if (this.operation){
+            var mouseMove= e.data.getLocalPosition(this.parent);
+            var diff={x:mouseMove.x-this.mouseDown.x,y:mouseMove.y-this.mouseDown.y};
+        }     
         switch (this.operation) {
             case "dragging":
-                this.x=p1.x-this.offset.x; 
-                this.y=p1.y-this.offset.y; 
+                this.x= this.initPosition.x + diff.x;
+                this.y= this.initPosition.y + diff.y; 
                 break;
             case "rotating":
-                this.angle =  -90 + Math.atan2(p1.y-this.position0.y,p1.x-this.position0.x)*180/Math.PI; 
+                this.angle = - 90 + Math.atan2(diff.y,diff.x)*180/Math.PI;
+                if (this.angle<0.0) this.angle +=360; //convert atan2 value to standar 360 degree system value
                 break;
             case "scaling" :
-                var dispX=p1.x-this.p0.x;
-                var dispY=p1.y-this.p0.y;
                 this.removeGizmo();
                 this.x=0;this.y=0;this.angle=0;
-                this.updateWorldTransform;
+                diff.x=diff.y=(diff.x+diff.y)/2.0;
+                this.tilingSprite.scale.x=this.initScale.x*(this.initSize.w+diff.x)/this.initSize.w;
+                this.tilingSprite.scale.y=-this.tilingSprite.scale.x;
+          
+                //this.tilingSprite.scale.y=this.initScale.y*(this.initSize.h+diff.y)/this.initSize.h;
 
-                this.tilingSprite.scale.x=this.scale0.x*(this.size0.w+dispX)/this.size0.w;
-                this.tilingSprite.scale.y=this.scale0.y*(this.size0.h+dispY)/this.size0.h;
-                console.log("move1",this.tilingSprite.height,this.height,this.size0.h);
-                this.updateWorldTransform;
-
-                this.angle=this.angle0;
+                this.angle=this.initAngle;
                 var p={x:this.tilingSprite.width*this.tilingSprite.scale.x/2,y:-this.tilingSprite.height*this.tilingSprite.scale.y/2};
                 this.x= p.x*Math.cos(this.rotation)-p.y*Math.sin(this.rotation);
                 this.y= p.x*Math.sin(this.rotation)+p.y*Math.cos(this.rotation);
-                console.log("move2",this.tilingSprite.height,this.height,this.size0.h);
-                this.updateWorldTransform;
         
-                this.x= this.x+this.position0.x;
-                this.y= this.y+this.position0.y;
-                console.log("move3",this.tilingSprite.height,this.height,-this.tilingSprite.height*this.tilingSprite.scale.y);
-                this.updateWorldTransform;
+                this.x= (this.x+this.initPivot.x);
+                this.y= (this.y+this.initPivot.y);
 
-                console.log(this.x,this.y);
-                this.x= this.x-(this.position0.x-this.origen.x);
-                this.y= this.y-(this.position0.y-this.origen.y);
-                console.log((this.position0.x-this.origen.x),this.position0.x,this.origen.x);
-                console.log("move4",this.tilingSprite.height,this.height,this.size0.h);
-                this.updateWorldTransform;
-
+                if (this.tilingSprite.scale.x<0){
+                    this.angle=this.initAngle+180;
+                    this.tilingSprite.scale.x=-this.tilingSprite.scale.x;
+                    this.tilingSprite.scale.y=-this.tilingSprite.scale.x;
+                }
+      
+                console.log(this.tilingSprite.scale.x,this.x,this.y);
                 this.createGizmo();
                 break;            
         }
@@ -160,19 +125,18 @@ class DisplayActor extends PIXI.Container {
 
     onPointerUp(e){    
         var sceneID=document.querySelector(".sceneselected").id; 
-        var point1= e.data.getLocalPosition(this.parent);point1.y=-point1.y;
+        var mouseUp= e.data.getLocalPosition(this.parent);mouseUp.y=-mouseUp.y;
         switch (this.operation) {
             case "dragging":
-                    if (point1.x!=this.point0.x || point1.y!=this.point0.y){
+                    if (mouseUp.x!=this.mouseDown.x || mouseUp.y!=this.mouseDown.y){
                         CmdManager.changeActorPropertyCmd(sceneID,this.id,"position",{x:this.x,y:this.y});
                     }; break;
             case "rotating":
                     CmdManager.changeActorPropertyCmd(sceneID,this.id,"rotation",this.angle); break;
             case "scaling":
-                    CmdManager.changeActorPropertyCmd(sceneID,this.id,"scaleX",this.tilingSprite.scale.x.toFixed(2)); 
-                    CmdManager.changeActorPropertyCmd(sceneID,this.id,"scaleY",-this.tilingSprite.scale.y.toFixed(2));
-                    CmdManager.changeActorPropertyCmd(sceneID,this.id,"x",this.x);
-                    CmdManager.changeActorPropertyCmd(sceneID,this.id,"y",this.y);
+                    CmdManager.changeActorPropertyCmd(sceneID,this.id,"scale",{
+                        x:this.x,y:this.y,rotation:this.angle,
+                        scaleX:this.tilingSprite.scale.x,scaleY:this.tilingSprite.scale.x}); 
                     break;
         } 
         this.operation=null;
@@ -181,16 +145,34 @@ class DisplayActor extends PIXI.Container {
 
 // Utils
     computePoints(x,y,w,h){
-        var p=[];
-        p[0]={x:x,y:y+h/2+20}
-        p[1]={x:x-w/2,y:y+h/2};
-        p[2]={x:x,y:y+h/2};
-        p[3]={x:x+w/2,y:y+h/2};
-        p[4]={x:x-w/2,y:y};
-        p[5]={x:x+w/2,y:y};
-        p[6]={x:x-w/2,y:y-h/2};
-        p[7]={x:x,y:y-h/2};
-        p[8]={x:x+w/2,y:y-h/2};
+        var p=[];                   p[0]={x:x,y:y+h/2+25};
+        p[1]={x:x-w/2,y:y+h/2};     p[2]={x:x,y:y+h/2};         p[3]={x:x+w/2,y:y+h/2};
+        p[4]={x:x-w/2,y:y};                                     p[5]={x:x+w/2,y:y};
+        p[6]={x:x-w/2,y:y-h/2};     p[7]={x:x,y:y-h/2};         p[8]={x:x+w/2,y:y-h/2};
         return p;
     }
+
+    createOBB(p){
+        var OBB = new PIXI.Graphics(); // Oriented Bounding Box
+        OBB.lineStyle(1, 0xDDDDDD, 1, 0, true);
+        OBB.moveTo(p[1].x,p[1].y);
+        OBB.lineTo(p[3].x,p[3].y);
+        OBB.lineTo(p[8].x,p[8].y);
+        OBB.lineTo(p[6].x,p[6].y);
+        OBB.closePath();
+        OBB.moveTo(p[2].x,p[2].y);
+        OBB.lineTo(p[0].x,p[0].y);
+        this.gizmo.addChild(OBB);
+    }
+
+    createHandler(p,type,handler,pivot){
+        var graphic = new PIXI.Graphics();
+        graphic.beginFill(0xDDDDDD);
+        if(type=="circle") graphic.drawCircle(p.x,p.y,4.0/this.parent.scale.x);
+        graphic.endFill();
+        graphic.interactive=true;
+        graphic.on("pointerdown",handler.bind(this,pivot));
+        this.gizmo.addChild(graphic);
+    }
+
 }
