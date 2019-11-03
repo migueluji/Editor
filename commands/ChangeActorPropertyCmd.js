@@ -16,6 +16,7 @@ class ChangeActorPropertyCmd extends Command {
             case "scale" :
                 this.oldValue={ x:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["x"],
                                 y:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["y"],
+                                rotation:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["rotation"],
                                 scaleX:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["scaleX"],
                                 scaleY:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["scaleY"]};
                 break;

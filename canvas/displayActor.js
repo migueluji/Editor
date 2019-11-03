@@ -44,25 +44,25 @@ class DisplayActor extends PIXI.Container {
 
         this.createOBB(this.points);
         this.createHandler(this.points[0],"circle",this.initRotationHandler,{x:this.x,y:this.y});
-        this.createHandler(this.points[1],"circle",this.initScaleHandler,this.points[8]);
+     //   this.createHandler(this.points[1],"circle",this.initScaleHandler,this.points[8]);
         this.createHandler(this.points[3],"circle",this.initScaleHandler,this.points[6]);
     }
 
 // Handlers
 
     initScaleHandler(pivot,e){
-    //    console.log("initScale3",this,e,pivot);
+        
+        console.log(this,pivot,e);
         this.operation ="scaling";
         this.mouseDown=e.data.getLocalPosition(this.parent); 
-
+  
         this.initSize={w:this.tilingSprite.width*this.tilingSprite.scale.x,h:this.tilingSprite.height*-this.tilingSprite.scale.y};
         this.initScale={x:this.tilingSprite.scale.x,y:this.tilingSprite.scale.y};
         this.initAngle=this.angle;
 
-        var pivotX= pivot.x*Math.cos(this.rotation)-pivot.y*Math.sin(this.rotation);
-        var pivotY= pivot.x*Math.sin(this.rotation)+pivot.y*Math.cos(this.rotation);
-        this.initPivot={x:this.x+pivotX,y:this.y+pivotY};
-
+        var newPivot=this.rotatePoint(pivot,this.rotation);
+        this.initPivot={x:this.x+newPivot.x,y:this.y+newPivot.y};
+        console.log("initScale3",this.initSize,this.tilingSprite.width,this.tilingSprite.scale.x);
         e.stopPropagation();
     }
 
@@ -96,28 +96,26 @@ class DisplayActor extends PIXI.Container {
                 break;
             case "scaling" :
                 this.removeGizmo();
+                    
                 this.x=0;this.y=0;this.angle=0;
-                diff.x=diff.y=(diff.x+diff.y)/2.0;
-                this.tilingSprite.scale.x=this.initScale.x*(this.initSize.w+diff.x)/this.initSize.w;
-                this.tilingSprite.scale.y=-this.tilingSprite.scale.x;
-          
-                //this.tilingSprite.scale.y=this.initScale.y*(this.initSize.h+diff.y)/this.initSize.h;
+        
+                var diff={x:mouseMove.x-this.initPivot.x,y:mouseMove.y-this.initPivot.y};
+                diff=this.rotatePoint(diff,-this.initAngle*Math.PI/180);
+
+                this.tilingSprite.scale.x= this.initScale.x* (diff.x)/this.initSize.w;
+                this.tilingSprite.scale.y= this.initScale.y * this.tilingSprite.scale.x/ this.initScale.x;
 
                 this.angle=this.initAngle;
                 var p={x:this.tilingSprite.width*this.tilingSprite.scale.x/2,y:-this.tilingSprite.height*this.tilingSprite.scale.y/2};
-                this.x= p.x*Math.cos(this.rotation)-p.y*Math.sin(this.rotation);
-                this.y= p.x*Math.sin(this.rotation)+p.y*Math.cos(this.rotation);
-        
-                this.x= (this.x+this.initPivot.x);
-                this.y= (this.y+this.initPivot.y);
+                this.position=this.rotatePoint(p,this.rotation);
+                
+                this.position={x:this.x+this.initPivot.x,y:this.y+this.initPivot.y};
 
                 if (this.tilingSprite.scale.x<0){
                     this.angle=this.initAngle+180;
-                    this.tilingSprite.scale.x=-this.tilingSprite.scale.x;
-                    this.tilingSprite.scale.y=-this.tilingSprite.scale.x;
+                    this.tilingSprite.scale={x:-this.tilingSprite.scale.x,y:-this.tilingSprite.scale.y};
                 }
-      
-                console.log(this.tilingSprite.scale.x,this.x,this.y);
+          
                 this.createGizmo();
                 break;            
         }
@@ -136,7 +134,7 @@ class DisplayActor extends PIXI.Container {
             case "scaling":
                     CmdManager.changeActorPropertyCmd(sceneID,this.id,"scale",{
                         x:this.x,y:this.y,rotation:this.angle,
-                        scaleX:this.tilingSprite.scale.x,scaleY:this.tilingSprite.scale.x}); 
+                        scaleX:this.tilingSprite.scale.x,scaleY:-this.tilingSprite.scale.y}); 
                     break;
         } 
         this.operation=null;
@@ -150,6 +148,12 @@ class DisplayActor extends PIXI.Container {
         p[4]={x:x-w/2,y:y};                                     p[5]={x:x+w/2,y:y};
         p[6]={x:x-w/2,y:y-h/2};     p[7]={x:x,y:y-h/2};         p[8]={x:x+w/2,y:y-h/2};
         return p;
+    }
+
+    rotatePoint(p,angle){
+        var newX= p.x*Math.cos(angle)-p.y*Math.sin(angle);
+        var newY= p.x*Math.sin(angle)+p.y*Math.cos(angle);
+        return {x:newX,y:newY}
     }
 
     createOBB(p){
