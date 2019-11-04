@@ -370,7 +370,7 @@
 					"height": 73,
 					"scaleX": 1,
 					"scaleY": 1,
-					"rotation": 0,
+					"rotation": 210,
 					"screen": false,
 					"collider": "Box",
 					"tags": "",

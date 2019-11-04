@@ -6,22 +6,23 @@ class ChangeActorPropertyCmd extends Command {
         this.actorID=actorID;
         this.property=property;
         this.value=value;
-        this.scenePos=this.editor.model.sceneList.findIndex(i => i.id == sceneID);
-        this.actorPos=this.editor.model.sceneList[this.scenePos].actorList.findIndex(i=>i.id==actorID);
+        var scenePos=this.editor.model.sceneList.findIndex(i => i.id == sceneID);
+        var actorPos=this.editor.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID);
+        var actor=this.editor.model.sceneList[scenePos].actorList[actorPos];
         switch (property) {
             case "position" :
-                this.oldValue={ x:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["x"],
-                                y:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["y"]};
+                this.oldValue={x:actor.x,y:actor.y};
+                break;
+            case "scaleUniform" :
+                this.oldValue={x:actor.x,y:actor.y,rotation:actor.rotation,flipX:actor.flipX,
+                                scaleX:actor.scaleX,scaleY:actor.scaleY};
                 break;
             case "scale" :
-                this.oldValue={ x:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["x"],
-                                y:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["y"],
-                                rotation:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["rotation"],
-                                scaleX:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["scaleX"],
-                                scaleY:this.editor.model.sceneList[this.scenePos].actorList[this.actorPos]["scaleY"]};
+                this.oldValue={x:actor.x,y:actor.y,rotation:actor.rotation,flipX:actor.flipX,
+                               scaleX:actor.scaleX,scaleY:actor.scaleY};
                 break;
             default:
-                this.oldValue=this.editor.model.sceneList[this.scenePos].actorList[this.actorPos][property];
+                this.oldValue=actor[property];
                 break;
         }
         this.type="ChangeActorPropertyCmd";

@@ -159,6 +159,17 @@ class Editor {
                 actor.x=Math.round(value.x);
                 actor.y=Math.round(value.y);
                 break;
+            case property=="scaleUniform":
+                console.log(value);
+                actor.x=Math.round(value.x);
+                actor.y=Math.round(value.y);
+                actor.rotation=Math.round(value.rotation);
+                actor.width=Math.round(actor.width/actor.scaleX*value.scaleX);
+                actor.height=Math.round(actor.height/actor.scaleY*value.scaleY);
+                actor.scaleX=Number(value.scaleX).toFixed(2);
+                actor.scaleY= Number(value.scaleY).toFixed(2);
+                actor.flipX=value.flipX;
+                break;
             case property=="scale":
                 console.log(value);
                 actor.x=Math.round(value.x);
@@ -168,6 +179,7 @@ class Editor {
                 actor.height=Math.round(actor.height/actor.scaleY*value.scaleY);
                 actor.scaleX=Number(value.scaleX).toFixed(2);
                 actor.scaleY= Number(value.scaleY).toFixed(2);
+                actor.flipX=value.flipX;
                 break;
             case property=="tileX" || property=="scaleX": 
                 actor.width=Math.round(actor.width/actor.tileX*value);
