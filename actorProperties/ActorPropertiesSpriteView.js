@@ -27,12 +27,12 @@ class ActorPropertiesSpriteView {
 				'</div>'+
 				'<div class="two-properties">'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="color" type="text" value="#ffffff" class="mdc-text-field__input">'+
+						'<input id="color" type="color" value="#ffffff" class="mdc-text-field__input">'+
 						'<label class="mdc-floating-label" for="text-field-filled">Color</label>'+
 							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="opacity" min="0" max="1" step="0.1" type="number" value="1" class="mdc-text-field__input">'+
+						'<input id="opacity" min="0" max="1" step="0.1" type="number" value="0" class="mdc-text-field__input">'+
 						'<label class="mdc-floating-label" for="text-field-filled">Opacity</label>'+
 							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 						'</div>'+	

@@ -3,29 +3,17 @@ class Game {
     constructor(game) {
         this.name=game.name || "Untitled Game"
         Object.assign(this,game);
-        // if (this.imageList){
-        //     const sprites={};
-        //     this.loader = new PIXI.Loader("./images",this.imageList.length);
-        //     this.loader.add(this.imageList);
-        //     this.loader.load(this.imageLoadComplete.bind(this));            
-        // }
         if (this.soundList) this.soundList.forEach((sound,i) => this.soundList[i]=new Asset(sound));
         if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]=new Asset(font));
         this.sceneList.forEach((scene,i) => this.sceneList[i]=new Scene(scene));
     }
 
-    // imageLoadComplete(){
-    //     var sprite = new PIXI.sprite(
-    //         //this.loader.resources[].texture;
-    //     );
-    //     console.log("image list load complete...",this.loader);
-    // }
-
     get properties(){
         var obj={
             // Settings
             width:this.width, height:this.height, 
-            cameraX:this.cameraX, cameraY:this.cameraY, cameraRotation:this.cameraRotation, cameraZoom:this.cameraZoom,
+            cameraX:this.cameraX, cameraY:this.cameraY, cameraAngle:this.cameraAngle, cameraZoom:this.cameraZoom,
+            backgroundColor:this.backgroundColor,
             // Sound
             play:this.play, sound:this.sound, volume:this.volume, start:this.start, pan:this.pan, loop:this.loop, 
             // Physics

@@ -135,7 +135,7 @@ class ActorView {
 				count++;
 			}
 		}
-		return count++;
+		return length-count+1;
 	}
 }
 

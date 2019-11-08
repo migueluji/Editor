@@ -13,12 +13,12 @@ class ChangeActorPropertyCmd extends Command {
             case "position" :
                 this.oldValue={x:actor.x,y:actor.y};
                 break;
-            case "scaleUniform" :
-                this.oldValue={x:actor.x,y:actor.y,rotation:actor.rotation,flipX:actor.flipX,
+            case "scale" :
+                this.oldValue={x:actor.x,y:actor.y,angle:actor.angle,flipX:actor.flipX,
                                 scaleX:actor.scaleX,scaleY:actor.scaleY};
                 break;
-            case "scale" :
-                this.oldValue={x:actor.x,y:actor.y,rotation:actor.rotation,flipX:actor.flipX,
+            case "scaleNoUniform" :
+                this.oldValue={x:actor.x,y:actor.y,angle:actor.angle,flipX:actor.flipX,
                                scaleX:actor.scaleX,scaleY:actor.scaleY};
                 break;
             default:

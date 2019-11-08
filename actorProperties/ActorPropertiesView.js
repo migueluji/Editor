@@ -88,6 +88,7 @@ class ActorPropertiesView {
 			case "checkbox": 	this.value=Boolean(element.checked); break;
 			case "number" : 	this.value=Number(element.value); break;
 			case "text" : 		this.value=String(element.value).trim(); break;
+			case "color" : 		this.value=String(element.value); break;
 		}
 		var sceneID=document.querySelector(".sceneselected").id;
 		var actorID=document.querySelector(".actorselected").id;

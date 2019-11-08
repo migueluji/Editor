@@ -19,7 +19,7 @@ class Editor {
         this.view.addView(this.drawerScenesView.html);
         this.view.addView(this.drawerHeaderView.html);
 
-        this.canvasView = new CanvasView(gameModel.imageList,this.model.sceneList[this.selectedSceneIndex].actorList,this.model.width,this.model.height);
+        this.canvasView = new CanvasView(gameModel.imageList,this.model.sceneList[this.selectedSceneIndex].actorList,gameModel.properties);
         this.view.addView(this.canvasView.html);
         this.scriptCanvasView = new ScriptCanvasView();
         this.view.addView(this.scriptCanvasView.html);
@@ -58,6 +58,7 @@ class Editor {
         this.model[property]=value;
         this.openGameProperties();
         this.gamePropertiesView.updateGameProperty(property,value);
+        this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model);
      }
 
 /* Game editor commands */
@@ -102,7 +103,7 @@ class Editor {
        this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
        this.drawerScenesView.updateSelectedScene(sceneID);
        this.appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
-       this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList); // actualiza el canvas
+       this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model.properties); // actualiza el canvas
        if (oldSelectedSceneIndex!=this.selectedSceneIndex) this.selectedActorIndex=null;
        if (SideSheetView.isOpenCast()) this.openCast();
        else if (SideSheetView.isOpenGameProperties()) this.openGameProperties();
@@ -121,8 +122,7 @@ class Editor {
         this.appBarView.drawerToogle();
         var actorID=null;
         if (this.selectedActorIndex!=null) actorID=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].id;
-      // this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList);
-        this.canvasView.updateStage();
+        this.canvasView.updateStageDrawer();
         if (actorID) this.canvasView.updateSelectedActor(actorID);
     }
 
@@ -159,22 +159,20 @@ class Editor {
                 actor.x=Math.round(value.x);
                 actor.y=Math.round(value.y);
                 break;
-            case property=="scaleUniform":
-                console.log(value);
+            case property=="scale":
                 actor.x=Math.round(value.x);
                 actor.y=Math.round(value.y);
-                actor.rotation=Math.round(value.rotation);
+                actor.angle=Math.round(value.angle);
                 actor.width=Math.round(actor.width/actor.scaleX*value.scaleX);
                 actor.height=Math.round(actor.height/actor.scaleY*value.scaleY);
                 actor.scaleX=Number(value.scaleX).toFixed(2);
                 actor.scaleY= Number(value.scaleY).toFixed(2);
                 actor.flipX=value.flipX;
                 break;
-            case property=="scale":
-                console.log(value);
+            case property=="scaleNoUniform": 
                 actor.x=Math.round(value.x);
                 actor.y=Math.round(value.y);
-                actor.rotation=Math.round(value.rotation);
+                actor.angle=Math.round(value.angle);
                 actor.width=Math.round(actor.width/actor.scaleX*value.scaleX);
                 actor.height=Math.round(actor.height/actor.scaleY*value.scaleY);
                 actor.scaleX=Number(value.scaleX).toFixed(2);
@@ -194,16 +192,16 @@ class Editor {
             case property=="height":
                 actor.scaleY=(value*actor.scaleY/actor.height).toFixed(2);
                 break;
-            case property=="rotation":
+            case property=="angle":
                 value=Math.round(value);
                 break;
         }
         if (property in this.model.sceneList[scenePos].actorList[actorPos])
              this.model.sceneList[scenePos].actorList[actorPos][property]=value;
         var isOpen = SideSheetView.isOpenActorProperties();
-        this.selectScene(sceneID);
-        this.selectActor(actorID);
-        if (property=="name")this.openCast();
+       this.selectScene(sceneID);
+       this.selectActor(actorID);
+       if (property=="name")this.openCast();
         if (isOpen) this.openActorProperties();
     }
 

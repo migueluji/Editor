@@ -26,7 +26,7 @@ class ActorPropertiesPhysicsView {
 					'<div class="mdc-form-field">'+
 					'<label class="text-check-label">Fixed Rotation</label>'+
 						'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
-							'<input id="fixedRotation" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
+							'<input id="fixedAngle" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
 							'<div class="mdc-checkbox__background">'+
 								'<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">'+
 									'<path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>'+

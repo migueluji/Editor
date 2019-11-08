@@ -36,7 +36,7 @@ class GamePropertiesView {
 		var element=this.html.querySelector("#"+property);
 		(element.type==="checkbox") ? element.value=element.checked=Boolean(value) : element.value=value;
 		if (property == "play") this.soundView.onClickHandler();
-      	if (property == "active") this.physicsView.onClickHandler();
+		if (property == "active") this.physicsView.onClickHandler();
 		element.focus();
 	}
 
@@ -74,7 +74,9 @@ class GamePropertiesView {
 			case "checkbox": 	this.value=Boolean(element.checked); break;
 			case "number" : 	this.value=Number(element.value); break;
 			case "text" : 		this.value=String(element.value).trim(); break;
+			case "color" : 		this.value=String(element.value); break;
 		}
+		console.log(element.value);
 		CmdManager.changeGamePropertyCmd(this.property,this.value);
 	}
 
@@ -82,9 +84,11 @@ class GamePropertiesView {
 	update(gameModel){
 		Object.keys(gameModel.properties).forEach(element => {
 			this.updateGameProperty(element,gameModel.properties[element]);
+			document.activeElement.blur();
 		});
 		this.newPropertiesView= new NewPropertiesView(gameModel.newProperties);
 		this.addView(this.newPropertiesView.html);
+
 	}
 
 }

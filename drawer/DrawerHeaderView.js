@@ -12,7 +12,7 @@ class DrawerHeaderView {
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 					'<div style="width:25%;position:relative">'+
-	                    '<button id="gameProperties" class="mdc-button mdc-button-upgraded upload-button" style="right:-8px;top:16px">'+
+	                    '<button id="gameProperties" class="mdc-button mdc-button-upgraded upload-button" style="right:-16px;top:16px">'+
                             '<i class="material-icons mdc-button_icon">settings</i>'+
                         '</button>'+					
                     '</div>'+	

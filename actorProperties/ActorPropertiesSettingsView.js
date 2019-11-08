@@ -47,8 +47,8 @@ class ActorPropertiesSettingsView {
 				'</div>'+	
 				'<div class="two-properties">'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="rotation" type="number" value="0"  class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Rotation</label>'+
+						'<input id="angle" type="number" value="0"  class="mdc-text-field__input">'+
+						'<label class="mdc-floating-label" for="text-field-filled">Angle</label>'+
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 					'<div class="mdc-form-field">'+
