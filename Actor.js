@@ -27,13 +27,13 @@ class Actor {
             // Text
             write:this.write || false, text:this.text || "",
             font:this.font || "Arial", size:this.size || 30,
-            color:this.color || "#ffffff" , style:this.style || "Normal" ,
+            fill:this.fill || "#000000" , style:this.style || "Normal" ,
             align:this.align || "Left", offsetX:this.offsetX || 0,
             offsetY:this.offsetY || 0,
             // Sound
             play:this.play || false, sound:this.sound || undefined,
             start:this.start || 0, volume: String(this.volume) || 1,
-            pan:this.pan || 0 , loop:this.loop || true,
+            pan:this.pan || 0 , loop:this.loop || false,
             // Physics
             active:this.active || false, type:this.type || "Kinematic",
             fixedAngle:this.fixedAngle || false,

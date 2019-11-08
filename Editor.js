@@ -19,7 +19,7 @@ class Editor {
         this.view.addView(this.drawerScenesView.html);
         this.view.addView(this.drawerHeaderView.html);
 
-        this.canvasView = new CanvasView(gameModel.imageList,this.model.sceneList[this.selectedSceneIndex].actorList,gameModel.properties);
+        this.canvasView = new CanvasView(gameModel,this.selectedSceneIndex);
         this.view.addView(this.canvasView.html);
         this.scriptCanvasView = new ScriptCanvasView();
         this.view.addView(this.scriptCanvasView.html);
@@ -56,9 +56,15 @@ class Editor {
 
     changeGameProperty(property,value){
         this.model[property]=value;
-        this.openGameProperties();
-        this.gamePropertiesView.updateGameProperty(property,value);
-        this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model);
+        if(property!="name"){
+            this.openGameProperties();
+            this.gamePropertiesView.updateGameProperty(property,value);
+            this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model);
+        }
+        else {
+            if (!document.querySelector(".mdc-drawer").classList.contains("mdc-drawer--open")) this.drawerToggle();
+            this.drawerHeaderView.updateGameName(value);
+        }
      }
 
 /* Game editor commands */
@@ -268,7 +274,7 @@ class Editor {
         else this.selectedActorIndex=null;
         if (SideSheetView.isOpenActorProperties() && actorID!=null) this.openActorProperties();
         if (actorID==null && !SideSheetView.isOpenCast()) SideSheetView.closeSheetHandler();
-        this.castView.updateSelectedActor(actorID);
+        if (SideSheetView.isOpenCast() || SideSheetView.isOpenActorProperties()) this.castView.updateSelectedActor(actorID);
         this.canvasView.updateSelectedActor(actorID);
     }
 

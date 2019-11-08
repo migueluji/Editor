@@ -18,7 +18,7 @@ class ActorPropertiesTextView {
 			'</li>'+
 			'<div class="properties-panel">'+
 				'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-					'<input id="text" type="text" value="" class="mdc-text-field__input">'+
+					'<input id="text" type="text" value="Write anything..." class="mdc-text-field__input">'+
 					'<label class="mdc-floating-label" for="text-field-filled">Text</label>'+
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 				'</div>'+	
@@ -32,8 +32,8 @@ class ActorPropertiesTextView {
 				'</div>'+
 				'<div class="two-properties">'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="color" type="text" value="#ffffff" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Color</label>'+
+						'<input id="fill" type="color" value="#ffffff" class="mdc-text-field__input">'+
+						'<label class="mdc-floating-label" for="text-field-filled">Fill</label>'+
 							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+

@@ -29,7 +29,9 @@ class DrawerHeaderView {
     }
 
     updateGameName(name){
-        this.html.querySelector("#name").value=name;
+        var element=this.html.querySelector("#name")
+        element.value=name;
+        element.focus();
     }
 
 // Handlers

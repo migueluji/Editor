@@ -1,6 +1,7 @@
 class CanvasView {
 
-    constructor(imageList,actorList,properties) {  
+    constructor(game,sceneIndex) {  
+        this.actorList=game.sceneList[sceneIndex].actorList;
 		this.html = document.createElement("div");
         this.html.className +="canvas";
         this.html.style.display="block";
@@ -9,17 +10,16 @@ class CanvasView {
             '<button id="addactor" class="do-button mdc-fab mdc-ripple-upgraded add-property-button">'+
                 '<i class="material-icons">add</i>'+
             '</button>';
-        this.html.querySelector("#addactor").addEventListener("click",this.addActorHandler.bind(this,actorList));
+        this.html.querySelector("#addactor").addEventListener("click",this.addActorHandler.bind(this));
         this.html.addEventListener("wheel",this.mouseStageWheel.bind(this));
-        window.addEventListener("resize",this.resize.bind(this,actorList,properties));
+        window.addEventListener("resize",this.resize.bind(this));
        
-        this.actorList=actorList;
-        this.properties=properties;
+        this.gameProperties=game.properties;
         this.selected=false;
         this.displayObject=null;
         this.mouseDown=false;
         this.diff={x:0,y:0} 
-        this.loadImages(imageList);
+        this.loadImages(game.imageList);
     }
 
     loadImages(imageList){
@@ -36,6 +36,7 @@ class CanvasView {
 
     initApp(){
         this.app = new PIXI.Application();
+        console.log()
         this.app.renderer.view.style.position = "absolute";
         this.app.renderer.view.style.display = "block"; 
         this.html.appendChild(this.app.view);
@@ -54,7 +55,7 @@ class CanvasView {
         this.app.stage.x =this.initStage.x ;
         this.app.stage.y =this.initStage.y ;
  
-        this.update(this.actorList,this.properties); 
+        this.update(); 
     }
 
 
@@ -65,26 +66,23 @@ class CanvasView {
         this.hitArea(this.scene);
     }
 
-    update(actorList,gameProperties){
+    update(){
 
         this.app.stage.removeChildren();
-        this.app.renderer.backgroundColor="0x"+String(gameProperties.backgroundColor).substr(1);
+        this.app.renderer.backgroundColor="0x"+String(this.gameProperties.backgroundColor).substr(1);
 
         const frame = new PIXI.Graphics(); // draw the camera frame
         frame.lineStyle(20, 0xDDDDDD, 1, 1, true);
-        frame.drawRect(-gameProperties.width/2.0,-gameProperties.height/2.0,gameProperties.width,gameProperties.height);
+        frame.drawRect(-this.gameProperties.width/2.0,-this.gameProperties.height/2.0,this.gameProperties.width,this.gameProperties.height);
         this.app.stage.addChild(frame);
  
         this.scene= new PIXI.Container(); // create the scene container
-        this.scene.position ={x:-gameProperties.cameraX,y:gameProperties.cameraY};
-        this.scene.angle = gameProperties.cameraAngle;
-        this.scene.scale = {x:gameProperties.cameraZoom,y:-gameProperties.cameraZoom};
+        this.scene.position ={x:-this.gameProperties.cameraX,y:this.gameProperties.cameraY};
+        this.scene.angle = this.gameProperties.cameraAngle;
+        this.scene.scale = {x:this.gameProperties.cameraZoom,y:-this.gameProperties.cameraZoom};
   
-        actorList.forEach(actor => {
-            var texture = null;
-            if (actor.image) texture = this.loader.resources[actor.image].texture;
-            else texture=PIXI.Texture.WHITE;
-            var displayActor = new DisplayActor(actor,texture); 
+        this.actorList.forEach(actor => {
+            var displayActor = new DisplayActor(actor,this.actorList,this.gameProperties,this.loader); 
             this.scene.addChild(displayActor);
         });
 
@@ -106,16 +104,16 @@ class CanvasView {
     }
 
 // Handlers
-    addActorHandler(actorList){
+    addActorHandler(){
         var sceneID=document.querySelector(".sceneselected").id;
-		CmdManager.addActorCmd(sceneID,actorList.length);
+		CmdManager.addActorCmd(sceneID,this.actorList.length);
     }
 
-    resize(actorList,properties){
+    resize(){
         var drawerApp=document.querySelector(".mdc-drawer-app-content");
         this.drawerOffset = drawerApp.getBoundingClientRect().x;
         this.app.renderer.resize(window.innerWidth,window.innerHeight);
-        this.update(actorList,properties);
+        this.update(this.actorList,this.gameProperties);
         if (this.selected) Command.selectActorCmd(this.displayObject.id);
     }
 

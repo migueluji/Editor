@@ -80,7 +80,6 @@ class ActorPropertiesSettingsView {
 	}
 
 // Handlers
-
 	propertyGroupHandler(){
 		var element=this.html.querySelector(".properties-panel");
 		var expandButton=this.html.querySelector("#expandbutton");

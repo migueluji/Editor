@@ -1,14 +1,57 @@
 class DisplayActor extends PIXI.Container {
 
-    constructor(actor,texture) {
+    constructor(actor,cast,game,loader) {
         super();
-        this.id=actor.id;  
+        this.id=actor.id;
+        this.game=game;  
         this.angle=actor.angle;
         this.interactive=true;
         this.buttonMode=true;
         this.x=actor.x;
         this.y=actor.y;
 
+        var texture = null;
+        if (actor.image) texture = loader.resources[actor.image].texture;
+        else texture=PIXI.Texture.WHITE;
+
+        this.createSprite(actor,texture); 
+        if (!actor.visible && !actor.text) this.createBorder();
+        if (actor.text && actor.write) this.createText(actor,cast,game);
+
+        this.on('pointerdown',this.onPointerDown.bind(this))
+            .on('pointerup',this.onPointerUp.bind(this))
+            .on('pointerupoutside',this.onPointerUp.bind(this))
+            .on('pointermove',this.onPointerMove.bind(this));
+
+        this.operation=null;
+        this.visibleActor=(actor.visible || actor.text);
+    }
+
+    createText(actor,cast,game){
+        var w = Math.abs(this.tilingSprite.width*this.tilingSprite.scale.x);
+        const style = new PIXI.TextStyle({
+            fontFamily: actor.font,
+            fill: actor.fill,
+            fontSize: actor.size,
+            fontStyle: actor.style,
+            align: actor.align,
+            wordWrap: true,
+            wordWrapWidth:  w,
+        });
+        var newText = this.convertText(actor.text,actor,cast,game);
+        const text = new PIXI.Text(newText, style);
+        var pivot={x:0,y:0};
+        switch (actor.align) {
+            case "left": pivot={x:-w/2,y:text.height/2} ;break;
+            case "right": pivot={x:w/2-text.width,y:text.height/2}; break; 
+            case "center": pivot={x:-text.width/2,y:text.height/2}; break; 
+        }
+        text.position={x:pivot.x+actor.offsetX,y:pivot.y+actor.offsetY};
+        text.scale.y=-1;
+        this.addChild(text);
+    }
+
+    createSprite(actor,texture){
         this.tilingSprite = new PIXI.TilingSprite(texture);
         (actor.visible) ? this.tilingSprite.alpha=actor.opacity : this.tilingSprite.alpha=0;
         this.tilingSprite.tint= "0x"+String(actor.color).substr(1);
@@ -18,23 +61,12 @@ class DisplayActor extends PIXI.Container {
      
         this.tilingSprite.width=textureSize.w*actor.tileX;
         this.tilingSprite.height=textureSize.h*actor.tileY;
-        this.flipX=actor.flipX;
-        this.flipY=actor.flipY;
+
         (actor.flipX) ? this.tilingSprite.scale.x =-actor.scaleX : this.tilingSprite.scale.x=actor.scaleX; 
         (actor.flipY) ? this.tilingSprite.scale.y = actor.scaleY : this.tilingSprite.scale.y=-actor.scaleY; // axis change and rotate the sprite scale
         this.tilingSprite.anchor.set(0.5001);
         
         this.addChild(this.tilingSprite);
-
-        this
-            .on('pointerdown',this.onPointerDown.bind(this))
-            .on('pointerup',this.onPointerUp.bind(this))
-            .on('pointerupoutside',this.onPointerUp.bind(this))
-            .on('pointermove',this.onPointerMove.bind(this));
-
-        this.operation=null;
-        this.visibleActor=actor.visible;
-        if (!actor.visible) this.createBorder();
     }
 
     createBorder(){
@@ -56,10 +88,12 @@ class DisplayActor extends PIXI.Container {
 
     createGizmo(){
         if (!this.visibleActor) this.removeBorder();
+        var w = this.tilingSprite.width*this.tilingSprite.scale.x;
+        var h = this.tilingSprite.height*this.tilingSprite.scale.y;
         this.gizmo=new PIXI.Container();
         this.addChild(this.gizmo);
 
-        this.points=this.computePoints(0,0,this.width,this.height);
+        this.points=this.computePoints(0,0,w,-h);
         this.createOBB(this.points);
         this.createHandler(this.points[0],"circle",this.initRotationHandler,{x:this.x,y:this.y});
         this.createHandler(this.points[1],"circle",this.initScaleHandler,this.points[8]);
@@ -70,6 +104,7 @@ class DisplayActor extends PIXI.Container {
         this.createHandler(this.points[6],"circle",this.initScaleHandler,this.points[3]);
         this.createHandler(this.points[7],"rectangle",this.initScaleNoUniformHandler,this.points[2]);
         this.createHandler(this.points[8],"circle",this.initScaleHandler,this.points[1]);
+        console.log(this);
     }
 
     removeGizmo(){
@@ -323,6 +358,34 @@ class DisplayActor extends PIXI.Container {
         graphic.buttonMode=true;
         graphic.on("pointerdown",handler.bind(this,pointHandler,pivot));
         this.gizmo.addChild(graphic);
+    }
+
+    convertText(text,actor,cast,game){
+
+        var i=text.indexOf("$",0);
+        if (i!=-1) {
+            var j=text.indexOf("}");
+            var value=this.findValue(text.substring(i+2,j),actor,cast,game);
+            if (value.element){
+                console.log("existe element");
+            }
+            else {
+                var newValue=actor[value.property];
+                console.log("no existe element",newValue);
+                console.log(text.replace(text.substring(i,j+1),newValue));
+                text=text.replace(text.substring(i,j+1),newValue);
+            }
+        }
+        
+        return text;
+    };
+
+    findValue(text,actor,cast,value){
+        var i=text.indexOf(".",0);
+        if (i!=-1) var element=text.substring(0,i);
+        var property=text.substring(i+1,text.length);
+        console.log(element,property);
+        return {element:element,property:property};
     }
 
 }
