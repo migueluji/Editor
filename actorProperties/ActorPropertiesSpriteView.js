@@ -32,7 +32,7 @@ class ActorPropertiesSpriteView {
 							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="opacity" min="0" max="1" step="0.1" type="number" value="0" class="mdc-text-field__input">'+
+						'<input id="opacity" min="0" max="1" step="0.1" type="number" value="1" class="mdc-text-field__input">'+
 						'<label class="mdc-floating-label" for="text-field-filled">Opacity</label>'+
 							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 						'</div>'+	
@@ -111,5 +111,10 @@ class ActorPropertiesSpriteView {
 		var expandButton=this.html.querySelector("#expandbutton");
 		element.classList.toggle("open");
 		element.classList.contains("open") ? expandButton.innerHTML='expand_less' : expandButton.innerHTML='expand_more';
+		if (element.classList.contains("open")) {
+			var sceneID=document.querySelector(".sceneselected").id;
+			var actorID=document.querySelector(".actorselected").id;
+			CmdManager.changeActorPropertyCmd(sceneID,actorID,"visible",true);
+		}
 	}
 }

@@ -5,6 +5,7 @@ class Actor {
         this.name=actor.name;
         this.scriptList=[];
         Object.assign(this,this.properties); //inicialización de propiedades
+        console.log(this.properties);
         Object.assign(this,actor);
         if (this.scriptList) {this.scriptList.forEach((script,i) => this.scriptList[i] = new Script(script));
         }
@@ -20,28 +21,33 @@ class Actor {
             collider:this.collider || "Box", tags:this.tags || "",
             // Sprite
             visible:this.visible || false, image:this.image || undefined,
-            color:this.color || "#ffffff", opacity: String(this.opacity) || 1, // String para que no sea falso ?
+            color:this.color || "#ffffff", opacity: this.opacity,
             flipX:this.flipX || false , flipY:this.flipY || false ,
             scrollX:this.scrollX || 0, scrollY:this.scrollY || 0,
             tileX:this.tileX || 1, tileY:this.tileY || 1,
             // Text
             write:this.write || false, text:this.text || "",
             font:this.font || "Arial", size:this.size || 30,
-            fill:this.fill || "#000000" , style:this.style || "Normal" ,
-            align:this.align || "Left", offsetX:this.offsetX || 0,
+            fill:this.fill || "#000000" , style:this.style || "normal" ,
+            align:this.align || "left", offsetX:this.offsetX || 0,
             offsetY:this.offsetY || 0,
             // Sound
             play:this.play || false, sound:this.sound || undefined,
-            start:this.start || 0, volume: String(this.volume) || 1,
+            start:this.start || 0, volume: this.volume,
             pan:this.pan || 0 , loop:this.loop || false,
             // Physics
             active:this.active || false, type:this.type || "Kinematic",
             fixedAngle:this.fixedAngle || false,
             velocityX:this.velocityX || 0, velocityY:this.velocityY || 0,
             angularVelocity:this.angularVelocity || 0, 
-            density: String(this.density) || 1, friction: String(this.friction) || 1, restitution: String(this.restitution) || 1,
+            density: this.density, friction: this.friction, restitution: this.restitution,
             dampingLinear:this.dampingLinear || 0, dampingAngular:this.dampingAngular ||  0
         }
+        if (obj.opacity==undefined) obj.opacity=1;
+        if (obj.volume==undefined) obj.volume=1;
+        if (obj.density==undefined) obj.density=1;
+        if (obj.friction==undefined) obj.friction=1;
+        if (obj.restitution==undefined) obj.restitution=1;
         return(obj);
     }
 

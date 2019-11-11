@@ -64,22 +64,49 @@ class ActorPropertiesSettingsView {
 					'</div>'+	
 				'</div>'+	
 				'<div class="two-properties">'+	
-				'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-					'<input id="collider"  type="text" value="Circle"  class="mdc-text-field__input">'+
-					'<label class="mdc-floating-label" for="text-field-filled">Collider</label>'+
-					'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-				'</div>'+	
-				'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-					'<input id="tags" type="text" value=""  class="mdc-text-field__input">'+
-					'<label class="mdc-floating-label" for="text-field-filled">Tags</label>'+
-					'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-				'</div>'+	
+					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
+						'<input id="collider"  type="text" value="box"  class="mdc-text-field__input" readonly>'+
+						'<label class="mdc-floating-label" for="text-field-filled">Collider</label>'+
+						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
+					'</div>'+	
+					'<div class="mdc-menu-surface--anchor menu-field">'+
+						'<div id="menuCollider" class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
+							'<ul class="mdc-list" role="menu" aria-hidden="true">'+
+								'<li id="box" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Box</li>'+
+								'<li id="circle" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Circle</li>'+
+							'</ul>'+
+						'</div>'+
+					'</div>'+
+					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
+						'<input id="tags" type="text" value=""  class="mdc-text-field__input">'+
+						'<label class="mdc-floating-label" for="text-field-filled">Tags</label>'+
+						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
+					'</div>'+	
 			'</div>'+				
 			'</div>';
 		this.html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));
+
+		this.html.querySelector("#box").addEventListener("click",this.changeInputHandler.bind(this,"collider","box"));
+		this.html.querySelector('#circle').addEventListener("click",this.changeInputHandler.bind(this,"collider","circle"));
+		this.menuCollider = mdc.menu.MDCMenu.attachTo(this.html.querySelector("#menuCollider"));
+		this.html.querySelector("#collider").addEventListener("click",this.menuHandler.bind(this,this.menuCollider));
 	}
 
 // Handlers
+	menuHandler(menu){
+		menu.open=true;
+	}
+
+	changeInputHandler(field,style){
+		var input=this.html.querySelector("#"+field);
+		input.value=style;
+		if ("createEvent" in document) {
+			var evt = document.createEvent("HTMLEvents");
+			evt.initEvent("change", false, true);
+			input.dispatchEvent(evt);
+		}
+	}
+
 	propertyGroupHandler(){
 		var element=this.html.querySelector(".properties-panel");
 		var expandButton=this.html.querySelector("#expandbutton");

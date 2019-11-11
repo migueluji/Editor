@@ -52,13 +52,11 @@ button{
     position: relative;
 }
 .menu-scene{
-    position:relative; 
-    z-index:2; 
+     z-index:2; 
     transform:translate(130px,-48px);
     width: 0px;
 }
 .menu-actor{
-    position:relative; 
     z-index:2; 
     transform:translate(300px,-48px);
     width: 0px;
@@ -70,10 +68,13 @@ button{
     width: 0px;
 }
 .menu-new-property{
-    position:relative; 
-    z-index:2; 
+     z-index:2; 
     transform:translate(200px,-58px);
     width: 0px;
+}
+.menu-field{
+     transform: translate(-116px, 60px);
+    z-index: 2;
 }
 .mdc-fab{
     z-index: 2;
@@ -224,7 +225,7 @@ button{
 .mdc-image-list__image-aspect-container .mdc-image-list__image  {
     top: 0px;
     bottom: 0px;
-    margin: auto;
+    margin: auto;;
 }
 .mdc-image-list{
     margin:0px;

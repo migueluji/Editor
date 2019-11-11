@@ -38,6 +38,10 @@ class DisplayActor extends PIXI.Container {
             wordWrap: true,
             wordWrapWidth:  w,
         });
+        if (actor.style=="italic-bold"){
+            style.fontStyle="italic";
+            style.fontWeight="bold";
+        }
         var newText = this.convertText(actor.text,actor,cast,game);
         const text = new PIXI.Text(newText, style);
         var pivot={x:0,y:0};
@@ -104,7 +108,6 @@ class DisplayActor extends PIXI.Container {
         this.createHandler(this.points[6],"circle",this.initScaleHandler,this.points[3]);
         this.createHandler(this.points[7],"rectangle",this.initScaleNoUniformHandler,this.points[2]);
         this.createHandler(this.points[8],"circle",this.initScaleHandler,this.points[1]);
-        console.log(this);
     }
 
     removeGizmo(){
@@ -361,31 +364,42 @@ class DisplayActor extends PIXI.Container {
     }
 
     convertText(text,actor,cast,game){
-
         var i=text.indexOf("$",0);
-        if (i!=-1) {
-            var j=text.indexOf("}");
-            var value=this.findValue(text.substring(i+2,j),actor,cast,game);
-            if (value.element){
-                console.log("existe element");
+        while (i!=-1){
+            if ((i!=-1) && (text[i+1]=="{")) {
+                var j=text.indexOf("}",i+2);
+                if (j!=-1) { // end of string
+                    var string = text.substring(i+2,j);
+                    var k=string.indexOf(".",0);
+                    var textElement=null;
+                    var textProperty=null;
+                    var newValue=null;
+                    if (k!=-1) { // property & element
+                        textElement=string.substring(0,k);
+                        textProperty=string.substring(k+1,string.length);
+                        if (textElement=="game") { // game property
+                            if (game[textProperty]) newValue=game[textProperty];
+                            else newValue= '"error '+textElement + "."+textProperty+": property doesn't exist"+'"';
+                        }
+                        else { // actor cast property
+                            var actorIndex=cast.findIndex(i => i.name == textElement);
+                            if (actorIndex!=-1) {
+                                if (cast[actorIndex][textProperty]) newValue=cast[actorIndex][textProperty];
+                                else newValue= '"error '+textElement + "."+textProperty+": property doesn't exist"+'"';
+                            }
+                            else newValue= '"error '+textElement + ": doesn't exist"+'"';
+                        }
+                    }
+                    else { // actor property
+                        textProperty=string.substring(k+1,string.length);
+                        newValue=actor[textProperty];
+                    }
+                    text=text.replace(text.substring(i,j+1),newValue);
+                }
             }
-            else {
-                var newValue=actor[value.property];
-                console.log("no existe element",newValue);
-                console.log(text.replace(text.substring(i,j+1),newValue));
-                text=text.replace(text.substring(i,j+1),newValue);
-            }
+            i=text.indexOf("$",0);
         }
-        
         return text;
-    };
-
-    findValue(text,actor,cast,value){
-        var i=text.indexOf(".",0);
-        if (i!=-1) var element=text.substring(0,i);
-        var property=text.substring(i+1,text.length);
-        console.log(element,property);
-        return {element:element,property:property};
     }
 
 }

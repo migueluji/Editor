@@ -63,11 +63,43 @@
 	"fontList": [
 		{
 			"id": "_12345678900081",
-			"name": "arial.ttf"
+			"name": "Arial"
 		},
 		{
 			"id": "_12345678900071",
-			"name": "verdana.ttf"
+			"name": "Arial Black"
+		},
+		{
+			"id": "_12345678900072",
+			"name": "Comic Sans MS"
+		},
+		{
+			"id": "_12345678900073",
+			"name": "Courier New"
+		},
+		{
+			"id": "_12345678900074",
+			"name": "Georgia"
+		},
+		{
+			"id": "_12345678900075",
+			"name": "Helvetica"
+		},
+		{
+			"id": "_12345678900076",
+			"name": "Impact"
+		},
+		{
+			"id": "_12345678900077",
+			"name": "Tahoma"
+		},
+		{
+			"id": "_12345678900078",
+			"name": "Times New Roman"
+		},
+		{
+			"id": "_12345678900079",
+			"name": "Verdana"
 		}
 	],
 	"sceneList": [
@@ -321,7 +353,7 @@
 					"scaleY": 1,
 					"angle": 0,
 					"screen": true,
-					"collider": "Box",
+					"collider": "box",
 					"tags": "",
 					"visible": false,
 					"image": "planeRed1.png",
@@ -337,7 +369,7 @@
 					"text": "hola mundo ${x}",
 					"font": "arial",
 					"size": 30,
-					"style": "Normal",
+					"style": "normal",
 					"align": "right",
 					"offsetX": 0,
 					"offsetY": 0,
@@ -373,7 +405,7 @@
 					"scaleY": 1,
 					"angle": 210,
 					"screen": false,
-					"collider": "Box",
+					"collider": "box",
 					"tags": "",
 					"visible": true,
 					"image": "planeYellow1.png",
@@ -387,10 +419,10 @@
 					"tileY": 1,
 					"write": false,
 					"text": "",
-					"font": "Arial",
+					"font": "arial",
 					"size": 30,
-					"style": "Normal",
-					"align": "Left",
+					"style": "normal",
+					"align": "left",
 					"offsetX": 0,
 					"offsetY": 0,
 					"play": false,
@@ -423,7 +455,7 @@
 					"scaleY": 1,
 					"angle": 0,
 					"screen": false,
-					"collider": "Box",
+					"collider": "box",
 					"tags": "",
 					"visible": true,
 					"image": "planeBlue1.png",
@@ -439,8 +471,8 @@
 					"text": "",
 					"font": "Arial",
 					"size": 30,
-					"style": "Normal",
-					"align": "Left",
+					"style": "normal",
+					"align": "left",
 					"offsetX": 0,
 					"offsetY": 0,
 					"play": false,
@@ -478,7 +510,7 @@
 					"scaleY": 1,
 					"angle": 0,
 					"screen": false,
-					"collider": "Box",
+					"collider": "box",
 					"tags": "",
 					"visible": true,
 					"image": "planeBlue1.png",
@@ -494,8 +526,8 @@
 					"text": "",
 					"font": "Arial",
 					"size": 30,
-					"style": "Normal",
-					"align": "Left",
+					"style": "normal",
+					"align": "left",
 					"offsetX": 0,
 					"offsetY": 0,
 					"play": false,
@@ -527,7 +559,7 @@
 					"scaleY": 1,
 					"angle": 0,
 					"screen": false,
-					"collider": "Box",
+					"collider": "box",
 					"tags": "",
 					"visible": true,
 					"image": "planeYellow1.png",
@@ -543,8 +575,8 @@
 					"text": "",
 					"font": "Arial",
 					"size": 30,
-					"style": "Normal",
-					"align": "Left",
+					"style": "normal",
+					"align": "left",
 					"offsetX": 0,
 					"offsetY": 0,
 					"play": false,
@@ -582,7 +614,7 @@
 					"scaleY": 1,
 					"angle": 0,
 					"screen": false,
-					"collider": "Box",
+					"collider": "box",
 					"tags": "",
 					"visible": true,
 					"image": "planeRed1.png",
@@ -598,8 +630,8 @@
 					"text": "",
 					"font": "Arial",
 					"size": 30,
-					"style": "Normal",
-					"align": "Left",
+					"style": "normal",
+					"align": "left",
 					"offsetX": 0,
 					"offsetY": 0,
 					"play": false,

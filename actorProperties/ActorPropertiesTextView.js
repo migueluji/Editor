@@ -44,15 +44,34 @@ class ActorPropertiesTextView {
 				'</div>'+
 				'<div class="two-properties">'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="style" type="text" value="normal" class="mdc-text-field__input">'+
+						'<input id="style" type="text" value="Normal" class="mdc-text-field__input" readonly>'+
 						'<label class="mdc-floating-label" for="text-field-filled">Style</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
+						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
+					'<div class="mdc-menu-surface--anchor menu-field">'+
+						'<div id="menuStyle" class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
+							'<ul class="mdc-list" role="menu" aria-hidden="true">'+
+								'<li id="normal" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Normal</li>'+
+								'<li id="italic" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Italic</li>'+
+								'<li id="bold" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Bold</li>'+
+								'<li id="italic-bold" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Italic-Bold</li>'+
+							'</ul>'+
+						'</div>'+
+					'</div>'+
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="align" type="text" value="left" class="mdc-text-field__input">'+
+						'<input id="align" type="text" value="left" class="mdc-text-field__input" readonly>'+
 						'<label class="mdc-floating-label" for="text-field-filled">Align</label>'+
 							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
+					'<div class="mdc-menu-surface--anchor menu-field">'+
+						'<div id="menuAlign" class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
+							'<ul class="mdc-list" role="menu" aria-hidden="true">'+
+								'<li id="left" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Left</li>'+
+								'<li id="center" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Center</li>'+
+								'<li id="right" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Right</li>'+
+							'</ul>'+
+						'</div>'+
+					'</div>'+
 				'</div>'+
 				'<div class="two-properties">'+	
 				'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
@@ -75,9 +94,38 @@ class ActorPropertiesTextView {
 		fontButton.addEventListener("click",this.onClickFontButton.bind(this));
 
 		this.html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));
+
+		
+		this.html.querySelector("#normal").addEventListener("click",this.changeInputHandler.bind(this,"style","normal"));
+		this.html.querySelector('#italic').addEventListener("click",this.changeInputHandler.bind(this,"style","italic"));
+		this.html.querySelector('#bold').addEventListener("click",this.changeInputHandler.bind(this,"style","bold"));
+		this.html.querySelector('#italic-bold').addEventListener("click",this.changeInputHandler.bind(this,"style","italic-bold"));
+		this.menuStyle = mdc.menu.MDCMenu.attachTo(this.html.querySelector("#menuStyle"));
+		this.html.querySelector("#style").addEventListener("click",this.menuHandler.bind(this,this.menuStyle));
+
+		
+		this.html.querySelector("#left").addEventListener("click",this.changeInputHandler.bind(this,"align","left"));
+		this.html.querySelector('#center').addEventListener("click",this.changeInputHandler.bind(this,"align","center"));
+		this.html.querySelector('#right').addEventListener("click",this.changeInputHandler.bind(this,"align","right"));
+		this.menuAlign = mdc.menu.MDCMenu.attachTo(this.html.querySelector('#menuAlign'));
+		this.html.querySelector("#align").addEventListener("click",this.menuHandler.bind(this,this.menuAlign));
 	}
 
 // Handlers
+	changeInputHandler(field,style){
+		var input=this.html.querySelector("#"+field);
+		input.value=style;
+		if ("createEvent" in document) {
+			var evt = document.createEvent("HTMLEvents");
+			evt.initEvent("change", false, true);
+			input.dispatchEvent(evt);
+		}
+	}
+
+	menuHandler(menu){
+		menu.open=true;
+	}
+
 	onClickHandler(){
 		(this.html.querySelector("#write").checked) ?	this.html.classList.remove("properties-section--disable"):
 														this.html.classList.add("properties-section--disable");
@@ -92,6 +140,11 @@ class ActorPropertiesTextView {
 		var expandButton=this.html.querySelector("#expandbutton");
 		element.classList.toggle("open");
 		element.classList.contains("open") ? expandButton.innerHTML='expand_less' : expandButton.innerHTML='expand_more';
+		if (element.classList.contains("open")) {
+			var sceneID=document.querySelector(".sceneselected").id;
+			var actorID=document.querySelector(".actorselected").id;
+			CmdManager.changeActorPropertyCmd(sceneID,actorID,"write",true);
+		}
 	}
 
 }

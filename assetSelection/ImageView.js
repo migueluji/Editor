@@ -27,7 +27,7 @@ class ImageView {
 
 // Handlers
 	selectImageHandler(e){
-		Command.selectImageCmd(e.srcElement.parentNode.parentNode.id);
+		if (e.srcElement.parentNode.parentNode.id) Command.selectImageCmd(e.srcElement.parentNode.parentNode.id);
 	}
 
 }

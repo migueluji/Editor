@@ -61,22 +61,22 @@ class SoundSelectionView {
 	exitSheetHandler(){
 		var element=this.html.querySelector("#"+this.selectedSound);
 		var name=null;
-		(element==null) ? name="Undefined" : name=element.firstChild.nextSibling.firstChild.textContent;
+		(element==null) ? name="undefined" : name=element.firstChild.nextSibling.firstChild.textContent;
+		this.html.style.display="none";
 		if (this.actorID==null) {
+			SideSheetView.openSheetHandler("game-properties");
 			if (this.elementSound != name){
 				CmdManager.changeGamePropertyCmd("sound",name);
 			}
-			SideSheetView.openSheetHandler("game-properties");
 		}
 		else {
+			SideSheetView.openSheetHandler("actor-properties");
 			if (this.elementSound != name){
 				var sceneID=document.querySelector(".sceneselected").id;
 				var actorID=document.querySelector(".actorselected").id;
 				CmdManager.changeActorPropertyCmd(sceneID,actorID,"sound",name);
 			}
-			SideSheetView.openSheetHandler("actor-properties");
 		}
-		this.html.style.display="none";
 	}
 
 	uploadSoundHandler(e){

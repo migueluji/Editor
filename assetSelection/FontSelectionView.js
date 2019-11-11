@@ -61,14 +61,15 @@ class FontSelectionView {
 	exitSheetHandler(){
 		var element=this.html.querySelector("#"+this.selectedFont);
 		var name=null;
-		(element==null) ? name="Undefined" : name=element.firstChild.nextSibling.firstChild.textContent
+		(element==null) ? name="Undefined" : name=element.firstChild.nextSibling.firstChild.textContent;
+		SideSheetView.openSheetHandler("actor-properties");
+		this.html.style.display="none";
 		if (this.elementFont != name){
 			var sceneID=document.querySelector(".sceneselected").id;
 			var actorID=document.querySelector(".actorselected").id;
 			CmdManager.changeActorPropertyCmd(sceneID,actorID,"font",name);
 		}
-		SideSheetView.openSheetHandler("actor-properties");
-		this.html.style.display="none";
+
 	}
 
 	uploadFontHandler(e){

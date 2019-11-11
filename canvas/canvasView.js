@@ -55,7 +55,7 @@ class CanvasView {
         this.app.stage.x =this.initStage.x ;
         this.app.stage.y =this.initStage.y ;
  
-        this.update(); 
+        this.update(this.actorList,this.gameProperties); 
     }
 
 
@@ -66,7 +66,10 @@ class CanvasView {
         this.hitArea(this.scene);
     }
 
-    update(){
+    update(actorList,gameProperties){
+
+        this.actorList=actorList;
+        this.gameProperties=gameProperties;
 
         this.app.stage.removeChildren();
         this.app.renderer.backgroundColor="0x"+String(this.gameProperties.backgroundColor).substr(1);

@@ -161,6 +161,11 @@ class Editor {
         var actorPos=this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID); 
         var actor = this.model.sceneList[scenePos].actorList[actorPos];
         switch  (true) {
+            case property=="imageSize":
+                actor.width=Math.round(value.width*actor.scaleX*actor.tileX);
+                actor.height=Math.round(value.height*actor.scaleY*actor.tileY);
+                actor.image=value.image;
+                break;
             case property=="position": 
                 actor.x=Math.round(value.x);
                 actor.y=Math.round(value.y);
@@ -185,18 +190,23 @@ class Editor {
                 actor.scaleY= Number(value.scaleY).toFixed(2);
                 actor.flipX=value.flipX;
                 break;
-            case property=="tileX" || property=="scaleX": 
+            case property=="tileX": 
                 actor.width=Math.round(actor.width/actor.tileX*value);
-                console.log(actor.width);
                 break;
-            case property=="tileY" || property=="scaleY":
+            case property=="tileY": 
                 actor.height=Math.round(actor.height/actor.tileY*value);
                 break;
+            case property=="scaleX":
+                actor.width=Math.round(actor.width/actor.scaleX*value);
+                break;
+            case property=="scaleY": 
+                actor.height=Math.round(actor.height/actor.scaleY*value);
+                break;
             case property=="width":
-                actor.scaleX=(value*actor.scaleX/actor.width).toFixed(2);
+                actor.scaleX=(value*actor.scaleX/actor.tileX/actor.width).toFixed(2);
                 break;
             case property=="height":
-                actor.scaleY=(value*actor.scaleY/actor.height).toFixed(2);
+                actor.scaleY=(value*actor.scaleY/actor.tileY/actor.height).toFixed(2);
                 break;
             case property=="angle":
                 value=Math.round(value);
@@ -205,9 +215,9 @@ class Editor {
         if (property in this.model.sceneList[scenePos].actorList[actorPos])
              this.model.sceneList[scenePos].actorList[actorPos][property]=value;
         var isOpen = SideSheetView.isOpenActorProperties();
-       this.selectScene(sceneID);
-       this.selectActor(actorID);
-       if (property=="name")this.openCast();
+        this.selectScene(sceneID);
+        this.selectActor(actorID);
+        if (property=="name") this.openCast();
         if (isOpen) this.openActorProperties();
     }
 

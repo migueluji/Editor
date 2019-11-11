@@ -76,7 +76,6 @@ class GamePropertiesView {
 			case "text" : 		this.value=String(element.value).trim(); break;
 			case "color" : 		this.value=String(element.value); break;
 		}
-		console.log(element.value);
 		CmdManager.changeGamePropertyCmd(this.property,this.value);
 	}
 

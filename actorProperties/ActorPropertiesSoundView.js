@@ -82,6 +82,11 @@ class ActorPropertiesSoundView {
 		var expandButton=this.html.querySelector("#expandbutton");
 		element.classList.toggle("open");
 		element.classList.contains("open") ? expandButton.innerHTML='expand_less' : expandButton.innerHTML='expand_more';
+		if (element.classList.contains("open")) {
+			var sceneID=document.querySelector(".sceneselected").id;
+			var actorID=document.querySelector(".actorselected").id;
+			CmdManager.changeActorPropertyCmd(sceneID,actorID,"play",true);
+		}
 	}
 
 }
