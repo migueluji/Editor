@@ -19,23 +19,23 @@ class Actor {
             angle:this.angle || 0, screen:this.screen || false,
             collider:this.collider || "Box", tags:this.tags || "",
             // Sprite
-            visible:this.visible || false, image:this.image || undefined,
+            spriteOn:this.spriteOn || false, image:this.image || undefined,
             color:this.color || "#ffffff", opacity: this.opacity,
             flipX:this.flipX || false , flipY:this.flipY || false ,
             scrollX:this.scrollX || 0, scrollY:this.scrollY || 0,
             tileX:this.tileX || 1, tileY:this.tileY || 1,
             // Text
-            write:this.write || false, text:this.text || "",
+            textOn:this.textOn || false, text:this.text || "",
             font:this.font || "Arial", size:this.size || 30,
             fill:this.fill || "#000000" , style:this.style || "normal" ,
             align:this.align || "left", offsetX:this.offsetX || 0,
             offsetY:this.offsetY || 0,
             // Sound
-            play:this.play || false, sound:this.sound || undefined,
+            soundOn:this.soundOn || false, sound:this.sound || undefined,
             start:this.start || 0, volume: this.volume,
             pan:this.pan || 0 , loop:this.loop || false,
             // Physics
-            active:this.active || false, type:this.type || "Kinematic",
+            physicsOn:this.physicsOn || false, type:this.type || "Kinematic",
             fixedAngle:this.fixedAngle || false,
             velocityX:this.velocityX || 0, velocityY:this.velocityY || 0,
             angularVelocity:this.angularVelocity || 0, 

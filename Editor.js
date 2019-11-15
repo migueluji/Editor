@@ -284,8 +284,8 @@ class Editor {
         else this.selectedActorIndex=null;
         if (SideSheetView.isOpenActorProperties() && actorID!=null) this.openActorProperties();
         if (actorID==null && !SideSheetView.isOpenCast()) SideSheetView.closeSheetHandler();
-        if (SideSheetView.isOpenCast() || SideSheetView.isOpenActorProperties()) this.castView.updateSelectedActor(actorID);
         this.canvasView.updateSelectedActor(actorID);
+        this.castView.updateSelectedActor(actorID);
     }
 
     openActorProperties(){

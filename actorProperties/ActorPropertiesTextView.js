@@ -8,7 +8,7 @@ class ActorPropertiesTextView {
 				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
 				'Text'+
 				'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
-					'<input id="write" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
+					'<input id="textOn" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
 					'<div class="mdc-checkbox__background">'+
 						'<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">'+
 							'<path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>'+
@@ -87,8 +87,8 @@ class ActorPropertiesTextView {
 			'</div>'+
 			'</div>';	
 
-		var write=this.html.querySelector("#write");
-		write.addEventListener("click",this.onClickHandler.bind(this));
+		var textOn=this.html.querySelector("#textOn");
+		textOn.addEventListener("click",this.onClickHandler.bind(this));
 
 		var fontButton=this.html.querySelector("#fontbutton");
 		fontButton.addEventListener("click",this.onClickFontButton.bind(this));
@@ -127,7 +127,7 @@ class ActorPropertiesTextView {
 	}
 
 	onClickHandler(){
-		(this.html.querySelector("#write").checked) ?	this.html.classList.remove("properties-section--disable"):
+		(this.html.querySelector("#textOn").checked) ?	this.html.classList.remove("properties-section--disable"):
 														this.html.classList.add("properties-section--disable");
 	}
 
@@ -143,7 +143,7 @@ class ActorPropertiesTextView {
 		if (element.classList.contains("open")) {
 			var sceneID=document.querySelector(".sceneselected").id;
 			var actorID=document.querySelector(".actorselected").id;
-			CmdManager.changeActorPropertyCmd(sceneID,actorID,"write",true);
+			CmdManager.changeActorPropertyCmd(sceneID,actorID,"textOn",true);
 		}
 	}
 

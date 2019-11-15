@@ -8,7 +8,7 @@ class GamePropertiesSoundView {
 				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
 				'Sound'+
 				'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
-					'<input id="play" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
+					'<input id="soundOn" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
 					'<div class="mdc-checkbox__background">'+
 						'<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">'+
 							'<path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>'+
@@ -57,8 +57,8 @@ class GamePropertiesSoundView {
 				'</div>'+
 			'</div>';	
 
-		var play=this.html.querySelector("#play");
-		play.addEventListener("click",this.onClickHandler.bind(this));
+		var soundOn=this.html.querySelector("#soundOn");
+		soundOn.addEventListener("click",this.onClickHandler.bind(this));
 
 		var soundButton=this.html.querySelector("#soundbutton");
 		soundButton.addEventListener("click",this.onClickSoundButton.bind(this));
@@ -68,7 +68,7 @@ class GamePropertiesSoundView {
 
 // Handlers
 	onClickHandler(){
-		(this.html.querySelector("#play").checked) ?	this.html.classList.remove("properties-section--disable"):
+		(this.html.querySelector("#soundOn").checked) ?	this.html.classList.remove("properties-section--disable"):
 														this.html.classList.add("properties-section--disable");
 	}
 
@@ -81,6 +81,9 @@ class GamePropertiesSoundView {
 		var expandButton=this.html.querySelector("#expandbutton");
 		element.classList.toggle("open");
 		element.classList.contains("open") ? expandButton.innerHTML='expand_less' : expandButton.innerHTML='expand_more';
+		if (element.classList.contains("open")) {
+			CmdManager.changeGamePropertyCmd("soundOn",true);
+		}
 	}
 
 }

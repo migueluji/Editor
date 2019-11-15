@@ -8,7 +8,7 @@ class ActorPropertiesSpriteView {
 				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
 				'Sprite'+
 				'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
-					'<input id="visible" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
+					'<input id="spriteOn" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
 					'<div class="mdc-checkbox__background">'+
 						'<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">'+
 							'<path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>'+
@@ -87,8 +87,8 @@ class ActorPropertiesSpriteView {
 			'</div>'+
 			'</div>';	
 
-		var visible=this.html.querySelector("#visible");
-		visible.addEventListener("click",this.onClickHandler.bind(this));
+		var spriteOn=this.html.querySelector("#spriteOn");
+		spriteOn.addEventListener("click",this.onClickHandler.bind(this));
 
 		var imageButton=this.html.querySelector("#imagebutton");
 		imageButton.addEventListener("click",this.onClickImageButton.bind(this));
@@ -98,7 +98,7 @@ class ActorPropertiesSpriteView {
 
 // Handlers
 	onClickHandler(){
-		(this.html.querySelector("#visible").checked) ?	this.html.classList.remove("properties-section--disable"):
+		(this.html.querySelector("#spriteOn").checked) ?	this.html.classList.remove("properties-section--disable"):
 														this.html.classList.add("properties-section--disable");
 	}
 
@@ -114,7 +114,7 @@ class ActorPropertiesSpriteView {
 		if (element.classList.contains("open")) {
 			var sceneID=document.querySelector(".sceneselected").id;
 			var actorID=document.querySelector(".actorselected").id;
-			CmdManager.changeActorPropertyCmd(sceneID,actorID,"visible",true);
+			CmdManager.changeActorPropertyCmd(sceneID,actorID,"spriteOn",true);
 		}
 	}
 }

@@ -19,8 +19,8 @@ class DisplayActor extends PIXI.Container {
         else texture=PIXI.Texture.WHITE;
 
         this.createSprite(actor,texture); 
-        if (!actor.visible && !actor.text) this.createBorder();
-        if (actor.text && actor.write) this.createText(actor,cast,game);
+        if (!actor.spriteOn && !actor.text) this.createBorder();
+        if (actor.text && actor.textOn) this.createText(actor,cast,game);
 
         this.on('pointerdown',this.onPointerDown.bind(this))
             .on('pointerup',this.onPointerUp.bind(this))
@@ -28,7 +28,7 @@ class DisplayActor extends PIXI.Container {
             .on('pointermove',this.onPointerMove.bind(this));
 
         this.operation=null;
-        this.visibleActor=(actor.visible || actor.text);
+        this.visibleActor=(actor.spriteOn || actor.text);
     }
 
     createText(actor,cast,game){
@@ -62,7 +62,7 @@ class DisplayActor extends PIXI.Container {
 
     createSprite(actor,texture){
         this.tilingSprite = new PIXI.TilingSprite(texture);
-        (actor.visible) ? this.tilingSprite.alpha=actor.opacity : this.tilingSprite.alpha=0;
+        (actor.spriteOn) ? this.tilingSprite.alpha=actor.opacity : this.tilingSprite.alpha=0;
         this.tilingSprite.tint= "0x"+String(actor.color).substr(1);
 
         var textureSize;

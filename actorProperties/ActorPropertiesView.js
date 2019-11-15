@@ -3,7 +3,7 @@ class ActorPropertiesView {
     constructor(actorModel) {   
 		 this.html = document.createElement("div");
 		 this.html.className +="actor-properties side-sheet-content";
-		 this.html.style.display="none";
+		 this.html.style.dissoundOn="none";
 		 this.html.innerHTML =
 			'<header class="mdc-top-app-bar--dense properties-bar">'+
 				'<div class="mdc-top-app-bar__row">'+
@@ -43,11 +43,12 @@ class ActorPropertiesView {
 
 	updateActorProperty(property,value) {
 		var element=this.html.querySelector("#"+property);
+//		console.log(this.html,property,value,element);
 		(element.type==="checkbox") ? element.value=element.checked=Boolean(value) : element.value=value;
-		if (property == "visible") this.spriteView.onClickHandler();
-		if (property == "write") this.textView.onClickHandler();
-		if (property == "play") this.soundView.onClickHandler();
-		if (property == "active") this.physicsView.onClickHandler();
+		if (property == "spriteOn") this.spriteView.onClickHandler();
+		if (property == "textOn") this.textView.onClickHandler();
+		if (property == "soundOn") this.soundView.onClickHandler();
+		if (property == "physicsOn") this.physicsView.onClickHandler();
 		element.focus();
 	}
 
