@@ -9,7 +9,20 @@ class CanvasView {
         this.html.innerHTML =
             '<button id="addactor" class="do-button mdc-fab mdc-ripple-upgraded add-property-button">'+
                 '<i class="material-icons">add</i>'+
-            '</button>';
+            '</button>'+
+            '<button id="actorbutton" class="mdc-fab mdc-ripple-upgrade actor-canvas-button">'+
+                '<i class="material-icons">more_vert</i>'+
+            '</button>'+
+            '<div class="mdc-menu-surface--anchor">'+
+                '<div id="menuStyle" class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
+                    '<ul class="mdc-list" role="menu" aria-hidden="true">'+
+                        '<li id="normal" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Normal</li>'+
+                        '<li id="italic" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Italic</li>'+
+                        '<li id="bold" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Bold</li>'+
+                        '<li id="italic-bold" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Italic-Bold</li>'+
+                    '</ul>'+
+                '</div>'+
+            '</div>';
         this.html.querySelector("#addactor").addEventListener("click",this.addActorHandler.bind(this));
         this.html.addEventListener("wheel",this.mouseStageWheel.bind(this));
         window.addEventListener("resize",this.resize.bind(this));
@@ -23,7 +36,7 @@ class CanvasView {
     }
 
     loadImages(imageList){
-        this.loader = new PIXI.Loader("./images",imageList.length);
+        this.loader = new PIXI.Loader("./images");
         this.loader.add(imageList);
         this.loader.onLoad.add((loader,resource) => {
             console.log(resource.name, " loaded");
@@ -36,7 +49,6 @@ class CanvasView {
 
     initApp(){
         this.app = new PIXI.Application();
-        console.log()
         this.app.renderer.view.style.position = "absolute";
         this.app.renderer.view.style.display = "block"; 
         this.html.appendChild(this.app.view);
@@ -95,13 +107,36 @@ class CanvasView {
 
     updateSelectedActor(actorID){
         if (actorID){
-            (this.selected) ? this.displayObject.removeGizmo() : this.selected=true;
-            var displayObjectIndex =this.scene.children.findIndex(i=>i.id==actorID);
-            this.displayObject = this.scene.children[displayObjectIndex];
-            this.displayObject.createGizmo();
+            (this.selected) ? this.displayActor.removeGizmo() : this.selected=true;
+            var displayActorIndex =this.scene.children.findIndex(i=>i.id==actorID);
+            this.displayActor = this.scene.children[displayActorIndex];
+            this.displayActor.createGizmo();
+
+            console.log(this.displayActor.points);
+            this.displayActor.gizmo.calculateBounds();
+           var bounds=this.displayActor.gizmo.getBounds(true);
+//GREEN LINE
+this.graphics= new PIXI.Graphics();
+this.graphics.lineStyle(3, 0x00FF00, 1);
+var sprite={x:this.displayActor.x,y:-this.displayActor.y};
+this.graphics.moveTo(sprite.x+bounds.x, sprite.y+bounds.y);
+this.graphics.lineTo(sprite.x+bounds.x+bounds.width, sprite.y+bounds.y);
+this.graphics.lineTo(sprite.x+bounds.x+bounds.width, sprite.y+bounds.y+bounds.height);
+this.graphics.lineTo(sprite.x+bounds.x, sprite.y+bounds.y+bounds.height);
+this.graphics.lineTo(sprite.x+bounds.x, sprite.y+bounds.y);
+this.app.stage.addChild(this.graphics);
+
+            var actorButton = this.html.querySelector("#actorbutton");
+            var left=4;
+            var top=0;
+            left=left+this.app.stage.x+(this.displayActor.transform.position.x+this.displayActor.tilingSprite.width*this.displayActor.tilingSprite.scale.x/2)*this.app.stage.scale.x;
+            top=this.app.stage.y-(this.displayActor.transform.position.y+this.displayActor.tilingSprite.height*-this.displayActor.tilingSprite.scale.y/2)*this.app.stage.scale.y;
+            actorButton.style.marginLeft=left+"px";
+            actorButton.style.marginTop=top+"px";
+            console.log(this.app.stage.scale.x,this.displayActor.transform.position.x);
         }
         else{
-            if (this.selected) this.displayObject.removeGizmo();
+            if (this.selected) this.displayActor.removeGizmo();
             this.selected=false;
         }
     }
@@ -117,7 +152,7 @@ class CanvasView {
         this.drawerOffset = drawerApp.getBoundingClientRect().x;
         this.app.renderer.resize(window.innerWidth,window.innerHeight);
         this.update(this.actorList,this.gameProperties);
-        if (this.selected) Command.selectActorCmd(this.displayObject.id);
+        if (this.selected) Command.selectActorCmd(this.displayActor.id);
     }
 
     mouseStageDown(e){

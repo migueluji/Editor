@@ -2,6 +2,9 @@ class Game {
 	
     constructor(game) {
         this.name=game.name || "Untitled Game"
+        this.backgroundColor=game.backgroundColor || "#ffffff";
+        this.width=game.width ||  800;
+        this.height=game.height || 480;
         Object.assign(this,game);
         if (this.soundList) this.soundList.forEach((sound,i) => this.soundList[i]=new Asset(sound));
         if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]=new Asset(font));

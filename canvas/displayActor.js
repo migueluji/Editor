@@ -9,7 +9,9 @@ class DisplayActor extends PIXI.Container {
         this.buttonMode=true;
         this.x=actor.x;
         this.y=actor.y;
-
+        this.flipX=actor.flipX;
+        this.flipY=actor.flipY;
+        
         var texture = null;
         if (actor.image) texture = loader.resources[actor.image].texture;
         else texture=PIXI.Texture.WHITE;
@@ -37,6 +39,7 @@ class DisplayActor extends PIXI.Container {
             align: actor.align,
             wordWrap: true,
             wordWrapWidth:  w,
+            padding:w
         });
         if (actor.style=="italic-bold"){
             style.fontStyle="italic";
@@ -91,12 +94,14 @@ class DisplayActor extends PIXI.Container {
     }
 
     createGizmo(){
+        
         if (!this.visibleActor) this.removeBorder();
         var w = this.tilingSprite.width*this.tilingSprite.scale.x;
         var h = this.tilingSprite.height*this.tilingSprite.scale.y;
         this.gizmo=new PIXI.Container();
         this.addChild(this.gizmo);
-
+  
+        if (this.flipY) h=-h;
         this.points=this.computePoints(0,0,w,-h);
         this.createOBB(this.points);
         this.createHandler(this.points[0],"circle",this.initRotationHandler,{x:this.x,y:this.y});
@@ -223,7 +228,8 @@ class DisplayActor extends PIXI.Container {
                 break;   
             case "scalingNoUniform" : 
                 this.removeGizmo();
-                    
+                if(this.flipX)  this.tilingSprite.scale={x:-this.tilingSprite.scale.x,y:this.tilingSprite.scale.y};
+                console.log(this.f)
                 this.x=0;this.y=0;this.angle=0;
                 var giro=1;
                 var diff={x:mouseMove.x-this.initPivot.x,y:mouseMove.y-this.initPivot.y}; // quadrant x,y
@@ -274,7 +280,6 @@ class DisplayActor extends PIXI.Container {
                     this.angle=(this.initAngle+180) % 360;
                     this.tilingSprite.scale={x:-this.tilingSprite.scale.x,y:-this.tilingSprite.scale.y};
                 }
-                
                 this.createGizmo();
                 break;          
         }
@@ -354,8 +359,10 @@ class DisplayActor extends PIXI.Container {
     createHandler(pointHandler,type,handler,pivot){
         var graphic = new PIXI.Graphics();
         graphic.beginFill(0xaaaaaa);
-        if (type=="rectangle") graphic.drawRect(pointHandler.x-5/this.parent.scale.x,pointHandler.y-5/this.parent.scale.y,10.0/this.parent.scale.x,10.0/this.parent.scale.y);
+        if (type=="circle") graphic.lineStyle(1,0xffffff,1,0.5,true);
         graphic.drawCircle(pointHandler.x,pointHandler.y,5.0/this.parent.scale.x);
+        graphic.lineStyle(1,0xffffff,1,0.5,true);
+        if (type=="rectangle") graphic.drawRect(pointHandler.x-5/this.parent.scale.x,pointHandler.y-5/this.parent.scale.y,10.0/this.parent.scale.x,10.0/this.parent.scale.y); 
         graphic.endFill();
         graphic.interactive=true;
         graphic.buttonMode=true;
