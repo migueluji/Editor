@@ -7,36 +7,46 @@ class CanvasView {
         this.html.style.display="block";
         this.html.style.transform="";
         this.html.innerHTML =
-            '<button id="addactor" class="do-button mdc-fab mdc-ripple-upgraded add-property-button">'+
+            '<button id="addactor"  class="do-button mdc-fab mdc-ripple-upgraded add-property-button">'+
                 '<i class="material-icons">add</i>'+
             '</button>'+
-            '<button id="actorbutton" class="mdc-fab mdc-ripple-upgrade actor-canvas-button">'+
+            '<button id="actorbutton" style="visibility:hidden" class="mdc-fab mdc-ripple-upgrade actor-canvas-button">'+
                 '<i class="material-icons">more_vert</i>'+
             '</button>'+
             '<div class="mdc-menu-surface--anchor">'+
-                '<div id="menuStyle" class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
+                '<div id="menuActor" class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
                     '<ul class="mdc-list" role="menu" aria-hidden="true">'+
-                        '<li id="normal" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Normal</li>'+
-                        '<li id="italic" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Italic</li>'+
-                        '<li id="bold" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Bold</li>'+
-                        '<li id="italic-bold" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Italic-Bold</li>'+
-                    '</ul>'+
+                        '<li id="properties" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Properties</li>'+
+                        '<li id="scripts" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Scripts</li>'+
+                        '<li class="mdc-list-divider" role="separator" tabindex="-1"></li>'+
+                        '<li id="rename" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Rename</li>'+
+                        '<li id="duplicate" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Duplicate</li>'+
+                        '<li id="delete" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Delete</li>'+
+                '</ul>'+
                 '</div>'+
             '</div>';
+        this.html.querySelector("#actorbutton").addEventListener("click",this.menuActorHandler.bind(this));
         this.html.querySelector("#addactor").addEventListener("click",this.addActorHandler.bind(this));
         this.html.addEventListener("wheel",this.mouseStageWheel.bind(this));
+        this.html.querySelector("#properties").addEventListener("click",this.propertiesActorHandler.bind(this));
+		this.html.querySelector("#scripts").addEventListener("click",this.scriptsActorHandler.bind(this));
+		this.html.querySelector("#rename").addEventListener("click",this.renameActorHandler.bind(this));
+		this.html.querySelector('#duplicate').addEventListener("click",this.duplicateActorHandler.bind(this));
+		this.html.querySelector('#delete').addEventListener("click",this.removeActorHandler.bind(this));
         window.addEventListener("resize",this.resize.bind(this));
-       
+        this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
+
+        this.actorButton = this.html.querySelector("#actorbutton");
         this.gameProperties=game.properties;
         this.selected=false;
-        this.displayObject=null;
+        this.displayActor=null;
         this.mouseDown=false;
         this.diff={x:0,y:0} 
         this.loadImages(game.imageList);
     }
 
     loadImages(imageList){
-        this.loader = new PIXI.Loader("./images");
+        this.loader = new PIXI.Loader("./images",imageList.length);
         this.loader.add(imageList);
         this.loader.onLoad.add((loader,resource) => {
             console.log(resource.name, " loaded");
@@ -97,12 +107,17 @@ class CanvasView {
         this.scene.scale = {x:this.gameProperties.cameraZoom,y:-this.gameProperties.cameraZoom};
   
         this.actorList.forEach(actor => {
-            var displayActor = new DisplayActor(actor,this.actorList,this.gameProperties,this.loader); 
+            var displayActor = new DisplayActor(this,actor,this.actorList,this.gameProperties,this.loader); 
             this.scene.addChild(displayActor);
         });
 
         this.app.stage.addChild(this.scene);
         this.hitArea(this.scene);
+        this.updateActorButton();  
+    }
+
+    updateActorButton(){
+       this.actorButton.style.visibility="hidden";  
     }
 
     updateSelectedActor(actorID){
@@ -111,37 +126,74 @@ class CanvasView {
             var displayActorIndex =this.scene.children.findIndex(i=>i.id==actorID);
             this.displayActor = this.scene.children[displayActorIndex];
             this.displayActor.createGizmo();
+           
+            this.actorButton.style.visibility="visible";
 
-            console.log(this.displayActor.points);
-            this.displayActor.gizmo.calculateBounds();
-           var bounds=this.displayActor.gizmo.getBounds(true);
-//GREEN LINE
-this.graphics= new PIXI.Graphics();
-this.graphics.lineStyle(3, 0x00FF00, 1);
-var sprite={x:this.displayActor.x,y:-this.displayActor.y};
-this.graphics.moveTo(sprite.x+bounds.x, sprite.y+bounds.y);
-this.graphics.lineTo(sprite.x+bounds.x+bounds.width, sprite.y+bounds.y);
-this.graphics.lineTo(sprite.x+bounds.x+bounds.width, sprite.y+bounds.y+bounds.height);
-this.graphics.lineTo(sprite.x+bounds.x, sprite.y+bounds.y+bounds.height);
-this.graphics.lineTo(sprite.x+bounds.x, sprite.y+bounds.y);
-this.app.stage.addChild(this.graphics);
+            var p=this.displayActor.points;
+            p[0].y=-p[0].y;
+    
+            var xMax=0; var xMin=0; var yMax=0; var yMin=0;
+            p.forEach((i,index) => {
+                i=Utils.rotatePoint(i,-this.displayActor.angle);
+                if (i.x<xMin) xMin=i.x; if (i.x>xMax) xMax=i.x;
+                if (i.y>yMin ) yMin=i.y; if (i.y<yMax && index!=0) yMax=i.y;
+            });
+    
+            this.actorButton.style.left=((this.displayActor.transform.position.x+xMax+8)*this.app.stage.scale.x+this.app.stage.x)+"px";
+            this.actorButton.style.top=((-this.displayActor.transform.position.y+yMax)*this.app.stage.scale.y+this.app.stage.y)+"px";
 
-            var actorButton = this.html.querySelector("#actorbutton");
-            var left=4;
-            var top=0;
-            left=left+this.app.stage.x+(this.displayActor.transform.position.x+this.displayActor.tilingSprite.width*this.displayActor.tilingSprite.scale.x/2)*this.app.stage.scale.x;
-            top=this.app.stage.y-(this.displayActor.transform.position.y+this.displayActor.tilingSprite.height*-this.displayActor.tilingSprite.scale.y/2)*this.app.stage.scale.y;
-            actorButton.style.marginLeft=left+"px";
-            actorButton.style.marginTop=top+"px";
-            console.log(this.app.stage.scale.x,this.displayActor.transform.position.x);
+            // var OBB = new PIXI.Graphics(); // Oriented Bounding Box
+            // OBB.lineStyle(1, 0xffaaaa, 1, 0, true);
+            // OBB.moveTo(xMin-10,yMin+10);
+            // OBB.lineTo(xMax,yMin);
+            // OBB.lineTo(xMax,yMax);
+            // OBB.lineTo(xMin,yMax);
+            // OBB.closePath();
+            // this.app.stage.addChild(OBB);
         }
         else{
             if (this.selected) this.displayActor.removeGizmo();
             this.selected=false;
+            this.actorButton.style.visibility="hidden";
         }
     }
 
 // Handlers
+    propertiesActorHandler(){
+        Command.openActorPropertiesCmd();
+    }
+
+    scriptsActorHandler(){
+        Command.openActorScriptsCmd();
+    }
+
+    renameActorHandler(){
+        var dialog = new RenameDialogView("actor",this.displayActor.id);
+        var editorFrame=document.querySelector(".editor-frame-root");
+        editorFrame.appendChild(dialog.html);
+        dialog.html.querySelector("input").focus();
+    }
+
+    duplicateActorHandler(){
+        var sceneID=document.querySelector(".sceneselected").id;
+        CmdManager.duplicateActorCmd(sceneID,this.displayActor.id);
+    }
+
+    removeActorHandler(){
+        var sceneID=document.querySelector(".sceneselected").id;
+        if (confirm('Are you sure you want to delete "'+this.displayActor.name+'" actor?')){
+                CmdManager.removeActorCmd(sceneID,this.displayActor.id); 
+        }
+    }
+
+    menuActorHandler(e){
+        e.preventDefault();
+        this.menu.open = true;
+        var menu = this.html.querySelector(".mdc-menu-surface--anchor");
+        menu.style.left=this.actorButton.style.left;
+        menu.style.top=this.actorButton.style.top;
+    }
+
     addActorHandler(){
         var sceneID=document.querySelector(".sceneselected").id;
 		CmdManager.addActorCmd(sceneID,this.actorList.length);
@@ -176,12 +228,13 @@ this.app.stage.addChild(this.graphics);
          this.diff={x:position1.x-this.position0.x,y:position1.y-this.position0.y};
          this.app.stage.x = this.stage.x+this.diff.x;
          this.app.stage.y = this.stage.y+this.diff.y;
+        
        }
     }
 
     mouseStageWheel(e){
         this.zoom(e.deltaY,e.offsetX,e.offsetY);
-        if (this.displayObject) Command.selectActorCmd(this.displayObject.id);
+        if (this.displayActor) Command.selectActorCmd(this.displayActor.id);
     }
 
 // Utils
@@ -192,7 +245,7 @@ this.app.stage.addChild(this.graphics);
     }
 
     zoom (s,x,y){
-        s = s > 0 ? 1.1: 0.9;
+        s = s > 0 ? 0.9: 1.1;
         var stage = this.app.stage;
         var worldPos = {x: (x - stage.x ) / stage.scale.x, y: (y - stage.y)/stage.scale.y};
         var newScale = {x: stage.scale.x * s, y: stage.scale.y * s};

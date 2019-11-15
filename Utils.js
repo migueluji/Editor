@@ -31,6 +31,13 @@ class Utils {
         return Math.hypot(p2.x-p1.x, p2.y-p1.y);
     }
 
+    static rotatePoint(p,angle){
+      angle=angle*Math.PI/180;
+      var newX= p.x*Math.cos(angle)-p.y*Math.sin(angle);
+      var newY= p.x*Math.sin(angle)+p.y*Math.cos(angle);
+      return {x:newX,y:newY}
+    }
+
     static id (){
         return "_" + new Date().valueOf() + Math.random().toFixed(16).substring(2);
     }

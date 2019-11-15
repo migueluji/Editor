@@ -10,6 +10,8 @@ class DuplicateActorCmd extends Command {
         this.actor = new Actor(actorJSON);
         this.actor.id = Utils.id();
         this.actor.name = "Copy of "+actor.name;
+        this.actor.x=actor.x+25;
+        this.actor.y=actor.y-25;
         this.type="DuplicateActorCmd";
         this.name="Duplicate Actor: "+ this.actor.id;
     }

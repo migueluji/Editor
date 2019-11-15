@@ -73,12 +73,18 @@ class RenameDialogView {
 			}
 			else{
 				switch (this.element) {
-					case "scene": CmdManager.renameSceneCmd(this.elementID,name); break;
-					case "actor":	var sceneSelected=document.querySelector(".sceneselected").id;
-												CmdManager.renameActorCmd(sceneSelected,this.elementID,name);break;
-					case "script": 	var sceneSelected=document.querySelector(".sceneselected").id;
-													var actorSelected=document.querySelector(".actorselected").id;
-													CmdManager.renameScriptCmd(sceneSelected,actorSelected,this.elementID,name);break;
+					case "scene": 
+						CmdManager.renameSceneCmd(this.elementID,name); 
+						break;
+					case "actor":
+						var sceneSelected=document.querySelector(".sceneselected").id;
+						console.log("rename",sceneSelected,this.elementID,name);
+						CmdManager.renameActorCmd(sceneSelected,this.elementID,name);
+						break;
+					case "script": 	
+						var sceneSelected=document.querySelector(".sceneselected").id;
+						var actorSelected=document.querySelector(".actorselected").id;
+						CmdManager.renameScriptCmd(sceneSelected,actorSelected,this.elementID,name);break;
 				}
 				this.cancelButtonHandler();
 			}

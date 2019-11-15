@@ -1,10 +1,11 @@
 {
 	"name": "Mario Bros",
+	"backgroundColor": "#ffffff",
 	"width": 800,
 	"height": 480,
 	"cameraX": 0,
 	"cameraY": 0,
-	"cameraRotation": 0,
+	"cameraAngle": 0,
 	"cameraZoom": 1,
 	"play": false,
 	"sound": "player.mp4",
@@ -62,11 +63,43 @@
 	"fontList": [
 		{
 			"id": "_12345678900081",
-			"name": "arial.ttf"
+			"name": "Arial"
 		},
 		{
 			"id": "_12345678900071",
-			"name": "verdana.ttf"
+			"name": "Arial Black"
+		},
+		{
+			"id": "_12345678900072",
+			"name": "Comic Sans MS"
+		},
+		{
+			"id": "_12345678900073",
+			"name": "Courier New"
+		},
+		{
+			"id": "_12345678900074",
+			"name": "Georgia"
+		},
+		{
+			"id": "_12345678900075",
+			"name": "Helvetica"
+		},
+		{
+			"id": "_12345678900076",
+			"name": "Impact"
+		},
+		{
+			"id": "_12345678900077",
+			"name": "Tahoma"
+		},
+		{
+			"id": "_12345678900078",
+			"name": "Times New Roman"
+		},
+		{
+			"id": "_12345678900079",
+			"name": "Verdana"
 		}
 	],
 	"sceneList": [
@@ -74,7 +107,7 @@
 			"actorList": [
 				{
 					"id": "_actor1",
-					"name": "Actor 1",
+					"name": "Actor1",
 					"scriptList": [
 						{
 							"nodeList": [
@@ -312,15 +345,304 @@
 							"name": "Destroy enemy"
 						}
 					],
-					"x": -400,
-					"y": -240,
+					"x": -179,
+					"y": 142,
 					"width": 88,
 					"height": 73,
 					"scaleX": 1,
-					"scaleY": 0.5,
-					"rotation": 30,
+					"scaleY": 1,
+					"angle": 0,
 					"screen": true,
-					"collider": "Box",
+					"collider": "box",
+					"tags": "",
+					"visible": true,
+					"image": "planeRed1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"write": false,
+					"text": "hola mundo ${x}",
+					"font": "arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "normal",
+					"align": "right",
+					"offsetX": 0,
+					"offsetY": 0,
+					"play": false,
+					"sound": "lalala.mp4",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"active": false,
+					"type": "Kinematic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 1,
+					"restitution": 1,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"lives": 3,
+					"on": false
+				},
+				{
+					"id": "_15738316842413588706588243358",
+					"name": "Copy of Actor1",
+					"scriptList": [
+						{
+							"nodeList": [
+								{
+									"id": "_15586856911528986388357662354",
+									"type": "Compare",
+									"parameters": {
+										"Value_1": null,
+										"Operation": "<",
+										"Value_2": null
+									},
+									"nodeListTrue": [
+										{
+											"id": "_15586857443366997568588519776",
+											"type": "Check",
+											"parameters": {
+												"Property": null
+											},
+											"nodeListTrue": [
+												{
+													"id": "_15586857833176953662735795074",
+													"type": "Delete",
+													"parameters": {}
+												},
+												{
+													"id": "_15586858925679667296968503183",
+													"type": "Push To",
+													"parameters": {
+														"Force": 0,
+														"X": 0,
+														"Y": 0
+													}
+												}
+											],
+											"nodeListFalse": [
+												{
+													"id": "_15586857890738521405161478637",
+													"type": "Animate",
+													"parameters": {
+														"Animation": null,
+														"Fps": 24
+													}
+												},
+												{
+													"id": "_15586858985306170310926778388",
+													"type": "Torque",
+													"parameters": {
+														"Angle": 0
+													}
+												}
+											]
+										}
+									],
+									"nodeListFalse": [
+										{
+											"id": "_15586857547544579732567433781",
+											"type": "Collision",
+											"parameters": {
+												"Tag": null
+											},
+											"nodeListTrue": [
+												{
+													"id": "_15586857714540624623046662349",
+													"type": "Edit",
+													"parameters": {
+														"Property": null,
+														"Value": null
+													}
+												},
+												{
+													"id": "_15586858657072526260683134514",
+													"type": "Push",
+													"parameters": {
+														"Force": 0,
+														"Angle": 0
+													}
+												}
+											],
+											"nodeListFalse": [
+												{
+													"id": "_15586857791666567328958183443",
+													"type": "Spawn",
+													"parameters": {
+														"Actor": null,
+														"X": 0,
+														"Y": 0,
+														"Angle": 0
+													}
+												},
+												{
+													"id": "_15586858760990630669306458918",
+													"type": "Rotate To",
+													"parameters": {
+														"Speed": 0,
+														"X": 0,
+														"Y": 0,
+														"Pivot_X": 0,
+														"Pivot_Y": 0
+													}
+												}
+											]
+										}
+									]
+								},
+								{
+									"id": "_15586858048630009530075333781",
+									"type": "Timer",
+									"parameters": {
+										"Seconds": 0
+									},
+									"nodeListTrue": [
+										{
+											"id": "_15586858101852131429820063993",
+											"type": "Touch",
+											"parameters": {
+												"Mode": "down",
+												"On_Actor": true
+											},
+											"nodeListTrue": [
+												{
+													"id": "_15586858366718620178333622570",
+													"type": "Move To",
+													"parameters": {
+														"Speed": 0,
+														"X": 0,
+														"Y": 0
+													}
+												}
+											],
+											"nodeListFalse": [
+												{
+													"id": "_15586858459655733024344593121",
+													"type": "Rotate",
+													"parameters": {
+														"Speed": 0,
+														"Pivot_X": 0,
+														"Pivot_Y": 0
+													}
+												}
+											]
+										},
+										{
+											"id": "_15586859139193299764356537158",
+											"type": "Add",
+											"parameters": {
+												"Add": null,
+												"Stop": false
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"id": "_15586858156375691026035316546",
+											"type": "Keyboard",
+											"parameters": {
+												"Key": null,
+												"Key_Mode": "down"
+											},
+											"nodeListTrue": [
+												{
+													"id": "_15586858225342536861783919229",
+													"type": "Play",
+													"parameters": {
+														"Sound": null,
+														"Volume": 1,
+														"Start": 0,
+														"Pan": 0
+													}
+												}
+											],
+											"nodeListFalse": [
+												{
+													"id": "_15586858318891765537245443183",
+													"type": "Move",
+													"parameters": {
+														"Speed": 0,
+														"Angle": 0
+													}
+												}
+											]
+										},
+										{
+											"id": "_15586859059352432566083880574",
+											"type": "Go To",
+											"parameters": {
+												"Scene": null
+											}
+										}
+									]
+								},
+								{
+									"id": "_15586859186283210735582080149",
+									"type": "Remove",
+									"parameters": {}
+								}
+							],
+							"id": "_15510884179469936971423234",
+							"name": "Move the player"
+						},
+						{
+							"nodeList": [
+								{
+									"id": "_nodo1",
+									"type": "Compare",
+									"parameters": {
+										"Value_1": "game.x",
+										"Operation": "<=",
+										"Value_2": "20"
+									},
+									"nodeListTrue": [
+										{
+											"id": "_nodo11",
+											"type": "Check",
+											"parameters": {
+												"Property": "actor.visible",
+												"Value": true
+											},
+											"nodeListTrue": [],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": [
+										{
+											"id": "_nodo104",
+											"type": "Edit",
+											"parameters": {
+												"Property": "actor.x",
+												"Value": 100
+											}
+										}
+									]
+								}
+							],
+							"id": "_script2",
+							"name": "Destroy enemy"
+						}
+					],
+					"x": 144,
+					"y": 193,
+					"width": 264,
+					"height": 73,
+					"scaleX": "3.00",
+					"scaleY": "1.00",
+					"angle": 0,
+					"screen": true,
+					"collider": "box",
 					"tags": "",
 					"visible": false,
 					"image": "planeRed1.png",
@@ -332,12 +654,13 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"write": false,
-					"text": "",
-					"font": "arial.ttf",
+					"write": true,
+					"text": "hola mundo ${x}",
+					"font": "arial",
 					"size": 30,
-					"style": "Normal",
-					"align": "Left",
+					"fill": "#000000",
+					"style": "normal",
+					"align": "right",
 					"offsetX": 0,
 					"offsetY": 0,
 					"play": false,
@@ -345,10 +668,10 @@
 					"start": 0,
 					"volume": 1,
 					"pan": 0,
-					"loop": true,
+					"loop": false,
 					"active": false,
 					"type": "Kinematic",
-					"fixedRotation": false,
+					"fixedAngle": false,
 					"velocityX": 0,
 					"velocityY": 0,
 					"angularVelocity": 0,
@@ -364,17 +687,17 @@
 					"id": "_15510884187483724645860623896",
 					"name": "Actor 2",
 					"scriptList": [],
-					"x": 200,
-					"y": 50,
-					"width": 50,
-					"height": 50,
+					"x": 214,
+					"y": -80,
+					"width": 88,
+					"height": 73,
 					"scaleX": 1,
 					"scaleY": 1,
-					"rotation": 0,
+					"angle": 20,
 					"screen": false,
-					"collider": "Box",
+					"collider": "box",
 					"tags": "",
-					"visible": false,
+					"visible": true,
 					"image": "planeYellow1.png",
 					"color": "#ffffff",
 					"opacity": 1,
@@ -386,10 +709,11 @@
 					"tileY": 1,
 					"write": false,
 					"text": "",
-					"font": "Arial",
+					"font": "arial",
 					"size": 30,
-					"style": "Normal",
-					"align": "Left",
+					"fill": "#000000",
+					"style": "normal",
+					"align": "left",
 					"offsetX": 0,
 					"offsetY": 0,
 					"play": false,
@@ -399,7 +723,7 @@
 					"loop": true,
 					"active": false,
 					"type": "Kinematic",
-					"fixedRotation": false,
+					"fixedAngle": false,
 					"velocityX": 0,
 					"velocityY": 0,
 					"angularVelocity": 0,
@@ -414,17 +738,17 @@
 					"id": "_15510884194967055353027074027",
 					"name": "Actor 3",
 					"scriptList": [],
-					"x": -100,
-					"y": -70,
-					"width": 50,
-					"height": 50,
+					"x": 0,
+					"y": 0,
+					"width": 88,
+					"height": 73,
 					"scaleX": 1,
 					"scaleY": 1,
-					"rotation": 0,
+					"angle": 0,
 					"screen": false,
-					"collider": "Box",
+					"collider": "box",
 					"tags": "",
-					"visible": false,
+					"visible": true,
 					"image": "planeBlue1.png",
 					"color": "#ffffff",
 					"opacity": 1,
@@ -438,8 +762,9 @@
 					"text": "",
 					"font": "Arial",
 					"size": 30,
-					"style": "Normal",
-					"align": "Left",
+					"fill": "#000000",
+					"style": "normal",
+					"align": "left",
 					"offsetX": 0,
 					"offsetY": 0,
 					"play": false,
@@ -449,7 +774,7 @@
 					"loop": true,
 					"active": false,
 					"type": "Kinematic",
-					"fixedRotation": false,
+					"fixedAngle": false,
 					"velocityX": 0,
 					"velocityY": 0,
 					"angularVelocity": 0,
@@ -471,15 +796,15 @@
 					"scriptList": [],
 					"x": 100,
 					"y": 0,
-					"width": 50,
-					"height": 50,
+					"width": 88,
+					"height": 73,
 					"scaleX": 1,
 					"scaleY": 1,
-					"rotation": 0,
+					"angle": 0,
 					"screen": false,
-					"collider": "Box",
+					"collider": "box",
 					"tags": "",
-					"visible": false,
+					"visible": true,
 					"image": "planeBlue1.png",
 					"color": "#ffffff",
 					"opacity": 1,
@@ -493,8 +818,9 @@
 					"text": "",
 					"font": "Arial",
 					"size": 30,
-					"style": "Normal",
-					"align": "Left",
+					"fill": "#000000",
+					"style": "normal",
+					"align": "left",
 					"offsetX": 0,
 					"offsetY": 0,
 					"play": false,
@@ -504,7 +830,7 @@
 					"loop": true,
 					"active": false,
 					"type": "Kinematic",
-					"fixedRotation": false,
+					"fixedAngle": false,
 					"velocityX": 0,
 					"velocityY": 0,
 					"angularVelocity": 0,
@@ -520,15 +846,15 @@
 					"scriptList": [],
 					"x": -100,
 					"y": 0,
-					"width": 50,
-					"height": 50,
+					"width": 88,
+					"height": 73,
 					"scaleX": 1,
 					"scaleY": 1,
-					"rotation": 0,
+					"angle": 0,
 					"screen": false,
-					"collider": "Box",
+					"collider": "box",
 					"tags": "",
-					"visible": false,
+					"visible": true,
 					"image": "planeYellow1.png",
 					"color": "#ffffff",
 					"opacity": 1,
@@ -542,8 +868,9 @@
 					"text": "",
 					"font": "Arial",
 					"size": 30,
-					"style": "Normal",
-					"align": "Left",
+					"fill": "#000000",
+					"style": "normal",
+					"align": "left",
 					"offsetX": 0,
 					"offsetY": 0,
 					"play": false,
@@ -553,7 +880,7 @@
 					"loop": true,
 					"active": false,
 					"type": "Kinematic",
-					"fixedRotation": false,
+					"fixedAngle": false,
 					"velocityX": 0,
 					"velocityY": 0,
 					"angularVelocity": 0,
@@ -575,15 +902,15 @@
 					"scriptList": [],
 					"x": 0,
 					"y": 0,
-					"width": 50,
-					"height": 50,
+					"width": 88,
+					"height": 73,
 					"scaleX": 1,
 					"scaleY": 1,
-					"rotation": 0,
+					"angle": 0,
 					"screen": false,
-					"collider": "Box",
+					"collider": "box",
 					"tags": "",
-					"visible": false,
+					"visible": true,
 					"image": "planeRed1.png",
 					"color": "#ffffff",
 					"opacity": 1,
@@ -597,8 +924,9 @@
 					"text": "",
 					"font": "Arial",
 					"size": 30,
-					"style": "Normal",
-					"align": "Left",
+					"fill": "#000000",
+					"style": "normal",
+					"align": "left",
 					"offsetX": 0,
 					"offsetY": 0,
 					"play": false,
@@ -608,7 +936,7 @@
 					"loop": true,
 					"active": false,
 					"type": "Kinematic",
-					"fixedRotation": false,
+					"fixedAngle": false,
 					"velocityX": 0,
 					"velocityY": 0,
 					"angularVelocity": 0,
