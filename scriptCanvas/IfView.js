@@ -4,7 +4,7 @@ class IfView extends NodeView {
 		super();
 		this.html.innerHTML =
 			'<div  class="condition">'+
-					'<div  class="cuadro" ></div>'+
+					'<div  class="frame" ></div>'+
 							'<div  class="element">'+
 										'<span  class="notext">no</span>'+
 										'<span  class="yestext">yes</span>'+

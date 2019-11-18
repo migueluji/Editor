@@ -31,6 +31,7 @@ class ScriptCanvasView {
         this.html.addEventListener("click",this.unselectNodeHandler.bind(this));
         this.selectedNode=null;
         this.selected=null;
+        this.drawerX=256;
   }
 
     addNode(html,nodeView,nodePos){
@@ -144,19 +145,28 @@ class ScriptCanvasView {
 // Utilities
     update(nodeList){
         this.selected="no";
+        this.nodeList=nodeList;
         var list =this.html.querySelector(".nodelist"); 
-		while (list.firstChild){ // elimina todos los elementos de la lista
-			list.removeChild(list.firstChild);
-        };
+		while (list.firstChild)	list.removeChild(list.firstChild);
         this.updateNodeList(list,nodeList);
-        this.redraw();
-        // centrado del script sobre el fondo
+        this.redrawFrames();
         var element=this.html.querySelector(".script-background");
-        var x=this.html.clientWidth;
-        var xClient=element.clientWidth;
-        this.posx= -(xClient-x)/2;
-        this.posy=0;
-        element.style.transform="translateX("+this.posx+"px)";
+        if (this.currentList!=nodeList[0].id) { // compute initial view
+            this.posx=(this.html.clientWidth-element.clientWidth)/2;
+            element.firstChild.style="margin-top:"+this.html.clientHeight+"px";
+            this.posy=-this.html.clientHeight+100;
+            this.currentList=nodeList[0].id;
+            this.drawerX=0;
+        }
+        this.posx=this.posx-this.drawerX;
+        console.log(this.drawerX,this.posx);
+        element.style.transform="translate("+this.posx+"px,"+this.posy+"px)";
+    }
+
+    updateStageDrawer(){
+        var drawerApp=document.querySelector(".mdc-drawer-app-content");
+        (drawerApp.getBoundingClientRect().x==0) ? this.drawerX=-256 : this.drawerX=256;
+        this.update(this.nodeList);
     }
 
     updateNodeList(html,nodeList){
@@ -177,18 +187,18 @@ class ScriptCanvasView {
         });
     }
 
-    redraw (){
-        var cuadros=document.querySelectorAll('.cuadro');
-        cuadros.forEach(cuadro=>{
-            var upNodeChildren=cuadro.parentNode.children;
+    redrawFrames (){
+        var frames=document.querySelectorAll('.frame');
+        frames.forEach(frame=>{
+            var upNodeChildren=frame.parentNode.children;
             var childrenWidht1=upNodeChildren[2].clientWidth+16; 
             var childrenWidht2=upNodeChildren[3].clientWidth+16; // 16 por el marigen de 8px 
             var boxWidth = childrenWidht1/2+childrenWidht2/2-4; // 4 por el borde
 
-            cuadro.style.height=cuadro.parentNode.parentNode.clientHeight-56+"px";
-            cuadro.style.width=boxWidth+"px";
+            frame.style.height=frame.parentNode.parentNode.clientHeight-56+"px";
+            frame.style.width=boxWidth+"px";
             var position=childrenWidht1/2;
-            cuadro.style.transform="translateX("+position+"px)";
+            frame.style.transform="translateX("+position+"px)";
         });
         // height
         var nodelist= this.html.querySelector(".nodelist");

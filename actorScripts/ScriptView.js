@@ -27,7 +27,7 @@ class ScriptView {
 		this.html.addEventListener("dragover",this.dragoverScriptHandler.bind(this));
 		this.html.addEventListener("dragleave",this.dragleaveScriptHandler.bind(this));
 		this.html.addEventListener("drop",this.dropScriptHandler.bind(this));
-	  this.html.addEventListener("click",this.selectScriptHandler.bind(this));
+	    this.html.addEventListener("click",this.selectScriptHandler.bind(this));
 
 		this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
 	}

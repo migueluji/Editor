@@ -129,6 +129,7 @@ class Editor {
         var actorID=null;
         if (this.selectedActorIndex!=null) actorID=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].id;
         this.canvasView.updateStageDrawer();
+        this.scriptCanvasView.updateStageDrawer();
         if (actorID) this.canvasView.updateSelectedActor(actorID);
     }
 

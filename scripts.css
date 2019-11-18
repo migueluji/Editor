@@ -91,7 +91,7 @@
     display: inline-block;
     pointer-events:none;
 }
-.cuadro {
+.frame {
     position: absolute;
     margin-top: 24px;
     background:white;
