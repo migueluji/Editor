@@ -31,6 +31,10 @@ class SideSheetView {
 		return(document.querySelector(".actor-properties").style.display!="none");
 	}
 
+	static isOpenActorScripts(){
+		return(document.querySelector(".actor-scripts").style.display!="none");
+	}
+
 	static closeSheetHandler(){
 		document.querySelector(".side-sheet").style.display="none";
 		document.querySelector(".game-properties").style.display="none";

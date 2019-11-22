@@ -16,8 +16,12 @@ class NodeView {
 
 		//añade los eventos del chip
 		chip.html.addEventListener("click",this.selectNodeHandler.bind(this));	
+		chip.html.addEventListener("dragstart",this.dragstartNodeHandler.bind(this));
+	// //	chip.html.addEventListener("dragover",this.dragoverNodeHandler.bind(this));
+	// 	chip.html.addEventListener("dragleave",this.dragleaveNodeHandler.bind(this));
+	// //	chip.html.addEventListener("drop",this.dropNodeHandler.bind(this));
+		chip.html.draggable=true;
 		chip.html.querySelector("#remove").addEventListener("click",this.removeNodeHandler.bind(this));
-		
 
 		if (node.type=="Delete" ){ // nodo sin tarjeta
 			this.html.querySelector(".circle").classList.add("do");
@@ -31,7 +35,6 @@ class NodeView {
 		var card=new CardView(); // crea card
 		children = this.html.querySelector(".mdc-card");
 		children.parentNode.replaceChild(card.html,children);
-
 		this.createFields(node); // añade iconos y campos dependiendo de la acción
 		//añade los eventos del card
 		card.html.querySelector("#close").addEventListener("click",this.closeNodeInfoHandler.bind(this));
@@ -48,6 +51,40 @@ class NodeView {
 	}
 	
 // Handlers
+	 dragstartNodeHandler(e){
+		 console.log("Drag Start");
+		 e.dataTransfer.setData('text/html', this.html.outerHTML);
+	 }
+
+	// dragoverNodeHandler(e){
+	// 	console.log("Drag Over")
+	// 	e.preventDefault();
+	// 	this.html.classList.add('over');
+	// };
+
+	// dragleaveNodeHandler(e){
+	// 	this.html.classList.remove("over");
+	// };
+
+	// dropNodeHandler(e){
+	// 	if(e.stopPropagation){
+	// 		e.stopPropagation();
+	// 	}
+	// 	var element= document.createElement("div");
+	// 	element.innerHTML=e.dataTransfer.getData('text/html');
+	// 	element=element.firstElementChild;
+	// 	var sceneSelected=document.querySelector(".sceneselected").id;
+	// 	var actorSelected=document.querySelector(".actorselected").id;
+	// 	var scriptSelected=document.querySelector(".scriptselected").id;
+	// 	console.log(element,scriptSelected);
+	// 	CmdManager.addNodeCmd(sceneSelected,actorSelected,scriptSelected,element.id,"down","Edit");
+	// //	CmdManager.moveScriptCmd(sceneSelected,actorSelected,element.id,this.position(this.html,this.html.parentNode));
+	// 	this.html.classList.remove("over");
+	// 	if (element.querySelector(".scriptselected")){
+	// 			Command.selectScriptCmd(element.id); 
+	// 	}
+	// };
+
 	selectNodeHandler(event){
 		console.log("selected",event.target.classList[0]);
 		if(event.target.classList[0]=="mdc-chip" && event.target.classList[0]!="circle"){

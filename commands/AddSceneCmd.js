@@ -16,7 +16,6 @@ class AddSceneCmd extends Command {
             name="Scene "+pos;
         }
         return name;
-        //
     }
 
     execute (){  

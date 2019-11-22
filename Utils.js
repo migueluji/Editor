@@ -1,6 +1,5 @@
 class Utils {
     
-
     static randomColor(opacity) {
 
         return "rgba(" + Math.floor(Math.random() * 256) + ", " + Math.floor(Math.random() * 256) + ", " + Math.floor(Math.random() * 256) + ", " + (opacity || 1) + ")"

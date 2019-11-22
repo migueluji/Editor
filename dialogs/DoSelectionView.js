@@ -143,6 +143,7 @@ class DoSelectionView {
 			var sceneID=document.querySelector(".sceneselected").id;
 			var actorID=document.querySelector(".actorselected").id;
 			var scriptID=document.querySelector(".scriptselected").id;
+			console.log("dialog",sceneID,actorID,scriptID,this.nodeID,this.insertPoint,type);
 			CmdManager.addNodeCmd(sceneID,actorID,scriptID,this.nodeID,this.insertPoint,type);
 			this.closeDialog();
 		}

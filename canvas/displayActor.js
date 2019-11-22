@@ -19,7 +19,7 @@ class DisplayActor extends PIXI.Container {
         else texture=PIXI.Texture.WHITE;
 
         this.createSprite(actor,texture); 
-        if (!actor.spriteOn && !actor.text) this.createBorder();
+        if (!actor.spriteOn && !actor.textOn) this.createBorder();
         if (actor.text && actor.textOn) this.createText(actor,cast,game);
 
         this.on('pointerdown',this.onPointerDown.bind(this))

@@ -14,7 +14,7 @@
     height: 10000px;
 }
 .init {
-    margin: 64px auto 16px auto;
+    margin: 64px auto 0px auto;
     width: 16px;
     height: 16px;
     background-color: greenyellow;
@@ -23,13 +23,13 @@
     pointer-events:none;
 }
 .nodelist{
-    margin: 16px 8px;
+    margin: 0px 8px;
     min-width: 168px;
     min-height: 48px;
     pointer-events:none;
 }
 .end{
-    margin: 16px auto 64px auto;
+    margin: 0px auto 64px auto;
     width: 36px;
     height: 25px;
     background-color: lightgray;
@@ -82,9 +82,8 @@
 }
 .node{
     overflow: hidden;
-    padding: 16px 0px;
+    padding: 0px 0px;
     display: flex;
-    pointer-events:none;
 }
 .condition {
     margin: auto;
@@ -188,4 +187,9 @@
 }
 .moveup{
    transform: translateY(-52px);
+}
+.empty{
+    background: white;
+    border: 2px solid lightgray;
+    pointer-events: none;
 }
