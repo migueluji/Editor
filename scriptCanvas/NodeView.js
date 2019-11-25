@@ -17,9 +17,6 @@ class NodeView {
 		//añade los eventos del chip
 		chip.html.addEventListener("click",this.selectNodeHandler.bind(this));	
 		chip.html.addEventListener("dragstart",this.dragstartNodeHandler.bind(this));
-	// //	chip.html.addEventListener("dragover",this.dragoverNodeHandler.bind(this));
-	// 	chip.html.addEventListener("dragleave",this.dragleaveNodeHandler.bind(this));
-	// //	chip.html.addEventListener("drop",this.dropNodeHandler.bind(this));
 		chip.html.draggable=true;
 		chip.html.querySelector("#remove").addEventListener("click",this.removeNodeHandler.bind(this));
 
@@ -52,7 +49,6 @@ class NodeView {
 	
 // Handlers
 	 dragstartNodeHandler(e){
-		 console.log("Drag Start");
 		 e.dataTransfer.setData('text/html', this.html.outerHTML);
 	 }
 
@@ -86,7 +82,6 @@ class NodeView {
 	// };
 
 	selectNodeHandler(event){
-		console.log("selected",event.target.classList[0]);
 		if(event.target.classList[0]=="mdc-chip" && event.target.classList[0]!="circle"){
 			Command.selectNodeCmd(this.html.id);
 		}

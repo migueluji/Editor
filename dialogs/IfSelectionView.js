@@ -67,11 +67,21 @@ class IfSelectionView {
 // Handlers
 	addNodeHandler(e){
 		if (e.target.tagName== "I"){
-			var type = e.target.parentNode.nextSibling.firstChild.innerHTML;
 			var sceneID=document.querySelector(".sceneselected").id;
 			var actorID=document.querySelector(".actorselected").id;
 			var scriptID=document.querySelector(".scriptselected").id;
-			CmdManager.addNodeCmd(sceneID,actorID,scriptID,this.nodeID,this.insertPoint,type);
+			var type = e.target.parentNode.nextSibling.firstChild.innerHTML;
+			var parameters=null;
+			switch(type){
+				case "Compare":     parameters= new Object({"Value_1":null,"Operation":"<","Value_2":null});break;
+				case "Check":       parameters= new Object({"Property":null});break;
+				case "Collision":   parameters= new Object({"Tag":null});break;
+				case "Timer":       parameters= new Object({"Seconds":0});break;
+				case "Touch":       parameters= new Object({"Mode":"down","On_Actor":true});break;
+				case "Keyboard":    parameters= new Object({"Key":null,"Key_Mode":"down"});break;
+			}
+			this.node= new If({"id":Utils.id(),"type":type,"parameters":parameters,"nodeListTrue":[],"nodeListFalse":[]});
+			CmdManager.addNodeCmd(sceneID,actorID,scriptID,this.nodeID,this.insertPoint,this.node);
 			this.closeDialog();
 		}
 	}

@@ -4,12 +4,12 @@ class EmptyNodeView {
 	//	console.log(canvas);
 		this.canvas=canvas;
 		this.html = document.createElement("div");
-		this.html.classList.add("node","element");
+		this.html.classList.add("node","element","empty");
 		this.html.innerHTML=
 			'<div class="mdc-chip"></div>';
 		this.html.id=Utils.id();
 		this.chip =this.html.firstChild;
-		this.chip.classList.add("empty");
+		this.chip.classList.add("emptychip");
 
 		this.html.style.pointerEvents="auto";
 		this.chip.style.display="none";

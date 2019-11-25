@@ -145,8 +145,8 @@ class CmdManager {
         this.history.execute(cmd);
     }
 
-    static addNodeCmd(sceneID,actorID,scriptID,nodeID,insertPoint,type){
-        var cmd = new AddNodeCmd(sceneID,actorID,scriptID,nodeID,insertPoint,type);
+    static addNodeCmd(sceneID,actorID,scriptID,nodeID,insertPoint,node){// node can be an if structure
+        var cmd = new AddNodeCmd(sceneID,actorID,scriptID,nodeID,insertPoint,node);
         this.history.execute(cmd);
     }
 

@@ -6,9 +6,9 @@ class Script {
         this.assignNodes(this.nodeList);
     }
 
-    addNode(nodeID,insertPoint,condition){
+    addNode(nodeID,insertPoint,node){
         if (nodeID==null){ //script vacio
-            this.nodeList.splice(0,0,condition);
+            this.nodeList.splice(0,0,node);
         }
         else {
             var founded=this.findNode(null,null,this.nodeList,nodeID); // parentID y side = null
@@ -17,21 +17,21 @@ class Script {
             var position=0;
             switch (insertPoint) {
                 case "rightStart" :{
-                    actualNodeList[pos].nodeListTrue.splice(position,0,condition); break;  
+                    actualNodeList[pos].nodeListTrue.splice(position,0,node); break;  
                 }
                 case "leftStart" : {
-                    actualNodeList[pos].nodeListFalse.splice(position,0,condition); break; 
+                    actualNodeList[pos].nodeListFalse.splice(position,0,node); break; 
                 }
                 case "right" : {
                     position = actualNodeList[pos].nodeListTrue.length;
-                    actualNodeList[pos].nodeListTrue.splice(position,0,condition); break;  
+                    actualNodeList[pos].nodeListTrue.splice(position,0,node); break;  
                 }
                 case "left" :{
                     position = actualNodeList[pos].nodeListFalse.length;
-                    actualNodeList[pos].nodeListFalse.splice(position,0,condition); break;  
+                    actualNodeList[pos].nodeListFalse.splice(position,0,node); break;  
                 }
                 case "down" : {
-                    actualNodeList.splice(pos+1,0,condition); break;
+                    actualNodeList.splice(pos+1,0,node); break;
                 }
             }
         }
@@ -62,7 +62,7 @@ class Script {
         });
     }
 
-    findNode(parentID,side,list,nodeID){
+    findNode(parentID,side,list,nodeID){ // returns the list and the pos of the nodeID (also the parentID and the side
         var pos=0;
         var node=undefined;
         while (pos<list.length) {

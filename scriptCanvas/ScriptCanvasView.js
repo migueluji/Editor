@@ -169,7 +169,6 @@ class ScriptCanvasView {
     }
 
     updateNodeList(html,nodeList){
-        console.log(html,nodeList);
         var nodePos=0;
         var nodeView;
         var chip = new EmptyNodeView(this);
@@ -200,7 +199,6 @@ class ScriptCanvasView {
             var childrenWidht1=upNodeChildren[2].clientWidth+16; 
             var childrenWidht2=upNodeChildren[3].clientWidth+16; // 16 por el marigen de 8px 
             var boxWidth = childrenWidht1/2+childrenWidht2/2-4; // 4 por el borde
-
         //    frame.style.height=frame.parentNode.parentNode.clientHeight-56+"px";
             frame.style.height=frame.parentNode.parentNode.clientHeight-28+"px";
             frame.style.width=boxWidth+"px";
@@ -221,9 +219,9 @@ class ScriptCanvasView {
         var nodeID=null;
         var insertPoint="down";
         if (node==null){ // si no hay nodo seleccionado se inserta al final de la lista principal
-            var nodelist=this.html.querySelector(".nodelist");
-            var position = nodelist.childNodes.length;
-            if (position!=0) nodeID=nodelist.childNodes[position-1].id;
+            var nodeList=this.html.querySelector(".nodelist");
+            var position = 0;
+            nodeID=nodeList.childNodes[nodeList.childNodes.length-2].id; //2 to take into account empty chips
         }
         else {
             if (node.firstChild.classList.contains("condition")){
@@ -236,6 +234,7 @@ class ScriptCanvasView {
             }
             nodeID=node.id;
         }
+        console.log("nodeID:",nodeID,"insertPoint:",insertPoint);
         return {"nodeID":nodeID,"insertPoint":insertPoint}
     }
 

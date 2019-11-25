@@ -341,7 +341,7 @@
 									]
 								}
 							],
-							"id": "_script2",
+							"id": "_script2345",
 							"name": "Destroy enemy"
 						}
 					],
@@ -593,7 +593,7 @@
 									"parameters": {}
 								}
 							],
-							"id": "_15510884179469936971423234",
+							"id": "_1551088417946993",
 							"name": "Move the player"
 						},
 						{
@@ -630,7 +630,7 @@
 									]
 								}
 							],
-							"id": "_script2",
+							"id": "_script21",
 							"name": "Destroy enemy"
 						}
 					],

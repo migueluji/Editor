@@ -139,12 +139,30 @@ class DoSelectionView {
 // Handlers
 	addActionHandler(e){
 		if (e.target.tagName== "I"){
-			var type= e.target.parentNode.nextSibling.firstChild.innerHTML;
 			var sceneID=document.querySelector(".sceneselected").id;
 			var actorID=document.querySelector(".actorselected").id;
 			var scriptID=document.querySelector(".scriptselected").id;
-			console.log("dialog",sceneID,actorID,scriptID,this.nodeID,this.insertPoint,type);
-			CmdManager.addNodeCmd(sceneID,actorID,scriptID,this.nodeID,this.insertPoint,type);
+			var type= e.target.parentNode.nextSibling.firstChild.innerHTML;
+			var parameters=null;
+			switch(type){
+				case "Edit" :       parameters= new Object({"Property":null,"Value":null});break;
+				case "Spawn" :      parameters= new Object({"Actor":null,"X":0,"Y":0,"Angle":0});break;
+				case "Delete" :     parameters= new Object({});break;
+				case "Animate" :    parameters= new Object({"Animation":null,"Fps":24});break;
+				case "Play" :       parameters= new Object({"Sound":null,"Volume":1, "Start":0, "Pan":0});break;
+				case "Move" :       parameters= new Object({"Speed":0,"Angle":0});break;
+				case "Move To" :    parameters= new Object({"Speed":0,"X":0,"Y":0});break;
+				case "Rotate" :     parameters= new Object({"Speed":0,"Pivot_X":0,"Pivot_Y":0});break;
+				case "Rotate To" :  parameters= new Object({"Speed":0,"X":0,"Y":0,"Pivot_X":0,"Pivot_Y":0});break;
+				case "Push" :       parameters= new Object({"Force":0,"Angle":0});break;
+				case "Push To" :    parameters= new Object({"Force":0,"X":0,"Y":0});break;
+				case "Torque" :     parameters= new Object({"Angle":0});break;
+				case "Go To" :      parameters= new Object({"Scene":null});break;
+				case "Add" :        parameters= new Object({"Add":null,"Stop":false});break;
+				case "Remove" :     parameters= new Object({});break;
+			}
+			this.node=new Do({"id":Utils.id(),"type":type,"parameters":parameters});
+			CmdManager.addNodeCmd(sceneID,actorID,scriptID,this.nodeID,this.insertPoint,this.node);
 			this.closeDialog();
 		}
 	}	

@@ -417,7 +417,6 @@ class Editor {
 
 // SCRIPTING this.sceneID,this.actorID,this.scriptID,this.nodeID,this.if
     addNode(sceneID,actorID,scriptID,nodeID,insertPoint,node){
-      console.log("add node",sceneID,actorID,scriptID,nodeID,insertPoint,node);
       var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
       var actorPos = this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID);
       var scriptPos =  this.model.sceneList[scenePos].actorList[actorPos].scriptList.findIndex(i=>i.id==scriptID);
