@@ -17,6 +17,7 @@ class NodeView {
 		//añade los eventos del chip
 		chip.html.addEventListener("click",this.selectNodeHandler.bind(this));	
 		chip.html.addEventListener("dragstart",this.dragstartNodeHandler.bind(this));
+		chip.html.addEventListener("dragend",this.dragendNodeHandler.bind(this));
 		chip.html.draggable=true;
 		chip.html.querySelector("#remove").addEventListener("click",this.removeNodeHandler.bind(this));
 
@@ -49,9 +50,18 @@ class NodeView {
 	
 // Handlers
 	 dragstartNodeHandler(e){
-		 e.dataTransfer.setData('text/html', this.html.outerHTML);
+		document.querySelectorAll(".empty").forEach(element=>{
+			element.style.pointerEvents="auto";
+		})
+		e.dataTransfer.setData('text/html', this.html.outerHTML);
 	 }
 
+	 dragendNodeHandler(){ 
+		document.querySelectorAll(".empty").forEach(element=>{
+			element.style.pointerEvents="none";
+		})
+	}
+	
 	// dragoverNodeHandler(e){
 	// 	console.log("Drag Over")
 	// 	e.preventDefault();

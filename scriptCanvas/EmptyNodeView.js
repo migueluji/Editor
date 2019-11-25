@@ -11,7 +11,7 @@ class EmptyNodeView {
 		this.chip =this.html.firstChild;
 		this.chip.classList.add("emptychip");
 
-		this.html.style.pointerEvents="auto";
+	//	this.html.style.pointerEvents="auto";
 		this.chip.style.display="none";
 		this.html.ondragover=true;
 		this.html.addEventListener("dragenter",this.dragenterNodeHandler.bind(this));
@@ -42,16 +42,30 @@ class EmptyNodeView {
 	dropNodeHandler(e){
 	//	console.log("drop",e.dataTransfer.getData('text/html'));
 		this.dragleaveNodeHandler(e);
-		var node=document.createElement("div");
-		node.innerHTML=e.dataTransfer.getData('text/html');
-		node=node.firstElementChild;
 		var sceneSelected=document.querySelector(".sceneselected").id;
 		var actorSelected=document.querySelector(".actorselected").id;
 		var scriptSelected=document.querySelector(".scriptselected").id;
-	//	console.log(node,scriptSelected);
-	//	CmdManager.removeNodeCmd(sceneSelected,actorSelected,scriptSelected,node.id);
-	//	CmdManager.addNodeCmd(scriptSelected,actorSelected,scriptSelected,node.id,"down",JSON.stringify(node));
-
+		var insertPoint="down";
+		var nodeSelected=this.html;
+		var nodeSelectedID;
+		if (nodeSelected.previousSibling){	// looking for big brother
+			nodeSelectedID=nodeSelected.previousSibling.id;
+		}
+		else { // looking for father
+			nodeSelected=nodeSelected.parentNode;
+			if(nodeSelected.classList.contains("no")) insertPoint="leftStart";
+			if(nodeSelected.classList.contains("yes")) insertPoint="rightStart";
+			while (!nodeSelected.classList.contains("node") && !nodeSelected.classList.contains("script-background")) {
+				nodeSelected=nodeSelected.parentNode;
+			}
+			if(nodeSelected.classList.contains("script-background")) nodeSelectedID=null;
+			else nodeSelectedID=nodeSelected.id;
+		}
+		var node=document.createElement("div");
+		node.innerHTML=e.dataTransfer.getData('text/html');
+		var nodeToInsertID=node.firstElementChild.id;
+		console.log("moveNodeCmd",sceneSelected,actorSelected,scriptSelected,nodeSelectedID,insertPoint,nodeToInsertID);
+		CmdManager.moveNodeCmd(sceneSelected,actorSelected,scriptSelected,nodeSelectedID,insertPoint,nodeToInsertID);
 	}
 	
 

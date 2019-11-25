@@ -92,7 +92,7 @@ class ScriptCanvasView {
     }
 
     mouseDowndHandler(e){
-  //      console.log("mouseDown");
+        console.log("mouseDown",e.target.classList[0]);
         if (e.target.classList[0]=="script-background") {
             e.preventDefault();
             this.x0=e.clientX;
@@ -102,7 +102,7 @@ class ScriptCanvasView {
     }
 
     mouseUpHandler(e){
-    //    console.log("mouseUp");
+        console.log("mouseUp");
             e.preventDefault();
             this.down=false;
             this.posx=this.x;
@@ -110,7 +110,7 @@ class ScriptCanvasView {
     }
     
     mouseMoveHandler(e){
-    //    console.log("mouseMove");
+        console.log("mouseMove");
         if (e.target.classList[0]=="script-background") {
             e.preventDefault();
             if(this.down){

@@ -7,6 +7,7 @@ class Script {
     }
 
     addNode(nodeID,insertPoint,node){
+        console.log("añadir",nodeID,insertPoint,node);
         if (nodeID==null){ //script vacio
             this.nodeList.splice(0,0,node);
         }
@@ -65,6 +66,7 @@ class Script {
     findNode(parentID,side,list,nodeID){ // returns the list and the pos of the nodeID (also the parentID and the side
         var pos=0;
         var node=undefined;
+        console.log("find",parentID,side,list,nodeID);
         while (pos<list.length) {
             if (list[pos].id==nodeID){
                 return  {"parentID":parentID,"side":side,"list":list,"pos":pos};

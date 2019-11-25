@@ -155,6 +155,11 @@ class CmdManager {
         this.history.execute(cmd);
     }
 
+    static moveNodeCmd(sceneID,actorID,scriptID,nodeID,insertPoint,nodeToInsertID){
+        var cmd = new MoveNodeCmd(sceneID,actorID,scriptID,nodeID,insertPoint,nodeToInsertID);
+        this.history.execute(cmd);
+    }
+    
     static changeNode (sceneID,actorID,scriptID,nodeID,parameters){
         var cmd = new ChangeNodeCmd(sceneID,actorID,scriptID,nodeID,parameters);
         this.history.execute(cmd);
