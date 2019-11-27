@@ -23,8 +23,10 @@ class EmptyNodeView {
 // Handlers
 	dragenterNodeHandler(e){		
 	//	console.log("dragenter",e.target);
-		this.html.style.padding="16px 0px";
+		this.html.style.padding="24px 0px";
+		this.html.style.height="48px";
 		this.chip.style.display="block";
+		this.chip.style.height="48px";
 		this.canvas.redrawFrames();
 	}
 

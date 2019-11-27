@@ -425,7 +425,7 @@ class Editor {
       this.selectActor(actorID);
       this.openActorScripts();
       this.selectScript(scriptID);
-      this.selectNode(node.id);
+      if(this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].nodelist) this.selectNode(node.id);
  
     }
 

@@ -102,7 +102,7 @@ class ScriptCanvasView {
     }
 
     mouseUpHandler(e){
-        console.log("mouseUp");
+        console.log("mouseUp",e.target.classList[0]);
             e.preventDefault();
             this.down=false;
             this.posx=this.x;
@@ -110,7 +110,7 @@ class ScriptCanvasView {
     }
     
     mouseMoveHandler(e){
-        console.log("mouseMove");
+        console.log("mouseMove",e.target.classList[0]);
         if (e.target.classList[0]=="script-background") {
             e.preventDefault();
             if(this.down){
@@ -220,7 +220,7 @@ class ScriptCanvasView {
         var insertPoint="down";
         if (node==null){ // si no hay nodo seleccionado se inserta al final de la lista principal
             var nodeList=this.html.querySelector(".nodelist");
-            var position = 0;
+     //       var position = 0;
             nodeID=nodeList.childNodes[nodeList.childNodes.length-2].id; //2 to take into account empty chips
         }
         else {
