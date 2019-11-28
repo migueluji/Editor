@@ -1,8 +1,7 @@
 class DoSelectionView {
 
-    constructor(nodeID,insertPoint) {  
-		 this.nodeID=nodeID;
-		 this.insertPoint=insertPoint;
+    constructor(insert) {  
+		 this.insert=insert;
 		 this.html = document.createElement("div");
 		 this.html.className +="dialog-full-screen";
 		 this.html.innerHTML =
@@ -162,7 +161,8 @@ class DoSelectionView {
 				case "Remove" :     parameters= new Object({});break;
 			}
 			this.node=new Do({"id":Utils.id(),"type":type,"parameters":parameters});
-			CmdManager.addNodeCmd(sceneID,actorID,scriptID,this.nodeID,this.insertPoint,this.node);
+			console.log("addNodeCmd",sceneID,actorID,scriptID,this.insert,this.node);
+			CmdManager.addNodeCmd(sceneID,actorID,scriptID,this.insert,this.node);
 			this.closeDialog();
 		}
 	}	

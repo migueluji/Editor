@@ -145,8 +145,8 @@ class CmdManager {
         this.history.execute(cmd);
     }
 
-    static addNodeCmd(sceneID,actorID,scriptID,nodeID,insertPoint,node){// node can be an if structure
-        var cmd = new AddNodeCmd(sceneID,actorID,scriptID,nodeID,insertPoint,node);
+    static addNodeCmd(sceneID,actorID,scriptID,insert,node){// node can be an if structure
+        var cmd = new AddNodeCmd(sceneID,actorID,scriptID,insert,node);
         this.history.execute(cmd);
     }
 
@@ -155,8 +155,8 @@ class CmdManager {
         this.history.execute(cmd);
     }
 
-    static moveNodeCmd(sceneID,actorID,scriptID,nodeID,insertPoint,nodeToInsertID){
-        var cmd = new MoveNodeCmd(sceneID,actorID,scriptID,nodeID,insertPoint,nodeToInsertID);
+    static moveNodeCmd(sceneID,actorID,scriptID,insert,nodeID){
+        var cmd = new MoveNodeCmd(sceneID,actorID,scriptID,insert,nodeID);
         this.history.execute(cmd);
     }
     

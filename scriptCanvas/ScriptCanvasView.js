@@ -128,14 +128,14 @@ class ScriptCanvasView {
 
     addDoHandler(){
         var insert = this.getInsertPoint();
-        this.dialog = new DoSelectionView(insert.nodeID,insert.insertPoint);
+        this.dialog = new DoSelectionView(insert);
 		var editorFrame=document.querySelector(".editor-frame-root");
         editorFrame.appendChild(this.dialog.html);
      }
 
     addIfHandler(){
         var insert = this.getInsertPoint();
-        var dialog = new IfSelectionView(insert.nodeID,insert.insertPoint);
+        var dialog = new IfSelectionView(insert);
 		var editorFrame=document.querySelector(".editor-frame-root");
         editorFrame.appendChild(dialog.html);
     }
@@ -214,28 +214,41 @@ class ScriptCanvasView {
 
     }
 
-    getInsertPoint(){
+    getInsertPoint(){ // returns: parentID, side (of parent), position (into the parent list)
         var node = this.html.querySelector(".nodeselected");
-        var nodeID=null;
-        var insertPoint="down";
-        if (node==null){ // si no hay nodo seleccionado se inserta al final de la lista principal
-            var nodeList=this.html.querySelector(".nodelist");
-     //       var position = 0;
-            nodeID=nodeList.childNodes[nodeList.childNodes.length-2].id; //2 to take into account empty chips
+        var insert ={"parentID":null,"side":null,"position":null};
+        var nodeList=null;
+        if (node==null){ // there is not node selected
+            nodeList=this.html.querySelector(".nodelist"); // found main nodelist
+            insert.position=(nodeList.childNodes.length-1)/2;// 2 to take into account empty chips
         }
         else {
-            if (node.firstChild.classList.contains("condition")){
+            if (node.firstChild.classList.contains("condition")){ // Insert into condition node
+                insert.parentID=node.id;
                 if (node.firstChild.querySelector(".yestext").style.display=="block"){ // insertar en un nodo condición en el yes
-                    insertPoint="right";
+                    insert.side="right";
+                    insert.position=(node.querySelector(".yes").childNodes.length-1)/2;
                 }
                 else if (node.firstChild.querySelector(".notext").style.display=="block"){
-                    insertPoint="left";
-                }
+                    insert.side="left";
+                    insert.position=(node.querySelector(".no").childNodes.length-1)/2;
+                    }
+                    else {
+                        insert.side=null;
+                    }       
+            };
+            if (insert.side==null){ // Insert any node into the parent list
+                nodeList=node.parentNode;
+                insert.parentID=nodeList.parentNode.parentNode.id || null;
+                if (nodeList.classList.contains("yes")) insert.side="right";
+                else if (nodeList.classList.contains("no")) insert.side="left";
+                var i=0;
+                while ((node=node.previousSibling)!=null) i++;
+                insert.position=((i-1)/2)+1;
             }
-            nodeID=node.id;
         }
-        console.log("nodeID:",nodeID,"insertPoint:",insertPoint);
-        return {"nodeID":nodeID,"insertPoint":insertPoint}
+  //    console.log(insert);
+        return insert;
     }
 
 }

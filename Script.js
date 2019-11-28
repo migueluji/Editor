@@ -6,44 +6,24 @@ class Script {
         this.assignNodes(this.nodeList);
     }
 
-    addNode(nodeID,insertPoint,node){ // father, side, position, node 
-        console.log("añadir",nodeID,insertPoint,node);
-        if (nodeID==null){ //script vacio
-            this.nodeList.splice(0,0,node);
+    addNode(insert,node){ // father, side, position, node 
+        console.log("añadir",insert,node);
+        if (insert.parentID==null){ //script vacio
+            this.nodeList.splice(insert.position,0,node);
         }
         else {
-            var founded=this.findNode(null,null,this.nodeList,nodeID); // parentID y side = null
-            if (founded){
-                var actualNodeList=founded.list;
-                var pos=founded.pos;
-                var position=0;
-                switch (insertPoint) {
-                    case "rightStart" :{
-                        actualNodeList[pos].nodeListTrue.splice(position,0,node); break;  
-                    }
-                    case "leftStart" : {
-                        actualNodeList[pos].nodeListFalse.splice(position,0,node); break; 
-                    }
-                    case "right" : {
-                        position = actualNodeList[pos].nodeListTrue.length;
-                        actualNodeList[pos].nodeListTrue.splice(position,0,node); break;  
-                    }
-                    case "left" :{
-                        position = actualNodeList[pos].nodeListFalse.length;
-                        actualNodeList[pos].nodeListFalse.splice(position,0,node); break;  
-                    }
-                    case "down" : {
-                        actualNodeList.splice(pos+1,0,node); break;
-                    }
-                }
+            var nodeList=this.findNode(this.nodeList,insert.parentID); // returns parent nodeList and position
+            console.log(this.nodeList,insert.parentID,nodeList);
+            if (nodeList) {
+                if (insert.side=="right") nodeList.list[nodeList.position].nodeListTrue.splice(insert.position,0,node);
+                else if (insert.side=="left") nodeList.list[nodeList.position].nodeListFalse.splice(insert.position,0,node);
             }
         }
-    
     }
 
     removeNode(nodeID){
-        var founded=this.findNode(null,null,this.nodeList,nodeID);
-        founded.list.splice(founded.pos,1);
+        var founded = this.findNode(this.nodeList,nodeID);
+        if (founded) founded.list.splice(founded.position,1);
     }
 
     changeNode(nodeID,parameters){
@@ -65,26 +45,27 @@ class Script {
         });
     }
 
-    findNode(parentID,side,list,nodeID){ // returns the list and the pos of the nodeID (also the parentID and the side
-        var pos=0;
-        var node=undefined;
-     //   console.log("find",parentID,side,list,nodeID);
-        while ((list) && (pos<list.length)) {
-            if (list[pos].id==nodeID){
-                return  {"parentID":parentID,"side":side,"list":list,"pos":pos};
-            }
+    findNode(nodeList,nodeID,parentID,side){
+        var pos = 0;
+        console.log("find node",parentID,side);
+        var found = undefined;
+        while (pos < nodeList.length){
+            if (nodeList[pos].id==nodeID){
+                return {"list":nodeList,"position":pos,"parentID":parentID,"side":side};
+            } 
             else {
-                if(list[pos].nodeListTrue) {
-                    node = this.findNode(list[pos].id,"right",list[pos].nodeListTrue,nodeID)
-                    if (node!=undefined) return node;
+                if (nodeList[pos].nodeListTrue) {
+                    found= this.findNode(nodeList[pos].nodeListTrue,nodeID,nodeList[pos].id,"right");
+                    if (found) return found;
                 }
-                if(list[pos].nodeListFalse) {
-                    node = this.findNode(list[pos].id,"left",list[pos].nodeListFalse,nodeID)
-                    if (node!=undefined) return node;
+                if (nodeList[pos].nodeListFalse) {
+                    found=this.findNode(nodeList[pos].nodeListFalse,nodeID,nodeList[pos].id,"left");
+                    if (found) return found;
                 }
             }
-            pos++;
+            pos ++;
         }
     }
+
 }
 

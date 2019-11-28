@@ -10,7 +10,7 @@ class CanvasView {
             '<button id="addactor"  class="do-button mdc-fab mdc-ripple-upgraded add-property-button">'+
                 '<i class="material-icons">add</i>'+
             '</button>'+
-            '<button id="actorbutton" style="visibility:hidden" class="mdc-fab mdc-ripple-upgrade actor-canvas-button">'+
+            '<button id="actorbutton" style="visibility:hidden;box-shadow:none" class="mdc-fab mdc-ripple-upgrade actor-canvas-button">'+
                 '<i class="material-icons">more_vert</i>'+
             '</button>'+
             '<div class="mdc-menu-surface--anchor">'+

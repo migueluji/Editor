@@ -61,35 +61,6 @@ class NodeView {
 			element.style.pointerEvents="none";
 		})
 	}
-	
-	// dragoverNodeHandler(e){
-	// 	console.log("Drag Over")
-	// 	e.preventDefault();
-	// 	this.html.classList.add('over');
-	// };
-
-	// dragleaveNodeHandler(e){
-	// 	this.html.classList.remove("over");
-	// };
-
-	// dropNodeHandler(e){
-	// 	if(e.stopPropagation){
-	// 		e.stopPropagation();
-	// 	}
-	// 	var element= document.createElement("div");
-	// 	element.innerHTML=e.dataTransfer.getData('text/html');
-	// 	element=element.firstElementChild;
-	// 	var sceneSelected=document.querySelector(".sceneselected").id;
-	// 	var actorSelected=document.querySelector(".actorselected").id;
-	// 	var scriptSelected=document.querySelector(".scriptselected").id;
-	// 	console.log(element,scriptSelected);
-	// 	CmdManager.addNodeCmd(sceneSelected,actorSelected,scriptSelected,element.id,"down","Edit");
-	// //	CmdManager.moveScriptCmd(sceneSelected,actorSelected,element.id,this.position(this.html,this.html.parentNode));
-	// 	this.html.classList.remove("over");
-	// 	if (element.querySelector(".scriptselected")){
-	// 			Command.selectScriptCmd(element.id); 
-	// 	}
-	// };
 
 	selectNodeHandler(event){
 		if(event.target.classList[0]=="mdc-chip" && event.target.classList[0]!="circle"){

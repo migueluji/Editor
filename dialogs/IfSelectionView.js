@@ -1,8 +1,7 @@
 class IfSelectionView {
 
-    constructor(nodeID,insertPoint) { 
-			this.nodeID=nodeID;
-			this.insertPoint=insertPoint;
+    constructor(insert) { 
+			this.insert=insert;
 			this.html = document.createElement("div");
 			this.html.className +="dialog-full-screen";
 			this.html.innerHTML =
@@ -81,7 +80,8 @@ class IfSelectionView {
 				case "Keyboard":    parameters= new Object({"Key":null,"Key_Mode":"down"});break;
 			}
 			this.node= new If({"id":Utils.id(),"type":type,"parameters":parameters,"nodeListTrue":[],"nodeListFalse":[]});
-			CmdManager.addNodeCmd(sceneID,actorID,scriptID,this.nodeID,this.insertPoint,this.node);
+			console.log("addNodeCmd",sceneID,actorID,scriptID,this.insert,this.node);
+			CmdManager.addNodeCmd(sceneID,actorID,scriptID,this.insert,this.node);
 			this.closeDialog();
 		}
 	}
