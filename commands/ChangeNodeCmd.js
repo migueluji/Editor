@@ -12,8 +12,11 @@ class ChangeNodeCmd extends Command {
         var actorPos=this.editor.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID);
         var scriptPos=this.editor.model.sceneList[scenePos].actorList[actorPos].scriptList.findIndex(i=>i.id==scriptID);
         var script=this.editor.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos];
-        var founded = script.findNode(null,null,script.nodeList,nodeID);
-        var node = founded.list[founded.pos];
+
+        var founded = script.findNode(script.nodeList,nodeID);
+        
+        var node = founded.list[founded.position];
+        console.log("fouonded",node,founded,script.nodeList,nodeID);
 
         this.oldParameters=node.parameters;
 

@@ -160,7 +160,7 @@ class CmdManager {
         this.history.execute(cmd);
     }
     
-    static changeNode (sceneID,actorID,scriptID,nodeID,parameters){
+    static changeNodeCmd(sceneID,actorID,scriptID,nodeID,parameters){
         var cmd = new ChangeNodeCmd(sceneID,actorID,scriptID,nodeID,parameters);
         this.history.execute(cmd);
     }

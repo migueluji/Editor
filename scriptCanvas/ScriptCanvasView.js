@@ -31,8 +31,11 @@ class ScriptCanvasView {
         this.html.addEventListener("click",this.unselectNodeHandler.bind(this));
         this.selectedNode=null;
         this.selected=null;
-        this.drawerX=256;
+        this.drawerX=0;
         this.scriptID=null;
+
+        this.background=this.html.querySelector(".script-background");
+        this.posx=this.posy=0;
   }
 
     addNode(html,nodeView,nodePos){
@@ -91,8 +94,7 @@ class ScriptCanvasView {
         }
     }
 
-    mouseDowndHandler(e){
-        console.log("mouseDown",e.target.classList[0]);
+    mouseDowndHandler(e){   
         if (e.target.classList[0]=="script-background") {
             e.preventDefault();
             this.x0=e.clientX;
@@ -102,38 +104,37 @@ class ScriptCanvasView {
     }
 
     mouseUpHandler(e){
-        console.log("mouseUp",e.target.classList[0]);
-            e.preventDefault();
+        e.preventDefault();
+        if (this.down){
             this.down=false;
-            this.posx=this.x;
-            this.posy=this.y;
+            this.posx=this.posx+this.x-this.newx;
+            this.posy=this.posy+this.y-this.newy;
+            this.update(this.nodeList);
+        }
     }
     
     mouseMoveHandler(e){
-        console.log("mouseMove",e.target.classList[0]);
+      
         if (e.target.classList[0]=="script-background") {
-            e.preventDefault();
             if(this.down){
+                e.preventDefault();
                 this.x1=e.clientX;
                 this.y1=e.clientY;
-                this.x=this.x1-this.x0;
-                this.y=this.y1-this.y0;
-                var element=this.html.querySelector(".script-background");
-                this.x=this.x+this.posx;
-                this.y=this.y+this.posy;
-                element.style.transform="translate("+this.x+"px,"+this.y+"px)";
+                this.x=this.newx+this.x1-this.x0;
+                this.y=this.newy+this.y1-this.y0;
+                e.target.style.transform="translate("+this.x+"px,"+this.y+"px)";
             }
         }  
     }
 
-    addDoHandler(){
+    addDoHandler(e){
         var insert = this.getInsertPoint();
         this.dialog = new DoSelectionView(insert);
 		var editorFrame=document.querySelector(".editor-frame-root");
         editorFrame.appendChild(this.dialog.html);
      }
 
-    addIfHandler(){
+    addIfHandler(e){
         var insert = this.getInsertPoint();
         var dialog = new IfSelectionView(insert);
 		var editorFrame=document.querySelector(".editor-frame-root");
@@ -141,9 +142,13 @@ class ScriptCanvasView {
     }
 
 // Utilities
+    init(){
+        this.centerX=(this.html.clientWidth-this.background.clientWidth)/2;
+        this.centerY=this.posx=this.posy=0;
+    }
+
     updateStageDrawer(){
-        var drawerApp=document.querySelector(".mdc-drawer-app-content");
-        (drawerApp.getBoundingClientRect().x==0) ? this.drawerX=-256 : this.drawerX=256;
+        this.init(); 
         this.update(this.nodeList);
     }
 
@@ -154,16 +159,12 @@ class ScriptCanvasView {
 		while (list.firstChild)	list.removeChild(list.firstChild);
         this.updateNodeList(list,nodeList);
         this.redrawFrames();
-        var element=this.html.querySelector(".script-background");
-   //     console.log(this.scriptID,scriptID);
-        if (this.scriptID!=scriptID) { // compute initial view
-            this.posx=(this.html.clientWidth-element.clientWidth)/2;
-            element.firstChild.style="margin-top:"+this.html.clientHeight+"px";
-            this.posy=-this.html.clientHeight+100;
-            this.drawerX=0;
-        }
-        this.posx=this.posx-this.drawerX;
-        element.style.transform="translate("+this.posx+"px,"+this.posy+"px)";
+
+        if (this.scriptID!=scriptID) this.init(); // first update of nodeList
+
+        this.newx=this.centerX+this.posx;
+        this.newy=this.centerY+this.posy;
+        this.background.style.transform="translate("+this.newx+"px,"+this.newy+"px)";
         this.nodeList=nodeList;
         this.scriptID=scriptID;
     }
@@ -247,7 +248,6 @@ class ScriptCanvasView {
                 insert.position=((i-1)/2)+1;
             }
         }
-  //    console.log(insert);
         return insert;
     }
 

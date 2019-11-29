@@ -27,8 +27,8 @@ class Script {
     }
 
     changeNode(nodeID,parameters){
-        var founded=this.findNode(null,null,this.nodeList,nodeID);
-        founded.list[founded.pos].parameters=parameters;
+        var founded=this.findNode(this.nodeList,nodeID);
+        founded.list[founded.position].parameters=parameters;
     }
 
 // utils

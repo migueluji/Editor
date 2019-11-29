@@ -25,8 +25,7 @@ class MoveNodeCmd extends Command {
     execute (){
         this.editor.removeNode(this.sceneID,this.actorID,this.scriptID,this.nodeID);
         var founded=this.script.findNode(this.script.nodeList,this.insert.parentID);
-   //     console.log("comaaa",founded,this.insert);
-        // if exist parent to insert or the parent is null (because the root list)
+        // to avoid add a node that does not exists!
         if (founded!=undefined || this.insert.parentID==null) this.editor.addNode(this.sceneID,this.actorID,this.scriptID,this.insert,this.node);
     }
     

@@ -89,7 +89,8 @@ class NodeView {
 		var actorID=document.querySelector(".actorselected").id;
 		var scriptID=document.querySelector(".scriptselected").id;
 		var nodeID=document.querySelector(".nodeselected").id;
-		CmdManager.changeNode(sceneID,actorID,scriptID,nodeID,this.fields.parameters);
+		console.log("changeNode",this.fields.parameters);
+		CmdManager.changeNodeCmd(sceneID,actorID,scriptID,nodeID,this.fields.parameters);
 		var cards=document.querySelectorAll(".action-card");
 		cards.forEach(i=>i.classList.remove("open"));
 	}

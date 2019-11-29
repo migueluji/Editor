@@ -182,6 +182,7 @@ button{
 }
 .properties-bar{
     border-bottom: 1px solid lightgray;
+    user-select: none;
 }
 .two-properties{
     width: 100%;
@@ -244,10 +245,6 @@ button{
 :not(.mdc-list--non-interactive)>:not(.mdc-list-item--disabled).mdc-list-item::before, :not(.mdc-list--non-interactive)>:not(.mdc-list-item--disabled).mdc-list-item::after {
     background-color:transparent; 
 }
-
-
-
-
 .mdc-top-app-bar__action-item, .mdc-top-app-bar__navigation-icon {
     padding: 12px;
     border: none;
