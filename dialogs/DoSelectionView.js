@@ -144,7 +144,7 @@ class DoSelectionView {
 			var type= e.target.parentNode.nextSibling.firstChild.innerHTML;
 			var parameters=null;
 			switch(type){
-				case "Edit" :       parameters= new Object({"Property":null,"Value":null});break;
+				case "Edit" :       parameters= new Object({"Element":null,"Property":null,"Value":null});break;
 				case "Spawn" :      parameters= new Object({"Actor":null,"X":0,"Y":0,"Angle":0});break;
 				case "Delete" :     parameters= new Object({});break;
 				case "Animate" :    parameters= new Object({"Animation":null,"Fps":24});break;
@@ -157,7 +157,7 @@ class DoSelectionView {
 				case "Push To" :    parameters= new Object({"Force":0,"X":0,"Y":0});break;
 				case "Torque" :     parameters= new Object({"Angle":0});break;
 				case "Go To" :      parameters= new Object({"Scene":null});break;
-				case "Add" :        parameters= new Object({"Add":null,"Stop":false});break;
+				case "Add" :        parameters= new Object({"Scene":null,"Stop":false});break;
 				case "Remove" :     parameters= new Object({});break;
 			}
 			this.node=new Do({"id":Utils.id(),"type":type,"parameters":parameters});

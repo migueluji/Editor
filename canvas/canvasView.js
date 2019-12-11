@@ -98,7 +98,7 @@ class CanvasView {
 
         const frame = new PIXI.Graphics(); // draw the camera frame
         frame.lineStyle(20, 0xDDDDDD, 1, 1, true);
-        frame.drawRect(-this.gameProperties.width/2.0,-this.gameProperties.height/2.0,this.gameProperties.width,this.gameProperties.height);
+        frame.drawRect(-this.gameProperties.displayWidth/2.0,-this.gameProperties.displayHeight/2.0,this.gameProperties.displayWidth,this.gameProperties.displayHeight);
         this.app.stage.addChild(frame);
  
         this.scene= new PIXI.Container(); // create the scene container

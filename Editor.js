@@ -113,7 +113,10 @@ class Editor {
        if (oldSelectedSceneIndex!=this.selectedSceneIndex) this.selectedActorIndex=null;
        if (SideSheetView.isOpenCast()) this.openCast();
        else if (SideSheetView.isOpenGameProperties()) this.openGameProperties();
-            else SideSheetView.closeSheetHandler();
+            else {
+                SideSheetView.closeSheetHandler();
+                this.view.openCanvas("canvas");
+            }
     }
 
     openCast(){
@@ -259,13 +262,9 @@ class Editor {
         this.selectActor(actorID);
         this.openActorScripts();
         if (this.model.sceneList[scenePos].actorList[actorPos].scriptList.length==scriptPos){
-            if(scriptPos>0){
-                this.selectScript(this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos-1].id);
-            }
+            if(scriptPos>0) this.selectScript(this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos-1].id);
         }
-        else {
-            this.selectScript(this.model.sceneList[scenePos].actorList[actorPos].scriptList[this.selectedScriptIndex].id);
-        }
+        else this.selectScript(this.model.sceneList[scenePos].actorList[actorPos].scriptList[this.selectedScriptIndex].id);
     }
 
     renameScript(sceneID,actorID,scriptID,scriptName){
@@ -295,10 +294,10 @@ class Editor {
         this.view.openCanvas("canvas");
     }
 
-    selectScript(scriptID){
+    selectScript(scriptID){ 
+        var scriptList=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].scriptList;
         this.selectedScriptIndex=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].scriptList.findIndex(i=>i.id==scriptID);
         this.actorScriptsView.updateSelectedScript(scriptID);
-        var scriptList=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].scriptList;
         this.scriptCanvasView.update(scriptList[this.selectedScriptIndex].nodeList); 
     }
 
@@ -311,9 +310,7 @@ class Editor {
             this.view.openCanvas("scriptcanvas");
             this.selectScript(scriptList[scriptList.length-1].id);
         }
-        else {
-            this.view.openCanvas("canvas");
-        }
+        else this.view.openCanvas("canvas");
     }
 
     closeActorScripts(){
@@ -417,6 +414,7 @@ class Editor {
 
 // SCRIPTING this.sceneID,this.actorID,this.scriptID,this.nodeID,this.if
     addNode(sceneID,actorID,scriptID,insert,node){
+    //console.log("addNode",sceneID,actorID,scriptID,node.id);
       var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
       var actorPos = this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID);
       var scriptPos =  this.model.sceneList[scenePos].actorList[actorPos].scriptList.findIndex(i=>i.id==scriptID);
@@ -447,11 +445,65 @@ class Editor {
         var actorPos = this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID);
         var scriptPos =  this.model.sceneList[scenePos].actorList[actorPos].scriptList.findIndex(i=>i.id==scriptID);
         this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].changeNode(nodeID,parameters);
-        this.scriptCanvasView.update(this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].nodeList);
+    //    this.scriptCanvasView.update(this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].nodeList);
         this.selectScene(sceneID); //necesario para los comandos de deshacer
         this.selectActor(actorID);
         this.openActorScripts();
         this.selectScript(scriptID);
         this.selectNode(nodeID);
+    }
+
+    getTagList(){
+        return (this.model.tagList);
+    }
+
+    getActorList(){
+        var actorList=[];
+        this.model.sceneList[this.selectedSceneIndex].actorList.forEach(element => {
+            actorList.push(element.name);
+        });
+        return (actorList.sort());
+    }
+
+    getSceneList(){
+        var sceneList=[];
+        this.model.sceneList.forEach(element => {
+            sceneList.push(element.name);
+        });
+        return (sceneList.sort());
+    }
+
+    getPropertiesList(element,type){
+        var actor=null;
+        var properties=[];
+        if (element=="Game") properties=Object.keys(Object.assign(this.model.newProperties,this.model.properties));
+        else if (element=="Me")  {
+            actor = this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex];
+            properties=Object.keys(Object.assign(actor.newProperties,actor.properties));  
+            }   
+            else if (element) {
+                    var actorPos = this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.name==element);
+                    actor= this.model.sceneList[this.selectedSceneIndex].actorList[actorPos];
+                    properties=Object.keys(Object.assign(actor.newProperties,actor.properties));  
+                }  
+        switch (type) {
+            case "boolean": properties=this.checkType(element,properties,"boolean");break;
+            case "number" : properties=this.checkType(element,properties,"number");break;
+        }
+        return(properties);
+    }
+
+// Utilities
+    checkType(element,properties,type){
+        var newProperties=[];
+        properties.forEach((property,i)=>{
+            if (element=="Game") {
+                if (typeof this.model[property] == type) newProperties.push(property);
+            }
+            else {
+                if (typeof this.model.sceneList[0].actorList[0][property] == type) newProperties.push(property);
+              }
+        })
+        return (newProperties);
     }
 }

@@ -7,13 +7,13 @@ class Script {
     }
 
     addNode(insert,node){ // father, side, position, node 
-        console.log("añadir",insert,node);
+        //console.log("añadir",insert,node);
         if (insert.parentID==null){ //script vacio
             this.nodeList.splice(insert.position,0,node);
         }
         else {
             var nodeList=this.findNode(this.nodeList,insert.parentID); // returns parent nodeList and position
-            console.log(this.nodeList,insert.parentID,nodeList);
+         //   console.log(this.nodeList,insert.parentID,nodeList);
             if (nodeList) {
                 if (insert.side=="right") nodeList.list[nodeList.position].nodeListTrue.splice(insert.position,0,node);
                 else if (insert.side=="left") nodeList.list[nodeList.position].nodeListFalse.splice(insert.position,0,node);
@@ -47,7 +47,7 @@ class Script {
 
     findNode(nodeList,nodeID,parentID,side){
         var pos = 0;
-        console.log("find node",parentID,side);
+   //     console.log("find node",parentID,side);
         var found = undefined;
         while (pos < nodeList.length){
             if (nodeList[pos].id==nodeID){

@@ -81,6 +81,7 @@ class NodeView {
 		if (nodeselected==null || nodeselected.id!=this.html.id) Command.selectNodeCmd(this.html.id); 
 		var node = document.getElementById(this.html.id);
 		node.querySelector(".action-card").classList.add("open");
+		node.querySelector(".action-card").classList.add("mdc-elevation--z6");
 	}
 
 	closeNodeInfoHandler(e){
@@ -89,7 +90,6 @@ class NodeView {
 		var actorID=document.querySelector(".actorselected").id;
 		var scriptID=document.querySelector(".scriptselected").id;
 		var nodeID=document.querySelector(".nodeselected").id;
-		console.log("changeNode",this.fields.parameters);
 		CmdManager.changeNodeCmd(sceneID,actorID,scriptID,nodeID,this.fields.parameters);
 		var cards=document.querySelectorAll(".action-card");
 		cards.forEach(i=>i.classList.remove("open"));

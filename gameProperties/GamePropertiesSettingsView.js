@@ -11,13 +11,13 @@ class GamePropertiesSettingsView {
 			'<div class="properties-panel open">'+
 				'<div class="two-properties">'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="width" min="1" type="number" value="1"  class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Width</label>'+
+						'<input id="displayWidth" min="1" type="number" value="1"  class="mdc-text-field__input">'+
+						'<label class="mdc-floating-label" for="text-field-filled">Display Width</label>'+
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="height" min="1" type="number" value="1"  class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Height</label>'+
+						'<input id="displayHeight" min="1" type="number" value="1"  class="mdc-text-field__input">'+
+						'<label class="mdc-floating-label" for="text-field-filled">Display Height</label>'+
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 				'</div>'+

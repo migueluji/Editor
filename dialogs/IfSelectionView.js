@@ -73,14 +73,14 @@ class IfSelectionView {
 			var parameters=null;
 			switch(type){
 				case "Compare":     parameters= new Object({"Value_1":null,"Operation":"<","Value_2":null});break;
-				case "Check":       parameters= new Object({"Property":null});break;
+				case "Check":       parameters= new Object({"Element":"me","Property":null});break;
 				case "Collision":   parameters= new Object({"Tag":null});break;
 				case "Timer":       parameters= new Object({"Seconds":0});break;
 				case "Touch":       parameters= new Object({"Mode":"down","On_Actor":true});break;
 				case "Keyboard":    parameters= new Object({"Key":null,"Key_Mode":"down"});break;
 			}
 			this.node= new If({"id":Utils.id(),"type":type,"parameters":parameters,"nodeListTrue":[],"nodeListFalse":[]});
-			console.log("addNodeCmd",sceneID,actorID,scriptID,this.insert,this.node);
+	//		console.log("addNodeCmd",sceneID,actorID,scriptID,this.insert,this.node);
 			CmdManager.addNodeCmd(sceneID,actorID,scriptID,this.insert,this.node);
 			this.closeDialog();
 		}

@@ -109,7 +109,7 @@ class ScriptCanvasView {
             this.down=false;
             this.posx=this.posx+this.x-this.newx;
             this.posy=this.posy+this.y-this.newy;
-            this.update(this.nodeList);
+          //  this.update(this.nodeList);
         }
     }
     
@@ -144,7 +144,8 @@ class ScriptCanvasView {
 // Utilities
     init(){
         this.centerX=(this.html.clientWidth-this.background.clientWidth)/2;
-        this.centerY=this.posx=this.posy=0;
+        this.centerY=0;
+        //this.posx=this.posy=0;
     }
 
     updateStageDrawer(){
@@ -200,7 +201,6 @@ class ScriptCanvasView {
             var childrenWidht1=upNodeChildren[2].clientWidth+16; 
             var childrenWidht2=upNodeChildren[3].clientWidth+16; // 16 por el marigen de 8px 
             var boxWidth = childrenWidht1/2+childrenWidht2/2-4; // 4 por el borde
-        //    frame.style.height=frame.parentNode.parentNode.clientHeight-56+"px";
             frame.style.height=frame.parentNode.parentNode.clientHeight-28+"px";
             frame.style.width=boxWidth+"px";
             var position=childrenWidht1/2;
@@ -212,7 +212,6 @@ class ScriptCanvasView {
         var line=document.querySelector("#rule-line");
         line.parentNode.setAttribute("height",height);
         line.setAttribute("y2",height);
-
     }
 
     getInsertPoint(){ // returns: parentID, side (of parent), position (into the parent list)

@@ -3,8 +3,8 @@ class Game {
     constructor(game) {
         this.name=game.name || "Untitled Game"
         this.backgroundColor=game.backgroundColor || "#ffffff";
-        this.width=game.width ||  800;
-        this.height=game.height || 480;
+        this.displayWidth=game.displayWidth ||  800;
+        this.displayHeight=game.displayHeight || 480;
         Object.assign(this,game);
         if (this.soundList) this.soundList.forEach((sound,i) => this.soundList[i]=new Asset(sound));
         if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]=new Asset(font));
@@ -14,7 +14,7 @@ class Game {
     get properties(){
         var obj={
             // Settings
-            width:this.width, height:this.height, 
+            displayWidth:this.displayWidth, displayHeight:this.displayHeight, 
             cameraX:this.cameraX, cameraY:this.cameraY, cameraAngle:this.cameraAngle, cameraZoom:this.cameraZoom,
             backgroundColor:this.backgroundColor,
             // Sound
@@ -68,5 +68,6 @@ class Game {
 
     removeFont(fontID) {
         this.fontList.splice(this.fontList.findIndex(i => i.id == fontID),1);
-    } 
+    }
+
 }

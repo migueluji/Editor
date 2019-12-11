@@ -80,4 +80,25 @@ class Command {
     static openFontsCmd(){
         this.editor.openFonts();
     }
+
+    static getTagListCmd(){
+        return(this.editor.getTagList());
+    }
+
+    static getActorListCmd(){
+        return(this.editor.getActorList());
+    }
+
+    static getSceneListCmd(){
+        return(this.editor.getSceneList());
+    }
+
+    // static getPropertyValueCmd(property){
+    //     return(this.editor.getPropertyValue(property));
+    // }
+
+    static getPropertiesListCmd(element,type){
+        return(this.editor.getPropertiesList(element,type));
+    }
+
 }

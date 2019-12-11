@@ -34,6 +34,7 @@ class GamePropertiesView {
 
 	updateGameProperty(property,value) {
 		var element=this.html.querySelector("#"+property);
+	//	console.log(property,value);
 		(element.type=="checkbox") ? element.value=element.checked=Boolean(value) : element.value=value;
 		if (property == "soundOn") this.soundView.onClickHandler();
 		if (property == "physicsOn") this.physicsView.onClickHandler();

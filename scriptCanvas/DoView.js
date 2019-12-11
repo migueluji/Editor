@@ -7,7 +7,6 @@ class DoView extends NodeView {
 
 	createFields(node){
 		this.html.querySelector(".circle").classList.add("do");
-		var fields=null;
 		switch(node.type){
 			case "Edit" : this.icon="edit"; break;
 			case "Spawn" : this.icon="person_add";break;

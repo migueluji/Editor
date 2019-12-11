@@ -22,7 +22,6 @@ class IfView extends NodeView {
 		this.html.querySelector(".card-title").classList.add("if");
 
 		var icon=null;
-		var fields=null;
 		switch(node.type){
 			case "Compare" : this.icon="code"; break;
  			case "Check" : this.icon="check";break;
