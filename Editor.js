@@ -363,17 +363,28 @@ class Editor {
         var imageView = new ImageView();
         imageView.addView(image);
         this.model.addImage(image);
-        this.imageSelectionView.addImage(imageView);
+        this.assetDialog.addImage(imageView);
     }
 
     removeImage(imageID){
         this.model.removeImage(imageID);
-        this.imageSelectionView.removeImage(imageID);
+        this.assetDialog.removeImage(imageID);
     }
 
 /* Images editor commands */
+    openAssets(input){
+        // this.imageSelectionView.selectedImage=null; // inicializa la imagen seleccionada a null
+        // this.imageSelectionView.actorImage=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].image;
+        // var index=this.model.imageList.findIndex(i=> i.name == this.imageSelectionView.actorImage);
+        // (index !== -1) ? this.selectedImage=this.model.imageList[index].id : this.selectedImage=null;
+      //  console.log("carga imagenes");
+		this.assetDialog = new AssetSelectionView(this.model.imageList,input);
+		var editorFrame=document.querySelector(".editor-frame-root");
+		editorFrame.appendChild(this.assetDialog.html);
+    }
+
     selectImage(imageID){
-        this.imageSelectionView.updateSelectedImage(imageID);
+        this.assetDialog.updateSelectedImage(imageID);
     }
 
     openImages(){

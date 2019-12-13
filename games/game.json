@@ -36,6 +36,54 @@
 		{
 			"id": "_15533626446808360745224876015",
 			"name": "rock.png"
+		},
+		{
+			"id": "_15762381361265481740893387097",
+			"name": "planeGreen1.png"
+		},
+		{
+			"id": "_15762381416817466122927905570",
+			"name": "sound.png"
+		},
+		{
+			"id": "_15762381453480821664512552434",
+			"name": "font.png"
+		},
+		{
+			"id": "_15762381484724092725231010335",
+			"name": "gamesonomy.png"
+		},
+		{
+			"id": "_15762381557582495423863528408",
+			"name": "planeYellow2.png"
+		},
+		{
+			"id": "_15762381594718249745984025307",
+			"name": "planeYellow3.png"
+		},
+		{
+			"id": "_15762382667698498889654444084",
+			"name": "planeBlue2.png"
+		},
+		{
+			"id": "_15762382728243726070376618009",
+			"name": "planeBlue3.png"
+		},
+		{
+			"id": "_15762382810345881370382287172",
+			"name": "planeRed2.png"
+		},
+		{
+			"id": "_15762382810369123205097834590",
+			"name": "planeRed3.png"
+		},
+		{
+			"id": "_15762382898437501318152452303",
+			"name": "planeGreen2.png"
+		},
+		{
+			"id": "_15762382898451216594235164878",
+			"name": "planeGreen3.png"
 		}
 	],
 	"soundList": [
@@ -173,7 +221,7 @@
 													"id": "_15586857714540624623046662349",
 													"type": "Edit",
 													"parameters": {
-														"Element":null,
+														"Element": null,
 														"Property": null,
 														"Value": null
 													}
@@ -380,7 +428,7 @@
 											"id": "_15754505818436181248057678759",
 											"type": "Edit",
 											"parameters": {
-												"Element":"Actor1",
+												"Element": "Actor1",
 												"Property": "x",
 												"Value": 34
 											}
@@ -450,7 +498,7 @@
 									"id": "_15753877512458876756614764696",
 									"type": "Check",
 									"parameters": {
-										"Element" : "Actor1",
+										"Element": "Actor1",
 										"Property": "spriteOn"
 									},
 									"nodeListTrue": [],
@@ -568,8 +616,8 @@
 											"id": "_15586857443366997568588519776",
 											"type": "Check",
 											"parameters": {
-												"Element" : "game",
-												"Property":  "soundOn"
+												"Element": "game",
+												"Property": "soundOn"
 											},
 											"nodeListTrue": [
 												{
@@ -618,7 +666,7 @@
 													"id": "_15586857714540624623046662349",
 													"type": "Edit",
 													"parameters": {
-														"Element":null,
+														"Element": null,
 														"Property": null,
 														"Value": null
 													}
@@ -780,7 +828,7 @@
 											"id": "_nodo104",
 											"type": "Edit",
 											"parameters": {
-												"Element" : null,
+												"Element": null,
 												"Property": "actor.x",
 												"Value": 100
 											}

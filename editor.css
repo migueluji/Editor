@@ -223,19 +223,21 @@ button{
     position: absolute;
     right: 8px;
 }
+
 .mdc-image-list__item{
-    width:33%;
-    padding: 8px;
+  width:20%;
+  padding: 8px;
 }
-.image-list--selected{
+.mdc-image-list__image-aspect-container.image-list--selected{
     border: 8px solid #6200ee38;
-    margin: -8px;
+}
+.mdc-image-list__image-aspect-container{
+    border: 8px solid white;
+    padding-bottom: calc(85% / 1);
 }
 .mdc-image-list__image-aspect-container .mdc-image-list__image  {
-    top: 0px;
-    bottom: 0px;
     margin: auto;;
-}
+} 
 .mdc-image-list{
     margin:0px;
 }

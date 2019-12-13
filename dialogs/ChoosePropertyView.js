@@ -10,8 +10,8 @@ class ChoosePropertyView {
 				'<div>'+				
 				'<div class="mdc-card__actions">'+
 					'<div class="mdc-card__action-icons">'+
-						'<button id="cancelbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded">Cancel</button>'+
-						'<button id="okbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded">Ok</button>'+
+						'<button id="cancelbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded"><span class="mdc-button__ripple"></span>Cancel</button>'+
+						'<button id="okbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded"><span class="mdc-button__ripple"></span>Ok</button>'+
 					'</div>'+
 				'</div>';
 		
@@ -58,7 +58,12 @@ class ChoosePropertyView {
 	
 	okButtonHandler(){
 		this.input.value += this.parameters.Element+"."+this.parameters.Property;
-		this.input.focus();
+		if ("createEvent" in document) {
+			var event = document.createEvent("HTMLEvents");
+			event.initEvent("input", false, true);
+			this.input.dispatchEvent(event);
+			this.input.focus();
+	   }
 		this.cancelButtonHandler();
 	}
 

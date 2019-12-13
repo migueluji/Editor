@@ -69,6 +69,7 @@ class ParametersView  {
 	}
 
 	changeInputHandler(input){
+		console.log("change input",input);
 		var value=null;
 		switch (input.type){
 			case "checkbox": value= Boolean(input.checked);break;
@@ -98,7 +99,7 @@ class ParametersView  {
 
 		var inputs=this.html.querySelectorAll("input");
 		inputs.forEach(input=>{
-			input.addEventListener("change",this.changeInputHandler.bind(this,input));
+			input.addEventListener("input",this.changeInputHandler.bind(this,input));
 		});
 
 		var selects=this.html.querySelectorAll(".mdc-select");

@@ -54,6 +54,10 @@ class Command {
         this.editor.selectNode(nodeID);
     }
 
+// ASSETS
+    static openAssetsCmd(input){
+        this.editor.openAssets(input);
+    }
 // SOUNDS
     static selectSoundCmd(soundID){
         this.editor.selectSound(soundID);
@@ -81,6 +85,7 @@ class Command {
         this.editor.openFonts();
     }
 
+//
     static getTagListCmd(){
         return(this.editor.getTagList());
     }

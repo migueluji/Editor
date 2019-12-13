@@ -110,34 +110,39 @@ class FieldView  {
 		(value!=null && value[0]=="#") ? this.input.type="color" : this.input.type="text"; 
 		this.input.value=value;
 		this.input.id=key;
-		this.input.addEventListener("change",this.focusInput.bind(this));
+	//	this.input.addEventListener("change",this.focusInput.bind(this));
 		this.html.querySelector("label").textContent=key.replace("_"," ");	
 
 		var button=this.html.querySelector("button");
-		button.addEventListener("click",this.menuHandler.bind(this));
+		
 		var icon=button.querySelector('i');
 		switch (type){
 			case "file": icon.innerHTML="folder";break;
 			case "color": icon.style.display="none";break;
 		}
-		this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
-		var menuItems=this.html.querySelectorAll("li");
-		menuItems.forEach(item=>{
-			item.addEventListener("click",this.menuItemHandler.bind(this,item.id));
-		});
-
-
+		if (type=="file"){
+			button.addEventListener("click",this.loadImageHandler.bind(this));
+		}
+		else{
+			button.addEventListener("click",this.menuHandler.bind(this));
+			this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
+			var menuItems=this.html.querySelectorAll("li");
+			menuItems.forEach(item=>{
+				item.addEventListener("click",this.menuItemHandler.bind(this,item.id));
+			});
+		}
 	}
 
 //Handlers
-	focusInput(){
-		this.input.focus();
-	}
-
 	menuItemHandler(id){
 		if (id!="property"){
 			this.input.value += id+"()";
-			this.focusInput();
+			if ("createEvent" in document) {
+				var event = document.createEvent("HTMLEvents");
+				event.initEvent("input", false, true);
+				this.input.dispatchEvent(event);
+				this.input.focus();
+		   }
 		}
 		else {
 			var dialog = new ChoosePropertyView(this.input);
@@ -148,6 +153,10 @@ class FieldView  {
 
 	menuHandler(){
 		this.menu.open=true;
+	}
+
+	loadImageHandler(){
+		Command.openAssetsCmd(this.input);
 	}
 }
 

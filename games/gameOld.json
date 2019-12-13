@@ -1,8 +1,8 @@
 {
 	"name": "Mario Bros",
 	"backgroundColor": "#ffffff",
-	"width": 800,
-	"height": 480,
+	"displayWidth": 800,
+	"displayHeight": 480,
 	"cameraX": 0,
 	"cameraY": 0,
 	"cameraAngle": 0,
@@ -173,6 +173,7 @@
 													"id": "_15586857714540624623046662349",
 													"type": "Edit",
 													"parameters": {
+														"Element":null,
 														"Property": null,
 														"Value": null
 													}
@@ -314,31 +315,184 @@
 									"type": "Compare",
 									"parameters": {
 										"Value_1": "game.x",
-										"Operation": "less",
+										"Operation": "Less",
 										"Value_2": "20"
 									},
 									"nodeListTrue": [
 										{
-											"id": "_nodo11",
-											"type": "Check",
+											"id": "_15754506113754974324301815942",
+											"type": "Rotate To",
 											"parameters": {
-												"Property": "actor.spriteOn",
-												"Value": true
-											},
-											"nodeListTrue": [],
-											"nodeListFalse": []
+												"Speed": "30",
+												"X": "100",
+												"Y": 0,
+												"Pivot_X": 0,
+												"Pivot_Y": 0
+											}
+										},
+										{
+											"id": "_15754506144678187824458526716",
+											"type": "Push",
+											"parameters": {
+												"Force": "200",
+												"Angle": "45"
+											}
+										},
+										{
+											"id": "_15754506171953774226482280263",
+											"type": "Push To",
+											"parameters": {
+												"Force": "200",
+												"X": 0,
+												"Y": 0
+											}
+										},
+										{
+											"id": "_15754506196914537319609937127",
+											"type": "Torque",
+											"parameters": {
+												"Angle": "100"
+											}
+										},
+										{
+											"id": "_15754506217374655181756526829",
+											"type": "Go To",
+											"parameters": {
+												"Scene": "End"
+											}
+										},
+										{
+											"id": "_15754506240093586251750218830",
+											"type": "Add",
+											"parameters": {
+												"Scene": "Level 1",
+												"Stop": true
+											}
+										},
+										{
+											"id": "_15754506258958577482269537302",
+											"type": "Remove",
+											"parameters": {}
 										}
 									],
 									"nodeListFalse": [
 										{
-											"id": "_nodo104",
+											"id": "_15754505818436181248057678759",
 											"type": "Edit",
 											"parameters": {
-												"Property": "actor.x",
-												"Value": 100
+												"Element":"Actor1",
+												"Property": "x",
+												"Value": 34
+											}
+										},
+										{
+											"id": "_15754505844487585944863316083",
+											"type": "Spawn",
+											"parameters": {
+												"Actor": "Actor 3",
+												"X": 0,
+												"Y": "10",
+												"Angle": 0
+											}
+										},
+										{
+											"id": "_15754505868438156671918871858",
+											"type": "Delete",
+											"parameters": {}
+										},
+										{
+											"id": "_15754505891834163000265277963",
+											"type": "Animate",
+											"parameters": {
+												"Animation": "image.jpg",
+												"Fps": 24
+											}
+										},
+										{
+											"id": "_15754505957054026741783736774",
+											"type": "Play",
+											"parameters": {
+												"Sound": "sound.mp3",
+												"Volume": 1,
+												"Start": "1",
+												"Pan": 0
+											}
+										},
+										{
+											"id": "_15754505986734203407603799729",
+											"type": "Move",
+											"parameters": {
+												"Speed": "100",
+												"Angle": "30"
+											}
+										},
+										{
+											"id": "_15754506014395064545820183497",
+											"type": "Move To",
+											"parameters": {
+												"Speed": "300",
+												"X": "100",
+												"Y": "100"
+											}
+										},
+										{
+											"id": "_15754506043991210195137069843",
+											"type": "Rotate",
+											"parameters": {
+												"Speed": "30",
+												"Pivot_X": 0,
+												"Pivot_Y": 0
 											}
 										}
 									]
+								},
+								{
+									"id": "_15753877512458876756614764696",
+									"type": "Check",
+									"parameters": {
+										"Element" : "Actor1",
+										"Property": "spriteOn"
+									},
+									"nodeListTrue": [],
+									"nodeListFalse": []
+								},
+								{
+									"id": "_15753875805138896176409978107",
+									"type": "Collision",
+									"parameters": {
+										"Tag": "player"
+									},
+									"nodeListTrue": [],
+									"nodeListFalse": []
+								},
+								{
+									"id": "_15753875991454961563536335241",
+									"type": "Touch",
+									"parameters": {
+										"Mode": "Down",
+										"On_Actor": true
+									},
+									"nodeListTrue": [],
+									"nodeListFalse": []
+								},
+								{
+									"id": "_15753875910411163475230534807",
+									"type": "Timer",
+									"parameters": {
+										"Seconds": "3"
+									},
+									"nodeListTrue": [],
+									"nodeListFalse": []
+								},
+								{
+									"id": "_15753876076878057891710394176",
+									"type": "Keyboard",
+									"parameters": {
+										"Key": "B",
+										"Key_Mode": "Pressed"
+									},
+									"nodeListTrue": [],
+									"nodeListFalse": []
 								}
 							],
 							"id": "_script2345",
@@ -365,7 +519,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"writeOn": false,
+					"textOn": false,
 					"text": "hola mundo ${x}",
 					"font": "arial",
 					"size": 30,
@@ -391,6 +545,7 @@
 					"restitution": 1,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
+					"writeOn": false,
 					"lives": 3,
 					"on": false
 				},
@@ -413,7 +568,8 @@
 											"id": "_15586857443366997568588519776",
 											"type": "Check",
 											"parameters": {
-												"Property": null
+												"Element" : "game",
+												"Property":  "soundOn"
 											},
 											"nodeListTrue": [
 												{
@@ -462,6 +618,7 @@
 													"id": "_15586857714540624623046662349",
 													"type": "Edit",
 													"parameters": {
+														"Element":null,
 														"Property": null,
 														"Value": null
 													}
@@ -611,8 +768,8 @@
 											"id": "_nodo11",
 											"type": "Check",
 											"parameters": {
-												"Property": "actor.spriteOn",
-												"Value": true
+												"Element": "Actor1",
+												"Property": "spriteOn"
 											},
 											"nodeListTrue": [],
 											"nodeListFalse": []
@@ -623,6 +780,7 @@
 											"id": "_nodo104",
 											"type": "Edit",
 											"parameters": {
+												"Element" : null,
 												"Property": "actor.x",
 												"Value": 100
 											}
@@ -654,7 +812,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"writeOn": true,
+					"textOn": false,
 					"text": "hola mundo ${x}",
 					"font": "arial",
 					"size": 30,
@@ -680,6 +838,7 @@
 					"restitution": 1,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
+					"writeOn": true,
 					"lives": 3,
 					"on": false
 				},
@@ -707,7 +866,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"writeOn": false,
+					"textOn": false,
 					"text": "",
 					"font": "arial",
 					"size": 30,
@@ -732,6 +891,7 @@
 					"restitution": 1,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
+					"writeOn": false,
 					"tutu": true
 				},
 				{
@@ -758,7 +918,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"writeOn": false,
+					"textOn": false,
 					"text": "",
 					"font": "Arial",
 					"size": 30,
@@ -782,7 +942,8 @@
 					"friction": 1,
 					"restitution": 1,
 					"dampingLinear": 0,
-					"dampingAngular": 0
+					"dampingAngular": 0,
+					"writeOn": false
 				}
 			],
 			"id": "_scene1",
@@ -814,7 +975,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"writeOn": false,
+					"textOn": false,
 					"text": "",
 					"font": "Arial",
 					"size": 30,
@@ -838,7 +999,8 @@
 					"friction": 1,
 					"restitution": 1,
 					"dampingLinear": 0,
-					"dampingAngular": 0
+					"dampingAngular": 0,
+					"writeOn": false
 				},
 				{
 					"id": "_15510884234760783788112553860",
@@ -864,7 +1026,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"writeOn": false,
+					"textOn": false,
 					"text": "",
 					"font": "Arial",
 					"size": 30,
@@ -888,7 +1050,8 @@
 					"friction": 1,
 					"restitution": 1,
 					"dampingLinear": 0,
-					"dampingAngular": 0
+					"dampingAngular": 0,
+					"writeOn": false
 				}
 			],
 			"id": "_15510884000529820939255083476",
@@ -920,7 +1083,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"writeOn": false,
+					"textOn": false,
 					"text": "",
 					"font": "Arial",
 					"size": 30,
@@ -944,7 +1107,8 @@
 					"friction": 1,
 					"restitution": 1,
 					"dampingLinear": 0,
-					"dampingAngular": 0
+					"dampingAngular": 0,
+					"writeOn": false
 				}
 			],
 			"id": "_15510884012027860725808037956",

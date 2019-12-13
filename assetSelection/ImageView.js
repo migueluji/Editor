@@ -1,11 +1,11 @@
 class ImageView {
 
-    constructor() {
+    constructor(image) {
 			this.html = document.createElement("li");
 			this.html.className +="mdc-image-list__item";
 			this.html.innerHTML =
 				'<div class="mdc-image-list__image-aspect-container">'+
-					'<img class="mdc-image-list__image" src="./images/font.png">'+
+					'<img class="mdc-image-list__image" src="">'+
 				'</div>'+
 				'<div class="mdc-image-list__supporting">'+
 					'<span class="mdc-image-list__label">Text label</span>'+
@@ -18,7 +18,7 @@ class ImageView {
 		this.html.querySelector(".mdc-image-list__label").innerHTML=image.name;
 		var img = this.html.querySelector(".mdc-image-list__image");
 		img.src="./images/"+image.name;
-		(img.width>img.height) ? img.style.height="auto" : img.style.width="auto";
+		(img.width>=img.height) ? img.style.height="auto" : img.style.width="auto";
 	}
 
 	remove() { 
@@ -27,6 +27,7 @@ class ImageView {
 
 // Handlers
 	selectImageHandler(e){
+		console.log(e.srcElement.parentNode.parentNode.id);
 		if (e.srcElement.parentNode.parentNode.id) Command.selectImageCmd(e.srcElement.parentNode.parentNode.id);
 	}
 
