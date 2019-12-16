@@ -18,7 +18,7 @@ class ActorPropertiesSpriteView {
 			'</li>'+
 			'<div class="properties-panel">'+
 				'<div class="mdc-text-field mdc-text-field--with-trailing-icon mdc-ripple-upgraded text-field--full">'+
-					'<input id="image" type="text" value="value" class="mdc-text-field__input">'+ //image file
+					'<input id="image" type="text" value="value" readonly="readonly" class="mdc-text-field__input">'+ //image file
 						'<label class="mdc-floating-label" for="text-field-filled">Image</label>'+
 						'<button id="imagebutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
 							'<i class="material-icons mdc-button_icon">folder</i>'+
@@ -103,7 +103,9 @@ class ActorPropertiesSpriteView {
 	}
 
 	onClickImageButton(){
-		Command.openImagesCmd(); 
+	//	Command.openImagesCmd(); 
+		var input = this.html.querySelector("#image");
+		Command.openAssetsCmd(input,input.value,"Image");
 	}
 
 	propertyGroupHandler(){

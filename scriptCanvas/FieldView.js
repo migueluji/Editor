@@ -1,12 +1,12 @@
 class FieldView  {
 
-    constructor(type,key,value,list) { 
+    constructor(type,key,value,option) { 
 		this.html = document.createElement("div"); 
 		this.html.style="width:100%";
 		switch(true){
-			case type == "select" : this.operation(key,value,list);break;
-			case (type == "input") || (type=="file") || (type=="color"): this.input(key,value,type);break;
 			case type == "boolean" : this.boolean(key,value);break;
+			case type == "select" : this.select(key,value,option);break;
+			case (type == "input") || (type=="file") || (type=="color"): this.input(type,key,value,option);break;
 		}
 	}
 
@@ -33,7 +33,7 @@ class FieldView  {
 		input.id=key;
 	}
 
-	operation(key,value,list){
+	select(key,value,option){
 		this.html.className +="text-field--full";
 		this.html.innerHTML=
 			'<div class="mdc-select">'+
@@ -50,7 +50,7 @@ class FieldView  {
 		var separator;
 		this.html.querySelector(".mdc-select").id=key;
 		var listView=this.html.querySelector("ul");
-		list.forEach(element=>{
+		option.forEach(element=>{
 			var item = document.createElement("li");
 			item.classList.add("mdc-list-item");
 			item.setAttribute("data-value",element);
@@ -60,7 +60,7 @@ class FieldView  {
 				item.setAttribute("tabIndex","0");
 				item.setAttribute("aria-selected","true");
 			}
-			if ((element=="displayWidth") || (element=="x") || (element=="spriteOn") || (element=="textOn") ||(element=="soundOn") || (element=="physicsOn")){
+			if ((element=="fps") || (element=="displayWidth") || (element=="x") || (element=="spriteOn") || (element=="textOn") ||(element=="soundOn") || (element=="physicsOn")){
 				separator = document.createElement("li");
 				separator.className +="mdc-list-divider";
 				separator.setAttribute("role","separator");
@@ -77,7 +77,7 @@ class FieldView  {
 		this.html.querySelector("span").textContent=key.replace("_"," ");	
 	}
 
-	input(key,value,type){
+	input(type,key,value,option){
 		this.html.innerHTML =
 			'<div class="text-field--full mdc-text-field mdc-ripple-upgraded">'+
 				'<input class="mdc-text-field__input" style="padding-right:36px">'+
@@ -121,7 +121,8 @@ class FieldView  {
 			case "color": icon.style.display="none";break;
 		}
 		if (type=="file"){
-			button.addEventListener("click",this.loadImageHandler.bind(this));
+			this.input.setAttribute("readonly","readonly");
+			button.addEventListener("click",this.loadAssetHandler.bind(this,option));
 		}
 		else{
 			button.addEventListener("click",this.menuHandler.bind(this));
@@ -155,8 +156,9 @@ class FieldView  {
 		this.menu.open=true;
 	}
 
-	loadImageHandler(){
-		Command.openAssetsCmd(this.input);
+	loadAssetHandler(option){
+		//console.log("load",this.input,this.input.value,option);
+		Command.openAssetsCmd(this.input,this.input.value,option);
 	}
 }
 

@@ -57,7 +57,7 @@ class GamePropertiesView {
 
 		var inputs=this.html.querySelectorAll("input");
 		inputs.forEach(element=>{
-			element.addEventListener("change",this.onChangeInputHandler.bind(this,element));
+			element.addEventListener("input",this.onChangeInputHandler.bind(this,element));
 		})
 	}
 

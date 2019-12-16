@@ -12,40 +12,42 @@ class ParametersView  {
 	addFields(parameters){
 		console.log(parameters);
 		for (const field in parameters) {
-			var list=null;
+			var option=null;
 			var typeOf=null;
 			switch(field){
-				case "Operation" : type="select"; list=["Less","Less Equal","Equal","Greater Equal","Greater","Different"];break;
-				case "Tag" : type="select"; list=Command.getTagListCmd(); break;
-				case "Mode" : type="select"; list=["Down","Up","Is Over","Tap"];break;
-				case "Key_Mode" : type="select"; list=["Pressed","Down","Up"];break;
-				case "Actor" : type="select"; list=Command.getActorListCmd();break;
-				case "Scene" : type="select"; list=Command.getSceneListCmd(); break;
+				case "Operation" : type="select"; option=["Less","Less Equal","Equal","Greater Equal","Greater","Different"];break;
+				case "Tag" : type="select"; option=Command.getTagListCmd(); break;
+				case "Mode" : type="select"; option=["Down","Up","Is Over","Tap"];break;
+				case "Key_Mode" : type="select"; option=["Pressed","Down","Up"];break;
+				case "Actor" : type="select"; option=Command.getActorListCmd();break;
+				case "Scene" : type="select"; option=Command.getSceneListCmd(); break;
 				case "Animation" : type="file";break;
-				case "Sound" : type="file" ; break;
-				case "Element" : type="select"; list=["Game","Me"]; list=list.concat(Command.getActorListCmd()); break;
+				case "Sound" : type="file";option="Sound" ; break;
+				case "Element" : type="select"; option=["Game","Me"]; option=option.concat(Command.getActorListCmd()); break;
 				case "Property" : type="select"; parameters.hasOwnProperty("Value") ? typeOf="all" : typeOf="boolean";
-								list=Command.getPropertiesListCmd(parameters.Element,typeOf); break;
+								option=Command.getPropertiesListCmd(parameters.Element,typeOf); break;
 				case "Value": {
 					switch (parameters["Property"]){
-						case "image" : type="file";break;
-						case "sound" : type="file";break;
-						case "font" : type="file";break;
+						case "image" : type="file"; option="Image";break;
+						case "sound" : type="file"; option="Sound";break;
+						case "font" : type="file"; option="Font";break;
 						case "color" : type="color"; break;
 						case "backgroundColor" : type="color";break;
 						case "fill" : type="color"; break;
-						case "collider" : type="select"; list=["Circle","Box"];break;
-						case "tags" : type="select"; list=Command.getTagListCmd(); break;
-						case "style" : type="select"; list=["Normal","Italic","Bold","Italic-Bold"];break;
-						case "align" : type="select"; list=["Left","Center","Right"];break;
-						case "type" : type="select"; list=["Kinematic","Dynamic","Static"];break;
+						case "collider" : type="select"; option=["Circle","Box"];break;
+						case "tags" : type="select"; option=Command.getTagListCmd(); break;
+						case "style" : type="select"; option=["Normal","Italic","Bold","Italic-Bold"];break;
+						case "align" : type="select"; option=["Left","Center","Right"];break;
+						case "type" : type="select"; option=["Kinematic","Dynamic","Static"];break;
+						case "currentScene": type="select"; option=Command.getSceneListCmd(); break;
 						default: type="input";break;
 					}; break;
 				};	
 				default : type="input";break;
 			}
+			console.log("field",typeof parameters[field]);
 			if ((typeof parameters[field]=="boolean"))	type="boolean";
-			var fieldView = new FieldView(type,field,parameters[field],list);
+			var fieldView = new FieldView(type,field,parameters[field],option);
 			this.html.appendChild(fieldView.html);	
 		};
 	}
@@ -60,7 +62,7 @@ class ParametersView  {
 	editChangeHandler(){
 		var keys=Command.getPropertiesListCmd(this.parameters["Element"],"boolean");
 		if (this.parameters.hasOwnProperty("Value")) // only for edit, not for check
-			(keys.includes(this.parameters["Property"]))?this.parameters.Value=false:	this.parameters.Value=null;
+			(keys.includes(this.parameters["Property"]))?this.parameters.Value=false:this.parameters.Value=null;
 		if (this.parameters["Property"] == "color" || this.parameters["Property"]=="backgroundColor" || this.parameters["Property"]=="fill") this.parameters.Value="#ffffff";
 		if (this.parameters["Property"] == "image") this.parameters.Value="";
 		this.removeFields();
@@ -69,7 +71,7 @@ class ParametersView  {
 	}
 
 	changeInputHandler(input){
-		console.log("change input",input);
+	//	console.log("change input",input);
 		var value=null;
 		switch (input.type){
 			case "checkbox": value= Boolean(input.checked);break;

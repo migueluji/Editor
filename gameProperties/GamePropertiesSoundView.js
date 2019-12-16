@@ -73,7 +73,8 @@ class GamePropertiesSoundView {
 	}
 
 	onClickSoundButton(){
-		Command.openSoundsCmd(null); // no se pasa ningun actorID - así se sabe que es el sonido del juego
+		var input = this.html.querySelector("#sound");
+		Command.openAssetsCmd(input,input.value,"Sound");
 	}
 
 	propertyGroupHandler(){

@@ -7,6 +7,10 @@ class Game {
         this.displayHeight=game.displayHeight || 480;
         Object.assign(this,game);
         if (this.soundList) this.soundList.forEach((sound,i) => this.soundList[i]=new Asset(sound));
+        // fuentes fijas
+        this.fontList=["Arial","Arial Black","Courier New","Georgia","Helvetica","Impact","Tahoma","Times New Roman","Verdana"];
+        if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]={"name":this.fontList[i]});
+        // fin fuentes fijas
         if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]=new Asset(font));
         this.sceneList.forEach((scene,i) => this.sceneList[i]=new Scene(scene));
     }
@@ -38,6 +42,25 @@ class Game {
         return (obj);
     }
 
+    get inputProperties(){
+        var obj={
+            fps:null,
+            time:null,
+            exit:false,
+            currentScene:null,
+            currentSceneNumber:0,
+            deltaTime:null,
+            mouseX:null,
+            mouseY:null,
+            accelerationX:null,
+            accelerationY:null,
+            accelerationZ:null,
+            latitude:null,
+            longitude:null
+        }
+        return(obj);
+    }
+
     addScene(scene,pos) {
         this.sceneList.splice(pos,0,scene);
     }
@@ -46,28 +69,25 @@ class Game {
         this.sceneList.splice(this.sceneList.findIndex(i => i.id == sceneID),1);
     } 
     
-    addSound(sound) {
-        this.soundList.push(sound);
+    addAsset(asset,option) {
+        var assetList=[];
+        switch (option){
+            case "Image" : assetList=this.imageList; break;
+            case "Sound" : assetList=this.soundList; break;
+            case "Font"  : assetList=this.fontList; break;
+        }
+        assetList.push(asset);
     } 
 
-    removeSound(soundID) {
-        this.soundList.splice(this.soundList.findIndex(i => i.id == soundID),1);
+    removeAsset(assetID,option) {
+        var assetList=[];
+        switch (option){
+            case "Image" : assetList=this.imageList; break;
+            case "Sound" : assetList=this.soundList; break;
+            case "Font"  : assetList=this.fontList; break;
+        }
+        assetList.splice(assetList.findIndex(i => i.id == assetID),1);
     } 
 
-    addImage(image) {
-        this.imageList.push(image);
-    } 
-
-    removeImage(imageID) {
-        this.imageList.splice(this.imageList.findIndex(i => i.id == imageID),1);
-    } 
-
-    addFont(font) {
-        this.fontList.push(font);
-    } 
-
-    removeFont(fontID) {
-        this.fontList.splice(this.fontList.findIndex(i => i.id == fontID),1);
-    }
 
 }

@@ -132,7 +132,8 @@ class ActorPropertiesTextView {
 	}
 
 	onClickFontButton(){
-		Command.openFontsCmd();
+		var input = this.html.querySelector("#font");
+		Command.openAssetsCmd(input,input.value,"Font");
 	}
 
 	propertyGroupHandler(){

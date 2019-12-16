@@ -55,37 +55,15 @@ class Command {
     }
 
 // ASSETS
-    static openAssetsCmd(input){
-        this.editor.openAssets(input);
-    }
-// SOUNDS
-    static selectSoundCmd(soundID){
-        this.editor.selectSound(soundID);
+    static openAssetsCmd(input,name,option){
+        this.editor.openAssets(input,name,option);
     }
 
-    static openSoundsCmd(actorID){
-        this.editor.openSounds(actorID);
+    static selectAssetCmd(assetID){
+        this.editor.selectAsset(assetID);
     }
 
-// IMAGES
-    static selectImageCmd(imageID){
-        this.editor.selectImage(imageID);
-    }
-
-    static openImagesCmd(){
-        this.editor.openImages();
-    }
-
-// FONTS
-    static selectFontCmd(fontID){
-        this.editor.selectFont(fontID);
-    }
-
-    static openFontsCmd(){
-        this.editor.openFonts();
-    }
-
-//
+// GETS
     static getTagListCmd(){
         return(this.editor.getTagList());
     }
@@ -97,10 +75,6 @@ class Command {
     static getSceneListCmd(){
         return(this.editor.getSceneList());
     }
-
-    // static getPropertyValueCmd(property){
-    //     return(this.editor.getPropertyValue(property));
-    // }
 
     static getPropertiesListCmd(element,type){
         return(this.editor.getPropertiesList(element,type));

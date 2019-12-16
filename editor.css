@@ -223,23 +223,21 @@ button{
     position: absolute;
     right: 8px;
 }
-
-.mdc-image-list__item{
-  width:20%;
-  padding: 8px;
-}
 .mdc-image-list__image-aspect-container.image-list--selected{
-    border: 8px solid #6200ee38;
+    border:2px solid #6200ee;
 }
 .mdc-image-list__image-aspect-container{
-    border: 8px solid white;
-    padding-bottom: calc(85% / 1);
+    border:2px solid white;
+}
+.mdc-image-list__item.image-file{
+    width: 100px;
+}
+.mdc-image-list__item{
+  width:33%;
+  padding: 8px;
 }
 .mdc-image-list__image-aspect-container .mdc-image-list__image  {
-    margin: auto;;
-} 
-.mdc-image-list{
-    margin:0px;
+    margin: auto;
 }
 .open{
     display: block;
@@ -256,4 +254,10 @@ button{
 .mdc-toolbar__title{
     padding: 18px;
     font-size: 1.25em;
+}
+.clip-text{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 188px;
+    white-space: nowrap;
 }

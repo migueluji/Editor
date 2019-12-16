@@ -73,8 +73,10 @@ class ActorPropertiesSoundView {
 	}
 
 	onClickSoundButton(){
-		var actorID=document.querySelector(".actorselected").id;
-		Command.openSoundsCmd(actorID); 
+		// var actorID=document.querySelector(".actorselected").id;
+		// Command.openSoundsCmd(actorID); 
+		var input = this.html.querySelector("#sound");
+		Command.openAssetsCmd(input,input.value,"Sound");
 	}
 
 	propertyGroupHandler(){

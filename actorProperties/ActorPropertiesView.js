@@ -8,7 +8,7 @@ class ActorPropertiesView {
 			'<header class="mdc-top-app-bar--dense properties-bar">'+
 				'<div class="mdc-top-app-bar__row">'+
 					'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">'+
-						'<span class="mdc-toolbar__title">Actor Properties</span>'+
+						'<span class="mdc-toolbar__title clip-text">Actor Properties</span>'+
 					'</section>'+
 					'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">'+
 						'<button id="codebutton" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">code</button>'+
@@ -71,7 +71,7 @@ class ActorPropertiesView {
 		}); 
 		var inputs=this.html.querySelectorAll("input");
 		inputs.forEach(element=>{
-			element.addEventListener("change",this.onChangeInputHandler.bind(this,element));
+			element.addEventListener("input",this.onChangeInputHandler.bind(this,element));
 		})
 	}
 

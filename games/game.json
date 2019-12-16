@@ -109,46 +109,6 @@
 		}
 	],
 	"fontList": [
-		{
-			"id": "_12345678900081",
-			"name": "Arial"
-		},
-		{
-			"id": "_12345678900071",
-			"name": "Arial Black"
-		},
-		{
-			"id": "_12345678900072",
-			"name": "Comic Sans MS"
-		},
-		{
-			"id": "_12345678900073",
-			"name": "Courier New"
-		},
-		{
-			"id": "_12345678900074",
-			"name": "Georgia"
-		},
-		{
-			"id": "_12345678900075",
-			"name": "Helvetica"
-		},
-		{
-			"id": "_12345678900076",
-			"name": "Impact"
-		},
-		{
-			"id": "_12345678900077",
-			"name": "Tahoma"
-		},
-		{
-			"id": "_12345678900078",
-			"name": "Times New Roman"
-		},
-		{
-			"id": "_12345678900079",
-			"name": "Verdana"
-		}
 	],
 	"sceneList": [
 		{

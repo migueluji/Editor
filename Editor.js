@@ -28,12 +28,6 @@ class Editor {
         this.sideSheetView=new SideSheetView();
             this.gamePropertiesView = new GamePropertiesView(gameModel);
             this.sideSheetView.addView(this.gamePropertiesView.html);
-            this.soundSelectionView = new SoundSelectionView(gameModel.soundList);
-            this.sideSheetView.addView(this.soundSelectionView.html);
-            this.imageSelectionView = new ImageSelectionView(gameModel.imageList);
-            this.sideSheetView.addView(this.imageSelectionView.html);
-            this.fontSelectionView = new FontSelectionView(gameModel.fontList);
-            this.sideSheetView.addView(this.fontSelectionView.html);
             this.castView = new CastView(this.model.sceneList[this.selectedSceneIndex].actorList);
             this.sideSheetView.addView(this.castView.html);
             this.actorPropertiesView = new ActorPropertiesView(this.model.sceneList[this.selectedSceneIndex].actorList[0]);
@@ -323,104 +317,40 @@ class Editor {
         this.scriptCanvasView.updateSelectedNode(nodeID);
     }
 
-// SOUNDS
-    addSound(sound){
-        var soundView = new SoundView();
-        soundView.addView(sound);
-        this.model.addSound(sound);
-        this.soundSelectionView.addSound(soundView);
-    }
-
-    removeSound(soundID){
-        this.model.removeSound(soundID);
-        this.soundSelectionView.removeSound(soundID);
-    }
-
-/* Sounds editor commands */
-    selectSound(soundID){
-         this.soundSelectionView.updateSelectedSound(soundID);
-    }
-
-    openSounds(actorID){
-        this.soundSelectionView.actorID=actorID // null si se abren los sonidos desde las propiedades del juego
-        this.soundSelectionView.selectedSound=null; // inicializa el sonido seleccionado a null
-        if (actorID==null){
-            this.soundSelectionView.elementSound=this.model.sound;
-            var index=this.model.soundList.findIndex(i => i.name == this.model.sound);
-           (index !== -1) ? this.selectedSound=this.model.soundList[index].id : this.selectedSound=null;
+// ASSET
+    openAssets(input,name,option){
+        var assetList=[];
+        switch (option){
+            case "Image" : assetList=this.model.imageList; break;
+            case "Sound" : assetList=this.model.soundList; break;
+            case "Font"  : assetList=this.model.fontList; break;
         }
-        else {
-            this.soundSelectionView.elementSound=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].sound;
-            var index=this.model.soundList.findIndex(i=> i.name == this.soundSelectionView.elementSound);
-            (index !== -1) ? this.selectedSound=this.model.soundList[index].id : this.selectedSound=null;
-        }
-        this.selectSound(this.selectedSound);
-        SideSheetView.openSheetHandler("sound-selection");
-     }
-
-// IMAGES
-    addImage(image){
-        var imageView = new ImageView();
-        imageView.addView(image);
-        this.model.addImage(image);
-        this.assetDialog.addImage(imageView);
+        var index=assetList.findIndex(i=>i.name==name);
+        var assetID=null;
+        if (index!=-1) assetID=assetList[index].id; 
+        //console.log("asset",assetList,input,option);
+        this.assetDialog = new AssetSelectionView(assetList,input,option);
+        this.assetDialog.updateSelectedAsset(assetID);
+        var editorFrame=document.querySelector(".editor-frame-root");
+        editorFrame.appendChild(this.assetDialog.html);
     }
 
-    removeImage(imageID){
-        this.model.removeImage(imageID);
-        this.assetDialog.removeImage(imageID);
+    selectAsset(assetID){
+        this.assetDialog.updateSelectedAsset(assetID);
     }
 
-/* Images editor commands */
-    openAssets(input){
-        // this.imageSelectionView.selectedImage=null; // inicializa la imagen seleccionada a null
-        // this.imageSelectionView.actorImage=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].image;
-        // var index=this.model.imageList.findIndex(i=> i.name == this.imageSelectionView.actorImage);
-        // (index !== -1) ? this.selectedImage=this.model.imageList[index].id : this.selectedImage=null;
-      //  console.log("carga imagenes");
-		this.assetDialog = new AssetSelectionView(this.model.imageList,input);
-		var editorFrame=document.querySelector(".editor-frame-root");
-		editorFrame.appendChild(this.assetDialog.html);
+    addAsset(asset,option){
+        console.log("editor addAsset",option);
+        var assetView = new AssetView(option);
+        assetView.addView(asset);
+        this.model.addAsset(asset,option);
+        this.assetDialog.addAsset(assetView);
     }
 
-    selectImage(imageID){
-        this.assetDialog.updateSelectedImage(imageID);
-    }
-
-    openImages(){
-        this.imageSelectionView.selectedImage=null; // inicializa la imagen seleccionada a null
-        this.imageSelectionView.actorImage=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].image;
-        var index=this.model.imageList.findIndex(i=> i.name == this.imageSelectionView.actorImage);
-        (index !== -1) ? this.selectedImage=this.model.imageList[index].id : this.selectedImage=null;
-        this.selectImage(this.selectedImage);
-        SideSheetView.openSheetHandler("image-selection");
-    }
-
-// FONTS
-    addFont(font){
-        var fontView = new FontView();
-        fontView.addView(font);
-        this.model.addFont(font);
-        this.fontSelectionView.addFont(fontView);
-    }
-
-    removeFont(fontID){
-        this.model.removeFont(fontID);
-        this.fontSelectionView.removeFont(fontID);
-    }
-
-/* Fonts editor commands */
-    selectFont(fontID){
-        this.fontSelectionView.updateSelectedFont(fontID);
-    }
-
-    openFonts(){
-        this.fontSelectionView.selectedFont=null;
-        this.fontSelectionView.actorFont=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].font;
-        var index=this.model.fontList.findIndex(i=> i.name == this.fontSelectionView.actorFont);
-        (index !== -1) ? this.selectedFont=this.model.fontList[index].id : this.selectedFont=null;
-        this.selectFont(this.selectedFont);
-        SideSheetView.openSheetHandler("font-selection");
+    removeAsset(assetID,option){
+        console.log("editor remove Asset",assetID,option);
+        this.model.removeAsset(assetID,option);
+        this.assetDialog.removeAsset(assetID);
     }
 
 // SCRIPTING this.sceneID,this.actorID,this.scriptID,this.nodeID,this.if
@@ -487,33 +417,33 @@ class Editor {
     getPropertiesList(element,type){
         var actor=null;
         var properties=[];
-        if (element=="Game") properties=Object.keys(Object.assign(this.model.newProperties,this.model.properties));
+        if (element=="Game") {
+            var object=Object.assign(this.model.newProperties,this.model.properties);
+            properties=Object.assign(object,this.model.inputProperties);
+        }
         else if (element=="Me")  {
             actor = this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex];
-            properties=Object.keys(Object.assign(actor.newProperties,actor.properties));  
+            properties=Object.assign(actor.newProperties,actor.properties);  
             }   
             else if (element) {
                     var actorPos = this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.name==element);
                     actor= this.model.sceneList[this.selectedSceneIndex].actorList[actorPos];
-                    properties=Object.keys(Object.assign(actor.newProperties,actor.properties));  
+                    properties=Object.assign(actor.newProperties,actor.properties);  
                 }  
         switch (type) {
             case "boolean": properties=this.checkType(element,properties,"boolean");break;
             case "number" : properties=this.checkType(element,properties,"number");break;
         }
-        return(properties);
+        return(Object.keys(properties));
     }
 
 // Utilities
     checkType(element,properties,type){
-        var newProperties=[];
-        properties.forEach((property,i)=>{
-            if (element=="Game") {
-                if (typeof this.model[property] == type) newProperties.push(property);
-            }
-            else {
-                if (typeof this.model.sceneList[0].actorList[0][property] == type) newProperties.push(property);
-              }
+        var newProperties={};
+        Object.keys(properties).forEach(name=>{
+            var obj = new Object();
+            obj[name]=properties[name];
+           if (typeof properties[name] == type) Object.assign(newProperties,obj);
         })
         return (newProperties);
     }

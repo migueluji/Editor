@@ -8,35 +8,16 @@ class CmdManager {
     }
 
 // Asset
-    static addSoundCmd(soundName){
-        var cmd = new AddSoundCmd(soundName);
+    static addAssetCmd(name,option){
+        var cmd = new AddAssetCmd(name,option);
         this.history.execute(cmd);
     }
 
-    static removeSoundCmd(soundID){
-        var cmd = new RemoveSoundCmd(soundID);
+    static removeAssetCmd(assetID,option){
+        var cmd = new RemoveAssetCmd(assetID,option);
         this.history.execute(cmd);
     }
 
-    static addImageCmd(imageName){
-        var cmd = new AddImageCmd(imageName);
-        this.history.execute(cmd);
-    }
-
-    static removeImageCmd(imageID){
-        var cmd = new RemoveImageCmd(imageID);
-        this.history.execute(cmd);
-    }
-
-    static addFontCmd(fontName){
-        var cmd = new AddFontCmd(fontName);
-        this.history.execute(cmd);
-    }
-
-    static removeFontCmd(fontID){
-        var cmd = new RemoveFontCmd(fontID);
-        this.history.execute(cmd);
-    }
 // Game
     static changeGamePropertyCmd(property,value){
         var cmd = new ChangeGamePropertyCmd(property,value);
