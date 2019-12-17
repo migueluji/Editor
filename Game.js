@@ -22,7 +22,7 @@ class Game {
             cameraX:this.cameraX, cameraY:this.cameraY, cameraAngle:this.cameraAngle, cameraZoom:this.cameraZoom,
             backgroundColor:this.backgroundColor,
             // Sound
-            soundOn:this.soundOn, sound:this.sound, volume:this.volume, start:this.start, pan:this.pan, loop:this.loop, 
+            soundOn:this.soundOn, soundtrack:this.soundtrack, volume:this.volume, start:this.start, pan:this.pan, loop:this.loop, 
             // Physics
             physicsOn:this.physicsOn, gravityX: this.gravityX, gravityY:this.gravityY
         }

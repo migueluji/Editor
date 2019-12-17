@@ -6,7 +6,7 @@ class Scene {
     }
 
     addActor(actor,pos){
-        console.log(actor);
+        //console.log(actor);
         this.actorList.splice(pos,0,actor);
     }
 

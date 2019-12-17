@@ -197,3 +197,12 @@
 .empty{
     height: 24px;
 }
+.card-background{
+    width: 10000px;
+    height: 10000px;
+    opacity: 0.1;
+    z-index: -1;
+    background: lightgrey;
+    position: absolute;
+    transform: translate(-5000px,-5000px);
+}

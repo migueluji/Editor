@@ -35,7 +35,7 @@ class ScriptCanvasView {
         this.scriptID=null;
 
         this.background=this.html.querySelector(".script-background");
-        this.posx=this.posy=0;
+        this.traslateX=this.traslateY=0;
   }
 
     addNode(html,nodeView,nodePos){
@@ -85,8 +85,9 @@ class ScriptCanvasView {
 	}
 
 // Handlers
-    unselectNodeHandler(e){
+    unselectNodeHandler(e){  
         if (e.target.classList[0]=="script-background") {
+ //           console.log("unselect",e.target);
             if (e.target.querySelector(".open")==null){
                 e.preventDefault();
                 Command.selectNodeCmd(null);
@@ -94,58 +95,63 @@ class ScriptCanvasView {
         }
     }
 
-    mouseDowndHandler(e){   
-        if (e.target.classList[0]=="script-background") {
+    mouseDowndHandler(e){  
+        if(e.target.classList[0]=="script-background"){
+        //    console.log("down",this.x,this.y);
+            e = e || window.event;
             e.preventDefault();
             this.x0=e.clientX;
             this.y0=e.clientY;
             this.down=true;
-        }
+        } else if (e.target.classList[0]=="card-background") this.update(this.nodeList);
     }
 
     mouseUpHandler(e){
-        e.preventDefault();
         if (this.down){
             this.down=false;
-            this.posx=this.posx+this.x-this.newx;
-            this.posy=this.posy+this.y-this.newy;
-          //  this.update(this.nodeList);
+            this.traslateX=this.traslateX+(this.x1-this.x0);
+            this.traslateY=this.traslateY+(this.y1-this.y0);
+   //         console.log("up",this.x,this.y);
         }
+  
     }
     
     mouseMoveHandler(e){
-      
-        if (e.target.classList[0]=="script-background") {
-            if(this.down){
-                e.preventDefault();
-                this.x1=e.clientX;
-                this.y1=e.clientY;
-                this.x=this.newx+this.x1-this.x0;
-                this.y=this.newy+this.y1-this.y0;
-                e.target.style.transform="translate("+this.x+"px,"+this.y+"px)";
-            }
-        }  
+        if (this.down && e.target.classList[0]=="script-background"){
+            e = e || window.event;
+            e.preventDefault();
+            this.x1=e.clientX;
+            this.y1=e.clientY;
+            this.x=this.centerX+this.traslateX+(this.x1-this.x0);
+            this.y=this.centerY+this.traslateY+(this.y1-this.y0);
+ //         console.log("move",this.x,this.y);
+            e.target.style.transform="translate("+this.x+"px,"+this.y+"px)";
+        }
     }
 
     addDoHandler(e){
-        var insert = this.getInsertPoint();
-        this.dialog = new DoSelectionView(insert);
-		var editorFrame=document.querySelector(".editor-frame-root");
-        editorFrame.appendChild(this.dialog.html);
+        if (this.html.querySelector(".open")==null){ // if there is not a card opened
+            var insert = this.getInsertPoint();
+            this.dialog = new DoSelectionView(insert);
+            var editorFrame=document.querySelector(".editor-frame-root");
+            editorFrame.appendChild(this.dialog.html);
+        }
      }
 
     addIfHandler(e){
-        var insert = this.getInsertPoint();
-        var dialog = new IfSelectionView(insert);
-		var editorFrame=document.querySelector(".editor-frame-root");
-        editorFrame.appendChild(dialog.html);
+        if (this.html.querySelector(".open")==null){ // if there is not a card opened
+            var insert = this.getInsertPoint();
+            var dialog = new IfSelectionView(insert);
+            var editorFrame=document.querySelector(".editor-frame-root");
+            editorFrame.appendChild(dialog.html);
+        }
     }
 
 // Utilities
     init(){
         this.centerX=(this.html.clientWidth-this.background.clientWidth)/2;
         this.centerY=0;
-        //this.posx=this.posy=0;
+        this.traslateX=this.traslateY=0;
     }
 
     updateStageDrawer(){
@@ -163,9 +169,9 @@ class ScriptCanvasView {
 
         if (this.scriptID!=scriptID) this.init(); // first update of nodeList
 
-        this.newx=this.centerX+this.posx;
-        this.newy=this.centerY+this.posy;
-        this.background.style.transform="translate("+this.newx+"px,"+this.newy+"px)";
+        this.x=this.centerX+this.traslateX;
+        this.y=this.centerY+this.traslateY;
+        this.background.style.transform="translate("+this.x+"px,"+this.y+"px)";
         this.nodeList=nodeList;
         this.scriptID=scriptID;
     }
@@ -199,7 +205,7 @@ class ScriptCanvasView {
         frames.forEach(frame=>{
             var upNodeChildren=frame.parentNode.children;
             var childrenWidht1=upNodeChildren[2].clientWidth+16; 
-            var childrenWidht2=upNodeChildren[3].clientWidth+16; // 16 por el marigen de 8px 
+            var childrenWidht2=upNodeChildren[3].clientWidth+16; // 16 por el margen de 8px 
             var boxWidth = childrenWidht1/2+childrenWidht2/2-4; // 4 por el borde
             frame.style.height=frame.parentNode.parentNode.clientHeight-28+"px";
             frame.style.width=boxWidth+"px";

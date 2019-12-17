@@ -10,7 +10,7 @@ class ParametersView  {
 	}
 
 	addFields(parameters){
-		console.log(parameters);
+		//console.log(parameters);
 		for (const field in parameters) {
 			var option=null;
 			var typeOf=null;
@@ -39,13 +39,13 @@ class ParametersView  {
 						case "style" : type="select"; option=["Normal","Italic","Bold","Italic-Bold"];break;
 						case "align" : type="select"; option=["Left","Center","Right"];break;
 						case "type" : type="select"; option=["Kinematic","Dynamic","Static"];break;
-						case "currentScene": type="select"; option=Command.getSceneListCmd(); break;
+						case "currentScene": type ="select"; option=Command.getSceneListCmd(); break;
 						default: type="input";break;
 					}; break;
 				};	
 				default : type="input";break;
 			}
-			console.log("field",typeof parameters[field]);
+		//	console.log("field",typeof parameters[field]);
 			if ((typeof parameters[field]=="boolean"))	type="boolean";
 			var fieldView = new FieldView(type,field,parameters[field],option);
 			this.html.appendChild(fieldView.html);	

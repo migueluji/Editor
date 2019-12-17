@@ -16,7 +16,7 @@ class FieldView  {
 			'<div class="mdc-form-field">'+
 				'<label class="text-check-label"></label>'+
 				'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
-					'<input id="screen" type="checkbox" class="mdc-checkbox__native-control">'+
+					'<input id="" type="checkbox" class="mdc-checkbox__native-control">'+
 					'<div class="mdc-checkbox__background">'+
 						'<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24"><path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path></svg>'+
 					'</div>'+
@@ -110,7 +110,7 @@ class FieldView  {
 		(value!=null && value[0]=="#") ? this.input.type="color" : this.input.type="text"; 
 		this.input.value=value;
 		this.input.id=key;
-	//	this.input.addEventListener("change",this.focusInput.bind(this));
+
 		this.html.querySelector("label").textContent=key.replace("_"," ");	
 
 		var button=this.html.querySelector("button");

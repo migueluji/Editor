@@ -18,8 +18,8 @@ class GamePropertiesSoundView {
 			'</li>'+
 			'<div class="properties-panel">'+
 				'<div class="mdc-text-field mdc-text-field--with-trailing-icon mdc-ripple-upgraded text-field--full">'+
-					'<input id="sound" type="text" value="value" class="mdc-text-field__input">'+ //sound file
-						'<label class="mdc-floating-label" for="text-field-filled">Sound File</label>'+
+					'<input id="soundtrack" type="text" value="value" class="mdc-text-field__input">'+ //sound file
+						'<label class="mdc-floating-label" for="text-field-filled">Soundtrack</label>'+
 						'<button id="soundbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
 							'<i class="material-icons mdc-button_icon">folder</i>'+
 						'</button>'+
@@ -73,7 +73,7 @@ class GamePropertiesSoundView {
 	}
 
 	onClickSoundButton(){
-		var input = this.html.querySelector("#sound");
+		var input = this.html.querySelector("#soundtrack");
 		Command.openAssetsCmd(input,input.value,"Sound");
 	}
 

@@ -5,7 +5,7 @@ class CardView {
 		this.html = document.createElement("div");
 		this.html.className +="mdc-card action-card";
 		this.html.innerHTML =
-		  	'<div></div>'+
+		  	'<div class="card-background" ></div>'+
 			'<div class="mdc-card__primary-action card-title">'+
 				'<div  style="pointer-events:none" class="circle">'+
 					'<i class="nodeIcon material-icons mdc-chip_icon">code</i>'+
