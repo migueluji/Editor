@@ -73,6 +73,7 @@ class ActorPropertiesView {
 		inputs.forEach(element=>{
 			element.addEventListener("input",this.onChangeInputHandler.bind(this,element));
 		})
+
 	}
 
 //Handlers

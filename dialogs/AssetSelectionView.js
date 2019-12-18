@@ -2,7 +2,6 @@ class AssetSelectionView {
 
     constructor(assetList,input,option) {  
 		this.input=input;
-		this.option=option;
 	//	console.log("asset selection",input,input.value);
 		this.assetList=assetList;
 		this.html = document.createElement("div");
@@ -48,11 +47,10 @@ class AssetSelectionView {
 		}
 	}
 
-	init(assetList){
+	init(assetList,option){
 	//	console.log("init", assetList,option);
 		assetList.forEach(asset=>{
-			var assetView= new AssetView(this.option);
-			assetView.addView(asset);
+			var assetView= new AssetView(asset,option);
 			this.addAsset(assetView);
 		});
 	}	

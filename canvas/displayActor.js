@@ -13,7 +13,7 @@ class DisplayActor extends PIXI.Container {
         this.y=actor.y;
         this.flipX=actor.flipX;
         this.flipY=actor.flipY;
-        
+                
         var texture = null;
         if (actor.image) texture = loader.resources[actor.image].texture;
         else texture=PIXI.Texture.WHITE;
@@ -62,7 +62,10 @@ class DisplayActor extends PIXI.Container {
 
     createSprite(actor,texture){
         this.tilingSprite = new PIXI.TilingSprite(texture);
+        console.log(actor);
+      
         (actor.spriteOn) ? this.tilingSprite.alpha=actor.opacity : this.tilingSprite.alpha=0;
+        if (actor.off && actor.spriteOn) this.tilingSprite.alpha=0.5;
         this.tilingSprite.tint= "0x"+String(actor.color).substr(1);
 
         var textureSize;

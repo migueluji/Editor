@@ -157,7 +157,6 @@ class FieldView  {
 	}
 
 	loadAssetHandler(option){
-		//console.log("load",this.input,this.input.value,option);
 		Command.openAssetsCmd(this.input,this.input.value,option);
 	}
 }

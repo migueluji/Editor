@@ -37,7 +37,7 @@ class CastView {
 	updateSelectedActor(actorID){
 		var actorSelected=this.html.querySelector(".actorselected");
 		if (actorSelected)  actorSelected.classList.remove("actorselected");
-		if (actorID!=null)  this.html.querySelector("#"+actorID).className = "actorselected";
+		if (actorID!=null && this.html.querySelector("#"+actorID)!=null)  this.html.querySelector("#"+actorID).className = "actorselected";
 	}
 
 // Handlers

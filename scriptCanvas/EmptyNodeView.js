@@ -42,7 +42,7 @@ class EmptyNodeView {
 		var sceneSelected=document.querySelector(".sceneselected").id;
 		var actorSelected=document.querySelector(".actorselected").id;
 		var scriptSelected=document.querySelector(".scriptselected").id;
-	//	console.log(this.html);
+
 		var insert={"parentID":null,"side":null,"position":null};
 		var emptyNode=this.html;
 		var i=0;
@@ -56,13 +56,11 @@ class EmptyNodeView {
 		if (parent.classList.contains("yes")) insert.side="right";
 			else if (parent.classList.contains("no")) insert.side="left";
 		insert.position=i/2;
-	//	console.log(insert.parentID,insert.side,insert.position);
 
 		 var node=document.createElement("div");
 		 node.innerHTML=e.dataTransfer.getData('text/html');
 		 var nodeID=node.firstElementChild.id;
-	
-	//	console.log("moveNodeCmd",sceneSelected,actorSelected,scriptSelected,insert,nodeID);
+
 		CmdManager.moveNodeCmd(sceneSelected,actorSelected,scriptSelected,insert,nodeID);
 	}
  }
