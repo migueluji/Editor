@@ -412,7 +412,7 @@
 											"id": "_15754505891834163000265277963",
 											"type": "Animate",
 											"parameters": {
-												"Animation": "image.jpg",
+												"Animation": "rock.png",
 												"Fps": 24
 											}
 										},
@@ -529,7 +529,7 @@
 					"tileY": 1,
 					"textOn": false,
 					"text": "hola mundo ${x}",
-					"font": "arial",
+					"font": "Arial",
 					"size": 30,
 					"fill": "#000000",
 					"style": "normal",
@@ -822,7 +822,7 @@
 					"tileY": 1,
 					"textOn": false,
 					"text": "hola mundo ${x}",
-					"font": "arial",
+					"font": "Arial",
 					"size": 30,
 					"fill": "#000000",
 					"style": "normal",
@@ -876,7 +876,7 @@
 					"tileY": 1,
 					"textOn": false,
 					"text": "",
-					"font": "arial",
+					"font": "Arial",
 					"size": 30,
 					"fill": "#000000",
 					"style": "normal",

@@ -13,14 +13,14 @@ class Actor {
     get properties(){
         var obj={
             // Settings
-            off:this.off || false,
+            sleeping:this.sleeping || false,
             x:this.x || 0, y:this.y || 0, 
             width:this.width || 50, height:this.height || 50, 
             scaleX:this.scaleX || 1, scaleY:this.scaleY || 1, 
             angle:this.angle || 0, screen:this.screen || false,
             collider:this.collider || "Box", tags:this.tags || "",
             // Sprite
-            spriteOn:this.spriteOn || false, image:this.image || undefined,
+            spriteOn:this.spriteOn || false, image:this.image || "",
             color:this.color || "#ffffff", opacity: this.opacity,
             flipX:this.flipX || false , flipY:this.flipY || false ,
             scrollX:this.scrollX || 0, scrollY:this.scrollY || 0,

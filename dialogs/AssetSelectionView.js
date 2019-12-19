@@ -36,6 +36,7 @@ class AssetSelectionView {
 		this.html.addEventListener("click",this.cancelBackgroundHandler.bind(this));
 		this.html.querySelector("#cancelbutton").addEventListener("click",this.cancelButtonHandler.bind(this));
 
+		this.option=option;
 		if (this.option=="Font") {
 			this.html.querySelector("#deletebutton").style.display="none";
 			this.html.querySelector("#uploadbutton").style.display="none";
@@ -45,10 +46,12 @@ class AssetSelectionView {
 			this.html.querySelector("#deletebutton").addEventListener("click",this.removeAssetHandler.bind(this));
 			this.html.querySelector("#files").addEventListener("change",this.fileBrowserHandler.bind(this));
 		}
+		this.selectedAsset=[];
 	}
 
 	init(assetList,option){
-	//	console.log("init", assetList,option);
+		if(option=="Animation") option="Image"; // the assetView is equal
+		console.log("init", assetList,option);
 		assetList.forEach(asset=>{
 			var assetView= new AssetView(asset,option);
 			this.addAsset(assetView);
@@ -67,16 +70,27 @@ class AssetSelectionView {
 		this.html.querySelector("#"+assetID).remove();
 	}
 
-	updateSelectedAsset(assetID){
-		(this.selectedAsset === assetID) ? this.selectedAsset=null : this.selectedAsset=assetID;
+	updateSelectedAsset(assetIDList){ // assetIDList
+		console.log("update",this.selectedAsset,assetIDList);
+		assetIDList.forEach(assetID=>{
+			var founded = this.selectedAsset.findIndex(i=>i==assetID);
+			if (founded!=-1) 
+				this.selectedAsset.splice(founded,1)
+			else {
+				if (this.option=="Animation") this.selectedAsset.push(assetID);
+				else this.selectedAsset[0]=assetID;
+			}
+		})
 		var selectedAssets=this.html.querySelectorAll(".image-list--selected");
 		selectedAssets.forEach(element=>{
-			element.classList.remove("image-list--selected");
+			 element.classList.remove("image-list--selected"); // all selected are deleted
 		});			
-		if (this.selectedAsset != null) {
-			var listItem=this.html.querySelector("#"+assetID).firstChild;
-			listItem.className+= " image-list--selected";
-		}
+		console.log("upd",this.selectedAsset,assetIDList);
+		this.selectedAsset.forEach(i=>{
+			var listItem=this.html.querySelector("#"+i);
+			console.log(i,listItem);
+			if (listItem) listItem.firstChild.classList.add("image-list--selected");   // new selected are marked
+		})
 	}
 
 // Handlers
@@ -118,8 +132,15 @@ class AssetSelectionView {
 	okButtonHandler(){		
 	//	console.log("ok",this.input);
 		this.cancelButtonHandler();
-		var id=this.assetList.findIndex(i=>i.id==this.selectedAsset);
-		(id!=-1) ? this.input.value=this.assetList[id].name: this.input.value="";
+		this.input.value=null;
+	//	console.log(this.input.value,this.selectedAsset);
+		this.selectedAsset.forEach((assetID,j)=>{
+			var id=this.assetList.findIndex(i=>i.id==assetID);
+			if (id!=-1) {
+				(j==0) ?this.input.value=this.assetList[id].name: this.input.value +=","+this.assetList[id].name;
+			}
+		})
+
 		if ("createEvent" in document) {
 		 	var event = document.createEvent("HTMLEvents");
 		 	event.initEvent("input", false, true);

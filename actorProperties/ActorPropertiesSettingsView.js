@@ -6,11 +6,11 @@ class ActorPropertiesSettingsView {
 		 this.html.innerHTML =
 			'<li class="mdc-list-item mdc-ripple-upgraded properties-section-title">'+
 				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
-				'Properties'+
+				'Settings'+
 				'<div class="mdc-form-field">'+
-					'<label class="text-check-label" style="padding-left: 110px">Off</label>'+
+					'<label class="text-check-label" style="padding-left: 90px">Sleeping</label>'+
 					'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
-						'<input id="off" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
+						'<input id="sleeping" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
 						'<div class="mdc-checkbox__background">'+
 							'<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">'+
 								'<path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>'+

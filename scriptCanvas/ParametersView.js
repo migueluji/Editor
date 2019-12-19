@@ -21,7 +21,7 @@ class ParametersView  {
 				case "Key_Mode" : type="select"; option=["Pressed","Down","Up"];break;
 				case "Actor" : type="select"; option=Command.getActorListCmd();break;
 				case "Scene" : type="select"; option=Command.getSceneListCmd(); break;
-				case "Animation" : type="file";break;
+				case "Animation" : type="file"; option="Animation"; break;
 				case "Sound" : type="file";option="Sound" ; break;
 				case "Element" : type="select"; option=["Game","Me"]; option=option.concat(Command.getActorListCmd()); break;
 				case "Property" : type="select"; parameters.hasOwnProperty("Value") ? typeOf="all" : typeOf="boolean";

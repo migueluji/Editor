@@ -318,31 +318,39 @@ class Editor {
     }
 
 // ASSET
-    openAssets(input,name,option){
+    openAssets(input,name,option){ // input (html field that makes the call) name (asset name) option (image, sound, font, animation)
+        
         var assetList=[];
         switch (option){
-            case "Image" : assetList=this.model.imageList; break;
             case "Sound" : assetList=this.model.soundList; break;
             case "Font"  : assetList=this.model.fontList; break;
+            default: assetList=this.model.imageList; break; // images and animations
         }
-        var index=assetList.findIndex(i=>i.name==name);
-        var assetID=null;
-        if (index!=-1) assetID=assetList[index].id; 
-        //console.log("asset",assetList,input,option);
         this.assetDialog = new AssetSelectionView(assetList,input,option);
-        this.assetDialog.updateSelectedAsset(assetID);
+        var assetNameList=name.split(",");
+        console.log("openAsset",name,assetNameList);
+        var assetIDList=[];
+        assetNameList.forEach(name=>{
+            var index=assetList.findIndex(i=>i.name==name);
+            console.log(assetList,name);
+            assetIDList.push(assetList[index].id);
+        })
+        this.assetDialog.updateSelectedAsset(assetIDList); // one or more selected asset elements
+
         var editorFrame=document.querySelector(".editor-frame-root");
         editorFrame.appendChild(this.assetDialog.html);
     }
 
     selectAsset(assetID){
-        this.assetDialog.updateSelectedAsset(assetID);
+        var assetIDList=[];
+        assetIDList[0]=assetID;
+        this.assetDialog.updateSelectedAsset(assetIDList);
     }
 
     addAsset(asset,option){
         console.log("editor addAsset",option);
-        var assetView = new AssetView(option);
-        assetView.addView(asset);
+        var assetView = new AssetView(asset,option);
+      //  assetView.addView(asset);
         this.model.addAsset(asset,option);
         this.assetDialog.addAsset(assetView);
     }
