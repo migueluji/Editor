@@ -103,7 +103,6 @@ class ActorPropertiesSpriteView {
 	}
 
 	onClickImageButton(){
-	//	Command.openImagesCmd(); 
 		var input = this.html.querySelector("#image");
 		Command.openAssetsCmd(input,input.value,"Image");
 	}

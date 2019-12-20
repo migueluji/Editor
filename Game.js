@@ -6,12 +6,12 @@ class Game {
         this.displayWidth=game.displayWidth ||  800;
         this.displayHeight=game.displayHeight || 480;
         Object.assign(this,game);
-        if (this.soundList) this.soundList.forEach((sound,i) => this.soundList[i]=new Asset(sound));
+        if (this.soundList) this.soundList.forEach((sound,i) => this.soundList[i]=new Object(sound));
         // fuentes fijas
         this.fontList=["Arial","Arial Black","Courier New","Georgia","Helvetica","Impact","Tahoma","Times New Roman","Verdana"];
         if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]={"name":this.fontList[i]});
         // fin fuentes fijas
-        if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]=new Asset(font));
+        if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]=new Object(font));
         this.sceneList.forEach((scene,i) => this.sceneList[i]=new Scene(scene));
     }
 

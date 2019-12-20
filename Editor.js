@@ -317,9 +317,26 @@ class Editor {
         this.scriptCanvasView.updateSelectedNode(nodeID);
     }
 
+// TAGS
+    openTags(inputTags){
+        console.log("open tags",inputTags,inputTags.value);
+        this.inputTags=inputTags;
+        this.tagsDialog= new TagSelectionView(this.model.tagList,inputTags.value);
+        var editorFrame=document.querySelector(".editor-frame-root");
+        editorFrame.appendChild(this.tagsDialog.html);
+    }
+
+    addTag(tag){
+        this.model.tagList.push(tag);
+        this.tagsDialog.add(tag);
+    }
+
+    removeTag(tag){
+        var index = this.model.tagList.findIndex(i=>i==tag);
+        this.model.tagList.splice(index,1);  
+    }
 // ASSET
     openAssets(input,name,option){ // input (html field that makes the call) name (asset name) option (image, sound, font, animation)
-        
         var assetList=[];
         switch (option){
             case "Sound" : assetList=this.model.soundList; break;
@@ -328,12 +345,10 @@ class Editor {
         }
         this.assetDialog = new AssetSelectionView(assetList,input,option);
         var assetNameList=name.split(",");
-        console.log("openAsset",name,assetNameList);
         var assetIDList=[];
         assetNameList.forEach(name=>{
             var index=assetList.findIndex(i=>i.name==name);
-            console.log(assetList,name);
-            assetIDList.push(assetList[index].id);
+           if (index!=-1) assetIDList.push(assetList[index].id);
         })
         this.assetDialog.updateSelectedAsset(assetIDList); // one or more selected asset elements
 

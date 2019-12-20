@@ -34,7 +34,7 @@ class ParametersView  {
 						case "color" : type="color"; break;
 						case "backgroundColor" : type="color";break;
 						case "fill" : type="color"; break;
-						case "collider" : type="select"; option=["Circle","Box"];break;
+						case "collider" : type="select"; option=["Circle","Box","Polygon"];break;
 						case "tags" : type="select"; option=Command.getTagListCmd(); break;
 						case "style" : type="select"; option=["Normal","Italic","Bold","Italic-Bold"];break;
 						case "align" : type="select"; option=["Left","Center","Right"];break;

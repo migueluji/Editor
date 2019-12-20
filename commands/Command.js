@@ -63,6 +63,11 @@ class Command {
         this.editor.selectAsset(assetID);
     }
 
+// TAGS
+    static openTagsCmd(input){
+        this.editor.openTags(input);
+    }
+
 // GETS
     static getTagListCmd(){
         return(this.editor.getTagList());

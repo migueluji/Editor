@@ -51,7 +51,7 @@ class AssetSelectionView {
 
 	init(assetList,option){
 		if(option=="Animation") option="Image"; // the assetView is equal
-		console.log("init", assetList,option);
+	//	console.log("init", assetList,option);
 		assetList.forEach(asset=>{
 			var assetView= new AssetView(asset,option);
 			this.addAsset(assetView);
@@ -71,7 +71,7 @@ class AssetSelectionView {
 	}
 
 	updateSelectedAsset(assetIDList){ // assetIDList
-		console.log("update",this.selectedAsset,assetIDList);
+	//	console.log("update",this.selectedAsset,assetIDList);
 		assetIDList.forEach(assetID=>{
 			var founded = this.selectedAsset.findIndex(i=>i==assetID);
 			if (founded!=-1) 
@@ -85,10 +85,10 @@ class AssetSelectionView {
 		selectedAssets.forEach(element=>{
 			 element.classList.remove("image-list--selected"); // all selected are deleted
 		});			
-		console.log("upd",this.selectedAsset,assetIDList);
+	//	console.log("upd",this.selectedAsset,assetIDList);
 		this.selectedAsset.forEach(i=>{
 			var listItem=this.html.querySelector("#"+i);
-			console.log(i,listItem);
+	//		console.log(i,listItem);
 			if (listItem) listItem.firstChild.classList.add("image-list--selected");   // new selected are marked
 		})
 	}

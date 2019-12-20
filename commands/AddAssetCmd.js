@@ -3,7 +3,7 @@ class AddAssetCmd extends Command {
     constructor (name,option){
         super();
         this.option=option;
-        this.asset=new Asset({"id":Utils.id(), "name":name});
+        this.asset=new Object({"id":Utils.id(), "name":name});
         switch (option) {
             case "Image" : this.assetSelected=this.editor.selectedImage; break;
             case "Sound" : this.assetSelected=this.editor.selectedSound; break;
@@ -15,12 +15,12 @@ class AddAssetCmd extends Command {
 
     execute (){
         this.editor.addAsset(this.asset,this.option);
-        this.editor.selectAsset(this.asset.id);
+       // this.editor.selectAsset(this.asset.id);
     }
     
     undo(){
         this.editor.removeAsset(this.asset.id,this.option);
-        this.editor.selectAsset(this.assetSelected);
+       // this.editor.selectAsset(this.assetSelected);
     }
 
 }

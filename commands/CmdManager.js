@@ -7,6 +7,17 @@ class CmdManager {
         this.history= CmdManager.history;
     }
 
+// Tag
+    static addTagCmd(tag){
+        var cmd = new AddTagCmd(tag);
+        this.history.execute(cmd);
+    }
+
+    static removeTagCmd(tag){
+        var cmd = new RemoveTagCmd(tag);
+        this.history.execute(cmd);
+    }
+
 // Asset
     static addAssetCmd(name,option){
         var cmd = new AddAssetCmd(name,option);

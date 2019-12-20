@@ -43,12 +43,15 @@ class ActorPropertiesView {
 
 	updateActorProperty(property,value) {
 		var element=this.html.querySelector("#"+property);
-//		console.log(this.html,property,value,element);
-		(element.type==="checkbox") ? element.value=element.checked=Boolean(value) : element.value=value;
+		(element.type== "checkbox") ? element.value=element.checked=Boolean(value) : element.value=value;
 		if (property == "spriteOn") this.spriteView.onClickHandler();
 		if (property == "textOn") this.textView.onClickHandler();
 		if (property == "soundOn") this.soundView.onClickHandler();
 		if (property == "physicsOn") this.physicsView.onClickHandler();
+		if (property == "collider" || property=="style" || property=="align" || property=="type") { // select properties
+			element.querySelector(".mdc-select__selected-text").innerHTML=value;
+			element.querySelector("span").classList.add("mdc-floating-label--float-above");
+		}
 		element.focus();
 	}
 
@@ -72,8 +75,12 @@ class ActorPropertiesView {
 		var inputs=this.html.querySelectorAll("input");
 		inputs.forEach(element=>{
 			element.addEventListener("input",this.onChangeInputHandler.bind(this,element));
-		})
-
+		});
+		var selects=this.html.querySelectorAll(".mdc-select");
+		selects.forEach(select=>{
+			mdc.select.MDCSelect.attachTo(select);
+			select.addEventListener("MDCSelect:change",this.onChangeSelectHandler.bind(this,select));
+		});
 	}
 
 //Handlers
@@ -94,6 +101,14 @@ class ActorPropertiesView {
 		}
 		var sceneID=document.querySelector(".sceneselected").id;
 		var actorID=document.querySelector(".actorselected").id;
+		CmdManager.changeActorPropertyCmd(sceneID,actorID,this.property,this.value);
+	}
+
+	onChangeSelectHandler(element){
+		this.property=element.id;
+		var sceneID=document.querySelector(".sceneselected").id;
+		var actorID=document.querySelector(".actorselected").id;
+		this.value=element.querySelector('.mdc-list-item--selected').dataset.value;
 		CmdManager.changeActorPropertyCmd(sceneID,actorID,this.property,this.value);
 	}
 

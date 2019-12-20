@@ -18,18 +18,21 @@ class ActorPropertiesPhysicsView {
 			'</li>'+
 			'<div class="properties-panel">'+
 				'<div class="two-properties">'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="type" type="text" value="Kinematic" class="mdc-text-field__input" readonly>'+
-						'<label class="mdc-floating-label" for="text-field-filled">Type</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
-					'<div class="mdc-menu-surface--anchor menu-field">'+
-						'<div id="menuType" class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
-							'<ul class="mdc-list" role="menu" aria-hidden="true">'+
-								'<li id="kinematic" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Kinematic</li>'+
-								'<li id="dynamic" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Dynamic</li>'+
-								'<li id="static" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Static</li>'+
-							'</ul>'+
+					'<div style="width:50%; margin-top:4px">'+
+						'<div id="type" type="text" class="mdc-select">'+
+							'<div class="mdc-select__anchor" style="width:100%">'+
+								'<i class="mdc-select__dropdown-icon"></i>'+
+								'<div class="mdc-select__selected-text"></div>'+
+								'<span class="mdc-floating-label mdc-floating-label--float-above">Align</span>'+
+								'<div class="mdc-line-ripple"></div>'+
+							'</div>'+
+							'<div class="mdc-select__menu mdc-menu mdc-menu-surface" style="width:100%">'+
+								'<ul class="mdc-list">'+
+									'<li class="mdc-list-item" data-value="Kinematic">Kinematic</li>'+
+									'<li class="mdc-list-item" data-value="Dynamic">Dynamic</li>'+
+									'<li class="mdc-list-item" data-value="Static">Static</li>'+
+								'</ul>'+
+							'</div>'+
 						'</div>'+
 					'</div>'+
 					'<div class="mdc-form-field">'+
@@ -98,29 +101,9 @@ class ActorPropertiesPhysicsView {
 		physicsOn.addEventListener("click",this.onClickHandler.bind(this));
 
 		this.html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));
-
-		this.html.querySelector("#kinematic").addEventListener("click",this.changeInputHandler.bind(this,"type","kinematic"));
-		this.html.querySelector('#dynamic').addEventListener("click",this.changeInputHandler.bind(this,"type","dynamic"));
-		this.html.querySelector('#static').addEventListener("click",this.changeInputHandler.bind(this,"type","static"));
-		this.menuType = mdc.menu.MDCMenu.attachTo(this.html.querySelector("#menuType"));
-		this.html.querySelector("#type").addEventListener("click",this.menuHandler.bind(this,this.menuType));
 	}
 
 // Handlers
-	menuHandler(menu){
-		menu.open=true;
-	}
-
-	changeInputHandler(field,style){
-		var input=this.html.querySelector("#"+field);
-		input.value=style;
-		if ("createEvent" in document) {
-			var evt = document.createEvent("HTMLEvents");
-			evt.initEvent("change", false, true);
-			input.dispatchEvent(evt);
-		}
-	}
-
 	onClickHandler(){
 		(this.html.querySelector("#physicsOn").checked) ?	this.html.classList.remove("properties-section--disable"):
 														this.html.classList.add("properties-section--disable");

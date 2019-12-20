@@ -51,9 +51,9 @@ class DisplayActor extends PIXI.Container {
         const text = new PIXI.Text(newText, style);
         var pivot={x:0,y:0};
         switch (actor.align) {
-            case "left": pivot={x:-w/2,y:text.height/2} ;break;
-            case "right": pivot={x:w/2-text.width,y:text.height/2}; break; 
-            case "center": pivot={x:-text.width/2,y:text.height/2}; break; 
+            case "Left": pivot={x:-w/2,y:text.height/2} ;break;
+            case "Right": pivot={x:w/2-text.width,y:text.height/2}; break; 
+            case "Center": pivot={x:-text.width/2,y:text.height/2}; break; 
         }
         text.position={x:pivot.x+actor.offsetX,y:pivot.y+actor.offsetY};
         text.scale.y=-1;
@@ -62,7 +62,7 @@ class DisplayActor extends PIXI.Container {
 
     createSprite(actor,texture){
         this.tilingSprite = new PIXI.TilingSprite(texture);
-        console.log(actor);
+  //      console.log(actor);
       
         (actor.spriteOn) ? this.tilingSprite.alpha=actor.opacity : this.tilingSprite.alpha=0;
         if (actor.sleeping && actor.spriteOn) this.tilingSprite.alpha=0.5;
