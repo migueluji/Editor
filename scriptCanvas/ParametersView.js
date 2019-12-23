@@ -33,6 +33,7 @@ class ParametersView  {
 						case "font" : type="file"; option="Font";break;
 						case "color" : type="color"; break;
 						case "text" : type="text"; break;
+						case "tags" : type="tags"; break;
  						case "backgroundColor" : type="color";break;
 						case "fill" : type="color"; break;
 						case "collider" : type="select"; option=["Circle","Box","Polygon"];break;

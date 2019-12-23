@@ -10,7 +10,8 @@ class Editor {
         this.previousNodeSelected=null;
         
         //App Bar
-        this.appBarView=new AppBarView(gameModel.sceneList[0].name);
+        if (gameModel.sceneList.length==0) this.appBarView=new AppBarView("Untitle"); 
+        else this.appBarView=new AppBarView(gameModel.sceneList[0].name);
         this.view.addView(this.appBarView.html);
 
         //Drawer 
@@ -319,9 +320,8 @@ class Editor {
 
 // TAGS
     openTags(inputTags){
-        console.log("open tags",inputTags,inputTags.value);
-        this.inputTags=inputTags;
-        this.tagsDialog= new TagSelectionView(this.model.tagList,inputTags.value);
+        this.input=inputTags;
+        this.tagsDialog= new TagSelectionView(this.model.tagList,this.input);
         var editorFrame=document.querySelector(".editor-frame-root");
         editorFrame.appendChild(this.tagsDialog.html);
     }

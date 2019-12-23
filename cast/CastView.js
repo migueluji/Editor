@@ -52,10 +52,11 @@ class CastView {
 		while (element.firstChild){ // elimina todos los elementos de la lista
 			element.removeChild(element.firstChild);
 		};
-		cast.forEach(actor=>{ // añade los nuevos elementos a la lista
-			var actorView = new ActorView();
-			actorView.addView(actor);
-			this.addActor(actorView,0);
-		})
+		if (cast) 
+			cast.forEach(actor=>{ // añade los nuevos elementos a la lista
+				var actorView = new ActorView();
+				actorView.addView(actor);
+				this.addActor(actorView,0);
+			})
 	}
 }

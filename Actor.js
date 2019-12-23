@@ -32,7 +32,7 @@ class Actor {
             align:this.align || "Left", offsetX:this.offsetX || 0,
             offsetY:this.offsetY || 0,
             // Sound
-            soundOn:this.soundOn || false, sound:this.sound || undefined,
+            soundOn:this.soundOn || false, sound:this.sound || "",
             start:this.start || 0, volume: this.volume,
             pan:this.pan || 0 , loop:this.loop || false,
             // Physics

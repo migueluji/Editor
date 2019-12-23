@@ -1,6 +1,6 @@
 class TagSelectionView {
 
-    constructor(tagList,value) {  
+    constructor(tagList,input) {  
 		this.html = document.createElement("div");
 		this.html.className +="dialog-full-screen";
 		this.html.innerHTML =
@@ -25,8 +25,9 @@ class TagSelectionView {
 						'</div>'+
 					'</div>'+
 				'</div>';
-		this.init(tagList,value);
+		this.init(tagList,input.value);
 		this.selectedAsset=[];
+		this.input=input;
 
 		this.html.querySelector("#addbutton").addEventListener("click",this.addTagHandler.bind(this));
 		this.html.addEventListener("click",this.cancelBackgroundHandler.bind(this));
@@ -35,16 +36,16 @@ class TagSelectionView {
 	}
 
 	init(tagList,value){
-		console.log(tagList,value);
-		var myTags = value.split(",");
-		var list = this.html.querySelector("ul");
-
-		tagList.forEach(tag=>{
-			var li =new TagView(tag);
-			list.appendChild(li.html);
-			var founded = myTags.findIndex(i=>i==tag);
-			if (founded!=-1) li.html.querySelector("input").checked=true;
-		})
+		if (tagList){
+			var myTags = value.split(",");
+			var list = this.html.querySelector("ul");
+			tagList.forEach(tag=>{
+				var li =new TagView(tag);
+				list.appendChild(li.html);
+				var founded = myTags.findIndex(i=>i==tag);
+				if (founded!=-1) li.html.querySelector("input").checked=true;
+			})
+		}
 	}	
 
 	add (tag){
@@ -70,10 +71,16 @@ class TagSelectionView {
 				if (this.tags!="") this.tags += ","+i.querySelector("p").innerText;
 				else this.tags = i.querySelector("p").innerText;
 		})
-		var sceneSelected=document.querySelector(".sceneselected").id;
-		var actorSelected=document.querySelector(".actorselected").id;
-		CmdManager.changeActorPropertyCmd(sceneSelected,actorSelected,"tags",this.tags);
-		document.querySelector("#tags").focus();
+
+		this.input.value=this.tags;
+		if ("createEvent" in document) {
+			var event = document.createEvent("HTMLEvents");
+			if (this.input.id=="Value") event.initEvent("input", false, true);
+			else event.initEvent("change", false, true);
+			this.input.dispatchEvent(event);
+			this.input.focus();
+	   }
+
 	}
 
 	cancelBackgroundHandler(e){

@@ -1,30 +1,33 @@
 class Game {
 	
     constructor(game) {
-        this.name=game.name || "Untitled Game"
-        this.backgroundColor=game.backgroundColor || "#ffffff";
-        this.displayWidth=game.displayWidth ||  800;
-        this.displayHeight=game.displayHeight || 480;
+        this.name="Untitled Game";
+        this.tagList=this.fontList=this.soundList=this.imageList=this.sceneList=[];
+        Object.assign(this,this.properties);// init properties
         Object.assign(this,game);
         if (this.soundList) this.soundList.forEach((sound,i) => this.soundList[i]=new Object(sound));
         // fuentes fijas
         this.fontList=["Arial","Arial Black","Courier New","Georgia","Helvetica","Impact","Tahoma","Times New Roman","Verdana"];
-        if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]={"name":this.fontList[i]});
+        if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]={id:Utils.id(),name:this.fontList[i]});
         // fin fuentes fijas
         if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]=new Object(font));
-        this.sceneList.forEach((scene,i) => this.sceneList[i]=new Scene(scene));
+        if (this.sceneList.length!=0) this.sceneList.forEach((scene,i) => this.sceneList[i]=new Scene(scene));
+        else {
+            var scene= new Scene({"id":Utils.id(),"name":"Scene 1","actorList":[]});
+            this.sceneList.push(scene);
+        }
     }
 
     get properties(){
         var obj={
             // Settings
-            displayWidth:this.displayWidth, displayHeight:this.displayHeight, 
-            cameraX:this.cameraX, cameraY:this.cameraY, cameraAngle:this.cameraAngle, cameraZoom:this.cameraZoom,
-            backgroundColor:this.backgroundColor,
+            displayWidth:this.displayWidth || 800, displayHeight:this.displayHeight || 480, 
+            cameraX:this.cameraX || 0, cameraY:this.cameraY || 0, cameraAngle:this.cameraAngle || 0, cameraZoom:this.cameraZoom || 1,
+            backgroundColor:this.backgroundColor || "#ffffff",
             // Sound
-            soundOn:this.soundOn, soundtrack:this.soundtrack, volume:this.volume, start:this.start, pan:this.pan, loop:this.loop, 
+            soundOn:this.soundOn || false, soundtrack:this.soundtrack || "", volume:this.volume || 1, start:this.start || 0, pan:this.pan || 0, loop:this.loop || false, 
             // Physics
-            physicsOn:this.physicsOn, gravityX: this.gravityX, gravityY:this.gravityY
+            physicsOn:this.physicsOn || true, gravityX: this.gravityX || 0, gravityY:this.gravityY || -9.8
         }
         return(obj);
     }

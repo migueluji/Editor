@@ -21,7 +21,8 @@ class DrawerScenesView {
 			sceneView.addView(scene);
 			this.addScene(sceneView,scenePos);
 		});	
-		this.updateSelectedScene(sceneList[0].id);
+		console.log(sceneList);
+		if (sceneList[0]) this.updateSelectedScene(sceneList[0].id);
 	}
 
   	addScene(sceneView,scenePos) {

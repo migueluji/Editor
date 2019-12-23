@@ -6,7 +6,7 @@ class FieldView  {
 		switch(true){
 			case type == "boolean" : this.boolean(key,value);break;
 			case type == "select" : this.select(key,value,option);break;
-			case (type == "input") || (type=="file") || (type=="color") || (type=="text"): this.input(type,key,value,option);break;
+			case (type == "input") || (type=="file") || (type=="color") || (type=="text") || (type=="tags"): this.input(type,key,value,option);break;
 		}
 	}
 
@@ -107,6 +107,7 @@ class FieldView  {
 			'</div>';	
 		this.input = this.html.querySelector("input");
 		this.input.spellcheck=false;
+		this.input.id="Value";
 		(value!=null && value[0]=="#") ? this.input.type="color" : this.input.type="text"; 
 		this.input.value=value;
 		this.input.id=key;
@@ -124,6 +125,9 @@ class FieldView  {
 			case "text": 
 				icon.innerHTML="add_comment";
 				button.addEventListener("click",this.openPropertiesHandler.bind(this));break;
+			case "tags" :
+				icon.innerHTML="label";
+				button.addEventListener("click",this.opentTagsHandler.bind(this));break;
 			case "color": 
 				icon.style.display="none"; break;
 			default:			
@@ -160,15 +164,19 @@ class FieldView  {
 
 	openPropertiesHandler(){
 		var input=this.html.querySelector("input");
-		input.id="Value";
 		var dialog = new ChoosePropertyView(input);
 		var editorFrame=document.querySelector(".editor-frame-root");
 		editorFrame.appendChild(dialog.html);
 	}
 
+	opentTagsHandler(){
+		Command.openTagsCmd(this.input);
+	}
+
 	loadAssetHandler(option){
 		Command.openAssetsCmd(this.input,this.input.value,option);
 	}
+
 }
 
 

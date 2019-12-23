@@ -143,7 +143,8 @@ class AssetSelectionView {
 
 		if ("createEvent" in document) {
 		 	var event = document.createEvent("HTMLEvents");
-		 	event.initEvent("input", false, true);
+			 if (this.input.id=="Value") event.initEvent("input", false, true);
+			 else event.initEvent("change", false, true);
 			this.input.dispatchEvent(event);
 			this.input.focus();
 		}

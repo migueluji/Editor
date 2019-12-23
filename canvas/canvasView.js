@@ -1,7 +1,10 @@
 class CanvasView {
 
     constructor(game,sceneIndex) {  
-        this.actorList=game.sceneList[sceneIndex].actorList;
+        console.log(game,sceneIndex);
+        if (game.scenelist) this.actorList=game.sceneList[sceneIndex].actorList;
+        else this.actorList=[];
+        this.drawerOffset=256;
 		this.html = document.createElement("div");
         this.html.className +="canvas";
         this.html.style.display="block";
@@ -46,15 +49,15 @@ class CanvasView {
     }
 
     loadImages(imageList){
-        this.loader = new PIXI.Loader("./images",imageList.length);
-        this.loader.add(imageList);
-        this.loader.onLoad.add((loader,resource) => {
-            console.log(resource.name, " loaded");
-        });
-        this.loader.load((loader, resources)=>{
-            console.log("Load finished!");
-            this.initApp();
-        });
+            this.loader = new PIXI.Loader("./images");
+     //       this.loader.add(imageList);
+            this.loader.onLoad.add((loader,resource) => {
+                console.log(resource.name, " loaded");
+            });
+            this.loader.load((loader, resources)=>{
+                console.log("Load finished!");
+                this.initApp();
+            });
     }
 
     initApp(){
@@ -70,8 +73,8 @@ class CanvasView {
             .on("pointerupoutside",this.mouseStageUp.bind(this)) 
             .on("pointerup",this.mouseStageUp.bind(this));     
 
-        var drawerApp=document.querySelector(".mdc-drawer-app-content");
-        this.drawerOffset = drawerApp.getBoundingClientRect().x;
+   //     var drawerApp=document.querySelector(".mdc-drawer-app-content");
+     //   this.drawerOffset = drawerApp.getBoundingClientRect().x;
         this.app.renderer.resize(window.innerWidth,window.innerHeight);
         this.initStage={x:window.innerWidth/2.0-this.drawerOffset,y:window.innerHeight/2.0-32}
         this.app.stage.x =this.initStage.x ;
