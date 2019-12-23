@@ -6,7 +6,7 @@ class FieldView  {
 		switch(true){
 			case type == "boolean" : this.boolean(key,value);break;
 			case type == "select" : this.select(key,value,option);break;
-			case (type == "input") || (type=="file") || (type=="color"): this.input(type,key,value,option);break;
+			case (type == "input") || (type=="file") || (type=="color") || (type=="text"): this.input(type,key,value,option);break;
 		}
 	}
 
@@ -117,20 +117,22 @@ class FieldView  {
 		
 		var icon=button.querySelector('i');
 		switch (type){
-			case "file": icon.innerHTML="folder";break;
-			case "color": icon.style.display="none";break;
-		}
-		if (type=="file"){
-			this.input.setAttribute("readonly","readonly");
-			button.addEventListener("click",this.loadAssetHandler.bind(this,option));
-		}
-		else{
-			button.addEventListener("click",this.menuHandler.bind(this));
-			this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
-			var menuItems=this.html.querySelectorAll("li");
-			menuItems.forEach(item=>{
-				item.addEventListener("click",this.menuItemHandler.bind(this,item.id));
-			});
+			case "file": 
+				icon.innerHTML="folder";
+				this.input.setAttribute("readonly","readonly");
+				button.addEventListener("click",this.loadAssetHandler.bind(this,option));break;
+			case "text": 
+				icon.innerHTML="add_comment";
+				button.addEventListener("click",this.openPropertiesHandler.bind(this));break;
+			case "color": 
+				icon.style.display="none"; break;
+			default:			
+				button.addEventListener("click",this.menuHandler.bind(this));
+				this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
+				var menuItems=this.html.querySelectorAll("li");
+				menuItems.forEach(item=>{
+					item.addEventListener("click",this.menuItemHandler.bind(this,item.id));
+				}); break;
 		}
 	}
 
@@ -154,6 +156,14 @@ class FieldView  {
 
 	menuHandler(){
 		this.menu.open=true;
+	}
+
+	openPropertiesHandler(){
+		var input=this.html.querySelector("input");
+		input.id="Value";
+		var dialog = new ChoosePropertyView(input);
+		var editorFrame=document.querySelector(".editor-frame-root");
+		editorFrame.appendChild(dialog.html);
 	}
 
 	loadAssetHandler(option){

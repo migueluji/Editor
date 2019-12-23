@@ -17,11 +17,14 @@ class ActorPropertiesTextView {
 				'</div>'+
 			'</li>'+
 			'<div class="properties-panel">'+
-				'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-					'<input id="text" type="text" value="Write anything..." class="mdc-text-field__input">'+
-					'<label class="mdc-floating-label" for="text-field-filled">Text</label>'+
-						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-				'</div>'+	
+				'<div class="mdc-text-field mdc-text-field--with-trailing-icon mdc-ripple-upgraded text-field--full">'+
+					'<input id="text" type="text" value="value" class="mdc-text-field__input">'+ // text
+						'<label class="mdc-floating-label" for="text-field-filled">Text</label>'+
+						'<button id="textbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
+							'<i class="material-icons mdc-button_icon">add_comment</i>'+
+						'</button>'+
+					'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
+				'</div>'+
 				'<div class="mdc-text-field mdc-text-field--with-trailing-icon mdc-ripple-upgraded text-field--full">'+
 					'<input id="font" type="text" value="value" class="mdc-text-field__input">'+ // font file
 						'<label class="mdc-floating-label" for="text-field-filled">Font</label>'+
@@ -99,6 +102,9 @@ class ActorPropertiesTextView {
 		var fontButton=this.html.querySelector("#fontbutton");
 		fontButton.addEventListener("click",this.onClickFontButton.bind(this));
 
+		var textButton=this.html.querySelector("#textbutton");
+		textButton.addEventListener("click",this.onClickTextButton.bind(this));
+
 		this.html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));
 
 	}
@@ -112,6 +118,13 @@ class ActorPropertiesTextView {
 	onClickFontButton(){
 		var input = this.html.querySelector("#font");
 		Command.openAssetsCmd(input,input.value,"Font");
+	}
+
+	onClickTextButton(){
+		var input=this.html.querySelector("#text");
+		var dialog = new ChoosePropertyView(input);
+		var editorFrame=document.querySelector(".editor-frame-root");
+		editorFrame.appendChild(dialog.html);
 	}
 
 	propertyGroupHandler(){

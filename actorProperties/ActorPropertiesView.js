@@ -73,8 +73,8 @@ class ActorPropertiesView {
 			mdc.textField.MDCTextField.attachTo(element);
 		}); 
 		var inputs=this.html.querySelectorAll("input");
-		inputs.forEach(element=>{
-			element.addEventListener("input",this.onChangeInputHandler.bind(this,element));
+		inputs.forEach(input=>{
+			input.addEventListener("change",this.onChangeInputHandler.bind(this,input));
 		});
 		var selects=this.html.querySelectorAll(".mdc-select");
 		selects.forEach(select=>{
@@ -91,13 +91,13 @@ class ActorPropertiesView {
 		dialog.html.querySelector("#propertyname").focus();
 	}
 
-	onChangeInputHandler(element){
-		this.property=element.id;
-		switch (element.type){
-			case "checkbox": 	this.value=Boolean(element.checked); break;
-			case "number" : 	this.value=Number(element.value); break;
-			case "text" : 		this.value=String(element.value).trim(); break;
-			case "color" : 		this.value=String(element.value); break;
+	onChangeInputHandler(input){
+		this.property=input.id;
+		switch (input.type){
+			case "checkbox": 	this.value=Boolean(input.checked); break;
+			case "number" : 	this.value=Number(input.value); break;
+			case "text" : 		this.value=String(input.value).trim(); break;
+			case "color" : 		this.value=String(input.value); break;
 		}
 		var sceneID=document.querySelector(".sceneselected").id;
 		var actorID=document.querySelector(".actorselected").id;

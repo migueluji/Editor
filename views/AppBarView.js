@@ -26,7 +26,7 @@ class AppBarView {
   }
 
 	updateSceneName(sceneName) {
-		this.html.querySelector("#sceneName").innerText=sceneName;
+		this.html.querySelector("#sceneName").innerText=sceneName.split("_").join(" ");;
 	}
 	
  	drawerToogle() {

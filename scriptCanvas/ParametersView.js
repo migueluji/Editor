@@ -32,7 +32,8 @@ class ParametersView  {
 						case "sound" : type="file"; option="Sound";break;
 						case "font" : type="file"; option="Font";break;
 						case "color" : type="color"; break;
-						case "backgroundColor" : type="color";break;
+						case "text" : type="text"; break;
+ 						case "backgroundColor" : type="color";break;
 						case "fill" : type="color"; break;
 						case "collider" : type="select"; option=["Circle","Box","Polygon"];break;
 						case "tags" : type="select"; option=Command.getTagListCmd(); break;

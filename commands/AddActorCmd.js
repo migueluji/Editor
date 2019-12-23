@@ -11,11 +11,11 @@ class AddActorCmd extends Command {
 
     newName (actorPos){
         actorPos = actorPos+1;
-        var name="Actor "+actorPos;
+        var name="Actor_"+actorPos;
         var actorList = this.editor.model.sceneList[this.editor.model.sceneList.findIndex(i=> i.id == this.sceneID)].actorList;
          while( actorList && actorList.findIndex(i=>i.name==name)!== -1){
             actorPos++;
-            name="Actor "+actorPos;
+            name="Actor_"+actorPos;
         }
         return name;
     }

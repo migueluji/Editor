@@ -37,7 +37,7 @@ class ActorView {
    
   addView(actor) {
 		this.html.id=actor.id;
-		this.html.querySelector(".mdc-list-item__text").innerHTML=actor.name;
+		this.html.querySelector(".mdc-list-item__text").innerHTML=actor.name.split("_").join(" ");
 		if (actor.image){// miodifica el icono por defecto por la imagen del actor
 			var span=this.html.querySelector(".mdc-list-item__graphic");
 			span.innerHTML="";

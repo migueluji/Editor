@@ -34,7 +34,7 @@ class ScriptView {
    
   addView(script) {
 		this.html.id=script.id;
-		this.html.querySelector(".mdc-list-item__text").innerHTML=script.name;
+		this.html.querySelector(".mdc-list-item__text").innerHTML=script.name.split("_").join(" ");
 	}
 
 // Handlers

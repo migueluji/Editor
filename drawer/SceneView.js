@@ -32,7 +32,7 @@ class SceneView {
     
   addView(scene) {
 		this.html.id=scene.id;
-		this.html.querySelector(".mdc-list-item__text").innerHTML=scene.name;
+		this.html.querySelector(".mdc-list-item__text").innerHTML=scene.name.split("_").join(" ");;
 	}
 	  
 // Handlers

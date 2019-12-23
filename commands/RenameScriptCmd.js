@@ -5,7 +5,7 @@ class RenameScriptCmd extends Command {
         this.sceneID=sceneID;
         this.actorID=actorID;
         this.scriptID=scriptID;
-        this.scriptName=scriptName;
+        this.scriptName=scriptName.split(" ").join("_");
         var scenePos=this.editor.model.sceneList.findIndex(i => i.id == sceneID);
         var actorPos=this.editor.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID);
         var scriptPos=this.editor.model.sceneList[scenePos].actorList[actorPos].scriptList.findIndex(i=>i.id==scriptID);

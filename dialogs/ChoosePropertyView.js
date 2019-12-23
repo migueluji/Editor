@@ -57,10 +57,12 @@ class ChoosePropertyView {
  	 }
 	
 	okButtonHandler(){
-		this.input.value += this.parameters.Element+"."+this.parameters.Property;
+		if (this.input.id=="text" || this.input.id=="Value") this.input.value +="${"+this.parameters.Element+"."+this.parameters.Property+"}";
+		else this.input.value += this.parameters.Element+"."+this.parameters.Property;
 		if ("createEvent" in document) {
 			var event = document.createEvent("HTMLEvents");
-			event.initEvent("input", false, true);
+			if (this.input.id=="Value") event.initEvent("input", false, true);
+			else event.initEvent("change", false, true);
 			this.input.dispatchEvent(event);
 			this.input.focus();
 	   }

@@ -12,13 +12,13 @@ class AddScriptCmd extends Command {
 
     newName (scriptPos){
         scriptPos = scriptPos+1;
-        var name="Script "+scriptPos;
+        var name="Script_"+scriptPos;
         var sceneIndex=this.editor.model.sceneList.findIndex(i=> i.id == this.sceneID);
         var actorIndex=this.editor.model.sceneList[sceneIndex].actorList.findIndex(i=>i.id==this.actorID);
         var scriptList = this.editor.model.sceneList[sceneIndex].actorList[actorIndex].scriptList;
         while( scriptList && scriptList.findIndex(i=>i.name==name)!== -1){
             scriptPos++;
-            name="Script "+scriptPos;
+            name="Script_"+scriptPos;
         }
         return name;
     }

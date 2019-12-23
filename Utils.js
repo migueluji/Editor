@@ -51,6 +51,16 @@ class Utils {
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
     }
 
+    static keyPressHandler(input,e){
+        var chr = String.fromCharCode(e.which);
+        var name= input.value;
+        var filter=" abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        if ((filter.indexOf(chr) < 0) || (name.length >= 20)){
+          e.preventDefault();
+        }	
+        return true;
+    }
+
     static scaleToWindow(canvas, backgroundColor) {
         var scaleX, scaleY, scale, center;
       
