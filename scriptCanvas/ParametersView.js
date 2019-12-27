@@ -74,7 +74,7 @@ class ParametersView  {
 	}
 
 	changeInputHandler(input){
-		console.log("change input",input);
+	//	console.log("change input",input);
 		var value=null;
 		switch (input.type){
 			case "checkbox": value= Boolean(input.checked);break;
