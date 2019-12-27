@@ -2,7 +2,11 @@ class Game {
 	
     constructor(game) {
         this.name="Untitled Game";
-        this.tagList=this.fontList=this.soundList=this.imageList=this.sceneList=[];
+        this.tagList=[];
+        this.fontList=[];
+        this.soundList=[];
+        this.imageList=[];
+        this.sceneList=[];
         Object.assign(this,this.properties);// init properties
         Object.assign(this,game);
         if (this.soundList) this.soundList.forEach((sound,i) => this.soundList[i]=new Object(sound));
@@ -73,23 +77,19 @@ class Game {
     } 
     
     addAsset(asset,option) {
-        var assetList=[];
         switch (option){
-            case "Image" : assetList=this.imageList; break;
-            case "Sound" : assetList=this.soundList; break;
-            case "Font"  : assetList=this.fontList; break;
+            case "Sound" : this.soundList.push(asset); break;
+            case "Font"  : this.fontList.push(asset); break;
+            default : this.imageList.push(asset); break;
         }
-        assetList.push(asset);
     } 
 
     removeAsset(assetID,option) {
-        var assetList=[];
         switch (option){
-            case "Image" : assetList=this.imageList; break;
-            case "Sound" : assetList=this.soundList; break;
-            case "Font"  : assetList=this.fontList; break;
+            case "Sound" : this.soundList.splice(this.soundList.findIndex(i => i.id == assetID),1); break;
+            case "Font"  : this.fontList.splice(this.fontList.findIndex(i => i.id == assetID),1); break;
+            default : this.imageList.splice(this.imageList.findIndex(i => i.id == assetID),1); break;
         }
-        assetList.splice(assetList.findIndex(i => i.id == assetID),1);
     } 
 
 

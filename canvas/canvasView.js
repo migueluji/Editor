@@ -1,9 +1,7 @@
 class CanvasView {
 
     constructor(game,sceneIndex) {  
-        console.log(game,sceneIndex);
-        if (game.scenelist) this.actorList=game.sceneList[sceneIndex].actorList;
-        else this.actorList=[];
+        this.actorList=game.sceneList[sceneIndex].actorList;
         this.drawerOffset=256;
 		this.html = document.createElement("div");
         this.html.className +="canvas";
@@ -45,19 +43,30 @@ class CanvasView {
         this.displayActor=null;
         this.mouseDown=false;
         this.diff={x:0,y:0} 
-        this.loadImages(game.imageList);
+        this.loadInitImages(game.imageList);
     }
 
-    loadImages(imageList){
+    loadInitImages(imageList){
             this.loader = new PIXI.Loader("./images");
-     //       this.loader.add(imageList);
+            this.loader.add(imageList);
             this.loader.onLoad.add((loader,resource) => {
-                console.log(resource.name, " loaded");
+                console.log(resource.name," loaded");
             });
-            this.loader.load((loader, resources)=>{
+            this.loader.load(()=>{
                 console.log("Load finished!");
                 this.initApp();
             });
+    }
+
+    loadImage(image){
+        while(this.loader.loading);
+        this.loader.add(image);
+    }
+
+    deleteImage (image){
+        while(this.loader.loading);
+        this.loader.resources[image].texture.destroy(true);
+        delete this.loader.resources[image];
     }
 
     initApp(){
@@ -73,8 +82,6 @@ class CanvasView {
             .on("pointerupoutside",this.mouseStageUp.bind(this)) 
             .on("pointerup",this.mouseStageUp.bind(this));     
 
-   //     var drawerApp=document.querySelector(".mdc-drawer-app-content");
-     //   this.drawerOffset = drawerApp.getBoundingClientRect().x;
         this.app.renderer.resize(window.innerWidth,window.innerHeight);
         this.initStage={x:window.innerWidth/2.0-this.drawerOffset,y:window.innerHeight/2.0-32}
         this.app.stage.x =this.initStage.x ;
@@ -92,7 +99,7 @@ class CanvasView {
     }
 
     update(actorList,gameProperties){
-
+   //     console.log("update",actorList,gameProperties);
         this.actorList=actorList;
         this.gameProperties=gameProperties;
 

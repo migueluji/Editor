@@ -61,8 +61,9 @@ class DisplayActor extends PIXI.Container {
     }
 
     createSprite(actor,texture){
+     //   console.log(actor,texture);
         this.tilingSprite = new PIXI.TilingSprite(texture);
-  //      console.log(actor);
+     //  console.log(actor);
       
         (actor.spriteOn) ? this.tilingSprite.alpha=actor.opacity : this.tilingSprite.alpha=0;
         if (actor.sleeping && actor.spriteOn) this.tilingSprite.alpha=0.5;
@@ -235,7 +236,7 @@ class DisplayActor extends PIXI.Container {
             case "scalingNoUniform" : 
                 this.removeGizmo();
                 if(this.flipX)  this.tilingSprite.scale={x:-this.tilingSprite.scale.x,y:this.tilingSprite.scale.y};
-                console.log(this.f)
+            //    console.log(this.f)
                 this.x=0;this.y=0;this.angle=0;
                 var giro=1;
                 var diff={x:mouseMove.x-this.initPivot.x,y:mouseMove.y-this.initPivot.y}; // quadrant x,y
@@ -384,8 +385,8 @@ class DisplayActor extends PIXI.Container {
                     if (k!=-1) { // property & element
                         textElement=string.substring(0,k);
                         textProperty=string.substring(k+1,string.length);
-                        if (textElement=="game") { // game property
-                            if (game[textProperty]) newValue=game[textProperty];
+                        if (textElement=="Game") { // game property
+                            if (game[textProperty]!=null) newValue=game[textProperty];
                             else newValue= '"error '+textElement + "."+textProperty+": property doesn't exist"+'"';
                         }
                         else { // actor cast property

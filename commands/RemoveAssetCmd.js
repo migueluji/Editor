@@ -5,12 +5,9 @@ class RemoveAssetCmd extends Command {
         this.option=option;
         var assetList;
         switch (option) {
-            case "Image" : 
-                assetList=this.editor.model.imageList; break;
-            case "Sound" : 
-                assetList=this.editor.model.soundList; break;
-            case "Font" : 
-                assetList=this.editor.model.fontList; break;
+            case "Sound" : assetList=this.editor.model.soundList; break;
+            case "Font" : assetList=this.editor.model.fontList; break;
+            default : assetList=this.editor.model.imageList; break;
         }
         this.pos=assetList.findIndex(i => i.id == assetID);
         this.asset=assetList[this.pos];
@@ -20,12 +17,12 @@ class RemoveAssetCmd extends Command {
     
     execute (){
         this.editor.removeAsset(this.asset.id,this.option);
-        this.editor.selectAsset(null);
+      //  this.editor.selectAsset(null);
     }
     
     undo(){
         this.editor.addAsset(this.asset,this.option);
-        this.editor.selectAsset(this.asset.id);
+      //  this.editor.selectAsset(this.asset.id);
     }
 
 }

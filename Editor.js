@@ -136,6 +136,7 @@ class Editor {
         var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
         this.model.sceneList[scenePos].addActor(actor,actorPos);
         this.selectScene(sceneID); //necesario para los comandos de deshacer
+        this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList);
         this.selectActor(actor.id);
     }
 
@@ -341,10 +342,12 @@ class Editor {
         switch (option){
             case "Sound" : assetList=this.model.soundList; break;
             case "Font"  : assetList=this.model.fontList; break;
-            default: assetList=this.model.imageList; break; // images and animations
+            default: assetList=this.model.imageList; ; break; // images and animations
         }
-        this.assetDialog = new AssetSelectionView(assetList,input,option);
-        var assetNameList=name.split(",");
+        console.log(assetList,input,option,this.canvasView);
+        this.assetDialog = new AssetSelectionView(assetList,input,option,this.canvasView);
+
+        var assetNameList=name.split(",");// selected asset (can include multiple names for animations)
         var assetIDList=[];
         assetNameList.forEach(name=>{
             var index=assetList.findIndex(i=>i.name==name);
@@ -354,6 +357,7 @@ class Editor {
 
         var editorFrame=document.querySelector(".editor-frame-root");
         editorFrame.appendChild(this.assetDialog.html);
+        this.openAssetsDialog=true;
     }
 
     selectAsset(assetID){
@@ -363,17 +367,43 @@ class Editor {
     }
 
     addAsset(asset,option){
-        console.log("editor addAsset",option);
-        var assetView = new AssetView(asset,option);
-      //  assetView.addView(asset);
+        if(!this.openAssetsDialog) { // for undo commands is necessary to open the asset dialog
+            var assetList=[];
+            switch (option){
+                case "Sound" : assetList=this.model.soundList; break;
+                case "Font"  : assetList=this.model.fontList; break;
+                default: assetList=this.model.imageList; ; break; // images and animations
+            }
+            this.openAssets(assetList,"",option);
+        }
         this.model.addAsset(asset,option);
+        if (option == "Image" || option == "Animation") this.canvasView.loadImage(asset.name);
+        var assetView = new AssetView(asset,option);
         this.assetDialog.addAsset(assetView);
     }
 
     removeAsset(assetID,option){
-        console.log("editor remove Asset",assetID,option);
+        if(!this.openAssetsDialog) { // for undo commands is necessary to open the asset dialog
+            var assetList=[];
+            switch (option){
+                case "Sound" : assetList=this.model.soundList; break;
+                case "Font"  : assetList=this.model.fontList; break;
+                default: assetList=this.model.imageList; ; break; // images and animations
+            }
+            this.openAssets(assetList,"",option);
+        }
+        if (option == "Image" || option == "Animation") { // update the loader
+            var index=this.model.imageList.findIndex(i=>i.id==assetID);
+            this.canvasView.deleteImage(this.model.imageList[index].name);
+        }
         this.model.removeAsset(assetID,option);
         this.assetDialog.removeAsset(assetID);
+    }
+
+    closeAsset(){
+        var node=document.querySelector(".dialog-full-screen");
+        node.parentNode.removeChild(node);
+        this.openAssetsDialog=false;
     }
 
 // SCRIPTING this.sceneID,this.actorID,this.scriptID,this.nodeID,this.if

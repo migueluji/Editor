@@ -57,7 +57,7 @@ class ChoosePropertyView {
  	 }
 	
 	okButtonHandler(){
-		if (this.input.id=="text" || this.input.id=="Value") this.input.value +="${"+this.parameters.Element+"."+this.parameters.Property+"}";
+		if (this.input.id=="text") this.input.value +="${"+this.parameters.Element+"."+this.parameters.Property+"}";
 		else this.input.value += this.parameters.Element+"."+this.parameters.Property;
 		if ("createEvent" in document) {
 			var event = document.createEvent("HTMLEvents");

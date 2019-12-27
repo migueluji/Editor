@@ -1,8 +1,8 @@
 class AssetSelectionView {
 
-    constructor(assetList,input,option) {  
+    constructor(assetList,input,option,canvasView) {  
 		this.input=input;
-	//	console.log("asset selection",input,input.value);
+		this.canvasView=canvasView;
 		this.assetList=assetList;
 		this.html = document.createElement("div");
 		this.html.className +="dialog-full-screen";
@@ -50,8 +50,8 @@ class AssetSelectionView {
 	}
 
 	init(assetList,option){
-		if(option=="Animation") option="Image"; // the assetView is equal
-	//	console.log("init", assetList,option);
+	//	if(option=="Animation") option="Image"; // the assetView is equal
+		console.log("init", assetList,option);
 		assetList.forEach(asset=>{
 			var assetView= new AssetView(asset,option);
 			this.addAsset(assetView);
@@ -64,10 +64,12 @@ class AssetSelectionView {
 		var i=0;
 		while (i<list.childNodes.length && name > list.childNodes[i].firstChild.nextSibling.textContent) i++;
 		list.insertBefore(assetView.html,list.childNodes[i]);
+		//this.assetList.push({"id":assetView.html.id,"name":name});
 	}
 
 	removeAsset(assetID){
 		this.html.querySelector("#"+assetID).remove();
+		//this.assetList.splice(this.assetList.findIndex(i => i.id == assetID),1);
 	}
 
 	updateSelectedAsset(assetIDList){ // assetIDList
@@ -95,9 +97,11 @@ class AssetSelectionView {
 
 // Handlers
 	uploadAssetHandler(e){
-		var element = this.html.querySelector("#files")
-		element.value="";
-		element.click();
+		var input = this.html.querySelector("#files")
+		if (this.option=="Sound") input.accept="audio/*";
+		else input.accept="image/*";
+		input.value="";
+		input.click();
 	}
 
 	fileBrowserHandler(evt){
@@ -118,45 +122,56 @@ class AssetSelectionView {
 				}
 			}
 		}
+		this.updateLoader();
 	}
 
 	removeAssetHandler(){
 		if (this.selectedAsset){ 
-			var text=document.querySelector("#"+this.selectedAsset).firstChild.nextSibling.textContent;
-			if (confirm('Are you sure you want to delete "'+text+'" asset?')){
+			var name=document.querySelector("#"+this.selectedAsset).firstChild.nextSibling.textContent;
+			if (confirm('Are you sure you want to delete "'+name+'" asset?')){;
 				CmdManager.removeAssetCmd(this.selectedAsset,this.option);
+			}
+		}
+		this.updateLoader();
+	}
+
+	okButtonHandler(){		
+		this.cancelButtonHandler();
+		if (this.input!=null) {
+			this.input.value=null;
+			this.selectedAsset.forEach((assetID,j)=>{
+				var id=this.assetList.findIndex(i=>i.id==assetID);
+				if (id!=-1) {
+					(j==0) ?this.input.value=this.assetList[id].name: this.input.value +=","+this.assetList[id].name;
+				}
+			})
+			this.assetList=[];
+			if ("createEvent" in document) {
+				var event = document.createEvent("HTMLEvents");
+				console.log("event",this.assetList,this.input,this.selectedAsset,this.input.value);
+				if (this.input.id=="Value" || this.input.id=="Animation" || this.input.id=="Sound") event.initEvent("input", false, true);
+				else event.initEvent("change", false, true);
+				this.input.dispatchEvent(event);
+				this.input.focus();
 			}
 		}
 	}
 
-	okButtonHandler(){		
-	//	console.log("ok",this.input);
-		this.cancelButtonHandler();
-		this.input.value=null;
-	//	console.log(this.input.value,this.selectedAsset);
-		this.selectedAsset.forEach((assetID,j)=>{
-			var id=this.assetList.findIndex(i=>i.id==assetID);
-			if (id!=-1) {
-				(j==0) ?this.input.value=this.assetList[id].name: this.input.value +=","+this.assetList[id].name;
-			}
-		})
-
-		if ("createEvent" in document) {
-		 	var event = document.createEvent("HTMLEvents");
-			 if (this.input.id=="Value") event.initEvent("input", false, true);
-			 else event.initEvent("change", false, true);
-			this.input.dispatchEvent(event);
-			this.input.focus();
-		}
+	cancelButtonHandler(){
+		Command.closeAssetCmd();
 	}
 
 	cancelBackgroundHandler(e){
 		if (e.target===this.html) this.cancelButtonHandler();
 	}
 
-	cancelButtonHandler(){
-		var node=document.querySelector(".dialog-full-screen");
-		node.parentNode.removeChild(node);
+// Utils
+	updateLoader(){
+		var buttons=this.html.querySelectorAll("button");
+		buttons.forEach(i=>i.disabled=true);
+		this.canvasView.loader.load(()=>{
+			buttons.forEach(i=>i.disabled=false);
+			console.log("Load finished!");
+		});
 	}
-
 }

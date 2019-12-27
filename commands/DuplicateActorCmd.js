@@ -9,7 +9,7 @@ class DuplicateActorCmd extends Command {
         var actorJSON = JSON.parse(JSON.stringify(actor));
         this.actor = new Actor(actorJSON);
         this.actor.id = Utils.id();
-        this.actor.name = "Copy of "+actor.name;
+        this.actor.name = "Copy_of_"+actor.name;
         this.actor.x=actor.x+25;
         this.actor.y=actor.y-25;
         this.type="DuplicateActorCmd";

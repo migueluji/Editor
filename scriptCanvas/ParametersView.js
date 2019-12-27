@@ -22,6 +22,7 @@ class ParametersView  {
 				case "Actor" : type="select"; option=Command.getActorListCmd();break;
 				case "Scene" : type="select"; option=Command.getSceneListCmd(); break;
 				case "Animation" : type="file"; option="Animation"; break;
+				case "Key" : type="key"; break;
 				case "Sound" : type="file";option="Sound" ; break;
 				case "Element" : type="select"; option=["Game","Me"]; option=option.concat(Command.getActorListCmd()); break;
 				case "Property" : type="select"; parameters.hasOwnProperty("Value") ? typeOf="all" : typeOf="boolean";
@@ -73,7 +74,7 @@ class ParametersView  {
 	}
 
 	changeInputHandler(input){
-	//	console.log("change input",input);
+		console.log("change input",input);
 		var value=null;
 		switch (input.type){
 			case "checkbox": value= Boolean(input.checked);break;
@@ -91,7 +92,7 @@ class ParametersView  {
 		e.preventDefault();
 		key.value=e.key;
 		if (key.value===" ") key.value="Space";
-		this.onChangeInputHandler(key);
+		this.changeInputHandler(key);
 	 }
 
 // Utils

@@ -8,7 +8,7 @@ class ActorScriptsView {
 		 '<header class="mdc-top-app-bar--dense properties-bar">'+
 		 '<div class="mdc-top-app-bar__row">'+
 			 '<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">'+
-				 '<span class="mdc-toolbar__title">Actor Scripts</span>'+
+				 '<span class="mdc-toolbar__title clip-text">Actor Scripts</span>'+
 			 '</section>'+
 			 '<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">'+
 	    	 	'<button id="propertiesbutton" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">settings</button>'+
@@ -27,7 +27,7 @@ class ActorScriptsView {
 
 	updateActorName(name){
 		var title = this.html.querySelector(".mdc-toolbar__title");
-		title.innerText=name;
+		title.innerText=name.split("_").join(" ");
 	}
 
 	addScript(scriptView,scriptPos){

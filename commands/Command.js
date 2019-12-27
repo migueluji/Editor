@@ -59,6 +59,10 @@ class Command {
         this.editor.openAssets(input,name,option);
     }
 
+    static closeAssetCmd(){
+        this.editor.closeAsset();
+    }
+
     static selectAssetCmd(assetID){
         this.editor.selectAsset(assetID);
     }

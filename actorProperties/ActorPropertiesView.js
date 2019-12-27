@@ -38,7 +38,7 @@ class ActorPropertiesView {
 
 	updateActorName(name){
 		var title = this.html.querySelector(".mdc-toolbar__title");
-		title.innerText=name;
+		title.innerText=name.split("_").join(" ");
 	}
 
 	updateActorProperty(property,value) {

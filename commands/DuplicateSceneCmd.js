@@ -7,7 +7,7 @@ class DuplicateSceneCmd extends Command {
         var sceneJSON = JSON.parse(JSON.stringify(scene));
         this.scene=new Scene(sceneJSON);
         this.scene.id=Utils.id()
-        this.scene.name="Copy of "+scene.name;
+        this.scene.name="Copy_of_"+scene.name;
         this.type="DuplicateSceneCmd";
         this.name="Duplicate Scene: " + this.scene.id;
     }

@@ -10,17 +10,15 @@ class AddAssetCmd extends Command {
             case "Font" :  this.assetSelected=this.editor.selectedFont; break;
         }
         this.type="AddAssetCmd";
-        this.name="Add "+option+": "+this.asset.id;
+        this.name="Add "+option+": "+this.asset.name;
     }
 
     execute (){
         this.editor.addAsset(this.asset,this.option);
-       // this.editor.selectAsset(this.asset.id);
     }
     
     undo(){
         this.editor.removeAsset(this.asset.id,this.option);
-       // this.editor.selectAsset(this.assetSelected);
     }
 
 }

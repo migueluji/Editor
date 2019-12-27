@@ -6,7 +6,7 @@ class FieldView  {
 		switch(true){
 			case type == "boolean" : this.boolean(key,value);break;
 			case type == "select" : this.select(key,value,option);break;
-			case (type == "input") || (type=="file") || (type=="color") || (type=="text") || (type=="tags"): this.input(type,key,value,option);break;
+			case (type == "input") || (type=="file") || (type=="color") || (type=="text") || (type=="tags") || (type=="key"): this.input(type,key,value,option);break;
 		}
 	}
 
@@ -87,7 +87,7 @@ class FieldView  {
 				'</button>'+
 				'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 			'</div>'+
-			'<div class="mdc-menu-surface--anchor" style="transform: translate(180px, -56px">'+
+			'<div class="mdc-menu-surface--anchor" style="left:180px;top:-56px">'+
 				'<div class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
 					'<ul class="mdc-list" role="menu" aria-hidden="true">'+
 						'<li id="property" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Property</li>'+
@@ -129,6 +129,8 @@ class FieldView  {
 				icon.innerHTML="label";
 				button.addEventListener("click",this.opentTagsHandler.bind(this));break;
 			case "color": 
+				icon.style.display="none"; break;
+			case "key": 
 				icon.style.display="none"; break;
 			default:			
 				button.addEventListener("click",this.menuHandler.bind(this));

@@ -5,7 +5,7 @@ class AssetView {
 			this.html.className +="mdc-image-list__item image-file";
 			this.html.innerHTML =
 				'<div class="mdc-image-list__image-aspect-container" style="margin:-2px">'+
-					'<img class="mdc-image-list__image" src="">'+
+					'<img class="mdc-image-list__image" style="" src="">'+
 				'</div>'+
 				'<div class="mdc-image-list__supporting">'+
 					'<span class="mdc-image-list__label">'+asset.name+'</span>'+
@@ -18,11 +18,14 @@ class AssetView {
   	addView(asset,option) {
 		var img = this.html.querySelector(".mdc-image-list__image");
 		switch (option) {
-			case "Image" : img.src="./images/"+asset.name; break;
 			case "Sound" : img.src="./images/sound.png"; break;
 			case "Font" : img.src="./images/font.png"; break;
+			default : img.src="./images/"+asset.name; break;
 		}
-		(img.width>=img.height) ? img.style.height="auto" : img.style.width="auto";
+		img.onload= function(){
+			console.log("load image",asset.name,img.naturalWidth,img.naturalHeight);
+			(img.naturalWidth>=img.naturalHeight) ?	img.style.height="auto" : img.style.width="auto";
+		};
 	}
 
 	remove() { 
