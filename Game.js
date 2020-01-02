@@ -2,17 +2,18 @@ class Game {
 	
     constructor(game) {
         this.name="Untitled Game";
+        Object.assign(this,this.properties);// init properties
         this.tagList=[];
+        this.imageList=[];
         this.fontList=[];
         this.soundList=[];
-        this.imageList=[];
         this.sceneList=[];
-        Object.assign(this,this.properties);// init properties
         Object.assign(this,game);
-        if (this.soundList) this.soundList.forEach((sound,i) => this.soundList[i]=new Object(sound));
+        if (this.imageList) this.imageList.forEach((image,i) => this.imageList[i]=new Object({"id":Utils.id(),"name":image.name}));
+        if (this.soundList) this.soundList.forEach((sound,i) => this.soundList[i]=new Object({"id":Utils.id(),"name":sound.name}));
         // fuentes fijas
         this.fontList=["Arial","Arial Black","Courier New","Georgia","Helvetica","Impact","Tahoma","Times New Roman","Verdana"];
-        if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]={id:Utils.id(),name:this.fontList[i]});
+        if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]={"id":Utils.id(),"name":font});
         // fin fuentes fijas
         if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]=new Object(font));
         if (this.sceneList.length!=0) this.sceneList.forEach((scene,i) => this.sceneList[i]=new Scene(scene));

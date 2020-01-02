@@ -3,7 +3,7 @@ class ActorPropertiesView {
     constructor(actorModel) {   
 		 this.html = document.createElement("div");
 		 this.html.className +="actor-properties side-sheet-content";
-		 this.html.style.dissoundOn="none";
+		 this.html.style.display="none";
 		 this.html.innerHTML =
 			'<header class="mdc-top-app-bar--dense properties-bar">'+
 				'<div class="mdc-top-app-bar__row">'+

@@ -144,23 +144,24 @@ class DoSelectionView {
 			var type= e.target.parentNode.nextSibling.firstChild.innerHTML;
 			var parameters=null;
 			switch(type){
-				case "Edit" :       parameters= new Object({"Element":null,"Property":null,"Value":null});break;
-				case "Spawn" :      parameters= new Object({"Actor":null,"X":0,"Y":0,"Angle":0});break;
+				case "Edit" :       parameters= new Object({"element":null,"property":null,"value":null});break;
+				case "Spawn" :      parameters= new Object({"actor":null,"x":0,"y":0,"angle":0});break;
 				case "Delete" :     parameters= new Object({});break;
-				case "Animate" :    parameters= new Object({"Animation":null,"Fps":24});break;
-				case "Play" :       parameters= new Object({"Sound":null,"Volume":1, "Start":0, "Pan":0});break;
-				case "Move" :       parameters= new Object({"Speed":0,"Angle":0});break;
-				case "Move To" :    parameters= new Object({"Speed":0,"X":0,"Y":0});break;
-				case "Rotate" :     parameters= new Object({"Speed":0,"Pivot_X":0,"Pivot_Y":0});break;
-				case "Rotate To" :  parameters= new Object({"Speed":0,"X":0,"Y":0,"Pivot_X":0,"Pivot_Y":0});break;
-				case "Push" :       parameters= new Object({"Force":0,"Angle":0});break;
-				case "Push To" :    parameters= new Object({"Force":0,"X":0,"Y":0});break;
-				case "Torque" :     parameters= new Object({"Angle":0});break;
-				case "Go To" :      parameters= new Object({"Scene":null});break;
-				case "Add" :        parameters= new Object({"Scene":null,"Stop":false});break;
+				case "Animate" :    parameters= new Object({"animation":null,"fps":24});break;
+				case "Play" :       parameters= new Object({"sound":null,"volume":1, "start":0, "pan":0});break;
+				case "Move" :       parameters= new Object({"speed":0,"angle":0});break;
+				case "Move To" :    parameters= new Object({"speed":0,"x":0,"y":0});break;
+				case "Rotate" :     parameters= new Object({"speed":0,"pivot_X":0,"pivot_Y":0});break;
+				case "Rotate To" :  parameters= new Object({"speed":0,"x":0,"y":0,"pivot_X":0,"pivot_Y":0});break;
+				case "Push" :       parameters= new Object({"force":0,"angle":0});break;
+				case "Push To" :    parameters= new Object({"force":0,"x":0,"y":0});break;
+				case "Torque" :     parameters= new Object({"angle":0});break;
+				case "Go To" :      parameters= new Object({"scene":null});break;
+				case "Add" :        parameters= new Object({"scene":null,"stop":false});break;
 				case "Remove" :     parameters= new Object({});break;
 			}
-			this.node=new Do({"id":Utils.id(),"type":type,"parameters":parameters});
+			this.node=new Node({"id":Utils.id(),"type":type,"parameters":parameters});
+			// change do this.node=new Do({"id":Utils.id(),"type":type,"parameters":parameters});
 			console.log("addNodeCmd",sceneID,actorID,scriptID,this.insert,this.node);
 			CmdManager.addNodeCmd(sceneID,actorID,scriptID,this.insert,this.node);
 			this.closeDialog();

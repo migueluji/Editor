@@ -50,7 +50,7 @@ class FieldView  {
 		var separator;
 		this.html.querySelector(".mdc-select").id=key;
 		var listView=this.html.querySelector("ul");
-		option.forEach(element=>{
+		option.forEach((element,i)=>{
 			var item = document.createElement("li");
 			item.classList.add("mdc-list-item");
 			item.setAttribute("data-value",element);
@@ -60,7 +60,7 @@ class FieldView  {
 				item.setAttribute("tabIndex","0");
 				item.setAttribute("aria-selected","true");
 			}
-			if ((element=="fps") || (element=="displayWidth") || (element=="sleeping") || (element=="spriteOn") || (element=="textOn") ||(element=="soundOn") || (element=="physicsOn")){
+			if ((element=="fps") || (element=="displayWidth") || (element=="sleeping" && i!=0) || (element=="spriteOn") || (element=="textOn") ||(element=="soundOn") || (element=="physicsOn")){
 				separator = document.createElement("li");
 				separator.className +="mdc-list-divider";
 				separator.setAttribute("role","separator");
@@ -74,6 +74,7 @@ class FieldView  {
 				listView.appendChild(separator);
 			}
 		});
+		key=key.charAt(0).toUpperCase() + key.slice(1);
 		this.html.querySelector("span").textContent=key.replace("_"," ");	
 	}
 
@@ -112,8 +113,9 @@ class FieldView  {
 		this.input.value=value;
 		this.input.id=key;
 
+		key=key.charAt(0).toUpperCase() + key.slice(1);
 		this.html.querySelector("label").textContent=key.replace("_"," ");	
-
+		
 		var button=this.html.querySelector("button");
 		
 		var icon=button.querySelector('i');

@@ -184,7 +184,7 @@ class ScriptCanvasView {
         this.addNode(html,chip.html,nodePos);
         nodeList.forEach(node=>{
             nodePos++;
-            if (node instanceof If) nodeView = new IfView();
+            if (node.nodeListTrue!=null) nodeView = new IfView();
             else nodeView = new DoView();
             nodeView.addView(node);
             this.addNode(html,nodeView.html,nodePos); 

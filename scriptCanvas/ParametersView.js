@@ -10,25 +10,24 @@ class ParametersView  {
 	}
 
 	addFields(parameters){
-		//console.log(parameters);
 		for (const field in parameters) {
 			var option=null;
 			var typeOf=null;
 			switch(field){
-				case "Operation" : type="select"; option=["Less","Less Equal","Equal","Greater Equal","Greater","Different"];break;
-				case "Tag" : type="select"; option=Command.getTagListCmd(); break;
-				case "Mode" : type="select"; option=["Down","Up","Is Over","Tap"];break;
-				case "Key_Mode" : type="select"; option=["Pressed","Down","Up"];break;
-				case "Actor" : type="select"; option=Command.getActorListCmd();break;
-				case "Scene" : type="select"; option=Command.getSceneListCmd(); break;
-				case "Animation" : type="file"; option="Animation"; break;
-				case "Key" : type="key"; break;
-				case "Sound" : type="file";option="Sound" ; break;
-				case "Element" : type="select"; option=["Game","Me"]; option=option.concat(Command.getActorListCmd()); break;
-				case "Property" : type="select"; parameters.hasOwnProperty("Value") ? typeOf="all" : typeOf="boolean";
-								option=Command.getPropertiesListCmd(parameters.Element,typeOf); break;
-				case "Value": {
-					switch (parameters["Property"]){
+				case "operation" : type="select"; option=["Less","Less Equal","Equal","Greater Equal","Greater","Different"];break;
+				case "tag" : type="select"; option=Command.getTagListCmd(); break;
+				case "mode" : type="select"; option=["Down","Up","Is Over","Tap"];break;
+				case "key_Mode" : type="select"; option=["Pressed","Down","Up"];break;
+				case "actor" : type="select"; option=Command.getActorListCmd();break;
+				case "scene" : type="select"; option=Command.getSceneListCmd(); break;
+				case "animation" : type="file"; option="Animation"; break;
+				case "key" : type="key"; break;
+				case "sound" : type="file";option="Sound" ; break;
+				case "element" : type="select"; option=["Game","Me"]; option=option.concat(Command.getActorListCmd()); break;
+				case "property" : type="select"; parameters.hasOwnProperty("value") ? typeOf="all" : typeOf="boolean";
+								option=Command.getPropertiesListCmd(parameters["element"],typeOf); break;
+				case "value": {
+					switch (parameters["property"]){
 						case "image" : type="file"; option="Image";break;
 						case "sound" : type="file"; option="Sound";break;
 						case "font" : type="file"; option="Font";break;
@@ -63,11 +62,11 @@ class ParametersView  {
 
 // Handlers
 	editChangeHandler(){
-		var keys=Command.getPropertiesListCmd(this.parameters["Element"],"boolean");
-		if (this.parameters.hasOwnProperty("Value")) // only for edit, not for check
-			(keys.includes(this.parameters["Property"]))?this.parameters.Value=false:this.parameters.Value=null;
-		if (this.parameters["Property"] == "color" || this.parameters["Property"]=="backgroundColor" || this.parameters["Property"]=="fill") this.parameters.Value="#ffffff";
-		if (this.parameters["Property"] == "image") this.parameters.Value="";
+		var keys=Command.getPropertiesListCmd(this.parameters["element"],"boolean");
+		if (this.parameters.hasOwnProperty("value")) // only for edit, not for check
+			(keys.includes(this.parameters["property"]))?this.parameters["value"]=false:this.parameters["value"]=null;
+		if (this.parameters["property"] == "color" || this.parameters["property"]=="backgroundColor" || this.parameters["property"]=="fill") this.parameters["value"]="#ffffff";
+		if (this.parameters["property"] == "image") this.parameters["value"]="";
 		this.removeFields();
 		this.addFields(this.parameters);
 		this.addListeners();
@@ -85,7 +84,7 @@ class ParametersView  {
 	 
 	 changeSelectHandler(select){
 		this.parameters[select.id]=select.querySelector('.mdc-list-item--selected').dataset.value;
-		if ((select.id=="Element") || (select.id=="Property")) this.editChangeHandler();
+		if ((select.id=="element") || (select.id=="property")) this.editChangeHandler();
 	 }
 
 	 keyDownHandler(key,e){

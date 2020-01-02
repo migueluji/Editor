@@ -6,9 +6,6 @@ class SideSheetView {
 		 this.html.style.display="none";
 		 this.html.innerHTML =
 				 '<div class="game-properties"></div>'+
-				 '<div class="sound-selection"></div>'+
-				/* '<div class="image-selection"></div>'+*/
-				 '<div class="font-selection"></div>'+
 				 '<div class="cast"></div>'+
 				 '<div class="actor-properties"></div>'+
 				 '<div class="actor-scripts"></div>';	
@@ -38,9 +35,6 @@ class SideSheetView {
 	static closeSheetHandler(){
 		document.querySelector(".side-sheet").style.display="none";
 		document.querySelector(".game-properties").style.display="none";
-		document.querySelector(".sound-selection").style.display="none";
-	//	document.querySelector(".image-selection").style.display="none";
-		document.querySelector(".font-selection").style.display="none";
 		document.querySelector(".cast").style.display="none";
 		document.querySelector(".actor-properties").style.display="none";
 		document.querySelector(".actor-scripts").style.display="none";

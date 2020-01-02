@@ -19,6 +19,14 @@
 	"tagList": [
 		"plane"
 	],
+	"soundList": [
+		{
+			"name": "laser.mp3"
+		},
+		{
+			"name": "rocketExplode.wav"
+		}
+	],
 	"imageList": [
 		{
 			"name": "font.png"
@@ -81,14 +89,6 @@
 			"name": "starGold.png"
 		}
 	],
-	"soundList": [
-		{
-			"name": "laser.mp3"
-		},
-		{
-			"name": "rocketExplode.wav"
-		}
-	],
 	"sceneList": [
 		{
 			"name": "Inicio",
@@ -100,8 +100,8 @@
 					"y": 0,
 					"width": 800,
 					"height": 480,
-					"scaleX": 1,
-					"scaleY": 1,
+					"scaleX": "1.00",
+					"scaleY": "1.00",
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
@@ -149,9 +149,9 @@
 					"sleeping": false,
 					"x": -225,
 					"y": 21,
-					"width": 90,
+					"width": 88,
 					"height": 73,
-					"scaleX": 1.02,
+					"scaleX": 1,
 					"scaleY": 1,
 					"angle": 0,
 					"screen": false,
@@ -200,15 +200,15 @@
 								{
 									"type": "Keyboard",
 									"parameters": {
-										"key": "ArrowUp",
-										"key_Mode": "Pressed"
+										"Key": "ArrowUp",
+										"Key_Mode": "Pressed"
 									},
 									"nodeListTrue": [
 										{
 											"type": "Move",
 											"parameters": {
-												"speed": "300",
-												"angle": "90"
+												"Speed": "300",
+												"Angle": "90"
 											}
 										}
 									],
@@ -217,15 +217,15 @@
 								{
 									"type": "Keyboard",
 									"parameters": {
-										"key": "ArrowDown",
-										"key_Mode": "Pressed"
+										"Key": "ArrowDown",
+										"Key_Mode": "Pressed"
 									},
 									"nodeListTrue": [
 										{
 											"type": "Move",
 											"parameters": {
-												"speed": "300",
-												"angle": "270"
+												"Speed": "300",
+												"Angle": "270"
 											}
 										}
 									],
@@ -239,8 +239,8 @@
 								{
 									"type": "Animate",
 									"parameters": {
-										"animation": "planeBlue1.png,planeBlue2.png,planeBlue3.png",
-										"fps": 24
+										"Animation": "planeBlue1.png,planeBlue2.png,planeBlue3.png",
+										"Fps": 24
 									}
 								}
 							]
@@ -303,8 +303,8 @@
 								{
 									"type": "Move",
 									"parameters": {
-										"speed": "300",
-										"angle": "180"
+										"Speed": "300",
+										"Angle": "180"
 									}
 								}
 							]
@@ -315,15 +315,15 @@
 								{
 									"type": "Collision",
 									"parameters": {
-										"tag": "plane"
+										"Tag": "plane"
 									},
 									"nodeListTrue": [
 										{
 											"type": "Edit",
 											"parameters": {
-												"element": "Score",
-												"property": "puntos",
-												"value": "Score.puntos+1"
+												"Element": "Score",
+												"Property": "puntos",
+												"Value": "puntos+1"
 											}
 										},
 										{
@@ -388,21 +388,21 @@
 					"dampingAngular": 0,
 					"scriptList": [
 						{
-							"name": "Spawner",
+							"name": "Script_1",
 							"nodeList": [
 								{
 									"type": "Timer",
 									"parameters": {
-										"seconds": "1"
+										"Seconds": "1"
 									},
 									"nodeListTrue": [
 										{
 											"type": "Spawn",
 											"parameters": {
-												"actor": "Star",
-												"x": 0,
-												"y": 0,
-												"angle": 0
+												"Actor": "Star",
+												"X": 0,
+												"Y": 0,
+												"Angle": 0
 											}
 										}
 									],

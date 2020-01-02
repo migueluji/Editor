@@ -8,7 +8,7 @@ class NodeView {
 	addView(node){
 		this.html.id=node.id; // asigna el identificador al elemento html
 		this.icon=this.computeChipIcon(node.type);
-		(node instanceof Do)?this.color="do":this.color="if";
+		(node.nodeListTrue==null)?this.color="do":this.color="if";
 		var chip=new ChipView(node,this.icon,this.color); // crea chip
 		var children = this.html.querySelector(".mdc-chip");
 		children.parentNode.replaceChild(chip.html,children);
@@ -18,7 +18,8 @@ class NodeView {
 		chip.html.addEventListener("dragstart",this.dragstartNodeHandler.bind(this));
 		chip.html.addEventListener("dragend",this.dragendNodeHandler.bind(this));
 		chip.html.querySelector("#remove").addEventListener("click",this.removeNodeHandler.bind(this));
-		if (node.type!="Delete" || node.type!="Remove")
+		
+		if (node.type!="Delete" && node.type!="Remove") 
 			chip.html.querySelector("#open").addEventListener("click",this.openNodeInfoHandler.bind(this,node));
 	}
 	

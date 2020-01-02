@@ -1,10 +1,10 @@
 class Actor {
 	
     constructor(actor) {
-        this.id=actor.id;
+        this.id=Utils.id();
         this.name=actor.name;
-        this.scriptList=[];
         Object.assign(this,this.properties); //inicialización de propiedades
+        this.scriptList=[];
         Object.assign(this,actor);
         if (this.scriptList) {this.scriptList.forEach((script,i) => this.scriptList[i] = new Script(script));
         }

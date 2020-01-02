@@ -1,6 +1,8 @@
 class Script {
 	
     constructor(script) {
+        this.id=Utils.id();
+        this.name=script.name;
         this.nodeList=[];
         Object.assign(this,script);
         this.assignNodes(this.nodeList);
@@ -34,13 +36,14 @@ class Script {
 // utils
     assignNodes(nodeList){
         if (nodeList) nodeList.forEach((node,i)=>{
+            nodeList[i]= new Node(node);
             if (node.hasOwnProperty("nodeListTrue")) { // si es un IF
-                nodeList[i]= new If(node);
+               // nodeList[i]= new If(node);
                 if(node.nodeListTrue) this.assignNodes(node.nodeListTrue);
                 if(node.nodeListFalse)this.assignNodes(node.nodeListFalse);
             }
             else {
-                nodeList[i]=new Do(node);
+               // nodeList[i]=new Do(node);
             }
         });
     }

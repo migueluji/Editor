@@ -70,7 +70,13 @@ class Editor {
     }
 
     saveGame(){
-        File.save(this.model.name+".json",JSON.stringify(this.model, null, '\t'));
+        var saveToFile={};
+        Object.assign(saveToFile,this.model);
+        delete saveToFile.fontList;
+    //    delete saveToFile.soundList;
+        File.save(this.model.name+".json",JSON.stringify(saveToFile, (key,value)=>{if(key!="id")return value}, '\t'));
+      //  saveToFile=JSON.stringify(saveToFile,);
+      //   File.save(this.model.name+".json",JSON.stringify(saveToFile, (key,value)=>{if(key!="id")return value}, '\t'));
     }
 
 //SCENES
@@ -158,15 +164,16 @@ class Editor {
     }
 
     changeActorProperty(sceneID,actorID,property,value){
-        console.log("change actor property",sceneID,actorID,property,value);
+     //   console.log("change actor property",sceneID,actorID,property,value);
         var scenePos=this.model.sceneList.findIndex(i => i.id == sceneID);
         var actorPos=this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID); 
         var actor = this.model.sceneList[scenePos].actorList[actorPos];
         switch  (true) {
             case property=="image":
+                actor.image=value;
+                console.log(actor.image, this.canvasView.loader.resources);
                 actor.width= this.canvasView.loader.resources[actor.image].texture.width;
                 actor.height= this.canvasView.loader.resources[actor.image].texture.height;
-                actor.image=value.image;
                 break;
             case property=="position": 
                 actor.x=Math.round(value.x);
@@ -281,7 +288,8 @@ class Editor {
         if (actorID) this.selectedActorIndex=this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.id==actorID);
         else this.selectedActorIndex=null;
         if (SideSheetView.isOpenActorProperties() && actorID!=null) this.openActorProperties();
-        if (actorID==null && !SideSheetView.isOpenCast()) SideSheetView.closeSheetHandler();
+        if ((SideSheetView.isOpenActorScripts() && actorID!=null) || (actorID==null && !SideSheetView.isOpenCast()))  
+            SideSheetView.closeSheetHandler();
         this.canvasView.updateSelectedActor(actorID);
         this.castView.updateSelectedActor(actorID);
     }
@@ -346,7 +354,7 @@ class Editor {
             case "Font"  : assetList=this.model.fontList; break;
             default: assetList=this.model.imageList; ; break; // images and animations
         }
-        console.log(assetList,input,option,this.canvasView);
+      //  console.log(assetList,input,option,this.canvasView);
         this.assetDialog = new AssetSelectionView(assetList,input,option,this.canvasView);
 
         var assetNameList=name.split(",");// selected asset (can include multiple names for animations)
