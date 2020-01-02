@@ -1,2 +1,581 @@
 {
+	"name": "Happy Plane",
+	"tagList": [
+		"plane"
+	],
+	"fontList": [
+		{
+			"id": "_15779641317872463018606088854",
+			"name": "Arial"
+		},
+		{
+			"id": "_15779641317871967760600253960",
+			"name": "Arial Black"
+		},
+		{
+			"id": "_15779641317873769513877008246",
+			"name": "Courier New"
+		},
+		{
+			"id": "_15779641317871738657348948276",
+			"name": "Georgia"
+		},
+		{
+			"id": "_15779641317872375194356784553",
+			"name": "Helvetica"
+		},
+		{
+			"id": "_15779641317873336041295760361",
+			"name": "Impact"
+		},
+		{
+			"id": "_15779641317870494405501541477",
+			"name": "Tahoma"
+		},
+		{
+			"id": "_15779641317878384761286020372",
+			"name": "Times New Roman"
+		},
+		{
+			"id": "_15779641317874808878456631733",
+			"name": "Verdana"
+		}
+	],
+	"soundList": [],
+	"imageList": [
+		{
+			"id": "_15779533033683961331860658979",
+			"name": "font.png"
+		},
+		{
+			"id": "_15779533033702723764531501855",
+			"name": "gamesonomy.png"
+		},
+		{
+			"id": "_15779533033718293168491736722",
+			"name": "planeBlue1.png"
+		},
+		{
+			"id": "_15779533033725973364157238139",
+			"name": "planeBlue2.png"
+		},
+		{
+			"id": "_15779533033725608079150336780",
+			"name": "planeBlue3.png"
+		},
+		{
+			"id": "_15779533033731579928691646901",
+			"name": "planeGreen1.png"
+		},
+		{
+			"id": "_15779533033743937831833855618",
+			"name": "planeGreen2.png"
+		},
+		{
+			"id": "_15779533033740729749640788313",
+			"name": "planeGreen3.png"
+		},
+		{
+			"id": "_15779533033751597423993596201",
+			"name": "planeRed1.png"
+		},
+		{
+			"id": "_15779533033757046291298030538",
+			"name": "planeRed2.png"
+		},
+		{
+			"id": "_15779533033768826304066209132",
+			"name": "planeRed3.png"
+		},
+		{
+			"id": "_15779533033768773089298082970",
+			"name": "planeYellow1 - copia.png"
+		},
+		{
+			"id": "_15779533033770712618917995742",
+			"name": "planeYellow1.png"
+		},
+		{
+			"id": "_15779533033772868433873072818",
+			"name": "planeYellow2.png"
+		},
+		{
+			"id": "_15779533033784621365280437479",
+			"name": "planeYellow3.png"
+		},
+		{
+			"id": "_15779533033787587767826028891",
+			"name": "rock.png"
+		},
+		{
+			"id": "_15779533033795162205921205312",
+			"name": "sound.png"
+		},
+		{
+			"id": "_15779558913825192157458164892",
+			"name": "background.png"
+		},
+		{
+			"id": "_15779558913868250781237738165",
+			"name": "groundIce.png"
+		},
+		{
+			"id": "_15779558913876565549372477579",
+			"name": "starGold.png"
+		}
+	],
+	"sceneList": [
+		{
+			"actorList": [
+				{
+					"id": "_15779543205831713822071071081",
+					"name": "Background",
+					"scriptList": [],
+					"sleeping": false,
+					"x": 0,
+					"y": 0,
+					"width": 800,
+					"height": 480,
+					"scaleX": "1.00",
+					"scaleY": "1.00",
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "background.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": -100,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Left",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Kinematic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 1,
+					"restitution": 1,
+					"dampingLinear": 0,
+					"dampingAngular": 0
+				},
+				{
+					"id": "_15779532867904216163168229938",
+					"name": "Plane",
+					"scriptList": [
+						{
+							"nodeList": [
+								{
+									"id": "_15779541999373789967498697393",
+									"type": "Keyboard",
+									"parameters": {
+										"Key": "ArrowUp",
+										"Key_Mode": "Pressed"
+									},
+									"nodeListTrue": [
+										{
+											"id": "_15779542119580294959349660637",
+											"type": "Move",
+											"parameters": {
+												"Speed": "300",
+												"Angle": "90"
+											}
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"id": "_15779542467116420522071963890",
+									"type": "Keyboard",
+									"parameters": {
+										"Key": "ArrowDown",
+										"Key_Mode": "Pressed"
+									},
+									"nodeListTrue": [
+										{
+											"id": "_15779542568154151436933351660",
+											"type": "Move",
+											"parameters": {
+												"Speed": "300",
+												"Angle": "270"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							],
+							"id": "_15779541866931263930081682962",
+							"name": "Move"
+						}
+					],
+					"sleeping": false,
+					"x": -225,
+					"y": 21,
+					"width": 88,
+					"height": 73,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "plane",
+					"spriteOn": true,
+					"image": "planeBlue1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": true,
+					"text": "",
+					"font": "Tahoma",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Left",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Kinematic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 1,
+					"restitution": 1,
+					"dampingLinear": 0,
+					"dampingAngular": 0
+				},
+				{
+					"id": "_15779573242988743576579698875",
+					"name": "Star",
+					"scriptList": [
+						{
+							"nodeList": [
+								{
+									"id": "_15779574020817452512475851369",
+									"type": "Move",
+									"parameters": {
+										"Speed": "300",
+										"Angle": "180"
+									}
+								}
+							],
+							"id": "_15779573992831845379290094216",
+							"name": "Move_to_the_left"
+						},
+						{
+							"nodeList": [
+								{
+									"id": "_15779580096769338660083937489",
+									"type": "Collision",
+									"parameters": {
+										"Tag": "plane"
+									},
+									"nodeListTrue": [
+										{
+											"id": "_15779619778601099483050362702",
+											"type": "Edit",
+											"parameters": {
+												"Element": "Score",
+												"Property": "puntos",
+												"Value": "puntos+1"
+											}
+										},
+										{
+											"id": "_15779580208083298376106292529",
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							],
+							"id": "_15779580047541056181288348124",
+							"name": "Destroy_Star"
+						}
+					],
+					"sleeping": true,
+					"x": 444,
+					"y": 273,
+					"width": 39,
+					"height": 38,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "starGold.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Left",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Kinematic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 1,
+					"restitution": 1,
+					"dampingLinear": 0,
+					"dampingAngular": 0
+				},
+				{
+					"id": "_15779574350154767776393518985",
+					"name": "Generator",
+					"scriptList": [
+						{
+							"nodeList": [
+								{
+									"id": "_15779578732610830369384080503",
+									"type": "Timer",
+									"parameters": {
+										"Seconds": "1"
+									},
+									"nodeListTrue": [
+										{
+											"id": "_15779578823660135082849539438",
+											"type": "Spawn",
+											"parameters": {
+												"Actor": "Star",
+												"X": 0,
+												"Y": 0,
+												"Angle": 0
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							],
+							"id": "_15779578668152474371780391156",
+							"name": "Script_1"
+						}
+					],
+					"sleeping": false,
+					"x": 450,
+					"y": 0,
+					"width": 50,
+					"height": 50,
+					"scaleX": "1.00",
+					"scaleY": "1.00",
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Left",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Kinematic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 1,
+					"restitution": 1,
+					"dampingLinear": 0,
+					"dampingAngular": 0
+				},
+				{
+					"id": "_15779580653721930321892120455",
+					"name": "Foreground",
+					"scriptList": [],
+					"sleeping": false,
+					"x": 0,
+					"y": -205,
+					"width": 808,
+					"height": 71,
+					"scaleX": "1.00",
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "groundIce.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": -200,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Left",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Kinematic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 1,
+					"restitution": 1,
+					"dampingLinear": 0,
+					"dampingAngular": 0
+				},
+				{
+					"id": "_15779610534237354485245147941",
+					"name": "Score",
+					"scriptList": [],
+					"sleeping": false,
+					"x": 257,
+					"y": 199,
+					"width": 238,
+					"height": 50,
+					"scaleX": "4.75",
+					"scaleY": "1.00",
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": true,
+					"text": "Puntos: ${Me.puntos}",
+					"font": "Arial Black",
+					"size": 30,
+					"fill": "#004080",
+					"style": "Normal",
+					"align": "Right",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Kinematic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 1,
+					"restitution": 1,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"puntos": 0
+				}
+			],
+			"id": "_15779532737880508799047169823",
+			"name": "Inicio"
+		}
+	],
+	"displayWidth": 800,
+	"displayHeight": 480,
+	"cameraX": 0,
+	"cameraY": 0,
+	"cameraAngle": 0,
+	"cameraZoom": 1,
+	"backgroundColor": "#ffffff",
+	"soundOn": false,
+	"soundtrack": "",
+	"volume": 1,
+	"start": 0,
+	"pan": 0,
+	"loop": false,
+	"physicsOn": true,
+	"gravityX": 0,
+	"gravityY": -9.8
 }

@@ -10,9 +10,9 @@ class ChangeActorPropertyCmd extends Command {
         var actorPos=this.editor.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID);
         var actor=this.editor.model.sceneList[scenePos].actorList[actorPos];
         switch (property) {
-            case "imageSize" :
-                this.oldValue={image:actor.image,width:actor.width,height:actor.height};
-                break;
+            // case "imageSize" :
+            //     this.oldValue={image:actor.image,width:actor.width,height:actor.height};
+            //     break;
             case "position" :
                 this.oldValue={x:actor.x,y:actor.y};
                 break;

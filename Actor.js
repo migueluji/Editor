@@ -60,8 +60,8 @@ class Actor {
         delete obj.id;
         delete obj.name;
         delete obj.scriptList;
-        delete obj.tagList;
-        return (obj);
+        delete obj.tags;
+        return (properties,obj);
     }
 
     addScript(script,pos){

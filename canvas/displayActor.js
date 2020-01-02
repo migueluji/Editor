@@ -303,8 +303,7 @@ class DisplayActor extends PIXI.Container {
             case "rotating":
                     CmdManager.changeActorPropertyCmd(sceneID,this.id,"angle",this.angle); 
                     break;
-            case "scaling":
-                    
+            case "scaling":              
                     var flipX;
                     if (this.tilingSprite.scale.x<0){
                         flipX=true;
@@ -382,11 +381,15 @@ class DisplayActor extends PIXI.Container {
                     var textElement=null;
                     var textProperty=null;
                     var newValue=null;
-                    if (k!=-1) { // property & element
-                        textElement=string.substring(0,k);
-                        textProperty=string.substring(k+1,string.length);
-                        if (textElement=="Game") { // game property
-                            if (game[textProperty]!=null) newValue=game[textProperty];
+                    textElement=string.substring(0,k);
+                    textProperty=string.substring(k+1,string.length);
+                    if (textElement=="Game") { // game property
+                        if (game[textProperty]!=null) newValue=game[textProperty];
+                        else newValue= '"error '+textElement + "."+textProperty+": property doesn't exist"+'"';
+                    }
+                    else 
+                        if (textElement=="Me"){
+                            if (actor[textProperty]!=null) newValue=actor[textProperty];
                             else newValue= '"error '+textElement + "."+textProperty+": property doesn't exist"+'"';
                         }
                         else { // actor cast property
@@ -397,11 +400,6 @@ class DisplayActor extends PIXI.Container {
                             }
                             else newValue= '"error '+textElement + ": doesn't exist"+'"';
                         }
-                    }
-                    else { // actor property
-                        textProperty=string.substring(k+1,string.length);
-                        newValue=actor[textProperty];
-                    }
                     text=text.replace(text.substring(i,j+1),newValue);
                 }
             }

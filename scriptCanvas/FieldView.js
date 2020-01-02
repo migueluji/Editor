@@ -60,7 +60,7 @@ class FieldView  {
 				item.setAttribute("tabIndex","0");
 				item.setAttribute("aria-selected","true");
 			}
-			if ((element=="fps") || (element=="displayWidth") || (element=="x") || (element=="spriteOn") || (element=="textOn") ||(element=="soundOn") || (element=="physicsOn")){
+			if ((element=="fps") || (element=="displayWidth") || (element=="sleeping") || (element=="spriteOn") || (element=="textOn") ||(element=="soundOn") || (element=="physicsOn")){
 				separator = document.createElement("li");
 				separator.className +="mdc-list-divider";
 				separator.setAttribute("role","separator");

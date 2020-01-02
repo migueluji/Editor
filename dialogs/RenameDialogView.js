@@ -8,7 +8,7 @@ class RenameDialogView {
 					'<h2 id="title" class="demo-card__title mdc-typography--headline6">Rename    </h2>'+
 					'<div class=text-field-container">'+
 						'<div class="mdc-text-field mdc-ripple-upgraded text-field--full">'+
-							'<input id="input" type="text"  class="mdc-text-field__input">'+
+							'<input id="input" type="text"  class="mdc-text-field__input" spellcheck="false">'+
 							'<label class="mdc-floating-label">New name</label>'+
 							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 						'</div>'+

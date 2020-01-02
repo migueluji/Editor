@@ -120,6 +120,7 @@ class Editor {
         if (this.selectedActorIndex!=null) actorID=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].id;
         this.castView.updateSelectedActor(actorID);
         SideSheetView.openSheetHandler("cast");
+        this.view.openCanvas("canvas");
     }
 
     drawerToggle (){
@@ -157,13 +158,14 @@ class Editor {
     }
 
     changeActorProperty(sceneID,actorID,property,value){
+        console.log("change actor property",sceneID,actorID,property,value);
         var scenePos=this.model.sceneList.findIndex(i => i.id == sceneID);
         var actorPos=this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID); 
         var actor = this.model.sceneList[scenePos].actorList[actorPos];
         switch  (true) {
-            case property=="imageSize":
-                actor.width=Math.round(value.width*actor.scaleX*actor.tileX);
-                actor.height=Math.round(value.height*actor.scaleY*actor.tileY);
+            case property=="image":
+                actor.width= this.canvasView.loader.resources[actor.image].texture.width;
+                actor.height= this.canvasView.loader.resources[actor.image].texture.height;
                 actor.image=value.image;
                 break;
             case property=="position": 

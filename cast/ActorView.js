@@ -43,7 +43,7 @@ class ActorView {
 			span.innerHTML="";
 			var image=document.createElement("IMG");
 			image.classList="mdc-list-item__graphic material-icons";
-			image.style="position:absolute;width:36px;height:auto";
+			image.style="position:absolute;width:36px;height:auto;border-radius:unset";
 			image.src="./images/"+actor.image;
 			span.appendChild(image);
 		}

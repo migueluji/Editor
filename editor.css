@@ -50,7 +50,7 @@ button{
 }
 .actor-canvas-button{
     position: absolute;
-    background: white;
+    background: #ffffff00;
     width: 40px;
     height: 40px;
     color: #aaaaaa;
