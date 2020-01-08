@@ -73,10 +73,18 @@ class Editor {
         var saveToFile={};
         Object.assign(saveToFile,this.model);
         delete saveToFile.fontList;
-    //    delete saveToFile.soundList;
-        File.save(this.model.name+".json",JSON.stringify(saveToFile, (key,value)=>{if(key!="id")return value}, '\t'));
-      //  saveToFile=JSON.stringify(saveToFile,);
-      //   File.save(this.model.name+".json",JSON.stringify(saveToFile, (key,value)=>{if(key!="id")return value}, '\t'));
+        File.save("game.json",JSON.stringify(saveToFile, (key,value)=>{if(key!="id")return value}, '\t'));
+     }
+
+    playGame(){
+        console.log("play");
+        var gameData={};
+        Object.assign(gameData,this.model);
+        delete gameData.fontList;
+        gameData=JSON.stringify(gameData, (key,value)=>{if(key!="id")return value}, '\t');
+        localStorage.setItem("localStorage_GameData",gameData);
+        var win=window.open("/engine","_blank");
+        win.focus();
     }
 
 //SCENES

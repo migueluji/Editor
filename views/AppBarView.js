@@ -23,6 +23,7 @@ class AppBarView {
 		this.html.querySelector("#undo").addEventListener("click",CmdManager.undo.bind(CmdManager));
 		this.html.querySelector("#redo").addEventListener("click",CmdManager.redo.bind(CmdManager));
 		this.html.querySelector("#cast").addEventListener("click",Command.openCastCmd.bind(Command));
+		this.html.querySelector("#play").addEventListener("click",Command.playGameCmd.bind(Command));
   }
 
 	updateSceneName(sceneName) {

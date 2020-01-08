@@ -1,6 +1,12 @@
 html{
     height: 100%;
 }
+:root{
+    --mdc-theme-primary: #2E64EC;
+    --mdc-theme-secondary: #2E64EC;
+    --my-theme-if:#ecb62e;
+    --my-theme-do:#2ec3ec;
+}
 body{
     margin:0;
     height: 100%;
@@ -29,16 +35,16 @@ button{
     left: 18%;
 }
 .sceneselected{
-    background-color: #ede3fa;
+    background-color: #e6e9fc;
 }
 .actorselected{
-    background-color: #ede3fa;
+    background-color: #e6e9fc;
 }
 .scriptselected{
-    background-color: #ede3fa;
+    background-color: #e6e9fc;
 }
 .selected{
-    background-color: #ede3fa;
+    background-color: #e6e9fc;
 }
 .properties-new{
     padding-bottom: 56px;
@@ -167,7 +173,7 @@ button{
     background-color:rgba(0,0,0,0.05);
 }
 .properties-section-title{
-    color:#6200ee ;
+    color:var(--mdc-theme-primary) ;
     font-size: 1.1rem;
 }
 #expandbutton{
@@ -225,7 +231,7 @@ button{
     right: 8px;
 }
 .mdc-image-list__image-aspect-container.image-list--selected{
-    border:2px solid #6200ee;
+    border:2px solid var(--mdc-theme-secondary);
 }
 .mdc-image-list__image-aspect-container{
     border:2px solid white;
@@ -261,4 +267,7 @@ button{
     overflow: hidden;
     width: 188px;
     white-space: nowrap;
+}
+.add-actor{
+    background-color: var(-m);
 }
