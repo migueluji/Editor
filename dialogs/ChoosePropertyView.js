@@ -37,7 +37,7 @@ class ChoosePropertyView {
 			var list=null;
 			switch(field){
 				case "Element" : type="select"; list=["Game","Me"]; list=list.concat(Command.getActorListCmd()); break;
-				case "Property" : type="select"; list=Command.getPropertiesListCmd(parameters.Element,"number"); break;
+				case "Property" : type="select"; list=Command.getPropertiesListCmd(parameters.Element,"all"); break;
 			}
 			var fieldView = new FieldView(type,field,parameters[field],list);
 			this.container.appendChild(fieldView.html);	
