@@ -103,7 +103,7 @@ class ScriptCanvasView {
             this.x0=e.clientX;
             this.y0=e.clientY;
             this.down=true;
-        } else if (e.target.classList[0]=="card-background") this.update(this.nodeList);
+        }// else if (e.target.classList[0]=="card-background") this.update(this.nodeList);
     }
 
     mouseUpHandler(e){

@@ -80,7 +80,7 @@ class Editor {
         console.log("play");
         var gameData={};
         Object.assign(gameData,this.model);
-        delete gameData.fontList;
+       // delete gameData.fontList;
         gameData=JSON.stringify(gameData, (key,value)=>{if(key!="id")return value}, '\t');
         localStorage.setItem("localStorage_GameData",gameData);
         var win=window.open("/engine","_blank");
@@ -502,14 +502,14 @@ class Editor {
                     properties=Object.assign(actor.newProperties,actor.properties);  
                 }  
         switch (type) {
-            case "boolean": properties=this.checkType(element,properties,"boolean");break;
-            case "number" : properties=this.checkType(element,properties,"number");break;
+            case "Boolean": properties=this.checkType(properties,"boolean");break;
+            case "Number" : properties=this.checkType(properties,"number");break;
         }
         return(Object.keys(properties));
     }
 
 // Utilities
-    checkType(element,properties,type){
+    checkType(properties,type){
         var newProperties={};
         Object.keys(properties).forEach(name=>{
             var obj = new Object();

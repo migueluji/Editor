@@ -321,8 +321,7 @@
 										{
 											"type": "Edit",
 											"parameters": {
-												"element": "Score",
-												"property": "puntos",
+												"property": "Score.puntos",
 												"value": "Score.puntos+1"
 											}
 										},

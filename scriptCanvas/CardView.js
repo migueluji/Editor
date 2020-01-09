@@ -5,15 +5,15 @@ class CardView {
 		this.html = document.createElement("div");
 		this.html.className +="mdc-card action-card";
 		this.html.innerHTML =
-		  	'<div class="card-background" ></div>'+
-			'<div class="mdc-card__primary-action card-title '+color+'">'+
+		  	'<div class="card-background"></div>'+
+			'<div style=" -webkit-user-select: none;" class="mdc-card__primary-action card-title '+color+'">'+
 				'<div  style="pointer-events:none" class="circle">'+
-					'<i class="nodeIcon material-icons mdc-chip_icon">'+icon+'</i>'+
+					'<i  class="nodeIcon material-icons mdc-chip_icon">'+icon+'</i>'+
 				'</div>'+
 				'<span style="pointer-events:none" class="nodelabel mdc-list-item__text">'+
 					'<span style="pointer-events:none" class="mdc-list-item__primary-text card-title_label">'+node.type+'</span>'+
 				'</span>'+
-				'<i id="close" class="chipIcon ge-chip-button material-icons">close</i>'+
+				 '<i id="close" class="chipIcon ge-chip-button material-icons">close</i>'+
 			'</div>'+
 			'<div class="mdc-card__actions"></div>';
 		if (color=="if") this.html.classList.add("moveup");

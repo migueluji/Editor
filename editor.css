@@ -269,5 +269,8 @@ button{
     white-space: nowrap;
 }
 .add-actor{
-    background-color: var(-m);
+    background-color: var(--mdc-theme-primary);
+}
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+    color:var(--mdc-theme-primary);
 }

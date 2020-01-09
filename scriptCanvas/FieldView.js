@@ -1,12 +1,16 @@
 class FieldView  {
 
     constructor(type,key,value,option) { 
+		this.key=key;
+		this.value=value;
 		this.html = document.createElement("div"); 
 		this.html.style="width:100%";
 		switch(true){
-			case type == "boolean" : this.boolean(key,value);break;
-			case type == "select" : this.select(key,value,option);break;
-			case (type == "input") || (type=="file") || (type=="color") || (type=="text") || (type=="tags") || (type=="key"): this.input(type,key,value,option);break;
+			case type=="boolean" : this.boolean(key,value); break;
+			case type=="select" : this.select(key,value,option); break;
+			case 
+				(type=="input") || (type=="file") || (type=="color") || 
+				(type=="text") || (type=="tags") || (type=="key") || (type=="properties"): this.input(type,key,value,option);break;
 		}
 	}
 
@@ -50,24 +54,24 @@ class FieldView  {
 		var separator;
 		this.html.querySelector(".mdc-select").id=key;
 		var listView=this.html.querySelector("ul");
-		option.forEach((element,i)=>{
+		option.forEach((property,i)=>{
 			var item = document.createElement("li");
 			item.classList.add("mdc-list-item");
-			item.setAttribute("data-value",element);
-			item.innerHTML=element;
+			item.setAttribute("data-value",property);
+			item.innerHTML=property;
 			if(item.dataset.value==value){
 				item.classList.add("mdc-list-item--selected");
 				item.setAttribute("tabIndex","0");
 				item.setAttribute("aria-selected","true");
 			}
-			if ((element=="fps") || (element=="displayWidth") || (element=="sleeping" && i!=0) || (element=="spriteOn") || (element=="textOn") ||(element=="soundOn") || (element=="physicsOn")){
+			if (i!=0 && ["fps","displayWidth","sleeping","spriteOn","textOn","soundOn","physicsOn"].includes(property)){
 				separator = document.createElement("li");
 				separator.className +="mdc-list-divider";
 				separator.setAttribute("role","separator");
 				listView.appendChild(separator);
 			}
 			listView.appendChild(item);
-			if((element=="Me")) {
+			if((property=="Me")) {
 				separator = document.createElement("li");
 				separator.className +="mdc-list-divider";
 				separator.setAttribute("role","separator");
@@ -134,6 +138,9 @@ class FieldView  {
 				icon.style.display="none"; break;
 			case "key": 
 				icon.style.display="none"; break;
+			case "properties":
+				icon.innerHTML="add_comment"; 
+				button.addEventListener("click",this.openPropertiesHandler.bind(this,option)); break;
 			default:			
 				button.addEventListener("click",this.menuHandler.bind(this));
 				this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
@@ -166,9 +173,8 @@ class FieldView  {
 		this.menu.open=true;
 	}
 
-	openPropertiesHandler(){
-		var input=this.html.querySelector("input");
-		var dialog = new ChoosePropertyView(input);
+	openPropertiesHandler(option){
+		var dialog = new ChoosePropertyView(this.input,option);
 		var editorFrame=document.querySelector(".editor-frame-root");
 		editorFrame.appendChild(dialog.html);
 	}

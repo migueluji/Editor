@@ -1,6 +1,8 @@
 class ChoosePropertyView {
 
-    constructor(input) {   
+    constructor(input,option) {   
+		this.input=input;
+		this.option=option;
 		 this.html = document.createElement("div");
 		 this.html.className +="dialog-full-screen";
 		 this.html.innerHTML =
@@ -14,13 +16,16 @@ class ChoosePropertyView {
 						'<button id="okbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded"><span class="mdc-button__ripple"></span>Ok</button>'+
 					'</div>'+
 				'</div>';
+	//	var editorFrame=document.querySelector(".editor-frame-root");
+	//	editorFrame.appendChild(this.html);
 		
-		var parameters={Element:"",Property:""};
+		var parameter=input.value.split(".");
+		var parameters={Element:parameter[0],Property:parameter[1]};
 		this.container=this.html.querySelector(".text-field-container");
 		this.addFields(parameters);
 		this.addListeners();
 		this.parameters=parameters;
-		this.input=input;
+
 
 		this.html.querySelector("#okbutton").addEventListener("click",this.okButtonHandler.bind(this));
 		this.html.querySelector("#cancelbutton").addEventListener("click",this.cancelButtonHandler.bind(this));
@@ -37,7 +42,7 @@ class ChoosePropertyView {
 			var list=null;
 			switch(field){
 				case "Element" : type="select"; list=["Game","Me"]; list=list.concat(Command.getActorListCmd()); break;
-				case "Property" : type="select"; list=Command.getPropertiesListCmd(parameters.Element,"all"); break;
+				case "Property" : type="select"; list=Command.getPropertiesListCmd(parameters.Element,this.option); break;
 			}
 			var fieldView = new FieldView(type,field,parameters[field],list);
 			this.container.appendChild(fieldView.html);	
@@ -52,21 +57,28 @@ class ChoosePropertyView {
 
 // Handlers
   	changeSelectHandler(select){
+		var oldElement= this.parameters[select.id];
 		this.parameters[select.id]=select.querySelector(".mdc-list-item--selected").dataset.value;
+		if (select.id=="Element" && oldElement!=this.parameters[select.id] ) this.parameters.Property=null;
 		this.editChangeHandler();
  	 }
 	
 	okButtonHandler(){
-		if (this.input.id=="text") this.input.value +="${"+this.parameters.Element+"."+this.parameters.Property+"}";
-		else this.input.value += this.parameters.Element+"."+this.parameters.Property;
-		if ("createEvent" in document) {
-			var event = document.createEvent("HTMLEvents");
-			if (this.input.id=="Value") event.initEvent("input", false, true);
-			else event.initEvent("change", false, true);
-			this.input.dispatchEvent(event);
-			this.input.focus();
-	   }
-		this.cancelButtonHandler();
+		if (this.parameters.Property!=null){
+			switch (this.input.id) {
+				case "text" : this.input.value +="${"+this.parameters.Element+"."+this.parameters.Property+"}"; break;
+				case "property":this.input.value=this.parameters.Element+"."+this.parameters.Property; break;
+				case "value": this.input.value += this.parameters.Element+"."+this.parameters.Property; break;
+			}
+			if ("createEvent" in document) {
+				var event = document.createEvent("HTMLEvents");
+				if ((this.input.id=="value") || (this.input.id=="property")) event.initEvent("input", false, true);
+				else event.initEvent("change", false, true);
+				this.input.dispatchEvent(event);
+				this.input.focus();
+		   }
+			this.cancelButtonHandler();
+		}
 	}
 
 	cancelButtonHandler(){

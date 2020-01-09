@@ -144,7 +144,7 @@ class DoSelectionView {
 			var type= e.target.parentNode.nextSibling.firstChild.innerHTML;
 			var parameters=null;
 			switch(type){
-				case "Edit" :       parameters= new Object({"element":null,"property":null,"value":null});break;
+				case "Edit" :       parameters= new Object({"property":"","value":null});break;
 				case "Spawn" :      parameters= new Object({"actor":null,"x":0,"y":0,"angle":0});break;
 				case "Delete" :     parameters= new Object({});break;
 				case "Animate" :    parameters= new Object({"animation":null,"fps":24});break;

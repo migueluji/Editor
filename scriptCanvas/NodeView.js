@@ -54,6 +54,7 @@ class NodeView {
 		var card=new CardView(node,this.icon,this.color); // crea card
 		var children = this.html.querySelector(".mdc-card");
 		children.parentNode.replaceChild(card.html,children);
+		card.html.querySelector(".card-background").addEventListener("click",this.closeNodeInfoHandler.bind(this,card.fields.parameters));
 		card.html.querySelector("#close").addEventListener("click",this.closeNodeInfoHandler.bind(this,card.fields.parameters));
 
 		e.preventDefault();

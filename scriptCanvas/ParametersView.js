@@ -23,13 +23,13 @@ class ParametersView  {
 				case "animation" : type="file"; option="Animation"; break;
 				case "key" : type="key"; break;
 				case "sound" : type="file";option="Sound" ; break;
-				case "element" : type="select"; option=["Game","Me"]; option=option.concat(Command.getActorListCmd()); break;
-				case "property" : type="select"; parameters.hasOwnProperty("value") ? typeOf="all" : typeOf="boolean";
-								option=Command.getPropertiesListCmd(parameters["element"],typeOf); break;
+				case "property" : type="properties";(parameters.hasOwnProperty("value")) ? option="All" : option="Boolean";break;
 				case "value": {
-					switch (parameters["property"]){
+					var property=parameters["property"].split(".")[1];
+					switch (property){
 						case "image" : type="file"; option="Image";break;
 						case "sound" : type="file"; option="Sound";break;
+						case "soundtrack" : type="file"; option="Sound";break;
 						case "font" : type="file"; option="Font";break;
 						case "color" : type="color"; break;
 						case "text" : type="text"; break;
@@ -47,7 +47,6 @@ class ParametersView  {
 				};	
 				default : type="input";break;
 			}
-		//	console.log("field",typeof parameters[field]);
 			if ((typeof parameters[field]=="boolean"))	type="boolean";
 			var fieldView = new FieldView(type,field,parameters[field],option);
 			this.html.appendChild(fieldView.html);	
@@ -62,29 +61,31 @@ class ParametersView  {
 
 // Handlers
 	editChangeHandler(){
-		var keys=Command.getPropertiesListCmd(this.parameters["element"],"boolean");
+		var parameter=this.parameters["property"].split(".");
+		var element=parameter[0];
+		var property=parameter[1];
+		var keys=Command.getPropertiesListCmd(element,"Boolean");
 		if (this.parameters.hasOwnProperty("value")) // only for edit, not for check
-			(keys.includes(this.parameters["property"]))?this.parameters["value"]=false:this.parameters["value"]=null;
-		if (this.parameters["property"] == "color" || this.parameters["property"]=="backgroundColor" || this.parameters["property"]=="fill") this.parameters["value"]="#ffffff";
-		if (this.parameters["property"] == "image") this.parameters["value"]="";
+			(keys.includes(property))?this.parameters["value"]=false:this.parameters["value"]=null;
+		if (property=="color" || property=="backgroundColor" || property=="fill") this.parameters["value"]="#ffffff";
+		else if (property=="image") this.parameters["value"]="";
 		this.removeFields();
 		this.addFields(this.parameters);
 		this.addListeners();
 	}
 
 	changeInputHandler(input){
-	//	console.log("change input",input);
 		var value=null;
 		switch (input.type){
 			case "checkbox": value= Boolean(input.checked);break;
 			default: value=input.value; break;
 		}
 		this.parameters[input.id]=value;
+		if (input.id=="property") this.editChangeHandler();
 	 }
 	 
 	 changeSelectHandler(select){
 		this.parameters[select.id]=select.querySelector('.mdc-list-item--selected').dataset.value;
-		if ((select.id=="element") || (select.id=="property")) this.editChangeHandler();
 	 }
 
 	 keyDownHandler(key,e){

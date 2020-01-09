@@ -1,9 +1,7 @@
 class Command {
     
     constructor(editorRef){
-        if(editorRef!== undefined){//si tengo un editor
-          Command.editor=editorRef;
-        }
+        if(editorRef!== undefined) Command.editor=editorRef;
         this.editor= Command.editor;
     }
 
@@ -19,6 +17,7 @@ class Command {
     static playGameCmd(){
         this.editor.playGame();
     }
+    
 // SCENES
     static selectSceneCmd(sceneID){
         this.editor.selectScene(sceneID);
