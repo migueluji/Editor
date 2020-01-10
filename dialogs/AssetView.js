@@ -23,7 +23,7 @@ class AssetView {
 			default : img.src="./images/"+asset.name; break;
 		}
 		img.onload= function(){
-			console.log("load image",asset.name,img.naturalWidth,img.naturalHeight);
+			//console.log("load image",asset.name,img.naturalWidth,img.naturalHeight);
 			(img.naturalWidth>=img.naturalHeight) ?	img.style.height="auto" : img.style.width="auto";
 		};
 	}
