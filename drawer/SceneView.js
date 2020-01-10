@@ -57,12 +57,14 @@ class SceneView {
 	}
 
 	removeSceneHandler (){
-		var text =document.querySelector("#"+this.html.id).firstChild.firstChild.nextSibling.innerText;
-		if (confirm('Are you sure you want to delete "'+text+'" scene?')){
-			var ul =document.querySelector("#"+this.html.id).parentNode;
-			CmdManager.removeSceneCmd(this.html.id);
-			if (ul.firstChild==null){ // si no hay scenas creamos una
-				CmdManager.addSceneCmd(0);
+		var ul =document.querySelector("#"+this.html.id).parentNode;
+		if (ul.children.length==1){
+			alert ("This scene cannot be deleted!");
+		}
+		else {
+			var text =document.querySelector("#"+this.html.id).firstChild.firstChild.nextSibling.innerText;
+			if (confirm('Are you sure you want to delete "'+text+'" scene?')){
+				CmdManager.removeSceneCmd(this.html.id);
 			}
 		}
 	}
