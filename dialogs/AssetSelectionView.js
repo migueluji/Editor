@@ -87,10 +87,8 @@ class AssetSelectionView {
 		selectedAssets.forEach(element=>{
 			 element.classList.remove("image-list--selected"); // all selected are deleted
 		});			
-	//	console.log("upd",this.selectedAsset,assetIDList);
 		this.selectedAsset.forEach(i=>{
 			var listItem=this.html.querySelector("#"+i);
-	//		console.log(i,listItem);
 			if (listItem) listItem.firstChild.classList.add("image-list--selected");   // new selected are marked
 		})
 	}
@@ -113,13 +111,10 @@ class AssetSelectionView {
 				j++;
 			};
 			if (j==list.length) {
-			//	CmdManager.addAssetCmd(files[i].name,this.type);
 				Command.addAssetCmd(files[i].name,this.type);
 			}
 			else {
 				if(confirm('The file "'+files[i].name+'" already exist. Do you want to replace it?')){
-			//		CmdManager.removeAssetCmd(list[j].parentNode.parentNode.id,this.type);
-			//		CmdManager.addAssetCmd(files[i].name,this.type);
 					Command.removeAssetCmd(list[j].parentNode.parentNode.id,this.type);
 					Command.addAssetCmd(files[i].name,this.type);
 				}
@@ -132,7 +127,6 @@ class AssetSelectionView {
 		if (this.selectedAsset){ 
 			var name=document.querySelector("#"+this.selectedAsset).firstChild.nextSibling.textContent;
 			if (confirm('Are you sure you want to delete "'+name+'" asset?')){
-				//CmdManager.removeAssetCmd(this.selectedAsset,this.type);
 				Command.removeAssetCmd(this.selectedAsset,this.type)
 			}
 		}
@@ -152,8 +146,9 @@ class AssetSelectionView {
 			this.assetList=[];
 			if ("createEvent" in document) {
 				var event = document.createEvent("HTMLEvents");
-				console.log("event",this.assetList,this.input,this.selectedAsset,this.input.value);
-				if (this.input.id=="value" || this.input.id=="animation" || this.input.id=="sound" || this.input.id=="soundtrack") event.initEvent("input", false, true);
+				if (this.input.id=="value" || this.input.id=="animation" || 
+					this.input.id=="sound" || this.input.id=="soundtrack") 
+						event.initEvent("input", false, true);
 				else event.initEvent("change", false, true);
 				this.input.dispatchEvent(event);
 				this.input.focus();
@@ -172,10 +167,9 @@ class AssetSelectionView {
 // Utils
 	updateLoader(){
 		var buttons=this.html.querySelectorAll("button");
-		buttons.forEach(i=>i.disabled=true);
-		this.canvasView.loader.load(()=>{
-			buttons.forEach(i=>i.disabled=false);
-			console.log("Load finished!");
+		buttons.forEach(i=>i.disabled=true); // disable cancel, ok, upload and delete buttons
+		this.canvasView.loader.load(()=>{ 
+			buttons.forEach(i=>i.disabled=false); // enable all buttons when loaded asset
 		});
 	}
 }

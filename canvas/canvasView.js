@@ -90,7 +90,6 @@ class CanvasView {
         this.update(this.actorList,this.gameProperties); 
     }
 
-
     updateStageDrawer(){
         var drawerApp=document.querySelector(".mdc-drawer-app-content");
         if (drawerApp.getBoundingClientRect().x ==0) this.app.stage.x = this.app.stage.x+this.drawerOffset;
@@ -99,7 +98,6 @@ class CanvasView {
     }
 
     update(actorList,gameProperties){
-   //     console.log("update",actorList,gameProperties);
         this.actorList=actorList;
         this.gameProperties=gameProperties;
 
@@ -151,15 +149,6 @@ class CanvasView {
     
             this.actorButton.style.left=((this.displayActor.transform.position.x+xMax+8)*this.app.stage.scale.x+this.app.stage.x)+"px";
             this.actorButton.style.top=((-this.displayActor.transform.position.y+yMax)*this.app.stage.scale.y+this.app.stage.y)+"px";
-
-            // var OBB = new PIXI.Graphics(); // Oriented Bounding Box
-            // OBB.lineStyle(1, 0xffaaaa, 1, 0, true);
-            // OBB.moveTo(xMin-10,yMin+10);
-            // OBB.lineTo(xMax,yMin);
-            // OBB.lineTo(xMax,yMax);
-            // OBB.lineTo(xMin,yMax);
-            // OBB.closePath();
-            // this.app.stage.addChild(OBB);
         }
         else{
             if (this.selected) this.displayActor.removeGizmo();
@@ -168,6 +157,14 @@ class CanvasView {
         }
     }
 
+    positionToAddActor(){
+        var position={x:0,y:this.app.stage.y};
+        var drawerApp=document.querySelector(".mdc-drawer-app-content");
+        (drawerApp.getBoundingClientRect().x==0) ? position.x = this.app.stage.x : position.x = this.app.stage.x+this.drawerOffset;
+        position.x=-position.x+window.innerWidth/2.0;
+        position.y=position.y-window.innerHeight/2+32; 
+        return (position);
+    }
 // Handlers
     propertiesActorHandler(){
         Command.openActorPropertiesCmd();
@@ -210,8 +207,8 @@ class CanvasView {
     }
 
     resize(){
-        var drawerApp=document.querySelector(".mdc-drawer-app-content");
-        this.drawerOffset = drawerApp.getBoundingClientRect().x;
+    //     var drawerApp=document.querySelector(".mdc-drawer-app-content");
+    //     this.drawerOffset = drawerApp.getBoundingClientRect().x;
         this.app.renderer.resize(window.innerWidth,window.innerHeight);
         this.update(this.actorList,this.gameProperties);
         if (this.selected) Command.selectActorCmd(this.displayActor.id);

@@ -148,6 +148,9 @@ class Editor {
 
 // ACTOR
     addActor(sceneID,actorPos,actor){
+        var position=this.canvasView.positionToAddActor();
+        actor.x=position.x;
+        actor.y=position.y;
         var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
         this.model.sceneList[scenePos].addActor(actor,actorPos);
         this.selectScene(sceneID); //necesario para los comandos de deshacer
@@ -397,15 +400,6 @@ class Editor {
     }
 
     removeAsset(assetID,type){
-        // if(!this.openAssetsDialog) { // for undo commands is necessary to open the asset dialog
-        //     var assetList=[];
-        //     switch (option){
-        //         case "Sound" : assetList=this.model.soundList; break;
-        //         case "Font"  : assetList=this.model.fontList; break;
-        //         default: assetList=this<.model.imageList; ; break; // images and animations
-        //     }
-        //     this.openAssets(assetList,"",option);
-        // }
         if (type == "Image" || type == "Animation") { // update the loader
             var index=this.model.imageList.findIndex(i=>i.id==assetID);
             this.canvasView.deleteImage(this.model.imageList[index].name);
@@ -422,7 +416,6 @@ class Editor {
 
 // SCRIPTING this.sceneID,this.actorID,this.scriptID,this.nodeID,this.if
     addNode(sceneID,actorID,scriptID,insert,node){
-    //console.log("addNode",sceneID,actorID,scriptID,node.id);
       var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
       var actorPos = this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID);
       var scriptPos =  this.model.sceneList[scenePos].actorList[actorPos].scriptList.findIndex(i=>i.id==scriptID);
@@ -431,7 +424,6 @@ class Editor {
       this.selectActor(actorID);
       this.openActorScripts();
       this.selectScript(scriptID);
-      //if(this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].nodelist) 
       this.selectNode(node.id);
     }
 
@@ -453,7 +445,6 @@ class Editor {
         var actorPos = this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID);
         var scriptPos =  this.model.sceneList[scenePos].actorList[actorPos].scriptList.findIndex(i=>i.id==scriptID);
         this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].changeNode(nodeID,parameters);
-    //    this.scriptCanvasView.update(this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos].nodeList);
         this.selectScene(sceneID); //necesario para los comandos de deshacer
         this.selectActor(actorID);
         this.openActorScripts();

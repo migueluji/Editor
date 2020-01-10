@@ -98,5 +98,4 @@ class Command {
     static getPropertiesListCmd(element,type){
         return(this.editor.getPropertiesList(element,type));
     }
-
 }
