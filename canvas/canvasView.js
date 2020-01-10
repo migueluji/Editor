@@ -163,6 +163,8 @@ class CanvasView {
         (drawerApp.getBoundingClientRect().x==0) ? position.x = this.app.stage.x : position.x = this.app.stage.x+this.drawerOffset;
         position.x=-position.x+window.innerWidth/2.0;
         position.y=position.y-window.innerHeight/2+32; 
+        position.x=position.x / this.app.stage.scale.x;
+        position.y=position.y / this.app.stage.scale.y;
         return (position);
     }
 // Handlers
