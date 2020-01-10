@@ -130,7 +130,7 @@ class FieldView  {
 				button.addEventListener("click",this.loadAssetHandler.bind(this,option));break;
 			case "text": 
 				icon.innerHTML="add_comment";
-				button.addEventListener("click",this.openPropertiesHandler.bind(this));break;
+				button.addEventListener("click",this.openPropertiesHandler.bind(this,option));break;
 			case "tags" :
 				icon.innerHTML="label";
 				button.addEventListener("click",this.opentTagsHandler.bind(this));break;
@@ -153,6 +153,7 @@ class FieldView  {
 
 //Handlers
 	menuItemHandler(id){
+		console.log(id);
 		if (id!="property"){
 			this.input.value += id+"()";
 			if ("createEvent" in document) {
@@ -163,9 +164,7 @@ class FieldView  {
 		   }
 		}
 		else {
-			var dialog = new ChoosePropertyView(this.input);
-			var editorFrame=document.querySelector(".editor-frame-root");
-			editorFrame.appendChild(dialog.html);
+			this.openPropertiesHandler("Number");
 		}
 	}
 
@@ -174,9 +173,7 @@ class FieldView  {
 	}
 
 	openPropertiesHandler(option){
-		var dialog = new ChoosePropertyView(this.input,option);
-		var editorFrame=document.querySelector(".editor-frame-root");
-		editorFrame.appendChild(dialog.html);
+		new ChoosePropertyView(this.input,option);
 	}
 
 	opentTagsHandler(){

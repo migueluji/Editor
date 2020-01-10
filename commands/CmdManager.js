@@ -18,17 +18,6 @@ class CmdManager {
         this.history.execute(cmd);
     }
 
-// Asset
-    static addAssetCmd(name,option){
-        var cmd = new AddAssetCmd(name,option);
-        this.history.execute(cmd);
-    }
-
-    static removeAssetCmd(assetID,option){
-        var cmd = new RemoveAssetCmd(assetID,option);
-        this.history.execute(cmd);
-    }
-
 // Game
     static changeGamePropertyCmd(property,value){
         var cmd = new ChangeGamePropertyCmd(property,value);

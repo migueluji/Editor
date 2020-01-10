@@ -1,6 +1,6 @@
 class AssetSelectionView {
 
-    constructor(assetList,input,option,canvasView) {  
+    constructor(assetList,input,type,canvasView) {  
 		this.input=input;
 		this.canvasView=canvasView;
 		this.assetList=assetList;
@@ -30,14 +30,14 @@ class AssetSelectionView {
 						'</div>'+
 					'</div>'+
 				'</div>';
-		this.html.querySelector("#title").textContent="Select "+option;
-		this.init(assetList,option);
+		this.html.querySelector("#title").textContent="Select "+type;
+		this.init(assetList,type);
 		this.html.querySelector("#okbutton").addEventListener("click",this.okButtonHandler.bind(this));
 		this.html.addEventListener("click",this.cancelBackgroundHandler.bind(this));
 		this.html.querySelector("#cancelbutton").addEventListener("click",this.cancelButtonHandler.bind(this));
 
-		this.option=option;
-		if (this.option=="Font") {
+		this.type=type;
+		if (this.type=="Font") {
 			this.html.querySelector("#deletebutton").style.display="none";
 			this.html.querySelector("#uploadbutton").style.display="none";
 		}
@@ -49,11 +49,11 @@ class AssetSelectionView {
 		this.selectedAsset=[];
 	}
 
-	init(assetList,option){
-	//	if(option=="Animation") option="Image"; // the assetView is equal
-		console.log("init", assetList,option);
+	init(assetList,type){
+	//	if(type=="Animation") type="Image"; // the assetView is equal
+	//	console.log("init", assetList,type);
 		assetList.forEach(asset=>{
-			var assetView= new AssetView(asset,option);
+			var assetView= new AssetView(asset,type);
 			this.addAsset(assetView);
 		});
 	}	
@@ -79,7 +79,7 @@ class AssetSelectionView {
 			if (founded!=-1) 
 				this.selectedAsset.splice(founded,1)
 			else {
-				if (this.option=="Animation") this.selectedAsset.push(assetID);
+				if (this.type=="Animation") this.selectedAsset.push(assetID);
 				else this.selectedAsset[0]=assetID;
 			}
 		})
@@ -98,7 +98,7 @@ class AssetSelectionView {
 // Handlers
 	uploadAssetHandler(e){
 		var input = this.html.querySelector("#files")
-		if (this.option=="Sound") input.accept="audio/*";
+		if (this.type=="Sound") input.accept="audio/*";
 		else input.accept="image/*";
 		input.value="";
 		input.click();
@@ -113,12 +113,15 @@ class AssetSelectionView {
 				j++;
 			};
 			if (j==list.length) {
-				CmdManager.addAssetCmd(files[i].name,this.option);
+			//	CmdManager.addAssetCmd(files[i].name,this.type);
+				Command.addAssetCmd(files[i].name,this.type);
 			}
 			else {
 				if(confirm('The file "'+files[i].name+'" already exist. Do you want to replace it?')){
-					CmdManager.removeAssetCmd(list[j].parentNode.parentNode.id,this.option);
-					CmdManager.addAssetCmd(files[i].name,this.option);
+			//		CmdManager.removeAssetCmd(list[j].parentNode.parentNode.id,this.type);
+			//		CmdManager.addAssetCmd(files[i].name,this.type);
+					Command.removeAssetCmd(list[j].parentNode.parentNode.id,this.type);
+					Command.addAssetCmd(files[i].name,this.type);
 				}
 			}
 		}
@@ -128,8 +131,9 @@ class AssetSelectionView {
 	removeAssetHandler(){
 		if (this.selectedAsset){ 
 			var name=document.querySelector("#"+this.selectedAsset).firstChild.nextSibling.textContent;
-			if (confirm('Are you sure you want to delete "'+name+'" asset?')){;
-				CmdManager.removeAssetCmd(this.selectedAsset,this.option);
+			if (confirm('Are you sure you want to delete "'+name+'" asset?')){
+				//CmdManager.removeAssetCmd(this.selectedAsset,this.type);
+				Command.removeAssetCmd(this.selectedAsset,this.type)
 			}
 		}
 		this.updateLoader();

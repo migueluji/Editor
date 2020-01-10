@@ -179,10 +179,14 @@ class Editor {
         switch  (true) {
             case property=="image":
                 actor.image=value;
-                console.log(actor.image, this.canvasView.loader.resources);
-                actor.width= this.canvasView.loader.resources[actor.image].texture.width;
-                actor.height= this.canvasView.loader.resources[actor.image].texture.height;
-                break;
+                if(this.canvasView.loader.resources.hasOwnProperty(value)){
+                    actor.width= this.canvasView.loader.resources[actor.image].texture.width;
+                    actor.height= this.canvasView.loader.resources[actor.image].texture.height;
+                }
+                else{
+                    actor.width= 50;
+                    actor.height= 50;
+                } break;
             case property=="position": 
                 actor.x=Math.round(value.x);
                 actor.y=Math.round(value.y);
@@ -384,37 +388,29 @@ class Editor {
         this.assetDialog.updateSelectedAsset(assetIDList);
     }
 
-    addAsset(asset,option){
-        if(!this.openAssetsDialog) { // for undo commands is necessary to open the asset dialog
-            var assetList=[];
-            switch (option){
-                case "Sound" : assetList=this.model.soundList; break;
-                case "Font"  : assetList=this.model.fontList; break;
-                default: assetList=this.model.imageList; ; break; // images and animations
-            }
-            this.openAssets(assetList,"",option);
-        }
-        this.model.addAsset(asset,option);
-        if (option == "Image" || option == "Animation") this.canvasView.loadImage(asset.name);
-        var assetView = new AssetView(asset,option);
+    addAsset(name,type){
+        var asset=new Object({"id":Utils.id(), "name":name});
+        this.model.addAsset(asset,type);
+        if (type == "Image" || type == "Animation") this.canvasView.loadImage(asset.name);
+        var assetView = new AssetView(asset,type);
         this.assetDialog.addAsset(assetView);
     }
 
-    removeAsset(assetID,option){
-        if(!this.openAssetsDialog) { // for undo commands is necessary to open the asset dialog
-            var assetList=[];
-            switch (option){
-                case "Sound" : assetList=this.model.soundList; break;
-                case "Font"  : assetList=this.model.fontList; break;
-                default: assetList=this.model.imageList; ; break; // images and animations
-            }
-            this.openAssets(assetList,"",option);
-        }
-        if (option == "Image" || option == "Animation") { // update the loader
+    removeAsset(assetID,type){
+        // if(!this.openAssetsDialog) { // for undo commands is necessary to open the asset dialog
+        //     var assetList=[];
+        //     switch (option){
+        //         case "Sound" : assetList=this.model.soundList; break;
+        //         case "Font"  : assetList=this.model.fontList; break;
+        //         default: assetList=this<.model.imageList; ; break; // images and animations
+        //     }
+        //     this.openAssets(assetList,"",option);
+        // }
+        if (type == "Image" || type == "Animation") { // update the loader
             var index=this.model.imageList.findIndex(i=>i.id==assetID);
             this.canvasView.deleteImage(this.model.imageList[index].name);
         }
-        this.model.removeAsset(assetID,option);
+        this.model.removeAsset(assetID,type);
         this.assetDialog.removeAsset(assetID);
     }
 
@@ -488,19 +484,18 @@ class Editor {
     getPropertiesList(element,type){
         var actor=null;
         var properties=[];
-        if (element=="Game") {
-            var object=Object.assign(this.model.newProperties,this.model.properties);
-            properties=Object.assign(object,this.model.inputProperties);
+        switch (element){
+            case "Game": 
+                var object=Object.assign(this.model.newProperties,this.model.properties);
+                properties=Object.assign(object,this.model.inputProperties); break;
+            case "Me":
+                actor = this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex];
+                properties=Object.assign(actor.newProperties,actor.properties); break;
+            default:
+                var actorPos = this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.name==element);
+                actor= this.model.sceneList[this.selectedSceneIndex].actorList[actorPos];
+                properties=Object.assign(actor.newProperties,actor.properties); break;
         }
-        else if (element=="Me")  {
-            actor = this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex];
-            properties=Object.assign(actor.newProperties,actor.properties);  
-            }   
-            else if (element) {
-                    var actorPos = this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.name==element);
-                    actor= this.model.sceneList[this.selectedSceneIndex].actorList[actorPos];
-                    properties=Object.assign(actor.newProperties,actor.properties);  
-                }  
         switch (type) {
             case "Boolean": properties=this.checkType(properties,"boolean");break;
             case "Number" : properties=this.checkType(properties,"number");break;

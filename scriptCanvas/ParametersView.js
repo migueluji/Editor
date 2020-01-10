@@ -32,7 +32,7 @@ class ParametersView  {
 						case "soundtrack" : type="file"; option="Sound";break;
 						case "font" : type="file"; option="Font";break;
 						case "color" : type="color"; break;
-						case "text" : type="text"; break;
+						case "text" : type="text"; option="All-Text"; break;
 						case "tags" : type="tags"; break;
  						case "backgroundColor" : type="color";break;
 						case "fill" : type="color"; break;

@@ -16,16 +16,19 @@ class ChoosePropertyView {
 						'<button id="okbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded"><span class="mdc-button__ripple"></span>Ok</button>'+
 					'</div>'+
 				'</div>';
-	//	var editorFrame=document.querySelector(".editor-frame-root");
-	//	editorFrame.appendChild(this.html);
+		var editorFrame=document.querySelector(".editor-frame-root");
+		editorFrame.appendChild(this.html);
 		
-		var parameter=input.value.split(".");
-		var parameters={Element:parameter[0],Property:parameter[1]};
+		var parameters={Element:"Me",Property:""};
+		if (input.id!="text" && input.id!="value") {
+			var parameter=input.value.split(".");
+			if (parameter[0]=="") parameter[0]="Me";
+			parameters={Element:parameter[0],Property:parameter[1]};
+		}
 		this.container=this.html.querySelector(".text-field-container");
 		this.addFields(parameters);
 		this.addListeners();
 		this.parameters=parameters;
-
 
 		this.html.querySelector("#okbutton").addEventListener("click",this.okButtonHandler.bind(this));
 		this.html.querySelector("#cancelbutton").addEventListener("click",this.cancelButtonHandler.bind(this));
@@ -64,15 +67,17 @@ class ChoosePropertyView {
  	 }
 	
 	okButtonHandler(){
+		var id=this.input.id;
+		var type=this.input.type;
 		if (this.parameters.Property!=null){
-			switch (this.input.id) {
-				case "text" : this.input.value +="${"+this.parameters.Element+"."+this.parameters.Property+"}"; break;
-				case "property":this.input.value=this.parameters.Element+"."+this.parameters.Property; break;
-				case "value": this.input.value += this.parameters.Element+"."+this.parameters.Property; break;
+			switch (true) {
+				case (id =="text") || ((id=="value")&& (this.option=="All-Text")): this.input.value +="${"+this.parameters.Element+"."+this.parameters.Property+"}"; break;
+				case (id =="property"):this.input.value=this.parameters.Element+"."+this.parameters.Property; break;
+				case (id=="value"): this.input.value += this.parameters.Element+"."+this.parameters.Property; break;
 			}
 			if ("createEvent" in document) {
 				var event = document.createEvent("HTMLEvents");
-				if ((this.input.id=="value") || (this.input.id=="property")) event.initEvent("input", false, true);
+				if ((id=="value") || (id=="property")) event.initEvent("input", false, true);
 				else event.initEvent("change", false, true);
 				this.input.dispatchEvent(event);
 				this.input.focus();

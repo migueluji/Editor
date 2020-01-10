@@ -57,6 +57,14 @@ class Command {
     }
 
 // ASSETS
+    static addAssetCmd(name,type){
+        this.editor.addAsset(name,type);
+    }
+
+    static removeAssetCmd(assetID,type){
+        this.editor.removeAsset(assetID,type);
+    }
+
     static openAssetsCmd(input,name,option){
         this.editor.openAssets(input,name,option);
     }
