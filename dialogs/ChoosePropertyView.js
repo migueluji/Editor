@@ -73,11 +73,11 @@ class ChoosePropertyView {
 			switch (true) {
 				case (id =="text") || ((id=="value")&& (this.option=="All-Text")): this.input.value +="${"+this.parameters.Element+"."+this.parameters.Property+"}"; break;
 				case (id =="property"):this.input.value=this.parameters.Element+"."+this.parameters.Property; break;
-				case (id=="value"): this.input.value += this.parameters.Element+"."+this.parameters.Property; break;
+				default: this.input.value += this.parameters.Element+"."+this.parameters.Property; break;
 			}
 			if ("createEvent" in document) {
 				var event = document.createEvent("HTMLEvents");
-				if ((id=="value") || (id=="property")) event.initEvent("input", false, true);
+				if ((id=="value") || (id=="value_1") || (id=="value_2")|| (id=="property")) event.initEvent("input", false, true);
 				else event.initEvent("change", false, true);
 				this.input.dispatchEvent(event);
 				this.input.focus();

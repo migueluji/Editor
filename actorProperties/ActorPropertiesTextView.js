@@ -21,7 +21,7 @@ class ActorPropertiesTextView {
 					'<input id="text" type="text" value="value" class="mdc-text-field__input">'+ // text
 						'<label class="mdc-floating-label" for="text-field-filled">Text</label>'+
 						'<button id="textbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
-							'<i class="material-icons mdc-button_icon">add_comment</i>'+
+							'<i class="material-icons mdc-button_icon">add_box</i>'+
 						'</button>'+
 					'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 				'</div>'+

@@ -5,6 +5,7 @@ class ParametersView  {
 			Object.assign(this.parameters,parameters);
 			this.html = document.createElement("div");
 			this.html.className +="mdc-card__actions node-panel";
+			console.log("parametere¡s¡",parameters);
 			this.addFields(parameters);
 			this.addListeners();
 	}
@@ -12,7 +13,7 @@ class ParametersView  {
 	addFields(parameters){
 		for (const field in parameters) {
 			var option=null;
-			var typeOf=null;
+		//	var typeOf=null;
 			switch(field){
 				case "operation" : type="select"; option=["Less","Less Equal","Equal","Greater Equal","Greater","Different"];break;
 				case "tag" : type="select"; option=Command.getTagListCmd(); break;
@@ -37,7 +38,6 @@ class ParametersView  {
  						case "backgroundColor" : type="color";break;
 						case "fill" : type="color"; break;
 						case "collider" : type="select"; option=["Circle","Box","Polygon"];break;
-						case "tags" : type="select"; option=Command.getTagListCmd(); break;
 						case "style" : type="select"; option=["Normal","Italic","Bold","Italic-Bold"];break;
 						case "align" : type="select"; option=["Left","Center","Right"];break;
 						case "type" : type="select"; option=["Kinematic","Dynamic","Static"];break;
@@ -113,9 +113,9 @@ class ParametersView  {
 			select.addEventListener("MDCSelect:change",this.changeSelectHandler.bind(this,select));
 		})
 
-		var keys=this.html.querySelectorAll("#Key");
+		var keys=this.html.querySelectorAll("#key");
 		keys.forEach(key=>{
-			key.addEventListener("keydown",this.keyDownHandler.bind(this,key));
+					key.addEventListener("keydown",this.keyDownHandler.bind(this,key));
 		});
 	 }
 }

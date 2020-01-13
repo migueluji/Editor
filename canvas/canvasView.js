@@ -210,11 +210,11 @@ class CanvasView {
     }
 
     resize(){
-    //     var drawerApp=document.querySelector(".mdc-drawer-app-content");
-    //     this.drawerOffset = drawerApp.getBoundingClientRect().x;
-        this.app.renderer.resize(window.innerWidth,window.innerHeight);
-        this.update(this.actorList,this.gameProperties);
-        if (this.selected) Command.selectActorCmd(this.displayActor.id);
+        if (this.html.style.display=="block"){ 
+            this.app.renderer.resize(window.innerWidth,window.innerHeight);
+            this.update(this.actorList,this.gameProperties);
+            if (this.selected) Command.selectActorCmd(this.displayActor.id);
+        }
     }
 
     mouseStageDown(e){

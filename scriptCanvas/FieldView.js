@@ -129,7 +129,7 @@ class FieldView  {
 				this.input.setAttribute("readonly","readonly");
 				button.addEventListener("click",this.loadAssetHandler.bind(this,option));break;
 			case "text": 
-				icon.innerHTML="add_comment";
+				icon.innerHTML="add_box";
 				button.addEventListener("click",this.openPropertiesHandler.bind(this,option));break;
 			case "tags" :
 				icon.innerHTML="label";
@@ -139,7 +139,7 @@ class FieldView  {
 			case "key": 
 				icon.style.display="none"; break;
 			case "properties":
-				icon.innerHTML="add_comment"; 
+				icon.innerHTML="add_box"; 
 				button.addEventListener("click",this.openPropertiesHandler.bind(this,option)); break;
 			default:			
 				button.addEventListener("click",this.menuHandler.bind(this));

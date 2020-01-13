@@ -54,7 +54,6 @@ class RenameDialogView {
 	okButtonHandler(){
 		var input=this.html.querySelector("#input");
 		var name=input.value.trim().split(/\s+/).join(" "); // delete white spaces
-		console.log("name",name);
 		switch(this.element){
 			case "scene": this.panel=document.querySelector(".mdc-drawer__content"); break;
 			case "actor": this.panel=document.querySelector(".cast"); break;

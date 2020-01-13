@@ -396,8 +396,9 @@ class DisplayActor extends PIXI.Container {
                         }
                         else { // actor cast property
                             var actorIndex=cast.findIndex(i => i.name == textElement);
+                            console.log(textElement,textProperty,cast[actorIndex][textProperty]);
                             if (actorIndex!=-1) {
-                                if (cast[actorIndex][textProperty]) newValue=cast[actorIndex][textProperty];
+                                if (cast[actorIndex][textProperty]!=undefined) newValue=cast[actorIndex][textProperty];
                                 else newValue= '"error '+textElement + "."+textProperty+": property doesn't exist"+'"';
                             }
                             else newValue= '"error '+textElement + ": doesn't exist"+'"';

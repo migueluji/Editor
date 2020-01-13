@@ -72,12 +72,12 @@ class IfSelectionView {
 			var type = e.target.parentNode.nextSibling.firstChild.innerHTML;
 			var parameters=null;
 			switch(type){
-				case "Compare":     parameters= new Object({"value_1":null,"operation":"<","value_2":null});break;
+				case "Compare":     parameters= new Object({"value_1":null,"operation":"Less","value_2":null});break;
 				case "Check":       parameters= new Object({"property":null});break;
 				case "Collision":   parameters= new Object({"tag":null});break;
-				case "Timer":       parameters= new Object({"seconds":0});break;
-				case "Touch":       parameters= new Object({"mode":"down","on_Actor":true});break;
-				case "Keyboard":    parameters= new Object({"key":null,"key_Mode":"down"});break;
+				case "Timer":       parameters= new Object({"seconds":1});break;
+				case "Touch":       parameters= new Object({"mode":"Down","on_Actor":true});break;
+				case "Keyboard":    parameters= new Object({"key":null,"key_Mode":"Pressed"});break;
 			}
 			this.node= new Node({"id":Utils.id(),"type":type,"parameters":parameters,"nodeListTrue":[],"nodeListFalse":[]});
 	// change if node		this.node= new If({"id":Utils.id(),"type":type,"parameters":parameters,"nodeListTrue":[],"nodeListFalse":[]});

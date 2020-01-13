@@ -114,18 +114,19 @@ class Editor {
 
  /* Scene editor commands */
     selectScene(sceneID){
-       var oldSelectedSceneIndex=this.selectedSceneIndex;
-       this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
-       this.drawerScenesView.updateSelectedScene(sceneID);
-       this.appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
-       this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model.properties); // actualiza el canvas
-       if (oldSelectedSceneIndex!=this.selectedSceneIndex) this.selectedActorIndex=null;
-       switch (true) {
-           case SideSheetView.isOpenCast(): this.isOpenCast();break;
-           case SideSheetView.isOpenGameProperties() : this.openGameProperties(); break;
-           case SideSheetView.isOpenActorProperties() : this.openActorProperties(); break;
+        var oldSelectedSceneIndex=this.selectedSceneIndex;
+        this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
+        this.drawerScenesView.updateSelectedScene(sceneID);
+        this.appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
+        this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model.properties); // actualiza el canvas
+        this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList); //update castView
+        if (oldSelectedSceneIndex!=this.selectedSceneIndex) this.selectedActorIndex=null;
+        switch (true) {
+           case SideSheetView.isOpenCast(): this.openCast();break;
+           case SideSheetView.isOpenGameProperties(): this.openGameProperties(); break;
+           case (SideSheetView.isOpenActorProperties() && oldSelectedSceneIndex==this.selectedSceneIndex) : this.openActorProperties(); break;
            default :SideSheetView.closeSheetHandler(); this.view.openCanvas("canvas"); break;
-       }
+        }
     }
 
     openCast(){
@@ -154,7 +155,7 @@ class Editor {
         var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
         this.model.sceneList[scenePos].addActor(actor,actorPos);
         this.selectScene(sceneID); //necesario para los comandos de deshacer
-   //     this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList);
+        this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList); // update the cast view
         this.selectActor(actor.id);
     }
 
@@ -470,7 +471,7 @@ class Editor {
         this.model.sceneList.forEach(element => {
             sceneList.push(element.name);
         });
-        return (sceneList.sort());
+        return (sceneList);
     }
 
     getPropertiesList(element,type){

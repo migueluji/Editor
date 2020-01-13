@@ -5,7 +5,7 @@ class AssetView {
 			this.html.className +="mdc-image-list__item image-file";
 			this.html.innerHTML =
 				'<div class="mdc-image-list__image-aspect-container" style="margin:-2px">'+
-					'<img class="mdc-image-list__image" style="" src="">'+
+					'<img class="mdc-image-list__image" style="pointer-events:none" src="">'+
 				'</div>'+
 				'<div class="mdc-image-list__supporting">'+
 					'<span class="mdc-image-list__label">'+asset.name+'</span>'+
@@ -35,6 +35,6 @@ class AssetView {
 // Handlers
 	selectAssetHandler(e){
 		e.preventDefault();
-		if (e.srcElement.parentNode.parentNode.id) Command.selectAssetCmd(e.srcElement.parentNode.parentNode.id);
+		if (e.srcElement.parentNode.id) Command.selectAssetCmd(e.srcElement.parentNode.id);
 	}
 }
