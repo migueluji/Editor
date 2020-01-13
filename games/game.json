@@ -319,6 +319,13 @@
 									},
 									"nodeListTrue": [
 										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Score.puntos",
+												"value": "Score.puntos+1"
+											}
+										},
+										{
 											"type": "Delete",
 											"parameters": {}
 										}
