@@ -101,7 +101,7 @@ class ActorPropertiesView {
 		}
 		var sceneID=document.querySelector(".sceneselected").id;
 		var actorID=document.querySelector(".actorselected").id;
-		CmdManager.changeActorPropertyCmd(sceneID,actorID,this.property,this.value);
+		if(sceneID && actorID) CmdManager.changeActorPropertyCmd(sceneID,actorID,this.property,this.value);
 	}
 
 	onChangeSelectHandler(element){
@@ -109,7 +109,7 @@ class ActorPropertiesView {
 		var sceneID=document.querySelector(".sceneselected").id;
 		var actorID=document.querySelector(".actorselected").id;
 		this.value=element.querySelector('.mdc-list-item--selected').dataset.value;
-		CmdManager.changeActorPropertyCmd(sceneID,actorID,this.property,this.value);
+		if(sceneID && actorID) CmdManager.changeActorPropertyCmd(sceneID,actorID,this.property,this.value);
 	}
 
 //Utilities

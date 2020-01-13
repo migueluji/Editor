@@ -274,3 +274,5 @@ button{
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
     color:var(--mdc-theme-primary);
 }
+.mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
+    color:var(--mdc-theme-primary);

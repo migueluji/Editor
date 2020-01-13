@@ -23,7 +23,7 @@ class ActorPropertiesPhysicsView {
 							'<div class="mdc-select__anchor" style="width:100%">'+
 								'<i class="mdc-select__dropdown-icon"></i>'+
 								'<div class="mdc-select__selected-text"></div>'+
-								'<span class="mdc-floating-label mdc-floating-label--float-above">Align</span>'+
+								'<span class="mdc-floating-label mdc-floating-label--float-above">Type</span>'+
 								'<div class="mdc-line-ripple"></div>'+
 							'</div>'+
 							'<div class="mdc-select__menu mdc-menu mdc-menu-surface" style="width:100%">'+

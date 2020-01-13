@@ -29,7 +29,7 @@ class Actor {
             textOn:this.textOn || false, text:this.text || "",
             font:this.font || "Arial", size:this.size || 30,
             fill:this.fill || "#000000" , style:this.style || "Normal" ,
-            align:this.align || "Left", offsetX:this.offsetX || 0,
+            align:this.align || "Center", offsetX:this.offsetX || 0,
             offsetY:this.offsetY || 0,
             // Sound
             soundOn:this.soundOn || false, sound:this.sound || "",

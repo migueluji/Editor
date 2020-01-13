@@ -120,12 +120,12 @@ class Editor {
        this.appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
        this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model.properties); // actualiza el canvas
        if (oldSelectedSceneIndex!=this.selectedSceneIndex) this.selectedActorIndex=null;
-       if (SideSheetView.isOpenCast()) this.openCast();
-       else if (SideSheetView.isOpenGameProperties()) this.openGameProperties();
-            else {
-                SideSheetView.closeSheetHandler();
-                this.view.openCanvas("canvas");
-            }
+       switch (true) {
+           case SideSheetView.isOpenCast(): this.isOpenCast();break;
+           case SideSheetView.isOpenGameProperties() : this.openGameProperties(); break;
+           case SideSheetView.isOpenActorProperties() : this.openActorProperties(); break;
+           default :SideSheetView.closeSheetHandler(); this.view.openCanvas("canvas"); break;
+       }
     }
 
     openCast(){
@@ -154,7 +154,7 @@ class Editor {
         var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
         this.model.sceneList[scenePos].addActor(actor,actorPos);
         this.selectScene(sceneID); //necesario para los comandos de deshacer
-        this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList);
+   //     this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList);
         this.selectActor(actor.id);
     }
 
@@ -182,6 +182,7 @@ class Editor {
         switch  (true) {
             case property=="image":
                 actor.image=value;
+                actor.spriteOn=true;
                 if(this.canvasView.loader.resources.hasOwnProperty(value)){
                     actor.width= this.canvasView.loader.resources[actor.image].texture.width;
                     actor.height= this.canvasView.loader.resources[actor.image].texture.height;

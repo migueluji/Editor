@@ -196,6 +196,7 @@ class DisplayActor extends PIXI.Container {
                 break;
             case "scaling" :
                 this.removeGizmo();
+                this.removeBorder();
                     
                 this.x=0;this.y=0;this.angle=0;
                 var giro=1; 
@@ -235,6 +236,7 @@ class DisplayActor extends PIXI.Container {
                 break;   
             case "scalingNoUniform" : 
                 this.removeGizmo();
+                this.removeBorder();
                 if(this.flipX)  this.tilingSprite.scale={x:-this.tilingSprite.scale.x,y:this.tilingSprite.scale.y};
             //    console.log(this.f)
                 this.x=0;this.y=0;this.angle=0;

@@ -129,7 +129,7 @@ class CanvasView {
     }
 
     updateSelectedActor(actorID){
-        if (actorID){
+        if (actorID){ // if actorED != mull
             (this.selected) ? this.displayActor.removeGizmo() : this.selected=true;
             var displayActorIndex =this.scene.children.findIndex(i=>i.id==actorID);
             this.displayActor = this.scene.children[displayActorIndex];
@@ -192,6 +192,7 @@ class CanvasView {
         var sceneID=document.querySelector(".sceneselected").id;
         if (confirm('Are you sure you want to delete "'+this.displayActor.name+'" actor?')){
                 CmdManager.removeActorCmd(sceneID,this.displayActor.id); 
+                this.displayActor=null;
         }
     }
 
@@ -221,7 +222,7 @@ class CanvasView {
             this.position0={x:e.data.global.x,y:e.data.global.y};
             this.stage={x:this.app.stage.x,y:this.app.stage.y};
             this.mouseDown=true;
-            Command.selectActorCmd(null);
+            if (this.selected) Command.selectActorCmd(null);
         }
     }
 
@@ -237,13 +238,12 @@ class CanvasView {
          this.diff={x:position1.x-this.position0.x,y:position1.y-this.position0.y};
          this.app.stage.x = this.stage.x+this.diff.x;
          this.app.stage.y = this.stage.y+this.diff.y;
-        
        }
     }
 
     mouseStageWheel(e){
         this.zoom(e.deltaY,e.offsetX,e.offsetY);
-        if (this.displayActor) Command.selectActorCmd(this.displayActor.id);
+        if (this.selected) Command.selectActorCmd(this.displayActor.id);
     }
 
 // Utils
