@@ -75,7 +75,7 @@ class TagSelectionView {
 		this.input.value=this.tags;
 		if ("createEvent" in document) {
 			var event = document.createEvent("HTMLEvents");
-			if (this.input.id=="value") event.initEvent("input", false, true);
+			if (this.input.id=="value" || this.input.id=="tags") event.initEvent("input", false, true);
 			else event.initEvent("change", false, true);
 			this.input.dispatchEvent(event);
 			this.input.focus();

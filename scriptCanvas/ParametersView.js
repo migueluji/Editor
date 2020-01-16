@@ -16,7 +16,8 @@ class ParametersView  {
 		//	var typeOf=null;
 			switch(field){
 				case "operation" : type="select"; option=["Less","Less Equal","Equal","Greater Equal","Greater","Different"];break;
-				case "tag" : type="select"; option=Command.getTagListCmd(); break;
+				//case "tag" : type="select"; option=Command.getTagListCmd(); break;
+				case "tags" : type="tags"; break;
 				case "mode" : type="select"; option=["Down","Up","Is Over","Tap"];break;
 				case "key_Mode" : type="select"; option=["Pressed","Down","Up"];break;
 				case "actor" : type="select"; option=Command.getActorListCmd();break;
