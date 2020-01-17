@@ -20,7 +20,9 @@ class ChoosePropertyView {
 		editorFrame.appendChild(this.html);
 		
 		var parameters={Element:"Me",Property:""};
-		if (input.id!="text" && input.id!="value") {
+		console.log("input id",input.id);
+	//	if (input.id!="text" && input.id!="value") {
+		if (input.id=="property"){
 			var parameter=input.value.split(".");
 			if (parameter[0]=="") parameter[0]="Me";
 			parameters={Element:parameter[0],Property:parameter[1]};
@@ -41,6 +43,7 @@ class ChoosePropertyView {
 	}
 
 	addFields(parameters){
+		console.log("Add fields",parameters)
 		for (const field in parameters) {
 			var list=null;
 			switch(field){
@@ -77,7 +80,7 @@ class ChoosePropertyView {
 			}
 			if ("createEvent" in document) {
 				var event = document.createEvent("HTMLEvents");
-				if ((id=="value") || (id=="value_1") || (id=="value_2")|| (id=="property")) event.initEvent("input", false, true);
+				if (id!="text") event.initEvent("input", false, true);
 				else event.initEvent("change", false, true);
 				this.input.dispatchEvent(event);
 				this.input.focus();

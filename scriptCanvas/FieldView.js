@@ -8,9 +8,11 @@ class FieldView  {
 		switch(true){
 			case type=="boolean" : this.boolean(key,value); break;
 			case type=="select" : this.select(key,value,option); break;
-			case 
+			default : this.input(type,key,value,option);break;
+		/*	case 
 				(type=="input") || (type=="file") || (type=="color") || 
-				(type=="text") || (type=="tags") || (type=="key") || (type=="properties"): this.input(type,key,value,option);break;
+				(type=="text") || (type=="tags") || (type=="key") || (type=="properties"):this.input(type,key,value,option);break;
+				*/
 		}
 	}
 
@@ -173,6 +175,7 @@ class FieldView  {
 	}
 
 	openPropertiesHandler(option){
+		console.log(option);
 		new ChoosePropertyView(this.input,option);
 	}
 
