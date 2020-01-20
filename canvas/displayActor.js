@@ -15,7 +15,7 @@ class DisplayActor extends PIXI.Container {
         this.flipY=actor.flipY;
                 
         var texture = null;
-        if (actor.image) texture = loader.resources[actor.image].texture;
+        if (actor.image && loader.resources[actor.image]) texture = loader.resources[actor.image].texture;
         else texture=PIXI.Texture.WHITE;
 
         this.createSprite(actor,texture); 

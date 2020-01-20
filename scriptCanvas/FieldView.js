@@ -175,7 +175,6 @@ class FieldView  {
 	}
 
 	openPropertiesHandler(option){
-		console.log(option);
 		new ChoosePropertyView(this.input,option);
 	}
 
