@@ -86,13 +86,13 @@ class NodeView {
 			case "Animate" : icon="movie_creation";break;
 			case "Play" : icon="volume_up";break;
 			case "Move" : icon="navigation";break;
-			case "Move To" : icon="place";break;
+			case "Move_To" : icon="place";break;
 			case "Rotate" : icon="rotate_left";break;
-			case "Rotate To" : icon="rotate_90_degrees_ccw";break;
+			case "Rotate_To" : icon="rotate_90_degrees_ccw";break;
 			case "Push" : icon="call_made";break;
-			case "Push To" : icon="keyboard_tab";break;
+			case "Push_To" : icon="keyboard_tab";break;
 			case "Torque" : icon="sync";break;
-			case "Go To" : icon="input";break;
+			case "Go_To" : icon="input";break;
 			case "Add" : icon="present_to_all";break;
 			case "Remove" : icon="cancel_presentation";break;
 			case "Compare" : icon="code"; break;

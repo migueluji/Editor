@@ -1,7 +1,7 @@
 class CardView {
 
 	constructor(node,icon,color) {  
-		this.view=null;
+		var text=node.type.replace("_"," ");
 		this.html = document.createElement("div");
 		this.html.className +="mdc-card action-card";
 		this.html.innerHTML =
@@ -11,7 +11,7 @@ class CardView {
 					'<i  class="nodeIcon material-icons mdc-chip_icon">'+icon+'</i>'+
 				'</div>'+
 				'<span style="pointer-events:none" class="nodelabel mdc-list-item__text">'+
-					'<span style="pointer-events:none" class="mdc-list-item__primary-text card-title_label">'+node.type+'</span>'+
+					'<span style="pointer-events:none" class="mdc-list-item__primary-text card-title_label">'+text+'</span>'+
 				'</span>'+
 				 '<i id="close" class="chipIcon ge-chip-button material-icons">close</i>'+
 			'</div>'+

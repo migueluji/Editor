@@ -142,6 +142,7 @@ class DoSelectionView {
 			var actorID=document.querySelector(".actorselected").id;
 			var scriptID=document.querySelector(".scriptselected").id;
 			var type= e.target.parentNode.nextSibling.firstChild.innerHTML;
+			type=type.replace(" ","_");
 			var parameters=null;
 			switch(type){
 				case "Edit" :       parameters= new Object({"property":"","value":null});break;
@@ -150,13 +151,13 @@ class DoSelectionView {
 				case "Animate" :    parameters= new Object({"animation":null,"fps":24});break;
 				case "Play" :       parameters= new Object({"sound":null,"volume":1, "start":0, "pan":0});break;
 				case "Move" :       parameters= new Object({"speed":0,"angle":0});break;
-				case "Move To" :    parameters= new Object({"speed":0,"x":0,"y":0});break;
+				case "Move_To" :    parameters= new Object({"speed":0,"x":0,"y":0});break;
 				case "Rotate" :     parameters= new Object({"speed":0,"pivot_X":0,"pivot_Y":0});break;
-				case "Rotate To" :  parameters= new Object({"speed":0,"x":0,"y":0,"pivot_X":0,"pivot_Y":0});break;
+				case "Rotate_To" :  parameters= new Object({"speed":0,"x":0,"y":0,"pivot_X":0,"pivot_Y":0});break;
 				case "Push" :       parameters= new Object({"force":0,"angle":0});break;
-				case "Push To" :    parameters= new Object({"force":0,"x":0,"y":0});break;
+				case "Push_To" :    parameters= new Object({"force":0,"x":0,"y":0});break;
 				case "Torque" :     parameters= new Object({"angle":0});break;
-				case "Go To" :      parameters= new Object({"scene":null});break;
+				case "Go_To" :      parameters= new Object({"scene":null});break;
 				case "Add" :        parameters= new Object({"scene":null,"stop":false});break;
 				case "Remove" :     parameters= new Object({});break;
 			}

@@ -5,7 +5,6 @@ class ParametersView  {
 			Object.assign(this.parameters,parameters);
 			this.html = document.createElement("div");
 			this.html.className +="mdc-card__actions node-panel";
-			console.log("parametere¡s¡",parameters);
 			this.addFields(parameters);
 			this.addListeners();
 	}
@@ -13,10 +12,8 @@ class ParametersView  {
 	addFields(parameters){
 		for (const field in parameters) {
 			var option=null;
-		//	var typeOf=null;
 			switch(field){
 				case "operation" : type="select"; option=["Less","Less Equal","Equal","Greater Equal","Greater","Different"];break;
-				//case "tag" : type="select"; option=Command.getTagListCmd(); break;
 				case "tags" : type="tags"; break;
 				case "mode" : type="select"; option=["Down","Up","Is Over","Tap"];break;
 				case "key_Mode" : type="select"; option=["Pressed","Down","Up"];break;

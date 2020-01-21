@@ -408,7 +408,7 @@
 									},
 									"nodeListTrue": [
 										{
-											"type": "Go To",
+											"type": "Go_To",
 											"parameters": {
 												"scene": "End"
 											}
