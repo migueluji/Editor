@@ -1,0 +1,204 @@
+.canvas{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.scriptcanvas{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.script-background{
+    position: absolute;
+    width: 10000px;
+    height: 10000px;
+}
+.init {
+    margin: 64px auto 0px auto;
+    width: 16px;
+    height: 16px;
+    background-color: #76ff03;
+    border-radius: 16px;
+    border: 2px solid lightgray;
+    pointer-events:none;
+}
+.nodelist{
+    margin: 0px 8px;
+    min-width: 168px;
+    min-height: 48px;
+    pointer-events:none;
+}
+.end{
+    margin: 0px auto 64px auto;
+    width: 36px;
+    height: 25px;
+    background-color: lightgray;
+    border-radius: 6px;
+    pointer-events:none;
+}
+.button-text{
+    font-size: 1em;
+    font-weight: bold;
+}
+.do-button{
+    background-color:var(--my-theme-do);
+}
+.if-button{
+    background-color:var(--my-theme-if);
+    bottom: 86px;
+}
+.selection-item.mdc-image-list__item{
+    margin: auto;
+    padding: 4px;
+}
+.action-circle{
+    background-color:var(--my-theme-do);
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    padding-bottom: 0px;
+    margin: auto;
+}
+.condition-circle{
+    background-color:var(--my-theme-if);
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    padding-bottom: 0px;
+    margin: auto;
+}
+.selection-icon {
+    display: inline-flex;
+    color: white;
+    cursor: default;
+    margin: 14px;
+}
+.selection-label{
+    margin: auto;
+    cursor: default;
+}
+.node{
+    overflow: hidden;
+    padding: 0px 0px;
+    display: flex;
+}
+.condition {
+    margin: auto;
+    display: inline-block;
+    pointer-events:none;
+}
+.frame {
+    position: absolute;
+    margin-top: 24px;
+    background:white;
+    border: 2px solid lightgray;
+    border-radius: 12px;
+    pointer-events:none;
+}
+.element {
+    overflow: visible;
+    width: 168px;
+    height: 48px;
+    margin: auto;
+}
+.mdc-chip {
+    height: 48px;
+    width: 168px;
+    padding: 0px;
+    border-radius: 24px;
+    background-color: #ebebeb;
+    pointer-events: auto;
+}
+.if {
+    background-color:var(--my-theme-if);
+}
+.do {
+    background-color: var(--my-theme-do);
+}
+.circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+.nodeIcon{
+    color: white;
+    position: absolute;
+    transform: translate(12px,12px);
+    pointer-events:none;
+}
+.chipIcon {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    pointer-events:auto;
+}
+.nodelabel{
+    width: 80px;
+    height: auto;
+    margin: -20px auto 0px 8px;
+    pointer-events:none;
+}
+.no{
+    float:left;
+}
+.yes{
+    float:right;
+}
+.notext{
+    position: absolute;
+    transform:translateX(-30px);
+    display: none;
+    color: gray;
+}
+.yestext{
+    position: absolute;
+    transform:translateX(178px);
+    display: none;
+    color:gray;
+}
+.action-card{
+    background-color:white;
+    width: 235px;
+    transform: translateX(0px);
+    left: auto;
+    top: auto;
+    padding: 0px;
+    display: none;
+    z-index: 10;
+    pointer-events: all;
+}
+.action-card.open{
+    display: block;
+}
+.card-title{
+    flex-direction: row;
+    color: white;
+}
+.card-title_label{
+    margin-top:16px;
+}
+.mdc-card__actions.node-panel {
+    flex-direction: column;
+    background-color: rgb(235,235,235);
+}
+.moveup{
+   transform: translateY(-52px);
+}
+.emptychip{
+    background: white;
+    border: 2px solid lightgray;
+    pointer-events: none;
+    height: 24px;
+}
+.empty{
+    height: 24px;
+}
+.card-background{
+    width: 10000px;
+    height: 10000px;
+    opacity: 0.1;
+    z-index: -1;
+    background: lightgrey;
+    position: absolute;
+    transform: translate(-5000px,-5000px);
+}
