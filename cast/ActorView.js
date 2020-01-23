@@ -36,16 +36,17 @@ class ActorView {
 	}
    
   addView(actor) {
+//	  	console.log("addView",actor);
 		this.html.id=actor.id;
 		this.html.querySelector(".mdc-list-item__text").innerHTML=actor.name.split("_").join(" ");
 		if (actor.image){// miodifica el icono por defecto por la imagen del actor
 			var span=this.html.querySelector(".mdc-list-item__graphic");
-			span.innerHTML="";
-			var image=document.createElement("IMG");
-			image.classList="mdc-list-item__graphic material-icons";
-			image.style="position:absolute;width:36px;height:auto;border-radius:unset";
-			image.src="./images/"+actor.image;
-			span.appendChild(image);
+				span.innerHTML="";
+				var image = new Image();
+				image.classList="mdc-list-item__graphic material-icons";
+				image.style="position:absolute;width:36px;height:auto;border-radius:unset";
+				image.src=app.parentGamesFolder+"/"+app.gameFolder+"/images/"+actor.image;
+				span.appendChild(image);
 		}
 	}
 

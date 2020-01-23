@@ -15,11 +15,18 @@ class DisplayActor extends PIXI.Container {
         this.flipY=actor.flipY;
                 
         var texture = null;
-        if (actor.image && loader.resources[actor.image]) texture = loader.resources[actor.image].texture;
+        var existsImage=Boolean(loader.resources[actor.image]);
+        if (actor.image && existsImage) texture = loader.resources[actor.image].texture;
         else texture=PIXI.Texture.WHITE;
 
         this.createSprite(actor,texture); 
-        if ((!actor.spriteOn && !actor.textOn) || actor.image=="") this.createBorder();
+   
+        if ((!actor.spriteOn && !actor.textOn) || actor.image=="" || !existsImage){
+            var color;
+           // console.log(loader.resources,actor.image,existsImage);
+            (!existsImage && actor.image!="") ? color=0xff0000 : color=0xaaaaaa;
+            this.createBorder(color);
+        } 
         if (actor.text && actor.textOn) this.createText(actor,cast,game);
 
         this.on('pointerdown',this.onPointerDown.bind(this))
@@ -80,11 +87,11 @@ class DisplayActor extends PIXI.Container {
         this.addChild(this.tilingSprite);
     }
 
-    createBorder(){
+    createBorder(color){
         var w = this.tilingSprite.width*this.tilingSprite.scale.x;
         var h = this.tilingSprite.height*this.tilingSprite.scale.y;
         this.border = new PIXI.Graphics();
-        this.border.lineStyle(1, 0xaaaaaa, 1, 0, true);
+        this.border.lineStyle(1, color, 1, 0, true);
         this.border.moveTo(-w/2,h/2);
         this.border.lineTo(w/2,h/2);
         this.border.lineTo(w/2,-h/2);

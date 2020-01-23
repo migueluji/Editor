@@ -50,8 +50,6 @@ class AssetSelectionView {
 	}
 
 	init(assetList,type){
-	//	if(type=="Animation") type="Image"; // the assetView is equal
-	//	console.log("init", assetList,type);
 		assetList.forEach(asset=>{
 			var assetView= new AssetView(asset,type);
 			this.addAsset(assetView);
@@ -64,16 +62,13 @@ class AssetSelectionView {
 		var i=0;
 		while (i<list.childNodes.length && name > list.childNodes[i].firstChild.nextSibling.textContent) i++;
 		list.insertBefore(assetView.html,list.childNodes[i]);
-		//this.assetList.push({"id":assetView.html.id,"name":name});
 	}
 
 	removeAsset(assetID){
 		this.html.querySelector("#"+assetID).remove();
-		//this.assetList.splice(this.assetList.findIndex(i => i.id == assetID),1);
 	}
 
 	updateSelectedAsset(assetIDList){ // assetIDList
-	//	console.log("update",this.selectedAsset,assetIDList);
 		assetIDList.forEach(assetID=>{
 			var founded = this.selectedAsset.findIndex(i=>i==assetID);
 			if (founded!=-1) 
@@ -96,8 +91,11 @@ class AssetSelectionView {
 // Handlers
 	uploadAssetHandler(e){
 		var input = this.html.querySelector("#files")
-		if (this.type=="Sound") input.accept="audio/*";
-		else input.accept="image/*";
+		if (this.type=="Sound") {
+		input.accept="audio/*";
+		} else {
+		input.accept="image/*";
+		}
 		input.value="";
 		input.click();
 	}
@@ -111,23 +109,23 @@ class AssetSelectionView {
 				j++;
 			};
 			if (j==list.length) {
-				Command.addAssetCmd(files[i].name,this.type);
+				Command.uploadFileCmd(files[i],this.type);
 			}
 			else {
 				if(confirm('The file "'+files[i].name+'" already exist. Do you want to replace it?')){
-					Command.removeAssetCmd(list[j].parentNode.parentNode.id,this.type);
-					Command.addAssetCmd(files[i].name,this.type);
+					Command.removeAssetCmd(list[j].parentNode.parentNode.id,this.type);									
+					Command.uploadFileCmd(files[i],this.type);
 				}
 			}
 		}
 		this.updateLoader();
 	}
-
+	
 	removeAssetHandler(){
-		if (this.selectedAsset){ 
+		if (this.selectedAsset){
 			var name=document.querySelector("#"+this.selectedAsset).firstChild.nextSibling.textContent;
-			if (confirm('Are you sure you want to delete "'+name+'" asset?')){
-				Command.removeAssetCmd(this.selectedAsset,this.type)
+			if (confirm('Are you sure you want to delete "'+name+'" asset?')){				
+				Command.deleteFileCmd(this.selectedAsset, name, this.type)
 			}
 		}
 		this.updateLoader();
@@ -146,9 +144,9 @@ class AssetSelectionView {
 			this.assetList=[];
 			if ("createEvent" in document) {
 				var event = document.createEvent("HTMLEvents");
-				if (this.input.id=="value" || this.input.id=="animation" || 
-					this.input.id=="sound" || this.input.id=="soundtrack") 
+				if (this.input.id=="value" || this.input.id=="animation" || this.input.id=="sound_File"){
 						event.initEvent("input", false, true);
+				}
 				else event.initEvent("change", false, true);
 				this.input.dispatchEvent(event);
 				this.input.focus();

@@ -47,7 +47,7 @@ class CanvasView {
     }
 
     loadInitImages(imageList){
-            this.loader = new PIXI.Loader("./images");
+            this.loader = new PIXI.Loader(app.parentGamesFolder+"/"+app.gameFolder+"/images");
             this.loader.add(imageList);
             this.loader.onLoad.add((loader,resource) => {
                 console.log(resource.name," loaded");

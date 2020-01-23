@@ -29,7 +29,7 @@ class Editor {
         this.sideSheetView=new SideSheetView();
             this.gamePropertiesView = new GamePropertiesView(gameModel);
             this.sideSheetView.addView(this.gamePropertiesView.html);
-            this.castView = new CastView(this.model.sceneList[this.selectedSceneIndex].actorList);
+            this.castView = new CastView(this.model.sceneList[this.selectedSceneIndex].actorList,this.model.imageList);
             this.sideSheetView.addView(this.castView.html);
             this.actorPropertiesView = new ActorPropertiesView(this.model.sceneList[this.selectedSceneIndex].actorList[0]);
             this.sideSheetView.addView(this.actorPropertiesView.html);
@@ -73,17 +73,17 @@ class Editor {
         var saveToFile={};
         Object.assign(saveToFile,this.model);
         delete saveToFile.fontList;
-        File.save("game.json",JSON.stringify(saveToFile, (key,value)=>{if(key!="id")return value}, '\t'));
+        delete saveToFile.imageList;
+        delete saveToFile.soundList;
+        File.save(JSON.stringify(saveToFile, (key,value)=>{if(key!="id")return value}, '\t'));
      }
 
     playGame(){
-        console.log("play");
         var gameData={};
         Object.assign(gameData,this.model);
-       // delete gameData.fontList;
         gameData=JSON.stringify(gameData, (key,value)=>{if(key!="id")return value}, '\t');
         localStorage.setItem("localStorage_GameData",gameData);
-        var win=window.open("/engine","_blank");
+        var win=window.open("../engine","_blank");
         win.focus();
     }
 
@@ -119,7 +119,7 @@ class Editor {
         this.drawerScenesView.updateSelectedScene(sceneID);
         this.appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
         this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model.properties); // actualiza el canvas
-        this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList); //update castView
+        this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model.imageList); //update castView
         if (oldSelectedSceneIndex!=this.selectedSceneIndex) this.selectedActorIndex=null;
         switch (true) {
            case SideSheetView.isOpenCast(): this.openCast();break;
@@ -130,7 +130,7 @@ class Editor {
     }
 
     openCast(){
-        this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList);
+        this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model.imageList);
         var actorID=null;
         if (this.selectedActorIndex!=null) actorID=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].id;
         this.castView.updateSelectedActor(actorID);
@@ -155,7 +155,7 @@ class Editor {
         var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
         this.model.sceneList[scenePos].addActor(actor,actorPos);
         this.selectScene(sceneID); //necesario para los comandos de deshacer
-        this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList); // update the cast view
+        this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model.imageList); // update the cast view
         this.selectActor(actor.id);
     }
 
@@ -363,58 +363,6 @@ class Editor {
         var index = this.model.tagList.findIndex(i=>i==tag);
         this.model.tagList.splice(index,1);  
     }
-// ASSET
-    openAssets(input,name,option){ // input (html field that makes the call) name (asset name) option (image, sound, font, animation)
-        var assetList=[];
-        switch (option){
-            case "Sound" : assetList=this.model.soundList; break;
-            case "Font"  : assetList=this.model.fontList; break;
-            default: assetList=this.model.imageList; ; break; // images and animations
-        }
-      //  console.log(assetList,input,option,this.canvasView);
-        this.assetDialog = new AssetSelectionView(assetList,input,option,this.canvasView);
-
-        var assetNameList=name.split(",");// selected asset (can include multiple names for animations)
-        var assetIDList=[];
-        assetNameList.forEach(name=>{
-            var index=assetList.findIndex(i=>i.name==name);
-           if (index!=-1) assetIDList.push(assetList[index].id);
-        })
-        this.assetDialog.updateSelectedAsset(assetIDList); // one or more selected asset elements
-
-        var editorFrame=document.querySelector(".editor-frame-root");
-        editorFrame.appendChild(this.assetDialog.html);
-        this.openAssetsDialog=true;
-    }
-
-    selectAsset(assetID){
-        var assetIDList=[];
-        assetIDList[0]=assetID;
-        this.assetDialog.updateSelectedAsset(assetIDList);
-    }
-
-    addAsset(name,type){
-        var asset=new Object({"id":Utils.id(), "name":name});
-        this.model.addAsset(asset,type);
-        if (type == "Image" || type == "Animation") this.canvasView.loadImage(asset.name);
-        var assetView = new AssetView(asset,type);
-        this.assetDialog.addAsset(assetView);
-    }
-
-    removeAsset(assetID,type){
-        if (type == "Image" || type == "Animation") { // update the loader
-            var index=this.model.imageList.findIndex(i=>i.id==assetID);
-            this.canvasView.deleteImage(this.model.imageList[index].name);
-        }
-        this.model.removeAsset(assetID,type);
-        this.assetDialog.removeAsset(assetID);
-    }
-
-    closeAsset(){
-        var node=document.querySelector(".dialog-full-screen");
-        node.parentNode.removeChild(node);
-        this.openAssetsDialog=false;
-    }
 
 // SCRIPTING this.sceneID,this.actorID,this.scriptID,this.nodeID,this.if
     addNode(sceneID,actorID,scriptID,insert,node){
@@ -506,4 +454,68 @@ class Editor {
         })
         return (newProperties);
     }
+
+// ASSET
+    openAssets(input,name,option){ // input (html field that makes the call) name (asset name) option (image, sound, font, animation)
+        var assetList=[];
+        switch (option){
+            case "Sound" : assetList=this.model.soundList; break;
+            case "Font"  : assetList=this.model.fontList; break;
+            default: assetList=this.model.imageList; ; break; // images and animations
+        }
+    //  console.log(assetList,input,option,this.canvasView);
+        this.assetDialog = new AssetSelectionView(assetList,input,option,this.canvasView);
+
+        var assetNameList=name.split(",");// selected asset (can include multiple names for animations)
+        var assetIDList=[];
+        assetNameList.forEach(name=>{
+            var index=assetList.findIndex(i=>i.name==name);
+        if (index!=-1) assetIDList.push(assetList[index].id);
+        })
+        this.assetDialog.updateSelectedAsset(assetIDList); // one or more selected asset elements
+
+        var editorFrame=document.querySelector(".editor-frame-root");
+        editorFrame.appendChild(this.assetDialog.html);
+        this.openAssetsDialog=true;
+    }
+
+    selectAsset(assetID){
+        var assetIDList=[];
+        assetIDList[0]=assetID;
+        this.assetDialog.updateSelectedAsset(assetIDList);
+    }
+
+    uploadFile(file,type){
+        var formData = new FormData();
+      	formData.append('asset-file', file, file.name); 				
+    	File.uploadFile(app.gameFolder, file.name, formData, type);			
+    }
+
+    addAsset(name, type){
+        var asset=new Object({"id":Utils.id(), "name":name});
+        this.model.addAsset(asset,type);
+        if (type == "Image" || type == "Animation") this.canvasView.loadImage(asset.name);
+        var assetView = new AssetView(asset,type);
+        this.assetDialog.addAsset(assetView);
+    }
+
+    deleteFile(assetID, fileName, type){    	
+            File.deleteFile(app.gameFolder, assetID, fileName, type);
+    }
+    
+    removeAsset(assetID, type){
+        if (type == "Image" || type == "Animation") { // update the loader
+            var index=this.model.imageList.findIndex(i=>i.id==assetID);
+            this.canvasView.deleteImage(this.model.imageList[index].name);
+        }
+        this.model.removeAsset(assetID,type);
+        this.assetDialog.removeAsset(assetID);
+    }
+
+    closeAsset(){
+        var node=document.querySelector(".dialog-full-screen");
+        node.parentNode.removeChild(node);
+        this.openAssetsDialog=false;
+    }
+
 }

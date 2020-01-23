@@ -1,6 +1,6 @@
 class CastView {
 
-    constructor(cast) {   
+    constructor(cast,imageList) {   
 		 this.html = document.createElement("div");
 		 this.html.className +="cast side-sheet-content";
 		 this.html.style.display="none";
@@ -21,7 +21,7 @@ class CastView {
 		'</div>';
 		this.html.querySelector("#closebutton").addEventListener("click",SideSheetView.closeSheetHandler);
 		this.html.querySelector("#addactor").addEventListener("click",this.addActorHandler.bind(this));
-		this.update(cast);
+		this.update(cast,imageList);
 	}
 
 	addActor(actorView,actorPos){
@@ -47,15 +47,19 @@ class CastView {
 	}
 
 // Utils
-	update(cast){
+	update(cast,imageList){
 		var element =this.html.querySelector(".mdc-list "); 
 		while (element.firstChild){ // elimina todos los elementos de la lista
 			element.removeChild(element.firstChild);
 		};
 		if (cast) 
 			cast.forEach(actor=>{ // añade los nuevos elementos a la lista
-				var actorView = new ActorView();
-				actorView.addView(actor);
+				var actorView  = new ActorView();
+				var actorData={id:actor.id,name:actor.name};
+			//	console.log(imageList,imageList.find(i=>i.name==actor.image));
+				if (!imageList.find(i=>i.name==actor.image)) actorData.image=null;
+				else actorData.image=actor.image;
+				actorView.addView(actorData);
 				this.addActor(actorView,0);
 			})
 	}

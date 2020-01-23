@@ -112,9 +112,20 @@
 <body class="mdc-typography">
 	<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 	<script>
-
-		var app=new App("./games/game.json");
-
+	/*    
+		var userId="<?php echo $_POST['iduser'];?>";
+		var userName="<?php echo $_POST['nameuser'];?>";
+		var gameId="<?php echo $_POST['idgame'];?>";
+		var gameName="<?php echo $_POST['gamename'];?>";
+		var gameFolder="<?php echo $_POST['gamefolder'];?>";
+		var parentGamesFolder="https://<?php echo $_SERVER['SERVER_NAME'];?>/games-js";
+	*/
+		userId=1455;
+		userName="Editor";
+		gameId=Utils.id();
+		gameFolder="prueba";
+		parentGamesFolder="http://localhost/games"		
+		var app=new App(userId, gameId, gameFolder, parentGamesFolder);
 	</script>
 	<script type="text/javascript">
 		let type = "WebGL"

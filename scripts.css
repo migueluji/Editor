@@ -69,12 +69,9 @@
 }
 .selection-icon {
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 56px;
-    height: 56px;
     color: white;
     cursor: default;
+    margin: 14px;
 }
 .selection-label{
     margin: auto;
@@ -125,7 +122,6 @@
 }
 .nodeIcon{
     color: white;
-    font-weight: bod;
     position: absolute;
     transform: translate(12px,12px);
     pointer-events:none;

@@ -149,7 +149,7 @@ class DoSelectionView {
 				case "Spawn" :      parameters= new Object({"actor":null,"x":0,"y":0,"angle":0});break;
 				case "Delete" :     parameters= new Object({});break;
 				case "Animate" :    parameters= new Object({"animation":null,"fps":24});break;
-				case "Play" :       parameters= new Object({"sound":null,"volume":1, "start":0, "pan":0});break;
+				case "Play" :       parameters= new Object({"sound_File":null});break;
 				case "Move" :       parameters= new Object({"speed":0,"angle":0});break;
 				case "Move_To" :    parameters= new Object({"speed":0,"x":0,"y":0});break;
 				case "Rotate" :     parameters= new Object({"speed":0,"pivot_X":0,"pivot_Y":0});break;

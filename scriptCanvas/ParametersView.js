@@ -21,7 +21,7 @@ class ParametersView  {
 				case "scene" : type="select"; option=Command.getSceneListCmd(); break;
 				case "animation" : type="file"; option="Animation"; break;
 				case "key" : type="key"; break;
-				case "sound" : type="file";option="Sound" ; break;
+				case "sound_File" : type="file";option="Sound" ; break;
 				case "property" : type="properties";(parameters.hasOwnProperty("value")) ? option="All" : option="Boolean";break;
 				case "value": {
 					var property=parameters["property"].split(".")[1];
