@@ -1,0 +1,815 @@
+{
+    "name": "Tower Bridge Defense ",
+    "width": 960,
+    "height": 540,
+    "cameraX": 0,
+    "cameraY": 0,
+    "cameraAngle": 0,
+    "cameraZoom": 1,
+    "gravityX": 0,
+    "gravityY": 9.8,
+    "sound": "assets/audio/main.wav",
+    "playSound": false,
+    "loop": true,
+    "activeScene": "Scene1",
+    "score": 0,
+    "stopwatch": 6000,
+    "assets": {
+        "images": {},
+        "fonts": {
+            "LilitaOne": "assets/fonts/LilitaOne-Regular.ttf"
+        }
+    },
+    "sceneList": {
+        "Scene1": {
+            "number": 0,
+            "actorList": {
+                "EnviromentBackground": {
+                    "x": 0,
+                    "y": -25,
+                    "width": 1920,
+                    "height": 1080,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "spriteName": "assets/images/env_bg.png"
+                },
+                "EnviromentGherkin": {
+                    "x": 0,
+                    "y": -25,
+                    "width": 1920,
+                    "height": 1080,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "spriteName": "assets/images/env_Gherkin.png"
+                },
+                "EnviromentBigBen": {
+                    "x": 0,
+                    "y": -25,
+                    "width": 1920,
+                    "height": 1080,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "spriteName": "assets/images/env_BigBen.png"
+                },
+                "EnviromentBank": {
+                    "x": 0,
+                    "y": -25,
+                    "width": 1920,
+                    "height": 1080,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "spriteName": "assets/images/env_Bank.png"
+                },
+                "EnviromentRiver": {
+                    "x": 0,
+                    "y": 490,
+                    "width": 1920,
+                    "height": 1080,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "spriteName": "assets/images/env_RiverBase.png"
+                },
+                "EnviromentTowerLeft": {
+                    "x": -400,
+                    "y": 0,
+                    "width": 672,
+                    "height": 1080,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "spriteName": "assets/images/env_TowerFull.png",
+                    "scriptList": {
+                        "Test": [
+                            {
+                                "type": "Pointer",
+                                "mode": "down",
+                                "onActor": true,
+                                "branchTrue": [
+                                    {
+                                        "type": "PlaySound",
+                                        "soundFile": "assets/audio/test.wav",
+                                        "play": true,
+                                        "volume": 1,
+                                        "pan": 0.5
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "EnviromentTowerLeftUpCollider": {
+                    "x": -400,
+                    "y": -180,
+                    "width": 150,
+                    "height": 300,
+                    "tags": {"Limits": true},
+                    "physics": true,
+                    "physicMode": "static"
+                },
+                "EnviromentTowerLeftDownCollider": {
+                    "x": -420,
+                    "y": 100,
+                    "width": 150,
+                    "height": 150,
+                    "tags": {"Limits": true},
+                    "physics": true,
+                    "physicMode": "static"
+                },
+                "EnviromentTowerRight": {
+                    "x": 400,
+                    "y": 0,
+                    "width": 672,
+                    "height": 1080,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "flipX": -1,
+                    "spriteName": "assets/images/env_TowerFull.png"
+                },
+                "EnviromentTowerRightUpCollider": {
+                    "x": 400,
+                    "y": -180,
+                    "width": 150,
+                    "height": 300,
+                    "tags": {"Limits": true},
+                    "physics": true,
+                    "physicMode": "static"
+                },
+                "EnviromentTowerRightDownCollider": {
+                    "x": 420,
+                    "y": 100,
+                    "width": 150,
+                    "height": 150,
+                    "tags": {"Limits": true},
+                    "physics": true,
+                    "physicMode": "static"
+                },
+                "EnviromentPlatformBridgeLeft": {
+                    "x": -250,
+                    "y": 205,
+                    "width": 801,
+                    "height": 192,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "spriteName": "assets/images/env_PlatformBridge.png"
+                },
+                "EnviromentPlatformBridgeLeftCollider": {
+                    "x": -220,
+                    "y": 200,
+                    "width": 300,
+                    "height": 50,
+                    "tags": {"Ground": true},
+                    "physics": true,
+                    "physicMode": "static"
+                },
+                "EnviromentPlatformBridgeRight": {
+                    "x": 250,
+                    "y": 205,
+                    "width": 801,
+                    "height": 192,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "flipX": -1,
+                    "spriteName": "assets/images/env_PlatformBridge.png"
+                },
+                "EnviromentPlatformBridgeRightCollider": {
+                    "x": 220,
+                    "y": 200,
+                    "width": 300,
+                    "height": 50,
+                    "tags": {"Ground": true},
+                    "physics": true,
+                    "physicMode": "static"
+                },
+                "EnviromentPlatformLeft": {
+                    "x": -250,
+                    "y": 0,
+                    "width": 441,
+                    "height": 123,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "spriteName": "assets/images/env_PlatformTop.png"
+                },
+                "EnviromentPlatformLeftCollider": {
+                    "x": -250,
+                    "y": 0,
+                    "width": 200,
+                    "height": 50,
+                    "tags": {"Ground": true},
+                    "friction": 0,
+                    "physics": true,
+                    "physicMode": "static"
+                },
+                "EnviromentPlatformRight": {
+                    "x": 250,
+                    "y": 0,
+                    "width": 441,
+                    "height": 123,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "flipX": -1,
+                    "spriteName": "assets/images/env_PlatformTop.png"
+                },
+                "EnviromentPlatformRightCollider": {
+                    "x": 250,
+                    "y": 0,
+                    "width": 200,
+                    "height": 50,
+                    "tags": {"Ground": true},
+                    "friction": 0, 
+                    "physics": true,
+                    "physicMode": "static"
+                },
+                "EnviromentUFOLegs": {
+                    "x": 0,
+                    "y": 145,
+                    "width": 483,
+                    "height": 116,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "spriteName": "assets/images/env_UfoLegsBack.png"
+                },
+                "EnviromentUFOFront": {
+                    "x": 0,
+                    "y": 113,
+                    "width": 1250,
+                    "height": 300,  
+                    "scaleX": 0.4,
+                    "scaleY": 0.4,
+                    "spriteName": "assets/images/env_UfoFront.png"
+                },
+                "EnviromentUFOBodyCenter": {
+                    "x": 0,
+                    "y": 90,
+                    "width": 150,
+                    "height": 65,
+                    "tags": {"Ground": true},
+                    "physics": true,
+                    "physicMode": "static"
+                },
+                "EnviromentUFOBodyWings": {
+                    "x": 0,
+                    "y": 105,
+                    "width": 500,
+                    "height": 17,
+                    "tags": {"Ground": true},
+                    "physics": true,
+                    "physicMode": "static"
+                },
+                "EnviromentUFOBodyLeftSlope": {
+                    "x": -120,
+                    "y": 85,
+                    "angle": -22,
+                    "width": 100,
+                    "height": 19,
+                    "tags": {"Ground": true},
+                    "physics": true,
+                    "physicMode": "static"
+                },
+                "EnviromentUFOBodyRightSlope": {
+                    "x": 120,
+                    "y": 85,
+                    "angle": 22,
+                    "width": 100,
+                    "height": 19,
+                    "tags": {"Ground": true},
+                    "physics": true,
+                    "physicMode": "static"
+                },
+                "Player": {
+                    "x": -290,
+                    "y": -190,
+                    "width": 400,
+                    "height": 400,
+                    "scaleX": 0.10,
+                    "scaleY": 0.10,
+                    "fixedRotation": true,
+                    "physics": true,
+                    "spriteName": "assets/images/character_stand.png",
+                    "scrollX": 1,
+                    "scrollY": 0,
+                    "scriptList": {
+                        "TestLive": [
+                            {
+                                "type": "Keyboard",
+                                "key": "Enter",
+                                "mode": "down",
+                                "branchTrue": [
+                                    {
+                                        "type": "Edit",
+                                        "element": "Me",
+                                        "property": "live",
+                                        "value": "false"
+                                    }
+                                ]
+                            }
+                        ],
+                        "CameraMovement": [
+                            {
+                                "type": "Edit",
+                                "element": "Render",
+                                "property": "cameraX",
+                                "value": "Player.x * 0.3"
+                            },
+                            {
+                                "type": "Edit",
+                                "element": "Render",
+                                "property": "cameraY",
+                                "value": "Player.y * 0.3"
+                            }
+                        ],
+                        "PlayerMovement": [
+                            {
+                                "type": "Keyboard",
+                                "key": "ArrowLeft",
+                                "mode": "down",
+                                "branchTrue": [
+                                    {
+                                        "type": "Push",
+                                        "strength": "30",
+                                        "angle": "180.0"
+                                    },
+                                    {
+                                        "type": "Edit",
+                                        "element": "Player",
+                                        "property": "flipX",
+                                        "value": -1
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Keyboard",
+                                "key": "ArrowRight",
+                                "mode": "down",
+                                "branchTrue": [
+                                    {
+                                        "type": "Push",
+                                        "strength": "30",
+                                        "angle": "0.0"
+                                    },
+                                    {
+                                        "type": "Edit",
+                                        "element": "Player",
+                                        "property": "flipX",
+                                        "value": 1
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Keyboard",
+                                "key": "ArrowUp",
+                                "mode": "down",
+                                "branchTrue": [
+                                    {
+                                        "type": "Collide",
+                                        "tag": "Ground",
+                                        "branchTrue": [
+                                            {
+                                                "type": "Push",
+                                                "strength": 50,
+                                                "angle": 90.0
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Collide",
+                                "tag": "Sink",
+                                "branchTrue": [
+                                    {
+                                        "type": "ChangeScene",
+                                        "scene": "Scene1"
+                                    }
+                                ]
+                            }
+                        ],
+                        "Shooting": [
+                            {
+                                "type": "Keyboard",
+                                "key": "Space",
+                                "mode": "down",
+                                "branchTrue": [
+                                    {
+                                        "type": "Spawn",
+                                        "actor": "Bullet",
+                                        "x": 0,
+                                        "y": -5,
+                                        "angle": 0
+                                    }
+                                ]
+                            }
+                        ],
+                        "Animation": [
+                            {
+                                "type": "Compare",
+                                "leftExpression": "abs(Me.velocityX)",
+                                "relationalOperator": ">",
+                                "rightExpression": "0",
+                                "branchTrue": [
+                                    {
+                                        "type": "Animate",
+                                        "FPS": 24,
+                                        "animationList": [
+                                            "assets/images/character_w1.png",
+                                            "assets/images/character_w3.png",
+                                            "assets/images/character_w4.png",
+                                            "assets/images/character_w5.png",
+                                            "assets/images/character_w6.png"
+                                        ]
+                                    }
+                                ],
+                                "branchFalse": [
+                                    {
+                                        "type": "Edit",
+                                        "element": "Player",
+                                        "property": "spriteName",
+                                        "value": "'assets/images/character_stand.png'"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "Bullet": {
+                    "live": false,
+                    "x": 350,
+                    "y": -50,
+                    "width": 647,
+                    "height": 310,
+                    "scaleX": 0.05,
+                    "scaleY": 0.05,
+                    "spriteName": "assets/images/part_rocket.png",
+                    "tags": {"Bullet": true},
+                    "scriptList": {
+                        "FirstDirection": [
+                            {
+                                "type": "Check",
+                                "element": "Me",
+                                "property": "first",
+                                "branchTrue": [
+                                    {
+                                        "type": "Edit",
+                                        "element": "Me",
+                                        "property": "movementDirection",
+                                        "value": "Player.flipX"
+                                    },
+                                    {
+                                        "type": "Edit",
+                                        "element": "Me",
+                                        "property": "flipX",
+                                        "value": "Me.movementDirection"
+                                    },
+                                    {
+                                        "type": "Edit",
+                                        "element": "Me",
+                                        "property": "first",
+                                        "value": "false"
+                                    }
+                                ]
+                            }
+                        ],
+                        "Movement": [
+                            {
+                                "type": "Move",
+                                "speed": "1000 * Me.movementDirection",
+                                "angle": "0"
+                            }
+                        ],
+                        "Destroyer": [
+                            {
+                                "type": "Collide",
+                                "tag": "Limits",
+                                "branchTrue": [
+                                    {
+                                        "type": "Destroy"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Collide",
+                                "tag": "Alien",
+                                "branchTrue": [
+                                    {
+                                        "type": "Destroy"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "first": true,
+                    "movementDirection": 1
+                },
+                "Alien": {
+                    "live": false,
+                    "x": 0,
+                    "y": 0,
+                    "width": 560,
+                    "height": 480,
+                    "scaleX": 0.07,
+                    "scaleY": 0.07,
+                    "fixedRotation": true,
+                    "tags": {"Alien": true},
+                    "physics": true,
+                    "spriteName": "assets/images/char_enemy_alienShip.png",
+                    "scriptList": {
+                        "FirstDirection": [
+                            {
+                                "type": "Check",
+                                "element": "Me",
+                                "property": "first",
+                                "branchTrue": [
+                                    {
+                                        "type": "Edit",
+                                        "element": "Me",
+                                        "property": "movementDirection",
+                                        "value": "(-1 + 2 * round(random(0, 1)))"
+                                    },
+                                    {
+                                        "type": "Edit",
+                                        "element": "Me",
+                                        "property": "flipX",
+                                        "value": "Me.movementDirection"
+                                    },
+                                    {
+                                        "type": "Edit",
+                                        "element": "Me",
+                                        "property": "first",
+                                        "value": "false"
+                                    }
+                                ]
+                            }
+                        ],
+                        "Movement": [
+                            {
+                                "type": "Push",
+                                "strength": "1.0 * Me.movementDirection",
+                                "angle": "0"
+                            },
+                            {
+                                "type": "Compare",
+                                "leftExpression": "abs(Me.velocityX)",
+                                "relationalOperator": ">",
+                                "rightExpression": "5",
+                                "branchTrue": [
+                                    {
+                                        "type": "Edit",
+                                        "element": "Me",
+                                        "property": "velocityX",
+                                        "value": "5 * Me.movementDirection"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Collide",
+                                "tag": "Limits",
+                                "branchTrue": [
+                                    {
+                                        "type": "Edit",
+                                        "element": "Me",
+                                        "property": "movementDirection",
+                                        "value": "Me.movementDirection * -1"
+                                    },
+                                    {
+                                        "type": "Edit",
+                                        "element": "Me",
+                                        "property": "flipX",
+                                        "value": "Me.movementDirection"
+                                    }
+                                ]
+                            }
+                        ],
+                        "BulletDestroyer": [
+                            {
+                                "type": "Collide",
+                                "tag": "Bullet",
+                                "branchTrue": [
+                                    {
+                                        "type": "Edit",
+                                        "element": "Game",
+                                        "property": "score",
+                                        "value": "Game.score + 100"
+                                    },
+                                    {
+                                        "type": "Destroy"
+                                    }
+                                ]
+                            }
+                        ],
+                        "SinkDestroyer": [
+                            {
+                                "type": "Collide",
+                                "tag": "Sink",
+                                "branchTrue": [
+                                    {
+                                        "type": "Destroy"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "first": true,
+                    "movementDirection": 1
+                },
+                "AlienSpawner": {
+                    "live": true,
+                    "x": 0,
+                    "y": -250,
+                    "width": 50,
+                    "height": 50,
+                    "scriptList": {
+                        "Spawner": [
+                            {
+                                "type": "Timer",
+                                "value": "3",
+                                "branchTrue": [
+                                    {
+                                        "type": "Spawn",
+                                        "actor": "Alien",
+                                        "x": "random(-200,200)",
+                                        "y": 0,
+                                        "angle": 0
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "Sink": {
+                    "x": 0,
+                    "y": 250,
+                    "width": 200,
+                    "height": 50,
+                    "tags": {"Sink": true}
+                },
+                "Score": {
+                    "x": 100,
+                    "y": -200,
+                    "screen": true,
+                    "width": 100,
+                    "height": 50,
+                    "text": "${Game.score}",
+                    "font": "LilitaOne",
+                    "textAlign": "center",
+                    "fontColor": "#333333"
+                },
+                "Mousessss": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 100,
+                    "height": 50,
+                    "text": "${Game.mouseX} , ${Game.mouseY}",
+                    "font": "LilitaOne",
+                    "textAlign": "center",
+                    "fontColor": "#333333"
+                },
+                "Stopwatch": {
+                    "x": -100,
+                    "y": -200,
+                    "screen": true,
+                    "width": 100,
+                    "height": 50,
+                    "text": "${Game.stopwatch}",
+                    "font": "LilitaOne",
+                    "textAlign": "center",
+                    "fontColor": "#ffffff",
+                    "scriptList": {
+                        "Stopwatch": [
+                            {
+                                "type": "Timer",
+                                "value": "1",
+                                "branchTrue": [
+                                    {
+                                        "type": "Edit",
+                                        "element": "Game",
+                                        "property": "stopwatch",
+                                        "value": "Game.stopwatch - 1"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Compare",
+                                "leftExpression": "Game.stopwatch",
+                                "relationalOperator": "<=",
+                                "rightExpression": "0",
+                                "branchTrue": [
+                                    {
+                                        "type": "Edit",
+                                        "element": "Game",
+                                        "property": "stopwatch",
+                                        "value": "6"
+                                    },
+                                    {
+                                        "type": "AddScene",
+                                        "scene": "Scene2",
+                                        "stop": true
+                                    }
+                                ]
+                            }
+
+                        ]
+                    }
+                },
+                "PointerTest": {
+                    "x": -200,
+                    "y": -150,
+                    "width": 512,
+                    "height": 410,
+                    "scaleX": 0.2,
+                    "scaleY": 0.2,
+                    "spriteName": "assets/images/bus1.png",
+                    "scriptList": {
+                        "Test": [
+                            {
+                                "type": "Pointer",
+                                "mode": "down",
+                                "onActor": true,
+                                "branchTrue": [
+                                    {
+                                        "type": "Edit", 
+                                        "element": "Game",
+                                        "property": "stopwatch",
+                                        "value": "17"
+                                    },
+                                    {
+                                        "type": "RemoveScene"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Keyboard",
+                                "key": "Enter",
+                                "mode": "down",
+                                "branchTrue": [
+                                    
+                                    {
+                                        "type": "AddScene",
+                                        "scene": "Scene2",
+                                        "stop": true
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "MoveTo",
+                                "speed": "100",
+                                "targetX": "Game.mouseX",
+                                "targetY": "Game.mouseY"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "Scene2": {
+            "number": 1,
+            "actorList": {
+                
+                "PointerTest": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 512,
+                    "height": 410,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "spriteName": "assets/images/bus1.png"
+                },
+                "TestESCENAAAAAAAS": { 
+                    "x": 0,
+                    "y": 0,
+                    "width": 100,
+                    "height": 50,
+                    "text": "${Game.score}",
+                    "font": "LilitaOne",
+                    "textAlign": "center",
+                    "fontColor": "#ffffff",
+                    "scriptList": {
+                        "RestartScene": [
+                            {
+                                "type": "Keyboard",
+                                "key": "Enter",
+                                "mode": "down",
+                                "branchTrue": [
+                                    
+                                    {
+                                        "type": "RemoveScene"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Keyboard",
+                                "key": "Space",
+                                "mode": "down",
+                                "branchTrue": [
+                                    {
+                                        "type": "Edit",
+                                        "element": "PointerTest",
+                                        "property": "x",
+                                        "value": "PointerTest.x + 1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

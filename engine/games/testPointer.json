@@ -1,0 +1,26 @@
+{
+    "name": "Tower Bridge Defense ",
+    "width": 960,
+    "height": 540,
+    "cameraX": 0,
+    "cameraY": 0,
+    "cameraAngle": 0,
+    "cameraZoom": 1,
+    "gravityX": 0,
+    "gravityY": 9.8,
+    "activeScene": "Scene1",
+    "score": 0,
+    "stopwatch": 60,
+    "assets": {
+        "images": {},
+        "fonts": {
+            "LilitaOne": "assets/fonts/LilitaOne-Regular.ttf"
+        }
+    },
+    "sceneList": {
+        "Scene1": {
+            "number": 0,
+            "actorList": {}
+        }
+    }
+}
