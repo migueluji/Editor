@@ -491,7 +491,6 @@ class Editor {
     }
 
     addAsset(name, type){
-        console.log("addAsset",name,type)
         var asset=new Object({"id":Utils.id(), "name":name});
         this.model.addAsset(asset,type);
         if (type == "Image" || type == "Animation") this.canvasView.loadImage(asset.name);

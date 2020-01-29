@@ -52,12 +52,12 @@ class CanvasView {
             else this.loader.add(imageList);   
              
             this.loader.onLoad.add((loader,resource) => {
-                console.log(resource.name," loaded",this.loader.resources);
+                console.log(resource.name," loaded");
             });
             this.loader.load(()=>{
-                console.log("Load finished!",this.loader.resources);
+                console.log("Load finished!");
                 this.initApp();
-               if (this.loader.resources[""]) delete this.loader.resources[""];
+                if (this.loader.resources[""]) delete this.loader.resources[""];
             });
            
     }
@@ -134,6 +134,7 @@ class CanvasView {
 
     updateSelectedActor(actorID){
         if (actorID){ // if actorED != mull
+            console.log(actorID,this.selected,this.displayActor);
             (this.selected) ? this.displayActor.removeGizmo() : this.selected=true;
             var displayActorIndex =this.scene.children.findIndex(i=>i.id==actorID);
             this.displayActor = this.scene.children[displayActorIndex];
@@ -197,6 +198,7 @@ class CanvasView {
         if (confirm('Are you sure you want to delete "'+this.displayActor.name+'" actor?')){
                 CmdManager.removeActorCmd(sceneID,this.displayActor.id); 
                 this.displayActor=null;
+                this.selected=false;
         }
     }
 
