@@ -176,7 +176,6 @@ class Editor {
     }
 
     changeActorProperty(sceneID,actorID,property,value){
-     //   console.log("change actor property",sceneID,actorID,property,value);
         var scenePos=this.model.sceneList.findIndex(i => i.id == sceneID);
         var actorPos=this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID); 
         var actor = this.model.sceneList[scenePos].actorList[actorPos];
@@ -487,11 +486,12 @@ class Editor {
 
     uploadFile(file,type){
         var formData = new FormData();
-      	formData.append('asset-file', file, file.name); 				
+        formData.append('asset-file', file, file.name); 				
     	File.uploadFile(app.gameFolder, file.name, formData, type);			
     }
 
     addAsset(name, type){
+        console.log("addAsset",name,type)
         var asset=new Object({"id":Utils.id(), "name":name});
         this.model.addAsset(asset,type);
         if (type == "Image" || type == "Animation") this.canvasView.loadImage(asset.name);

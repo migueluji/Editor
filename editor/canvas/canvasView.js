@@ -48,14 +48,18 @@ class CanvasView {
 
     loadInitImages(imageList){
             this.loader = new PIXI.Loader(app.parentGamesFolder+"/"+app.gameFolder+"/images");
-            this.loader.add(imageList);
+            if (imageList.length==0) this.loader.add("");
+            else this.loader.add(imageList);   
+             
             this.loader.onLoad.add((loader,resource) => {
-                console.log(resource.name," loaded");
+                console.log(resource.name," loaded",this.loader.resources);
             });
             this.loader.load(()=>{
-                console.log("Load finished!");
+                console.log("Load finished!",this.loader.resources);
                 this.initApp();
+               if (this.loader.resources[""]) delete this.loader.resources[""];
             });
+           
     }
 
     loadImage(image){
