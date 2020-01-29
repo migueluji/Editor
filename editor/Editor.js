@@ -149,9 +149,10 @@ class Editor {
 
 // ACTOR
     addActor(sceneID,actorPos,actor){
-        var position=this.canvasView.positionToAddActor();
-        actor.x=position.x;
-        actor.y=position.y;
+        console.log(actor);
+        // var position=this.canvasView.positionToAddActor();
+        // actor.x=position.x;
+        // actor.y=position.y;
         var scenePos = this.model.sceneList.findIndex(i => i.id == sceneID);
         this.model.sceneList[scenePos].addActor(actor,actorPos);
         this.selectScene(sceneID); //necesario para los comandos de deshacer

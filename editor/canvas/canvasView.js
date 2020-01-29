@@ -212,7 +212,8 @@ class CanvasView {
 
     addActorHandler(){
         var sceneID=document.querySelector(".sceneselected").id;
-		CmdManager.addActorCmd(sceneID,this.actorList.length);
+        var position=this.positionToAddActor();
+		CmdManager.addActorCmd(sceneID,this.actorList.length,position);
     }
 
     resize(){

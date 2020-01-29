@@ -1,10 +1,10 @@
 class AddActorCmd extends Command {
 
-    constructor (sceneID,actorPos){
+    constructor (sceneID,actorPos,position){
         super();
         this.actorPos=actorPos;
         this.sceneID=sceneID;
-        this.actor= new Actor({"id":Utils.id(),"name":this.newName(actorPos)});
+        this.actor= new Actor({"id":Utils.id(),"name":this.newName(actorPos),"x":position.x,"y":position.y});
         this.type="AddActorCmd";
         this.name="Add Actor: "+ this.actor.id;
     }
