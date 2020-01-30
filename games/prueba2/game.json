@@ -77,7 +77,7 @@
 					"sleeping": false,
 					"x": -94,
 					"y": 42,
-					"width": 218,
+					"width": 216,
 					"height": 478,
 					"scaleX": 1,
 					"scaleY": 1,
@@ -86,7 +86,7 @@
 					"collider": "Box",
 					"tags": "",
 					"spriteOn": true,
-					"image": "rockIce.png",
+					"image": "rockIceDown.png",
 					"color": "#ffffff",
 					"opacity": 1,
 					"flipX": false,
@@ -121,7 +121,12 @@
 					"restitution": 1,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
-					"scriptList": []
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": []
+						}
+					]
 				}
 			]
 		}

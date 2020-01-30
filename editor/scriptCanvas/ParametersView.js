@@ -11,42 +11,42 @@ class ParametersView  {
 
 	addFields(parameters){
 		for (const field in parameters) {
-			var option=null;
+			var list=null;
 			switch(field){
-				case "operation" : type="select"; option=["Less","Less Equal","Equal","Greater Equal","Greater","Different"];break;
+				case "operation" : type="select"; list=["Less","Less Equal","Equal","Greater Equal","Greater","Different"];break;
 				case "tags" : type="tags"; break;
-				case "mode" : type="select"; option=["Down","Up","Is Over","Tap"];break;
-				case "key_Mode" : type="select"; option=["Pressed","Down","Up"];break;
-				case "actor" : type="select"; option=Command.getActorListCmd();break;
-				case "scene" : type="select"; option=Command.getSceneListCmd(); break;
-				case "animation" : type="file"; option="Animation"; break;
+				case "mode" : type="select"; list=["Down","Up","Is Over","Tap"];break;
+				case "key_Mode" : type="select"; list=["Pressed","Down","Up"];break;
+				case "actor" : type="select"; list=Command.getActorListCmd();break;
+				case "scene" : type="select"; list=Command.getSceneListCmd(); break;
+				case "animation" : type="file"; list="Animation"; break;
 				case "key" : type="key"; break;
-				case "sound_File" : type="file";option="Sound" ; break;
-				case "property" : type="properties";(parameters.hasOwnProperty("value")) ? option="All" : option="Boolean";break;
+				case "sound_File" : type="file";list="Sound" ; break;
+				case "property" : type="properties";(parameters.hasOwnProperty("value")) ? list="All" : list="Boolean";break;
 				case "value": {
 					var property=parameters["property"].split(".")[1];
 					switch (property){
-						case "image" : type="file"; option="Image";break;
-						case "sound" : type="file"; option="Sound";break;
-						case "soundtrack" : type="file"; option="Sound";break;
-						case "font" : type="file"; option="Font";break;
+						case "image" : type="file"; list="Image";break;
+						case "sound" : type="file"; list="Sound";break;
+						case "soundtrack" : type="file"; list="Sound";break;
+						case "font" : type="file"; list="Font";break;
 						case "color" : type="color"; break;
-						case "text" : type="text"; option="All-Text"; break;
+						case "text" : type="text"; list="All-Text"; break;
 						case "tags" : type="tags"; break;
  						case "backgroundColor" : type="color";break;
 						case "fill" : type="color"; break;
-						case "collider" : type="select"; option=["Circle","Box","Polygon"];break;
-						case "style" : type="select"; option=["Normal","Italic","Bold","Italic-Bold"];break;
-						case "align" : type="select"; option=["Left","Center","Right"];break;
-						case "type" : type="select"; option=["Kinematic","Dynamic","Static"];break;
-						case "currentScene": type ="select"; option=Command.getSceneListCmd(); break;
+						case "collider" : type="select"; list=["Circle","Box","Polygon"];break;
+						case "style" : type="select"; list=["Normal","Italic","Bold","Italic-Bold"];break;
+						case "align" : type="select"; list=["Left","Center","Right"];break;
+						case "type" : type="select"; list=["Kinematic","Dynamic","Static"];break;
+						case "currentScene": type ="select"; list=Command.getSceneListCmd(); break;
 						default: type="input";break;
 					}; break;
 				};	
 				default : type="input";break;
 			}
 			if ((typeof parameters[field]=="boolean"))	type="boolean";
-			var fieldView = new FieldView(type,field,parameters[field],option);
+			var fieldView = new FieldView(type,field,parameters[field],list,null);
 			this.html.appendChild(fieldView.html);	
 		};
 	}

@@ -1,18 +1,14 @@
 class FieldView  {
 
-    constructor(type,key,value,option) { 
+    constructor(type,key,value,list,option) { 
 		this.key=key;
 		this.value=value;
 		this.html = document.createElement("div"); 
 		this.html.style="width:100%";
 		switch(true){
 			case type=="boolean" : this.boolean(key,value); break;
-			case type=="select" : this.select(key,value,option); break;
-			default : this.input(type,key,value,option);break;
-		/*	case 
-				(type=="input") || (type=="file") || (type=="color") || 
-				(type=="text") || (type=="tags") || (type=="key") || (type=="properties"):this.input(type,key,value,option);break;
-				*/
+			case type=="select" : this.select(key,value,list,option); break;
+			default : this.input(type,key,value,list);break;
 		}
 	}
 
@@ -39,7 +35,7 @@ class FieldView  {
 		input.id=key;
 	}
 
-	select(key,value,option){
+	select(key,value,list,option){
 		this.html.className +="text-field--full";
 		this.html.innerHTML=
 			'<div class="mdc-select">'+
@@ -56,7 +52,7 @@ class FieldView  {
 		var separator;
 		this.html.querySelector(".mdc-select").id=key;
 		var listView=this.html.querySelector("ul");
-		option.forEach((property,i)=>{
+		list.forEach((property,i)=>{
 			var item = document.createElement("li");
 			item.classList.add("mdc-list-item");
 			item.setAttribute("data-value",property);
@@ -66,25 +62,21 @@ class FieldView  {
 				item.setAttribute("tabIndex","0");
 				item.setAttribute("aria-selected","true");
 			}
-			if (i!=0 && ["fps","displayWidth","sleeping","spriteOn","textOn","soundOn","physicsOn"].includes(property)){
+			if 	((i!=0 && ["fps","displayWidth","sleeping","spriteOn","textOn","soundOn","physicsOn"].includes(property)) ||
+				(option=="Number" && i!=0 && ["x","opacity","size","start","velocityX"].includes(property)) ||
+				((list[i-1]=="Me"))){
 				separator = document.createElement("li");
 				separator.className +="mdc-list-divider";
 				separator.setAttribute("role","separator");
 				listView.appendChild(separator);
 			}
 			listView.appendChild(item);
-			if((property=="Me")) {
-				separator = document.createElement("li");
-				separator.className +="mdc-list-divider";
-				separator.setAttribute("role","separator");
-				listView.appendChild(separator);
-			}
 		});
 		key=key.charAt(0).toUpperCase() + key.slice(1);
 		this.html.querySelector("span").textContent=key.replace("_"," ");	
 	}
 
-	input(type,key,value,option){
+	input(type,key,value,list){
 		this.html.innerHTML =
 			'<div class="text-field--full mdc-text-field mdc-ripple-upgraded">'+
 				'<input class="mdc-text-field__input" style="padding-right:36px">'+
@@ -129,10 +121,10 @@ class FieldView  {
 			case "file": 
 				icon.innerHTML="folder";
 				this.input.setAttribute("readonly","readonly");
-				button.addEventListener("click",this.loadAssetHandler.bind(this,option));break;
+				button.addEventListener("click",this.loadAssetHandler.bind(this,list));break;
 			case "text": 
 				icon.innerHTML="add_box";
-				button.addEventListener("click",this.openPropertiesHandler.bind(this,option));break;
+				button.addEventListener("click",this.openPropertiesHandler.bind(this,list));break;
 			case "tags" :
 				icon.innerHTML="label";
 				button.addEventListener("click",this.opentTagsHandler.bind(this));break;
@@ -142,7 +134,7 @@ class FieldView  {
 				icon.style.display="none"; break;
 			case "properties":
 				icon.innerHTML="add_box"; 
-				button.addEventListener("click",this.openPropertiesHandler.bind(this,option)); break;
+				button.addEventListener("click",this.openPropertiesHandler.bind(this,list)); break;
 			default:			
 				button.addEventListener("click",this.menuHandler.bind(this));
 				this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
@@ -155,7 +147,7 @@ class FieldView  {
 
 //Handlers
 	menuItemHandler(id){
-		console.log(id);
+//		console.log(id);
 		if (id!="property"){
 			this.input.value += id+"()";
 			if ("createEvent" in document) {
@@ -174,16 +166,16 @@ class FieldView  {
 		this.menu.open=true;
 	}
 
-	openPropertiesHandler(option){
-		new ChoosePropertyView(this.input,option);
+	openPropertiesHandler(list){
+		new ChoosePropertyView(this.input,list);
 	}
 
 	opentTagsHandler(){
 		Command.openTagsCmd(this.input);
 	}
 
-	loadAssetHandler(option){
-		Command.openAssetsCmd(this.input,this.input.value,option);
+	loadAssetHandler(list){
+		Command.openAssetsCmd(this.input,this.input.value,list);
 	}
 
 }

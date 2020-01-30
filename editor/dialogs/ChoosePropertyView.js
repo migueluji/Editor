@@ -20,7 +20,7 @@ class ChoosePropertyView {
 		editorFrame.appendChild(this.html);
 		
 		var parameters={Element:"Me",Property:""};
-		console.log("input id",input.id);
+	//	console.log("input id",input.id);
 	//	if (input.id!="text" && input.id!="value") {
 		if (input.id=="property"){
 			var parameter=input.value.split(".");
@@ -43,14 +43,14 @@ class ChoosePropertyView {
 	}
 
 	addFields(parameters){
-		console.log("Add fields",parameters)
+//		console.log("Add fields",parameters)
 		for (const field in parameters) {
 			var list=null;
 			switch(field){
 				case "Element" : type="select"; list=["Game","Me"]; list=list.concat(Command.getActorListCmd()); break;
 				case "Property" : type="select"; list=Command.getPropertiesListCmd(parameters.Element,this.option); break;
 			}
-			var fieldView = new FieldView(type,field,parameters[field],list);
+			var fieldView = new FieldView(type,field,parameters[field],list,this.option);
 			this.container.appendChild(fieldView.html);	
 		}
 	}	
