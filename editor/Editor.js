@@ -191,7 +191,10 @@ class Editor {
                 else{
                     actor.width= 50;
                     actor.height= 50;
-                } break;
+                } 
+                actor.width=Math.round(actor.width*actor.scaleX*actor.tileX);
+                actor.height=Math.round(actor.height*actor.scaleY*actor.tileY);
+                break;
             case property=="position": 
                 actor.x=Math.round(value.x);
                 actor.y=Math.round(value.y);
@@ -200,8 +203,8 @@ class Editor {
                 actor.x=Math.round(value.x);
                 actor.y=Math.round(value.y);
                 actor.angle=Math.round(value.angle);
-                actor.width=Math.round(actor.width/actor.scaleX*value.scaleX);
-                actor.height=Math.round(actor.height/actor.scaleY*value.scaleY);
+            //    actor.width=Math.round(actor.width/actor.scaleX*value.scaleX);
+            //    actor.height=Math.round(actor.height/actor.scaleY*value.scaleY);
                 actor.scaleX=Number(value.scaleX).toFixed(2);
                 actor.scaleY= Number(value.scaleY).toFixed(2);
                 actor.flipX=value.flipX;
@@ -210,8 +213,8 @@ class Editor {
                 actor.x=Math.round(value.x);
                 actor.y=Math.round(value.y);
                 actor.angle=Math.round(value.angle);
-                actor.width=Math.round(actor.width/actor.scaleX*value.scaleX);
-                actor.height=Math.round(actor.height/actor.scaleY*value.scaleY);
+             //   actor.width=Math.round(actor.width/actor.scaleX*value.scaleX);
+             //   actor.height=Math.round(actor.height/actor.scaleY*value.scaleY);
                 actor.scaleX=Number(value.scaleX).toFixed(2);
                 actor.scaleY= Number(value.scaleY).toFixed(2);
                 actor.flipX=value.flipX;
@@ -516,6 +519,7 @@ class Editor {
         var node=document.querySelector(".dialog-full-screen");
         node.parentNode.removeChild(node);
         this.openAssetsDialog=false;
+        this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model);
     }
 
 }
