@@ -15,8 +15,8 @@ class Actor {
             // Settings
             sleeping:this.sleeping || false,
             x:this.x || 0, y:this.y || 0, 
-            width:this.width || 50, height:this.height || 50, 
-            scaleX:this.scaleX || 1, scaleY:this.scaleY || 1, 
+            width:this.width, height:this.height, 
+            scaleX:this.scaleX, scaleY:this.scaleY, 
             angle:this.angle || 0, screen:this.screen || false,
             collider:this.collider || "Box", tags:this.tags || "",
             // Sprite
@@ -40,14 +40,18 @@ class Actor {
             fixedAngle:this.fixedAngle || false,
             velocityX:this.velocityX || 0, velocityY:this.velocityY || 0,
             angularVelocity:this.angularVelocity || 0, 
-            density: this.density || 1, friction: this.friction || 0.5, restitution: this.restitution || 0.5,
+            density: this.density || 1, friction: this.friction, restitution: this.restitution,
             dampingLinear:this.dampingLinear || 0, dampingAngular:this.dampingAngular ||  0
         }
         if (obj.opacity==undefined) obj.opacity=1;
         if (obj.volume==undefined) obj.volume=1;
         if (obj.density==undefined) obj.density=1;
-        if (obj.friction==undefined) obj.friction=1;
-        if (obj.restitution==undefined) obj.restitution=1;
+        if (obj.friction==undefined) obj.friction=0.5;
+        if (obj.restitution==undefined) obj.restitution=0.5;
+        if (obj.width==undefined) obj.width=50;
+        if (obj.height==undefined) obj.height=50;
+        if (obj.scaleX==undefined) obj.scaleX=1;
+        if (obj.scaleY==undefined) obj.scaleY=1;
         return(obj);
     }
 

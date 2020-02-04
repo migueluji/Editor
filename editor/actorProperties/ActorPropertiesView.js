@@ -42,6 +42,17 @@ class ActorPropertiesView {
 	}
 
 	updateActorProperty(property,value) {
+		if (!isNaN(value)){ 
+			if (value % 1 != 0) {
+				console.log(property,value);
+				var number=String(value).split(".");
+				if (number[1].length>2)	value=Number(value).toFixed(2);
+			}
+			else {
+				value=Math.round(value); 
+			}
+		}
+		if (property=="scaleX") console.log(property,value);
 		var element=this.html.querySelector("#"+property);
 		(element.type== "checkbox") ? element.value=element.checked=Boolean(value) : element.value=value;
 		if (property == "spriteOn") this.spriteView.onClickHandler();
@@ -52,7 +63,6 @@ class ActorPropertiesView {
 			element.querySelector(".mdc-select__selected-text").innerHTML=value;
 			element.querySelector("span").classList.add("mdc-floating-label--float-above");
 		}
-		//element.focus();
 	}
 
 //Frame

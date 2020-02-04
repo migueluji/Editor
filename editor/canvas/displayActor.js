@@ -75,9 +75,9 @@ class DisplayActor extends PIXI.Container {
         this.tilingSprite.tint= "0x"+String(actor.color).substr(1);
 
         var textureSize;
-    //  (texture==PIXI.Texture.WHITE) ? textureSize={w:50,h:50} : textureSize={w:this.tilingSprite.texture.width,h:this.tilingSprite.texture.height};
-        textureSize={w:actor.width/actor.scaleX/actor.tileX,h:actor.height/actor.scaleY/actor.tileY};
-        console.log("displayActor",actor.width,actor.scaleX,actor.tileX,textureSize.w);
+        (texture==PIXI.Texture.WHITE) ? textureSize={w:50,h:50} : textureSize={w:this.tilingSprite.texture.width,h:this.tilingSprite.texture.height};
+    //    textureSize={w:actor.width/actor.scaleX/actor.tileX,h:actor.height/actor.scaleY/actor.tileY};
+    //    console.log("displayActor",actor.width,actor.scaleX,actor.tileX,textureSize.w);
 
         this.tilingSprite.width=textureSize.w*actor.tileX;
         this.tilingSprite.height=textureSize.h*actor.tileY;

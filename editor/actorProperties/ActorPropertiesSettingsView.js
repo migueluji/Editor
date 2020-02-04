@@ -34,12 +34,12 @@ class ActorPropertiesSettingsView {
 				'</div>'+
 				'<div class="two-properties">'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="width" min="1" type="number" value="50"  class="mdc-text-field__input">'+
+						'<input id="width" min="1" type="number" value="1"  class="mdc-text-field__input">'+
 						'<label class="mdc-floating-label" for="text-field-filled">Width</label>'+
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
 					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="height" min="1" type="number" value="50"  class="mdc-text-field__input">'+
+						'<input id="height" min="1" type="number" value="1"  class="mdc-text-field__input">'+
 						'<label class="mdc-floating-label" for="text-field-filled">Height</label>'+
 						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
