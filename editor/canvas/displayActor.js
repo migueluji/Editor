@@ -75,8 +75,9 @@ class DisplayActor extends PIXI.Container {
         this.tilingSprite.tint= "0x"+String(actor.color).substr(1);
 
         var textureSize;
-   //     (texture==PIXI.Texture.WHITE) ? textureSize={w:50,h:50} : textureSize={w:this.tilingSprite.texture.width,h:this.tilingSprite.texture.height};
-        textureSize={w:actor.width/actor.tileX,h:actor.height/actor.tileY};
+    //  (texture==PIXI.Texture.WHITE) ? textureSize={w:50,h:50} : textureSize={w:this.tilingSprite.texture.width,h:this.tilingSprite.texture.height};
+        textureSize={w:actor.width/actor.scaleX/actor.tileX,h:actor.height/actor.scaleY/actor.tileY};
+        console.log("displayActor",actor.width,actor.scaleX,actor.tileX,textureSize.w);
 
         this.tilingSprite.width=textureSize.w*actor.tileX;
         this.tilingSprite.height=textureSize.h*actor.tileY;
@@ -402,7 +403,6 @@ class DisplayActor extends PIXI.Container {
                         }
                         else { // actor cast property
                             var actorIndex=cast.findIndex(i => i.name == textElement);
-                            console.log(textElement,textProperty,cast[actorIndex][textProperty]);
                             if (actorIndex!=-1) {
                                 if (cast[actorIndex][textProperty]!=undefined) newValue=cast[actorIndex][textProperty];
                                 else newValue= '"error '+textElement + "."+textProperty+": property doesn't exist"+'"';

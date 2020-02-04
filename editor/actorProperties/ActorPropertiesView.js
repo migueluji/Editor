@@ -52,7 +52,7 @@ class ActorPropertiesView {
 			element.querySelector(".mdc-select__selected-text").innerHTML=value;
 			element.querySelector("span").classList.add("mdc-floating-label--float-above");
 		}
-		element.focus();
+		//element.focus();
 	}
 
 //Frame

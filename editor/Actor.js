@@ -40,7 +40,7 @@ class Actor {
             fixedAngle:this.fixedAngle || false,
             velocityX:this.velocityX || 0, velocityY:this.velocityY || 0,
             angularVelocity:this.angularVelocity || 0, 
-            density: this.density, friction: this.friction, restitution: this.restitution,
+            density: this.density || 1, friction: this.friction || 0.5, restitution: this.restitution || 0.5,
             dampingLinear:this.dampingLinear || 0, dampingAngular:this.dampingAngular ||  0
         }
         if (obj.opacity==undefined) obj.opacity=1;

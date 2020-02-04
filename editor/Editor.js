@@ -177,6 +177,7 @@ class Editor {
     }
 
     changeActorProperty(sceneID,actorID,property,value){
+        console.log(sceneID,actorID,property,value);
         var scenePos=this.model.sceneList.findIndex(i => i.id == sceneID);
         var actorPos=this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID); 
         var actor = this.model.sceneList[scenePos].actorList[actorPos];
@@ -203,8 +204,8 @@ class Editor {
                 actor.x=Math.round(value.x);
                 actor.y=Math.round(value.y);
                 actor.angle=Math.round(value.angle);
-            //    actor.width=Math.round(actor.width/actor.scaleX*value.scaleX);
-            //    actor.height=Math.round(actor.height/actor.scaleY*value.scaleY);
+                actor.width=Math.round(actor.width/actor.scaleX*value.scaleX);
+                actor.height=Math.round(actor.height/actor.scaleY*value.scaleY);
                 actor.scaleX=Number(value.scaleX).toFixed(2);
                 actor.scaleY= Number(value.scaleY).toFixed(2);
                 actor.flipX=value.flipX;
@@ -213,8 +214,8 @@ class Editor {
                 actor.x=Math.round(value.x);
                 actor.y=Math.round(value.y);
                 actor.angle=Math.round(value.angle);
-             //   actor.width=Math.round(actor.width/actor.scaleX*value.scaleX);
-             //   actor.height=Math.round(actor.height/actor.scaleY*value.scaleY);
+                actor.width=Math.round(actor.width/actor.scaleX*value.scaleX);
+                actor.height=Math.round(actor.height/actor.scaleY*value.scaleY);
                 actor.scaleX=Number(value.scaleX).toFixed(2);
                 actor.scaleY= Number(value.scaleY).toFixed(2);
                 actor.flipX=value.flipX;
@@ -232,10 +233,10 @@ class Editor {
                 actor.height=Math.round(actor.height/actor.scaleY*value);
                 break;
             case property=="width":
-                actor.scaleX=(value*actor.scaleX/actor.tileX/actor.width).toFixed(2);
+                actor.scaleX=(value*actor.scaleX/actor.width).toFixed(2);
                 break;
             case property=="height":
-                actor.scaleY=(value*actor.scaleY/actor.tileY/actor.height).toFixed(2);
+                actor.scaleY=(value*actor.scaleY/actor.height).toFixed(2);
                 break;
             case property=="angle":
                 value=Math.round(value);
