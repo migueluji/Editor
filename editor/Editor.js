@@ -176,6 +176,12 @@ class Editor {
         var scenePos=this.model.sceneList.findIndex(i => i.id == sceneID);
         var actorPos=this.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID); 
         var actor = this.model.sceneList[scenePos].actorList[actorPos];
+
+        if (["width","height","scaleX","scaleY","size","opacity","volume","start","density","friction","restitution","dampingLinear","dampingAngular","tileX","tileY"].includes(property))
+        if (value<=0) value=0;
+        if (property in this.model.sceneList[scenePos].actorList[actorPos])
+            this.model.sceneList[scenePos].actorList[actorPos][property]=value;
+
         var originalWidth=50;
         var originalHeight=50;
         if(this.canvasView.loader.resources.hasOwnProperty(actor.image)){
@@ -183,19 +189,34 @@ class Editor {
             originalHeight= this.canvasView.loader.resources[actor.image].texture.height;
         }
 
-        actor.width=originalWidth*actor.scaleX*actor.tileX;
-        actor.height=originalHeight*actor.scaleY*actor.tileY;
 
-        if (["width","height","scaleX","scaleY","size","opacity","volume","start","density","friction","restitution","dampingLinear","dampingAngular","tileX","tileY"].includes(property))
-            if (value<=0) value=0;
         switch  (true) {
             case property=="image":
-                actor.image=value;
+                actor.width=originalWidth*actor.scaleX*actor.tileX;
+                actor.height=originalHeight*actor.scaleY*actor.tileY;
                 actor.spriteOn=true;
                 break;
             case property=="position": 
                 actor.x=value.x;
                 actor.y=value.y;
+                break;
+            case property=="width":
+                actor.scaleX=value/originalWidth;
+                break;
+            case property=="height":
+                actor.scaleY=value/originalHeight;
+                break;
+            case property=="scaleX":
+                actor.width=originalWidth*value*actor.tileX;
+                break;
+            case property=="scaleY":
+                actor.height=originalHeight*value*actor.tileY;
+                break;
+            case property=="tileX": 
+                actor.width=originalWidth*value;
+                break;
+            case property=="tileY": 
+                actor.height=originalHeight*value;
                 break;
             case property=="scale":
                 actor.x=value.x;
@@ -217,27 +238,7 @@ class Editor {
                 actor.scaleY=value.scaleY;
                 actor.flipX=value.flipX;
                 break;
-            case property=="tileX": 
-                actor.width=originalWidth*value;
-                break;
-            case property=="tileY": 
-                actor.height=originalHeight*value;
-                break;
-            case property=="scaleX":
-                actor.width=originalWidth*value;
-                break;
-            case property=="scaleY":
-                actor.height=originalHeight*value;
-                break;
-            case property=="width":
-                actor.scaleX=value/originalWidth;
-                break;
-            case property=="height":
-                actor.scaleY=value/originalHeight;
-                break;
         }
-        if (property in this.model.sceneList[scenePos].actorList[actorPos])
-             this.model.sceneList[scenePos].actorList[actorPos][property]=value;
         var isOpen = SideSheetView.isOpenActorProperties();
         this.selectScene(sceneID);
         this.selectActor(actorID);      

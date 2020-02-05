@@ -44,7 +44,6 @@ class ActorPropertiesView {
 	updateActorProperty(property,value) {
 		if (!isNaN(value)){ 
 			if (value % 1 != 0) {
-				console.log(property,value);
 				var number=String(value).split(".");
 				if (number[1].length>2)	value=Number(value).toFixed(2);
 			}
@@ -52,7 +51,6 @@ class ActorPropertiesView {
 				value=Math.round(value); 
 			}
 		}
-		if (property=="scaleX") console.log(property,value);
 		var element=this.html.querySelector("#"+property);
 		(element.type== "checkbox") ? element.value=element.checked=Boolean(value) : element.value=value;
 		if (property == "spriteOn") this.spriteView.onClickHandler();
@@ -109,9 +107,9 @@ class ActorPropertiesView {
 			case "text" : 		this.value=String(input.value).trim(); break;
 			case "color" : 		this.value=String(input.value); break;
 		}
-		var sceneID=document.querySelector(".sceneselected").id;
-		var actorID=document.querySelector(".actorselected").id;
-		if(sceneID && actorID) CmdManager.changeActorPropertyCmd(sceneID,actorID,this.property,this.value);
+		var sceneID=document.querySelector(".sceneselected");
+		var actorID=document.querySelector(".actorselected");
+		if(sceneID.id && actorID.id) CmdManager.changeActorPropertyCmd(sceneID.id,actorID.id,this.property,this.value);
 	}
 
 	onChangeSelectHandler(element){

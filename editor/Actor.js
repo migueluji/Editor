@@ -24,7 +24,7 @@ class Actor {
             color:this.color || "#ffffff", opacity: this.opacity,
             flipX:this.flipX || false , flipY:this.flipY || false ,
             scrollX:this.scrollX || 0, scrollY:this.scrollY || 0,
-            tileX:this.tileX || 1, tileY:this.tileY || 1,
+            tileX:this.tileX, tileY:this.tileY,
             // Text
             textOn:this.textOn || false, text:this.text || "",
             font:this.font || "Arial", size:this.size || 30,
@@ -52,6 +52,8 @@ class Actor {
         if (obj.height==undefined) obj.height=50;
         if (obj.scaleX==undefined) obj.scaleX=1;
         if (obj.scaleY==undefined) obj.scaleY=1;
+        if (obj.tileX==undefined) obj.tileX=1;
+        if (obj.tileY==undefined) obj.tileY=1;
         return(obj);
     }
 
