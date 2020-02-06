@@ -178,7 +178,7 @@ class Editor {
         var actor = this.model.sceneList[scenePos].actorList[actorPos];
 
         if (["width","height","scaleX","scaleY","size","opacity","volume","start","density","friction","restitution","dampingLinear","dampingAngular","tileX","tileY"].includes(property))
-        if (value<=0) value=0;
+            if (value<=0) value=0;
         if (property in this.model.sceneList[scenePos].actorList[actorPos])
             this.model.sceneList[scenePos].actorList[actorPos][property]=value;
 
@@ -188,7 +188,6 @@ class Editor {
             originalWidth= this.canvasView.loader.resources[actor.image].texture.width;
             originalHeight= this.canvasView.loader.resources[actor.image].texture.height;
         }
-
 
         switch  (true) {
             case property=="image":
@@ -303,7 +302,7 @@ class Editor {
     selectActor(actorID){
         if (actorID) this.selectedActorIndex=this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.id==actorID);
         else this.selectedActorIndex=null;
-  //      if (SideSheetView.isOpenActorProperties() && actorID!=null) this.openActorProperties();
+        if (SideSheetView.isOpenActorProperties() && actorID!=null) this.openActorProperties();
         if ((SideSheetView.isOpenActorScripts() && actorID!=null) || (actorID==null && !SideSheetView.isOpenCast()))  
             SideSheetView.closeSheetHandler();
         this.canvasView.updateSelectedActor(actorID);

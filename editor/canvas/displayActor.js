@@ -23,7 +23,7 @@ class DisplayActor extends PIXI.Container {
    
         if ((!actor.spriteOn && !actor.textOn) || actor.image=="" || !existsImage){
             var color;
-            console.log(loader.resources,actor.image,existsImage);
+         //   console.log(loader.resources,actor.image,existsImage);
             (!existsImage && actor.image!="") ? color=0xff0000 : color=0xaaaaaa;
             this.createBorder(color);
         } 
@@ -45,7 +45,7 @@ class DisplayActor extends PIXI.Container {
             fill: actor.fill,
             fontSize: actor.size,
             fontStyle: actor.style,
-            align: actor.align,
+            align: actor.align.toLowerCase(),
             wordWrap: true,
             wordWrapWidth:  w,
             padding:w
@@ -409,6 +409,16 @@ class DisplayActor extends PIXI.Container {
                             }
                             else newValue= '"error '+textElement + ": doesn't exist"+'"';
                         }
+                    // adjust decimal values    
+                    if (!isNaN(newValue)){ //si es un número
+                        if (newValue % 1 != 0) {
+                            var number=String(newValue).split(".");
+                            if (number[1].length>2)	newValue=Number(newValue).toFixed(2);
+                        }
+                        else {
+                            newValue=Math.round(newValue); 
+                        }
+                    }
                     text=text.replace(text.substring(i,j+1),newValue);
                 }
             }

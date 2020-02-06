@@ -16,7 +16,9 @@
 	"physicsOn": false,
 	"gravityX": 0,
 	"gravityY": -9.8,
-	"tagList": [],
+	"tagList": [
+		"a"
+	],
 	"sceneList": [
 		{
 			"name": "Scene_1",

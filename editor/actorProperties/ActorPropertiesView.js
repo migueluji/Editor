@@ -42,7 +42,7 @@ class ActorPropertiesView {
 	}
 
 	updateActorProperty(property,value) {
-		if (!isNaN(value)){ 
+		if (!isNaN(value) && value!=""){ //si es un número
 			if (value % 1 != 0) {
 				var number=String(value).split(".");
 				if (number[1].length>2)	value=Number(value).toFixed(2);
@@ -107,6 +107,7 @@ class ActorPropertiesView {
 			case "text" : 		this.value=String(input.value).trim(); break;
 			case "color" : 		this.value=String(input.value); break;
 		}
+		if (this.property=="opacity" && this.value>1) this.value=1;  // special case for pixi
 		var sceneID=document.querySelector(".sceneselected");
 		var actorID=document.querySelector(".actorselected");
 		if(sceneID.id && actorID.id) CmdManager.changeActorPropertyCmd(sceneID.id,actorID.id,this.property,this.value);
