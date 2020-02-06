@@ -6,8 +6,8 @@ class If {
         this.code           = null;                         /** */
         this.value          = null;                         /** */
 
-        this.branchTrue     = {};                           /** */
-        this.branchFalse    = {};                           /** */
+        this.nodeListTrue     = {};                           /** */
+        this.nodeListFalse    = {};                           /** */
     }
 
     run(scope) {
@@ -16,16 +16,16 @@ class If {
 
         if(this.value) {
 
-            for(var t in this.branchTrue) {
+            for(var t in this.nodeListTrue) {
 
-                this.branchTrue[t].run(scope);
+                this.nodeListTrue[t].run(scope);
             }
         }
         else {
 
-            for(var f in this.branchFalse) {
+            for(var f in this.nodeListFalse) {
 
-                this.branchFalse[f].run(scope);
+                this.nodeListFalse[f].run(scope);
             }
         }
     }
@@ -37,8 +37,8 @@ class If {
 
     destroy() {
 
-        this.destroyBranch(this.branchTrue);
-        this.destroyBranch(this.branchFalse);
+        this.destroyBranch(this.nodeListTrue);
+        this.destroyBranch(this.nodeListFalse);
 
         Util.deepDestroy(this);
     }

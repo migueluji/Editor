@@ -63,7 +63,9 @@ class Util {
 
         text = aux;
 
-        return text.replace(/Me./g, actor.name + ".").replace(/{/g, "{this.scope['");
+        var test = text.replace(/Me./g, actor.ID + "'").replace(/{/g, "{this.scope['");
+
+        return test;
     }
 
     /**
@@ -127,10 +129,10 @@ class Util {
         var temp = expression;
 
         for(var i in scope) {
-            
+
             if((temp.search(scope[i].name) != -1) && (scope[i].scene == scope.Game.activeScene) && (scope[i].ID != undefined)) {
 
-                temp = temp.replace(new RegExp(scope[i].name,"g"), scope[i].ID);
+                temp = temp.replace(new RegExp(scope[i].name, "g"), scope[i].ID);
             }
         }
 
@@ -187,6 +189,28 @@ class Util {
         for(var i = 0; i < container.sceneList.length; i++) {
 
             sceneList[container.sceneList[i].name] = container.sceneList[i];
+
+            var actorList = {};
+
+            for(var j = 0; j < container.sceneList[i].actorList.length; j++) {
+
+                actorList[container.sceneList[i].actorList[j].name] = container.sceneList[i].actorList[j];
+
+                var scriptList = {};
+
+                for(var k = 0; k < container.sceneList[i].actorList[j].scriptList.length; k++) {
+
+                    scriptList[container.sceneList[i].actorList[j].scriptList[k].name] = container.sceneList[i].actorList[j].scriptList[k].nodeList;
+                    Util.destroy(scriptList[container.sceneList[i].actorList[j].scriptList[k].name], "name");
+                }
+
+                actorList[container.sceneList[i].actorList[j].name].scriptList = scriptList;
+
+                Util.destroy(actorList[container.sceneList[i].actorList[j].name], "name");
+            }
+
+            sceneList[container.sceneList[i].name].actorList = actorList;
+
             Util.destroy(sceneList[container.sceneList[i].name], "name");
         }
 

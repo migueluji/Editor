@@ -2,8 +2,8 @@ class Player {
 
     constructor(player) {
 
-        this.file   = new File({source: player.source});    /** */
-        this.engine = null;                                 /** */
+        this.file   = new File(player); /** */
+        this.engine = null;             /** */
 
         this.init();
     }
@@ -15,8 +15,10 @@ class Player {
 
     onFileLoaded() {
 
-        //this.engine = new Engine(Util.parser({}, this.file.data));   /** Sin el parser, el parametro es "this.file.data"*/
-        this.engine = new Engine(this.file.data);
+        var debugParser = Util.parser({}, this.file.data);
+
+        this.engine = new Engine(debugParser);   /** Sin el parser, el parametro es "this.file.data"*/
+        //this.engine = new Engine(this.file.data);
 
         this.run();
     }

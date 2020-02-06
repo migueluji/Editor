@@ -1,19 +1,22 @@
 class Physics {
 
-    constructor() {
+    constructor(physics) {
 
         this.actorList          = {};                       /** */
 
-        this.gravity            = new b2Vec2(0.0, 9.81);    /** */
+        this.gravity            = new b2Vec2(physics.gravityX, physics.gravityY);    /** */
         this.sleep              = false;                    /** */
         this.deltaTime          = 1.0 / 60.0;               /** */
         this.velocityIterations = 10.0;                     /** */
         this.positionIterations = 10.0;                     /** */
-        this.scaleFactor        = 1 / 100;                  /** Para compensar el factor de escala del sistema de referencia de Box2D */ 
+        this.scaleFactor        = 1 / 1;                  /** Para compensar el factor de escala del sistema de referencia de Box2D */ 
+        
+        this.PIXELS_PER_METER = 100;
+        this.HALF_PIXELS_PER_METER = this.PIXELS_PER_METER / 2;
 
         this.world              = new b2World(this.gravity, this.sleep);
 
-        this.setContactListener();
+        //this.setContactListener();
     }
 
     run() {
@@ -46,7 +49,7 @@ class Physics {
 
             /** --- DEBUG (ELIMINAR SIN PROBLEMA) */
             
-                this.drawDebug(this.actorList[i]);
+                //this.drawDebug(this.actorList[i]);
 
             /** FIN --- DEBUG (ELIMINAR SIN PROBLEMA) */
         }
@@ -54,78 +57,77 @@ class Physics {
 
     setActorPhysics(actor) {
 
-        /** Definicion del physics body. */
-        var bodyDef             = new b2BodyDef();
-        bodyDef.position.Set(this.scaleFactor * actor.x, this.scaleFactor * actor.y);
-        bodyDef.angle           = actor.angle;
-        bodyDef.fixedRotation   = actor.fixedRotation;
-
-        /** Definicion del fixture con las propiedades fisicas. */
-        var fixDef      = new b2FixtureDef;
-        fixDef.shape    = new b2PolygonShape;
-        
-        /** Definicion del tipo de objeto fisico y configuracion de sus propiedades. */
-        if(actor.physics) {
-
-            switch(actor.physicMode) {
-
-                case "static":
-                    bodyDef.type = b2Body.b2_staticBody;  
-                    break;
-                case "kinematic":
-                    bodyDef.type = b2Body.b2_kinematicBody;
-                    fixDef.isSensor = true; 
-                    break;
-                default:
-                case "dynamic":
-                    bodyDef.type = b2Body.b2_dynamicBody;
-                    break;
-            }
-
-            fixDef.density      = actor.density;
-            fixDef.friction     = actor.friction;
-            fixDef.restitution  = actor.restitution;
-        }
-        else {
-
-            fixDef.isSensor = true;
-        }
-
-        /** Configuracion de la forma geometrica del objeto fisico */
-        if(actor.physicVertices != null) {
- 
-            this.createCustomPolygonShape(actor.physicVertices, fixDef.shape);
-        }
-        else {
-
-            fixDef.shape.SetAsBox(this.scaleFactor * actor.scaleX * actor.width / 2, this.scaleFactor * actor.scaleY * actor.height / 2); // tiene que ser siempre la mitad y ademas multiplicado por la escala
-        }
-
-        /** Creacion del physics body en el sistema y en el mundo fisico de Box2D */
-        actor.physicBody = this.world.CreateBody(bodyDef).CreateFixture(fixDef);
-
-        /** Activamos su velocidad lineal, por si tuviera algo preconfigurado */
-        actor.physicBody.m_body.SetLinearVelocity(new b2Vec2(actor.velocityX, actor.velocityY));
-
-        /** Definicion del objeto padre del physics body (NECESARIO PARA LA DETECCION DE COLISIONES) */
-        actor.physicBody.m_body.SetUserData(actor);
-
-
-
-
-        actor.physicBody.m_body.SetSleepingAllowed(false);
-        //console.log(actor.physicBody);
-
-
-
-
-
-        /** Añadimos el actor a la lista del motor de fisicas */
-        this.actorList[actor.ID] = actor;
+        this.createPhysicsBody(actor);          /** */
+        actor.physicBody.SetUserData(actor);    /** Definicion del objeto padre del physics body (NECESARIO PARA LA DETECCION DE COLISIONES) */
+        this.actorList[actor.ID] = actor;       /** Añadimos el actor a la lista del motor de fisicas */
 
         /* DEBUG -- Borrar sin problemas */
             actor.physicsDebugSprite = new PIXI.Sprite();
         /* FIN DEBUG */
+    }
+
+    createPhysicsBody(actor) {
+
+        var body = new b2BodyDef();
+        body.position.Set(actor.x, actor.y);
+        body.angle = 0.0;
+        body.linearVelocity.Set(actor.velocityX, actor.velocityY); /** Activamos su velocidad lineal, por si tuviera algo preconfigurado */
+        body.fixedRotation = actor.fixedAngle;
+        //body.SetSleepingAllowed(false);
+
+        //console.log(actor.name, "x: " + actor.x, "y: " + actor.y, "px: " + body.position.x, "py: " + body.position.y);
+        body.angularVelocity = 0;
+        body.linearDamping = 0;
+        body.angularDamping = 0;
+        body.fixedRotation = false;
+        //console.log(actor.type);
+        body.type = this["set" + actor.type + "Body"]();
+
+        var fixture = new b2FixtureDef();
+        fixture.restitution = actor.restitution;
+        fixture.friction = actor.friction;
+        fixture.density = actor.density;
+        fixture.shape = this["set" + actor.collider + "Shape"](); /** Configuracion de la forma geometrica del objeto fisico */
+
+        actor.physicBody = this.world.CreateBody(body).CreateFixture(fixture); /** Creacion del physics body en el sistema y en el mundo fisico de Box2D */
+    }
+
+    setDynamicBody() {
+
+        return b2Body.b2_dynamicBody;
+    }
+
+    setKinematicBody() {
+
+        return b2Body.b2_kinematicBody;
+    }
+
+    setStaticBody() {
+
+        return b2Body.b2_staticBody;
+    }
+
+    setBoxShape() {
+
+        var shape = new b2PolygonShape;
+        shape.SetAsBox(this.width / 2, this.height / 2); // Tiene que ser la mitad.
+        return shape;
+    }
+
+    setCircleShape() {
+
+        var shape = new b2CircleShape;
+        shape.m_p.x = this.x;
+        shape.m_p.y = this.y;
+        shape.m_radius = this.radius;
+        return shape;
+    }
+
+    setPolygonShape() {
+
+        // TODO (provisional con BOX)
+        console.log("POLYGON");
+        this.setBoxShape();
     }
 
     disableActor(actor) {
@@ -153,22 +155,51 @@ class Physics {
     }
 
     drawDebug(actor) {
-
+        
         actor.physicsDebugSprite.removeChildren();
 
-        /* Dado que Box2D al rotar un body no actualiza los vertices de su shape 
-        es necesario aplicar una transformacion a los vertices para ver correctamente
-        su contorno en el modo debug 
-        ---------------------------------------------------------------------------------*/
+        this.drawCircleShape(actor.physicsDebugSprite, actor);
+
+        if(actor.collider == "Circle") {
+
+            this.drawCircleShape(actor.physicsDebugSprite, actor);
+        }
+        else {
+
+            this.drawPolygonShape(actor.physicsDebugSprite, actor);
+        }
+    }
+
+    drawCircleShape(debug, actor) {
+
+        var graphics = new PIXI.Graphics();
+
+        graphics.lineStyle(1, 0xff0000);
+
+        //console.log(actor.physicBody.m_shape.m_radius, actor.radius, actor.physicBody.m_body.m_xf.position)
+
+        graphics.drawCircle(actor.physicBody.m_body.m_xf.position.x, actor.physicBody.m_body.m_xf.position.y, actor.radius); //actor.physicBody.m_shape.m_radius
+
+        debug.addChild(graphics);
+    }
+
+    
+
+    drawPolygonShape(debug, actor) {
+
         var vertexTransformList = [];
 
         var x_origin = actor.physicBody.m_shape.m_centroid.x;
         var y_origin = actor.physicBody.m_shape.m_centroid.y;
 
+        //console.log(x_origin, y_origin);
+
         for(var i = 0; i < actor.physicBody.m_shape.m_vertices.length; i++) {
 
             var x = actor.physicBody.m_shape.m_vertices[i].x;
             var y = actor.physicBody.m_shape.m_vertices[i].y;
+
+            //console.log(actor.physicBody.m_shape.m_vertices, y);
 
             var x_rotated = ((x - x_origin) * Math.cos(actor.angle)) - ((y_origin - y) * Math.sin(actor.angle)) + x_origin;
             var y_rotated = ((y_origin - y) * Math.cos(actor.angle)) + ((x - x_origin) * Math.sin(actor.angle)) + y_origin;
@@ -176,30 +207,19 @@ class Physics {
             vertexTransformList.push({x: x_rotated, y: y_rotated});
         }
 
-        /* Con los vertices ya rotados, se dibuja el controrno del objeto 
-        ---------------------------------------------------------------------------------*/
         var graphics = new PIXI.Graphics();
-        
-        if(actor.physics) {
 
-            graphics.lineStyle(3, 0xff0000, 1);
-        }
-        else {
-
-            graphics.lineStyle(1, 0x00ff00, 1);
-        }
-        
-
-        graphics.moveTo(actor.x + 1 / this.scaleFactor * vertexTransformList[0].x, actor.y + 1 / this.scaleFactor * vertexTransformList[0].y);
+        graphics.lineStyle(1, 0x0000ff);
+        graphics.moveTo(actor.x + vertexTransformList[0].x, actor.y + vertexTransformList[0].y);
 
         for(var j = 1; j < vertexTransformList.length; j++) {
 
-            graphics.lineTo(actor.x + 1 / this.scaleFactor * vertexTransformList[j].x, actor.y + 1 / this.scaleFactor * vertexTransformList[j].y);
+            graphics.lineTo(actor.x + vertexTransformList[j].x, actor.y + vertexTransformList[j].y);
         }
 
-        graphics.lineTo(actor.x + 1 / this.scaleFactor * vertexTransformList[0].x, actor.y + 1 / this.scaleFactor * vertexTransformList[0].y);
+        graphics.lineTo(actor.x + vertexTransformList[0].x, actor.y + vertexTransformList[0].y);
 
-        actor.physicsDebugSprite.addChild(graphics);
+        debug.addChild(graphics);
     }
 
     addContactListener(callbacks) {
@@ -239,21 +259,7 @@ class Physics {
 
             BeginContact: function(idA, idB) {
 
-                if(idB.name.includes("RightUpCollider")) {
-                    
-                    if(idA.name.includes("Bullet")) {
-                        console.log(idA, idB);
-                    }
-                }
-
-                if(idA.name.includes("RightUpCollider")) {
-                    
-                    if(idB.name.includes("Bullet")) {
-                        console.log(idA, idB);
-                    }
-                }
-
-                //console.log("----------------", idA, idB);
+                console.log("----------------", idA, idB);
 
                 for(var i in idB.tags) {
 
@@ -284,20 +290,6 @@ class Physics {
 
             EndContact: function(idA, idB) {
 
-                if(idB.name.includes("RightUpCollider")) {
-                    
-                    if(idA.name.includes("Bullet")) {
-                        console.log(idA, idB);
-                    }
-                }
-
-                if(idA.name.includes("RightUpCollider")) {
-                    
-                    if(idB.name.includes("Bullet")) {
-                        console.log(idA, idB);
-                    }
-                }
-
                 for(var i in idB.tags) {
 
                     var collisionVariable = "collidingWith" + i + "Tag";
@@ -327,19 +319,12 @@ class Physics {
 
             PreSolve: function(idA, idB) {
 
-                if(idB.name.includes("RightUpCollider")) {
-                    
-                    if(idA.name.includes("Bullet")) {
-                        console.log(idA, idB);
-                    }
-                }
+                console.log("----------------", idA, idB);
+            },
 
-                if(idA.name.includes("RightUpCollider")) {
-                    
-                    if(idB.name.includes("Bullet")) {
-                        console.log(idA, idB);
-                    }
-                }
+            PostSolve: function(idA, idB) {
+
+                console.log("----------------", idA, idB);
             }
         });
     }
