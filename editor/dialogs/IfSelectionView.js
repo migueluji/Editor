@@ -74,7 +74,7 @@ class IfSelectionView {
 			switch(type){
 				case "Compare":     parameters= new Object({"value_1":null,"operation":"Less","value_2":null});break;
 				case "Check":       parameters= new Object({"property":null});break;
-				case "Collision":   parameters= new Object({"tag_List":null});break;
+				case "Collision":   parameters= new Object({"tags":null});break;
 				case "Timer":       parameters= new Object({"seconds":1});break;
 				case "Touch":       parameters= new Object({"mode":"Down","on_Actor":true});break;
 				case "Keyboard":    parameters= new Object({"key":null,"key_Mode":"Pressed"});break;

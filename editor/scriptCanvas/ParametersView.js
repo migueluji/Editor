@@ -15,7 +15,6 @@ class ParametersView  {
 			switch(field){
 				case "operation" : type="select"; list=["Less","Less Equal","Equal","Greater Equal","Greater","Different"];break;
 				case "tags" : type="tags"; break;
-				case "tag_List" : type="tags"; break;
 				case "mode" : type="select"; list=["Down","Up","Is Over","Tap"];break;
 				case "key_Mode" : type="select"; list=["Pressed","Down","Up"];break;
 				case "actor" : type="select"; list=Command.getActorListCmd();break;

@@ -79,7 +79,7 @@ class FieldView  {
 	input(type,key,value,list){
 		this.html.innerHTML =
 			'<div class="text-field--full mdc-text-field mdc-ripple-upgraded">'+
-				'<input class="mdc-text-field__input" style="padding-right:36px">'+
+				'<input name="script" class="mdc-text-field__input" style="padding-right:36px">'+
 				'<label class="mdc-floating-label"></label>'+
 				'<button id="button" class="mdc-button mdc-button-upgraded upload-button" style="padding:0px;right:8px;min-width: 24px;">'+
 					'<i class="material-icons mdc-button_icon">more_vert</i>'+
