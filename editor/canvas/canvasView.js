@@ -11,7 +11,7 @@ class CanvasView {
             '<button id="addactor"  class="add-actor mdc-fab mdc-ripple-upgraded add-property-button">'+
                 '<i class="material-icons">add</i>'+
             '</button>'+
-            '<button id="actorbutton" style="visibility:hidden;box-shadow:none" class="mdc-fab mdc-ripple-upgrade actor-canvas-button">'+
+            '<button id="actorbutton" style="visibility:hidden" class="mdc-fab mdc-ripple-upgrade actor-canvas-button">'+
                 '<i class="material-icons">more_vert</i>'+
             '</button>'+
             '<div class="mdc-menu-surface--anchor">'+
@@ -96,7 +96,7 @@ class CanvasView {
 
     updateStageDrawer(){
         var drawerApp=document.querySelector(".mdc-drawer-app-content");
-        if (drawerApp.getBoundingClientRect().x ==0) this.app.stage.x = this.app.stage.x+this.drawerOffset;
+        if (drawerApp.getBoundingClientRect().x == 0) this.app.stage.x = this.app.stage.x+this.drawerOffset;
         else this.app.stage.x = this.app.stage.x-this.drawerOffset; 
         this.hitArea(this.scene);
     }

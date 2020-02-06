@@ -56,11 +56,14 @@ button{
 }
 .actor-canvas-button{
     position: absolute;
-    background: #ffffff00;
+    background: white;
     width: 40px;
     height: 40px;
+    box-shadow: 0px 0px 3px darkslategrey;
     color: #aaaaaa;
-    border: 1px solid;
+}
+.actor-canvas-button:hover{
+    box-shadow: 0px 0px 5px darkslategrey;
 }
 .mdc-top-app-bar{
     position: relative;
