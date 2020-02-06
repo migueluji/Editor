@@ -2,13 +2,15 @@ class Render {
 
     constructor(render) {
 
-        this.width              = render.width              || 800;         /** */
-        this.height             = render.height             || 600;         /** */
-        this.backgroundColor    = render.backgroundColor    || 0xffffff;    /** */
-        this.cameraX            = render.cameraX            || 0.00;        /** */
-        this.cameraY            = render.cameraY            || 0.00;        /** */
-        this.cameraZoom         = render.cameraZoom         || 0.00;        /** */
-        this.cameraAngle        = render.cameraAngle        || 0.00;        /** Radians */
+        this.width              = render.displayWidth       || window.innerWidth;   /** Para la ejecucion en el editor. */
+        this.height             = render.displayHeight      || window.innerHeight;  /** Para la ejecucion en el editor. */
+        this.displayWidth       = render.displayWidth       || 800;                 /** Para la ejecucion en el player. */
+        this.displayHeight      = render.displayHeight      || 600;                 /** Para la ejecucion en el player. */
+        this.backgroundColor    = render.backgroundColor    || 0xffffff;            /** */
+        this.cameraX            = render.cameraX            || 0.00;                /** */
+        this.cameraY            = render.cameraY            || 0.00;                /** */
+        this.cameraZoom         = render.cameraZoom         || 0.00;                /** */
+        this.cameraAngle        = render.cameraAngle        || 0.00;                /** Radians */
 
         this.actorList          = {};       /** */
         this.onScreenList       = {};       /** */
@@ -18,7 +20,7 @@ class Render {
 
         this.setOriginAtScreenCenter();     /** */
 
-      //miguel  this.loadFonts(render.assets.fonts);
+        //this.loadFonts(render.assets.fonts);
     }
 
     createRenderer() {
@@ -52,38 +54,45 @@ class Render {
     
     setActorRender(actor) {
 
-        /** Creamos la textura del sprite */
-        actor.texture           = (actor.spriteName != null) ? new PIXI.Texture.from(actor.spriteName) : PIXI.Texture.EMPTY;
-        actor.sprite            = new PIXI.TilingSprite(actor.texture, actor.width, actor.height);
+        actor.render = new PIXI.Sprite();
+        actor.render.anchor.set(0.5); // This will set the origin to center. (0.5) is same as (0.5, 0.5).
+        actor.render.rotation   = Util.degToRad(actor.angle);
 
-        actor.sprite.anchor.set(0.5); // This will set the origin to center. (0.5) is same as (0.5, 0.5).
-        actor.sprite.rotation   = Util.degToRad(actor.angle);
-        actor.sprite.scale.set(actor.scaleX, actor.scaleY);
-        actor.sprite.tint       = Util.colorFormat(actor.tint); /** Configuramos el color de tintado */
-        actor.sprite.alpha      = actor.alpha;   /** Configuramos el alpha del sprite */
+        /** Creamos la textura del sprite */
+        actor.texture           = (actor.image != null) ? new PIXI.Texture.from("./assets/images/" + actor.image) : PIXI.Texture.EMPTY;
+        actor.sprite            = new PIXI.TilingSprite(actor.texture, actor.width, actor.height);
+        //actor.sprite.scale.set(actor.scaleX, actor.scaleY);
+        actor.sprite.tint       = Util.colorFormat(actor.color); /** Configuramos el color de tintado */
+        actor.sprite.alpha      = actor.opacity;   /** Configuramos el alpha del sprite */
+        actor.render.addChild(actor.sprite);
 
         /** Texto */
         actor.textStyle     = new PIXI.TextStyle({
                                 fontFamily: actor.font, 
-                                fontSize:   actor.fontSize, 
-                                fill:       actor.fontColor, 
-                                align:      actor.textAlign
+                                fontSize:   actor.size, 
+                                fill:       actor.color, 
+                                align:      actor.align,
+                                fontWeight: actor.style
                             });
         actor.text          = (actor.text != undefined) ? Util.replaceScopeReference(actor, actor.text) : "";
         actor.textSprite    = new PIXI.Text("", actor.textStyle);
-        actor.textSprite.anchor.set(0.5);           // This will set the origin to center. (0.5) is same as (0.5, 0.5).
-        actor.sprite.addChild(actor.textSprite);    /** Añadimos el texto al sprite contenedor */
+        actor.textSprite.anchor.set(0.0);           // This will set the origin to center. (0.5) is same as (0.5, 0.5).
+        actor.render.addChild(actor.textSprite);    /** Añadimos el texto al sprite contenedor */
 
         /** Añadimos el actor a la lista del motor de render */
         this.actorList[actor.ID] = actor;
 
         /* DEBUG -- Borrar sin problemas */
             actor.renderDebugSprite = new PIXI.Sprite();
+            actor.collisionBroadDebugSprite = new PIXI.Sprite();
+            actor.collisionNarrowDebugSprite = new PIXI.Sprite();
         /* FIN DEBUG */
 
         /* DEBUG -- Borrar sin problemas */
             this.stage.addChild(actor.physicsDebugSprite);
             this.stage.addChild(actor.renderDebugSprite);
+            this.stage.addChild(actor.collisionBroadDebugSprite);
+            this.stage.addChild(actor.collisionNarrowDebugSprite);
         /* FIN DEBUG */
 
         /** Añadimos el sprite al contenedor de screen */
@@ -96,7 +105,7 @@ class Render {
         }
         
         /** Añadimos el sprite al stage */
-        this.stage.addChild(actor.sprite);
+        this.stage.addChild(actor.render);
     }
 
     run() {
@@ -133,7 +142,7 @@ class Render {
 
             /** --- DEBUG (ELIMINAR SIN PROBLEMA */
                 //this.drawDebug(this.actorList[i]);
-            /** FIN --- DEBUG (ELIMINAR SIN PROBLEMA */
+            /** FIN --- DEBUG (ELIMINAR SIN PROBLEMA */ 
         }
     }
 
@@ -142,7 +151,7 @@ class Render {
         actor.renderDebugSprite.removeChildren();
         var graphics = new PIXI.Graphics();
         graphics.lineStyle(2, 0xff0000, 1);
-        graphics.drawRect(actor.x - actor.scaleX * actor.width / 2, actor.y - actor.scaleY * actor.height / 2, actor.width * actor.scaleX, actor.height * actor.scaleY);
+        graphics.drawRect(actor.x - /*actor.scaleX * */actor.width / 2, actor.y - /*actor.scaleY * */actor.height / 2, actor.width /* * actor.scaleX*/, actor.height /* * actor.scaleY*/);
         actor.renderDebugSprite.addChild(graphics);
     }
 

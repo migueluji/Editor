@@ -1,7 +1,7 @@
 {
     "name": "Tower Bridge Defense ",
-    "width": 960,
-    "height": 540,
+    "displayWidth": 960,
+    "displayHeight": 540,
     "cameraX": 0,
     "cameraY": 0,
     "cameraAngle": 0,
@@ -11,14 +11,11 @@
     "sound": "assets/audio/main.wav",
     "playSound": false,
     "loop": true,
-    "activeScene": "Scene1",
     "score": 0,
     "stopwatch": 6000,
-    "assets": {
-        "images": {},
-        "fonts": {
-            "LilitaOne": "assets/fonts/LilitaOne-Regular.ttf"
-        }
+    "imageList": {},
+    "fontList": {
+        "LilitaOne": "assets/fonts/LilitaOne-Regular.ttf"
     },
     "sceneList": {
         "Scene1": {
@@ -307,13 +304,13 @@
                                 "type": "Edit",
                                 "element": "Render",
                                 "property": "cameraX",
-                                "value": "Player.x * 0.3"
+                                "value": "Player.x * 0.2"
                             },
                             {
                                 "type": "Edit",
                                 "element": "Render",
                                 "property": "cameraY",
-                                "value": "Player.y * 0.3"
+                                "value": "Player.y * 0.0"
                             }
                         ],
                         "PlayerMovement": [

@@ -8,11 +8,11 @@ class Game {
 
         /** Gestion de escenas
          * --------------------------------------------------------------------- */
-        this.sceneList          = game.sceneList;
-        // miguel - this.activeScene        = game.activeScene; 
-        this.activeScene=game.sceneList[0].name;
-       // miguel this.activeSceneNumber  = this.sceneList[this.activeScene].number;
-       this.activeSceneNumber=0;
+        this.sceneList          = game.sceneList;                                       /** */
+        this.activeSceneNumber  = 0;                                                    /** */
+        this.activeScene        = Object.keys(game.sceneList)[this.activeSceneNumber];  /** */
+
+        console.log(this.activeScene);
 
         /** Propiedades de lectura para la ejecucion
          * --------------------------------------------------------------------- */

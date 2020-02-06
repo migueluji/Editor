@@ -25,27 +25,20 @@
 				transform: translateX(-50%) translateY(-50%);
 			}
 
-			#hola {
-
-				font-family: "LilitaOne";
-				color: white;
-			}
-
 		</style>
 	
-		<title>Physics test</title>
+		<title>Gamesonomy Engine</title>
 	
 	</head>
 	
 	<body>
 
-		<div id="hola">Test para comprobar que se muestran las fuentes cargadas.</div>
-
-        <script src="libraries/math.js"></script>
+		<script src="libraries/math.js"></script>
         <script src="libraries/stats.min.js"></script>
 		<script src="libraries/pixi.min.js"></script>
 		<script src="libraries/box2d.min.js"></script>
 		<script src="libraries/howler.min.js"></script>
+		<script src="libraries/SAT.js"></script>
 
         <script src="Player.js"></script>
 
@@ -58,6 +51,7 @@
 
         <script src="Physics.js"></script>
         <script src="Input.js"></script>
+        <script src="Collision.js"></script>
         <script src="Logic.js"></script>
         <script src="Audio.js"></script>
         <script src="Render.js"></script>
@@ -69,7 +63,8 @@
 
 		<script>
 
-			var player = new Player({source: "../games/prueba/game.json"});
+			var player = new Player({source: "local", data: localStorage.getItem("localStorage_GameData")});
+			//var player = new Player({source: "games/testEditor.json", data: {}});
 
 			console.log(player);
 

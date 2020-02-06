@@ -4,19 +4,22 @@ class Actor {
 
         /** Configuracion de propiedades y asignacion de valores por defecto 
          * --------------------------------------------------------------------- */
-        this.live           = actor.live ? true : false     || true;
+        this.sleeping       = actor.sleeping ? false : true || false;
         this.destroyActor   = actor.destroyActor            || false;
 
         this.name           = actor.name                    || "NewActor" + Util.random();
         this.x              = actor.x                       || 0;
-        this.y              = actor.y                       || 0;
-        this.width          = actor.width                   || 64;
-        this.height         = actor.height                  || 64;
+        this.y              = -actor.y                      || 0;
         this.scaleX         = actor.scaleX                  || 1;
         this.scaleY         = actor.scaleY                  || 1;
+        this.width          = actor.width                   || 64;
+        this.height         = actor.height                  || 64;
+        this.radius         = Math.max(this.width, this.height) / 2;
         this.flipX          = actor.flipX                   || 1;
         this.flipY          = actor.flipY                   || 1;
         this.angle          = Util.degToRad(actor.angle)    || 0;
+
+        this.screen         = actor.screen                  || false;
 
         this.velocityX      = actor.velocityX               || 0;
         this.velocityY      = actor.velocityY               || 0;
@@ -25,30 +28,36 @@ class Actor {
         this.friction       = actor.friction                || 0.5;
         this.restitution    = actor.restitution             || 0.2;
         this.physics        = actor.physics                 || false;
-        this.physicMode     = actor.physicMode              || "dynamic";
-        this.physicVertices = actor.physicVertices          || null; 
-        this.tags           = actor.tags                    || {};
+        this.physicMode     = actor.physicMode              || "Dynamic";
         this.physicBody     = null;
 
-        this.spriteName     = actor.spriteName              || null;
-        this.sprite         = null;
-        this.tint           = actor.tint                    || "#ffffff";
-        this.alpha          = actor.alpha                   || 1;
+        this.image          = actor.image                   || null;
+        this.color          = actor.color                   || "#ffffff";
+        this.opacity        = actor.opacity                 || 1;
         this.scrollX        = actor.scrollX                 || 0;
         this.scrollY        = actor.scrollY                 || 0;
-
         this.text           = actor.text                    || "";
-        this.textAlign      = actor.textAlign               || "left";
+        this.align          = actor.align                   || "left";
         this.font           = actor.font                    || "Arial";
-        this.fontColor      = actor.fontColor               || "#333333";
-        this.fontSize       = actor.fontSize                || 30;
+        this.fill           = actor.fill                    || "#333333";
+        this.size           = actor.size                    || 30;
+        this.style          = actor.style                   || "normal";
+        
+        this.render         = null;                                         /** Contenedor del sprite y del textSprite. */
+        this.sprite         = null;
         this.textSprite     = null;
 
-        this.soundFile      = actor.sound                   || "";      /** */
-        this.pan            = actor.pan                     || 0;       /** */
-        this.volume         = actor.volume                  || 1;       /** */
-        this.playSound      = actor.playSound               || false;    /** */
-        this.loop           = actor.loop                    || false;    /** */
+        this.soundFile      = actor.sound                   || "";          /** */
+        this.pan            = actor.pan                     || 0;           /** */
+        this.volume         = actor.volume                  || 1;           /** */
+        this.playSound      = actor.playSound               || false;       /** */
+        this.loop           = actor.loop                    || false;       /** */
+
+        this.collisionOn    = false;                                        /** Propiedad de ejecucion. */
+        this.collisionList  = {};                                           /** Propiedad de ejecucion. */
+        this.tags           = this.setTags(actor.tags);
+        this.collider       = actor.collider                || "Circle";
+        this.physicVertices = actor.physicVertices          || null; 
 
         /** Variables custom
          * --------------------------------------------------------------------- */
@@ -79,16 +88,34 @@ class Actor {
 
     setRenderProperties() {
 
-        this.sprite.position.x  = this.x;
-        this.sprite.position.y  = this.y;
-        this.sprite.rotation    = this.angle;
+        this.render.position.x  = this.x - this.width / 2;
+        this.render.position.y  = this.y - this.height / 2;
+        this.render.rotation    = this.angle;
 
-        this.sprite.scale.set(this.scaleX * this.flipX, this.scaleY * this.flipY); // Para actualizaciones de los flips
+        this.sprite.tilePosition.x += this.scrollX * 0.01;
+        this.sprite.tilePosition.y += this.scrollY * 0.01;
+
+        this.sprite.scale.set(/*this.scaleX * */this.flipX, /*this.scaleY * */this.flipY); // Para actualizaciones de los flips
     }
 
     setTextProperties() {
 
         this.textSprite.text = this.compiledText;
+    }
+
+    setTags(tags) {
+
+        if(tags == "") { return {}; }
+
+        var aux = {};
+        var t = tags.split(',');
+
+        for(var i = 0; i < t.length; i++) {
+
+            aux[t[i]] = true;
+        }
+
+        return aux;
     }
 
     destroy() {
@@ -102,34 +129,6 @@ class Actor {
     /** ###############################################################################
      *  Control sobre el cambio de propiedades en ejecucion.
      *  ############################################################################### */
-
-    get live() { return this._live; }
-    set live(value) {
-
-        /** Registramos el valor anterior para evitar regenerar el actor. */
-        //var previousValue = this._live;
-
-        /** Actualizamos la propiedad de la estructura de datos del actor.*/
-        this._live = value;
-
-        /** Comprobamos que no estamos en la primera carga del actor. */
-        //if(previousValue != undefined) {
-
-            /** Comprobamos que el valor anterior no es el mismo, para evitar generar duplicados erroneos. */
-            //if(previousValue != this._live) {
-
-                /** Añadimos el actor a su lista correspondiente. */
-                /*if(this._live) {
-
-                    player.engine.addEnabledActor(this);
-                }
-                else {
-
-                    player.engine.addDisabledActor(this);
-                }
-            }
-        }*/
-    }
 
     get destroyActor() { return this._destroyActor; }
     set destroyActor(value) {
