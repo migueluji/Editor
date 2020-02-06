@@ -30,7 +30,7 @@ class File {
 	    if(type=="Image" || type=="Animation") 	destination="images";
 		if(type=="Sound")   destination="sounds";
 		var url=app.parentGamesFolder+"/uploadAsset.php?gameFolder="+gameFolder+"&assetFolder="+destination;
-		//console.log("Upload File: "+fileName);
+		
 		var xhr = new XMLHttpRequest();
         xhr.open("POST", url, true);
 		xhr.type=type;

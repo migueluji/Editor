@@ -43,7 +43,8 @@ class CastView {
 // Handlers
 	addActorHandler(){
 		var sceneID=document.querySelector(".sceneselected").id;
-		CmdManager.addActorCmd(sceneID,this.html.querySelectorAll(".mdc-list-item__text").length);
+		var position={"x":0,"y":0};
+		CmdManager.addActorCmd(sceneID,this.html.querySelectorAll(".mdc-list-item__text").length,position);
 	}
 
 // Utils

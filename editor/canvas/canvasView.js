@@ -48,14 +48,18 @@ class CanvasView {
 
     loadInitImages(imageList){
             this.loader = new PIXI.Loader(app.parentGamesFolder+"/"+app.gameFolder+"/images");
-            this.loader.add(imageList);
+            if (imageList.length==0) this.loader.add("");
+            else this.loader.add(imageList);   
+             
             this.loader.onLoad.add((loader,resource) => {
                 console.log(resource.name," loaded");
             });
             this.loader.load(()=>{
                 console.log("Load finished!");
                 this.initApp();
+                if (this.loader.resources[""]) delete this.loader.resources[""];
             });
+           
     }
 
     loadImage(image){
@@ -130,10 +134,11 @@ class CanvasView {
 
     updateSelectedActor(actorID){
         if (actorID){ // if actorED != mull
+         //   console.log(actorID,this.selected,this.displayActor);
             (this.selected) ? this.displayActor.removeGizmo() : this.selected=true;
             var displayActorIndex =this.scene.children.findIndex(i=>i.id==actorID);
             this.displayActor = this.scene.children[displayActorIndex];
-            this.displayActor.createGizmo();
+            if (this.displayActor!=undefined) this.displayActor.createGizmo();
            
             this.actorButton.style.visibility="visible";
 
@@ -193,6 +198,7 @@ class CanvasView {
         if (confirm('Are you sure you want to delete "'+this.displayActor.name+'" actor?')){
                 CmdManager.removeActorCmd(sceneID,this.displayActor.id); 
                 this.displayActor=null;
+                this.selected=false;
         }
     }
 
@@ -206,7 +212,8 @@ class CanvasView {
 
     addActorHandler(){
         var sceneID=document.querySelector(".sceneselected").id;
-		CmdManager.addActorCmd(sceneID,this.actorList.length);
+        var position=this.positionToAddActor();
+		CmdManager.addActorCmd(sceneID,this.actorList.length,position);
     }
 
     resize(){

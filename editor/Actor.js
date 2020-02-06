@@ -15,8 +15,8 @@ class Actor {
             // Settings
             sleeping:this.sleeping || false,
             x:this.x || 0, y:this.y || 0, 
-            width:this.width || 50, height:this.height || 50, 
-            scaleX:this.scaleX || 1, scaleY:this.scaleY || 1, 
+            width:this.width, height:this.height, 
+            scaleX:this.scaleX, scaleY:this.scaleY, 
             angle:this.angle || 0, screen:this.screen || false,
             collider:this.collider || "Box", tags:this.tags || "",
             // Sprite
@@ -24,7 +24,7 @@ class Actor {
             color:this.color || "#ffffff", opacity: this.opacity,
             flipX:this.flipX || false , flipY:this.flipY || false ,
             scrollX:this.scrollX || 0, scrollY:this.scrollY || 0,
-            tileX:this.tileX || 1, tileY:this.tileY || 1,
+            tileX:this.tileX, tileY:this.tileY,
             // Text
             textOn:this.textOn || false, text:this.text || "",
             font:this.font || "Arial", size:this.size || 30,
@@ -40,14 +40,20 @@ class Actor {
             fixedAngle:this.fixedAngle || false,
             velocityX:this.velocityX || 0, velocityY:this.velocityY || 0,
             angularVelocity:this.angularVelocity || 0, 
-            density: this.density, friction: this.friction, restitution: this.restitution,
+            density: this.density || 1, friction: this.friction, restitution: this.restitution,
             dampingLinear:this.dampingLinear || 0, dampingAngular:this.dampingAngular ||  0
         }
         if (obj.opacity==undefined) obj.opacity=1;
         if (obj.volume==undefined) obj.volume=1;
         if (obj.density==undefined) obj.density=1;
-        if (obj.friction==undefined) obj.friction=1;
-        if (obj.restitution==undefined) obj.restitution=1;
+        if (obj.friction==undefined) obj.friction=0.5;
+        if (obj.restitution==undefined) obj.restitution=0.5;
+        if (obj.width==undefined) obj.width=50;
+        if (obj.height==undefined) obj.height=50;
+        if (obj.scaleX==undefined) obj.scaleX=1;
+        if (obj.scaleY==undefined) obj.scaleY=1;
+        if (obj.tileX==undefined) obj.tileX=1;
+        if (obj.tileY==undefined) obj.tileY=1;
         return(obj);
     }
 

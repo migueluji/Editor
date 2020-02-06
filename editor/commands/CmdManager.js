@@ -61,8 +61,8 @@ class CmdManager {
     }
 
 // Actor
-    static addActorCmd(sceneID,actorPos) {
-        var cmd =new AddActorCmd(sceneID,actorPos);
+    static addActorCmd(sceneID,actorPos,position) {
+        var cmd =new AddActorCmd(sceneID,actorPos,position);
         this.history.execute(cmd);
     }
 
