@@ -110,6 +110,7 @@ class ActorPropertiesView {
 		if (this.property=="opacity" && this.value>1) this.value=1;  // special case for pixi
 		var sceneID=document.querySelector(".sceneselected");
 		var actorID=document.querySelector(".actorselected");
+		console.log(sceneID.id,actorID.id,this.property,this.value);
 		if(sceneID.id && actorID.id) CmdManager.changeActorPropertyCmd(sceneID.id,actorID.id,this.property,this.value);
 	}
 
@@ -118,6 +119,7 @@ class ActorPropertiesView {
 		var sceneID=document.querySelector(".sceneselected").id;
 		var actorID=document.querySelector(".actorselected").id;
 		this.value=element.querySelector('.mdc-list-item--selected').dataset.value;
+		console.log(sceneID.id,actorID.id,this.property,this.value);
 		if(sceneID && actorID) CmdManager.changeActorPropertyCmd(sceneID,actorID,this.property,this.value);
 	}
 

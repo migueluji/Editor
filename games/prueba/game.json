@@ -391,6 +391,22 @@
 										}
 									],
 									"nodeListFalse": []
+								},
+								{
+									"type": "Timer",
+									"parameters": {
+										"seconds": 1
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Score.puntos",
+												"value": "Score.puntos+1"
+											}
+										}
+									],
+									"nodeListFalse": []
 								}
 							]
 						}
@@ -475,8 +491,8 @@
 				{
 					"name": "Wall",
 					"sleeping": false,
-					"x": -471,
-					"y": -3,
+					"x": -154.31385798235374,
+					"y": 400.0550898406408,
 					"width": 50,
 					"height": 484,
 					"scaleX": "1.00",
@@ -484,7 +500,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
+					"tags": "plane",
 					"spriteOn": false,
 					"image": "",
 					"color": "#ffffff",
