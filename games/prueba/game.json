@@ -140,7 +140,7 @@
 					"collider": "Box",
 					"tags": "plane",
 					"spriteOn": true,
-					"image": "planeGreen1.png",
+					"image": "planeYellow1.png",
 					"color": "#ffffff",
 					"opacity": 1,
 					"flipX": false,
@@ -221,9 +221,29 @@
 								{
 									"type": "Animate",
 									"parameters": {
-										"animation": "planeGreen1.png,planeGreen2.png,planeGreen3.png",
+										"animation": "planeYellow1.png,planeBlue1.png",
 										"fps": "12"
 									}
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "plane,wall"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Score.puntos",
+												"value": "Score.puntos+1"
+											}
+										},
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
 								}
 							]
 						}
