@@ -292,20 +292,7 @@
 								{
 									"type": "Collision",
 									"parameters": {
-										"tags": "plane,wall"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Delete",
-											"parameters": {}
-										}
-									],
-									"nodeListFalse": []
-								},
-								{
-									"type": "Collision",
-									"parameters": {
-										"tags": "plane"
+										"tag_List": "plane,wall"
 									},
 									"nodeListTrue": [
 										{
@@ -314,6 +301,10 @@
 												"property": "Score.puntos",
 												"value": "Score.puntos+1"
 											}
+										},
+										{
+											"type": "Delete",
+											"parameters": {}
 										}
 									],
 									"nodeListFalse": []
@@ -491,8 +482,8 @@
 				{
 					"name": "Wall",
 					"sleeping": false,
-					"x": -154.31385798235374,
-					"y": 400.0550898406408,
+					"x": -452.37140341072666,
+					"y": 5.46754390421529,
 					"width": 50,
 					"height": 484,
 					"scaleX": "1.00",
