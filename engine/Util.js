@@ -123,6 +123,7 @@ class Util {
             object = temp;
         }
     }
+    
 
     static updateExpressionNames(expression, scope) {
 
@@ -130,12 +131,41 @@ class Util {
 
         for(var i in scope) {
 
-            if((temp.search(scope[i].name) != -1) && (scope[i].scene == scope.Game.activeScene) && (scope[i].ID != undefined)) {
+            if((temp.search(scope[i].name) != -1) /* && (scope[i].scene == scope.Game.activeScene)*/ && (scope[i].ID != undefined)) {
 
                 temp = temp.replace(new RegExp(scope[i].name, "g"), scope[i].ID);
             }
         }
 
+        console.log(temp, scope);
+
+        return temp;
+    }
+
+    static addElementsToLocalScope(expression, actor, actorList) {
+
+        var temp = expression;
+        
+        for(var i in actorList) {
+
+            if((temp.search(actorList[i].name) != -1)) {
+
+                actor.localScope[actorList[i].name] = actorList[i];
+            }
+        }
+    }
+
+    static updateTextToLocalScope(text, actor) {
+
+        var temp = text;
+
+        if((temp.search("Me") != -1)) {
+
+            temp = temp.replace(new RegExp("Me", "g"), "player.engine.actorList." + actor.ID + ".localScope.Me");
+        }
+
+        // TODO: Actores que no sean "Me".
+        
         return temp;
     }
 

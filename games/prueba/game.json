@@ -224,26 +224,6 @@
 										"animation": "planeYellow1.png,planeBlue1.png",
 										"fps": "12"
 									}
-								},
-								{
-									"type": "Collision",
-									"parameters": {
-										"tags": "plane,wall"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Score.puntos",
-												"value": "Score.puntos+1"
-											}
-										},
-										{
-											"type": "Delete",
-											"parameters": {}
-										}
-									],
-									"nodeListFalse": []
 								}
 							]
 						}
@@ -312,7 +292,7 @@
 								{
 									"type": "Collision",
 									"parameters": {
-										"tag_List": "plane,wall"
+										"tags": "plane"
 									},
 									"nodeListTrue": [
 										{
@@ -322,6 +302,19 @@
 												"value": "Score.puntos+1"
 											}
 										},
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "wall"
+									},
+									"nodeListTrue": [
 										{
 											"type": "Delete",
 											"parameters": {}

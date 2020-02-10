@@ -324,22 +324,6 @@
 										}
 									],
 									"nodeListFalse": []
-								},
-								{
-									"type": "Collision",
-									"parameters": {
-										"tags": "plane"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Score.puntos",
-												"value": "Score.puntos+1"
-											}
-										}
-									],
-									"nodeListFalse": []
 								}
 							]
 						}
@@ -403,7 +387,7 @@
 									"parameters": {
 										"value_1": "Me.puntos",
 										"operation": "Greater_Equal",
-										"value_2": "20"
+										"value_2": "2000"
 									},
 									"nodeListTrue": [
 										{
@@ -476,7 +460,7 @@
 								{
 									"type": "Timer",
 									"parameters": {
-										"seconds": "1"
+										"seconds": "0.1"
 									},
 									"nodeListTrue": [
 										{
@@ -486,6 +470,13 @@
 												"x": 0,
 												"y": "random(-200,200)",
 												"angle": 0
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Score.puntos",
+												"value": "Score.puntos+1"
 											}
 										}
 									],

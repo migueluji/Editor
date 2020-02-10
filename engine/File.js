@@ -5,9 +5,10 @@ class File {
         this.source = file.source || "";    /** */
         this.data   = file.data   || {};    /** */
     }
+
     load() {
 
-        if(this.source == "local") {
+        if(typeof this.data === "string") {
 
             this.data = JSON.parse(String(this.data));
             this.loadAssets(this.data.imageList);
@@ -25,6 +26,8 @@ class File {
 
         if(this.readyState === this.DONE) {
 
+            console.log(this.response);
+
             file.data = JSON.parse(String(this.response)); /** Parse JSON file game data to a JS Object */
             file.loadAssets(file.data.imageList);
         }
@@ -32,9 +35,9 @@ class File {
 
     loadAssets(imageList) {
 
-        this.loader = new PIXI.Loader("./assets/images");
+        this.loader = new PIXI.Loader(this.source + "/images");
         this.loader.add(imageList);
-        this.loader.onLoad.add((loader,resource) => {
+        this.loader.onLoad.add((loader, resource) => {
             console.log(resource.name," loaded");
         });
         this.loader.load(()=>{

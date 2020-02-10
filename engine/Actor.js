@@ -19,6 +19,8 @@ class Actor {
         this.flipY          = actor.flipY                   || 1;
         this.angle          = Util.degToRad(actor.angle)    || 0;
 
+        this.interactiveOn  = false;                        
+
         this.screen         = actor.screen                  || false;
 
         this.velocityX      = actor.velocityX               || 0;
@@ -32,7 +34,7 @@ class Actor {
         this.physicBody     = null;
 
         this.image          = actor.image                   || null;
-        this.color          = actor.color                   || "#ffffff";
+        this.color          = actor.color                   || "0xffffff";
         this.opacity        = actor.opacity                 || 1;
         this.scrollX        = actor.scrollX                 || 0;
         this.scrollY        = actor.scrollY                 || 0;
@@ -43,7 +45,7 @@ class Actor {
         this.size           = actor.size                    || 30;
         this.style          = actor.style                   || "normal";
         
-        this.render         = null;                                         /** Contenedor del sprite y del textSprite. */
+        this.render         = null;                         /** Contenedor del sprite y del textSprite. */
         this.sprite         = null;
         this.textSprite     = null;
 
@@ -58,6 +60,8 @@ class Actor {
         this.tags           = this.setTags(actor.tags);
         this.collider       = actor.collider                || "Circle";
         this.physicVertices = actor.physicVertices          || null; 
+
+        this.localScope     = {};
 
         /** Variables custom
          * --------------------------------------------------------------------- */
@@ -92,13 +96,30 @@ class Actor {
         this.render.position.y  = this.y - this.height / 2;
         this.render.rotation    = this.angle;
 
+        this.render.updateTransform();
+    }
+
+    setSpriteProperties() {
+
         this.sprite.tilePosition.x += this.scrollX * 0.01;
         this.sprite.tilePosition.y += this.scrollY * 0.01;
 
         this.sprite.scale.set(/*this.scaleX * */this.flipX, /*this.scaleY * */this.flipY); // Para actualizaciones de los flips
+        
+        this.sprite.updateTransform();
     }
 
     setTextProperties() {
+
+        //console.log(this.compiledText);
+
+        //this.text = Util.updateTextToLocalScope(this.text, this, player.engine.actoList);
+
+        //console.log(this.text);
+
+        this.compiledText = eval("` " + this.text + "`");
+
+        //console.log(this, this.text, this.compiledText);
 
         this.textSprite.text = this.compiledText;
     }

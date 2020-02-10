@@ -47,8 +47,8 @@ class Collision {
 
         /** Eliminamos los sprites de debug. 
          * ----------------------------------------------------------------------- */
-        actor.collisionBroadDebugSprite.destroy();
-        actor.collisionNarrowDebugSprite.destroy();
+        //actor.collisionBroadDebugSprite.destroy();
+        //actor.collisionNarrowDebugSprite.destroy();
 
         /** Eliminamos el actor de la lista de actores del motor de colisiones. 
          * ----------------------------------------------------------------------- */
@@ -108,7 +108,7 @@ class Collision {
                     //this.drawCollisionShape(this.tagList[j][k]); /** Debug */
 
                     /** Broad phase */
-                    if(SAT.testCircleCircle(this.actorList[i].collisionBroadShape, this.tagList[j][k].collisionBroadShape, null)) {
+                    if(SAT.testCircleCircle(this.actorList[i].collisionBroadShape, this.tagList[j][k].collisionBroadShape, null) && this.actorList[i].ID != this.tagList[j][k].ID) {
 
                         /** Narrow phase */
                         switch(this.actorList[i].collider + this.tagList[j][k].collider) {

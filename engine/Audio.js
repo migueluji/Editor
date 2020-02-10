@@ -16,7 +16,7 @@ class Audio {
     setActorAudio(actor) {
 
         /** Comprobamos que el actor tiene un sonido. */
-        if(actor.soundFile != "") {
+        if(actor.soundOn) {
 
             /** Creamos el objeto de audio. */
             this.createSound({source: actor.soundFile, play: actor.playSound, volume: actor.volume, pan: actor.pan, loop: actor.loop}, false);

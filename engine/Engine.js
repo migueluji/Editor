@@ -7,17 +7,22 @@ class Engine {
 
         this.game       = new Game(game);               /** */
 
-        this.physics    = new Physics(game);            /** */
+        //this.physics    = new Physics(game);            /** */
         this.collision  = new Collision(game);          /** */
         this.render     = new Render(game);             /** */
         this.input      = new Input(game, this.render); /** */
         this.audio      = new Audio(game);              /** */
-        this.logic      = new Logic(game);              /** */
+        this.logic      = new Logic(game, this);              /** */
 
-        this.logic.setScope(this);                      /** Actualizar el scope con la informacion de Game y del Engine para la evaluacion de la logica. */
+        this.logic.setGlobalScope(this);  /** Actualizar el scope con la informacion de Game y del Engine para la evaluacion de la logica. */
 
         this.actorList  = {};                           /** */
         this.sceneList  = {};                           /** Necesitamos guardar los datos crudos de las escenas activas para acceder al Cast cuando queremos spawnear un actor. */
+
+
+        this.actorLoadList = {};
+
+
 
         this.spawnedActorsList      = [];               /** */
         this.spawnedNodesList       = [];               /** */
@@ -31,7 +36,6 @@ class Engine {
         console.log(this.game.sceneList);
 
         this.addScene(this.game.sceneList[this.game.activeScene]); /** Añadimos la primera escena. */
-
 
         /** DEBUG */
             this.stats = new Stats();
@@ -51,7 +55,7 @@ class Engine {
             this.stats.begin();
         /** FIN DEBUG */
 
-        this.physics.run();
+        //this.physics.run();
         this.collision.run();
         this.logic.run();
         this.render.run();
@@ -81,20 +85,28 @@ class Engine {
     /* ····································································
      *  NEW ACTOR HANDLERS
     ···································································· */
-    addActor(actor) {
+    createActor(actor) {
 
         var _actor = new Actor(actor);
         this.setActorID(_actor);
-        
-        this.physics.setActorPhysics(_actor);     // Añadir el actor al motor de fisicas.
-        this.render.setActorRender(_actor);       // Añadir el actor al motor de render. 
-        this.input.setActorInput(_actor);         // Añadir el actor al motor de input.
-        this.audio.setActorAudio(_actor);         // Añadir el actor al motor de audio.
-        this.logic.setActorLogic(_actor);         // Añadir el actor al motor de logica.
-        this.collision.setActorCollision(_actor); // Añadir el actor al motor de colisiones.
-        
-        this.actorList[_actor.ID] = _actor;
-        this.sceneList[this.game.activeScene][_actor.ID] = _actor;
+
+        return _actor;
+    }
+
+    setActor(actor) {
+
+        //this.physics.setActorPhysics(actor);      // Añadir el actor al motor de fisicas.
+        this.render.setActorRender(actor);          // Añadir el actor al motor de render. 
+        this.audio.setActorAudio(actor);            // Añadir el actor al motor de audio.
+        this.logic.setActorLogic(actor);            // Añadir el actor al motor de logica.
+        this.input.setActorInput(actor);            // Añadir el actor al motor de input.
+        this.collision.setActorCollision(actor);    // Añadir el actor al motor de colisiones.
+    }
+
+    addActor(actor) {
+
+        this.actorList[actor.ID] = actor;
+        this.sceneList[this.game.activeScene][actor.ID] = actor;
     }
 
     setActorID(actor) {
@@ -108,10 +120,10 @@ class Engine {
     ···································································· */
     addSpawnedActor(actor, x, y, angle) {
 
-        var spawnedActor = Object.assign({}, this.game.sceneList[this.game.activeScene].actorList[actor]); // De momento es la 0, porque no admitimos mas. Para mas capas hay que hacer un bucle.
+        var spawnedActor = Object.assign({}, this.game.sceneList[this.game.activeScene].actorList[actor]); 
 
         spawnedActor.live = true;
-        spawnedActor.name = "Copy_of_" + actor + "_" + Util.random(); // TODO: Este random deberia venir de una funcion UTIL
+        spawnedActor.name = "Copy_of_" + actor + "_" + Util.random();
         spawnedActor.x = x;
         spawnedActor.y = y; 
         spawnedActor.angle = angle; 
@@ -121,14 +133,29 @@ class Engine {
 
     spawnActors() {
 
+        this.actorLoadList = {};
+
         for(var i = 0; i < this.spawnedActorsList.length; i++) {
 
-            this.addActor(this.spawnedActorsList[i]);
-            this.logic.compileExpressions();
+            this.actorLoadList[this.spawnedActorsList[i].ID] = this.createActor(this.spawnedActorsList[i]);
             this.spawnedActorsList[i] = null;
         }
 
+        for(var i in this.actorLoadList) {
+
+            this.addActor(this.actorLoadList[i]);
+        }
+
+        for(var i in this.actorLoadList) {
+
+            this.setActor(this.actorLoadList[i]);
+        }
+
+
+        this.logic.compileExpressions();
+
         this.spawnedActorsList = [];
+        this.actorLoadList = {};
     }
 
     /* ····································································
@@ -145,9 +172,11 @@ class Engine {
 
         for(var i = 0; i < this.destroyedActorsList.length; i++) {
 
+            console.log("DESTROY", this.destroyedActorsList[i])
+
             /** Destruimos las referencias y las estructuras de datos relativas al actor en cada modulo del motor
              * ------------------------------------------------------------------------------------------------------- */
-            this.physics.destroyActor(this.destroyedActorsList[i]);     // Eliminar el actor de las fisicas
+            //this.physics.destroyActor(this.destroyedActorsList[i]);     // Eliminar el actor de las fisicas
             this.render.destroyActor(this.destroyedActorsList[i]);      // Eliminar el actor del render
             this.input.destroyActor(this.destroyedActorsList[i]);       // Eliminar el actor del input
             this.audio.destroyActor(this.destroyedActorsList[i]);       // Eliminar el actor del audio
@@ -188,7 +217,7 @@ class Engine {
 
     enableActor(actor) {
 
-        this.physics.enableActor(actor);    // Añadir el actor al motor de fisicas.
+        //this.physics.enableActor(actor);    // Añadir el actor al motor de fisicas.
         //this.render.setActorRender(actor);    // El motor de render no es necesario, ya que en gamesonomy.com se mantiene la imagen.
         this.input.setActorInput(actor);        // Añadir el actor al motor de input.
         this.logic.enableActor(actor);        // Añadir el actor al motor de logica.
@@ -214,7 +243,7 @@ class Engine {
 
     disableActor(actor) {
 
-        this.physics.disableActor(actor);   // Eliminar el actor de las fisicas
+        //this.physics.disableActor(actor);   // Eliminar el actor de las fisicas
         //this.render.destroyActor(actor);  // El motor de render no es necesario, ya que en gamesonomy.com se mantiene la imagen.
         this.input.destroyActor(actor);     // Eliminar el actor del input
         this.logic.disableActor(actor);     // Eliminar el actor de la logica
@@ -225,18 +254,34 @@ class Engine {
     ···································································· */
     addScene(scene) {
 
-        this.sceneList[scene.name] = {};            /** Actualizar la lista de escenas activas */
+        /** Actualizar la lista de escenas activas y la lista auxiliar de carga de actores. */
+        this.sceneList[scene.name]  = {};
+        this.actorLoadList          = {};
         
-        for(var i in scene.actorList) {             /** Creamos los actores en el motor */
+        /** Creacion de los actores en la memoria del motor. */
+        for(var i in scene.actorList) {
 
-            if(!scene.actorList[i].sleeping) {  /** Si es un actor activo */
+            if(!scene.actorList[i].sleeping) {      /** Si es un actor activo */
 
                 scene.actorList[i].name = i;
-                this.addActor(scene.actorList[i]);
+                this.actorLoadList[i] = this.createActor(scene.actorList[i]);
             }
         }
 
-        this.logic.compileExpressions();            /** Compilar las expresiones una vez cargados todos los datos en memoria */
+        /** Añadimos los actores a la listas de ejecucion del motor. */
+        for(var i in this.actorLoadList) {
+
+            this.addActor(this.actorLoadList[i]);
+        }
+
+        /** Configuracion de los actores en las estructuras de datos del motor. */
+        for(var i in this.actorLoadList) {
+
+            this.setActor(this.actorLoadList[i]);
+        }
+
+        /** Compilar las expresiones una vez cargados todos los datos en memoria */
+        this.logic.compileExpressions();            
     }
 
     addSceneHandler(scene, stop) {
