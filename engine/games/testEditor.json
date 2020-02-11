@@ -1,7 +1,7 @@
 {
 	"name": "Happy Plane",
-	"displayWidth": 800,
-	"displayHeight": 480,
+	"displayWidth": 1800,
+	"displayHeight": 1480,
 	"cameraX": 0,
 	"cameraY": 0,
 	"cameraAngle": 0,
@@ -20,6 +20,30 @@
 		"plane",
 		"wall"
 	],
+	"imageList": [
+		{
+			"name": "background.png"
+		},
+		{
+			"name": "groundIce.png"
+		},
+		{
+			"name": "planeBlue1.png"
+		},
+		{
+			"name": "planeGreen1.png"
+		},
+		{
+			"name": "planeGreen2.png"
+		},
+		{
+			"name": "planeGreen3.png"
+		},
+		{
+			"name": "starGold.png"
+		}
+	],
+	"soundList": [],
 	"sceneList": [
 		{
 			"name": "Init",
@@ -129,7 +153,7 @@
 				{
 					"name": "Plane",
 					"sleeping": false,
-					"x": -276,
+					"x": -275,
 					"y": 0,
 					"width": 88,
 					"height": 73,
@@ -253,7 +277,6 @@
 					"tileX": 1,
 					"tileY": 1,
 					"textOn": false,
-					"text": "",
 					"font": "Arial",
 					"size": 30,
 					"fill": "#000000",
@@ -292,20 +315,7 @@
 								{
 									"type": "Collision",
 									"parameters": {
-										"tags": "plane"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Delete",
-											"parameters": {}
-										}
-									],
-									"nodeListFalse": []
-								},
-								{
-									"type": "Collision",
-									"parameters": {
-										"tags": "wall"
+										"tags": "plane,wall"
 									},
 									"nodeListTrue": [
 										{
@@ -373,32 +383,11 @@
 							"name": "Go_to_next_scene",
 							"nodeList": [
 								{
-									"type": "Timer",
-									"parameters": {
-										"seconds": 1
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Score.puntos",
-												"value": "Score.puntos+1"
-											}
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						},
-						{
-							"name": "Script_2",
-							"nodeList": [
-								{
 									"type": "Compare",
 									"parameters": {
 										"value_1": "Me.puntos",
-										"operation": "Equal",
-										"value_2": "5"
+										"operation": "Greater_Equal",
+										"value_2": "2000"
 									},
 									"nodeListTrue": [
 										{
@@ -471,7 +460,7 @@
 								{
 									"type": "Timer",
 									"parameters": {
-										"seconds": "1"
+										"seconds": "0.1"
 									},
 									"nodeListTrue": [
 										{
@@ -481,6 +470,13 @@
 												"x": 0,
 												"y": "random(-200,200)",
 												"angle": 0
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Score.puntos",
+												"value": "Score.puntos+1"
 											}
 										}
 									],
@@ -493,8 +489,8 @@
 				{
 					"name": "Wall",
 					"sleeping": false,
-					"x": -452.37140341072666,
-					"y": 5.46754390421529,
+					"x": -471,
+					"y": -3,
 					"width": 50,
 					"height": 484,
 					"scaleX": "1.00",
