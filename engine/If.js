@@ -2,12 +2,12 @@ class If {
 
     constructor(expression) {
 
-        this.expression     = expression            || "";  /** */
-        this.code           = null;                         /** */
-        this.value          = null;                         /** */
+        this.expression     = expression || ""; /** */
+        this.code           = null;             /** */
+        this.value          = null;             /** */
 
-        this.nodeListTrue     = {};                           /** */
-        this.nodeListFalse    = {};                           /** */
+        this.nodeListTrue     = {};             /** */
+        this.nodeListFalse    = {};             /** */
     }
 
     run(scope) {

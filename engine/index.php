@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 
 <html>
 	
@@ -35,8 +35,7 @@
 
 		<script src="libraries/math.js"></script>
         <script src="libraries/stats.min.js"></script>
-		<!--<script src="libraries/pixi.min.js"></script>-->
-		<script src="https://pixijs.download/release/pixi.min.js"></script>
+		<script src="libraries/pixi.min.js"></script>
 		<script src="libraries/box2d.min.js"></script>
 		<script src="libraries/howler.min.js"></script>
 		<script src="libraries/SAT.js"></script>
@@ -63,18 +62,10 @@
 		<script src="Do.js"></script>
 
 		<script>
-
-			//var userId=1455;
-			//var userName="Editor";
-			//ar gameId=Utils.id();
-			var gameFolder="prueba";
-			var parentGamesFolder="http://localhost/games";
-
-			var player = new Player({source: parentGamesFolder + "/" + gameFolder, data: localStorage.getItem("localStorage_GameData")});
-			//var player = new Player({source: "games/testEditor.json", data: {}});
-
-			console.log(player);
-
+			console.log(localStorage.getItem("localStorage_GameData"));
+			var parentGamesFolder="<?php echo $_POST['parentGamesFolder'];?>";
+            var gameFolder="<?php echo $_POST['gameFolder'];?>";
+            var player = new Player({source: parentGamesFolder + "/" + gameFolder, data: localStorage.getItem("localStorage_GameData")});
 		</script>
 
 	</body>

@@ -17,22 +17,50 @@ class Input {
     
     setActorInput(actor) {
 
-        /** Añadimos la propiedad de control de eventos de pointer en el actor*/
-        actor.pointer = {down: false, up: true, isOver: false};
+        /** Comprobamos si es un actor interactivo. */
+        if(actor.interactiveOn) {
 
-        /** Configuramos las propiedades del motor de Render */
-        actor.sprite.interactive = true;
-        actor.sprite.buttonMode = true;
+            /** Añadimos la propiedad de control de eventos de pointer en el actor*/
+            actor.pointer = {down: false, up: true, isOver: false};
 
-        /** Añadimos los listeners */
-        actor.sprite.on("pointerdown", this.actorPointerDownHandler.bind(this, actor));
-        actor.sprite.on("pointerupoutside", this.actorPointerUpHandler.bind(this, actor));
-        actor.sprite.on("pointerup", this.actorPointerUpHandler.bind(this, actor));
-        actor.sprite.on("pointerover", this.actorPointerOverHandler.bind(this, actor));
-        actor.sprite.on("pointerout", this.actorPointerOutHandler.bind(this, actor));
+            /** Comprobamos si tiene un sprite render asignado, si no lo creamos. */
+            if(actor.render == null) {
 
-        /** Añadimos el actor a la lista del motor de input */
-        this.actorList[actor.ID] = actor;
+                /** Creamos el sprite contenedor. */
+                actor.render = new PIXI.Sprite();
+                actor.render.anchor.set(0.5001); // This will set the origin to center. (0.5) is same as (0.5, 0.5).
+                actor.render.rotation = Util.degToRad(actor.angle);
+                
+                /** Añadimos el sprite al contenedor de screen */
+                if(actor.screen) {
+
+                    actor.originalPositionX = actor.x;
+                    actor.originalPositionY = actor.y; 
+
+                    this.render.onScreenList[actor.ID] = actor;
+                }
+                
+                /** Añadimos el sprite al stage */
+                this.render.stage.addChild(actor.render);
+
+                /** Añadimos el actor a la lista del motor de render */
+                this.render.actorList[actor.ID] = actor;
+            }
+
+            /** Configuramos las propiedades del motor de Render */
+            actor.render.interactive = true;
+            actor.render.buttonMode = true;
+
+            /** Añadimos los listeners */
+            actor.render.on("pointerdown", this.actorPointerDownHandler.bind(this, actor));
+            actor.render.on("pointerupoutside", this.actorPointerUpHandler.bind(this, actor));
+            actor.render.on("pointerup", this.actorPointerUpHandler.bind(this, actor));
+            actor.render.on("pointerover", this.actorPointerOverHandler.bind(this, actor));
+            actor.render.on("pointerout", this.actorPointerOutHandler.bind(this, actor));
+
+            /** Añadimos el actor a la lista del motor de input */
+            this.actorList[actor.ID] = actor;
+        }
     }
 
     setPointerInteraction(render) {
@@ -129,8 +157,13 @@ class Input {
 
     destroyActor(actor) {
 
-        /** Eliminamos el actor de la lista de actores del motor de input 
-         * ----------------------------------------------------------------------- */
-        delete this.actorList[actor.ID];
+        /** Si es interactivo, lo eliminamos de las listas de actualizacion del motor de render. */
+        if(actor.interactiveOn) {
+
+            this.render.destroyActor(actor);
+        }
+
+        /** Eliminamos el actor de la lista de actores del motor de input */
+        Util.destroy(this.actorList, actor.ID);
     }
 }

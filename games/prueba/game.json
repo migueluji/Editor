@@ -140,7 +140,7 @@
 					"collider": "Box",
 					"tags": "plane",
 					"spriteOn": true,
-					"image": "planeYellow1.png",
+					"image": "planeGreen1.png",
 					"color": "#ffffff",
 					"opacity": 1,
 					"flipX": false,
@@ -221,29 +221,9 @@
 								{
 									"type": "Animate",
 									"parameters": {
-										"animation": "planeYellow1.png,planeBlue1.png",
+										"animation": "planeGreen1.png,planeGreen2.png,planeGreen3.png",
 										"fps": "12"
 									}
-								},
-								{
-									"type": "Collision",
-									"parameters": {
-										"tags": "plane,wall"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Score.puntos",
-												"value": "Score.puntos+1"
-											}
-										},
-										{
-											"type": "Delete",
-											"parameters": {}
-										}
-									],
-									"nodeListFalse": []
 								}
 							]
 						}
@@ -312,16 +292,9 @@
 								{
 									"type": "Collision",
 									"parameters": {
-										"tag_List": "plane,wall"
+										"tags": "plane"
 									},
 									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Score.puntos",
-												"value": "Score.puntos+1"
-											}
-										},
 										{
 											"type": "Delete",
 											"parameters": {}
@@ -387,23 +360,6 @@
 							"name": "Go_to_next_scene",
 							"nodeList": [
 								{
-									"type": "Compare",
-									"parameters": {
-										"value_1": "Me.puntos",
-										"operation": "Greater Equal",
-										"value_2": "5"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Go_To",
-											"parameters": {
-												"scene": "End"
-											}
-										}
-									],
-									"nodeListFalse": []
-								},
-								{
 									"type": "Timer",
 									"parameters": {
 										"seconds": 1
@@ -414,6 +370,28 @@
 											"parameters": {
 												"property": "Score.puntos",
 												"value": "Score.puntos+1"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "Script_2",
+							"nodeList": [
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.puntos",
+										"operation": "Equal",
+										"value_2": "5"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Go_To",
+											"parameters": {
+												"scene": "End"
 											}
 										}
 									],
@@ -511,7 +489,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "plane",
+					"tags": "wall",
 					"spriteOn": false,
 					"image": "",
 					"color": "#ffffff",
