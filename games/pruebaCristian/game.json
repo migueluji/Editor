@@ -4,7 +4,7 @@
 	"displayHeight": 480,
 	"cameraX": 0,
 	"cameraY": 0,
-	"cameraAngle": 0,
+	"cameraAngle": 90,
 	"cameraZoom": 1,
 	"backgroundColor": "#ffffff",
 	"soundOn": false,
