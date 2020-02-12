@@ -511,7 +511,7 @@
 								{
 									"type": "Timer",
 									"parameters": {
-										"seconds": "0.01"
+										"seconds": "1"
 									},
 									"nodeListTrue": [
 										{
@@ -546,7 +546,7 @@
 					"height": 50,
 					"scaleX": 1,
 					"scaleY": 1,
-					"angle": 0,
+					"angle": 18,
 					"screen": false,
 					"collider": "Box",
 					"tags": "",
@@ -607,8 +607,8 @@
 										{
 											"type": "Edit",
 											"parameters": {
-												"property": "Me.x",
-												"value": "Me.x+10"
+												"property": "Me.angle",
+												"value": "Me.angle + 10"
 											}
 										}
 									],

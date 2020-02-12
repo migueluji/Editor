@@ -17,7 +17,9 @@ class Actor {
         this.radius         = Math.max(this.width, this.height) / 2;
         this.flipX          = actor.flipX                   || 1;
         this.flipY          = actor.flipY                   || 1;
-        this.angle          = Util.degToRad(actor.angle)    || 0;
+        this.angle          = actor.angle                   || 0;
+
+        //console.log(actor.name, actor.angle);
 
         this.interactiveOn  = false;                        
 
@@ -76,14 +78,14 @@ class Actor {
     
     getPhysicsProperties(scaleFactor) {
 
-        this.x                  = this.physicBody.m_body.m_xf.position.x / scaleFactor;
+        /*this.x                  = this.physicBody.m_body.m_xf.position.x / scaleFactor;
         this.y                  = this.physicBody.m_body.m_xf.position.y / scaleFactor;
         this.angle              = this.physicBody.m_body.GetAngle();
 
         this.velocityX          = this.physicBody.m_body.GetLinearVelocity().x;
         this.velocityY          = this.physicBody.m_body.GetLinearVelocity().y;
 
-        this.angularVelocity    = this.physicBody.m_body.GetAngularVelocity();
+        this.angularVelocity    = this.physicBody.m_body.GetAngularVelocity();*/
 
         // TODO: Get linear damping
 
@@ -92,9 +94,8 @@ class Actor {
 
     setRenderProperties() {
 
-        this.render.position.x  = this.x - this.width / 2;
-        this.render.position.y  = this.y - this.height / 2;
-        this.render.rotation    = this.angle;
+        this.render.position.x  = this.x;
+        this.render.position.y  = this.y;
 
         this.render.updateTransform();
     }
@@ -202,4 +203,15 @@ class Actor {
             this.sprite.tint = this._tint;
         }
     };
+
+    get angle() { return this._angle; }
+    set angle(value) {
+
+        this._angle = value;
+
+        if(this.render != null) {
+
+            this.render.rotation = Util.degToRad(-this._angle);
+        }
+    }
 }

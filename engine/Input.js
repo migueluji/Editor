@@ -29,7 +29,7 @@ class Input {
                 /** Creamos el sprite contenedor. */
                 actor.render = new PIXI.Sprite();
                 actor.render.anchor.set(0.5001); // This will set the origin to center. (0.5) is same as (0.5, 0.5).
-                actor.render.rotation = Util.degToRad(actor.angle);
+                actor.render.angle = actor.angle;
                 
                 /** Añadimos el sprite al contenedor de screen */
                 if(actor.screen) {
