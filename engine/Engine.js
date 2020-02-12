@@ -18,13 +18,9 @@ class Engine {
 
         this.actorList  = {};                           /** */
         this.sceneList  = {};                           /** Necesitamos guardar los datos crudos de las escenas activas para acceder al Cast cuando queremos spawnear un actor. */
-
-
-        this.actorLoadList = {};
-
-
-
-        this.spawnedActorsList      = [];               /** */
+        
+        this.actorLoadList          = {};               /** */
+        this.spawnedActorsList      = {};               /** */
         this.spawnedNodesList       = [];               /** */
         this.destroyedActorsList    = [];               /** */
         this.enabledActorsList      = [];               /** Lista auxiliar de control para los cambios en la propiedad live. */
@@ -121,24 +117,25 @@ class Engine {
     addSpawnedActor(actor, x, y, angle) {
 
         var spawnedActor = Object.assign({}, this.game.sceneList[this.game.activeScene].actorList[actor]); 
-
-        spawnedActor.live = true;
+        spawnedActor.sleeping = false;
         spawnedActor.name = "Copy_of_" + actor + "_" + Util.random();
         spawnedActor.x = x;
         spawnedActor.y = y; 
         spawnedActor.angle = angle; 
 
-        this.spawnedActorsList.push(spawnedActor);
+        //console.log(spawnedActor);
+
+        this.spawnedActorsList[spawnedActor.name] = spawnedActor;
     }
 
     spawnActors() {
 
         this.actorLoadList = {};
 
-        for(var i = 0; i < this.spawnedActorsList.length; i++) {
+        for(var i in this.spawnedActorsList) {
 
-            this.actorLoadList[this.spawnedActorsList[i].ID] = this.createActor(this.spawnedActorsList[i]);
-            this.spawnedActorsList[i] = null;
+            this.actorLoadList[i] = this.createActor(this.spawnedActorsList[i]);
+            Util.destroy(this.spawnedActorsList, i);
         }
 
         for(var i in this.actorLoadList) {
@@ -149,12 +146,12 @@ class Engine {
         for(var i in this.actorLoadList) {
 
             this.setActor(this.actorLoadList[i]);
+            Util.destroy(this.actorLoadList, i);
         }
-
 
         this.logic.compileExpressions();
 
-        this.spawnedActorsList = [];
+        this.spawnedActorsList = {};
         this.actorLoadList = {};
     }
 
@@ -172,7 +169,7 @@ class Engine {
 
         for(var i = 0; i < this.destroyedActorsList.length; i++) {
 
-            console.log("DESTROY", this.destroyedActorsList[i])
+            //console.log("DESTROY", this.destroyedActorsList[i])
 
             /** Destruimos las referencias y las estructuras de datos relativas al actor en cada modulo del motor
              * ------------------------------------------------------------------------------------------------------- */

@@ -62,10 +62,11 @@
 		<script src="Do.js"></script>
 
 		<script>
-			console.log(localStorage.getItem("localStorage_GameData"));
+			//console.log(localStorage.getItem("localStorage_GameData"));
+			console.log(PIXI.utils.hex2rgb(0xff00ff));
 			var parentGamesFolder="<?php echo $_POST['parentGamesFolder'];?>";
             var gameFolder="<?php echo $_POST['gameFolder'];?>";
-            var player = new Player({source: parentGamesFolder + "/" + gameFolder, data: localStorage.getItem("localStorage_GameData")});
+			var player = new Player({source: parentGamesFolder + "/" + gameFolder, data: localStorage.getItem("localStorage_GameData")});
 		</script>
 
 	</body>

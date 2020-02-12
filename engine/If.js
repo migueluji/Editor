@@ -14,6 +14,11 @@ class If {
 
         this.value = this.code.eval(scope).entries[0];
 
+        /*if(this.expression.includes("pointer")) {
+
+            console.log(this.expression, this.value, scope, scope.Me.pointer.down);
+        }*/
+
         if(this.value) {
 
             for(var t in this.nodeListTrue) {

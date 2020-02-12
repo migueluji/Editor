@@ -75,11 +75,13 @@ class Logic {
 
     expandNode(actor, node) {
 
+        //console.log(node.type)
+
         var _node = this[node.type](actor, node.parameters);
 
         switch(node.type) {
 
-            case "Collision": case "Keyboard": case "Pointer": case "Compare": case "Check": case "Timer":
+            case "Collision": case "Keyboard": case "Touch": case "Compare": case "Check": case "Timer":
                 _node.nodeListTrue  = this.setScripts(actor, node.nodeListTrue);
                 _node.nodeListFalse = this.setScripts(actor, node.nodeListFalse);
                 break;
@@ -234,7 +236,7 @@ class Logic {
         var expression = parameters.value_1 + "" + operation + "" + parameters.value_2 + "\n"; /** value_1 == left && value_2 == right */
 
         /** Actualizamos las referencias al scope en la expresion. */
-        Util.addElementsToLocalScope(expression, actor, this.parent.actorList);
+        expression = Util.addElementsToLocalScope(expression, actor, this.parent.actorList);
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
         return new If(expression); 
@@ -246,7 +248,7 @@ class Logic {
         var expression = parameters.element + "." + parameters.property + "\n";
 
         /** Actualizamos las referencias al scope en la expresion. */
-        Util.addElementsToLocalScope(expression, actor, this.parent.actorList);
+        expression = Util.addElementsToLocalScope(expression, actor, this.parent.actorList);
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
         return new If(expression); 
@@ -270,7 +272,7 @@ class Logic {
                          "globalScope.Logic.updateTimer(" + timerCondition + ", globalScope.Logic.timerList." + timerProperty + ")" + "\n";
 
         /** Actualizamos las referencias al scope en la expresion. */
-        Util.addElementsToLocalScope(expression, actor, this.parent.actorList);
+        expression = Util.addElementsToLocalScope(expression, actor, this.parent.actorList);
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
         return new If(expression); 
@@ -316,7 +318,7 @@ class Logic {
         }
 
         /** Actualizamos las referencias al scope en la expresion. */
-        Util.addElementsToLocalScope(expression, actor, this.parent.actorList);
+        expression = Util.addElementsToLocalScope(expression, actor, this.parent.actorList);
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
         return new If(expression); 
@@ -335,19 +337,19 @@ class Logic {
         return new If(expression);
     }
 
-    Pointer(actor, parameters) {
+    Touch(actor, parameters) {
 
         var expression;
 
         /** Si el evento es sobre el actor, utilizamos la propiedad en el actor. 
          *  Si no, utilizaremos los parametros del motor de Input. */
-        if(parameters.onActor) {
+        if(parameters.on_Actor) {
 
             /** Definimos la expresion */
-            expression = "" + actor.name + ".pointer." + parameters.mode + "\n";
+            expression = "Me.pointer." + parameters.mode.toLowerCase() + "\n";
 
             /** Actualizamos las referencias al scope en la expresion. */
-            Util.addElementsToLocalScope(expression, actor, this.parent.actorList);
+            expression = Util.addElementsToLocalScope(expression, actor, this.parent.actorList);
 
             /** Activamos la variable de control de interaccion. */
             actor.interactiveOn = true;
@@ -355,7 +357,7 @@ class Logic {
         else {
 
             /** Definimos la expresion */
-            expression = "globalScope.Input.pointer." + parameters.mode + "\n";
+            expression = "globalScope.Input.pointer." + parameters.mode.toLowerCase() + "\n";
         }
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
@@ -364,11 +366,19 @@ class Logic {
 
     Edit(actor, parameters) {
 
+        /** Comprobamos si se pretende mofidicar un color. */
+        if(parameters.value.includes("#")) {
+
+            parameters.value = Util.colorString(parameters.value);
+            //console.log(parameters.value);
+        }
+
         /** Definimos la expresion */
         var expression = parameters.property + " = " + parameters.value + "\n";
+        //console.log(expression, parameters.value);
 
         /** Actualizamos las referencias al scope en la expresion. */
-        Util.addElementsToLocalScope(expression, actor, this.parent.actorList);
+        expression = Util.addElementsToLocalScope(expression, actor, this.parent.actorList);
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
         return new Do(expression);
@@ -379,7 +389,7 @@ class Logic {
         /** Definimos la expresion */
         var expression = "globalScope.Engine.addSpawnedActor('" + parameters.actor + "', Me.x" + "+" + parameters.x + ", Me.y" + "+" + parameters.y + ", " + actor.angle + ")" + "\n";
 
-        Util.addElementsToLocalScope(expression, actor, this.parent.actorList);
+        expression = Util.addElementsToLocalScope(expression, actor, this.parent.actorList);
 
         /* Creamos el nuevo nodo con su expresion correspondiente.*/
         return new Do(expression);
@@ -390,7 +400,7 @@ class Logic {
         /** Definimos la expresion */
         var expression = "globalScope.Engine.addDestroyedActor(Me)" + "\n";
 
-        Util.addElementsToLocalScope(expression, actor, this.parent.actorList);
+        expression = Util.addElementsToLocalScope(expression, actor, this.parent.actorList);
 
         /* Creamos el nuevo nodo con su expresion correspondiente.*/
         return new Do(expression);

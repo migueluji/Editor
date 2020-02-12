@@ -6,7 +6,7 @@ class Render {
         this.height             = render.displayHeight      || window.innerHeight;  /** Para la ejecucion en el editor. */
         this.displayWidth       = render.displayWidth       || 800;                 /** Para la ejecucion en el player. */
         this.displayHeight      = render.displayHeight      || 600;                 /** Para la ejecucion en el player. */
-        this.backgroundColor    = render.backgroundColor    || 0xffffff;            /** */
+        this.backgroundColor    = Util.colorFormat(render.backgroundColor)    || 0xffffff;            /** */
         this.cameraX            = render.cameraX            || 0.00;                /** */
         this.cameraY            = render.cameraY            || 0.00;                /** */
         this.cameraZoom         = render.cameraZoom         || 0.00;                /** */
@@ -37,6 +37,8 @@ class Render {
 
         // Scale mode for all textures, will retain pixelation
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+
+        //console.log(this.renderer);
     }
 
     createStage() {

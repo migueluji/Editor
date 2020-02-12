@@ -84,6 +84,11 @@ class Util {
         return value * Math.PI / 180.0;
     }
 
+    static colorString(value) {
+
+        return "'" + Util.colorFormat(value) + "'"; 
+    }
+
     /**
      * 
      */
@@ -137,22 +142,27 @@ class Util {
             }
         }
 
-        console.log(temp, scope);
+        //console.log(temp, scope);
 
         return temp;
     }
 
     static addElementsToLocalScope(expression, actor, actorList) {
 
-        var temp = expression;
-        
         for(var i in actorList) {
 
-            if((temp.search(actorList[i].name) != -1)) {
+            if((expression.search(actorList[i].name) != -1)) {
 
                 actor.localScope[actorList[i].name] = actorList[i];
             }
         }
+
+        if((expression.search("Game") != -1)) {
+
+            expression = expression.replace(new RegExp("Game", "g"), "globalScope.Game");
+        }
+
+        return expression;
     }
 
     static updateTextToLocalScope(text, actor) {
@@ -246,7 +256,7 @@ class Util {
 
         container.sceneList = sceneList;
 
-        console.log(container);
+        //console.log(container);
 
         return container;
     }

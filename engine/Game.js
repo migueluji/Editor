@@ -6,6 +6,8 @@ class Game {
          * --------------------------------------------------------------------- */
         this.data               = game;
 
+        console.log(this.data);
+
         /** Gestion de escenas
          * --------------------------------------------------------------------- */
         this.sceneList          = game.sceneList;                                       /** */
@@ -29,6 +31,9 @@ class Game {
         this.accelerometerX     = null;     /** */
         this.accelerometerY     = null;     /** */
         this.accelerometerZ     = null;     /** */
+
+        /** Propiedades del juego */
+        this.backgroundColor    = game.backgroundColor;
 
         /** Final del juego
          * --------------------------------------------------------------------- */
@@ -83,5 +88,19 @@ class Game {
         this._FPS = value;
 
         // TODO: Cambiar la propiedad FPS del request animation frame. (Seguramente hara falta un FPS auxiliar, para permitir establecer el maximo y leer el actual)
+    }
+
+    get backgroundColor() { return this._backgroundColor; }
+    set backgroundColor(value) {
+
+        this._backgroundColor = Util.colorFormat(value);
+
+        if(player.engine != null) {
+
+            //console.log("ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", player.engine.render, this._backgroundColor);
+            player.engine.render.renderer.backgroundColor = this._backgroundColor;
+        }
+        
+        
     }
 }
