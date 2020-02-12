@@ -200,7 +200,8 @@ class Logic {
 
     animateActor(actor, animation, timerCondition) {
 
-        actor.spriteName = actor[animation].list[actor[animation].index];
+        actor.image = actor[animation].list[actor[animation].index];
+        actor.sprite.texture = actor.texture;
         actor[animation].index = timerCondition ? ((actor[animation].index == actor[animation].maxIndex - 1) ? 0 : actor[animation].index + 1) : actor[animation].index;
     }
 

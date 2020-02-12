@@ -35,10 +35,7 @@ class Render {
         
         document.body.appendChild(this.renderer.view); // Add PIXI.Renderer to the DOM
 
-        // Scale mode for all textures, will retain pixelation
-        PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
-
-        //console.log(this.renderer);
+        PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST; // Scale mode for all textures, will retain pixelation
     }
 
     createStage() {
@@ -53,7 +50,13 @@ class Render {
             y: this.renderer.height / 2
         };
 
-        this.updateStage();
+        this.stage.position.x   = this.stageOrigin.x - this.cameraX;
+        this.stage.position.y   = this.stageOrigin.y + this.cameraY;
+
+        this.stage.rotation     = this.cameraAngle; // En radianes
+
+        this.stage.scale.x      = this.cameraZoom;
+        this.stage.scale.y      = this.cameraZoom;
     }
     
     setActorRender(actor) {
@@ -63,7 +66,8 @@ class Render {
             /** Creamos el sprite contenedor. */
             actor.render = new PIXI.Sprite();
             actor.render.pivot.set(actor.width / 2, actor.height / 2);
-            actor.render.anchor.set(0.5001); // This will set the origin to center. (0.5) is same as (0.5, 0.5).ç
+            actor.render.anchor.set(0.5001); // This will set the origin to center. (0.5) is same as (0.5, 0.5).
+            actor.render.position.set(actor.x, -actor.y);
             actor.render.rotation = Util.degToRad(-actor.angle);
             
             /** Añadimos el sprite al contenedor de screen */
@@ -87,28 +91,17 @@ class Render {
 
         /** Creamos el sprite de la texto. */
         if(actor.textOn) { this.setActorText(actor); }
-
-        /* DEBUG -- Borrar sin problemas */
-            //actor.renderDebugSprite = new PIXI.Sprite();
-            //actor.collisionBroadDebugSprite = new PIXI.Sprite();
-            //actor.collisionNarrowDebugSprite = new PIXI.Sprite();
-        /* FIN DEBUG */
-
-        /* DEBUG -- Borrar sin problemas */
-            //this.stage.addChild(actor.physicsDebugSprite);
-            //this.stage.addChild(actor.renderDebugSprite);
-            //this.stage.addChild(actor.collisionBroadDebugSprite);
-            //this.stage.addChild(actor.collisionNarrowDebugSprite);
-        /* FIN DEBUG */
     }
 
     setActorSprite(actor) {
 
         /** Asignamos la textura del sprite. */
-        actor.texture = (player.file.loader.resources[actor.image] != undefined) ? player.file.loader.resources[actor.image].texture : PIXI.Texture.WHITE;
+        //actor.texture = (player.file.loader.resources[actor.image] != undefined) ? player.file.loader.resources[actor.image].texture : PIXI.Texture.WHITE;
 
         /** Creamos el sprite de la imagen. */
         actor.sprite = new PIXI.TilingSprite(actor.texture, actor.width, actor.height);
+
+        //actor.sprite.scale.set(actor.scale)
 
         //actor.sprite.scale.set(actor.scaleX, actor.scaleY);
         actor.sprite.tint = Util.colorFormat(actor.color); /** Configuramos el color de tintado */
@@ -135,6 +128,7 @@ class Render {
         //actor.text = (actor.text != undefined) ? Util.addElementsToLocalScope(actor.text, actor, this.actorList) : "";
         actor.textSprite = new PIXI.Text("", actor.textStyle);
         actor.textSprite.anchor.set(0.0);           // This will set the origin to center. (0.5) is same as (0.5, 0.5).
+        actor.textSprite.position.set(actor.offsetX, -actor.offsetY);
         actor.render.addChild(actor.textSprite);    /** Añadimos el texto al sprite contenedor */
 
         this.textList[actor.ID] = actor; /** Añadimos el actor a la lista de actualizacion de texto. */
@@ -142,21 +136,9 @@ class Render {
 
     run() {
 
-        this.updateStage();
         this.updateActors();
 
         this.renderer.render(this.stage);
-    }
-
-    updateStage() {
-
-        this.stage.position.x   = this.stageOrigin.x - this.cameraX;
-        this.stage.position.y   = this.stageOrigin.y + this.cameraY;
-
-        this.stage.rotation     = this.cameraAngle; // En radianes
-
-        this.stage.scale.x      = this.cameraZoom;
-        this.stage.scale.y      = this.cameraZoom;
     }
 
     updateActors() {
@@ -167,11 +149,6 @@ class Render {
 
             this.onScreenList[i].x = this.cameraX + this.onScreenList[i].originalPositionX;
             this.onScreenList[i].y = this.cameraY + this.onScreenList[i].originalPositionY;
-        }
-
-        for(i in this.actorList) {
-
-            this.actorList[i].setRenderProperties();
         }
 
         for(i in this.textList) {

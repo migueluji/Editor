@@ -335,9 +335,9 @@
 					"size": 30,
 					"fill": "#1a12a0",
 					"style": "Bold",
-					"align": "Right",
-					"offsetX": 0,
-					"offsetY": 0,
+					"align": "Left",
+					"offsetX": -100,
+					"offsetY": -200,
 					"soundOn": false,
 					"sound": "",
 					"start": 0,
@@ -429,29 +429,7 @@
 					"restitution": 1,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
-					"scriptList": [
-						{
-							"name": "Go_to_next_scene",
-							"nodeList": [
-								{
-									"type": "Timer",
-									"parameters": {
-										"seconds": "1"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Score.puntos",
-												"value": "Score.puntos+1"
-											}
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						}
-					],
+					"scriptList": [],
 					"puntos": 0,
 					"actores": 0
 				},
@@ -542,8 +520,8 @@
 					"sleeping": false,
 					"x": 1,
 					"y": 1,
-					"width": 50,
-					"height": 50,
+					"width": 53,
+					"height": 64,
 					"scaleX": 1,
 					"scaleY": 1,
 					"angle": 18,
@@ -551,7 +529,7 @@
 					"collider": "Box",
 					"tags": "",
 					"spriteOn": true,
-					"image": "",
+					"image": "letterK.png",
 					"color": "#0000ff",
 					"opacity": 1,
 					"flipX": false,
@@ -607,8 +585,96 @@
 										{
 											"type": "Edit",
 											"parameters": {
+												"property": "Me.tileY",
+												"value": "Me.tileY + 1"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.x",
+												"value": "Me.x + 1"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
 												"property": "Me.angle",
 												"value": "Me.angle + 10"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "CameraAngleTest",
+					"sleeping": false,
+					"x": -236,
+					"y": -113,
+					"width": 52,
+					"height": 66,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 18,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "letterG.png",
+					"color": "#ffff00",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Kinematic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Touch",
+									"parameters": {
+										"mode": "Down",
+										"on_Actor": true
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.cameraY",
+												"value": "Game.cameraY + 1"
 											}
 										}
 									],

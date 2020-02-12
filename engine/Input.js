@@ -153,6 +153,13 @@ class Input {
             this.keyList[i].down = false;
             this.keyList[i].up = true;
         }
+        
+        for(var i in this.actorList) {
+
+            this.actorList[i].pointer.down   = false;
+            this.actorList[i].pointer.up     = true;
+            this.actorList[i].pointer.isOver = false;
+        }
     }
 
     destroyActor(actor) {

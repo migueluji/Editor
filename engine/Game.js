@@ -33,7 +33,13 @@ class Game {
         this.accelerometerZ     = null;     /** */
 
         /** Propiedades del juego */
-        this.backgroundColor    = game.backgroundColor;
+        this.backgroundColor    = game.backgroundColor    || 0xffffff;  /** */
+        this.cameraX            = game.cameraX            || 0.00;      /** */
+        this.cameraY            = game.cameraY            || 0.00;      /** */
+        this.cameraZoom         = game.cameraZoom         || 0.00;      /** */
+        this.cameraAngle        = game.cameraAngle        || 0.00;      /** */
+
+        console.log(this.cameraX);
 
         /** Final del juego
          * --------------------------------------------------------------------- */
@@ -102,5 +108,51 @@ class Game {
         }
         
         
+    }
+
+    get cameraX() { return this._cameraX; }
+    set cameraX(value) {
+
+        this._cameraX = value;
+
+        if(player.engine != null) {
+            
+            console.log(player.engine.render.stage.position.x, this._cameraX, player.engine.render.stageOrigin);
+
+            player.engine.render.stage.position.x = player.engine.render.stageOrigin.x - this._cameraX;
+        }
+    }
+
+    get cameraY() { return this._cameraY; }
+    set cameraY(value) {
+
+        this._cameraY = value;
+
+        if(player.engine != null) {
+
+            player.engine.render.stage.position.y = player.engine.render.stageOrigin.y + this._cameraY;
+        }
+    }
+
+    get cameraAngle() { return this._cameraAngle; }
+    set cameraAngle(value) {
+
+        this._cameraAngle = value;
+
+        if(player.engine != null) {
+
+            player.engine.render.stage.rotation = Util.degToRad(-this._cameraAngle);
+        }
+    }
+
+    get cameraZoom() { return this._cameraZoom; }
+    set cameraZoom(value) {
+
+        this._cameraZoom = value;
+
+        if(player.engine != null) {
+
+            player.engine.render.stage.scale.set(this._cameraZoom);
+        }
     }
 }
