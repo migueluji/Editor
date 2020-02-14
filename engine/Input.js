@@ -1,18 +1,18 @@
 class Input {
 
-    constructor(game, render) {
+    constructor(game, engine) {
+
+        this.engine = engine;
 
         this.actorList  = {};                                       /** */
 
         this.keyList    = {};                                       /** */
         this.pointer    = {down: false, up: true, isOver: false};   /** */
 
-        this.render = render;
-
         document.addEventListener("keydown", this.keyDownHandler.bind(this));
         document.addEventListener("keyup", this.keyUpHandler.bind(this));
 
-        this.setPointerInteraction(render);
+        this.setPointerInteraction(this.engine.render);
     }
     
     setActorInput(actor) {
@@ -37,14 +37,14 @@ class Input {
                     actor.originalPositionX = actor.x;
                     actor.originalPositionY = actor.y; 
 
-                    this.render.onScreenList[actor.ID] = actor;
+                    this.engine.render.onScreenList[actor.ID] = actor;
                 }
                 
                 /** Añadimos el sprite al stage */
-                this.render.stage.addChild(actor.render);
+                this.engine.render.stage.addChild(actor.render);
 
                 /** Añadimos el actor a la lista del motor de render */
-                this.render.actorList[actor.ID] = actor;
+                this.engine.render.actorList[actor.ID] = actor;
             }
 
             /** Configuramos las propiedades del motor de Render */
@@ -88,8 +88,8 @@ class Input {
 
     pointerMoveHandler(event) {
 
-        player.engine.game.mouseX = Math.floor(event.data.global.x - this.render.renderer.width / 2 + this.render.cameraX);
-        player.engine.game.mouseY = Math.floor(event.data.global.y - this.render.renderer.height / 2 - this.render.cameraY);
+        this.engine.game.mouseX = Math.floor(event.data.global.x - this.engine.render.renderer.width / 2 + this.engine.render.cameraX);
+        this.engine.game.mouseY = Math.floor(event.data.global.y - this.engine.render.renderer.height / 2 - this.engine.render.cameraY);
     }
 
     actorPointerDownHandler(actor) {
@@ -167,7 +167,7 @@ class Input {
         /** Si es interactivo, lo eliminamos de las listas de actualizacion del motor de render. */
         if(actor.interactiveOn) {
 
-            this.render.destroyActor(actor);
+            this.engine.render.destroyActor(actor);
         }
 
         /** Eliminamos el actor de la lista de actores del motor de input */

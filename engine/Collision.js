@@ -1,6 +1,8 @@
 class Collision {
 
-    constructor(collision) {
+    constructor(collision, engine) {
+
+        this.engine = engine;
 
         this.actorList = {}; /** */
         this.tagList   = {}; /** */

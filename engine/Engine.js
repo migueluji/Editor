@@ -5,16 +5,14 @@ class Engine {
     ···································································· */
     constructor(game) {
 
-        this.game       = new Game(game);               /** */
+        //this.physics    = new Physics(game, this);    /** */
+        this.collision  = new Collision(game, this);    /** */
+        this.render     = new Render(game, this);       /** */
+        this.input      = new Input(game, this);        /** */
+        this.audio      = new Audio(game, this);        /** */
+        this.logic      = new Logic(game, this);        /** */
 
-        //this.physics    = new Physics(game);            /** */
-        this.collision  = new Collision(game);          /** */
-        this.render     = new Render(game);             /** */
-        this.input      = new Input(game, this.render); /** */
-        this.audio      = new Audio(game);              /** */
-        this.logic      = new Logic(game, this);              /** */
-
-        this.logic.setGlobalScope(this);  /** Actualizar el scope con la informacion de Game y del Engine para la evaluacion de la logica. */
+        this.game       = new Game(game, this);         /** */
 
         this.actorList  = {};                           /** */
         this.sceneList  = {};                           /** Necesitamos guardar los datos crudos de las escenas activas para acceder al Cast cuando queremos spawnear un actor. */
@@ -83,32 +81,15 @@ class Engine {
     ···································································· */
     createActor(actor) {
 
-        var _actor = new Actor(actor);
-        this.setActorID(_actor);
+        var _actor      = new Actor(actor, this);
+
+        _actor.scene    = this.game.activeScene;
+        _actor.ID       = actor.scene + "_" + actor.name;
+
+        this.actorList[_actor.ID] = _actor;
+        this.sceneList[this.game.activeScene][_actor.ID] = _actor;
 
         return _actor;
-    }
-
-    setActor(actor) {
-
-        //this.physics.setActorPhysics(actor);      // Añadir el actor al motor de fisicas.
-        this.render.setActorRender(actor);          // Añadir el actor al motor de render. 
-        this.audio.setActorAudio(actor);            // Añadir el actor al motor de audio.
-        this.logic.setActorLogic(actor);            // Añadir el actor al motor de logica.
-        this.input.setActorInput(actor);            // Añadir el actor al motor de input.
-        this.collision.setActorCollision(actor);    // Añadir el actor al motor de colisiones.
-    }
-
-    addActor(actor) {
-
-        this.actorList[actor.ID] = actor;
-        this.sceneList[this.game.activeScene][actor.ID] = actor;
-    }
-
-    setActorID(actor) {
-
-        actor.scene = this.game.activeScene;
-        actor.ID    = actor.scene + "_" + actor.name;
     }
 
     /* ····································································
@@ -145,7 +126,7 @@ class Engine {
 
         for(var i in this.actorLoadList) {
 
-            this.setActor(this.actorLoadList[i]);
+            //this.setActor(this.actorLoadList[i]);
             Util.destroy(this.actorLoadList, i);
         }
 
@@ -261,24 +242,12 @@ class Engine {
             if(!scene.actorList[i].sleeping) {      /** Si es un actor activo */
 
                 scene.actorList[i].name = i;
-                this.actorLoadList[i] = this.createActor(scene.actorList[i]);
+                this.actorLoadList[i] = this.createActor(scene.actorList[i], this);
             }
         }
 
-        /** Añadimos los actores a la listas de ejecucion del motor. */
-        for(var i in this.actorLoadList) {
-
-            this.addActor(this.actorLoadList[i]);
-        }
-
-        /** Configuracion de los actores en las estructuras de datos del motor. */
-        for(var i in this.actorLoadList) {
-
-            this.setActor(this.actorLoadList[i]);
-        }
-
         /** Compilar las expresiones una vez cargados todos los datos en memoria */
-        this.logic.compileExpressions();            
+        this.logic.compileExpressions();
     }
 
     addSceneHandler(scene, stop) {
