@@ -30,7 +30,7 @@ class Logic {
 
         for(var i in script) {
 
-            script[i].run(actor.localScope);
+            script[i].run(actor.scope);
         }
     }
 
@@ -55,7 +55,7 @@ class Logic {
             //console.log(this.actorList, actor);
         }
 
-        console.log(actor.ID, this.actorList);
+        //console.log(actor.ID, this.actorList);
 
         return _scriptList;
     }
@@ -96,9 +96,11 @@ class Logic {
 
     compileExpressions() {
 
+        //console.log(this.nodeList);
+
         for(var i = 0; i < this.nodeList.length; i++) {
 
-            this.nodeList[i].compileExpression(this.scope);
+            this.nodeList[i].compileExpression();
         }
 
         this.nodeList = [];
@@ -121,7 +123,7 @@ class Logic {
 
         /** Eliminamos el actor del scope
          * ----------------------------------------------------------------------- */
-        Util.deepDestroy(actor.localScope);
+        Util.deepDestroy(actor.scope);
 
         /** Eliminamos todos los scripts junto con sus nodos
          * ----------------------------------------------------------------------- */
@@ -219,11 +221,8 @@ class Logic {
         /** Definimos la expresion */
         var expression = parameters.value_1 + "" + operation + "" + parameters.value_2 + "\n"; /** value_1 == left && value_2 == right */
 
-        /** Actualizamos las referencias al scope en la expresion. */
-        expression = Util.addElementsToLocalScope(expression, actor, this.engine.actorList);
-
         /* Creamos el nuevo nodo con su expresion correspondiente. */
-        return new If(expression); 
+        return new If(expression, actor.scope);
     }
 
     Check(actor, parameters) {
@@ -231,11 +230,8 @@ class Logic {
         /** Definimos la expresion */
         var expression = parameters.element + "." + parameters.property + "\n";
 
-        /** Actualizamos las referencias al scope en la expresion. */
-        expression = Util.addElementsToLocalScope(expression, actor, this.engine.actorList);
-
         /* Creamos el nuevo nodo con su expresion correspondiente. */
-        return new If(expression); 
+        return new If(expression, actor.scope);
     }
 
     Timer(actor, parameters) {
@@ -255,11 +251,8 @@ class Logic {
         var expression = "" + timerCondition + " = engine.logic.timerList." + timerProperty + ".timer > " + parameters.seconds + "\n" +
                          "engine.logic.updateTimer(" + timerCondition + ", engine.logic.timerList." + timerProperty + ")" + "\n";
 
-        /** Actualizamos las referencias al scope en la expresion. */
-        expression = Util.addElementsToLocalScope(expression, actor, this.engine.actorList);
-
         /* Creamos el nuevo nodo con su expresion correspondiente. */
-        return new If(expression); 
+        return new If(expression, actor.scope);
     }
 
     Collision(actor, parameters) {
@@ -301,24 +294,21 @@ class Logic {
             }
         }
 
-        /** Actualizamos las referencias al scope en la expresion. */
-        expression = Util.addElementsToLocalScope(expression, actor, this.engine.actorList);
-
         /* Creamos el nuevo nodo con su expresion correspondiente. */
-        return new If(expression); 
+        return new If(expression, actor.scope);
     }
 
     Keyboard(actor, parameters) {
 
         /* Registramos la propiedad en el motor de Input para el control
         de este evento de teclado. */
-        actor.localScope.engine.input.keyList[parameters.key] = {down: false, up: true, pressed: false};
+        actor.scope.engine.input.keyList[parameters.key] = {down: false, up: true, pressed: false};
 
         /** Definimos la expresion */
         var expression = "engine.input.keyList." + parameters.key + "." + parameters.key_Mode.toLowerCase() + "\n";
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
-        return new If(expression);
+        return new If(expression, actor.scope);
     }
 
     Touch(actor, parameters) {
@@ -332,9 +322,6 @@ class Logic {
             /** Definimos la expresion */
             expression = "Me.pointer." + parameters.mode.toLowerCase() + "\n";
 
-            /** Actualizamos las referencias al scope en la expresion. */
-            expression = Util.addElementsToLocalScope(expression, actor, this.engine.actorList);
-
             /** Activamos la variable de control de interaccion. */
             actor.interactiveOn = true;
         }
@@ -345,7 +332,7 @@ class Logic {
         }
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
-        return new If(expression);
+        return new If(expression, actor.scope);
     }
 
     Edit(actor, parameters) {
@@ -354,18 +341,13 @@ class Logic {
         if(parameters.value.includes("#")) {
 
             parameters.value = Util.colorString(parameters.value);
-            //console.log(parameters.value);
         }
 
         /** Definimos la expresion */
         var expression = parameters.property + " = " + parameters.value + "\n";
-        //console.log(expression, parameters.value);
-
-        /** Actualizamos las referencias al scope en la expresion. */
-        expression = Util.addElementsToLocalScope(expression, actor, this.engine.actorList);
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
-        return new Do(expression);
+        return new Do(expression, actor.scope);
     }
 
     Spawn(actor, parameters) {
@@ -373,10 +355,8 @@ class Logic {
         /** Definimos la expresion */
         var expression = "engine.addSpawnedActor('" + parameters.actor + "', Me.x" + "+" + parameters.x + ", Me.y" + "+" + parameters.y + ", " + actor.angle + ")" + "\n";
 
-        expression = Util.addElementsToLocalScope(expression, actor, this.engine.actorList);
-
         /* Creamos el nuevo nodo con su expresion correspondiente.*/
-        return new Do(expression);
+        return new Do(expression, actor.scope);
     }
 
     Delete(actor, parameters) {
@@ -384,20 +364,20 @@ class Logic {
         /** Definimos la expresion */
         var expression = "engine.addDestroyedActor(Me)" + "\n";
 
-        expression = Util.addElementsToLocalScope(expression, actor, this.engine.actorList);
-
         /* Creamos el nuevo nodo con su expresion correspondiente.*/
-        return new Do(expression);
+        return new Do(expression, actor.scope);
     }
 
     Move(actor, parameters) {
 
+        /** Para optimizar utilizamos 0.01745329251 como sustituto de PI / 180.0. */
+
         /** Definimos la expresion */
-        var expression = "Me.x = Me.x + " + parameters.speed + " * cos(" + parameters.angle + " * -PI / 180.0) * engine.game.deltaTime" + "\n" + 
-                         "Me.y = Me.y + " + parameters.speed + " * sin(" + parameters.angle + " * -PI / 180.0) * engine.game.deltaTime \n";
+        var expression = "Me.x = Me.x + " + parameters.speed + " * cos(" + parameters.angle + " * 0.01745329251) * engine.game.deltaTime" + "\n" + 
+                         "Me.y = Me.y + " + parameters.speed + " * sin(" + parameters.angle + " * 0.01745329251) * engine.game.deltaTime \n";
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
-        return new Do(expression);
+        return new Do(expression, actor.scope);
     }
 
     Move_To(actor, parameters) {
@@ -411,11 +391,8 @@ class Logic {
                          actor.name + ".x = " + actor.name + ".x + (" + parameters.speed + " * (" + parameters.targetX + " - " + actor.name + ".x) / " + distance + ") * engine.game.deltaTime" + "\n" + 
                          actor.name + ".y = " + actor.name + ".y + (" + parameters.speed + " * (" + parameters.targetY + " - " + actor.name + ".y) / " + distance + ") * engine.game.deltaTime" + "\n";
 
-        /** Determinamos si en la expresion aparece "Me."" y lo sustituimos */
-        expression = Util.replaceActorSelfReference(actor, expression);
-
         /* Creamos el nuevo nodo con su expresion correspondiente. */
-        return new Do(expression);
+        return new Do(expression, actor.scope);
     }
 
     Rotate(actor, parameters) {
@@ -424,11 +401,8 @@ class Logic {
         var expression = actor.name + ".x = " + actor.name + ".x + " + parameters.speed + " * cos(" + parameters.angle + " * PI / 180.0) * engine.game.deltaTime" + "\n" + 
                          actor.name + ".y = " + actor.name + ".y + " + parameters.speed + " * sin(" + parameters.angle + " * PI / 180.0) * engine.game.deltaTime \n";
 
-        /** Determinamos si en la expresion aparece "Me."" y lo sustituimos */
-        expression = Util.replaceActorSelfReference(actor, expression);
-
         /* Creamos el nuevo nodo con su expresion correspondiente. */
-        return new Do(expression);
+        return new Do(expression, actor.scope);
     }
 
     Rotate_To(actor, parameters) {
@@ -442,11 +416,8 @@ class Logic {
                          actor.name + ".x = " + actor.name + ".x + (" + parameters.speed + " * (" + parameters.targetX + " - " + actor.name + ".x) / " + distance + ") * engine.game.deltaTime" + "\n" + 
                          actor.name + ".y = " + actor.name + ".y + (" + parameters.speed + " * (" + parameters.targetY + " - " + actor.name + ".y) / " + distance + ") * engine.game.deltaTime" + "\n";
 
-        /** Determinamos si en la expresion aparece "Me."" y lo sustituimos */
-        expression = Util.replaceActorSelfReference(actor, expression);
-
         /* Creamos el nuevo nodo con su expresion correspondiente. */
-        return new Do(expression);
+        return new Do(expression, actor.scope);
     }
 
     Push(actor, parameters) {
@@ -454,11 +425,8 @@ class Logic {
         /** Configuramos la expresion para que llame al motor de fisicas, y que este ejecute la funcion que aplica la fuerza sobre el actor. */
         var expression = "engine.physics.ApplyForce(" + actor.name + ", " + parameters.strength + ", (" + parameters.angle + ") * PI / 180)" + "\n";
 
-        /** Determinamos si en la expresion aparece "Me."" y lo sustituimos */
-        expression = Util.replaceActorSelfReference(actor, expression);
-        
         /* Creamos el nuevo nodo con su expresion correspondiente.*/
-        return new Do(expression);
+        return new Do(expression, actor.scope);
     }
 
     Push_To(actor, parameters) {
@@ -470,11 +438,8 @@ class Logic {
         var expression = "" + distance + " = distance([" + actor.name + ".x , " + actor.name + ".y], [" + parameters.targetX + ", " + parameters.targetY + "])" + " \n" +
                          "engine.physics.ApplyForce(" + actor.name + ", " + parameters.strength + ", (" + parameters.angle + ") * PI / 180)" + "\n";
 
-        /** Determinamos si en la expresion aparece "Me."" y lo sustituimos */
-        expression = Util.replaceActorSelfReference(actor, expression);
-        
         /* Creamos el nuevo nodo con su expresion correspondiente.*/
-        return new Do(expression);
+        return new Do(expression, actor.scope);
     }
     
     Torque(actor, parameters) {
@@ -486,11 +451,8 @@ class Logic {
         var expression = "" + distance + " = distance([" + actor.name + ".x , " + actor.name + ".y], [" + parameters.targetX + ", " + parameters.targetY + "])" + " \n" +
                          "engine.physics.ApplyForce(" + actor.name + ", " + parameters.strength + ", (" + parameters.angle + ") * PI / 180)" + "\n";
 
-        /** Determinamos si en la expresion aparece "Me."" y lo sustituimos */
-        expression = Util.replaceActorSelfReference(actor, expression);
-        
         /* Creamos el nuevo nodo con su expresion correspondiente.*/
-        return new Do(expression);
+        return new Do(expression, actor.scope);
     }
 
     Animate(actor, parameters) {
@@ -522,7 +484,7 @@ class Logic {
                          "engine.logic.animateActor(Me, '" + animationProperty + "', " + timerCondition + ")" + "\n";
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
-        return new Do(expression);
+        return new Do(expression, actor.scope);
     }
 
     Play(actor, parameters) {
@@ -530,11 +492,8 @@ class Logic {
         /** Configuramos la expresion para que llame al motor de fisicas, y que este ejecute la funcion que aplica la fuerza sobre el actor. */
         var expression = "engine.audio.PlaySound('" + parameters.soundFile + "', " + parameters.play + ", " + parameters.volume + ", " + parameters.pan + ")" + "\n";
 
-        /** Determinamos si en la expresion aparece "Me."" y lo sustituimos */
-        expression = Util.replaceActorSelfReference(actor, expression);
-        
         /* Creamos el nuevo nodo con su expresion correspondiente.*/
-        return new Do(expression);
+        return new Do(expression, actor.scope);
     }
 
     Go_To(actor, parameters) {
@@ -543,7 +502,7 @@ class Logic {
         var expression = "engine.changeSceneHandler('" + parameters.scene + "')" + "\n";
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
-        return new Do(expression);
+        return new Do(expression, actor.scope);
     }
 
     Add(actor, parameters) {
@@ -552,7 +511,7 @@ class Logic {
         var expression = "engine.addSceneHandler('" + parameters.scene + "', " + parameters.stop + ")" + "\n";
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
-        return new Do(expression);
+        return new Do(expression, actor.scope);
     }
 
     Remove(actor, parameters) {
@@ -561,6 +520,6 @@ class Logic {
         var expression = "engine.removeSceneHandler()" + "\n";
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
-        return new Do(expression);
+        return new Do(expression, actor.scope);
     }
 }

@@ -1,43 +1,40 @@
 class If {
 
-    constructor(expression) {
+    constructor(expression, scope) {
 
         this.expression     = expression || ""; /** */
         this.code           = null;             /** */
         this.value          = null;             /** */
+        this.scope          = scope || null;    /** */
 
         this.nodeListTrue     = {};             /** */
         this.nodeListFalse    = {};             /** */
     }
 
-    run(scope) {
+    run() {
 
-        this.value = this.code.eval(scope).entries[0];
-
-        /*if(this.expression.includes("pointer")) {
-
-            console.log(this.expression, this.value, scope, scope.Me.pointer.down);
-        }*/
-
+        this.value = this.code.eval(this.scope).entries[0];
+        
         if(this.value) {
 
             for(var t in this.nodeListTrue) {
 
-                this.nodeListTrue[t].run(scope);
+                this.nodeListTrue[t].run();
             }
         }
         else {
 
             for(var f in this.nodeListFalse) {
 
-                this.nodeListFalse[f].run(scope);
+                this.nodeListFalse[f].run();
             }
         }
     }
 
     compileExpression() {
 
-        this.code = math.compile(this.expression);
+        this.expression = Util.checkScope(this.expression, this.scope); /** Comprobamos si hay que actualizar la expresion y el scope. */
+        this.code       = math.compile(this.expression);                /** Compilamos la expresion con Math.js. */
     }
 
     destroy() {

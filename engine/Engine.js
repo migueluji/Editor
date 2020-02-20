@@ -7,17 +7,16 @@ class Engine {
 
         //this.physics    = new Physics(game, this);    /** */
         this.collision  = new Collision(game, this);    /** */
-        this.render     = new Render(this);       /** */
-        this.input      = new Input(this);        /** */
+        this.render     = new Render(this);             /** */
+        this.input      = new Input(this);              /** */
         this.audio      = new Audio(game, this);        /** */
-        this.logic      = new Logic(this);        /** */
+        this.logic      = new Logic(this);              /** */
 
         this.game       = new Game(game, this);         /** */
 
         this.actorList  = {};                           /** */
         this.sceneList  = {};                           /** Necesitamos guardar los datos crudos de las escenas activas para acceder al Cast cuando queremos spawnear un actor. */
         
-        this.actorLoadList          = {};               /** */
         this.spawnedActorsList      = {};               /** */
         this.spawnedNodesList       = [];               /** */
         this.destroyedActorsList    = [];               /** */
@@ -77,64 +76,38 @@ class Engine {
     }
 
     /* ····································································
-     *  NEW ACTOR HANDLERS
-    ···································································· */
-    createActor(actor) {
-
-        var _actor      = new Actor(actor, this);
-
-        _actor.scene    = this.game.activeScene;
-        //_actor.ID       = actor.scene + "_" + actor.name;
-        //_actor.UUID     = _actor.ID + Util.random();
-
-        this.actorList[_actor.ID] = _actor;
-        this.sceneList[this.game.activeScene][_actor.ID] = _actor;
-
-        return _actor;
-    }
-
-    /* ····································································
      *  SPAWN ACTOR HANDLERS
     ···································································· */
-    addSpawnedActor(actor, x, y, angle) {
+    addSpawnedActor(actorName, x, y, angle) {
 
-        var spawnedActor = Object.assign({}, this.game.sceneList[this.game.activeScene].actorList[actor]); 
-        spawnedActor.sleeping = false;
-        spawnedActor.name = "Copy_of_" + actor + "_" + Util.random();
-        spawnedActor.x = x;
-        spawnedActor.y = y; 
-        spawnedActor.angle = angle; 
+        //console.log(this.sceneList[this.game.activeScene], actorName);
+        var name = "Spawn_of_" + actorName + "_" + Util.random();
 
-        //console.log(spawnedActor);
+        this.spawnedActorsList[name]            = Object.assign({}, this.game.sceneList[this.game.activeScene].actorList[actorName]); 
+        this.spawnedActorsList[name].sleeping   = false;
+        this.spawnedActorsList[name].name       = name;
+        this.spawnedActorsList[name].ID         = name;
+        this.spawnedActorsList[name].x          = x;
+        this.spawnedActorsList[name].y          = y; 
+        this.spawnedActorsList[name].angle      = angle;
 
-        this.spawnedActorsList[spawnedActor.name] = spawnedActor;
+        name = null;
     }
 
     spawnActors() {
 
-        this.actorLoadList = {};
-
         for(var i in this.spawnedActorsList) {
 
-            this.actorLoadList[i] = this.createActor(this.spawnedActorsList[i]);
+            this.actorList[i] = new Actor(this.spawnedActorsList[i], this);
             Util.destroy(this.spawnedActorsList, i);
-        }
-
-        for(var i in this.actorLoadList) {
-
-            this.addActor(this.actorLoadList[i]);
-        }
-
-        for(var i in this.actorLoadList) {
-
-            //this.setActor(this.actorLoadList[i]);
-            Util.destroy(this.actorLoadList, i);
         }
 
         this.logic.compileExpressions();
 
         this.spawnedActorsList = {};
-        this.actorLoadList = {};
+
+        console.log("SCENE LIST", Object.keys(this.sceneList[this.game.activeScene]).length);
+        console.log("ACTOR LIST", Object.keys(this.actorList).length);
     }
 
     /* ····································································
@@ -235,16 +208,16 @@ class Engine {
 
         /** Actualizar la lista de escenas activas y la lista auxiliar de carga de actores. */
         this.sceneList[scene.name]  = {};
-        this.actorLoadList          = {};
-        
+
         /** Creacion de los actores en la memoria del motor. */
         for(var i in scene.actorList) {
 
             if(!scene.actorList[i].sleeping) {      /** Si es un actor activo */
 
-                scene.actorList[i].name = i;
-                this.actorLoadList[i] = this.createActor(scene.actorList[i], this);
+                this.actorList[scene.actorList[i].ID] = new Actor(scene.actorList[i], this);
             }
+            
+            this.sceneList[this.game.activeScene][scene.actorList[i].ID] = scene.actorList[i];
         }
 
         /** Compilar las expresiones una vez cargados todos los datos en memoria */
