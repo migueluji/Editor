@@ -1,20 +1,19 @@
 class Logic {
 
-    constructor(game, engine) {
+    constructor(engine) {
 
-        this.engine = engine;
+        this.engine         = engine;   /** */
 
-        this.actorList      = {};   /** */
-
-        this.nodeList       = [];   /** Lista auxiliar de todos los nuevos nodos cargados en memoria (para compilarlos) */
-
-        this.timerList      = {};   /** */
-
-        this.currentTime    = 0.0;  /** */
-        this.previousTime   = 0.0;  /** */
+        this.actorList      = {};       /** */
+        this.nodeList       = [];       /** Lista auxiliar de todos los nuevos nodos cargados en memoria (para compilarlos) */
+        this.timerList      = {};       /** */
+        this.currentTime    = 0.0;      /** */
+        this.previousTime   = 0.0;      /** */
     }
 
     run() {
+
+        //console.log(this.actorList);
 
         for(var i in this.actorList) {
 
@@ -37,23 +36,28 @@ class Logic {
 
     setActorLogic(actor) {
 
+        //console.log("----", actor, actor.scriptList);
+
         /** Configuramos sus reglas de comportamiento (si fuera necesario) */
-        var scriptList = {};
+        var _scriptList = {};
         var empty = true;
 
-        for(var i in actor.scriptList) {
+        for(var i in actor._scriptList) {
 
             empty = false;
-            scriptList[i] = this.setScripts(actor, actor.scriptList[i]);
+            _scriptList[i] = this.setScripts(actor, actor._scriptList[i]);
         }
-
-        actor.scriptList = scriptList;
 
         if(!empty) { 
 
             /** Añadimos el actor a la lista del motor de logica */
             this.actorList[actor.ID] = actor;
+            //console.log(this.actorList, actor);
         }
+
+        console.log(actor.ID, this.actorList);
+
+        return _scriptList;
     }
 
     setScripts(actor, scripts) {
@@ -145,10 +149,10 @@ class Logic {
     reset() {
 
         /** Actualizar las propiedades de elapsedTime y deltaTime. */
-        this.currentTime            = Util.getDate();
-        this.engine.game.deltaTime   = Util.clamp(this.currentTime - this.previousTime, 0, 0.025); // El clamp es para evitar picos indeseados.
-        this.previousTime           = this.currentTime;
-        this.engine.game.elapsedTime += this.engine.game.deltaTime; 
+        this.currentTime                = Util.getDate();
+        this.engine.game.deltaTime      = Util.clamp(this.currentTime - this.previousTime, 0, 0.025); // El clamp es para evitar picos indeseados.
+        this.previousTime               = this.currentTime;
+        this.engine.game.elapsedTime    += this.engine.game.deltaTime; 
 
         /** Contabilizar los timers */
         for(var i in this.timerList) {

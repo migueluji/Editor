@@ -6,7 +6,7 @@
 	"cameraY": 0,
 	"cameraAngle": 0,
 	"cameraZoom": 1,
-	"backgroundColor": "#ffffff",
+	"backgroundColor": "#ff8000",
 	"soundOn": false,
 	"soundtrack": "",
 	"volume": 1,
@@ -172,7 +172,20 @@
 					"restitution": 0.5,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
-					"scriptList": []
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.color",
+										"value": "#ff0080"
+									}
+								}
+							]
+						}
+					]
 				},
 				{
 					"name": "Copy_of_Actor_1",
@@ -274,7 +287,30 @@
 					"restitution": 0.5,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
-					"scriptList": []
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Touch",
+									"parameters": {
+										"mode": "Down",
+										"on_Actor": false
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.backgroundColor",
+												"value": "#00ff00"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
 				},
 				{
 					"name": "Actor_5",

@@ -2,6 +2,8 @@ class Actor {
 
     constructor(actor, engine) {
 
+        //console.log(actor);
+
         /**
          * 
          */
@@ -62,10 +64,6 @@ class Actor {
         this.collider       = actor.collider                || "Circle";
         this.physicVertices = actor.physicVertices          || null; 
 
-        /** Logic properties
-         * ---------------------------------- */
-        this.localScope     = {};
-
         /** Physics properties
          * ---------------------------------- */
         this.physicsOn       = actor.physicsOn               || false;       /** */
@@ -84,6 +82,7 @@ class Actor {
         /** Settings properties
          * ---------------------------------- */
         this.name           = actor.name                    || "NewActor" + Util.random();
+        this.ID             = actor.ID                      || actor.name  + Util.random();
         this.sleeping       = actor.sleeping ? false : true || false;
         this.destroyActor   = actor.destroyActor            || false;
         this.x              = actor.x                       || 0;
@@ -97,6 +96,11 @@ class Actor {
         this.scaleX         = actor.scaleX                  || 1;
         this.scaleY         = actor.scaleY                  || 1;
         this.radius         = Math.max(this.width, this.height) / 2;
+
+        /** Logic properties
+         * ---------------------------------- */
+        this.scriptList =  actor.scriptList;
+        this.localScope = {};
 
         /** Variables custom
          * --------------------------------------------------------------------- */
@@ -179,7 +183,7 @@ class Actor {
         this._x = value;
 
         if(this._spriteOn) { this.sprite.x = this._x; }
-        //if(this._textOn) { this.textSprite.x = this._x; }
+        if(this._textOn) { this.textSprite.x = this._x; }
     }
 
     get y() { return this._y; }
@@ -188,7 +192,7 @@ class Actor {
         this._y = value;
 
         if(this._spriteOn) { this.sprite.y = -this._y; }
-        //if(this._textOn) { this.textSprite.y = -this._y; }
+        if(this._textOn) { this.textSprite.y = -this._y; }
     }
 
     get angle() { return this._angle; }
@@ -197,7 +201,7 @@ class Actor {
         this._angle = value;
 
         if(this._spriteOn) { this.sprite.rotation = Util.degToRad(-this._angle); }
-        //if(this._textOn) { this.textSprite.rotation = Util.degToRad(-this._angle); console.log("entra", this.textSprite.scale);}
+        if(this._textOn) { this.textSprite.rotation = Util.degToRad(-this._angle); }
     }
 
     get screen() { return this._screen; }
@@ -225,9 +229,10 @@ class Actor {
         this._scaleX = this._width / this.originalWidth;
         
         if(this._spriteOn) { this.sprite.width = this._width; }
-        //if(this._textOn) { this.textSprite.scale.x = 1; this._textSprite.width = this._width; }
-
-        console.log(this.textSprite);
+        if(this._textOn) { 
+            this.textStyle.wordWrapWidth = this._width; 
+            this.textStyle.padding       = this._width; 
+        }
     }
 
     get scaleX() { return this._scaleX; }
@@ -343,6 +348,7 @@ class Actor {
             this._textSprite.text = this.text; 
         }
         else {
+
             if(this._textSprite != null) { this._textSprite.text = ""; } // TODO: Gestionar la no actualizacion.
         }
     }
@@ -374,9 +380,9 @@ class Actor {
     get align() { return this._align; }
     set align(value) {
 
-        this._align = value;
+        this._align = value.toLowerCase();
 
-        if(this._textOn) { this.textStyle.align = this._align; }
+        if(this._textOn) { this.textStyle.align = this._align; /*console.log(this._align);*/ }
     }
 
     get style() { return this._style; }
@@ -389,8 +395,6 @@ class Actor {
             this.textStyle.fontStyle        = this._style == "italic-bold" ? "italic" : this._style;
             this.textStyle.fontWeight       = this._style == "italic-bold" ? "bold" : "normal";
             this.textStyle.wordWrap         = true;
-            this.textStyle.wordWrapWidth    = this._width;
-            this.textStyle.padding          = this._width;
         }
     }
 
@@ -412,7 +416,7 @@ class Actor {
     set textSprite(value) {
 
         this._textSprite = value;
-        //this._textSprite.anchor.set(0);
+        this._textSprite.anchor.set(0.5);
     }
 
     get localScope() { return this._localScope; }
@@ -421,6 +425,13 @@ class Actor {
         this._localScope = value;
         this._localScope.Me = this;
         this._localScope.engine = this.engine;
+    }
+
+    get scriptList() { return this._scriptList; }
+    set scriptList(value) {
+
+        this._scriptList = value;
+        this._scriptList = this.engine.logic.setActorLogic(this);
     }
 
     get destroyActor() { return this._destroyActor; }

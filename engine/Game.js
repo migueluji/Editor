@@ -95,28 +95,29 @@ class Game {
     get displayWidth() { return this._displayWidth; }
     set displayWidth(value) {
         this._displayWidth = value;
-        console.log("Display Width:", this._displayWidth, "Display Height: ", this._displayHeight || 480);
+        //console.log("Display Width:", this._displayWidth, "Display Height: ", this._displayHeight || 480);
         this.engine.render.renderer.resize(this._displayWidth, this._displayHeight || 480);
     }
 
     get displayHeight() { return this._displayHeight; }
     set displayHeight(value) {
         this._displayHeight = value;
-        console.log("Display Width:", this._displayWidth, "Display Height: ", this._displayHeight);
+        //console.log("Display Width:", this._displayWidth, "Display Height: ", this._displayHeight);
         this.engine.render.renderer.resize(this._displayWidth, this._displayHeight);
     }
 
     get backgroundColor() { return this._backgroundColor; }
     set backgroundColor(value) {
         this._backgroundColor = Util.colorFormat(value);
-        console.log("Background Color:", this._backgroundColor);
+        //console.log(this._backgroundColor);
+        //console.log("Background Color:", this._backgroundColor);
         this.engine.render.renderer.backgroundColor = this._backgroundColor;
     }
 
     get cameraX() { return this._cameraX; }
     set cameraX(value) {
         this._cameraX = value;
-        console.log("Camera X:", this._cameraX);
+        //console.log("Camera X:", this._cameraX);
         //this.engine.render.stage.position.x = this._stageOrigin.x - this._cameraX;
         this.engine.render.stage.position.x = this._stageOrigin.x - this._cameraX;
     }
@@ -124,22 +125,21 @@ class Game {
     get cameraY() { return this._cameraY; }
     set cameraY(value) {
         this._cameraY = value;
-        console.log("Camera Y:", this._cameraY);
-        //this.engine.render.stage.position.y = this._stageOrigin.y + this._cameraY;
+        //console.log("Camera Y:", this._cameraY);
         this.engine.render.stage.position.y = this._stageOrigin.y + this._cameraY;
     }
 
     get cameraAngle() { return this._cameraAngle; }
     set cameraAngle(value) {
         this._cameraAngle = value;
-        console.log("Camera Angle:", this._cameraAngle);
+        //console.log("Camera Angle:", this._cameraAngle);
         this.engine.render.stage.rotation = Util.degToRad(this._cameraAngle);
     }
 
     get cameraZoom() { return this._cameraZoom; }
     set cameraZoom(value) {
         this._cameraZoom = value;
-        console.log("Camera Zoom:", this._cameraZoom);
+        //console.log("Camera Zoom:", this._cameraZoom);
         this.engine.render.stage.scale.set(this._cameraZoom);
     }
 }

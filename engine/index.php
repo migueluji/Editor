@@ -66,6 +66,28 @@
 			var parentGamesFolder="<?php echo $_POST['parentGamesFolder'];?>";
             var gameFolder="<?php echo $_POST['gameFolder'];?>";
 			var player = new Player({source: parentGamesFolder + "/" + gameFolder, data: localStorage.getItem("localStorage_GameData")});
+
+/*
+			
+var a = {x: 1, y: 1};
+var b = {x: 0, y: 0};
+console.log("Paso 1: ", a, b);
+
+b = a;
+console.log("Paso 2: ", a, b);
+
+a.x++;
+console.log("Paso 3: ", a, b);
+
+b.x = a.x;
+console.log("Paso 4: ", a, b);
+
+a.x++;
+console.log("Paso 5: ", a, b);*/
+
+
+
+
 		</script>
 
 	</body>

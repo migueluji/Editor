@@ -9,7 +9,7 @@ class Do {
 
     run(scope) {
 
-        
+        console.log(this.expression);
         this.value = this.code.eval(scope).entries[0];
     }
 

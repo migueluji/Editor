@@ -1,6 +1,6 @@
 class Render {
 
-    constructor(game, engine) {
+    constructor(engine) {
 
         this.engine         = engine;   /** */
 
@@ -17,9 +17,22 @@ class Render {
     setRender() {
 
         this.renderer = new PIXI.Renderer();
+        this.stage = new PIXI.Container();
+
         document.body.appendChild(this.renderer.view); // Add PIXI.Renderer to the DOM
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST; // Scale mode for all textures, will retain pixelation
-        this.stage = new PIXI.Container();
+
+        /**
+         * Link model properties.
+         * --------------------------------------------- */
+        /*this.renderer.view.style.width  = this.game.displayWidth;
+        this.renderer.view.style.height = this.game.displayHeight;
+        this.renderer.backgroundColor   = this.game.backgroundColor;
+        this.stage.position.x           = this.game._stageOrigin.x - this.game.cameraX;
+        this.stage.position.y           = this.game._stageOrigin.y - this.game.cameraY;
+        this.stage.rotation             = Util.degToRad(this.game.cameraAngle);
+        this.stage.scale.x              = this.game.cameraZoom;
+        this.stage.scale.y              = this.game.cameraZoom;*/
     }
 
     setActorRender(actor, data) {
@@ -56,16 +69,14 @@ class Render {
 
         actor.sprite = new PIXI.TilingSprite(PIXI.Texture.EMPTY); /** Creamos el sprite de la imagen. */
         this.stage.addChild(actor.sprite); /** Añadimos el sprite al contenedor del sprites del actor. */
-        this.spriteList[actor.ID] = actor; /** Añadimos el actor a la lista de actualizacion de sprites. */
+        this.spriteList[actor.UUID] = actor; /** Añadimos el actor a la lista de actualizacion de sprites. */
     }
 
     setActorText(actor, data) {
 
         actor.textStyle = new PIXI.TextStyle({}); /** Definimos el estilo del texto. */
         //actor.text = Util.updateTextToLocalScope(actor.text, actor);
-        actor.textSprite = new PIXI.Text(" ", actor.textStyle);
-        actor.textSprite.scale.x = 20;
-        //console.log(actor.textSprite.width);
+        actor.textSprite = new PIXI.Text("Vacio", actor.textStyle);
         this.stage.addChild(actor.textSprite);    /** Añadimos el texto al sprite contenedor */
         this.textList[actor.ID] = actor; /** Añadimos el actor a la lista de actualizacion de texto. */
     }

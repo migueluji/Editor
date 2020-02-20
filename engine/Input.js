@@ -1,8 +1,9 @@
 class Input {
 
-    constructor(game, engine) {
+    constructor(engine) {
 
-        this.engine = engine;
+        this.engine         = engine;               /** */
+        this.game           = this.engine.game;     /** */
 
         this.actorList  = {};                                       /** */
 
@@ -94,7 +95,7 @@ class Input {
 
     actorPointerDownHandler(actor) {
 
-        //console.log("---------------------------------- DOWN", actor);
+        console.log("---------------------------------- DOWN", actor);
 
         actor.pointer.down = true;
         actor.pointer.up   = false;
@@ -125,6 +126,8 @@ class Input {
     keyDownHandler(event) {
 
         event.preventDefault();
+
+        console.log(event);
 
         if(this.keyList.hasOwnProperty(event.code)) {
 

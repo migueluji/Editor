@@ -7,10 +7,10 @@ class Engine {
 
         //this.physics    = new Physics(game, this);    /** */
         this.collision  = new Collision(game, this);    /** */
-        this.render     = new Render(game, this);       /** */
-        this.input      = new Input(game, this);        /** */
+        this.render     = new Render(this);       /** */
+        this.input      = new Input(this);        /** */
         this.audio      = new Audio(game, this);        /** */
-        this.logic      = new Logic(game, this);        /** */
+        this.logic      = new Logic(this);        /** */
 
         this.game       = new Game(game, this);         /** */
 
@@ -84,7 +84,8 @@ class Engine {
         var _actor      = new Actor(actor, this);
 
         _actor.scene    = this.game.activeScene;
-        _actor.ID       = actor.scene + "_" + actor.name;
+        //_actor.ID       = actor.scene + "_" + actor.name;
+        //_actor.UUID     = _actor.ID + Util.random();
 
         this.actorList[_actor.ID] = _actor;
         this.sceneList[this.game.activeScene][_actor.ID] = _actor;
