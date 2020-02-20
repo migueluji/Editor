@@ -102,7 +102,7 @@ class Actor {
         this.scriptList =  actor.scriptList;
         this.localScope = {};
 
-        console.log(this);
+        console.log("ACTOE", this);
 
         /** Variables custom
          * --------------------------------------------------------------------- */
