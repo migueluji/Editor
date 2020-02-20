@@ -66,18 +66,18 @@ class Actor {
 
         /** Physics properties
          * ---------------------------------- */
-        this.physicsOn       = actor.physicsOn               || false;       /** */
-        this.velocityX       = actor.velocityX               || 0;
-        this.velocityY       = actor.velocityY               || 0;
-        this.angularVelocity = actor.angularVelocity               || 0;
-        this.fixedAngle      = actor.fixedAngle           || false;
-        this.density         = actor.density                 || 1.0;
-        this.friction        = actor.friction                || 0.5;
-        this.restitution     = actor.restitution             || 0.2;
-        this.dampingLinear    = actor.dampingLinear             || 1.0;
-        this.dampingAngular    = actor.dampingAngular             || 1.0;
-        this.physics        = actor.physics                 || false;
-        this.type     = actor.type              || "Dynamic";
+        this.physicsOn       = actor.physicsOn          || false;       /** */
+        this.velocityX       = actor.velocityX          || 0;
+        this.velocityY       = actor.velocityY          || 0;
+        this.angularVelocity = actor.angularVelocity    || 0;
+        this.fixedAngle      = actor.fixedAngle         || false;
+        this.density         = actor.density            || 1.0;
+        this.friction        = actor.friction           || 0.5;
+        this.restitution     = actor.restitution        || 0.2;
+        this.dampingLinear   = actor.dampingLinear      || 1.0;
+        this.dampingAngular  = actor.dampingAngular     || 1.0;
+        this.physics         = actor.physics            || false;
+        this.type            = actor.type               || "Dynamic";
 
         /** Settings properties
          * ---------------------------------- */
@@ -101,6 +101,8 @@ class Actor {
          * ---------------------------------- */
         this.scriptList =  actor.scriptList;
         this.localScope = {};
+
+        console.log(this);
 
         /** Variables custom
          * --------------------------------------------------------------------- */
