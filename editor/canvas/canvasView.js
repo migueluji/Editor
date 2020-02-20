@@ -35,6 +35,7 @@ class CanvasView {
 		this.html.querySelector('#duplicate').addEventListener("click",this.duplicateActorHandler.bind(this));
 		this.html.querySelector('#delete').addEventListener("click",this.removeActorHandler.bind(this));
         window.addEventListener("resize",this.resize.bind(this));
+        window.addEventListener("click",this.takePhoto.bind(this));
         this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
 
         this.actorButton = this.html.querySelector("#actorbutton");
@@ -46,6 +47,22 @@ class CanvasView {
         this.loadInitImages(game.imageList);
     }
 
+    takePhoto(){
+        
+        // const texture = this.app.renderer.generateTexture(this.scene);
+        // //const mask=this.frame;
+        // //texture.mask=mask;
+        // const tilingSprite= new PIXI.TilingSprite(texture);
+        // tilingSprite.anchor.set(0.5001);
+        // tilingSprite.width=800;
+        // tilingSprite.height=480;
+        // tilingSprite.scale.y=-1;
+        // this.app.stage.addChild(tilingSprite);
+        
+        // // image.style.transform="scaleY(-1)";
+        // // console.log("click",image.style.transform);
+        // // document.body.appendChild(image);
+    }
     loadInitImages(imageList){
             this.loader = new PIXI.Loader(app.parentGamesFolder+"/"+app.gameFolder+"/images");
             if (imageList.length==0) this.loader.add("");
@@ -108,10 +125,10 @@ class CanvasView {
         this.app.stage.removeChildren();
         this.app.renderer.backgroundColor="0x"+String(this.gameProperties.backgroundColor).substr(1);
 
-        const frame = new PIXI.Graphics(); // draw the camera frame
-        frame.lineStyle(20, 0xDDDDDD, 1, 1, true);
-        frame.drawRect(-this.gameProperties.displayWidth/2.0,-this.gameProperties.displayHeight/2.0,this.gameProperties.displayWidth,this.gameProperties.displayHeight);
-        this.app.stage.addChild(frame);
+        this.frame = new PIXI.Graphics(); // draw the camera frame
+        this.frame.lineStyle(20, 0xDDDDDD, 1, 1, true);
+        this.frame.drawRect(-this.gameProperties.displayWidth/2.0,-this.gameProperties.displayHeight/2.0,this.gameProperties.displayWidth,this.gameProperties.displayHeight);
+        this.app.stage.addChild(this.frame);
  
         this.scene= new PIXI.Container(); // create the scene container
         this.scene.position ={x:-this.gameProperties.cameraX,y:this.gameProperties.cameraY};
@@ -257,7 +274,7 @@ class CanvasView {
     hitArea(container){
         var width=window.innerWidth/container.scale.x;
         var height=window.innerHeight/container.scale.y;
-        this.app.stage.hitArea = new PIXI.Rectangle(-width*5,height*5,width*10,-height*10);
+        this.app.stage.hitArea = new PIXI.Rectangle(-width*50,height*50,width*100,-height*100);
     }
 
     zoom (s,x,y){
@@ -266,10 +283,25 @@ class CanvasView {
         var worldPos = {x: (x - stage.x ) / stage.scale.x, y: (y - stage.y)/stage.scale.y};
         var newScale = {x: stage.scale.x * s, y: stage.scale.y * s};
         var newScreenPos = {x: worldPos.x * newScale.x + stage.x, y: worldPos.y * newScale.y + stage.y};
-        stage.x -= (newScreenPos.x-x) ;
-        stage.y -= (newScreenPos.y-y) ;
         stage.scale.x = newScale.x;
         stage.scale.y = newScale.y;
+       
+        if (stage.scale.x<0.05) stage.scale.x=0.05;
+        if (stage.scale.x>10.0) stage.scale.x=10.0;
+        if (stage.scale.y<0.05) stage.scale.y=0.05;
+        if (stage.scale.y>10.0) stage.scale.y=10.0;
+
+        if (stage.scale.x==0.05 || stage.scale.x==10.0 || stage.scale.y==0.05 || stage.scale.y==10.0){
+            stage.x = stage.x ;
+            stage.y = stage.y ;
+        }
+        else{
+            stage.x -= (newScreenPos.x-x) ;
+            stage.y -= (newScreenPos.y-y) ;
+        }
+
+     //   console.log(stage.scale.x,stage.scale.y);
+
         this.app.stage=stage;
         this.hitArea(this.scene);
     }

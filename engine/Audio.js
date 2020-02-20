@@ -1,6 +1,8 @@
 class Audio {
 
-    constructor(game) {
+    constructor(game, engine) {
+
+        this.engine = engine;
 
         this.actorList  = {};                           /** */
 

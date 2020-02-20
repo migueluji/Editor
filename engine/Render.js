@@ -1,159 +1,90 @@
 class Render {
 
-    constructor(render) {
+    constructor(engine) {
 
-        this.width              = render.displayWidth       || window.innerWidth;   /** Para la ejecucion en el editor. */
-        this.height             = render.displayHeight      || window.innerHeight;  /** Para la ejecucion en el editor. */
-        this.displayWidth       = render.displayWidth       || 800;                 /** Para la ejecucion en el player. */
-        this.displayHeight      = render.displayHeight      || 600;                 /** Para la ejecucion en el player. */
-        this.backgroundColor    = render.backgroundColor    || 0xffffff;            /** */
-        this.cameraX            = render.cameraX            || 0.00;                /** */
-        this.cameraY            = render.cameraY            || 0.00;                /** */
-        this.cameraZoom         = render.cameraZoom         || 0.00;                /** */
-        this.cameraAngle        = render.cameraAngle        || 0.00;                /** Radians */
+        this.engine         = engine;   /** */
 
-        this.actorList          = {};       /** */
-        this.onScreenList       = {};       /** */
-        this.textList           = {};       /** */
-        this.spriteList         = {};       /** */
+        this.actorList      = {};       /** */
+        this.onScreenList   = {};       /** */
+        this.textList       = {};       /** */
+        this.spriteList     = {};       /** */
 
-        this.createRenderer();              /** */
-        this.createStage();                 /** */
-
-        this.setOriginAtScreenCenter();     /** */
+        this.setRender();
 
         //this.loadFonts(render.assets.fonts);
     }
 
-    createRenderer() {
+    setRender() {
 
-        this.renderer = new PIXI.Renderer({
-            width: this.width, 
-            height: this.height, 
-            backgroundColor: this.backgroundColor
-        });
-        
-        document.body.appendChild(this.renderer.view); // Add PIXI.Renderer to the DOM
-
-        // Scale mode for all textures, will retain pixelation
-        PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
-    }
-
-    createStage() {
-
+        this.renderer = new PIXI.Renderer();
         this.stage = new PIXI.Container();
+
+        document.body.appendChild(this.renderer.view); // Add PIXI.Renderer to the DOM
+        PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST; // Scale mode for all textures, will retain pixelation
+
+        /**
+         * Link model properties.
+         * --------------------------------------------- */
+        /*this.renderer.view.style.width  = this.game.displayWidth;
+        this.renderer.view.style.height = this.game.displayHeight;
+        this.renderer.backgroundColor   = this.game.backgroundColor;
+        this.stage.position.x           = this.game._stageOrigin.x - this.game.cameraX;
+        this.stage.position.y           = this.game._stageOrigin.y - this.game.cameraY;
+        this.stage.rotation             = Util.degToRad(this.game.cameraAngle);
+        this.stage.scale.x              = this.game.cameraZoom;
+        this.stage.scale.y              = this.game.cameraZoom;*/
     }
 
-    setOriginAtScreenCenter() {
-
-        this.stageOrigin = {
-            x: this.renderer.width / 2,
-            y: this.renderer.height / 2
-        };
-
-        this.updateStage();
-    }
-    
-    setActorRender(actor) {
-
-        if(actor.spriteOn || actor.textOn) {
+    setActorRender(actor, data) {
             
+        /** Añadimos el sprite al contenedor de screen */
+        /*if(data.screen) {
+
+            actor.originalPositionX = actor.x;
+            actor.originalPositionY = actor.y; 
+
+            this.onScreenList[actor.ID] = actor;
+        }*/
+
+        //if(data.spriteOn || data.textOn) {
+
             /** Creamos el sprite contenedor. */
-            actor.render = new PIXI.Sprite();
-            actor.render.anchor.set(0.5001); // This will set the origin to center. (0.5) is same as (0.5, 0.5).
-            actor.render.rotation = Util.degToRad(actor.angle);
-            
-            /** Añadimos el sprite al contenedor de screen */
-            if(actor.screen) {
-
-                actor.originalPositionX = actor.x;
-                actor.originalPositionY = actor.y; 
-
-                this.onScreenList[actor.ID] = actor;
-            }
+            //actor.render = new PIXI.Sprite();
             
             /** Añadimos el sprite al stage */
-            this.stage.addChild(actor.render);
+            //this.stage.addChild(actor.render);
 
             /** Añadimos el actor a la lista del motor de render */
-            this.actorList[actor.ID] = actor;
-        }
+            //this.actorList[actor.ID] = actor;
+        //}*/
 
         /** Creamos el sprite de la textura. */
-        if(actor.spriteOn) { this.setActorSprite(actor); }
+        if(data.spriteOn) { this.setActorSprite(actor); }
 
         /** Creamos el sprite de la texto. */
-        if(actor.textOn) { this.setActorText(actor); }
-
-        /* DEBUG -- Borrar sin problemas */
-            //actor.renderDebugSprite = new PIXI.Sprite();
-            //actor.collisionBroadDebugSprite = new PIXI.Sprite();
-            //actor.collisionNarrowDebugSprite = new PIXI.Sprite();
-        /* FIN DEBUG */
-
-        /* DEBUG -- Borrar sin problemas */
-            //this.stage.addChild(actor.physicsDebugSprite);
-            //this.stage.addChild(actor.renderDebugSprite);
-            //this.stage.addChild(actor.collisionBroadDebugSprite);
-            //this.stage.addChild(actor.collisionNarrowDebugSprite);
-        /* FIN DEBUG */
+        if(data.textOn) { this.setActorText(actor); }
     }
 
-    setActorSprite(actor) {
+    setActorSprite(actor, data) {
 
-        /** Asignamos la textura del sprite. */
-        actor.texture = (player.file.loader.resources[actor.image] != undefined) ? player.file.loader.resources[actor.image].texture : PIXI.Texture.WHITE;
-
-        /** Creamos el sprite de la imagen. */
-        actor.sprite = new PIXI.TilingSprite(actor.texture, actor.width, actor.height);
-
-        //actor.sprite.scale.set(actor.scaleX, actor.scaleY);
-        actor.sprite.tint = Util.colorFormat(actor.color); /** Configuramos el color de tintado */
-        actor.sprite.alpha = actor.opacity;   /** Configuramos el alpha del sprite */
-
-        actor.render.addChild(actor.sprite); /** Añadimos el sprite al contenedor del sprites del actor. */
-
-        this.spriteList[actor.ID] = actor; /** Añadimos el actor a la lista de actualizacion de sprites. */
+        actor.sprite = new PIXI.TilingSprite(PIXI.Texture.EMPTY); /** Creamos el sprite de la imagen. */
+        this.stage.addChild(actor.sprite); /** Añadimos el sprite al contenedor del sprites del actor. */
+        this.spriteList[actor.UUID] = actor; /** Añadimos el actor a la lista de actualizacion de sprites. */
     }
 
-    setActorText(actor) {
+    setActorText(actor, data) {
 
-        /** Definimos el estilo del texto. */
-        actor.textStyle     = new PIXI.TextStyle({
-            fontFamily: actor.font, 
-            fontSize:   actor.size, 
-            fill:       actor.fill, 
-            align:      actor.align,
-            fontWeight: actor.style
-        });
-
-        actor.text = Util.updateTextToLocalScope(actor.text, actor);
-
-        //actor.text = (actor.text != undefined) ? Util.addElementsToLocalScope(actor.text, actor, this.actorList) : "";
-        actor.textSprite = new PIXI.Text("", actor.textStyle);
-        actor.textSprite.anchor.set(0.0);           // This will set the origin to center. (0.5) is same as (0.5, 0.5).
-        actor.render.addChild(actor.textSprite);    /** Añadimos el texto al sprite contenedor */
-
+        actor.textStyle = new PIXI.TextStyle({}); /** Definimos el estilo del texto. */
+        //actor.text = Util.updateTextToLocalScope(actor.text, actor);
+        actor.textSprite = new PIXI.Text("Vacio", actor.textStyle);
+        this.stage.addChild(actor.textSprite);    /** Añadimos el texto al sprite contenedor */
         this.textList[actor.ID] = actor; /** Añadimos el actor a la lista de actualizacion de texto. */
     }
 
     run() {
 
-        this.updateStage();
         this.updateActors();
-
         this.renderer.render(this.stage);
-    }
-
-    updateStage() {
-
-        this.stage.position.x   = this.stageOrigin.x - this.cameraX;
-        this.stage.position.y   = this.stageOrigin.y + this.cameraY;
-
-        this.stage.rotation     = this.cameraAngle; // En radianes
-
-        this.stage.scale.x      = this.cameraZoom;
-        this.stage.scale.y      = this.cameraZoom;
     }
 
     updateActors() {
@@ -166,11 +97,6 @@ class Render {
             this.onScreenList[i].y = this.cameraY + this.onScreenList[i].originalPositionY;
         }
 
-        for(i in this.actorList) {
-
-            this.actorList[i].setRenderProperties();
-        }
-
         for(i in this.textList) {
 
             this.textList[i].setTextProperties();
@@ -180,15 +106,6 @@ class Render {
 
             this.spriteList[i].setSpriteProperties();
         }
-    }
-
-    drawDebug(actor) {
-
-        actor.renderDebugSprite.removeChildren();
-        var graphics = new PIXI.Graphics();
-        graphics.lineStyle(2, 0xff0000, 1);
-        graphics.drawRect(actor.x - /*actor.scaleX * */actor.width / 2, actor.y - /*actor.scaleY * */actor.height / 2, actor.width /* * actor.scaleX*/, actor.height /* * actor.scaleY*/);
-        actor.renderDebugSprite.addChild(graphics);
     }
 
     destroyActor(actor) {

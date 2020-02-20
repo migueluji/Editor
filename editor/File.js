@@ -26,6 +26,7 @@ class File {
     }
 
 	static uploadFile(gameFolder, fileName, formData, type){
+        console.log("file",formData);
 	 	var destination;
 	    if(type=="Image" || type=="Animation") 	destination="images";
 		if(type=="Sound")   destination="sounds";

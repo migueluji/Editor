@@ -1,18 +1,19 @@
 class Input {
 
-    constructor(game, render) {
+    constructor(engine) {
+
+        this.engine         = engine;               /** */
+        this.game           = this.engine.game;     /** */
 
         this.actorList  = {};                                       /** */
 
         this.keyList    = {};                                       /** */
         this.pointer    = {down: false, up: true, isOver: false};   /** */
 
-        this.render = render;
-
         document.addEventListener("keydown", this.keyDownHandler.bind(this));
         document.addEventListener("keyup", this.keyUpHandler.bind(this));
 
-        this.setPointerInteraction(render);
+        this.setPointerInteraction(this.engine.render);
     }
     
     setActorInput(actor) {
@@ -29,7 +30,7 @@ class Input {
                 /** Creamos el sprite contenedor. */
                 actor.render = new PIXI.Sprite();
                 actor.render.anchor.set(0.5001); // This will set the origin to center. (0.5) is same as (0.5, 0.5).
-                actor.render.rotation = Util.degToRad(actor.angle);
+                actor.render.angle = actor.angle;
                 
                 /** Añadimos el sprite al contenedor de screen */
                 if(actor.screen) {
@@ -37,14 +38,14 @@ class Input {
                     actor.originalPositionX = actor.x;
                     actor.originalPositionY = actor.y; 
 
-                    this.render.onScreenList[actor.ID] = actor;
+                    this.engine.render.onScreenList[actor.ID] = actor;
                 }
                 
                 /** Añadimos el sprite al stage */
-                this.render.stage.addChild(actor.render);
+                this.engine.render.stage.addChild(actor.render);
 
                 /** Añadimos el actor a la lista del motor de render */
-                this.render.actorList[actor.ID] = actor;
+                this.engine.render.actorList[actor.ID] = actor;
             }
 
             /** Configuramos las propiedades del motor de Render */
@@ -88,13 +89,13 @@ class Input {
 
     pointerMoveHandler(event) {
 
-        player.engine.game.mouseX = Math.floor(event.data.global.x - this.render.renderer.width / 2 + this.render.cameraX);
-        player.engine.game.mouseY = Math.floor(event.data.global.y - this.render.renderer.height / 2 - this.render.cameraY);
+        this.engine.game.mouseX = Math.floor(event.data.global.x - this.engine.render.renderer.width / 2 + this.engine.render.cameraX);
+        this.engine.game.mouseY = Math.floor(event.data.global.y - this.engine.render.renderer.height / 2 - this.engine.render.cameraY);
     }
 
     actorPointerDownHandler(actor) {
 
-        //console.log("---------------------------------- DOWN", actor);
+        console.log("---------------------------------- DOWN", actor);
 
         actor.pointer.down = true;
         actor.pointer.up   = false;
@@ -126,6 +127,8 @@ class Input {
 
         event.preventDefault();
 
+        console.log(event);
+
         if(this.keyList.hasOwnProperty(event.code)) {
 
             this.keyList[event.code].down       = true;
@@ -153,6 +156,13 @@ class Input {
             this.keyList[i].down = false;
             this.keyList[i].up = true;
         }
+        
+        for(var i in this.actorList) {
+
+            this.actorList[i].pointer.down   = false;
+            this.actorList[i].pointer.up     = true;
+            this.actorList[i].pointer.isOver = false;
+        }
     }
 
     destroyActor(actor) {
@@ -160,7 +170,7 @@ class Input {
         /** Si es interactivo, lo eliminamos de las listas de actualizacion del motor de render. */
         if(actor.interactiveOn) {
 
-            this.render.destroyActor(actor);
+            this.engine.render.destroyActor(actor);
         }
 
         /** Eliminamos el actor de la lista de actores del motor de input */

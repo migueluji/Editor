@@ -84,6 +84,11 @@ class Util {
         return value * Math.PI / 180.0;
     }
 
+    static colorString(value) {
+
+        return "'" + Util.colorFormat(value) + "'"; 
+    }
+
     /**
      * 
      */
@@ -137,22 +142,27 @@ class Util {
             }
         }
 
-        console.log(temp, scope);
+        //console.log(temp, scope);
 
         return temp;
     }
 
     static addElementsToLocalScope(expression, actor, actorList) {
 
-        var temp = expression;
-        
         for(var i in actorList) {
 
-            if((temp.search(actorList[i].name) != -1)) {
+            if((expression.search(actorList[i].name) != -1)) {
 
                 actor.localScope[actorList[i].name] = actorList[i];
             }
         }
+
+        if((expression.search("Game") != -1)) {
+
+            expression = expression.replace(new RegExp("Game", "g"), "engine.game");
+        }
+
+        return expression;
     }
 
     static updateTextToLocalScope(text, actor) {
@@ -224,29 +234,31 @@ class Util {
 
             for(var j = 0; j < container.sceneList[i].actorList.length; j++) {
 
-                actorList[container.sceneList[i].actorList[j].name] = container.sceneList[i].actorList[j];
+                container.sceneList[i].actorList[j].ID = container.sceneList[i].name.replace(/ /g, "_") + "_" + container.sceneList[i].actorList[j].name + "_" + Util.random();
+
+                actorList[container.sceneList[i].actorList[j].ID] = container.sceneList[i].actorList[j];
 
                 var scriptList = {};
 
                 for(var k = 0; k < container.sceneList[i].actorList[j].scriptList.length; k++) {
 
                     scriptList[container.sceneList[i].actorList[j].scriptList[k].name] = container.sceneList[i].actorList[j].scriptList[k].nodeList;
-                    Util.destroy(scriptList[container.sceneList[i].actorList[j].scriptList[k].name], "name");
+                    //Util.destroy(scriptList[container.sceneList[i].actorList[j].scriptList[k].name], "name");
                 }
 
-                actorList[container.sceneList[i].actorList[j].name].scriptList = scriptList;
+                actorList[container.sceneList[i].actorList[j].ID].scriptList = scriptList;
 
-                Util.destroy(actorList[container.sceneList[i].actorList[j].name], "name");
+               // Util.destroy(actorList[container.sceneList[i].actorList[j].name], "name");
             }
 
             sceneList[container.sceneList[i].name].actorList = actorList;
 
-            Util.destroy(sceneList[container.sceneList[i].name], "name");
+            //Util.destroy(sceneList[container.sceneList[i].name], "name");
         }
 
         container.sceneList = sceneList;
 
-        console.log(container);
+        //console.log(container);
 
         return container;
     }

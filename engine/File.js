@@ -11,6 +11,7 @@ class File {
         if(typeof this.data === "string") {
 
             this.data = JSON.parse(String(this.data));
+            console.log(this.data);
             this.loadAssets(this.data.imageList);
         }
         else {
@@ -25,8 +26,6 @@ class File {
     ready(xhr, file, event) {
 
         if(this.readyState === this.DONE) {
-
-            console.log(this.response);
 
             file.data = JSON.parse(String(this.response)); /** Parse JSON file game data to a JS Object */
             file.loadAssets(file.data.imageList);
