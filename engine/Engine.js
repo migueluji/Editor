@@ -106,8 +106,8 @@ class Engine {
 
         this.spawnedActorsList = {};
 
-        console.log("SCENE LIST", Object.keys(this.sceneList[this.game.activeScene]).length);
-        console.log("ACTOR LIST", Object.keys(this.actorList).length);
+        //console.log("SCENE LIST", Object.keys(this.sceneList[this.game.activeScene]).length);
+        //console.log("ACTOR LIST", Object.keys(this.actorList).length);
     }
 
     /* ····································································

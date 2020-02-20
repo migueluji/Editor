@@ -124,7 +124,7 @@
 		userName="Editor";
 		gameId=Utils.id();
 		gameFolder="prueba";
-		parentGamesFolder="http://localhost/games"		
+		parentGamesFolder="http://localhost/games";
 		var app=new App(userId, gameId, gameFolder, parentGamesFolder);
 	</script>
 	<script type="text/javascript">

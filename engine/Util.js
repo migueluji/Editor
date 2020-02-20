@@ -164,6 +164,12 @@ class Util {
             }
         }
 
+        /** Comprobamos si hay que actualizar el indentificador del Game. */
+        if(expression.search("Game") != -1) {
+
+            expression = expression.replace(new RegExp("Game", "g"), "engine.game");
+        }
+
         return expression;
     }
 
