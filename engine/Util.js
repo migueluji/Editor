@@ -147,17 +147,25 @@ class Util {
         return temp;
     }
 
-    static addElementsToLocalScope(expression, actor, actorList) {
+    static checkScope(expression, scope) {
 
-        for(var i in actorList) {
+        for(var i in scope.engine.sceneList[scope.engine.game.activeScene]) {
 
-            if((expression.search(actorList[i].name) != -1)) {
+            if(expression.search(scope.engine.sceneList[scope.engine.game.activeScene][i].name) != -1) {
 
-                actor.localScope[actorList[i].name] = actorList[i];
+                /** Añadimos el elemento al scope. */
+                scope[scope.engine.sceneList[scope.engine.game.activeScene][i].name] = scope.engine.actorList[scope.engine.sceneList[scope.engine.game.activeScene][i].ID];
+
+                /** Comprobamos si hay que actualizar el indentificador del actor a spawnear. */
+                if(expression.search("addSpawnedActor") != -1) {
+
+                    expression = expression.replace(new RegExp(scope.engine.sceneList[scope.engine.game.activeScene][i].name, "g"), scope.engine.sceneList[scope.engine.game.activeScene][i].ID);
+                }
             }
         }
 
-        if((expression.search("Game") != -1)) {
+        /** Comprobamos si hay que actualizar el indentificador del Game. */
+        if(expression.search("Game") != -1) {
 
             expression = expression.replace(new RegExp("Game", "g"), "engine.game");
         }
@@ -165,13 +173,13 @@ class Util {
         return expression;
     }
 
-    static updateTextToLocalScope(text, actor) {
+    static updateTextToscope(text, actor) {
 
         var temp = text;
 
         if((temp.search("Me") != -1)) {
 
-            temp = temp.replace(new RegExp("Me", "g"), "player.engine.actorList." + actor.ID + ".localScope.Me");
+            temp = temp.replace(new RegExp("Me", "g"), "player.engine.actorList." + actor.ID + ".scope.Me");
         }
 
         // TODO: Actores que no sean "Me".
@@ -247,6 +255,10 @@ class Util {
                 }
 
                 actorList[container.sceneList[i].actorList[j].ID].scriptList = scriptList;
+
+                
+
+                //console.log("-----", container.sceneList[i].actorList[j].name);
 
                // Util.destroy(actorList[container.sceneList[i].actorList[j].name], "name");
             }

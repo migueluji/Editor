@@ -4,60 +4,25 @@ class Render {
 
         this.engine         = engine;   /** */
 
-        this.actorList      = {};       /** */
-        this.onScreenList   = {};       /** */
-        this.textList       = {};       /** */
-        this.spriteList     = {};       /** */
+        this.spriteList     = [];       /** */
+        this.textList       = [];       /** */
+        this.onScreenList   = [];       /** */
 
         this.setRender();
-
-        //this.loadFonts(render.assets.fonts);
     }
 
     setRender() {
 
-        this.renderer = new PIXI.Renderer();
-        this.stage = new PIXI.Container();
-
+        this.renderer   = new PIXI.Renderer();
+        this.stage      = new PIXI.Container();
         document.body.appendChild(this.renderer.view); // Add PIXI.Renderer to the DOM
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST; // Scale mode for all textures, will retain pixelation
 
-        /**
-         * Link model properties.
-         * --------------------------------------------- */
-        /*this.renderer.view.style.width  = this.game.displayWidth;
-        this.renderer.view.style.height = this.game.displayHeight;
-        this.renderer.backgroundColor   = this.game.backgroundColor;
-        this.stage.position.x           = this.game._stageOrigin.x - this.game.cameraX;
-        this.stage.position.y           = this.game._stageOrigin.y - this.game.cameraY;
-        this.stage.rotation             = Util.degToRad(this.game.cameraAngle);
-        this.stage.scale.x              = this.game.cameraZoom;
-        this.stage.scale.y              = this.game.cameraZoom;*/
+        //this.loadFonts(render.assets.fonts);
     }
 
     setActorRender(actor, data) {
             
-        /** Añadimos el sprite al contenedor de screen */
-        /*if(data.screen) {
-
-            actor.originalPositionX = actor.x;
-            actor.originalPositionY = actor.y; 
-
-            this.onScreenList[actor.ID] = actor;
-        }*/
-
-        //if(data.spriteOn || data.textOn) {
-
-            /** Creamos el sprite contenedor. */
-            //actor.render = new PIXI.Sprite();
-            
-            /** Añadimos el sprite al stage */
-            //this.stage.addChild(actor.render);
-
-            /** Añadimos el actor a la lista del motor de render */
-            //this.actorList[actor.ID] = actor;
-        //}*/
-
         /** Creamos el sprite de la textura. */
         if(data.spriteOn) { this.setActorSprite(actor); }
 
@@ -65,25 +30,26 @@ class Render {
         if(data.textOn) { this.setActorText(actor); }
     }
 
-    setActorSprite(actor, data) {
+    setActorSprite(actor) {
 
-        actor.sprite = new PIXI.TilingSprite(PIXI.Texture.EMPTY); /** Creamos el sprite de la imagen. */
+        //actor.sprite = new PIXI.TilingSprite(PIXI.Texture.EMPTY); /** Creamos el sprite de la imagen. */
+        actor.sprite = new PIXI.Sprite(PIXI.Texture.EMPTY); /** Creamos el sprite de la imagen. */
         this.stage.addChild(actor.sprite); /** Añadimos el sprite al contenedor del sprites del actor. */
-        this.spriteList[actor.UUID] = actor; /** Añadimos el actor a la lista de actualizacion de sprites. */
+        this.spriteList.push(actor); /** Añadimos el actor a la lista de actualizacion de sprites. */
     }
 
-    setActorText(actor, data) {
+    setActorText(actor) {
 
         actor.textStyle = new PIXI.TextStyle({}); /** Definimos el estilo del texto. */
-        //actor.text = Util.updateTextToLocalScope(actor.text, actor);
-        actor.textSprite = new PIXI.Text("Vacio", actor.textStyle);
+        //actor.text = Util.updateTextToscope(actor.text, actor);
+        actor.textSprite = new PIXI.Text("", actor.textStyle);
         this.stage.addChild(actor.textSprite);    /** Añadimos el texto al sprite contenedor */
-        this.textList[actor.ID] = actor; /** Añadimos el actor a la lista de actualizacion de texto. */
+        this.textList.push(actor); /** Añadimos el actor a la lista de actualizacion de texto. */
     }
 
     run() {
 
-        this.updateActors();
+        //this.updateActors();
         this.renderer.render(this.stage);
     }
 
@@ -91,18 +57,12 @@ class Render {
 
         var i;
 
-        for(i in this.onScreenList) {
-
-            this.onScreenList[i].x = this.cameraX + this.onScreenList[i].originalPositionX;
-            this.onScreenList[i].y = this.cameraY + this.onScreenList[i].originalPositionY;
-        }
-
-        for(i in this.textList) {
+        for(i = 0; i < this.textList.length; i++) {
 
             this.textList[i].setTextProperties();
         }
 
-        for(i in this.spriteList) {
+        for(i = 0; i < this.spriteList.length; i++) {
 
             this.spriteList[i].setSpriteProperties();
         }

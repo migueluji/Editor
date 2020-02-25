@@ -1,22 +1,25 @@
 class Do {
 
-    constructor(expression) {
+    constructor(expression, scope) {
 
         this.expression     = expression || ""; /** */
         this.code           = null;             /** */
         this.value          = null;             /** */
+        this.scope          = scope || null;    /** */
     }
 
-    run(scope) {
+    run() {
 
-        console.log(this.expression);
-        this.value = this.code.eval(scope).entries[0];
+        //this.value = this.code.eval(this.scope).entries[0];
+        //this.code.eval(this.scope);
+        this.value = this.code.eval(this.scope);
+        this.value = null;
     }
 
     compileExpression() {
-        
-        //console.log(this.expression);
-        this.code = math.compile(this.expression); /** Compilamos la expresion con Math.js. */
+
+        this.expression = Util.checkScope(this.expression, this.scope); /** Comprobamos si hay que actualizar la expresion y el scope. */
+        this.code       = math.compile(this.expression);                /** Compilamos la expresion con Math.js. */
     }
 
     destroy() {

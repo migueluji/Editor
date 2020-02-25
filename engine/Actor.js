@@ -2,23 +2,23 @@ class Actor {
 
     constructor(actor, engine) {
 
-        //console.log(actor);
+        //console.log(actor, engine);
 
         /**
          * 
          */
         this.engine = engine;
 
-        //console.log(this.engine);
+        //console.log(actor);
 
         /** Configuracion de las propiedades de ejecucion en los componentes del motor.
          * --------------------------------------------------------------------------------- */
         //engine.physics.setActorPhysics(this);             // Añadir el actor al motor de fisicas.
         engine.render.setActorRender(this, actor);          // Añadir el actor al motor de render. 
-        engine.audio.setActorAudio(this, actor);            // Añadir el actor al motor de audio.
-        engine.logic.setActorLogic(this, actor);            // Añadir el actor al motor de logica.
-        engine.input.setActorInput(this, actor);            // Añadir el actor al motor de input.
-        engine.collision.setActorCollision(this, actor);    // Añadir el actor al motor de colisiones.
+        //engine.audio.setActorAudio(this, actor);            // Añadir el actor al motor de audio.
+        //engine.logic.setActorLogic(this, actor);            // Añadir el actor al motor de logica.
+        //engine.input.setActorInput(this, actor);            // Añadir el actor al motor de input.
+        //engine.collision.setActorCollision(this, actor);    // Añadir el actor al motor de colisiones.
 
         /** Sprite properties
          * ---------------------------------- */
@@ -30,6 +30,8 @@ class Actor {
         this.scrollY        = actor.scrollY                 || 0;
         this.flipX          = actor.flipX                   || false;
         this.flipY          = actor.flipY                   || false;
+
+        //console.log(actor.scrollX, actor.scrollY, "---", this.scrollX, this.scrollY);
 
         /** Text properties
          * ---------------------------------- */
@@ -60,28 +62,29 @@ class Actor {
          * ---------------------------------- */
         this.collisionOn    = false;                                        /** Propiedad de ejecucion. */
         this.collisionList  = {};                                           /** Propiedad de ejecucion. */
-        this.tags           = this.setTags(actor.tags);
+        this.tags           = actor.tags;
         this.collider       = actor.collider                || "Circle";
         this.physicVertices = actor.physicVertices          || null; 
 
         /** Physics properties
          * ---------------------------------- */
-        this.physicsOn       = actor.physicsOn          || false;       /** */
-        this.velocityX       = actor.velocityX          || 0;
-        this.velocityY       = actor.velocityY          || 0;
-        this.angularVelocity = actor.angularVelocity    || 0;
-        this.fixedAngle      = actor.fixedAngle         || false;
-        this.density         = actor.density            || 1.0;
-        this.friction        = actor.friction           || 0.5;
-        this.restitution     = actor.restitution        || 0.2;
-        this.dampingLinear   = actor.dampingLinear      || 1.0;
-        this.dampingAngular  = actor.dampingAngular     || 1.0;
-        this.physics         = actor.physics            || false;
-        this.type            = actor.type               || "Dynamic";
+        this.physicsOn       = actor.physicsOn              || false;       /** */
+        this.velocityX       = actor.velocityX              || 0;
+        this.velocityY       = actor.velocityY              || 0;
+        this.angularVelocity = actor.angularVelocity        || 0;
+        this.fixedAngle      = actor.fixedAngle             || false;
+        this.density         = actor.density                || 1.0;
+        this.friction        = actor.friction               || 0.5;
+        this.restitution     = actor.restitution            || 0.2;
+        this.dampingLinear   = actor.dampingLinear          || 1.0;
+        this.dampingAngular  = actor.dampingAngular         || 1.0;
+        this.physics         = actor.physics                || false;
+        this.type            = actor.type                   || "Dynamic";
 
         /** Settings properties
          * ---------------------------------- */
         this.name           = actor.name                    || "NewActor" + Util.random();
+        this.scene          = this.engine.activeScene       || null;
         this.ID             = actor.ID                      || actor.name  + Util.random();
         this.sleeping       = actor.sleeping ? false : true || false;
         this.destroyActor   = actor.destroyActor            || false;
@@ -99,16 +102,12 @@ class Actor {
 
         /** Logic properties
          * ---------------------------------- */
-        this.scriptList =  actor.scriptList;
-        this.localScope = {};
-
-        console.log("ACTOE", this);
+        this.scope      = {};
+        this.scriptList = actor.scriptList;
 
         /** Variables custom
          * --------------------------------------------------------------------- */
-        for(var i in actor) { if(!(i in this)) { console.log(i, this[i]); } /*if(!this.hasOwnProperty(i)) { console.log(i, this[i]); this[i] = actor[i]; }*/ }
-
-        //console.log(actor.name, this);
+        for(var i in actor) { if(!(i in this)) { this[i] = actor[i]; } }
     }
     
     getPhysicsProperties(scaleFactor) {
@@ -129,42 +128,13 @@ class Actor {
 
     setSpriteProperties() {
 
-        this.sprite.tilePosition.x += this.scrollX * player.engine.game.deltaTime;
-        this.sprite.tilePosition.y += this.scrollY * player.engine.game.deltaTime;
-
-        //this.sprite.scale.set(/*this.scaleX * */this.flipX, /*this.scaleY * */this.flipY); // Para actualizaciones de los flips
-        
-        //this.sprite.updateTransform();
+        this.sprite.tilePosition.x += this.scrollX * this.engine.game.deltaTime;
+        this.sprite.tilePosition.y += this.scrollY * this.engine.game.deltaTime;
     }
 
     setTextProperties() {
 
-        //console.log(this.compiledText);
-
-        //this.text = Util.updateTextToLocalScope(this.text, this, player.engine.actoList);
-
-        //console.log(this.text);
-
-        this.compiledText = eval("` " + this.text + "`");
-
-        //console.log(this, this.text, this.compiledText);
-
-        this.textSprite.text = this.compiledText;
-    }
-
-    setTags(tags) {
-
-        if(tags == "") { return {}; }
-
-        var aux = {};
-        var t = tags.split(',');
-
-        for(var i = 0; i < t.length; i++) {
-
-            aux[t[i]] = true;
-        }
-
-        return aux;
+        this.textSprite.text = eval("`" + this.text + "`");
     }
 
     destroy() {
@@ -216,11 +186,13 @@ class Actor {
             this.originalPositionX = this._x;
             this.originalPositionY = this._y; 
 
-            this.engine.render.onScreenList[this.ID] = this;
+            this.engine.render.onScreenList.push(this);
         }
         else {
 
-            Util.destroy(this.engine.render.onScreenList, this.ID);
+            //Util.destroy(this.engine.render.onScreenList, this.ID);
+
+            /** TODO. Ahora son arrays, hay que eliminarlos eficientemente. */
         }
     }
 
@@ -355,6 +327,13 @@ class Actor {
         }
     }
 
+    get text() { return this._text; }
+    set text(value) {
+
+        this._text = value.replace(/Me/g, "this.scope.Me");
+
+    }
+
     get font() { return this._font; }
     set font(value) { 
 
@@ -421,12 +400,12 @@ class Actor {
         this._textSprite.anchor.set(0.5);
     }
 
-    get localScope() { return this._localScope; }
-    set localScope(value) {
+    get scope() { return this._scope; }
+    set scope(value) {
 
-        this._localScope = value;
-        this._localScope.Me = this;
-        this._localScope.engine = this.engine;
+        this._scope = value;
+        this._scope.Me = this;
+        this._scope.engine = this.engine;
     }
 
     get scriptList() { return this._scriptList; }
@@ -446,6 +425,42 @@ class Actor {
         /*if(this._destroyActor) {
 
             player.engine.addDestroyedActor(this);
+        }*/
+    }
+
+    get tags() { return this._tags; }
+    set tags(value) {
+
+        if(value == "" || value == undefined) { 
+
+            this._tags = {}; 
+        }
+        else {
+
+            var aux = {};
+            var t = value.split(',');
+
+            for(var i = 0; i < t.length; i++) {
+
+                aux[t[i]] = true;
+            }
+
+            this._tags = aux;
+        }
+    }
+
+    get sleeping() { return this._sleeping; }
+    set sleeping(value) {
+
+        this._sleeping = value;
+/*
+        if(value) {
+
+            this.engine.enableActor(this);
+        }
+        else {
+
+            this.engine.disableActor(this);
         }*/
     }
 }

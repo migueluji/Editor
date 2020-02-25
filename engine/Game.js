@@ -120,6 +120,11 @@ class Game {
         //console.log("Camera X:", this._cameraX);
         //this.engine.render.stage.position.x = this._stageOrigin.x - this._cameraX;
         this.engine.render.stage.position.x = this._stageOrigin.x - this._cameraX;
+        
+        for(var i = 0; i < this.engine.render.onScreenList.length; i++) {
+
+            this.engine.render.onScreenList[i].x = this._cameraX + this.engine.render.onScreenList[i].originalPositionX;
+        }
     }
 
     get cameraY() { return this._cameraY; }
@@ -127,6 +132,11 @@ class Game {
         this._cameraY = value;
         //console.log("Camera Y:", this._cameraY);
         this.engine.render.stage.position.y = this._stageOrigin.y + this._cameraY;
+        
+        for(var i = 0; i < this.engine.render.onScreenList.length; i++) {
+
+            this.engine.render.onScreenList[i].y = this._cameraY + this.engine.render.onScreenList[i].originalPositionY;
+        }
     }
 
     get cameraAngle() { return this._cameraAngle; }

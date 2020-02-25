@@ -95,7 +95,7 @@ class Input {
 
     actorPointerDownHandler(actor) {
 
-        console.log("---------------------------------- DOWN", actor);
+        //console.log("---------------------------------- DOWN", actor);
 
         actor.pointer.down = true;
         actor.pointer.up   = false;
@@ -127,7 +127,7 @@ class Input {
 
         event.preventDefault();
 
-        console.log(event);
+        //console.log(event);
 
         if(this.keyList.hasOwnProperty(event.code)) {
 
