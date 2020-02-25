@@ -15,10 +15,10 @@ class Actor {
          * --------------------------------------------------------------------------------- */
         //engine.physics.setActorPhysics(this);             // Añadir el actor al motor de fisicas.
         engine.render.setActorRender(this, actor);          // Añadir el actor al motor de render. 
-        engine.audio.setActorAudio(this, actor);            // Añadir el actor al motor de audio.
-        engine.logic.setActorLogic(this, actor);            // Añadir el actor al motor de logica.
-        engine.input.setActorInput(this, actor);            // Añadir el actor al motor de input.
-        engine.collision.setActorCollision(this, actor);    // Añadir el actor al motor de colisiones.
+        //engine.audio.setActorAudio(this, actor);            // Añadir el actor al motor de audio.
+        //engine.logic.setActorLogic(this, actor);            // Añadir el actor al motor de logica.
+        //engine.input.setActorInput(this, actor);            // Añadir el actor al motor de input.
+        //engine.collision.setActorCollision(this, actor);    // Añadir el actor al motor de colisiones.
 
         /** Sprite properties
          * ---------------------------------- */
@@ -128,21 +128,13 @@ class Actor {
 
     setSpriteProperties() {
 
-        //console.log("entra", this.scrollX, this.scrollY);
-
         this.sprite.tilePosition.x += this.scrollX * this.engine.game.deltaTime;
         this.sprite.tilePosition.y += this.scrollY * this.engine.game.deltaTime;
-
-        //this.sprite.scale.set(/*this.scaleX * */this.flipX, /*this.scaleY * */this.flipY); // Para actualizaciones de los flips
-        
-        //this.sprite.updateTransform();
     }
 
     setTextProperties() {
 
-        this.compiledText = eval("`" + this.text + "`");
-
-        this.textSprite.text = this.compiledText;
+        this.textSprite.text = eval("`" + this.text + "`");
     }
 
     destroy() {
@@ -194,11 +186,13 @@ class Actor {
             this.originalPositionX = this._x;
             this.originalPositionY = this._y; 
 
-            this.engine.render.onScreenList[this.ID] = this;
+            this.engine.render.onScreenList.push(this);
         }
         else {
 
-            Util.destroy(this.engine.render.onScreenList, this.ID);
+            //Util.destroy(this.engine.render.onScreenList, this.ID);
+
+            /** TODO. Ahora son arrays, hay que eliminarlos eficientemente. */
         }
     }
 

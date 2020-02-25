@@ -4,7 +4,7 @@ class Logic {
 
         this.engine         = engine;   /** */
 
-        this.actorList      = {};       /** */
+        this.actorList      = [];       /** */
         this.nodeList       = [];       /** Lista auxiliar de todos los nuevos nodos cargados en memoria (para compilarlos) */
         this.timerList      = {};       /** */
         this.currentTime    = 0.0;      /** */
@@ -13,16 +13,12 @@ class Logic {
 
     run() {
 
-        //console.log(this.actorList);
-
-        for(var i in this.actorList) {
+        for(var i = 0; i < this.actorList.length; i++) {
 
             for(var j in this.actorList[i].scriptList) {
 
                 this.runScript(this.actorList[i], this.actorList[i].scriptList[j]);
             }
-
-            //this.compileTexts(this.actorList);
         }
     }
 
@@ -36,26 +32,21 @@ class Logic {
 
     setActorLogic(actor) {
 
-        //console.log("----", actor, actor.scriptList);
-
         /** Configuramos sus reglas de comportamiento (si fuera necesario) */
-        var _scriptList = {};
+        var _scriptList = [];
         var empty = true;
 
         for(var i in actor._scriptList) {
 
             empty = false;
-            _scriptList[i] = this.setScripts(actor, actor._scriptList[i]);
+            _scriptList.push(this.setScripts(actor, actor._scriptList[i]));
         }
 
         if(!empty) { 
 
             /** Añadimos el actor a la lista del motor de logica */
-            this.actorList[actor.ID] = actor;
-            //console.log(this.actorList, actor);
+            this.actorList.push(actor);
         }
-
-        //console.log(actor.ID, this.actorList);
 
         return _scriptList;
     }
@@ -164,18 +155,7 @@ class Logic {
 
         // TODO: ¿Resetear las variables TAG de colision?
     }
-
-    compileTexts() {
-
-        for(var i in this.scope) {
-
-            if(this.scope[i].text != undefined) {
-
-                this.scope[i].compiledText = eval("` " + this.scope[i].text + "`");
-            }
-        }
-    }
-
+    
     updateTimer(condition, timerProperty) {
 
         timerProperty.timer         = condition ? 0 : timerProperty.timer;

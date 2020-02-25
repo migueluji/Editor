@@ -49,11 +49,11 @@ class Engine {
         /** FIN DEBUG */
 
         //this.physics.run();
-        this.collision.run();
-        this.logic.run();
+        //this.collision.run();
+        //this.logic.run();
         this.render.run();
 
-        this.resetEngine();
+        //this.resetEngine();
 
         /** DEBUG */
             this.stats.end();
@@ -214,11 +214,21 @@ class Engine {
 
             if(!scene.actorList[i].sleeping) {      /** Si es un actor activo */
 
-                this.actorList[scene.actorList[i].ID] = new Actor(scene.actorList[i], this);
+                for(var k = 0; k < 10; k++) {                                                                            /** DEBUG */
+
+                    var auxID = scene.actorList[i].ID + Util.random() + Util.random();                                    /** DEBUG */
+
+                    this.actorList[auxID] = new Actor(scene.actorList[i], this);                                // Esto es bueno, no es debug.
+
+                    this.actorList[auxID].x = -300 + Math.random() * 600;                                           /** DEBUG */
+                    this.actorList[auxID].y = -200 + Math.random() * 400;                                       /** DEBUG */ 
+                }                                                                                                           /** DEBUG */
             }
             
             this.sceneList[this.game.activeScene][scene.actorList[i].ID] = scene.actorList[i];
         }
+
+        //console.log(this.actorList);
 
         /** Compilar las expresiones una vez cargados todos los datos en memoria */
         this.logic.compileExpressions();
