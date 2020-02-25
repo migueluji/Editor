@@ -7,10 +7,11 @@ class DuplicateScriptCmd extends Command {
         var scenePos = this.editor.model.sceneList.findIndex(i => i.id == sceneID);
         var actorPos = this.editor.model.sceneList[scenePos].actorList.findIndex(i=>i.id==actorID);
         this.pos = this.editor.model.sceneList[scenePos].actorList[actorPos].scriptList.findIndex(i => i.id == scriptID);
+        this.scriptList=this.editor.model.sceneList[scenePos].actorList[actorPos].scriptList;
         var script = this.editor.model.sceneList[scenePos].actorList[actorPos].scriptList[this.pos];
         this.script = new Script(JSON.parse(JSON.stringify(script))); // Se crea igual que cuando se lee de disco
         this.script.id = Utils.id();
-        this.script.name = "Copy_of_" + this.script.name;
+        this.script.name = Utils.newName(this.script.name,this.scriptList);
         this.type = "DuplicateScriptCmd";
         this.name = "Duplicate Script: " + this.script.id;
     }

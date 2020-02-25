@@ -1,5 +1,27 @@
 class Utils {
     
+    static newName (name,list){
+        var strings=name.split("_");
+        if (!isNaN(strings[strings.length-1]) && strings[strings.length-2]=="copy"){
+            name="";
+            for (var i=0; i<strings.length-1; i++) name=name+strings[i]+"_";
+            name=name.substring(0,name.length-1);
+        }
+        else if (strings[strings.length-1]!="copy") name=name+"_copy";
+        var newName;
+        var firstCopy=Boolean(list.findIndex(i=>i.name==name)==-1);
+        if (firstCopy) newName=name;
+        else {
+            var copyCounter=2;
+            newName=name+"_"+copyCounter;
+            while (list && list.findIndex(i=>i.name==newName)!=-1){
+                copyCounter++;
+                newName=name+"_"+copyCounter;
+            }
+        }
+        return newName;
+    }
+    
     static randomColor(opacity) {
 
         return "rgba(" + Math.floor(Math.random() * 256) + ", " + Math.floor(Math.random() * 256) + ", " + Math.floor(Math.random() * 256) + ", " + (opacity || 1) + ")"
