@@ -9,14 +9,14 @@ class Actor {
          */
         this.engine = engine;
 
-        //console.log(actor);
+        //console.log(actor, this);
 
         /** Configuracion de las propiedades de ejecucion en los componentes del motor.
          * --------------------------------------------------------------------------------- */
         //engine.physics.setActorPhysics(this);             // Añadir el actor al motor de fisicas.
         engine.render.setActorRender(this, actor);          // Añadir el actor al motor de render. 
         //engine.audio.setActorAudio(this, actor);            // Añadir el actor al motor de audio.
-        //engine.logic.setActorLogic(this, actor);            // Añadir el actor al motor de logica.
+        engine.logic.setActorLogic(this, actor);            // Añadir el actor al motor de logica.
         //engine.input.setActorInput(this, actor);            // Añadir el actor al motor de input.
         //engine.collision.setActorCollision(this, actor);    // Añadir el actor al motor de colisiones.
 
@@ -102,8 +102,8 @@ class Actor {
 
         /** Logic properties
          * ---------------------------------- */
-        this.scope      = {};
-        this.scriptList = actor.scriptList;
+        //this.scope      = {};  // ESTO ESTA COMENTADO POR EL ORDEN. Al crear los motores arriba, necesitan esta informacion. Hay que arreglar esto.
+        //this.scriptList = [];
 
         /** Variables custom
          * --------------------------------------------------------------------- */
@@ -155,7 +155,7 @@ class Actor {
         this._x = value;
 
         if(this._spriteOn) { this.sprite.x = this._x; }
-        if(this._textOn) { this.textSprite.x = this._x; }
+        //if(this._textOn) { this.textSprite.x = this._x; }
     }
 
     get y() { return this._y; }
@@ -163,8 +163,8 @@ class Actor {
 
         this._y = value;
 
-        if(this._spriteOn) { this.sprite.y = -this._y; }
-        if(this._textOn) { this.textSprite.y = -this._y; }
+        //if(this._spriteOn) { this.sprite.y = -this._y; }
+        //if(this._textOn) { this.textSprite.y = -this._y; }
     }
 
     get angle() { return this._angle; }
@@ -172,8 +172,8 @@ class Actor {
 
         this._angle = value;
 
-        if(this._spriteOn) { this.sprite.rotation = Util.degToRad(-this._angle); }
-        if(this._textOn) { this.textSprite.rotation = Util.degToRad(-this._angle); }
+        //if(this._spriteOn) { this.sprite.rotation = Util.degToRad(-this._angle); }
+        //if(this._textOn) { this.textSprite.rotation = Util.degToRad(-this._angle); }
     }
 
     get screen() { return this._screen; }
@@ -412,7 +412,6 @@ class Actor {
     set scriptList(value) {
 
         this._scriptList = value;
-        this._scriptList = this.engine.logic.setActorLogic(this);
     }
 
     get destroyActor() { return this._destroyActor; }

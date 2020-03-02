@@ -67,6 +67,7 @@
             var gameFolder="<?php echo $_POST['gameFolder'];?>";
 			var player = new Player({source: parentGamesFolder + "/" + gameFolder, data: localStorage.getItem("localStorage_GameData")});
 
+
 /*
 			
 var a = {x: 1, y: 1};

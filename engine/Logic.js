@@ -15,7 +15,7 @@ class Logic {
 
         for(var i = 0; i < this.actorList.length; i++) {
 
-            for(var j in this.actorList[i].scriptList) {
+            for(var j = 0; j < this.actorList[i].scriptList.length; j++) {
 
                 this.runScript(this.actorList[i], this.actorList[i].scriptList[j]);
             }
@@ -24,40 +24,34 @@ class Logic {
 
     runScript(actor, script) {
 
-        for(var i in script) {
+        for(var i = 0; i < script.length; i++) {
 
             script[i].run(actor.scope);
         }
     }
 
-    setActorLogic(actor) {
+    setActorLogic(actor, data) {
 
-        /** Configuramos sus reglas de comportamiento (si fuera necesario) */
-        var _scriptList = [];
-        var empty = true;
+        if(data.scriptList.length > 0) {
+            
+            actor.scriptList = [];      /** Inicializamos la lista de scripts del actor. */
+            actor.scope      = {};      /** Inicializamos el scope del actor. */
+            this.actorList.push(actor); /** Añadimos el actor a la lista del motor de logica. */
 
-        for(var i in actor._scriptList) {
+            for(var i = 0; i < data.scriptList.length; i++) {
 
-            empty = false;
-            _scriptList.push(this.setScripts(actor, actor._scriptList[i]));
+                actor.scriptList.push(this.setScripts(actor, data.scriptList[i]));
+            }
         }
-
-        if(!empty) { 
-
-            /** Añadimos el actor a la lista del motor de logica */
-            this.actorList.push(actor);
-        }
-
-        return _scriptList;
     }
 
     setScripts(actor, scripts) {
 
-        var script = {};
+        var script = [];
 
-        for(var i in scripts) {
+        for(var i = 0; i < scripts.length; i++) {
 
-            script[i] = this.expandNode(actor, scripts[i]);
+            script.push(this.expandNode(actor, scripts[i]));
         }
 
         return script;
@@ -65,19 +59,17 @@ class Logic {
 
     expandNode(actor, node) {
 
-        //console.log(node.type)
-
         var _node = this[node.type](actor, node.parameters);
 
-        switch(node.type) {
-
-            case "Collision": case "Keyboard": case "Touch": case "Compare": case "Check": case "Timer":
-                _node.nodeListTrue  = this.setScripts(actor, node.nodeListTrue);
-                _node.nodeListFalse = this.setScripts(actor, node.nodeListFalse);
-                break;
-
-            default:
-                break;
+        if(node.type == "Collision" ||
+           node.type == "Touch"     ||
+           node.type == "Keyboard"  ||
+           node.type == "Compare"   ||
+           node.type == "Check"     ||
+           node.type == "Timer") {
+            
+            _node.nodeListTrue  = this.setScripts(actor, node.nodeListTrue);
+            _node.nodeListFalse = this.setScripts(actor, node.nodeListFalse);
         }
 
         this.nodeList.push(_node);
@@ -86,8 +78,6 @@ class Logic {
     }
 
     compileExpressions() {
-
-        //console.log(this.nodeList);
 
         for(var i = 0; i < this.nodeList.length; i++) {
 

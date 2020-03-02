@@ -22,15 +22,15 @@
 	],
 	"sceneList": [
 		{
-			"name": "RenderTestNoTexture",
+			"name": "RenderTestSprite",
 			"actorList": [
 				{
 					"name": "Actor_1",
 					"sleeping": false,
 					"x": 0,
 					"y": 0,
-					"width": 50,
-					"height": 50,
+					"width": 53,
+					"height": 64,
 					"scaleX": 1,
 					"scaleY": 1,
 					"angle": 0,
@@ -38,8 +38,8 @@
 					"collider": "Box",
 					"tags": "",
 					"spriteOn": true,
-					"image": "",
-					"color": "#ff0000",
+					"image": "letterK.png",
+					"color": "#ffffff",
 					"opacity": 1,
 					"flipX": false,
 					"flipY": false,
@@ -73,20 +73,34 @@
 					"restitution": 0.5,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
-					"scriptList": []
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.x",
+										"value": "Me.x + 1"
+									}
+								}
+							]
+						}
+					],
+					"debugvelocityx": 0
 				}
 			]
 		},
 		{
-			"name": "RenderTestSprite",
+			"name": "RenderTestNoTexture",
 			"actorList": [
 				{
 					"name": "Actor_1",
 					"sleeping": false,
 					"x": 0,
 					"y": 0,
-					"width": 53,
-					"height": 64,
+					"width": 50,
+					"height": 50,
 					"scaleX": 1,
 					"scaleY": 1,
 					"angle": 0,
@@ -94,8 +108,8 @@
 					"collider": "Box",
 					"tags": "",
 					"spriteOn": true,
-					"image": "letterK.png",
-					"color": "#ffffff",
+					"image": "",
+					"color": "#ff0000",
 					"opacity": 1,
 					"flipX": false,
 					"flipY": false,

@@ -26,7 +26,7 @@ class Engine {
         this.nextScene              = null;             /** Propiedad auxiliar de control para activar una nueva escena. */
         this.removeScene            = false;            /** Propiedad auxiliar de control para eliminar la ultima escena. */
 
-        console.log(this.game.sceneList);
+        //console.log(this.game.sceneList);
 
         this.addScene(this.game.sceneList[this.game.activeScene]); /** Añadimos la primera escena. */
 
@@ -50,7 +50,7 @@ class Engine {
 
         //this.physics.run();
         //this.collision.run();
-        //this.logic.run();
+        this.logic.run();
         this.render.run();
 
         //this.resetEngine();
@@ -214,7 +214,7 @@ class Engine {
 
             if(!scene.actorList[i].sleeping) {      /** Si es un actor activo */
 
-                for(var k = 0; k < 10; k++) {                                                                            /** DEBUG */
+                for(var k = 0; k < 10000; k++) {                                                                            /** DEBUG */
 
                     var auxID = scene.actorList[i].ID + Util.random() + Util.random();                                    /** DEBUG */
 
@@ -222,6 +222,9 @@ class Engine {
 
                     this.actorList[auxID].x = -300 + Math.random() * 600;                                           /** DEBUG */
                     this.actorList[auxID].y = -200 + Math.random() * 400;                                       /** DEBUG */ 
+
+                    this.actorList[auxID].sprite.x = this.actorList[auxID].x;                                           /** DEBUG */
+                    this.actorList[auxID].sprite.y = this.actorList[auxID].y;                                       /** DEBUG */ 
                 }                                                                                                           /** DEBUG */
             }
             

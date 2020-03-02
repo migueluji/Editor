@@ -246,11 +246,11 @@ class Util {
 
                 actorList[container.sceneList[i].actorList[j].ID] = container.sceneList[i].actorList[j];
 
-                var scriptList = {};
+                var scriptList = [];
 
                 for(var k = 0; k < container.sceneList[i].actorList[j].scriptList.length; k++) {
 
-                    scriptList[container.sceneList[i].actorList[j].scriptList[k].name] = container.sceneList[i].actorList[j].scriptList[k].nodeList;
+                    scriptList.push(container.sceneList[i].actorList[j].scriptList[k].nodeList);
                     //Util.destroy(scriptList[container.sceneList[i].actorList[j].scriptList[k].name], "name");
                 }
 
