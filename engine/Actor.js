@@ -2,14 +2,7 @@ class Actor {
 
     constructor(actor, engine) {
 
-        //console.log(actor, engine);
-
-        /**
-         * 
-         */
         this.engine = engine;
-
-        //console.log(actor, this);
 
         /** Configuracion de las propiedades de ejecucion en los componentes del motor.
          * --------------------------------------------------------------------------------- */
@@ -112,16 +105,16 @@ class Actor {
     
     getPhysicsProperties(scaleFactor) {
 
-        console.log(this.physicBody.m_body.m_xf.position, scaleFactor);
+        //console.log(this.type, this.physicBody.m_body.m_xf.position.x, this.x, scaleFactor,  this.physicBody.m_body.m_xf.position.x / scaleFactor);
 
         this.x                  = this.physicBody.m_body.m_xf.position.x / scaleFactor;
         this.y                  = this.physicBody.m_body.m_xf.position.y / scaleFactor;
-        this.angle              = this.physicBody.m_body.GetAngle();
+        //this.angle              = this.physicBody.m_body.GetAngle();
 
-        this.velocityX          = this.physicBody.m_body.GetLinearVelocity().x;
-        this.velocityY          = this.physicBody.m_body.GetLinearVelocity().y;
+        //this.velocityX          = this.physicBody.m_body.GetLinearVelocity().x;
+        //this.velocityY          = this.physicBody.m_body.GetLinearVelocity().y;
 
-        this.angularVelocity    = this.physicBody.m_body.GetAngularVelocity();
+        //this.angularVelocity    = this.physicBody.m_body.GetAngularVelocity();
 
         // TODO: Get linear damping
 

@@ -27,8 +27,8 @@
 				{
 					"name": "Actor_1",
 					"sleeping": false,
-					"x": 0,
-					"y": 0,
+					"x": -215,
+					"y": -6,
 					"width": 53,
 					"height": 64,
 					"scaleX": 1,
@@ -74,10 +74,6 @@
 					"dampingLinear": 0,
 					"dampingAngular": 0,
 					"scriptList": [
-						{
-							"name": "Script_1",
-							"nodeList": []
-						},
 						{
 							"name": "Script_2",
 							"nodeList": [

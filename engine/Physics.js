@@ -10,32 +10,31 @@ class Physics {
         this.sleep                  = false;                    /** */
         this.velocityIterations     = 10.0;                     /** */
         this.positionIterations     = 10.0;                     /** */
-        this.scaleFactor            = 1 / 100;                  /** Para compensar el factor de escala del sistema de referencia de Box2D */ 
         
         this.PIXELS_PER_METER       = 100;
         this.HALF_PIXELS_PER_METER  = this.PIXELS_PER_METER / 2;
+        this.scaleFactor            = 1 / this.PIXELS_PER_METER;  /** Para compensar el factor de escala del sistema de referencia de Box2D */ 
 
         this.world                  = new b2World(this.gravity, this.sleep);
 
-        this.setContactListener();
-
+        //this.setContactListener();
     }
 
     run() {
 
         this.updateBodies();
-        this.world.Step(this.engine.game.deltaTime, this.velocityIterations, this.positionIterations); // dt, velocityIterations, positionIterations
+        this.world.Step(this.engine.game.deltaTime, this.velocityIterations, this.positionIterations);
         this.world.ClearForces();
-        this.updateActors(this.scaleFactor);
+        this.updateActors();
     }
 
     updateBodies() {
 
         for(var i = 0; i < this.actorList.length; i++) {
 
-            this.actorList[i].physicBody.m_body.SetPosition(new b2Vec2(this.actorList[i].x * this.scaleFactor, this.actorList[i].y * this.scaleFactor));
-            this.actorList[i].physicBody.m_body.SetAngle(this.actorList[i].angle);
-            this.actorList[i].physicBody.m_body.SetLinearVelocity(new b2Vec2(this.actorList[i].velocityX, this.actorList[i].velocityY));
+            //this.actorList[i].physicBody.m_body.SetPosition(new b2Vec2(this.actorList[i].x * this.scaleFactor, -this.actorList[i].y * this.scaleFactor));
+            //this.actorList[i].physicBody.m_body.SetAngle(this.actorList[i].angle);
+            //this.actorList[i].physicBody.m_body.SetLinearVelocity(new b2Vec2(this.actorList[i].velocityX, this.actorList[i].velocityY));
 
             // TODO: Set Angular Velocity
             
@@ -43,111 +42,80 @@ class Physics {
         }
     }
 
-    updateActors(scaleFactor) {
+    updateActors() {
 
         for(var i = 0; i < this.actorList.length; i++) {
 
-            this.actorList[i].getPhysicsProperties(scaleFactor);
+            //this.actorList[i].getPhysicsProperties(this.scaleFactor);
 
-            /*if(this.actorList[i].type == "Dynamic") {
-            }*/
-
-            /** --- DEBUG (ELIMINAR SIN PROBLEMA) */
-            
-                //this.drawDebug(this.actorList[i]);
-
-            /** FIN --- DEBUG (ELIMINAR SIN PROBLEMA) */
+            this.drawDebug(this.actorList[i]); // DEBUG
         }
     }
 
     setActorPhysics(actor, data) {
 
-        console.log(actor, data);
-
-        /** ¿Tiene algun nodo colision? --> A la lista de actores. */ 
-        if(actor.collisionOn) {
-            
-            //this.actorList.push(actor);
-        }
-
-        /** ¿Tiene algun TAG? --> A la lista del tag correspondiente. */ 
-        for(var i in actor.tags) {
-
-            //this.setActorCollisionShape(actor);
-            this.tagList[i].push(actor);
-        }
-
-        this.createPhysicsBody(actor, data);          /** */
-        actor.physicBody.SetUserData(actor);    /** Definicion del objeto padre del physics body (NECESARIO PARA LA DETECCION DE COLISIONES) */
-        this.actorList.push(actor);       /** Añadimos el actor a la lista del motor de fisicas */
+        actor.physicBody = this.createPhysicsBody(actor, data); /** Creacion del physics body en el sistema y en el mundo fisico de Box2D */
+        actor.physicBody.SetUserData(actor);                    /** Definicion del objeto padre del physics body (NECESARIO PARA LA DETECCION DE COLISIONES) */
+        this.actorList.push(actor);                             /** Añadimos el actor a la lista del motor de fisicas */
 
         /* DEBUG -- Borrar sin problemas */
             actor.physicsDebugSprite = new PIXI.Sprite();
+            this.engine.render.stage.addChild(actor.physicsDebugSprite);
         /* FIN DEBUG */
     }
 
     createPhysicsBody(actor, data) {
 
+        console.log(data);
+
         var body = new b2BodyDef();
         body.position.Set(data.x, data.y);
-        body.angle = 0.0;
-        body.linearVelocity.Set(data.velocityX, data.velocityY); /** Activamos su velocidad lineal, por si tuviera algo preconfigurado */
-        body.fixedRotation = data.fixedAngle;
+        //body.angle              = data.angle;
+        //body.linearVelocity.Set(data.velocityX, data.velocityY); /** Activamos su velocidad lineal, por si tuviera algo preconfigurado */
+        //body.fixedRotation      = data.fixedAngle;
         //body.SetSleepingAllowed(false);
+        //body.angularVelocity    = data.angularVelocity || 0;
+        //body.linearDamping      = data.linearDamping || 0;
+        //body.angularDamping     = data.angularDamping || 0;
+        //console.log(data.type);
+        body.type               = this["set" + data.type + "Body"]();
 
-        //console.log(actor.name, "x: " + actor.x, "y: " + actor.y, "px: " + body.position.x, "py: " + body.position.y);
-        body.angularVelocity = 0;
-        body.linearDamping = 0;
-        body.angularDamping = 0;
-        body.fixedRotation = false;
-        console.log(data.type);
-        body.type = this["set" + data.type + "Body"]();
+        var fixture         = new b2FixtureDef();
+        //fixture.restitution = data.restitution || 0;
+        //fixture.friction    = data.friction || 0;
+        //fixture.density     = 0;
+        fixture.shape       = this["set" + data.collider + "Shape"](data); /** Configuracion de la forma geometrica del objeto fisico */
 
-        var fixture = new b2FixtureDef();
-        fixture.restitution = data.restitution;
-        fixture.friction = data.friction;
-        fixture.density = data.density;
-        fixture.shape = this["set" + data.collider + "Shape"](); /** Configuracion de la forma geometrica del objeto fisico */
-
-        actor.physicBody = this.world.CreateBody(body).CreateFixture(fixture); /** Creacion del physics body en el sistema y en el mundo fisico de Box2D */
+        return this.world.CreateBody(body).CreateFixture(fixture); 
     }
 
-    setDynamicBody() {
+    setDynamicBody() { return b2Body.b2_dynamicBody; }
 
-        return b2Body.b2_dynamicBody;
-    }
+    setKinematicBody() { return b2Body.b2_kinematicBody; }
 
-    setKinematicBody() {
+    setStaticBody() { return b2Body.b2_staticBody; }
 
-        return b2Body.b2_kinematicBody;
-    }
-
-    setStaticBody() {
-
-        return b2Body.b2_staticBody;
-    }
-
-    setBoxShape() {
+    setBoxShape(data) {
 
         var shape = new b2PolygonShape;
-        shape.SetAsBox(this.width / 2, this.height / 2); // Tiene que ser la mitad.
+        shape.SetAsBox(data.width / 2, data.height / 2); // Tiene que ser la mitad.
         return shape;
     }
 
-    setCircleShape() {
+    setCircleShape(data) {
 
-        var shape = new b2CircleShape;
-        shape.m_p.x = this.x;
-        shape.m_p.y = this.y;
-        shape.m_radius = this.radius;
+        var shape       = new b2CircleShape;
+        shape.m_p.x     = data.x;
+        shape.m_p.y     = data.y;
+        shape.m_radius  = data.radius;
         return shape;
     }
 
-    setPolygonShape() {
+    setPolygonShape(data) {
 
         // TODO (provisional con BOX)
         console.log("POLYGON");
-        this.setBoxShape();
+        this.setBoxShape(data);
     }
 
     disableActor(actor) {
@@ -171,20 +139,21 @@ class Physics {
 
         polygonShape.SetAsArray(_vertices, _vertices.length);
 
-        console.log(_vertices);
+        //console.log(_vertices);
     }
 
     drawDebug(actor) {
+
+        for(var i = 0; i < actor.physicsDebugSprite.children.length; i++) {
+
+            actor.physicsDebugSprite.children[i].destroy();
+        }
         
         actor.physicsDebugSprite.removeChildren();
 
         this.drawCircleShape(actor.physicsDebugSprite, actor);
 
-        if(actor.collider == "Circle") {
-
-            this.drawCircleShape(actor.physicsDebugSprite, actor);
-        }
-        else {
+        if(actor.collider != "Circle") {
 
             this.drawPolygonShape(actor.physicsDebugSprite, actor);
         }
@@ -194,32 +163,24 @@ class Physics {
 
         var graphics = new PIXI.Graphics();
 
-        graphics.lineStyle(1, 0xff0000);
-
-        //console.log(actor.physicBody.m_shape.m_radius, actor.radius, actor.physicBody.m_body.m_xf.position)
+        graphics.lineStyle(2, 0xff0000);
 
         graphics.drawCircle(actor.physicBody.m_body.m_xf.position.x, actor.physicBody.m_body.m_xf.position.y, actor.radius); //actor.physicBody.m_shape.m_radius
 
         debug.addChild(graphics);
     }
 
-    
-
     drawPolygonShape(debug, actor) {
-
+        
         var vertexTransformList = [];
 
         var x_origin = actor.physicBody.m_shape.m_centroid.x;
         var y_origin = actor.physicBody.m_shape.m_centroid.y;
 
-        //console.log(x_origin, y_origin);
-
         for(var i = 0; i < actor.physicBody.m_shape.m_vertices.length; i++) {
 
             var x = actor.physicBody.m_shape.m_vertices[i].x;
             var y = actor.physicBody.m_shape.m_vertices[i].y;
-
-            //console.log(actor.physicBody.m_shape.m_vertices, y);
 
             var x_rotated = ((x - x_origin) * Math.cos(actor.angle)) - ((y_origin - y) * Math.sin(actor.angle)) + x_origin;
             var y_rotated = ((y_origin - y) * Math.cos(actor.angle)) + ((x - x_origin) * Math.sin(actor.angle)) + y_origin;
@@ -227,17 +188,21 @@ class Physics {
             vertexTransformList.push({x: x_rotated, y: y_rotated});
         }
 
+        //console.log(vertexTransformList, actor.physicBody.m_shape);
+
         var graphics = new PIXI.Graphics();
 
-        graphics.lineStyle(1, 0x0000ff);
-        graphics.moveTo(actor.x + vertexTransformList[0].x, actor.y + vertexTransformList[0].y);
+        //console.log(actor.x, actor.y);
+
+        graphics.lineStyle(5, 0x0000ff);
+        graphics.moveTo(actor.x + vertexTransformList[0].x, -actor.y + vertexTransformList[0].y);
 
         for(var j = 1; j < vertexTransformList.length; j++) {
 
-            graphics.lineTo(actor.x + vertexTransformList[j].x, actor.y + vertexTransformList[j].y);
+            graphics.lineTo(actor.x + vertexTransformList[j].x, -actor.y + vertexTransformList[j].y);
         }
 
-        graphics.lineTo(actor.x + vertexTransformList[0].x, actor.y + vertexTransformList[0].y);
+        graphics.lineTo(actor.x + vertexTransformList[0].x, -actor.y + vertexTransformList[0].y);
 
         debug.addChild(graphics);
     }
@@ -248,26 +213,12 @@ class Physics {
 
         if(callbacks.BeginContact) {
 
-            listener.BeginContact = function(contact) { 
-
-                callbacks.BeginContact(contact.GetFixtureA().GetBody().GetUserData(), contact.GetFixtureB().GetBody().GetUserData());
-            };
+            listener.BeginContact = function(contact) { callbacks.BeginContact(contact.GetFixtureA().GetBody().GetUserData(), contact.GetFixtureB().GetBody().GetUserData()); };
         }
         
         if(callbacks.EndContact) {
             
-            listener.EndContact = function(contact) {
-                
-                callbacks.EndContact(contact.GetFixtureA().GetBody().GetUserData(), contact.GetFixtureB().GetBody().GetUserData());
-            };
-        }
-        
-        if(callbacks.PreSolve) {
-            
-            listener.PreSolve = function(contact) {
-                
-                callbacks.PreSolve(contact.GetFixtureA().GetBody().GetUserData(), contact.GetFixtureB().GetBody().GetUserData());
-            };
+            listener.EndContact = function(contact) { callbacks.EndContact(contact.GetFixtureA().GetBody().GetUserData(), contact.GetFixtureB().GetBody().GetUserData()); };
         }
 
         this.world.SetContactListener(listener);
@@ -335,16 +286,6 @@ class Physics {
                 }
 
                 idA = idB = null;
-            },
-
-            PreSolve: function(idA, idB) {
-
-                //console.log("----------------", idA, idB);
-            },
-
-            PostSolve: function(idA, idB) {
-
-                //console.log("----------------", idA, idB);
             }
         });
     }
