@@ -28,7 +28,7 @@ class Render {
         if(data.spriteOn) { this.setActorSprite(actor); }
 
         /** Creamos el sprite de la texto. */
-        //if(data.textOn) { this.setActorText(actor); }
+        if(data.textOn) { this.setActorText(actor); }
     }
 
     setActorSprite(actor) {

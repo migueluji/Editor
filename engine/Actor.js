@@ -6,11 +6,11 @@ class Actor {
 
         /** Configuracion de las propiedades de ejecucion en los componentes del motor.
          * --------------------------------------------------------------------------------- */
-        engine.physics.setActorPhysics(this, actor);             // Añadir el actor al motor de fisicas.
         engine.render.setActorRender(this, actor);          // Añadir el actor al motor de render. 
         //engine.audio.setActorAudio(this, actor);            // Añadir el actor al motor de audio.
         engine.logic.setActorLogic(this, actor);            // Añadir el actor al motor de logica.
         engine.input.setActorInput(this, actor);            // Añadir el actor al motor de input.
+        engine.physics.setActorPhysics(this, actor);             // Añadir el actor al motor de fisicas.
         //engine.collision.setActorCollision(this, actor);    // Añadir el actor al motor de colisiones.
 
         /** Sprite properties
@@ -53,8 +53,6 @@ class Actor {
 
         /** Collision properties
          * ---------------------------------- */
-        this.collisionOn    = false;                                        /** Propiedad de ejecucion. */
-        this.collisionList  = {};                                           /** Propiedad de ejecucion. */
         this.tags           = actor.tags;
         this.collider       = actor.collider                || "Circle";
         this.physicVertices = actor.physicVertices          || null; 
@@ -66,12 +64,11 @@ class Actor {
         this.velocityY       = actor.velocityY              || 0;
         this.angularVelocity = actor.angularVelocity        || 0;
         this.fixedAngle      = actor.fixedAngle             || false;
+        this.linearDamping   = actor.linearDamping          || 1.0;
+        this.angularDamping  = actor.angularDamping         || 1.0;
         this.density         = actor.density                || 1.0;
         this.friction        = actor.friction               || 0.5;
         this.restitution     = actor.restitution            || 0.2;
-        this.dampingLinear   = actor.dampingLinear          || 1.0;
-        this.dampingAngular  = actor.dampingAngular         || 1.0;
-        this.physics         = actor.physics                || false;
         this.type            = actor.type                   || "Dynamic";
 
         /** Settings properties
@@ -101,24 +98,6 @@ class Actor {
         /** Variables custom
          * --------------------------------------------------------------------- */
         for(var i in actor) { if(!(i in this)) { this[i] = actor[i]; } }
-    }
-    
-    getPhysicsProperties(scaleFactor) {
-
-        //console.log(this.type, this.physicBody.m_body.m_xf.position.x, this.x, scaleFactor,  this.physicBody.m_body.m_xf.position.x / scaleFactor);
-
-        this.x                  = this.physicBody.m_body.m_xf.position.x / scaleFactor;
-        this.y                  = this.physicBody.m_body.m_xf.position.y / scaleFactor;
-        //this.angle              = this.physicBody.m_body.GetAngle();
-
-        //this.velocityX          = this.physicBody.m_body.GetLinearVelocity().x;
-        //this.velocityY          = this.physicBody.m_body.GetLinearVelocity().y;
-
-        //this.angularVelocity    = this.physicBody.m_body.GetAngularVelocity();
-
-        // TODO: Get linear damping
-
-        // TODO: Get angular damping
     }
 
     setSpriteProperties() {
@@ -150,7 +129,7 @@ class Actor {
         this._x = value;
 
         if(this._spriteOn) { this.sprite.x = this._x; }
-        //if(this._textOn) { this.textSprite.x = this._x; }
+        if(this._textOn) { this.textSprite.x = this._x; }
     }
 
     get y() { return this._y; }
@@ -159,7 +138,7 @@ class Actor {
         this._y = value;
 
         if(this._spriteOn) { this.sprite.y = -this._y; }
-        //if(this._textOn) { this.textSprite.y = -this._y; }
+        if(this._textOn) { this.textSprite.y = -this._y; }
     }
 
     get angle() { return this._angle; }
@@ -168,7 +147,7 @@ class Actor {
         this._angle = value;
 
         if(this._spriteOn) { this.sprite.rotation = Util.degToRad(-this._angle); }
-        //if(this._textOn) { this.textSprite.rotation = Util.degToRad(-this._angle); }
+        if(this._textOn) { this.textSprite.rotation = Util.degToRad(-this._angle); }
     }
 
     get screen() { return this._screen; }
@@ -211,7 +190,6 @@ class Actor {
         this._width  = this.originalWidth * this._scaleX;
 
         if(this._spriteOn) { this.sprite.scale.x = this._scaleX * (this._flipX ? -1 : 1); }
-        //if(this._textOn) { this.textSprite.width = this.width; }
     }
 
 
@@ -222,7 +200,6 @@ class Actor {
         this._scaleY = this._height / this.originalHeight;
 
         if(this._spriteOn) { this.sprite.height = this._height; }
-        //if(this._textOn) { this.textSprite.height = this._height; }
     }
 
     get scaleY() { return this._scaleY; }
@@ -232,7 +209,6 @@ class Actor {
         this._height  = this.originalHeight * this._scaleY;
 
         if(this._spriteOn) { this.sprite.scale.y = this._scaleY * (this._flipY ? -1 : 1); }
-        //if(this._textOn) { this.textSprite.height = this._height; }
     }
 
     get flipX() { return this._flipX; }
@@ -461,5 +437,21 @@ class Actor {
 
             this.engine.disableActor(this);
         }*/
+    }
+
+    get physicsOn() { return this._physicsOn; }
+    set physicsOn(value) {
+        this._physicsOn = value;
+        //if(this.physicsOn) { this.rigidbody.m_body.SetActive(this._physicsOn); } 
+    }
+
+    get velocityX() { return this._velocityX; }
+    set velocityX(value) { 
+        this._velocityX = value;
+    }
+
+    get velocityY() { return this._velocityY; }
+    set velocityY(value) { 
+        this._velocityY = value;
     }
 }
