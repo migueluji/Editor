@@ -51,7 +51,6 @@
 
         <script src="Physics.js"></script>
         <script src="Input.js"></script>
-        <script src="Collision.js"></script>
         <script src="Logic.js"></script>
         <script src="Audio.js"></script>
         <script src="Render.js"></script>

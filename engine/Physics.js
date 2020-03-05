@@ -11,83 +11,94 @@ class Physics {
         this.sleep                  = false;                    /** */
         this.velocityIterations     = 10.0;                     /** */
         this.positionIterations     = 10.0;                     /** */
+        this.world                  = new b2World(this.gravity, this.sleep);
         
         this.PIXELS_PER_METER       = 100;                      /** Para compensar el factor de escala del sistema de referencia de Box2D */ 
         this.HALF_PIXELS_PER_METER  = this.PIXELS_PER_METER / 2;
-
-        this.world                  = new b2World(this.gravity, this.sleep);
 
         this.setContactListener();
     }
 
     run() {
 
-        this.updateRigidBodies();
+        this.updateWorld();
         this.world.Step(this.engine.game.deltaTime, this.velocityIterations, this.positionIterations);
         this.world.ClearForces();
-        this.updateActors();
+        this.updateGame();
     }
 
-    updateRigidBodies() {
+    updateWorld() {
 
-        for(var i = 0; i < this.rigidbodyList.length; i++) {
-
-            this.rigidbodyList[i].rigidbody.m_body.SetPosition(new b2Vec2(this.rigidbodyList[i].x / this.PIXELS_PER_METER, this.rigidbodyList[i].y / this.PIXELS_PER_METER));
-        }
+        for(var i = 0; i < this.rigidbodyList.length; i++) { this.updateBody(this.rigidbodyList[i]); }
+        for(var i = 0; i < this.triggerList.length; i++) { this.updateBody(this.triggerList[i]); }
     }
 
-    updateActors() {
+    updateBody(actor) {
 
-        for(var i = 0; i < this.rigidbodyList.length; i++) {
+        actor.rigidbody.m_body.SetPosition(new b2Vec2(actor.x / this.PIXELS_PER_METER, actor.y / this.PIXELS_PER_METER));
+        this.drawDebug(actor); // DEBUG
+    }
 
-            this.rigidbodyList[i].x = this.rigidbodyList[i].rigidbody.m_body.GetPosition().x * this.PIXELS_PER_METER;
-            this.rigidbodyList[i].y = this.rigidbodyList[i].rigidbody.m_body.GetPosition().y * this.PIXELS_PER_METER;
+    updateGame() {
 
-            //console.log(this.rigidbodyList[i].angle, this.rigidbodyList[i].rigidbody.m_body.GetAngle());
+        for(var i = 0; i < this.rigidbodyList.length; i++) { this.updateActor(this.rigidbodyList[i]); }
+    }
 
-            this.drawDebug(this.rigidbodyList[i]); // DEBUG
-        }
+    updateActor(actor) {
+
+        actor.x = actor.rigidbody.m_body.GetPosition().x * this.PIXELS_PER_METER;
+        actor.y = actor.rigidbody.m_body.GetPosition().y * this.PIXELS_PER_METER;
     }
 
     setActorPhysics(actor, data) {
 
-        if(actor.physicsOn) {
+        /**
+         *  ¿Actua como trigger?
+         * -------------------------------------------------- */
+        actor.triggerOn = (actor.triggerOn == undefined) ? (data.tags.length > 0) : actor.triggerOn;
+        if(actor.triggerOn && !actor.physicsOn) {  } /** Si es un trigger y no es un actor con fisicas, para evitar duplicados en los bucles y solo actualizar las posiciones de los fisicos. */
 
-            actor.rigidbody = this.createPhysicsBody(data); /** Creacion del physics body en el sistema y en el mundo fisico de Box2D */
-            actor.rigidbody.SetUserData(actor);             /** Definicion del objeto padre del physics body (NECESARIO PARA LA DETECCION DE COLISIONES) */
-            this.rigidbodyList.push(actor);                 /** Añadimos el actor a la lista del motor de fisicas */
-        }        
-                         
-        /* DEBUG -- Borrar sin problemas */
-            actor.physicsDebugSprite = new PIXI.Sprite();
-            this.engine.render.stage.addChild(actor.physicsDebugSprite);
-        /* FIN DEBUG */
+        /**
+         * ¿Es un actor con fisicas o un trigger?
+         * -------------------------------------------------- */
+        if(data.physicsOn || actor.triggerOn) {
+
+            actor.rigidbody = this.createPhysicsBody(data); /** Creacion del physics body en el sistema y en el mundo fisico de Box2D. */
+            actor.rigidbody.SetUserData(actor);             /** Definicion del objeto padre del physics body (NECESARIO PARA LA DETECCION DE COLISIONES). */
+            actor.collisionList = (actor.collisionList == undefined) ? [] : actor.collisionList;
+            
+            if(data.physicsOn) { 
+                
+                this.rigidbodyList.push(actor);             /** Añadimos el actor a la lista de rigidbodies. */
+            } 
+            else {
+
+                actor.rigidbody.SetSensor(true);            /** Activamos el rigidbody del actor como sensor, para que no interactue con otros rigidbodies. */
+                this.triggerList.push(actor);               /** Añadimos el actor a la lista de triggers. */
+            }
+
+            /* DEBUG -- Borrar sin problemas */
+                actor.physicsDebugSprite = new PIXI.Sprite();
+                this.engine.render.stage.addChild(actor.physicsDebugSprite);
+            /* FIN DEBUG */
+        }
     }
 
-    createPhysicsBody(actor) {
+    createPhysicsBody(data) {
 
-        if(actor.collisionOn || actor.tags.length > 0) {
-            
-            let body      = new b2BodyDef();
-            body.type     = this.setDynamicBody();
-            let fixture   = new b2FixtureDef();
-            fixture.shape = this["set" + actor.collider + "Shape"](actor); /** Configuracion de la forma geometrica del objeto fisico */
-        }
-        else {
+        let type = data.physicsOn ? data.type : "Dynamic";
 
-            let body      = new b2BodyDef();
-            body.type = this["set" + actor.type + "Body"]();
-            let fixture   = new b2FixtureDef();
-            fixture.shape = this["set" + actor.collider + "Shape"](actor); /** Configuracion de la forma geometrica del objeto fisico */
-        }
+        let body  = new b2BodyDef();
+        body.type = this["set" + type + "Body"]();
+        
+        let fixture   = new b2FixtureDef();
+        fixture.shape = this["set" + data.collider + "Shape"](data); /** Configuracion de la forma geometrica del objeto fisico */
 
         return this.world.CreateBody(body).CreateFixture(fixture); 
     }
 
     setDynamicBody() { return b2Body.b2_dynamicBody; }
-
     setKinematicBody() { return b2Body.b2_kinematicBody; }
-
     setStaticBody() { return b2Body.b2_staticBody; }
 
     setBoxShape(data) {
@@ -148,7 +159,7 @@ class Physics {
 
         var graphics = new PIXI.Graphics();
 
-        graphics.lineStyle(2, 0xff0000);
+        graphics.lineStyle(1, 0xff0000);
 
         graphics.drawCircle(actor.rigidbody.m_body.m_xf.position.x * this.PIXELS_PER_METER, -actor.rigidbody.m_body.m_xf.position.y * this.PIXELS_PER_METER, actor.radius); //actor.rigidbody.m_shape.m_radius
 
@@ -179,7 +190,7 @@ class Physics {
 
         //console.log(actor.x, actor.y);
 
-        graphics.lineStyle(5, 0x0000ff);
+        graphics.lineStyle(5, actor.physicsOn ? 0x0000ff : 0x00ff00);
         graphics.moveTo(actor.rigidbody.m_body.m_xf.position.x * this.PIXELS_PER_METER + vertexTransformList[0].x, -actor.rigidbody.m_body.m_xf.position.y * this.PIXELS_PER_METER + vertexTransformList[0].y);
 
         for(var j = 1; j < vertexTransformList.length; j++) {
@@ -215,30 +226,18 @@ class Physics {
 
             BeginContact: function(idA, idB) {
 
-                console.log("----------------", idA, idB);
+                for(var i = 0; i < idB.tags.length; i++) {
 
-                for(var i in idB.tags) {
+                    var collisionVariable = "collidingWith" + idB.tags[i] + "Tag";
 
-                    var collisionVariable = "collidingWith" + i + "Tag";
-
-                    if(idA[collisionVariable] != undefined) {
-                        
-                        idA[collisionVariable] = true;
-
-                        //console.log("INICIO DE COLISION DETECTADO POR TAG", idA.name, collisionVariable, idA[collisionVariable]);
-                    }
+                    if(idA[collisionVariable] != undefined) { idA[collisionVariable] = true; }
                 }
 
                 for(var i in idA.tags) {
 
-                    var collisionVariable = "collidingWith" + i + "Tag";
+                    var collisionVariable = "collidingWith" + idA.tags[i] + "Tag";
 
-                    if(idB[collisionVariable] != undefined) {
-                        
-                        idB[collisionVariable] = true;
-
-                        //console.log("INICIO DE COLISION DETECTADO POR TAG", idB.name, collisionVariable, idB[collisionVariable]);
-                    }
+                    if(idB[collisionVariable] != undefined) { idB[collisionVariable] = true; }
                 }
 
                 idA = idB = null;
@@ -246,28 +245,18 @@ class Physics {
 
             EndContact: function(idA, idB) {
 
-                for(var i in idB.tags) {
+                for(var i = 0; i < idB.collisionList.length; i++) { 
 
-                    var collisionVariable = "collidingWith" + i + "Tag";
+                    var collisionVariable = "collidingWith" + idB.tags[i] + "Tag";
 
-                    if(idA[collisionVariable] != undefined) {
-                        
-                        idA[collisionVariable] = false;
-
-                        //console.log("FINAL DE COLISION DETECTADO POR TAG", idA.name, collisionVariable, idA[collisionVariable]);
-                    }
+                    if(idA[collisionVariable] != undefined) { idA[collisionVariable] = false; }
                 }
 
                 for(var i in idA.tags) {
 
-                    var collisionVariable = "collidingWith" + i + "Tag";
+                    var collisionVariable = "collidingWith" + idA.tags[i] + "Tag";
 
-                    if(idB[collisionVariable] != undefined) {
-                        
-                        idB[collisionVariable] = false;
-
-                        //console.log("FINAL DE COLISION DETECTADO POR TAG", idB.name, collisionVariable, idB[collisionVariable]);
-                    }
+                    if(idB[collisionVariable] != undefined) { idB[collisionVariable] = false; }
                 }
 
                 idA = idB = null;

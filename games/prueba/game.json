@@ -1,6 +1,6 @@
 {
 	"name": "Happy Plane",
-	"displayWidth": 800,
+	"displayWidth": 1800,
 	"displayHeight": 480,
 	"cameraX": 0,
 	"cameraY": 0,
@@ -27,8 +27,8 @@
 				{
 					"name": "Actor_1",
 					"sleeping": false,
-					"x": 241,
-					"y": 58,
+					"x": -49,
+					"y": 96,
 					"width": 53,
 					"height": 64,
 					"scaleX": 1,
@@ -191,6 +191,27 @@
 									"nodeListFalse": []
 								}
 							]
+						},
+						{
+							"name": "Script_3_copy",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "plane"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.color",
+												"value": "#8000ff"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
 						}
 					],
 					"debugvelocityx": 0
@@ -207,7 +228,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
+					"tags": "plane",
 					"spriteOn": true,
 					"image": "",
 					"color": "#00ff00",
@@ -249,8 +270,83 @@
 				{
 					"name": "Actor_4",
 					"sleeping": false,
-					"x": 36,
-					"y": 106,
+					"x": 67,
+					"y": 81,
+					"width": 66,
+					"height": 64,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "letterM.png",
+					"color": "#000080",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Kinematic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "Space",
+										"key_Mode": "Pressed"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Rotate",
+											"parameters": {
+												"speed": "10",
+												"pivot_X": "0",
+												"pivot_Y": "0"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_4_copy",
+					"sleeping": false,
+					"x": 236,
+					"y": 80,
 					"width": 66,
 					"height": 64,
 					"scaleX": 1,
@@ -350,6 +446,57 @@
 					"size": 30,
 					"fill": "#ffffff",
 					"style": "Bold",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Kinematic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_6",
+					"sleeping": false,
+					"x": 152.5,
+					"y": 77,
+					"width": 100,
+					"height": 50,
+					"scaleX": 2,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "wall",
+					"spriteOn": true,
+					"image": "",
+					"color": "#ff0000",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
 					"align": "Center",
 					"offsetX": 0,
 					"offsetY": 0,

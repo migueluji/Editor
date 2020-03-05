@@ -228,10 +228,10 @@ class Logic {
     Collision(actor, parameters) {
 
         /** Activamos la bandera de colisiones para el actor. */
-        actor.collisionOn = true;
+        actor.triggerOn = true;
 
         /** Creamos la lista de colisiones, si no existiera previamente. */
-        actor.collisionList = (actor.collisionList == undefined) ? {} : actor.collisionList;
+        actor.collisionList = (actor.collisionList == undefined) ? [] : actor.collisionList;
 
         /** Comprobamos si hay mas de un tag. */
         var tagList = parameters.tags.split(",");
@@ -242,13 +242,13 @@ class Logic {
         /** Recorremos la lista y creamos los elementos de control. */
         for(var i = 0; i < tagList.length; i++) {
 
-            /* Añadimos la varible de control del tag a la lista de colisiones del actor. */
-            actor.collisionList[tagList[i]] = true;
-
             /* Si las reglas del actor cuentan con alguna condicion de colision,
             se ha de crear una variable booleana de ejecucion con la nomenclatura
             "collidingWith + TagName + Tag" en este actor. */
             var collisionVariable = "collidingWith" + tagList[i] + "Tag";
+
+            /* Añadimos la varible de control del tag a la lista de colisiones del actor. */
+            actor.collisionList.push(collisionVariable);
 
             /* Añadimos la varible de control al actor. */
             actor[collisionVariable] = false;

@@ -53,7 +53,7 @@ class Actor {
 
         /** Collision properties
          * ---------------------------------- */
-        this.tags           = actor.tags;
+        this.tags           = actor.tags                    || [];
         this.collider       = actor.collider                || "Circle";
         this.physicVertices = actor.physicVertices          || null; 
 
@@ -175,8 +175,10 @@ class Actor {
 
         this._width  = value;
         this._scaleX = this._width / this.originalWidth;
+
+        console.log(this.name, value, this._width, this._scaleX)
         
-        if(this._spriteOn) { this.sprite.width = this._width; }
+        if(this._spriteOn) { console.log(this.texture); this.sprite.width = this._width; }
         if(this._textOn) { 
             this.textStyle.wordWrapWidth = this._width; 
             this.textStyle.padding       = this._width; 
@@ -406,22 +408,7 @@ class Actor {
     get tags() { return this._tags; }
     set tags(value) {
 
-        if(value == "" || value == undefined) { 
-
-            this._tags = {}; 
-        }
-        else {
-
-            var aux = {};
-            var t = value.split(',');
-
-            for(var i = 0; i < t.length; i++) {
-
-                aux[t[i]] = true;
-            }
-
-            this._tags = aux;
-        }
+        this._tags = (value == "" || value == undefined) ? [] : value.split(','); 
     }
 
     get sleeping() { return this._sleeping; }
