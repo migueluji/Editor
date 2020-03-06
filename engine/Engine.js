@@ -77,8 +77,9 @@ class Engine {
 
         /** Creacion de los actores en la memoria del motor. */
         for(var i in scene.actorList) {
-
-            if(!scene.actorList[i].sleeping) {      /** Si es un actor activo */
+            
+            /** Si es un actor activo */
+            if(!scene.actorList[i].sleeping) {
 
                 for(var k = 0; k < 1; k++) {                                                                            /** DEBUG */
 

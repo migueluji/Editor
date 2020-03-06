@@ -11,7 +11,6 @@ class Actor {
         engine.logic.setActorLogic(this, actor);            // Añadir el actor al motor de logica.
         engine.input.setActorInput(this, actor);            // Añadir el actor al motor de input.
         engine.physics.setActorPhysics(this, actor);             // Añadir el actor al motor de fisicas.
-        //engine.collision.setActorCollision(this, actor);    // Añadir el actor al motor de colisiones.
 
         /** Sprite properties
          * ---------------------------------- */
@@ -23,8 +22,6 @@ class Actor {
         this.scrollY        = actor.scrollY                 || 0;
         this.flipX          = actor.flipX                   || false;
         this.flipY          = actor.flipY                   || false;
-
-        //console.log(actor.scrollX, actor.scrollY, "---", this.scrollX, this.scrollY);
 
         /** Text properties
          * ---------------------------------- */
@@ -176,13 +173,13 @@ class Actor {
         this._width  = value;
         this._scaleX = this._width / this.originalWidth;
 
-        console.log(this.name, this._scaleX, this._width, this.originalWidth);
-
-        if(this._spriteOn) { this.sprite.width = this.originalWidth * this._scaleX; }
+        if(this._spriteOn) { this.sprite.width = this._width; }
         if(this._textOn) { 
             this.textStyle.wordWrapWidth = this._width; 
             this.textStyle.padding       = this._width; 
         }
+
+        // TODO: PHYSICS
     }
 
     get scaleX() { return this._scaleX; }
@@ -191,7 +188,9 @@ class Actor {
         this._scaleX = value;
         this._width  = this.originalWidth * this._scaleX;
 
-        if(this._spriteOn) { this.sprite.scale.x = this._scaleX * (this._flipX ? -1 : 1); }
+        if(this._spriteOn && this.image != "") { this.sprite.scale.x = this._scaleX * (this._flipX ? -1 : 1); }
+
+        // TODO: PHYSICS
     }
 
 
@@ -202,6 +201,8 @@ class Actor {
         this._scaleY = this._height / this.originalHeight;
 
         if(this._spriteOn) { this.sprite.height = this._height; }
+
+        // TODO: PHYSICS
     }
 
     get scaleY() { return this._scaleY; }
@@ -210,7 +211,9 @@ class Actor {
         this._scaleY = value;
         this._height  = this.originalHeight * this._scaleY;
 
-        if(this._spriteOn) { this.sprite.scale.y = this._scaleY * (this._flipY ? -1 : 1); }
+        if(this._spriteOn && this.image != "") { this.sprite.scale.y = this._scaleY * (this._flipY ? -1 : 1); }
+
+        // TODO: PHYSICS
     }
 
     get flipX() { return this._flipX; }
@@ -235,6 +238,8 @@ class Actor {
         this._tileX = value;
 
         //if(this._spriteOn) { this.sprite.width = this._tileX * this._width; }
+
+        // TODO: PHYSICS
     }
 
     get tileY() { return this._tileY; }
@@ -243,6 +248,8 @@ class Actor {
         this._tileY = value;
 
         //if(this._spriteOn) { this.sprite.height = this._tileY * this._height; }
+
+        // TODO: PHYSICS
     }
 
     get image() { return this._image; }
@@ -429,16 +436,60 @@ class Actor {
     get physicsOn() { return this._physicsOn; }
     set physicsOn(value) {
         this._physicsOn = value;
-        //if(this.physicsOn) { this.rigidbody.m_body.SetActive(this._physicsOn); } 
+        //if(this.rigidbody != undefined) { this.rigidbody.m_body.SetActive(this._physicsOn); } // OJO CON ESTO, 
     }
 
     get velocityX() { return this._velocityX; }
     set velocityX(value) { 
         this._velocityX = value;
+        if(this._physicsOn) { this.rigidbody.m_body.SetLinearVelocity(new b2Vec2(this._velocityX, this._velocityY)); } 
     }
 
     get velocityY() { return this._velocityY; }
     set velocityY(value) { 
         this._velocityY = value;
+        if(this._physicsOn) { this.rigidbody.m_body.SetLinearVelocity(new b2Vec2(this._velocityX, this._velocityY)); } 
+    }
+
+    get angularVelocity() { return this._angularVelocity; }
+    set angularVelocity(value) {
+        this._angularVelocity = value;
+        if(this._physicsOn) { this.rigidbody.m_body.SetAngularVelocity(this._angularVelocity); }
+    }
+
+    get fixedAngle() { return this._fixedAngle; }
+    set fixedAngle(value) {
+        this._fixedAngle = value;
+        if(this._physicsOn) { this.rigidbody.m_body.SetFixedRotation(this._fixedAngle); }
+    }
+
+    get linearDamping() { return this._linearDamping; }
+    set linearDamping(value) {
+        this._linearDamping = value;
+        if(this._physicsOn) { this.rigidbody.m_body.SetLinearDamping(this._linearDamping); }
+    }
+
+    get angularDamping() { return this._angularDamping; }
+    set angularDamping(value) {
+        this._angularDamping = value;
+        if(this._physicsOn) { this.rigidbody.m_body.SetAngularDamping(this._angularDamping); }
+    }
+
+    get density() { return this._density; }
+    set density(value) {
+        this._density = value;
+        if(this._physicsOn) { this.rigidbody.SetDensity(this._density); }
+    }
+
+    get friction() { return this._friction; }
+    set friction(value) {
+        this._friction = value;
+        if(this._physicsOn) { this.rigidbody.SetFriction(this._friction); }
+    }
+
+    get restitution() { return this._restitution; }
+    set restitution(value) {
+        this._restitution = value;
+        if(this._physicsOn) { this.rigidbody.SetRestitution(this._restitution); }
     }
 }

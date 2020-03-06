@@ -412,7 +412,7 @@ class Logic {
     Push(actor, parameters) {
 
         /** Configuramos la expresion para que llame al motor de fisicas, y que este ejecute la funcion que aplica la fuerza sobre el actor. */
-        var expression = "engine.physics.ApplyForce(" + actor.name + ", " + parameters.strength + ", (" + parameters.angle + ") * PI / 180)" + "\n";
+        var expression = "engine.physics.ApplyForce(Me, " + parameters.force + ", (" + parameters.angle + ") * PI / 180)" + "\n";
 
         /* Creamos el nuevo nodo con su expresion correspondiente.*/
         return new Do(expression, actor.scope);
@@ -420,12 +420,8 @@ class Logic {
 
     Push_To(actor, parameters) {
 
-        /** Definimos el nombre de la variable distancia unica (para el compilado de la expresion en el scope) */
-        var distance = "distance" + Util.random();
-
         /** Configuramos la expresion para que llame al motor de fisicas, y que este ejecute la funcion que aplica la fuerza sobre el actor. */
-        var expression = "" + distance + " = distance([" + actor.name + ".x , " + actor.name + ".y], [" + parameters.targetX + ", " + parameters.targetY + "])" + " \n" +
-                         "engine.physics.ApplyForce(" + actor.name + ", " + parameters.strength + ", (" + parameters.angle + ") * PI / 180)" + "\n";
+        var expression = "engine.physics.ApplyForceTo(Me, " + parameters.force + ", " + parameters.x + ", " + parameters.y + ")" + "\n";
 
         /* Creamos el nuevo nodo con su expresion correspondiente.*/
         return new Do(expression, actor.scope);
@@ -433,12 +429,8 @@ class Logic {
     
     Torque(actor, parameters) {
 
-        /** Definimos el nombre de la variable distancia unica (para el compilado de la expresion en el scope) */
-        var distance = "distance" + Util.random();
-
         /** Configuramos la expresion para que llame al motor de fisicas, y que este ejecute la funcion que aplica la fuerza sobre el actor. */
-        var expression = "" + distance + " = distance([" + actor.name + ".x , " + actor.name + ".y], [" + parameters.targetX + ", " + parameters.targetY + "])" + " \n" +
-                         "engine.physics.ApplyForce(" + actor.name + ", " + parameters.strength + ", (" + parameters.angle + ") * PI / 180)" + "\n";
+        var expression = "engine.physics.ApplyTorque(Me, " + parameters.angle + " * PI / 180)" + "\n";
 
         /* Creamos el nuevo nodo con su expresion correspondiente.*/
         return new Do(expression, actor.scope);

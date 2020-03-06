@@ -36,6 +36,7 @@ class Physics {
     updateBody(actor) {
 
         actor.rigidbody.m_body.SetPosition(new b2Vec2(actor.x / this.PIXELS_PER_METER, actor.y / this.PIXELS_PER_METER));
+        //actor.rigidbody.m_body.SetAngle(Util.degToRad(actor.angle));
         this.drawDebug(actor); // DEBUG
     }
 
@@ -46,8 +47,9 @@ class Physics {
 
     updateActor(actor) {
 
-        actor.x = actor.rigidbody.m_body.GetPosition().x * this.PIXELS_PER_METER;
-        actor.y = actor.rigidbody.m_body.GetPosition().y * this.PIXELS_PER_METER;
+        actor.x     = actor.rigidbody.m_body.GetPosition().x * this.PIXELS_PER_METER;
+        actor.y     = actor.rigidbody.m_body.GetPosition().y * this.PIXELS_PER_METER;
+        //actor.angle = Util.radToDeg(actor.rigidbody.m_body.GetAngle());
     }
 
     setActorPhysics(actor, data) {
@@ -66,7 +68,7 @@ class Physics {
             actor.rigidbody = this.createPhysicsBody(data); /** Creacion del physics body en el sistema y en el mundo fisico de Box2D. */
             actor.rigidbody.SetUserData(actor);             /** Definicion del objeto padre del physics body (NECESARIO PARA LA DETECCION DE COLISIONES). */
             actor.collisionList = (actor.collisionList == undefined) ? [] : actor.collisionList;
-            
+
             if(data.physicsOn) { 
                 
                 this.rigidbodyList.push(actor);             /** Añadimos el actor a la lista de rigidbodies. */
@@ -233,7 +235,7 @@ class Physics {
                     if(idA[collisionVariable] != undefined) { idA[collisionVariable] = true; }
                 }
 
-                for(var i in idA.tags) {
+                for(var i = 0; i < idA.tags.length; i++) {
 
                     var collisionVariable = "collidingWith" + idA.tags[i] + "Tag";
 
@@ -245,14 +247,14 @@ class Physics {
 
             EndContact: function(idA, idB) {
 
-                for(var i = 0; i < idB.collisionList.length; i++) { 
+                for(var i = 0; i < idB.tags.length; i++) { 
 
                     var collisionVariable = "collidingWith" + idB.tags[i] + "Tag";
 
                     if(idA[collisionVariable] != undefined) { idA[collisionVariable] = false; }
                 }
 
-                for(var i in idA.tags) {
+                for(var i = 0; i < idA.tags.length; i++) {
 
                     var collisionVariable = "collidingWith" + idA.tags[i] + "Tag";
 
@@ -291,16 +293,22 @@ class Physics {
     /** ###############################################################################
      *  Elementos auxiliares para la ejecucion de las expresiones logicas 
      *  ############################################################################### */
-
-
-     // ESTO DEBE DE ESTAR EN LA EXPRESION, por si strength y angle son expresiones
-
     ApplyForce(actor, strength, angle) {
 
         var thrustX = strength * Math.cos(-1*angle); // El -1 es porque box2d interpreta la direccion en sentido contrario.
         var thrustY = strength * Math.sin(-1*angle);
 
         actor.rigidbody.m_body.ApplyForce(new b2Vec2(thrustX,thrustY), actor.rigidbody.m_body.GetWorldCenter());
+    }
+
+    ApplyForceTo(actor, strength, targetX, targetY) {
+
+        this.ApplyForce(actor, strength, Math.atan2(targetY - actor.y, targetX - actor.x));
+    }
+
+    ApplyTorque(actor, angle) {
+
+        actor.rigidbody.m_body.ApplyTorque(angle);
     }
 
 }

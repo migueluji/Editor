@@ -1,6 +1,6 @@
 {
 	"name": "Happy Plane",
-	"displayWidth": 1800,
+	"displayWidth": 800,
 	"displayHeight": 480,
 	"cameraX": 0,
 	"cameraY": 0,
@@ -70,7 +70,7 @@
 					"angularVelocity": 0,
 					"density": 1,
 					"friction": 0.5,
-					"restitution": 0.5,
+					"restitution": 2,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
 					"scriptList": [
@@ -93,6 +93,21 @@
 										}
 									],
 									"nodeListFalse": []
+								},
+								{
+									"type": "Push_To",
+									"parameters": {
+										"force": 0,
+										"x": 0,
+										"y": 0
+									}
+								},
+								{
+									"type": "Push",
+									"parameters": {
+										"force": 0,
+										"angle": 0
+									}
 								}
 							]
 						}
@@ -100,7 +115,7 @@
 					"debugvelocityx": 0
 				},
 				{
-					"name": "Actor_1_copy",
+					"name": "TriggerTest",
 					"sleeping": false,
 					"x": -161,
 					"y": 99,
@@ -145,7 +160,7 @@
 					"angularVelocity": 0,
 					"density": 1,
 					"friction": 0.5,
-					"restitution": 0.5,
+					"restitution": 1.5,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
 					"scriptList": [
@@ -205,7 +220,7 @@
 											"type": "Edit",
 											"parameters": {
 												"property": "Me.color",
-												"value": "#8000ff"
+												"value": "#ffff00"
 											}
 										}
 									],
@@ -469,14 +484,14 @@
 					"scriptList": []
 				},
 				{
-					"name": "Actor_6",
+					"name": "testWidth",
 					"sleeping": false,
 					"x": 152.5,
 					"y": 77,
 					"width": 100,
-					"height": 50,
+					"height": 150,
 					"scaleX": 2,
-					"scaleY": 1,
+					"scaleY": 3,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",

@@ -84,6 +84,14 @@ class Util {
         return value * Math.PI / 180.0;
     }
 
+    /**
+     * 
+     */
+    static radToDeg(value) {
+
+        return value * 180.0 / Math.PI;
+    }
+
     static colorString(value) {
 
         return "'" + Util.colorFormat(value) + "'"; 
