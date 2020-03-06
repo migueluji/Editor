@@ -176,9 +176,9 @@ class Actor {
         this._width  = value;
         this._scaleX = this._width / this.originalWidth;
 
-        console.log(this.name, value, this._width, this._scaleX)
-        
-        if(this._spriteOn) { console.log(this.texture); this.sprite.width = this._width; }
+        console.log(this.name, this._scaleX, this._width, this.originalWidth);
+
+        if(this._spriteOn) { this.sprite.width = this.originalWidth * this._scaleX; }
         if(this._textOn) { 
             this.textStyle.wordWrapWidth = this._width; 
             this.textStyle.padding       = this._width; 

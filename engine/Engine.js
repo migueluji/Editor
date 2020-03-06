@@ -6,7 +6,6 @@ class Engine {
     constructor(game) {
 
         this.physics    = new Physics(this);    /** */
-        //this.collision  = new Collision(game, this);    /** */
         this.render     = new Render(this);             /** */
         this.input      = new Input(this);              /** */
         //this.audio      = new Audio(game, this);        /** */
@@ -47,7 +46,6 @@ class Engine {
         /** FIN DEBUG */
 
         this.physics.run();
-        //this.collision.run();
         this.logic.run();
         this.render.run();
 
@@ -66,7 +64,6 @@ class Engine {
 
         this.input.reset();     // resetear las propiedades de input
         this.logic.reset();     // resetear las propiedades de logica
-        //this.collision.reset(); // resetear las propiedades de colision.
         this.spawnActors();     // spawnear los actores determinados por la lista
         this.destroyActors();   // eliminar los actores determinados por la lista
         this.enableActors();    // activar los actores deshabilitados en la lista
