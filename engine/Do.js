@@ -18,7 +18,6 @@ class Do {
 
         this.expression = Util.checkScope(this.expression, this.scope); /** Comprobamos si hay que actualizar la expresion y el scope. */
         this.code       = math.compile(this.expression);                /** Compilamos la expresion con Math.js. */
-        //this.code = math.compile("2+sin(PI)");
     }
 
     destroy() {

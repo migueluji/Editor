@@ -32,7 +32,7 @@ class Logic {
 
     setActorLogic(actor, data) {
 
-        if(data.scriptList.length > 0) {
+        if(data.scriptList != undefined && data.scriptList.length > 0) {
             
             actor.scriptList = [];      /** Inicializamos la lista de scripts del actor. */
             actor.scope      = {};      /** Inicializamos el scope del actor. */
@@ -326,7 +326,7 @@ class Logic {
     Spawn(actor, parameters) {
 
         /** Definimos la expresion */
-        var expression = "engine.addSpawnedActor('" + parameters.actor + "', Me.x" + "+" + parameters.x + ", Me.y" + "+" + parameters.y + ", " + actor.angle + ")" + "\n";
+        var expression = "engine.addSpawnedActor('" + parameters.actor + "', Me.x" + "+" + parameters.x + ", Me.y" + "+" + parameters.y + ", " + parameters.angle + ")" + "\n";
 
         /* Creamos el nuevo nodo con su expresion correspondiente.*/
         return new Do(expression, actor.scope);

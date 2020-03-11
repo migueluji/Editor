@@ -83,23 +83,25 @@ class Engine {
 
                 for(var k = 0; k < 1; k++) {                                                                            /** DEBUG */
 
-                    var auxID = scene.actorList[i].ID + Util.random() + Util.random();                                    /** DEBUG */
-
-                    this.actorList[auxID] = new Actor(scene.actorList[i], this);                                // Esto es bueno, no es debug.
+                    this.actorList[scene.actorList[i].ID] = new Actor(scene.actorList[i], this);                                // Esto es bueno, no es debug.
 
                     //this.actorList[auxID].x = -300 + Math.random() * 600;                                           /** DEBUG */
-                    //this.actorList[auxID].y = -200 + Math.random() * 400;                                       /** DEBUG */ 
+                    //this.actorList[auxID].y = -200 + Math.random() * 2800;                                       /** DEBUG */ 
+
+                    //this.actorList[auxID].velocityX = -3 + Math.random() * 6;                                           /** DEBUG */
+                    //this.actorList[auxID].velocityY = -2 + Math.random() * 4;                                       /** DEBUG */ 
 
                     //this.actorList[auxID].sprite.x = this.actorList[auxID].x;                                           /** DEBUG */
                     //this.actorList[auxID].sprite.y = this.actorList[auxID].y;                                       /** DEBUG */ 
-                }                                                                                                           /** DEBUG */
+                }                
             }
             
             this.sceneList[this.game.activeScene][scene.actorList[i].ID] = scene.actorList[i];
         }
         
-        /** Compilar las expresiones una vez cargados todos los datos en memoria */
+        /** Compilar las expresiones y los textos una vez cargados todos los datos en memoria */
         this.logic.compileExpressions();
+        this.render.compileTexts();
     }
 
 
@@ -144,6 +146,8 @@ class Engine {
      *  SPAWN ACTOR HANDLERS
     ···································································· */
     addSpawnedActor(actorName, x, y, angle) {
+
+        //console.log(actorName, x, y, angle);
 
         //console.log(this.sceneList[this.game.activeScene], actorName);
         var name = "Spawn_of_" + actorName + "_" + Util.random();

@@ -172,26 +172,33 @@ class Util {
             }
         }
 
-        /** Comprobamos si hay que actualizar el indentificador del Game. */
-        if(expression.search("Game") != -1) {
-
-            expression = expression.replace(new RegExp("Game", "g"), "engine.game");
-        }
+        expression = Util.replace(expression, "Game", "engine.game"); /** Comprobamos si hay que actualizar el indentificador del Game. */
 
         return expression;
     }
 
-    static updateTextToscope(text, actor) {
+    static updateTextToScope(text, actor) {
 
-        var temp = text;
+        var temp;
 
-        if((temp.search("Me") != -1)) {
+        for(var i in actor.engine.actorList) {
 
-            temp = temp.replace(new RegExp("Me", "g"), "player.engine.actorList." + actor.ID + ".scope.Me");
+            temp = Util.replace(text, actor.engine.actorList[i].name + ".", "player.engine.actorList." + i + ".");
         }
 
-        // TODO: Actores que no sean "Me".
+        temp = Util.replace(temp, "Me.", "player.engine.actorList." + actor.ID + ".");
         
+        //console.log("---", actor.name, ":", temp);
+        
+        return temp;
+    }
+
+    static replace(expression, target, replace) {
+
+        var temp = expression;
+
+        if((expression.search(target) != -1)) { temp = temp.replace(new RegExp(target, "g"), replace); }
+
         return temp;
     }
 

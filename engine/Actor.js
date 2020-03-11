@@ -12,6 +12,15 @@ class Actor {
         engine.input.setActorInput(this, actor);            // Añadir el actor al motor de input.
         engine.physics.setActorPhysics(this, actor);             // Añadir el actor al motor de fisicas.
 
+        /**
+         * General properties
+         * --------------------------------- */
+        this.name           = actor.name                    || "NewActor" + Util.random();
+        this.scene          = this.engine.activeScene       || null;
+        this.ID             = actor.ID                      || actor.name  + Util.random();
+        this.sleeping       = actor.sleeping ? false : true || false;
+        this.destroyActor   = actor.destroyActor            || false;
+
         /** Sprite properties
          * ---------------------------------- */
         this.image          = actor.image                   || "";
@@ -70,19 +79,22 @@ class Actor {
 
         /** Settings properties
          * ---------------------------------- */
-        this.name           = actor.name                    || "NewActor" + Util.random();
-        this.scene          = this.engine.activeScene       || null;
-        this.ID             = actor.ID                      || actor.name  + Util.random();
-        this.sleeping       = actor.sleeping ? false : true || false;
-        this.destroyActor   = actor.destroyActor            || false;
         this.x              = actor.x                       || 0;
         this.y              = actor.y                       || 0;
         this.angle          = actor.angle                   || 0;
         this.screen         = actor.screen                  || false;
-        this.originalWidth  = actor.width / actor.scaleX;
-        this.originalHeight = actor.height / actor.scaleY;
-        this.width          = actor.width                   || 64;
-        this.height         = actor.height                  || 64;
+
+
+        this.originalWidth  = (actor.width / actor.scaleX) / actor.tileX;
+        this.originalHeight = (actor.height / actor.scaleY) / actor.tileY;
+
+        console.log(this.originalWidth, actor.width, actor.scaleX, actor.tileX, actor.width / actor.scaleX);
+
+        this.tileX          = actor.tileX                   || 1;
+        this.tileY          = actor.tileY                   || 1;
+
+        this.width          = actor.width                   || 50;
+        this.height         = actor.height                  || 50;
         this.scaleX         = actor.scaleX                  || 1;
         this.scaleY         = actor.scaleY                  || 1;
         this.radius         = Math.max(this.width, this.height) / 2;
@@ -145,6 +157,7 @@ class Actor {
 
         if(this._spriteOn) { this.sprite.rotation = Util.degToRad(-this._angle); }
         if(this._textOn) { this.textSprite.rotation = Util.degToRad(-this._angle); }
+        //if(this._physicsOn) { this.rigidbody.m_body.SetAngle(Util.degToRad(this._angle)); }
     }
 
     get screen() { return this._screen; }
@@ -171,9 +184,14 @@ class Actor {
     set width(value) {
 
         this._width  = value;
-        this._scaleX = this._width / this.originalWidth;
+        this._scaleX = this._width / (this.originalWidth * this._tileX);
 
-        if(this._spriteOn) { this.sprite.width = this._width; }
+        console.log("----", this._width, this._width / (this.originalWidth * this._tileX))
+
+        if(this._spriteOn) { 
+            this.sprite.width = this.width; 
+            this.sprite.scale.x = this.scaleX;
+        }
         if(this._textOn) { 
             this.textStyle.wordWrapWidth = this._width; 
             this.textStyle.padding       = this._width; 
@@ -186,9 +204,27 @@ class Actor {
     set scaleX(value) {
 
         this._scaleX = value;
-        this._width  = this.originalWidth * this._scaleX;
+        this._width  = this.originalWidth * this._scaleX * (this._tileX || 1);
 
-        if(this._spriteOn && this.image != "") { this.sprite.scale.x = this._scaleX * (this._flipX ? -1 : 1); }
+        if(this._spriteOn && this.image != "") { 
+            this.sprite.scale.x = this._scaleX * (this._flipX ? -1 : 1); 
+            this.sprite.width = this._width; console.log("scaleX", this._scaleX, this.sprite.scale.x, this.sprite.width, this._width);
+        }
+        if(this._textOn) { 
+            this.textStyle.wordWrapWidth = this._width; 
+            this.textStyle.padding       = this._width;  
+        }
+
+        // TODO: PHYSICS
+    }
+
+    get tileX() { return this._tileX; }
+    set tileX(value) {
+
+        this._tileX = value;
+        this._width = this.originalWidth * this._tileX * (this._scaleX || 1);
+
+        if(this._spriteOn) { this.sprite.width = this._width; console.log("tileX", this.originalWidth, this.sprite.width, this._width);}
 
         // TODO: PHYSICS
     }
@@ -209,9 +245,19 @@ class Actor {
     set scaleY(value) {
 
         this._scaleY = value;
-        this._height  = this.originalHeight * this._scaleY;
+        this._height  *= this._scaleY;
 
         if(this._spriteOn && this.image != "") { this.sprite.scale.y = this._scaleY * (this._flipY ? -1 : 1); }
+
+        // TODO: PHYSICS
+    }
+
+    get tileY() { return this._tileY; }
+    set tileY(value) {
+
+        this._tileY = value;
+
+        //if(this._spriteOn) { this.sprite.height = this._tileY * this.originalHeight; }
 
         // TODO: PHYSICS
     }
@@ -230,26 +276,6 @@ class Actor {
         this._flipY = value;
 
         if(this._spriteOn) { this.sprite.scale.y *= this._flipY ? -1 : 1; }
-    }
-
-    get tileX() { return this._tileX; }
-    set tileX(value) {
-
-        this._tileX = value;
-
-        //if(this._spriteOn) { this.sprite.width = this._tileX * this._width; }
-
-        // TODO: PHYSICS
-    }
-
-    get tileY() { return this._tileY; }
-    set tileY(value) {
-
-        this._tileY = value;
-
-        //if(this._spriteOn) { this.sprite.height = this._tileY * this._height; }
-
-        // TODO: PHYSICS
     }
 
     get image() { return this._image; }
@@ -315,8 +341,7 @@ class Actor {
     get text() { return this._text; }
     set text(value) {
 
-        this._text = value.replace(/Me/g, "this.scope.Me");
-
+        this._text = value + "\n";
     }
 
     get font() { return this._font; }
@@ -348,7 +373,27 @@ class Actor {
 
         this._align = value.toLowerCase();
 
-        if(this._textOn) { this.textStyle.align = this._align; /*console.log(this._align);*/ }
+        if(this._textOn) { 
+
+            this.textStyle.align = this._align; 
+            
+            /*switch(this._align) {
+
+                case "left": 
+                    this.textSprite.anchor.x = 0.75;
+                    console.log("left", this.textSprite.x)
+                    break;
+
+                case "right": 
+                    this.textSprite.anchor.x = 1.0;
+                    this.textSprite.position.x += this._width / 2;
+                    break;
+
+                case "center": 
+                    this.textSprite.anchor.x = 0.5;
+                    break; 
+            }*/
+        }
     }
 
     get style() { return this._style; }
@@ -382,7 +427,7 @@ class Actor {
     set textSprite(value) {
 
         this._textSprite = value;
-        this._textSprite.anchor.set(0.5);
+        this._textSprite.anchor.y = 0.5;
     }
 
     get scope() { return this._scope; }

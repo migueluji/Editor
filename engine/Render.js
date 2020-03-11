@@ -24,16 +24,12 @@ class Render {
 
     setActorRender(actor, data) {
             
-        /** Creamos el sprite de la textura. */
-        if(data.spriteOn) { this.setActorSprite(actor); }
-
-        /** Creamos el sprite de la texto. */
-        if(data.textOn) { this.setActorText(actor); }
+        if(data.spriteOn) { this.setActorSprite(actor); } /** Creamos el sprite de la textura. */
+        if(data.textOn) { this.setActorText(actor); } /** Creamos el sprite de la texto. */
     }
 
     setActorSprite(actor) {
 
-        //actor.sprite = new PIXI.TilingSprite(PIXI.Texture.EMPTY); /** Creamos el sprite de la imagen. */
         actor.sprite = new PIXI.TilingSprite(PIXI.Texture.EMPTY); /** Creamos el sprite de la imagen. */
         actor.sprite.cacheAsBitmap = true;
         this.stage.addChild(actor.sprite); /** Añadimos el sprite al contenedor del sprites del actor. */
@@ -43,7 +39,6 @@ class Render {
     setActorText(actor) {
 
         actor.textStyle = new PIXI.TextStyle({}); /** Definimos el estilo del texto. */
-        //actor.text = Util.updateTextToscope(actor.text, actor);
         actor.textSprite = new PIXI.Text("", actor.textStyle);
         this.stage.addChild(actor.textSprite);    /** Añadimos el texto al sprite contenedor */
         this.textList.push(actor); /** Añadimos el actor a la lista de actualizacion de texto. */
@@ -51,22 +46,22 @@ class Render {
 
     run() {
 
-        //this.updateActors();
+        this.updateActors();
         this.renderer.render(this.stage);
     }
 
     updateActors() {
 
-        var i;
+        let i;
+        for(i = 0; i < this.textList.length; i++) { this.textList[i].setTextProperties(); }
+        for(i = 0; i < this.spriteList.length; i++) { this.spriteList[i].setSpriteProperties(); }
+    }
 
-        for(i = 0; i < this.textList.length; i++) {
+    compileTexts() {
 
-            this.textList[i].setTextProperties();
-        }
+        for(var i = 0; i < this.textList.length; i++) {
 
-        for(i = 0; i < this.spriteList.length; i++) {
-
-            this.spriteList[i].setSpriteProperties();
+            this.textList[i].text = Util.updateTextToScope(this.textList[i].text, this.textList[i]);
         }
     }
 

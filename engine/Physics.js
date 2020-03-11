@@ -36,8 +36,8 @@ class Physics {
     updateBody(actor) {
 
         actor.rigidbody.m_body.SetPosition(new b2Vec2(actor.x / this.PIXELS_PER_METER, actor.y / this.PIXELS_PER_METER));
-        //actor.rigidbody.m_body.SetAngle(Util.degToRad(actor.angle));
-        this.drawDebug(actor); // DEBUG
+        actor.rigidbody.m_body.SetAngle(Util.degToRad(actor.angle));
+        //this.drawDebug(actor); // DEBUG
     }
 
     updateGame() {
@@ -47,9 +47,11 @@ class Physics {
 
     updateActor(actor) {
 
+        //if(actor.name == "BounceActor") console.log("AFTER STEP", actor.rigidbody.m_body.GetAngle(), actor.rigidbody)
+
         actor.x     = actor.rigidbody.m_body.GetPosition().x * this.PIXELS_PER_METER;
         actor.y     = actor.rigidbody.m_body.GetPosition().y * this.PIXELS_PER_METER;
-        //actor.angle = Util.radToDeg(actor.rigidbody.m_body.GetAngle());
+        actor.angle = Util.radToDeg(actor.rigidbody.m_body.GetAngle());
     }
 
     setActorPhysics(actor, data) {
@@ -57,7 +59,7 @@ class Physics {
         /**
          *  ¿Actua como trigger?
          * -------------------------------------------------- */
-        actor.triggerOn = (actor.triggerOn == undefined) ? (data.tags.length > 0) : actor.triggerOn;
+        actor.triggerOn = (actor.triggerOn == undefined) ? (data.tags != undefined && data.tags.length > 0) : actor.triggerOn;
         if(actor.triggerOn && !actor.physicsOn) {  } /** Si es un trigger y no es un actor con fisicas, para evitar duplicados en los bucles y solo actualizar las posiciones de los fisicos. */
 
         /**
@@ -88,12 +90,13 @@ class Physics {
 
     createPhysicsBody(data) {
 
-        let type = data.physicsOn ? data.type : "Dynamic";
-
         let body  = new b2BodyDef();
-        body.type = this["set" + type + "Body"]();
-        
+        body.type = this["set" + (data.physicsOn ? data.type : "Dynamic") + "Body"]();
+
         let fixture   = new b2FixtureDef();
+        fixture.friction = data.friction;
+        fixture.density = data.density;   
+        fixture.restitution = data.restitution;   
         fixture.shape = this["set" + data.collider + "Shape"](data); /** Configuracion de la forma geometrica del objeto fisico */
 
         return this.world.CreateBody(body).CreateFixture(fixture); 
@@ -113,9 +116,7 @@ class Physics {
     setCircleShape(data) {
 
         var shape       = new b2CircleShape;
-        shape.m_p.x     = data.x / this.PIXELS_PER_METER;
-        shape.m_p.y     = data.y / this.PIXELS_PER_METER;
-        shape.m_radius  = data.radius / this.PIXELS_PER_METER;
+        shape.m_radius  = (Math.max(data.width, data.height) / 2) / this.PIXELS_PER_METER;
         return shape;
     }
 
@@ -142,66 +143,34 @@ class Physics {
 
     drawDebug(actor) {
 
-        for(var i = 0; i < actor.physicsDebugSprite.children.length; i++) {
-
-            actor.physicsDebugSprite.children[i].destroy();
-        }
-        
+        for(var i = 0; i < actor.physicsDebugSprite.children.length; i++) { actor.physicsDebugSprite.children[i].destroy(); }
         actor.physicsDebugSprite.removeChildren();
 
-        this.drawCircleShape(actor.physicsDebugSprite, actor);
-
-        if(actor.collider != "Circle") {
-
-            this.drawPolygonShape(actor.physicsDebugSprite, actor);
-        }
+        if(actor.collider == "Circle") { this.drawCircleShape(actor.physicsDebugSprite, actor); }
+        else { this.drawPolygonShape(actor.physicsDebugSprite, actor); }
     }
 
     drawCircleShape(debug, actor) {
 
+        console.log()
+
         var graphics = new PIXI.Graphics();
-
-        graphics.lineStyle(1, 0xff0000);
-
-        graphics.drawCircle(actor.rigidbody.m_body.m_xf.position.x * this.PIXELS_PER_METER, -actor.rigidbody.m_body.m_xf.position.y * this.PIXELS_PER_METER, actor.radius); //actor.rigidbody.m_shape.m_radius
-
+        graphics.lineStyle(5, 0xff0000);
+        graphics.drawCircle(actor.rigidbody.m_body.m_xf.position.x * this.PIXELS_PER_METER, -actor.rigidbody.m_body.m_xf.position.y * this.PIXELS_PER_METER, actor.rigidbody.m_shape.GetRadius() * this.PIXELS_PER_METER); //actor.rigidbody.m_shape.m_radius
         debug.addChild(graphics);
     }
 
     drawPolygonShape(debug, actor) {
         
-        var vertexTransformList = [];
-
-        var x_origin = actor.rigidbody.m_shape.m_centroid.x * this.PIXELS_PER_METER;
-        var y_origin = actor.rigidbody.m_shape.m_centroid.y * this.PIXELS_PER_METER;
-
-        for(var i = 0; i < actor.rigidbody.m_shape.m_vertices.length; i++) {
-
-            var x = actor.rigidbody.m_shape.m_vertices[i].x * this.PIXELS_PER_METER;
-            var y = actor.rigidbody.m_shape.m_vertices[i].y * this.PIXELS_PER_METER;
-
-            var x_rotated = ((x - x_origin) * Math.cos(-actor.angle)) - ((y_origin - y) * Math.sin(-actor.angle)) + x_origin;
-            var y_rotated = ((y_origin - y) * Math.cos(-actor.angle)) + ((x - x_origin) * Math.sin(-actor.angle)) + y_origin;
-
-            vertexTransformList.push({x: x_rotated, y: y_rotated});
-        }
-
-        //console.log(vertexTransformList, actor.rigidbody.m_shape);
+        let AABB = actor.rigidbody.GetAABB();
+        let width = AABB.upperBound.x - AABB.lowerBound.x;
+        let height = AABB.upperBound.y - AABB.lowerBound.y;
+        let origin_x = actor.rigidbody.m_body.GetPosition().x - width / 2;
+        let origin_y = -actor.rigidbody.m_body.GetPosition().y - height / 2;
 
         var graphics = new PIXI.Graphics();
-
-        //console.log(actor.x, actor.y);
-
-        graphics.lineStyle(5, actor.physicsOn ? 0x0000ff : 0x00ff00);
-        graphics.moveTo(actor.rigidbody.m_body.m_xf.position.x * this.PIXELS_PER_METER + vertexTransformList[0].x, -actor.rigidbody.m_body.m_xf.position.y * this.PIXELS_PER_METER + vertexTransformList[0].y);
-
-        for(var j = 1; j < vertexTransformList.length; j++) {
-
-            graphics.lineTo(actor.rigidbody.m_body.m_xf.position.x * this.PIXELS_PER_METER + vertexTransformList[j].x, -actor.rigidbody.m_body.m_xf.position.y * this.PIXELS_PER_METER + vertexTransformList[j].y);
-        }
-
-        graphics.lineTo(actor.rigidbody.m_body.m_xf.position.x * this.PIXELS_PER_METER + vertexTransformList[0].x, -actor.rigidbody.m_body.m_xf.position.y * this.PIXELS_PER_METER + vertexTransformList[0].y);
-
+        graphics.lineStyle(5, 0x0000ff);
+        graphics.drawRect(origin_x * this.PIXELS_PER_METER, origin_y * this.PIXELS_PER_METER, width * this.PIXELS_PER_METER, height * this.PIXELS_PER_METER);
         debug.addChild(graphics);
     }
 
@@ -214,10 +183,10 @@ class Physics {
             listener.BeginContact = function(contact) { callbacks.BeginContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); };
         }
         
-        if(callbacks.EndContact) {
+        /*if(callbacks.EndContact) {
             
             listener.EndContact = function(contact) { callbacks.EndContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); };
-        }
+        }*/
 
         this.world.SetContactListener(listener);
     }
@@ -245,7 +214,7 @@ class Physics {
                 idA = idB = null;
             },
 
-            EndContact: function(idA, idB) {
+            /*EndContact: function(idA, idB) {
 
                 for(var i = 0; i < idB.tags.length; i++) { 
 
@@ -262,7 +231,7 @@ class Physics {
                 }
 
                 idA = idB = null;
-            }
+            }*/
         });
     }
 
