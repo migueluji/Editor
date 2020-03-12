@@ -88,15 +88,16 @@ class Actor {
         this.originalWidth  = (actor.width / actor.scaleX) / actor.tileX;
         this.originalHeight = (actor.height / actor.scaleY) / actor.tileY;
 
-        console.log(this.originalWidth, actor.width, actor.scaleX, actor.tileX, actor.width / actor.scaleX);
-
-        this.tileX          = actor.tileX                   || 1;
-        this.tileY          = actor.tileY                   || 1;
-
-        this.width          = actor.width                   || 50;
-        this.height         = actor.height                  || 50;
+        console.log("--- \n originalWidth: " + this.originalWidth + "\n",
+                    "width: " + actor.width + "\n",
+                    "scaleX: " + actor.scaleX + "\n",
+                    "tileX: " + actor.tileX + "\n");
         this.scaleX         = actor.scaleX                  || 1;
         this.scaleY         = actor.scaleY                  || 1;
+        this.width          = actor.width                   || 50;
+        this.height         = actor.height                  || 50;
+        this.tileX          = actor.tileX                   || 1;
+        this.tileY          = actor.tileY                   || 1;
         this.radius         = Math.max(this.width, this.height) / 2;
 
         /** Logic properties
@@ -184,14 +185,8 @@ class Actor {
     set width(value) {
 
         this._width  = value;
-        this._scaleX = this._width / (this.originalWidth * this._tileX);
 
-        console.log("----", this._width, this._width / (this.originalWidth * this._tileX))
-
-        if(this._spriteOn) { 
-            this.sprite.width = this.width; 
-            this.sprite.scale.x = this.scaleX;
-        }
+        if(this._spriteOn) {  this.sprite.width = this._width; }
         if(this._textOn) { 
             this.textStyle.wordWrapWidth = this._width; 
             this.textStyle.padding       = this._width; 
@@ -204,11 +199,9 @@ class Actor {
     set scaleX(value) {
 
         this._scaleX = value;
-        this._width  = this.originalWidth * this._scaleX * (this._tileX || 1);
 
         if(this._spriteOn && this.image != "") { 
-            this.sprite.scale.x = this._scaleX * (this._flipX ? -1 : 1); 
-            this.sprite.width = this._width; console.log("scaleX", this._scaleX, this.sprite.scale.x, this.sprite.width, this._width);
+            this.sprite.scale.x = this._scaleX * (this._flipX ? -1 : 1);
         }
         if(this._textOn) { 
             this.textStyle.wordWrapWidth = this._width; 
@@ -222,9 +215,9 @@ class Actor {
     set tileX(value) {
 
         this._tileX = value;
-        this._width = this.originalWidth * this._tileX * (this._scaleX || 1);
+        this._width = this.originalWidth * this._tileX;
 
-        if(this._spriteOn) { this.sprite.width = this._width; console.log("tileX", this.originalWidth, this.sprite.width, this._width);}
+        if(this._spriteOn && this.image != "") { this.sprite.width = this._width; }
 
         // TODO: PHYSICS
     }
@@ -234,7 +227,6 @@ class Actor {
     set height(value) {
 
         this._height  = value;
-        this._scaleY = this._height / this.originalHeight;
 
         if(this._spriteOn) { this.sprite.height = this._height; }
 
@@ -245,9 +237,10 @@ class Actor {
     set scaleY(value) {
 
         this._scaleY = value;
-        this._height  *= this._scaleY;
 
-        if(this._spriteOn && this.image != "") { this.sprite.scale.y = this._scaleY * (this._flipY ? -1 : 1); }
+        if(this._spriteOn && this.image != "") { 
+            this.sprite.scale.y = this._scaleY * (this._flipY ? -1 : 1); 
+        }
 
         // TODO: PHYSICS
     }
@@ -256,8 +249,9 @@ class Actor {
     set tileY(value) {
 
         this._tileY = value;
+        this._height = this.originalHeight * this._tileY;
 
-        //if(this._spriteOn) { this.sprite.height = this._tileY * this.originalHeight; }
+        if(this._spriteOn && this.image != "") { this.sprite.height = this._height; }
 
         // TODO: PHYSICS
     }
@@ -294,12 +288,12 @@ class Actor {
         if(this._spriteOn) { this.sprite.texture = this.texture; }
     }
 
-    get alpha() { return this._alpha; }
-    set alpha(value) {
+    get opacity() { return this._opacity; }
+    set opacity(value) {
 
-        this._alpha = Util.clamp(value, 0, 1);
+        this._opacity = Util.clamp(value, 0, 1);
 
-        if(this._spriteOn) { this.sprite.alpha = this._alpha; }
+        if(this._spriteOn) { this.sprite.alpha = this._opacity; }
     }
 
     get color() { return this._color; }
