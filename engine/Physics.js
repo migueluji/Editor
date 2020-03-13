@@ -37,7 +37,7 @@ class Physics {
 
         actor.rigidbody.m_body.SetPosition(new b2Vec2(actor.x / this.PIXELS_PER_METER, actor.y / this.PIXELS_PER_METER));
         actor.rigidbody.m_body.SetAngle(Util.degToRad(actor.angle));
-        //this.drawDebug(actor); // DEBUG
+        this.drawDebug(actor); // DEBUG
     }
 
     updateGame() {

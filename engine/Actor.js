@@ -83,22 +83,21 @@ class Actor {
         this.y              = actor.y                       || 0;
         this.angle          = actor.angle                   || 0;
         this.screen         = actor.screen                  || false;
-
-
         this.originalWidth  = (actor.width / actor.scaleX) / actor.tileX;
         this.originalHeight = (actor.height / actor.scaleY) / actor.tileY;
-
-        console.log("--- \n originalWidth: " + this.originalWidth + "\n",
-                    "width: " + actor.width + "\n",
-                    "scaleX: " + actor.scaleX + "\n",
-                    "tileX: " + actor.tileX + "\n");
         this.scaleX         = actor.scaleX                  || 1;
         this.scaleY         = actor.scaleY                  || 1;
-        this.width          = actor.width                   || 50;
-        this.height         = actor.height                  || 50;
         this.tileX          = actor.tileX                   || 1;
         this.tileY          = actor.tileY                   || 1;
+        this.width          = actor.width                   || 50;
+        this.height         = actor.height                  || 50;
         this.radius         = Math.max(this.width, this.height) / 2;
+
+        console.log("----X------ \n",
+                    "width: " + actor.width + "\n", 
+                    "scaleX: " + actor.scaleX + "\n",
+                    "tileX: " + actor.tileX + "\n",
+                    "original: " + this.originalWidth + "\n");
 
         /** Logic properties
          * ---------------------------------- */
@@ -185,12 +184,19 @@ class Actor {
     set width(value) {
 
         this._width  = value;
+        this._scaleX = this._width / (this.originalWidth * this._tileX);
 
         if(this._spriteOn) {  this.sprite.width = this._width; }
         if(this._textOn) { 
             this.textStyle.wordWrapWidth = this._width; 
             this.textStyle.padding       = this._width; 
         }
+        
+            console.log("----WIDTH------ \n",
+                        "width: " + this._width + "\n", 
+                        "scaleX: " + this._scaleX + "\n",
+                        "tileX: " + this._tileX + "\n",
+                        "original: " + this.originalWidth + "\n");
 
         // TODO: PHYSICS
     }
@@ -199,6 +205,7 @@ class Actor {
     set scaleX(value) {
 
         this._scaleX = value;
+        this._width = this.originalWidth * this._scaleX * this._tileX;
 
         if(this._spriteOn && this.image != "") { 
             this.sprite.scale.x = this._scaleX * (this._flipX ? -1 : 1);
@@ -207,6 +214,12 @@ class Actor {
             this.textStyle.wordWrapWidth = this._width; 
             this.textStyle.padding       = this._width;  
         }
+        
+        console.log("----SCALE------ \n",
+                    "width: " + this._width + "\n", 
+                    "scaleX: " + this._scaleX + "\n",
+                    "tileX: " + this._tileX + "\n",
+                    "original: " + this.originalWidth + "\n");
 
         // TODO: PHYSICS
     }
@@ -215,9 +228,15 @@ class Actor {
     set tileX(value) {
 
         this._tileX = value;
-        this._width = this.originalWidth * this._tileX;
+        this._width = this.originalWidth * this._tileX * this._scaleX;
 
         if(this._spriteOn && this.image != "") { this.sprite.width = this._width; }
+        
+        console.log("----TILE------ \n",
+                    "width: " + this._width + "\n", 
+                    "scaleX: " + this._scaleX + "\n",
+                    "tileX: " + this._tileX + "\n",
+                    "original: " + this.originalWidth + "\n");
 
         // TODO: PHYSICS
     }
@@ -374,7 +393,7 @@ class Actor {
             /*switch(this._align) {
 
                 case "left": 
-                    this.textSprite.anchor.x = 0.75;
+                    this.textSprite.anchor.x = 0;
                     console.log("left", this.textSprite.x)
                     break;
 
