@@ -83,16 +83,16 @@ class Engine {
 
                 for(var k = 0; k < 1; k++) {                                                                            /** DEBUG */
 
-                    this.actorList[scene.actorList[i].ID] = new Actor(scene.actorList[i], this);                                // Esto es bueno, no es debug.
+                    this.actorList[scene.actorList[i].ID] = new Actor(scene.actorList[i], this);            // Esto es bueno, no es debug.
 
-                    //this.actorList[auxID].x = -300 + Math.random() * 600;                                           /** DEBUG */
-                    //this.actorList[auxID].y = -200 + Math.random() * 2800;                                       /** DEBUG */ 
+                    //this.actorList[auxID].x = -300 + Math.random() * 600;                                             /** DEBUG */
+                    //this.actorList[auxID].y = -200 + Math.random() * 2800;                                            /** DEBUG */ 
 
-                    //this.actorList[auxID].velocityX = -3 + Math.random() * 6;                                           /** DEBUG */
-                    //this.actorList[auxID].velocityY = -2 + Math.random() * 4;                                       /** DEBUG */ 
+                    //this.actorList[auxID].velocityX = -3 + Math.random() * 6;                                         /** DEBUG */
+                    //this.actorList[auxID].velocityY = -2 + Math.random() * 4;                                         /** DEBUG */ 
 
-                    //this.actorList[auxID].sprite.x = this.actorList[auxID].x;                                           /** DEBUG */
-                    //this.actorList[auxID].sprite.y = this.actorList[auxID].y;                                       /** DEBUG */ 
+                    //this.actorList[auxID].sprite.x = this.actorList[auxID].x;                                         /** DEBUG */
+                    //this.actorList[auxID].sprite.y = this.actorList[auxID].y;                                         /** DEBUG */ 
                 }                
             }
             

@@ -67,8 +67,8 @@ class Physics {
          * -------------------------------------------------- */
         if(data.physicsOn || actor.triggerOn) {
 
-            actor.rigidbody = this.createPhysicsBody(data); /** Creacion del physics body en el sistema y en el mundo fisico de Box2D. */
-            actor.rigidbody.SetUserData(actor);             /** Definicion del objeto padre del physics body (NECESARIO PARA LA DETECCION DE COLISIONES). */
+            actor.rigidbody = this.createPhysicsBody(data); /** Creacion del rigidbody en el sistema y en el mundo fisico de Box2D. */
+            actor.rigidbody.SetUserData(actor);             /** Definicion del objeto padre del rigidbody (NECESARIO PARA LA DETECCION DE COLISIONES). */
             actor.collisionList = (actor.collisionList == undefined) ? [] : actor.collisionList;
 
             if(data.physicsOn) { 
@@ -85,6 +85,22 @@ class Physics {
                 actor.physicsDebugSprite = new PIXI.Sprite();
                 this.engine.render.stage.addChild(actor.physicsDebugSprite);
             /* FIN DEBUG */
+        }
+    }
+
+    updateRigidbody(actor) {
+
+        if(actor.physicsOn || actor.triggerOn) {
+
+            actor.radius = Math.max(actor.width, actor.height) / 2;
+
+            //this.destroyRigidbody(actor);
+            actor.rigidbody = this.createPhysicsBody(actor); /** Creacion del nuevo rigidbody en el sistema y en el mundo fisico de Box2D. */
+
+            if(!actor.physicsOn) {
+
+                actor.rigidbody.SetSensor(true);            /** Activamos el rigidbody del actor como sensor, para que no interactue con otros rigidbodies. */
+            }
         }
     }
 
@@ -243,16 +259,21 @@ class Physics {
 
             /** Eliminamos el actor del physics world 
              * ----------------------------------------------------------------------- */
-            this.world.DestroyBody(actor.rigidbody.m_body); // Box2D JS Memory Leak: https://stackoverflow.com/questions/20840308/how-to-get-around-the-memory-leak-issue-in-box2d-for-javascript-port
-            actor.rigidbody.m_body.Destroy();
-            Util.deepDestroy(actor.rigidbody, "m_body");
-            Util.deepDestroy(actor.rigidbody);
+            this.destroyRigidbody(actor);
             Util.destroy(actor, "rigidbody");
             
             /** Eliminamos el actor de la lista de actores del motor de fisicas 
              * ----------------------------------------------------------------------- */
-            delete this.rigidbodyList[actor.ID];
+            delete this.rigidbodyList[actor.ID]; // TODO: ESTO NO ESTA BIEN
         }
+    }
+
+    destroyRigidbody(actor) {
+
+        this.world.DestroyBody(actor.rigidbody.m_body); // Box2D JS Memory Leak: https://stackoverflow.com/questions/20840308/how-to-get-around-the-memory-leak-issue-in-box2d-for-javascript-port
+        actor.rigidbody.m_body.Destroy();
+        Util.deepDestroy(actor.rigidbody, "m_body");
+        Util.deepDestroy(actor.rigidbody);
     }
 
 

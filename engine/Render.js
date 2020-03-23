@@ -65,6 +65,39 @@ class Render {
         }
     }
 
+    updateSpriteDimensions(actor) {
+
+        if(actor.spriteOn) { 
+        
+            actor.sprite.cacheAsBitmap  = false; 
+            
+            if(actor.image != "") { 
+
+                actor.sprite.width      = actor.width   * (1 / actor.scaleX);
+                actor.sprite.height     = actor.height  * (1 / actor.scaleY);
+
+                actor.sprite.scale.x    = actor.scaleX  * (actor.flipX ? -1 : 1); 
+                actor.sprite.scale.y    = actor.scaleY  * (actor.flipY ? -1 : 1);
+            }
+            else {
+
+                actor.sprite.width      = actor.width;
+                actor.sprite.height     = actor.height;
+            }
+
+            actor.sprite.cacheAsBitmap  = true; 
+        }
+    }
+
+    updateTextDimensions(actor) {
+
+        if(actor.textOn) { 
+        
+            actor.textStyle.wordWrapWidth = actor.width; 
+            actor.textStyle.padding       = actor.width; 
+        }
+    }
+
     destroyActor(actor) {
 
         /** Comprobamos que el actor no ha sido previamente desactivado*/
