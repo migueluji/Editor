@@ -94,7 +94,27 @@ class Render {
         if(actor.textOn) { 
         
             actor.textStyle.wordWrapWidth = actor.width; 
-            actor.textStyle.padding       = actor.width; 
+            actor.textStyle.padding       = actor.width;
+
+            actor.textStyle.align = actor.align;
+
+            switch(actor.align) {
+
+                case "left": 
+                    actor.textSprite.pivot.x = actor.width / 2;
+                    actor.textSprite.anchor.x = 0.0;
+                    break;
+
+                case "right": 
+                    actor.textSprite.pivot.x = -actor.width / 2;
+                    actor.textSprite.anchor.x = 1.0;
+                    break;
+
+                case "center": 
+                    actor.textSprite.pivot.x = 0.0;
+                    actor.textSprite.anchor.x = 0.5;
+                    break; 
+            }
         }
     }
 

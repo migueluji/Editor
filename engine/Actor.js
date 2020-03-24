@@ -2,27 +2,31 @@ class Actor {
 
     constructor(actor, engine) {
 
+        /**
+         * Asignacion del motor
+         * --------------------------------------------------------------------- */
         this.engine = engine;
 
         /** Configuracion de las propiedades de ejecucion en los componentes del motor.
-         * --------------------------------------------------------------------------------- */
-        engine.render.setActorRender(this, actor);          // Añadir el actor al motor de render. 
-        //engine.audio.setActorAudio(this, actor);            // Añadir el actor al motor de audio.
-        engine.logic.setActorLogic(this, actor);            // Añadir el actor al motor de logica.
-        engine.input.setActorInput(this, actor);            // Añadir el actor al motor de input.
-        engine.physics.setActorPhysics(this, actor);             // Añadir el actor al motor de fisicas.
+         * --------------------------------------------------------------------- */
+        this.engine.render.setActorRender(this, actor);     // Añadir el actor al motor de render. 
+        //this.engine.audio.setActorAudio(this, actor);     // Añadir el actor al motor de audio.
+        this.engine.logic.setActorLogic(this, actor);       // Añadir el actor al motor de logica.
+        this.engine.input.setActorInput(this, actor);       // Añadir el actor al motor de input.
+        this.engine.physics.setActorPhysics(this, actor);   // Añadir el actor al motor de fisicas.
 
         /**
          * General properties
-         * --------------------------------- */
+         * --------------------------------------------------------------------- */
         this.name           = actor.name                    || "NewActor" + Util.random();
         this.scene          = this.engine.activeScene       || null;
         this.ID             = actor.ID                      || actor.name  + Util.random();
         this.sleeping       = actor.sleeping ? false : true || false;
         this.destroyActor   = actor.destroyActor            || false;
+        this.loaded         = false;
 
         /** Sprite properties
-         * ---------------------------------- */
+         * --------------------------------------------------------------------- */
         this.image          = actor.image                   || "";
         this.spriteOn       = actor.spriteOn                || false;
         this.color          = actor.color                   || "0xffffff";
@@ -33,7 +37,7 @@ class Actor {
         this.flipY          = actor.flipY                   || false;
 
         /** Text properties
-         * ---------------------------------- */
+         * --------------------------------------------------------------------- */
         this.text           = actor.text                    || "";
         this.textOn         = actor.textOn                  || false;
         this.align          = actor.align                   || "left";
@@ -45,11 +49,11 @@ class Actor {
         this.offsetY        = actor.offsetY                 || 0;
 
         /** Input properties
-         * ---------------------------------- */
+         * --------------------------------------------------------------------- */
         this.interactiveOn  = false;
 
         /** Audio properties
-         * ---------------------------------- */
+         * --------------------------------------------------------------------- */
         this.sound          = actor.sound                   || "";          /** */
         this.soundOn        = actor.soundOn                 || false;       /** */
         this.pan            = actor.pan                     || 0;           /** */
@@ -58,13 +62,13 @@ class Actor {
         this.loop           = actor.loop                    || false;       /** */
 
         /** Collision properties
-         * ---------------------------------- */
+         * --------------------------------------------------------------------- */
         this.tags           = actor.tags                    || [];
         this.collider       = actor.collider                || "Circle";
         this.physicVertices = actor.physicVertices          || null; 
 
         /** Physics properties
-         * ---------------------------------- */
+         * --------------------------------------------------------------------- */
         this.physicsOn       = actor.physicsOn              || false;       /** */
         this.velocityX       = actor.velocityX              || 0;
         this.velocityY       = actor.velocityY              || 0;
@@ -78,16 +82,11 @@ class Actor {
         this.type            = actor.type                   || "Dynamic";
 
         /** Settings properties
-         * ---------------------------------- */
+         * --------------------------------------------------------------------- */
         this.x              = actor.x                       || 0;
         this.y              = actor.y                       || 0;
         this.angle          = actor.angle                   || 0;
         this.screen         = actor.screen                  || false;
-        //this.originalWidth  = (actor.width / actor.scaleX) / actor.tileX;
-        //this.originalHeight = (actor.height / actor.scaleY) / actor.tileY;
-
-
-
         this.scaleX         = actor.scaleX                  || 1;
         this.scaleY         = actor.scaleY                  || 1;
         this.tileX          = actor.tileX                   || 1;
@@ -96,20 +95,18 @@ class Actor {
         this.height         = actor.height                  || 50;
         this.radius         = Math.max(this.width, this.height) / 2;
 
-        /*console.log("----X------ \n",
-                    "width: " + actor.width + "\n", 
-                    "scaleX: " + actor.scaleX + "\n",
-                    "tileX: " + actor.tileX + "\n",
-                    "original: " + this.originalWidth + "\n");*/
-
         /** Logic properties
-         * ---------------------------------- */
-        //this.scope      = {};  // ESTO ESTA COMENTADO POR EL ORDEN. Al crear los motores arriba, necesitan esta informacion. Hay que arreglar esto.
-        //this.scriptList = [];
+         * --------------------------------------------------------------------- */
+        // Las gestiona el motor de logica (ver Logic.setActorLogic()).
 
-        /** Variables custom
+        /** Variables añadidas por el usuario
          * --------------------------------------------------------------------- */
         for(var i in actor) { if(!(i in this)) { this[i] = actor[i]; } }
+
+        /**
+         * Actualizacion de la variable de control de la carga de informacion
+         * --------------------------------------------------------------------- */
+        this.loaded = true;
     }
 
     setSpriteProperties() {
@@ -191,46 +188,41 @@ class Actor {
 
         this.engine.render.updateSpriteDimensions(this);
         this.engine.render.updateTextDimensions(this);
-        
-
-        //this.engine.physics.updateRigidbody(this);
+        this.engine.physics.updateRigidbody(this);
     }
 
     get scaleX() { return this._scaleX; }
     set scaleX(value) {
 
         this._scaleX = value;
-        this._width = this.originalWidth * this._scaleX * this._tileX;
+        this._width  = this.originalWidth * this._scaleX * this._tileX;
 
         this.engine.render.updateSpriteDimensions(this);
         this.engine.render.updateTextDimensions(this);
-
-        //this.engine.physics.updateRigidbody(this);
+        this.engine.physics.updateRigidbody(this);
     }
 
     get tileX() { return this._tileX; }
     set tileX(value) {
 
-        this._tileX = value;
-        this._width = this.originalWidth * this._tileX * this._scaleX;
+        this._tileX  = value;
+        this._width  = this.originalWidth * this._tileX * this._scaleX;
         this._scaleX = this._width / (this.originalWidth * this._tileX);
 
         this.engine.render.updateSpriteDimensions(this);
         this.engine.render.updateTextDimensions(this);
-
-        //this.engine.physics.updateRigidbody(this);
+        this.engine.physics.updateRigidbody(this);
     }
 
 
     get height() { return this._height; }
     set height(value) {
 
-        this._height  = value;
+        this._height = value;
         this._scaleY = this._height / (this.originalHeight * this._tileY);
         
         this.engine.render.updateSpriteDimensions(this);
-
-        //this.engine.physics.updateRigidbody(this);
+        this.engine.physics.updateRigidbody(this);
     }
 
     get scaleY() { return this._scaleY; }
@@ -240,20 +232,18 @@ class Actor {
         this._height = this.originalHeight * this._scaleY * this._tileY;
 
         this.engine.render.updateSpriteDimensions(this);
-
-        //this.engine.physics.updateRigidbody(this);
+        this.engine.physics.updateRigidbody(this);
     }
 
     get tileY() { return this._tileY; }
     set tileY(value) {
 
-        this._tileY = value;
+        this._tileY  = value;
         this._height = this.originalHeight * this._tileY * this._scaleY;
         this._scaleY = this._height / (this.originalHeight * this._tileY);
 
         this.engine.render.updateSpriteDimensions(this);
-
-        //this.engine.physics.updateRigidbody(this);
+        this.engine.physics.updateRigidbody(this);
     }
 
     get flipX() { return this._flipX; }
@@ -278,14 +268,6 @@ class Actor {
         this._image = value;
 
         this.texture = (player.file.loader.resources[this._image] != undefined) ? player.file.loader.resources[this._image].texture : PIXI.Texture.WHITE;
-
-        if(this.image == ""){
-
-            console.log(this.image, this.texture.orig);
-            //this.texture.orig.width = 50;
-            //this.texture.orig.height = 50;
-            //console.log("----", this.image, this.texture.orig);
-        } 
 
         this.originalWidth  = this.texture.orig.width;
         this.originalHeight = this.texture.orig.height;
@@ -346,7 +328,7 @@ class Actor {
     get text() { return this._text; }
     set text(value) {
 
-        this._text = value + "\n";
+        this._text = value;
     }
 
     get font() { return this._font; }
@@ -378,27 +360,7 @@ class Actor {
 
         this._align = value.toLowerCase();
 
-        if(this._textOn) { 
-
-            this.textStyle.align = this._align; 
-            
-            /*switch(this._align) {
-
-                case "left": 
-                    this.textSprite.anchor.x = 0;
-                    console.log("left", this.textSprite.x)
-                    break;
-
-                case "right": 
-                    this.textSprite.anchor.x = 1.0;
-                    this.textSprite.position.x += this._width / 2;
-                    break;
-
-                case "center": 
-                    this.textSprite.anchor.x = 0.5;
-                    break; 
-            }*/
-        }
+        this.engine.render.updateTextDimensions(this);
     }
 
     get style() { return this._style; }
@@ -432,7 +394,7 @@ class Actor {
     set textSprite(value) {
 
         this._textSprite = value;
-        this._textSprite.anchor.y = 0.5;
+        this._textSprite.anchor.set(0.5);
     }
 
     get scope() { return this._scope; }

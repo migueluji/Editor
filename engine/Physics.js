@@ -90,7 +90,7 @@ class Physics {
 
     updateRigidbody(actor) {
 
-        if(actor.physicsOn || actor.triggerOn) {
+        if(actor.loaded && (actor.physicsOn || actor.triggerOn)) {
 
             actor.radius = Math.max(actor.width, actor.height) / 2;
 
