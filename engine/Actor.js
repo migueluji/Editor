@@ -9,11 +9,11 @@ class Actor {
 
         /** Configuracion de las propiedades de ejecucion en los componentes del motor.
          * --------------------------------------------------------------------- */
-        this.engine.render.setActorRender(this, actor);     // Añadir el actor al motor de render. 
-        //this.engine.audio.setActorAudio(this, actor);     // Añadir el actor al motor de audio.
-        this.engine.logic.setActorLogic(this, actor);       // Añadir el actor al motor de logica.
-        this.engine.input.setActorInput(this, actor);       // Añadir el actor al motor de input.
-        this.engine.physics.setActorPhysics(this, actor);   // Añadir el actor al motor de fisicas.
+        this.engine.render.setActorRender(this, actor);     /** Añadir el actor al motor de render. */ 
+        this.engine.audio.setActorAudio(this, actor);       /** Añadir el actor al motor de audio. */ 
+        this.engine.logic.setActorLogic(this, actor);       /** Añadir el actor al motor de logica. */ 
+        this.engine.input.setActorInput(this, actor);       /** Añadir el actor al motor de input. */ 
+        this.engine.physics.setActorPhysics(this, actor);   /** Añadir el actor al motor de fisicas. */ 
 
         /**
          * General properties
@@ -111,8 +111,13 @@ class Actor {
 
     setSpriteProperties() {
 
-        this.sprite.tilePosition.x += this.scrollX * this.engine.game.deltaTime;
-        this.sprite.tilePosition.y += this.scrollY * this.engine.game.deltaTime;
+        if(this.scrollX != 0 || this.scrollY != 0) {
+            
+            this.sprite.cacheAsBitmap = false;
+            this.sprite.tilePosition.x += this.scrollX * this.engine.game.deltaTime;
+            this.sprite.tilePosition.y += this.scrollY * this.engine.game.deltaTime;
+            this.sprite.cacheAsBitmap = true;
+        }
     }
 
     setTextProperties() {
@@ -125,13 +130,27 @@ class Actor {
         Util.deepDestroy(this);
     }
 
+    sleep() {
 
+        this.engine.physics.sleep(this);
+        this.engine.input.sleep(this);
+        this.engine.logic.sleep(this);
+        this.engine.audio.sleep(this);
+        this.engine.render.sleep(this);
+    }
 
+    awake() {
+
+        this.engine.physics.awake(this);
+        this.engine.input.awake(this);
+        this.engine.logic.awake(this);
+        this.engine.audio.awake(this);
+        this.engine.render.awake(this);
+    }
 
     /** ###############################################################################
      *  Control sobre el cambio de propiedades en ejecucion.
      *  ############################################################################### */
-
     get x() { return this._x; }
     set x(value) { 
 
@@ -306,8 +325,6 @@ class Actor {
     set sprite(value) {
 
         this._sprite = value;
-
-        this._sprite.anchor.set(0.5001); // This will set the origin to center. (0.5) is same as (0.5, 0.5).
     }
 
     get textOn() { return this._textOn; }
@@ -394,7 +411,6 @@ class Actor {
     set textSprite(value) {
 
         this._textSprite = value;
-        this._textSprite.anchor.set(0.5);
     }
 
     get scope() { return this._scope; }
@@ -414,14 +430,12 @@ class Actor {
     get destroyActor() { return this._destroyActor; }
     set destroyActor(value) {
 
-        /** Actualizamos la propiedad de la estructura de datos del actor.*/
         this._destroyActor = value;
 
-        /** Si el valor es positivo, añadimos el actor a la lista de destruccion. */
-        /*if(this._destroyActor) {
+        if(this._destroyActor) {
 
             player.engine.addDestroyedActor(this);
-        }*/
+        }
     }
 
     get tags() { return this._tags; }
@@ -434,15 +448,15 @@ class Actor {
     set sleeping(value) {
 
         this._sleeping = value;
-/*
-        if(value) {
 
-            this.engine.enableActor(this);
+        if(this.loaded && this._sleeping) {
+
+            this.sleep();
         }
-        else {
+        else if(this.loaded) {
 
-            this.engine.disableActor(this);
-        }*/
+            this.awake();
+        }
     }
 
     get physicsOn() { return this._physicsOn; }

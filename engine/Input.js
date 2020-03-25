@@ -2,8 +2,8 @@ class Input {
 
     constructor(engine) {
 
-        this.engine         = engine;               /** */
-        this.game           = this.engine.game;     /** */
+        this.engine     = engine;               /** */
+        this.game       = this.engine.game;     /** */
 
         this.actorList  = [];                                       /** */
 
@@ -170,10 +170,29 @@ class Input {
         /** Si es interactivo, lo eliminamos de las listas de actualizacion del motor de render. */
         if(actor.interactiveOn) {
 
-            this.engine.render.destroyActor(actor);
+            actor.sprite.interactive = false;
         }
+        
+        this.actorList = Util.removeByID(this.actorList, actor.ID); /** Eliminamos el actor de la lista de actores del motor de input */
+    }
 
-        /** Eliminamos el actor de la lista de actores del motor de input */
-        Util.destroy(this.actorList, actor.ID);
+    
+
+    sleep(actor) {
+
+        if(actor.interactiveOn) { 
+            
+            if(actor.spriteOn) { actor.sprite.interactive = false; }
+            if(actor.textOn) { actor.textSprite.interactive = false; }
+        }
+    }
+
+    awake(actor) {
+
+        if(actor.interactiveOn) { 
+            
+            if(actor.spriteOn) { actor.sprite.interactive = true; }
+            if(actor.textOn) { actor.textSprite.interactive = true; }
+        }
     }
 }

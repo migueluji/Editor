@@ -34,7 +34,6 @@
 	<body>
 
 		<script src="libraries/math.js"></script>
-        <script src="libraries/stats.min.js"></script>
 		<script src="https://pixijs.download/release/pixi.min.js"></script>
 		<script src="libraries/box2d.min.js"></script>
 		<script src="libraries/howler.min.js"></script>

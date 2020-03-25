@@ -1,49 +1,34 @@
 class Engine {
 
-    /* ····································································
+    /* ----------------------------------------
      *  CONSTRUCTOR
-    ···································································· */
+     *  * ---------------------------------------- */
     constructor(game) {
 
-        this.physics    = new Physics(this);    /** */
-        this.render     = new Render(this);             /** */
-        this.input      = new Input(this);              /** */
-        //this.audio      = new Audio(game, this);        /** */
-        this.logic      = new Logic(this);              /** */
+        this.physics        = new Physics(this);    /** */
+        this.render         = new Render(this);     /** */
+        this.input          = new Input(this);      /** */
+        this.audio          = new Audio(this);      /** */
+        this.logic          = new Logic(this);      /** */
 
-        this.game       = new Game(game, this);         /** */
+        this.game           = new Game(game, this); /** */
 
-        this.actorList  = {};                           /** */
-        this.sceneList  = {};                           /** Necesitamos guardar los datos crudos de las escenas activas para acceder al Cast cuando queremos spawnear un actor. */
+        this.actorList      = {};                   /** Diccionario de referencia de los actores presentes en el juego. */
+        this.sceneList      = {};                   /** Necesitamos guardar los datos crudos de las escenas activas para acceder al Cast cuando queremos spawnear un actor. */
         
-        this.spawnedActorsList      = {};               /** */
-        this.spawnedNodesList       = [];               /** */
-        this.destroyedActorsList    = [];               /** */
-        this.enabledActorsList      = [];               /** Lista auxiliar de control para los cambios en la propiedad live. */
-        this.disabledActorsList     = [];               /** Lista auxiliar de control para los cambios en la propiedad live. */
+        this.spawnList      = [];                   /** Lista auxiliar para la creacion de nuevos actores (spawn) tras cada iteraccion del ciclo de juego. */
+        this.destroyList    = [];                   /** Lista auxilair para la eliminacion de actores tras cada iteracion del ciclo de juego. */
         
-        this.nextScene              = null;             /** Propiedad auxiliar de control para activar una nueva escena. */
-        this.removeScene            = false;            /** Propiedad auxiliar de control para eliminar la ultima escena. */
+        this.nextScene      = null;                 /** Propiedad auxiliar de control para activar una nueva escena. */
+        this.removeScene    = false;                /** Propiedad auxiliar de control para eliminar la ultima escena. */
 
         this.addScene(this.game.sceneList[this.game.activeScene]); /** Añadimos la primera escena. */
-
-        /** DEBUG */
-            this.stats = new Stats();
-            this.stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-            this.stats.dom.style.marginLeft = "350px"; //para debug del [0, 0] (BORRAR SIN PROBLEMA)
-            this.stats.dom.style.marginTop = "50px"; //para debug del [0, 0] (BORRAR SIN PROBLEMA)
-		    document.body.appendChild(this.stats.dom);
-        /** FIN DEBUG */
     }
 
-    /* ····································································
+    /* ----------------------------------------
      *  GAME LOOP
-    ···································································· */
+     * ---------------------------------------- */
     gameLoop() {
-
-        /** DEBUG */
-            this.stats.begin();
-        /** FIN DEBUG */
 
         this.physics.run();
         this.logic.run();
@@ -51,25 +36,21 @@ class Engine {
 
         this.resetEngine();
 
-        /** DEBUG */
-            this.stats.end();
-        /** FIN DEBUG */
-
         window.requestAnimationFrame(this.gameLoop.bind(this));
     }
 
     resetEngine() {
 
-        this.updateScenes();
-
-        this.input.reset();     // resetear las propiedades de input
-        this.logic.reset();     // resetear las propiedades de logica
-        this.spawnActors();     // spawnear los actores determinados por la lista
-        this.destroyActors();   // eliminar los actores determinados por la lista
-        this.enableActors();    // activar los actores deshabilitados en la lista
-        this.disableActors();   // desactivar los actores activados en la lista
+        this.updateScenes();    /** Gestion de los cambios de escena (si fuera necesario). */
+        this.input.reset();     /** Resetear las propiedades de input (mouse, keys, etc). */ 
+        this.logic.reset();     /** Resetear las propiedades de logica (deltaTime, timer, etc). */ 
+        this.spawnActors();     /** Spawnear los actores determinados por la lista. */ 
+        this.destroyActors();   /** Eliminar los actores determinados por la lista. */ 
     }
 
+    /* ----------------------------------------
+     *  SCENE MANAGEMENT
+     * ---------------------------------------- */
     addScene(scene) {
 
         /** Actualizar la lista de escenas activas y la lista auxiliar de carga de actores. */
@@ -81,198 +62,84 @@ class Engine {
             /** Si es un actor activo */
             if(!scene.actorList[i].sleeping) {
 
-                for(var k = 0; k < 1; k++) {                                                                            /** DEBUG */
-
-                    this.actorList[scene.actorList[i].ID] = new Actor(scene.actorList[i], this);            // Esto es bueno, no es debug.
-
-                    //this.actorList[auxID].x = -300 + Math.random() * 600;                                             /** DEBUG */
-                    //this.actorList[auxID].y = -200 + Math.random() * 2800;                                            /** DEBUG */ 
-
-                    //this.actorList[auxID].velocityX = -3 + Math.random() * 6;                                         /** DEBUG */
-                    //this.actorList[auxID].velocityY = -2 + Math.random() * 4;                                         /** DEBUG */ 
-
-                    //this.actorList[auxID].sprite.x = this.actorList[auxID].x;                                         /** DEBUG */
-                    //this.actorList[auxID].sprite.y = this.actorList[auxID].y;                                         /** DEBUG */ 
-                }                
+                this.actorList[scene.actorList[i].ID] = new Actor(scene.actorList[i], this);          
             }
             
             this.sceneList[this.game.activeScene][scene.actorList[i].ID] = scene.actorList[i];
         }
-        
-        /** Compilar las expresiones y los textos una vez cargados todos los datos en memoria */
-        this.logic.compileExpressions();
-        this.render.compileTexts();
+
+        this.logic.compileExpressions();    /** Compilamos las expresiones logicas de los nuevos actores. */
+        this.render.compileTexts();         /** Compilamos los textos de los nuevos actores. */
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /* ····································································
-     *  SPAWN ACTOR HANDLERS
-    ···································································· */
+    
+    /* ----------------------------------------
+     *  SPAWN MANAGEMENT
+     * ---------------------------------------- */
     addSpawnedActor(actorName, x, y, angle) {
 
-        //console.log(actorName, x, y, angle);
+        let _name   = "Spawn_of_" + actorName + "_" + Util.random();
+        let _actor  = Object.assign({}, this.game.sceneList[this.game.activeScene].actorList[actorName]);
 
-        //console.log(this.sceneList[this.game.activeScene], actorName);
-        var name = "Spawn_of_" + actorName + "_" + Util.random();
+        _actor.sleeping = false;
+        _actor.name     = _name;
+        _actor.ID       = _name;
+        _actor.x        = x;
+        _actor.y        = y; 
+        _actor.angle    = angle;
 
-        this.spawnedActorsList[name]            = Object.assign({}, this.game.sceneList[this.game.activeScene].actorList[actorName]); 
-        this.spawnedActorsList[name].sleeping   = false;
-        this.spawnedActorsList[name].name       = name;
-        this.spawnedActorsList[name].ID         = name;
-        this.spawnedActorsList[name].x          = x;
-        this.spawnedActorsList[name].y          = y; 
-        this.spawnedActorsList[name].angle      = angle;
-
-        name = null;
+        this.spawnList.push(_actor);
     }
 
     spawnActors() {
 
-        for(var i in this.spawnedActorsList) {
+        for(var i = 0; i < this.spawnList.length; i++) {
 
-            this.actorList[i] = new Actor(this.spawnedActorsList[i], this);
-            Util.destroy(this.spawnedActorsList, i);
+            this.actorList[this.spawnList[i].ID] = new Actor(this.spawnList[i], this);
         }
 
-        this.logic.compileExpressions();
+        this.spawnList = [];                /** Vaciamos la lista de actores a spawnear. */
 
-        this.spawnedActorsList = {};
-
-        //console.log("SCENE LIST", Object.keys(this.sceneList[this.game.activeScene]).length);
-        //console.log("ACTOR LIST", Object.keys(this.actorList).length);
+        this.logic.compileExpressions();    /** Compilamos las expresiones logicas de los nuevos actores. */
+        this.render.compileTexts();         /** Compilamos los textos de los nuevos actores. */
     }
 
-    /* ····································································
-     *  DESTROY ACTOR HANDLERS
-    ···································································· */
+    /* ----------------------------------------
+     *  DESTROY MANAGEMENT
+     * ---------------------------------------- */
     addDestroyedActor(actor) {
 
-        this.destroyedActorsList.push(actor);
-
-        //console.log("-- Destroyed Actors: ", this.destroyedActorsList);
+        this.destroyList.push(actor);
     }
 
     destroyActors() {
 
-        for(var i = 0; i < this.destroyedActorsList.length; i++) {
-
-            //console.log("DESTROY", this.destroyedActorsList[i])
+        for(var i = 0; i < this.destroyList.length; i++) {
 
             /** Destruimos las referencias y las estructuras de datos relativas al actor en cada modulo del motor
-             * ------------------------------------------------------------------------------------------------------- */
-            //this.physics.destroyActor(this.destroyedActorsList[i]);     // Eliminar el actor de las fisicas
-            this.render.destroyActor(this.destroyedActorsList[i]);      // Eliminar el actor del render
-            this.input.destroyActor(this.destroyedActorsList[i]);       // Eliminar el actor del input
-            this.audio.destroyActor(this.destroyedActorsList[i]);       // Eliminar el actor del audio
-            this.logic.destroyActor(this.destroyedActorsList[i]);       // Eliminar el actor de la logica
-            this.collision.destroyActor(this.destroyedActorsList[i]);   // Eliminar el actor de las colisiones
+             * --------------------------------------------------------------- * ---------------------------------------- */
+            this.physics.destroyActor(this.destroyList[i]);     // Eliminar el actor de las fisicas
+            this.render.destroyActor(this.destroyList[i]);      // Eliminar el actor del render
+            this.input.destroyActor(this.destroyList[i]);       // Eliminar el actor del input
+            this.audio.destroyActor(this.destroyList[i]);       // Eliminar el actor del audio
+            this.logic.destroyActor(this.destroyList[i]);       // Eliminar el actor de la logica
 
             /** Eliminar el actor de la listas del engine 
-             * ------------------------------------------------------------------------------------------------------- */ 
-            Util.destroy(this.actorList, this.destroyedActorsList[i].ID);
-            Util.destroy(this.sceneList[this.game.activeScene], this.destroyedActorsList[i].ID);
+             * --------------------------------------------------------------- * ---------------------------------------- */ 
+            Util.destroy(this.actorList, this.destroyList[i].ID);
+            Util.destroy(this.sceneList[this.game.activeScene], this.destroyList[i].ID);
 
             /** Destruimos todas las propiedades del actor
-             * ------------------------------------------------------------------------------------------------------- */
-            this.destroyedActorsList[i].destroy();
-            this.destroyedActorsList[i] = null;
+             * --------------------------------------------------------------- * ---------------------------------------- */
+            this.destroyList[i].destroy();
+            this.destroyList[i] = null;
         }
 
-        this.destroyedActorsList = [];
+        this.destroyList = [];
     }
 
-    /* ····································································
-     *  ENABLE ACTOR HANDLERS
-    ···································································· */
-    addEnabledActor(actor) {
-
-        this.enabledActorsList.push(actor);
-    }
-
-    enableActors() {
-
-        for(var i = 0; i < this.enabledActorsList.length; i++) {
-
-            this.enableActor(this.enabledActorsList[i]);
-        }
-
-        this.enabledActorsList = [];
-    }
-
-    enableActor(actor) {
-
-        //this.physics.enableActor(actor);    // Añadir el actor al motor de fisicas.
-        //this.render.setActorRender(actor);    // El motor de render no es necesario, ya que en gamesonomy.com se mantiene la imagen.
-        this.input.setActorInput(actor);        // Añadir el actor al motor de input.
-        this.logic.enableActor(actor);        // Añadir el actor al motor de logica.
-    }
-
-    /* ····································································
-     *  DISABLE ACTOR HANDLERS
-    ···································································· */
-    addDisabledActor(actor) {
-
-        this.disabledActorsList.push(actor);
-    }
-
-    disableActors() {
-
-        for(var i = 0; i < this.disabledActorsList.length; i++) {
-
-            this.disableActor(this.disabledActorsList[i]);
-        }
-
-        this.disabledActorsList = [];
-    }
-
-    disableActor(actor) {
-
-        //this.physics.disableActor(actor);   // Eliminar el actor de las fisicas
-        //this.render.destroyActor(actor);  // El motor de render no es necesario, ya que en gamesonomy.com se mantiene la imagen.
-        this.input.destroyActor(actor);     // Eliminar el actor del input
-        this.logic.disableActor(actor);     // Eliminar el actor de la logica
-    }
-
-    /* ····································································
+    /* ----------------------------------------
      *  ADD SCENE HANDLERS
-    ···································································· */
+     * ---------------------------------------- */
     
 
     addSceneHandler(scene, stop) {
@@ -280,9 +147,9 @@ class Engine {
         this.nextScene = {scene: scene, stop: stop};
     }
 
-    /* ····································································
+    /* ----------------------------------------
      *  DESTROY SCENE HANDLERS
-    ···································································· */
+     * ---------------------------------------- */
     destroyScene(scene) {
 
         for(var i in scene) {
@@ -301,9 +168,9 @@ class Engine {
             this.destroyScene(this.sceneList[i]);
         }
 
-        this.spawnedActorsList  = [];
-        this.enabledActorsList  = [];
-        this.disabledActorsList = [];
+        this.spawnList  = [];
+        this.enableList  = [];
+        this.disableList = [];
 
         this.destroyActors();   // eliminar los actores determinados por la lista
 
@@ -320,25 +187,25 @@ class Engine {
         this.removeScene = false;
     }
 
-    /* ····································································
+    /* ----------------------------------------
      *  CHANGE SCENE HANDLERS
-    ···································································· */
+     * ---------------------------------------- */
     changeSceneHandler(scene) {
 
         this.nextScene = {scene: scene};
     } 
 
-    /* ····································································
+    /* ----------------------------------------
      *  DESTROY SCENE HANDLERS
-    ···································································· */
+     * ---------------------------------------- */
     removeSceneHandler() {
 
         this.removeScene = true;
     }
 
-    /* ····································································
+    /* ----------------------------------------
      *  SCENE HANDLERS
-    ···································································· */
+     * ---------------------------------------- */
     updateScenes() {
 
         // Comprobamos si tenemos que eliminar la ultima escena.
@@ -362,7 +229,7 @@ class Engine {
 
                     
 
-                    this.spawnedActorsList  = [];
+                    this.spawnList  = [];
                 }
             }
 

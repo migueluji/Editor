@@ -2,46 +2,52 @@ class Render {
 
     constructor(engine) {
 
-        this.engine         = engine;   /** */
+        this.engine                 = engine;   /** Referencia al motor. */
 
-        this.spriteList     = [];       /** */
-        this.textList       = [];       /** */
-        this.onScreenList   = [];       /** */
+        this.spriteList             = [];       /** Lista de actores con sprites. */
+        this.textList               = [];       /** Lista de actores con texto. */
+        this.onScreenList           = [];       /** Lista de actores con la propiedad onScreen activa. */
 
-        this.setRender();
+        this.textCompilationList    = [];       /** Lista auxiliar para compilar los textos de los nuevos actores (incluyendo los spawns). */
+
+        this.setRender();                       /** Configuracion de las propiedades del motor de render y su bibloteca externa PIXI. */
     }
 
     setRender() {
 
-        this.renderer   = new PIXI.Renderer();
-        this.stage      = new PIXI.Container();
-        document.body.appendChild(this.renderer.view); // Add PIXI.Renderer to the DOM
-        PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST; // Scale mode for all textures, will retain pixelation
-        PIXI.settings.WRAP_MODE  = PIXI.WRAP_MODES.REPEAT;
+        this.renderer               = new PIXI.Renderer();
+        this.stage                  = new PIXI.Container();
+        PIXI.settings.SCALE_MODE    = PIXI.SCALE_MODES.NEAREST; /** Modo de escala para las texturas de PIXI (pixelizacion). */ 
+        PIXI.settings.WRAP_MODE     = PIXI.WRAP_MODES.REPEAT;
 
-        //this.loadFonts(render.assets.fonts);
+        document.body.appendChild(this.renderer.view);          /** Añadimos PIXI.Renderer al DOM. */ 
+
+        //this.loadFonts(render.assets.fonts);                  /** Carga de fuentes tipograficas. */
     }
 
     setActorRender(actor, data) {
             
-        if(data.spriteOn) { this.setActorSprite(actor); } /** Creamos el sprite de la textura. */
-        if(data.textOn) { this.setActorText(actor); } /** Creamos el sprite de la texto. */
+        if(data.spriteOn) { this.setActorSprite(actor); }   /** Creamos el sprite de la textura. */
+        if(data.textOn) { this.setActorText(actor); }       /** Creamos el sprite de la texto. */
     }
 
     setActorSprite(actor) {
 
-        actor.sprite = new PIXI.TilingSprite(PIXI.Texture.EMPTY); /** Creamos el sprite de la imagen. */
-        actor.sprite.cacheAsBitmap = true;
-        this.stage.addChild(actor.sprite); /** Añadimos el sprite al contenedor del sprites del actor. */
-        this.spriteList.push(actor); /** Añadimos el actor a la lista de actualizacion de sprites. */
+        actor.sprite = new PIXI.TilingSprite(PIXI.Texture.EMPTY);   /** Creamos el sprite de la imagen. */
+        actor.sprite.cacheAsBitmap = true;                          /** Activamos su cacheo (para mejorar el rendimiento). */
+        actor.sprite.anchor.set(0.5001);                            /** Establecemos su origen de coordenadas local en su centro. */ 
+        this.stage.addChild(actor.sprite);                          /** Añadimos el sprite al contenedor del sprites del actor. */
+        this.spriteList.push(actor);                                /** Añadimos el actor a la lista de actualizacion de sprites. */
     }
 
     setActorText(actor) {
 
-        actor.textStyle = new PIXI.TextStyle({}); /** Definimos el estilo del texto. */
-        actor.textSprite = new PIXI.Text("", actor.textStyle);
-        this.stage.addChild(actor.textSprite);    /** Añadimos el texto al sprite contenedor */
-        this.textList.push(actor); /** Añadimos el actor a la lista de actualizacion de texto. */
+        actor.textStyle = new PIXI.TextStyle({});               /** Definimos el estilo del texto. */
+        actor.textSprite = new PIXI.Text("", actor.textStyle);  /** Creamos el elemento de texto para el render. */
+        actor.textSprite.anchor.set(0.5);                       /** Establecemos su origen de coordenadas local en su centro. */ 
+        this.stage.addChild(actor.textSprite);                  /** Añadimos el texto al sprite contenedor. */
+        this.textList.push(actor);                              /** Añadimos el actor a la lista de textos. */
+        this.textCompilationList.push(actor);                   /** Añadimos el actor a la lista auxiliar de compilacion de texto. */
     }
 
     run() {
@@ -59,10 +65,12 @@ class Render {
 
     compileTexts() {
 
-        for(var i = 0; i < this.textList.length; i++) {
+        for(var i = 0; i < this.textCompilationList.length; i++) {
 
-            this.textList[i].text = Util.updateTextToScope(this.textList[i].text, this.textList[i]);
+            this.textCompilationList[i].text = Util.updateTextToScope(this.textCompilationList[i].text, this.textCompilationList[i]);
         }
+
+        this.textCompilationList = [];
     }
 
     updateSpriteDimensions(actor) {
@@ -118,40 +126,41 @@ class Render {
         }
     }
 
+    
+
+    
+
+    sleep(actor) {
+
+        // TODO
+    }
+
+    awake(actor) {
+
+        // TODO
+    }
+
     destroyActor(actor) {
 
-        /** Comprobamos que el actor no ha sido previamente desactivado*/
-        if(actor.render != undefined && actor.render != null) {
+        if(actor.textOn) {
 
-            if(actor.textOn) {
+            /** Eliminamos el texto. */
+            actor.textSprite.destroy();
+            Util.destroy(actor, "textSprite");
+            this.textList = Util.removeByID(this.textList, actor.ID); /** Eliminamos el actor de la lista de texto. */
+        }
 
-                /** Eliminamos el child de texto. */
-                actor.render.removeChild(actor.textSprite);
-                actor.textSprite.destroy();
-                Util.destroy(actor, "textSprite");
+        if(actor.spriteOn) {
 
-                /** Eliminamos el actor de la lista de texto. */
-                Util.destroy(this.textList, actor.ID);
-            }
+            /** Eliminamos el sprite. */
+            actor.sprite.destroy();
+            Util.destroy(actor, "sprite");
+            this.spriteList = Util.removeByID(this.spriteList, actor.ID); /** Eliminamos el actor de la lista de sprites. */
+        }
 
-            if(actor.spriteOn) {
+        if(actor.screen) {
 
-                /** Eliminamos el child de texto. */
-                actor.render.removeChild(actor.sprite);
-                actor.sprite.destroy();
-                Util.destroy(actor, "sprite");
-
-                /** Eliminamos el actor de la lista de texto. */
-                Util.destroy(this.spriteList, actor.ID);
-            }
-
-            /** Eliminamos el render del stage. */
-            this.stage.removeChild(actor.render);
-            actor.render.destroy();
-            Util.destroy(actor, "render");
-
-            /** Eliminamos el actor de la lista de actores del motor de render  */
-            Util.destroy(this.actorList, actor.ID);
+            this.onScreenList = Util.removeByID(this.onScreenList, actor.ID); /** Eliminamos el actor de la lista de actores onScreen. */
         }
     }
 

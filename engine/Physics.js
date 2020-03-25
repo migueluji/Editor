@@ -37,7 +37,7 @@ class Physics {
 
         actor.rigidbody.m_body.SetPosition(new b2Vec2(actor.x / this.PIXELS_PER_METER, actor.y / this.PIXELS_PER_METER));
         actor.rigidbody.m_body.SetAngle(Util.degToRad(actor.angle));
-        this.drawDebug(actor); // DEBUG
+        //this.drawDebug(actor); // DEBUG
     }
 
     updateGame() {
@@ -46,8 +46,6 @@ class Physics {
     }
 
     updateActor(actor) {
-
-        //if(actor.name == "BounceActor") console.log("AFTER STEP", actor.rigidbody.m_body.GetAngle(), actor.rigidbody)
 
         actor.x     = actor.rigidbody.m_body.GetPosition().x * this.PIXELS_PER_METER;
         actor.y     = actor.rigidbody.m_body.GetPosition().y * this.PIXELS_PER_METER;
@@ -251,6 +249,16 @@ class Physics {
         });
     }
 
+    sleep(actor) {
+
+        if(actor.triggerOn || actor.physicsOn) { actor.rigidbody.m_body.SetActive(false); }
+    }
+
+    awake(actor) {
+
+        if(actor.triggerOn || actor.physicsOn) { actor.rigidbody.m_body.SetActive(true); }
+    }
+
     destroyActor(actor) {
 
         /** Comprobamos que el actor no ha sido previamente desactivado
@@ -262,9 +270,10 @@ class Physics {
             this.destroyRigidbody(actor);
             Util.destroy(actor, "rigidbody");
             
-            /** Eliminamos el actor de la lista de actores del motor de fisicas 
+            /** Eliminamos el actor de las listas de actores del motor de fisicas 
              * ----------------------------------------------------------------------- */
-            delete this.rigidbodyList[actor.ID]; // TODO: ESTO NO ESTA BIEN
+            if(actor.physicsOn) { this.rigidbodyList = Util.removeByID(this.rigidbodyList, actor.ID); }
+            if(actor.triggerOn) { this.triggerList   = Util.removeByID(this.triggerList, actor.ID); }
         }
     }
 

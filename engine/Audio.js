@@ -1,18 +1,11 @@
 class Audio {
 
-    constructor(game, engine) {
+    constructor(engine) {
 
-        this.engine = engine;
+        this.engine     = engine;   /** */
+        this.actorList  = [];       /** */
 
-        this.actorList  = {};                           /** */
-
-        this.soundFile  = game.sound        || "";      /** */
-        this.pan        = game.pan          || 0;       /** */
-        this.volume     = game.volume       || 1;       /** */
-        this.playSound  = game.playSound    || false;    /** */
-        this.loop       = game.loop         || false;    /** */
-
-        this.sound      = (this.soundFile != "") ? this.setSound(this.soundFile) : null; /** */
+        this.sound      = null;     /** */
     }
 
     setActorAudio(actor) {
@@ -24,31 +17,28 @@ class Audio {
             this.createSound({source: actor.soundFile, play: actor.playSound, volume: actor.volume, pan: actor.pan, loop: actor.loop}, false);
         
             /** Añadimos el actor a la lista del motor de audio */
-            this.actorList[actor.ID] = actor;
+            this.actorList.push(actor);
         }
     }
 
     destroyActor(actor) {
 
-        /** Eliminamos el actor de la lista de actores del motor de audio 
-         * ----------------------------------------------------------------------- */
-        delete this.actorList[actor.ID];
+        this.actorList = Util.removeByID(this.actorList, actor.ID); /** Eliminamos el actor de la lista de actores del motor de audio. */
     }
 
     setSound() {
 
-        this.createSound({source: this.soundFile, play: this.playSound, volume: this.volume, pan: this.pan, loop: this.loop}, false);
+        this.sound = this.createSound({source: this.soundFile, play: this.playSound, volume: this.volume, pan: this.pan, loop: this.loop}, false);
     }
 
     play() {
 
-        if(this.playSound) {
-
-            this.sound.play();
-        }
+        if(this.playSound) { this.sound.play(); }
     }
 
     createSound(sound, destroy) {
+
+        console.log(sound);
 
         return new Howl({
             src: [sound.source],
@@ -65,6 +55,17 @@ class Audio {
         });
     }
 
+    
+
+    sleep(actor) {
+
+        // TODO
+    }
+
+    awake(actor) {
+
+        // TODO
+    }
 
     /** ###############################################################################
      *  Elementos auxiliares para la ejecucion de las expresiones logicas 

@@ -2,11 +2,15 @@ class Game {
 
     constructor(game, engine) {
 
-        this.engine = engine; /** */
+        /**
+         * Asignacion del motor
+         * --------------------------------------------------------------------- */
+        this.engine             = engine;
 
         /** Almacenamiento en memoria de los datos crudos del juego.
          * --------------------------------------------------------------------- */
         this.data               = game;
+        this.loaded             = false;
 
         /** Propiedades del juego
          * --------------------------------------------------------------------- */
@@ -19,31 +23,36 @@ class Game {
         this.cameraZoom         = game.cameraZoom           || 0.00;      /** */
         this.cameraAngle        = game.cameraAngle          || 0.00;      /** */
 
-        /**
-         * --------------------------------------------------------------------- */
-        this.gravityX           = game.gravityX             || 0.0;     /** */
-        this.gravityY           = game.gravityY             || 9.8;     /** */
-
-
-
         /** Gestion de escenas
          * --------------------------------------------------------------------- */
         this.sceneList          = game.sceneList;                                       /** */
         this.activeSceneNumber  = 0;                                                    /** */
         this.activeScene        = Object.keys(game.sceneList)[this.activeSceneNumber];  /** */
 
+        /** Propiedades fisicas del juego
+         * --------------------------------------------------------------------- */
+        this.physicsOn          = game.physicsOn            || true;    /** */
+        this.gravityX           = game.gravityX             || 0.0;     /** */
+        this.gravityY           = game.gravityY             || 9.8;     /** */
+
+        /** Propiedades de audio del juego
+         * --------------------------------------------------------------------- */
+        this.soundOn            = game.soundOn              || true;    /** */
+        this.soundFile          = game.sound                || "";      /** */
+        this.pan                = game.pan                  || 0.0;     /** */
+        this.volume             = game.volume               || 1.0;     /** */
+        this.playSound          = game.playSound            || false;   /** */
+        this.loop               = game.loop                 || false;   /** */
+
         /** Propiedades de lectura para la ejecucion
          * --------------------------------------------------------------------- */
         this.FPS                = 0.0;      /** */
         this.deltaTime          = 0.0;      /** */
         this.elapsedTime        = 0.0;      /** */
-        
         this.mouseX             = 0;        /** */
         this.mouseY             = 0;        /** */
-
         this.latitude           = null;     /** */
         this.longitude          = null;     /** */
-
         this.accelerometerX     = null;     /** */
         this.accelerometerY     = null;     /** */
         this.accelerometerZ     = null;     /** */
@@ -62,6 +71,11 @@ class Game {
 
             this.sceneList[i].name = i;
         }
+
+        /**
+         * Actualizacion de la variable de control de la carga de informacion
+         * --------------------------------------------------------------------- */
+        this.loaded = true;
     }
 
     
@@ -103,29 +117,25 @@ class Game {
     get displayWidth() { return this._displayWidth; }
     set displayWidth(value) {
         this._displayWidth = value;
-        //console.log("Display Width:", this._displayWidth, "Display Height: ", this._displayHeight || 480);
         this.engine.render.renderer.resize(this._displayWidth, this._displayHeight || 480);
     }
 
     get displayHeight() { return this._displayHeight; }
     set displayHeight(value) {
         this._displayHeight = value;
-        //console.log("Display Width:", this._displayWidth, "Display Height: ", this._displayHeight);
         this.engine.render.renderer.resize(this._displayWidth, this._displayHeight);
     }
 
     get backgroundColor() { return this._backgroundColor; }
     set backgroundColor(value) {
         this._backgroundColor = Util.colorFormat(value);
-        //console.log(this._backgroundColor);
-        //console.log("Background Color:", this._backgroundColor);
         this.engine.render.renderer.backgroundColor = this._backgroundColor;
     }
 
     get cameraX() { return this._cameraX; }
     set cameraX(value) {
         this._cameraX = value;
-        //console.log("Camera X:", this._cameraX);
+        
         this.engine.render.stage.position.x = this._stageOrigin.x - this._cameraX;
         
         for(var i = 0; i < this.engine.render.onScreenList.length; i++) {
@@ -137,7 +147,7 @@ class Game {
     get cameraY() { return this._cameraY; }
     set cameraY(value) {
         this._cameraY = value;
-        //console.log("Camera Y:", this._cameraY);
+        
         this.engine.render.stage.position.y = this._stageOrigin.y + this._cameraY;
         
         for(var i = 0; i < this.engine.render.onScreenList.length; i++) {
@@ -149,14 +159,12 @@ class Game {
     get cameraAngle() { return this._cameraAngle; }
     set cameraAngle(value) {
         this._cameraAngle = value;
-        //console.log("Camera Angle:", this._cameraAngle);
         this.engine.render.stage.rotation = Util.degToRad(this._cameraAngle);
     }
 
     get cameraZoom() { return this._cameraZoom; }
     set cameraZoom(value) {
         this._cameraZoom = value;
-        //console.log("Camera Zoom:", this._cameraZoom);
         this.engine.render.stage.scale.set(this._cameraZoom);
     }
 
@@ -169,6 +177,56 @@ class Game {
     get gravityY() { return this._gravityY; }
     set gravityY(value) {
         this._gravityY = value;
-        this.engine.physics.gravity.Set(this._gravityX, this._gravityY)
+        this.engine.physics.gravity.Set(this._gravityX, this._gravityY);
     }
+
+    get soundOn() { return this._soundOn; }
+    set soundOn(value) {
+        this._soundOn = value;
+    }
+
+    get soundFile() { return this._soundFile; }
+    set soundFile(value) {
+        this._soundFile = value;
+
+        if(this.loaded && this._soundOn) {
+            this.engine.audio.setSound(this._soundFile);
+        }
+    }
+
+    get pan() { return this._pan; }
+    set pan(value) {
+        this._pan = Util.clamp(value, -1.0, 1.0);
+
+        if(this.loaded && this._soundOn) {
+            this.engine.audio.sound.stereo = this._pan;
+        }
+    } 
+
+    get volume() { return this._volume; }
+    set volume(value) {
+        this._volume = Util.clamp(value, 0.0, 1.0);
+
+        if(this.loaded && this._soundOn) {
+            this.engine.audio.sound.volume = this._volume;
+        }
+    } 
+
+    get playSound() { return this._playSound; }
+    set playSound(value) {
+        this._playSound = value;
+
+        if(this.loaded && this._soundOn) {
+            this.engine.audio.sound.autoplay = this._playSound;
+        }
+    }  
+
+    get loop() { return this._loop; }
+    set loop(value) {
+        this._loop = value;
+
+        if(this.loaded && this._soundOn) {
+            this.engine.audio.sound.loop = this._loop;
+        }
+    } 
 }

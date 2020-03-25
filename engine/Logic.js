@@ -116,9 +116,7 @@ class Logic {
         
         actor.scriptList = null;
 
-        /** Eliminamos el actor de la lista de actores del motor de logica 
-         * ----------------------------------------------------------------------- */
-        delete this.actorList[actor.ID];
+        this.actorList = Util.removeByID(this.actorList, actor.ID); /** Eliminamos el actor de la lista de actores del motor de logica. */
     }
 
     destroyScript(script) {
@@ -158,6 +156,18 @@ class Logic {
         actor.image = actor[animation].list[actor[animation].index];
         actor.sprite.texture = actor.texture;
         actor[animation].index = timerCondition ? ((actor[animation].index == actor[animation].maxIndex - 1) ? 0 : actor[animation].index + 1) : actor[animation].index;
+    }
+
+    
+
+    sleep(actor) {
+
+        // TODO
+    }
+
+    awake(actor) {
+
+        // TODO
     }
 
 

@@ -23,6 +23,11 @@ class Util {
         }
     }
 
+    static removeByID(list, ID) {
+
+        return list.filter(item => item.ID != ID);
+    }
+
     /**
      * 
      */
