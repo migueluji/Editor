@@ -52,6 +52,8 @@ class Engine {
      * ---------------------------------------- */
     addScene(scene) {
 
+        console.log(scene);
+
         /** Actualizar la lista de escenas activas y la lista auxiliar de carga de actores. */
         this.sceneList[scene.name]  = {};
 
@@ -79,6 +81,7 @@ class Engine {
 
         for(var i in scene) {
 
+            console.log(i);
             //this.addDestroyedActor(scene[i]);
         }
 
@@ -135,6 +138,8 @@ class Engine {
                         this.spawnList  = [];
                     }
                 }
+
+                console.log(this.sceneHandler);
                 
                 this.game.activeScene = this.sceneHandler.scene;
                 this.addScene(this.game.sceneList[this.sceneHandler.scene]); /** Añadimos la nueva escena. */
@@ -210,11 +215,7 @@ class Engine {
 
     destroyAllActors() {
 
-        console.log(this.destroyList.length)
-
         for(var i in this.actorList) {
-
-            console.log(this.actorList[i].name, this.actorList[i].sprite)
 
             this.addDestroyedActor(this.actorList[i]);
         }
@@ -223,10 +224,6 @@ class Engine {
     destroyActors() {
 
         for(var i = 0; i < this.destroyList.length; i++) {
-
-            console.log("DESTROY ACTORS --> destroyActor: " + this.destroyList[i].name);
-
-            console.log(this.destroyList[i], this.destroyList[i].sprite, this.destroyList[i].rigidbody);
 
             /** Destruimos las referencias y las estructuras de datos relativas al actor en cada modulo del motor
              * --------------------------------------------------------------- * ---------------------------------------- */

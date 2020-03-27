@@ -148,8 +148,6 @@ class Render {
 
         if(actor.spriteOn) {
 
-            console.log("ENTRA", actor.sprite);
-
             /** Eliminamos el sprite. */
             actor.sprite.destroy({children: true, texture: false, baseTexture: false});
             Util.destroy(actor, "sprite");

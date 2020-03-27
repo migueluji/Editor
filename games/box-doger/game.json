@@ -21,10 +21,10 @@
 	],
 	"sceneList": [
 		{
-			"name": "scene_1",
+			"name": "Main",
 			"actorList": [
 				{
-					"name": "Actor_3",
+					"name": "background",
 					"sleeping": false,
 					"x": 0,
 					"y": -65.8125,
@@ -40,6 +40,7 @@
 					"image": "BG.png",
 					"color": "#ffffff",
 					"opacity": 1,
+					"flipX": false,
 					"flipY": false,
 					"scrollX": 0,
 					"scrollY": 0,
@@ -74,7 +75,7 @@
 					"scriptList": []
 				},
 				{
-					"name": "Actor_1",
+					"name": "player",
 					"sleeping": false,
 					"x": -51.5,
 					"y": -84.02552665751887,
@@ -141,6 +142,13 @@
 											}
 										},
 										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.flipX",
+												"value": false
+											}
+										},
+										{
 											"type": "Move",
 											"parameters": {
 												"speed": "300",
@@ -162,6 +170,13 @@
 											"parameters": {
 												"animation": "w1.png,w2.png,w3.png,w4.png,w5.png,w6.png",
 												"fps": "10"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.flipX",
+												"value": true
 											}
 										},
 										{
@@ -199,7 +214,7 @@
 					]
 				},
 				{
-					"name": "Actor_2",
+					"name": "ground",
 					"sleeping": false,
 					"x": 3.7532909293985313,
 					"y": -215.9351765759368,
@@ -250,7 +265,7 @@
 					"scriptList": []
 				},
 				{
-					"name": "Actor_4",
+					"name": "leftCollider",
 					"sleeping": false,
 					"x": -425.72512137428,
 					"y": -17.162054870681004,
@@ -301,7 +316,7 @@
 					"scriptList": []
 				},
 				{
-					"name": "Actor_4_copy",
+					"name": "rightCollider",
 					"sleeping": false,
 					"x": 424.40685384091705,
 					"y": -19.039061183727426,
@@ -416,7 +431,7 @@
 					]
 				},
 				{
-					"name": "Actor_7",
+					"name": "boxSpawn",
 					"sleeping": false,
 					"x": -71,
 					"y": 280,
@@ -559,7 +574,7 @@
 					"screen": false,
 					"collider": "Box",
 					"tags": "",
-					"spriteOn": false,
+					"spriteOn": true,
 					"image": "",
 					"color": "#ffffff",
 					"opacity": 1,
@@ -609,7 +624,7 @@
 										{
 											"type": "Go_To",
 											"parameters": {
-												"scene": "scene_1"
+												"scene": "Main"
 											}
 										}
 									],
