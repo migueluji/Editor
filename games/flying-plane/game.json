@@ -180,6 +180,13 @@
 							"name": "Script_1",
 							"nodeList": [
 								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "planeGreen1.png,planeGreen2.png,planeGreen3.png",
+										"fps": 24
+									}
+								},
+								{
 									"type": "Keyboard",
 									"parameters": {
 										"key": "ArrowUp",
@@ -430,8 +437,8 @@
 				{
 					"name": "score",
 					"sleeping": false,
-					"x": 220.75,
-					"y": 198,
+					"x": 215.25,
+					"y": 199.5,
 					"width": 311.5,
 					"height": 50,
 					"scaleX": 6.2299999999999995,
