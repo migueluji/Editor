@@ -177,7 +177,9 @@ class Util {
             }
         }
 
-        expression = Util.replace(expression, "Game", "engine.game"); /** Comprobamos si hay que actualizar el indentificador del Game. */
+        //console.log(expression);
+
+        //expression = Util.replace(expression, "Game", "engine.game"); /** Comprobamos si hay que actualizar el indentificador del Game. */
 
         return expression;
     }

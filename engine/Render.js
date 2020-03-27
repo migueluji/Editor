@@ -22,7 +22,7 @@ class Render {
 
         document.body.appendChild(this.renderer.view);          /** Añadimos PIXI.Renderer al DOM. */ 
 
-        //this.loadFonts(render.assets.fonts);                  /** Carga de fuentes tipograficas. */
+        //this.loadFonts(render.assets.fonts);                  /** Carga de fuentes tipograficas (DESACTIVADA POR AHORA). */
     }
 
     setActorRender(actor, data) {
@@ -34,8 +34,8 @@ class Render {
     setActorSprite(actor) {
 
         actor.sprite = new PIXI.TilingSprite(PIXI.Texture.EMPTY);   /** Creamos el sprite de la imagen. */
-        actor.sprite.cacheAsBitmap = true;                          /** Activamos su cacheo (para mejorar el rendimiento). */
         actor.sprite.anchor.set(0.5001);                            /** Establecemos su origen de coordenadas local en su centro. */ 
+        actor.sprite.cacheAsBitmap = true;                          /** Activamos su cacheo (para mejorar el rendimiento). */
         this.stage.addChild(actor.sprite);                          /** Añadimos el sprite al contenedor del sprites del actor. */
         this.spriteList.push(actor);                                /** Añadimos el actor a la lista de actualizacion de sprites. */
     }
@@ -76,7 +76,7 @@ class Render {
     updateSpriteDimensions(actor) {
 
         if(actor.spriteOn) { 
-        
+
             actor.sprite.cacheAsBitmap  = false; 
             
             if(actor.image != "") { 
@@ -126,10 +126,6 @@ class Render {
         }
     }
 
-    
-
-    
-
     sleep(actor) {
 
         // TODO
@@ -145,15 +141,17 @@ class Render {
         if(actor.textOn) {
 
             /** Eliminamos el texto. */
-            actor.textSprite.destroy();
+            actor.textSprite.destroy({children: true, texture: false, baseTexture: false});
             Util.destroy(actor, "textSprite");
             this.textList = Util.removeByID(this.textList, actor.ID); /** Eliminamos el actor de la lista de texto. */
         }
 
         if(actor.spriteOn) {
 
+            console.log("ENTRA", actor.sprite);
+
             /** Eliminamos el sprite. */
-            actor.sprite.destroy();
+            actor.sprite.destroy({children: true, texture: false, baseTexture: false});
             Util.destroy(actor, "sprite");
             this.spriteList = Util.removeByID(this.spriteList, actor.ID); /** Eliminamos el actor de la lista de sprites. */
         }

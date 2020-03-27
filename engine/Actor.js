@@ -74,11 +74,11 @@ class Actor {
         this.velocityY       = actor.velocityY              || 0;
         this.angularVelocity = actor.angularVelocity        || 0;
         this.fixedAngle      = actor.fixedAngle             || false;
-        this.linearDamping   = actor.linearDamping          || 1.0;
-        this.angularDamping  = actor.angularDamping         || 1.0;
-        this.density         = actor.density                || 1.0;
-        this.friction        = actor.friction               || 0.5;
-        this.restitution     = actor.restitution            || 0.2;
+        this.linearDamping   = actor.linearDamping          || 0.0;
+        this.angularDamping  = actor.angularDamping         || 0.0;
+        this.density         = actor.density                || 0.0;
+        this.friction        = actor.friction               || 0.0;
+        this.restitution     = actor.restitution            || 0.0;
         this.type            = actor.type                   || "Dynamic";
 
         /** Settings properties
@@ -112,7 +112,7 @@ class Actor {
     setSpriteProperties() {
 
         if(this.scrollX != 0 || this.scrollY != 0) {
-            
+
             this.sprite.cacheAsBitmap = false;
             this.sprite.tilePosition.x += this.scrollX * this.engine.game.deltaTime;
             this.sprite.tilePosition.y += this.scrollY * this.engine.game.deltaTime;
@@ -270,7 +270,7 @@ class Actor {
 
         this._flipX = value;
 
-        if(this._spriteOn) { this.sprite.scale.x *= this._flipX ? -1 : 1; }
+        this.engine.render.updateSpriteDimensions(this);
     }
 
     get flipY() { return this._flipY; }
@@ -278,7 +278,7 @@ class Actor {
 
         this._flipY = value;
 
-        if(this._spriteOn) { this.sprite.scale.y *= this._flipY ? -1 : 1; }
+        this.engine.render.updateSpriteDimensions(this);
     }
 
     get image() { return this._image; }
@@ -286,7 +286,9 @@ class Actor {
 
         this._image = value;
 
+        if(this.sprite != null) this.sprite.cacheAsBitmap = false;
         this.texture = (player.file.loader.resources[this._image] != undefined) ? player.file.loader.resources[this._image].texture : PIXI.Texture.WHITE;
+        if(this.sprite != null) this.sprite.cacheAsBitmap = true;
 
         this.originalWidth  = this.texture.orig.width;
         this.originalHeight = this.texture.orig.height;
@@ -297,7 +299,12 @@ class Actor {
 
         this._spriteOn = value;
 
-        if(this._spriteOn) { this.sprite.texture = this.texture; }
+        if(this._spriteOn) { 
+
+            if(this.sprite != null) this.sprite.cacheAsBitmap = false;
+            this.sprite.texture = this.texture; 
+            if(this.sprite != null) this.sprite.cacheAsBitmap = true;
+        }
     }
 
     get opacity() { return this._opacity; }

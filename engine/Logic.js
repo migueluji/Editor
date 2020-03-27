@@ -321,7 +321,7 @@ class Logic {
     Edit(actor, parameters) {
 
         /** Comprobamos si se pretende mofidicar un color. */
-        if(parameters.value.includes("#")) {
+        if(typeof parameters.value == "string" && parameters.value.includes("#")) {
 
             parameters.value = Util.colorString(parameters.value);
         }

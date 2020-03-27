@@ -45,7 +45,7 @@ class Input {
                 this.engine.render.stage.addChild(actor.sprite);
 
                 /** Añadimos el actor a la lista del motor de render */
-                this.engine.render.actorList.push(actor);
+                this.engine.render.spriteList.push(actor);
             }
 
             /** Configuramos las propiedades del motor de Render */
@@ -58,6 +58,21 @@ class Input {
             actor.sprite.on("pointerup", this.actorPointerUpHandler.bind(this, actor));
             actor.sprite.on("pointerover", this.actorPointerOverHandler.bind(this, actor));
             actor.sprite.on("pointerout", this.actorPointerOutHandler.bind(this, actor));
+
+            /** Si ademas tiene un sprite de texto */
+            if(actor.textSprite != null) {
+
+                /** Configuramos las propiedades del motor de Render */
+                actor.textSprite.interactive = true;
+                actor.textSprite.buttonMode = true;
+
+                /** Añadimos los listeners */
+                actor.textSprite.on("pointerdown", this.actorPointerDownHandler.bind(this, actor));
+                actor.textSprite.on("pointerupoutside", this.actorPointerUpHandler.bind(this, actor));
+                actor.textSprite.on("pointerup", this.actorPointerUpHandler.bind(this, actor));
+                actor.textSprite.on("pointerover", this.actorPointerOverHandler.bind(this, actor));
+                actor.textSprite.on("pointerout", this.actorPointerOutHandler.bind(this, actor));
+            }
 
             /** Añadimos el actor a la lista del motor de input */
             this.actorList.push(actor);

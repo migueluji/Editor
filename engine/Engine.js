@@ -19,8 +19,7 @@ class Engine {
         this.spawnList      = [];                   /** Lista auxiliar para la creacion de nuevos actores (spawn) tras cada iteraccion del ciclo de juego. */
         this.destroyList    = [];                   /** Lista auxilair para la eliminacion de actores tras cada iteracion del ciclo de juego. */
         
-        this.nextScene      = null;                 /** Propiedad auxiliar de control para activar una nueva escena. */
-        this.removeScene    = false;                /** Propiedad auxiliar de control para eliminar la ultima escena. */
+        this.sceneHandler      = null;              /** Propiedad auxiliar de control de las transiciones entre escenas. */
 
         this.addScene(this.game.sceneList[this.game.activeScene]); /** Añadimos la primera escena. */
     }
@@ -64,12 +63,110 @@ class Engine {
 
                 this.actorList[scene.actorList[i].ID] = new Actor(scene.actorList[i], this);          
             }
-            
-            this.sceneList[this.game.activeScene][scene.actorList[i].ID] = scene.actorList[i];
+
+            this.sceneList[scene.name][scene.actorList[i].ID] = scene.actorList[i];
         }
 
         this.logic.compileExpressions();    /** Compilamos las expresiones logicas de los nuevos actores. */
         this.render.compileTexts();         /** Compilamos los textos de los nuevos actores. */
+    }
+
+    addSceneHandler(scene, stop) { this.sceneHandler = {scene: scene, stop: stop}; }
+    changeSceneHandler(scene) { this.sceneHandler = {scene: scene}; }
+    removeSceneHandler() { this.sceneHandler = {scene: ""}; }
+
+    destroyScene(scene) {
+
+        for(var i in scene) {
+
+            //this.addDestroyedActor(scene[i]);
+        }
+
+        Util.deepDestroy(scene);
+        delete this.sceneList[scene.name];
+    }
+
+    destroyAllScenes() {
+
+        for(var i in this.sceneList) {
+
+            this.destroyScene(this.sceneList[i]);
+        }
+
+        this.destroyAllActors();
+        this.destroyActors();
+
+        Util.deepDestroy(this.actorList);
+        this.actorList = {};
+
+        this.spawnList  = [];
+        this.sceneList  = {};
+    }
+
+    popScene() {
+
+        var sceneName = Util.getLastKey(this.sceneList);
+        this.destroyScene(this.sceneList[sceneName]);
+        this.destroyActors();   // eliminar los actores determinados por la lista
+        delete this.sceneList[sceneName];
+        this.enableScene();
+        this.removeScene = false;
+    }
+
+    updateScenes() {
+
+        if(this.sceneHandler != null) {
+
+            if(this.sceneHandler.scene == "") {             /** Comprobamos si tenemos que eliminar la ultima escena. */ 
+
+                this.popScene();
+            }
+            else {
+
+                if(this.sceneHandler.stop == undefined) {  /** Comprobamos si tenemos que ir a una escena nueva. */
+
+                    this.destroyAllScenes();
+                }
+                else {                                      /** Comprobamos si tenemos que añadir una escena nueva. */
+
+                    if(this.sceneHandler.stop) {
+
+                        this.disableScene();
+                        this.spawnList  = [];
+                    }
+                }
+                
+                this.game.activeScene = this.sceneHandler.scene;
+                this.addScene(this.game.sceneList[this.sceneHandler.scene]); /** Añadimos la nueva escena. */
+                //this.game.activeSceneNumber = this.game.sceneList[this.sceneHandler.scene].number;
+                this.sceneHandler = null;
+            }
+        }
+    }
+
+    disableScene() {
+
+        var scene = Util.getLastElement(this.sceneList);
+
+        for(var i in scene) {
+
+            this.addDisabledActor(scene[i]);
+        }
+
+        this.game.activeScene = Util.getLastKey(this.sceneList);
+    }
+
+    enableScene() {
+
+        var sceneName = Util.getLastKey(this.sceneList);
+        var scene = this.sceneList[sceneName];
+
+        for(var i in scene) {
+
+            this.addEnabledActor(scene[i]);
+        }
+
+        this.game.activeScene = sceneName;
     }
     
     /* ----------------------------------------
@@ -111,9 +208,25 @@ class Engine {
         this.destroyList.push(actor);
     }
 
+    destroyAllActors() {
+
+        console.log(this.destroyList.length)
+
+        for(var i in this.actorList) {
+
+            console.log(this.actorList[i].name, this.actorList[i].sprite)
+
+            this.addDestroyedActor(this.actorList[i]);
+        }
+    }
+
     destroyActors() {
 
         for(var i = 0; i < this.destroyList.length; i++) {
+
+            console.log("DESTROY ACTORS --> destroyActor: " + this.destroyList[i].name);
+
+            console.log(this.destroyList[i], this.destroyList[i].sprite, this.destroyList[i].rigidbody);
 
             /** Destruimos las referencias y las estructuras de datos relativas al actor en cada modulo del motor
              * --------------------------------------------------------------- * ---------------------------------------- */
@@ -131,138 +244,8 @@ class Engine {
             /** Destruimos todas las propiedades del actor
              * --------------------------------------------------------------- * ---------------------------------------- */
             this.destroyList[i].destroy();
-            this.destroyList[i] = null;
         }
 
         this.destroyList = [];
-    }
-
-    /* ----------------------------------------
-     *  ADD SCENE HANDLERS
-     * ---------------------------------------- */
-    
-
-    addSceneHandler(scene, stop) {
-
-        this.nextScene = {scene: scene, stop: stop};
-    }
-
-    /* ----------------------------------------
-     *  DESTROY SCENE HANDLERS
-     * ---------------------------------------- */
-    destroyScene(scene) {
-
-        for(var i in scene) {
-
-            this.addDestroyedActor(scene[i]);
-        }
-
-        Util.deepDestroy(scene);
-        delete this.sceneList[scene.name];
-    }
-
-    clearScenes() {
-
-        for(var i in this.sceneList) {
-
-            this.destroyScene(this.sceneList[i]);
-        }
-
-        this.spawnList  = [];
-        this.enableList  = [];
-        this.disableList = [];
-
-        this.destroyActors();   // eliminar los actores determinados por la lista
-
-        this.sceneList = {};
-    }
-
-    popScene() {
-
-        var sceneName = Util.getLastKey(this.sceneList);
-        this.destroyScene(this.sceneList[sceneName]);
-        this.destroyActors();   // eliminar los actores determinados por la lista
-        delete this.sceneList[sceneName];
-        this.enableScene();
-        this.removeScene = false;
-    }
-
-    /* ----------------------------------------
-     *  CHANGE SCENE HANDLERS
-     * ---------------------------------------- */
-    changeSceneHandler(scene) {
-
-        this.nextScene = {scene: scene};
-    } 
-
-    /* ----------------------------------------
-     *  DESTROY SCENE HANDLERS
-     * ---------------------------------------- */
-    removeSceneHandler() {
-
-        this.removeScene = true;
-    }
-
-    /* ----------------------------------------
-     *  SCENE HANDLERS
-     * ---------------------------------------- */
-    updateScenes() {
-
-        // Comprobamos si tenemos que eliminar la ultima escena.
-        if(this.removeScene) {
-
-            this.popScene();
-        }
-
-        // Comprobamos si tenemos que añadir una escena.
-        if(this.nextScene != null) {
-
-            if(this.nextScene.stop == undefined) {
-
-                this.clearScenes();
-            }
-            else {
-
-                if(this.nextScene.stop) {
-
-                    this.disableScene();
-
-                    
-
-                    this.spawnList  = [];
-                }
-            }
-
-            // Añadimos la nueva escena.
-            this.game.activeScene       = this.nextScene.scene;
-            this.game.activeSceneNumber = this.game.sceneList[this.nextScene.scene].number;
-            this.addScene(this.game.sceneList[this.nextScene.scene]);
-            this.nextScene              = null;
-        }
-    }
-
-    disableScene() {
-
-        var scene = Util.getLastElement(this.sceneList);
-
-        for(var i in scene) {
-
-            this.addDisabledActor(scene[i]);
-        }
-
-        this.game.activeScene = Util.getLastKey(this.sceneList);
-    }
-
-    enableScene() {
-
-        var sceneName = Util.getLastKey(this.sceneList);
-        var scene = this.sceneList[sceneName];
-
-        for(var i in scene) {
-
-            this.addEnabledActor(scene[i]);
-        }
-
-        this.game.activeScene = sceneName;
     }
 }
