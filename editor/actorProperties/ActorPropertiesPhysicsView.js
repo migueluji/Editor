@@ -28,8 +28,8 @@ class ActorPropertiesPhysicsView {
 							'</div>'+
 							'<div class="mdc-select__menu mdc-menu mdc-menu-surface" style="width:100%">'+
 								'<ul class="mdc-list">'+
-									'<li class="mdc-list-item" data-value="Kinematic">Kinematic</li>'+
 									'<li class="mdc-list-item" data-value="Dynamic">Dynamic</li>'+
+									'<li class="mdc-list-item" data-value="Kinematic">Kinematic</li>'+
 									'<li class="mdc-list-item" data-value="Static">Static</li>'+
 								'</ul>'+
 							'</div>'+

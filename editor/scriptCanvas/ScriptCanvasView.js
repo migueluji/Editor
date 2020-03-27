@@ -43,7 +43,7 @@ class ScriptCanvasView {
     }
 
     updateSelectedNode(nodeID){
-          // deselecciona etiquetas yes, no
+        // deselecciona etiquetas yes, no
         var listno =this.html.querySelectorAll(".notext");
         var listyes =this.html.querySelectorAll(".yestext");
         listno.forEach(element=> element.style.display="none");
@@ -64,7 +64,7 @@ class ScriptCanvasView {
             chip.classList.add("mdc-elevation--z6");;
             if(node.firstChild.classList.contains("condition")){
                 if (this.selectedNode!=nodeID) {
-                    this.selected="no"; // se reinicia si el nodo es diferente
+                    this.selected=null; // se reinicia si el nodo es diferente // cambiar por "no"
                     this.selectedNode=nodeID;
                 }
                 if (this.selected==null) {
@@ -80,7 +80,7 @@ class ScriptCanvasView {
             else this.selected="no";
         }
         else {
-            this.selected="no";
+            this.selected=null; // cambiar por "no"
         }
 	}
 

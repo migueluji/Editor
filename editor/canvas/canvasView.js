@@ -128,8 +128,7 @@ class CanvasView {
         this.frame = new PIXI.Graphics(); // draw the camera frame
         this.frame.lineStyle(20, 0xDDDDDD, 1, 1, true);
         this.frame.drawRect(-this.gameProperties.displayWidth/2.0,-this.gameProperties.displayHeight/2.0,this.gameProperties.displayWidth,this.gameProperties.displayHeight);
-        this.app.stage.addChild(this.frame);
- 
+     
         this.scene= new PIXI.Container(); // create the scene container
         this.scene.position ={x:-this.gameProperties.cameraX,y:this.gameProperties.cameraY};
         this.scene.angle = this.gameProperties.cameraAngle;
@@ -141,6 +140,7 @@ class CanvasView {
         });
 
         this.app.stage.addChild(this.scene);
+        this.app.stage.addChild(this.frame);
         this.hitArea(this.scene);
         this.updateActorButton();  
     }

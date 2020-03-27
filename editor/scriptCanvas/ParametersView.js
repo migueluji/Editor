@@ -38,7 +38,7 @@ class ParametersView  {
 						case "collider" : type="select"; list=["Circle","Box","Polygon"];break;
 						case "style" : type="select"; list=["Normal","Italic","Bold","Italic-Bold"];break;
 						case "align" : type="select"; list=["Left","Center","Right"];break;
-						case "type" : type="select"; list=["Kinematic","Dynamic","Static"];break;
+						case "type" : type="select"; list=["Dynamic","Kinematic","Static"];break;
 						case "currentScene": type ="select"; list=Command.getSceneListCmd(); break;
 						default: type="input";break;
 					}; break;
