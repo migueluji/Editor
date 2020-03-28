@@ -20,8 +20,7 @@ class ChoosePropertyView {
 		editorFrame.appendChild(this.html);
 		
 		var parameters={Element:"Me",Property:""};
-	//	console.log("input id",input.id);
-	//	if (input.id!="text" && input.id!="value") {
+
 		if (input.id=="property"){
 			var parameter=input.value.split(".");
 			if (parameter[0]=="") parameter[0]="Me";
@@ -43,7 +42,6 @@ class ChoosePropertyView {
 	}
 
 	addFields(parameters){
-//		console.log("Add fields",parameters)
 		for (const field in parameters) {
 			var list=null;
 			switch(field){

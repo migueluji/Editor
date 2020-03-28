@@ -52,19 +52,19 @@ class Game {
 
     get inputProperties(){
         var obj={
-            fps:null,
-            time:null,
+            FPS:0,
+            time:0,
             exit:false,
-            currentScene:null,
+            currentScene:"",
             currentSceneNumber:0,
-            deltaTime:null,
-            mouseX:null,
-            mouseY:null,
-            accelerationX:null,
-            accelerationY:null,
-            accelerationZ:null,
-            latitude:null,
-            longitude:null
+            deltaTime:0,
+            mouseX:0,
+            mouseY:0,
+            accelerationX:0,
+            accelerationY:0,
+            accelerationZ:0,
+            latitude:0,
+            longitude:0
         }
         return(obj);
     }

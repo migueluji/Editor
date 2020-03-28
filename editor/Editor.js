@@ -439,6 +439,7 @@ class Editor {
     getPropertiesList(element,type){
         var actor=null;
         var properties=[];
+        console.log("get properties",element,type);
         switch (element){
             case "Game": 
                 var object=Object.assign(this.model.newProperties,this.model.properties);

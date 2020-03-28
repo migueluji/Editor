@@ -147,7 +147,6 @@ class FieldView  {
 
 //Handlers
 	menuItemHandler(id){
-//		console.log(id);
 		if (id!="property"){
 			this.input.value += id+"()";
 			if ("createEvent" in document) {
