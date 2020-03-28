@@ -368,11 +368,12 @@ class Logic {
         /** Definimos el nombre de la variable distancia unica (para el compilado de la expresion en el scope) */
         var distance = "distance" + Util.random();
 
+        
         /** Definimos la expresion */
-        var expression = "" + distance + " = distance([" + actor.name + ".x , " + actor.name + ".y], [" + parameters.targetX + ", " + parameters.targetY + "])" + " \n" +
-                         "" + distance + " = (" + distance + " < 1) ? Infinity : " + distance + "\n" + 
-                         actor.name + ".x = " + actor.name + ".x + (" + parameters.speed + " * (" + parameters.targetX + " - " + actor.name + ".x) / " + distance + ") * engine.game.deltaTime" + "\n" + 
-                         actor.name + ".y = " + actor.name + ".y + (" + parameters.speed + " * (" + parameters.targetY + " - " + actor.name + ".y) / " + distance + ") * engine.game.deltaTime" + "\n";
+        var expression = "" + distance + " = distance([Me.x , Me.y], [" + parameters.x + ", " + parameters.y + "])" + " \n" +
+                         "" + distance + " = (" + distance + " < 5) ? Infinity : " + distance + "\n" + 
+                         "Me.x = Me.x + (" + parameters.speed + " * (" + parameters.x + " - Me.x) / " + distance + ") * engine.game.deltaTime" + "\n" + 
+                         "Me.y = Me.y + (" + parameters.speed + " * (" + parameters.y + " - Me.y) / " + distance + ") * engine.game.deltaTime" + "\n";
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
         return new Do(expression, actor.scope);

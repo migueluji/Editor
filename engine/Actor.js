@@ -19,10 +19,11 @@ class Actor {
          * General properties
          * --------------------------------------------------------------------- */
         this.name           = actor.name                    || "NewActor" + Util.random();
-        this.scene          = this.engine.activeScene       || null;
+        this.scene          = this.engine.game.activeScene  || null;
         this.ID             = actor.ID                      || actor.name  + Util.random();
         this.sleeping       = actor.sleeping ? false : true || false;
         this.destroyActor   = actor.destroyActor            || false;
+        this.index          = actor.index                   || 0;                               /** Inidices para le orden de visualizacion. */
         this.loaded         = false;
 
         /** Sprite properties

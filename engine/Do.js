@@ -11,7 +11,6 @@ class Do {
     run() {
 
         this.value = this.code.eval(this.scope).entries[0];
-        //this.value = this.code.eval();
     }
 
     compileExpression() {

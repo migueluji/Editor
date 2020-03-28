@@ -11,7 +11,7 @@ class File {
         if(typeof this.data === "string") {
 
             this.data = JSON.parse(String(this.data));
-            console.log(this.data);
+            console.log(this.data); 
             this.loadAssets(this.data.imageList);
         }
         else {
@@ -36,7 +36,7 @@ class File {
 
         this.loader = new PIXI.Loader(this.source + "/images");
         this.loader.add(imageList);
-        this.loader.onLoad.add((loader, resource) => {
+        this.loader.onLoad.add((loader, resource) => { 
             console.log(resource.name," loaded");
         });
         this.loader.load(()=>{

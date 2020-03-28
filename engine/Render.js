@@ -19,6 +19,9 @@ class Render {
         this.stage                  = new PIXI.Container();
         PIXI.settings.SCALE_MODE    = PIXI.SCALE_MODES.NEAREST; /** Modo de escala para las texturas de PIXI (pixelizacion). */ 
         PIXI.settings.WRAP_MODE     = PIXI.WRAP_MODES.REPEAT;
+        PIXI.settings.SORTABLE_CHILDREN = true;
+        this.stage.sortableChildren = true;
+        this.stage.sortDirty = true;
 
         document.body.appendChild(this.renderer.view);          /** Añadimos PIXI.Renderer al DOM. */ 
 
@@ -27,25 +30,33 @@ class Render {
 
     setActorRender(actor, data) {
             
-        if(data.spriteOn) { this.setActorSprite(actor); }   /** Creamos el sprite de la textura. */
-        if(data.textOn) { this.setActorText(actor); }       /** Creamos el sprite de la texto. */
+        if(data.spriteOn) { this.setActorSprite(actor, data); }   /** Creamos el sprite de la textura. */
+        if(data.textOn) { this.setActorText(actor, data); }       /** Creamos el sprite de la texto. */
     }
 
-    setActorSprite(actor) {
+    setActorSprite(actor, data) {
 
         actor.sprite = new PIXI.TilingSprite(PIXI.Texture.EMPTY);   /** Creamos el sprite de la imagen. */
-        actor.sprite.anchor.set(0.5001);                            /** Establecemos su origen de coordenadas local en su centro. */ 
+        actor.sprite.anchor.set(0.5001);                            /** Establecemos su origen de coordenadas local en su centro. */
+        actor.sprite.zIndex = data.index;                           /** */ 
+        //console.log(actor.sprite.zIndex);
         actor.sprite.cacheAsBitmap = true;                          /** Activamos su cacheo (para mejorar el rendimiento). */
         this.stage.addChild(actor.sprite);                          /** Añadimos el sprite al contenedor del sprites del actor. */
+        this.stage.children.sort((itemA, itemB) => itemA.zIndex - itemB.zIndex);
+        this.stage.sortChildren();
         this.spriteList.push(actor);                                /** Añadimos el actor a la lista de actualizacion de sprites. */
     }
 
-    setActorText(actor) {
+    setActorText(actor, data) {
 
         actor.textStyle = new PIXI.TextStyle({});               /** Definimos el estilo del texto. */
         actor.textSprite = new PIXI.Text("", actor.textStyle);  /** Creamos el elemento de texto para el render. */
         actor.textSprite.anchor.set(0.5);                       /** Establecemos su origen de coordenadas local en su centro. */ 
+        actor.zIndex = data.index;                                 /** */ 
         this.stage.addChild(actor.textSprite);                  /** Añadimos el texto al sprite contenedor. */
+        this.stage.children.sort((itemA, itemB) => itemA.zIndex - itemB.zIndex);
+        //console.log(this.stage.children)
+        this.stage.sortChildren();
         this.textList.push(actor);                              /** Añadimos el actor a la lista de textos. */
         this.textCompilationList.push(actor);                   /** Añadimos el actor a la lista auxiliar de compilacion de texto. */
     }

@@ -104,8 +104,8 @@ class Input {
 
     pointerMoveHandler(event) {
 
-        this.engine.game.mouseX = Math.floor(event.data.global.x - this.engine.render.renderer.width / 2 + this.engine.render.cameraX);
-        this.engine.game.mouseY = Math.floor(event.data.global.y - this.engine.render.renderer.height / 2 - this.engine.render.cameraY);
+        this.engine.game.mouseX = Math.floor(event.data.global.x - this.engine.render.renderer.width / 2 + this.engine.game.cameraX);
+        this.engine.game.mouseY = -1 * Math.floor(event.data.global.y - this.engine.render.renderer.height / 2 - this.engine.game.cameraY);
     }
 
     actorPointerDownHandler(actor) {
