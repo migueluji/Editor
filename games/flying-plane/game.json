@@ -177,7 +177,20 @@
 					"dampingAngular": 0,
 					"scriptList": [
 						{
-							"name": "Script_1",
+							"name": "movement",
+							"nodeList": [
+								{
+									"type": "Move_To",
+									"parameters": {
+										"speed": "400",
+										"x": "Game.mouseX",
+										"y": "Game.mouseY"
+									}
+								}
+							]
+						},
+						{
+							"name": "animation",
 							"nodeList": [
 								{
 									"type": "Animate",
@@ -185,40 +198,6 @@
 										"animation": "planeGreen1.png,planeGreen2.png,planeGreen3.png",
 										"fps": 24
 									}
-								},
-								{
-									"type": "Keyboard",
-									"parameters": {
-										"key": "ArrowUp",
-										"key_Mode": "Pressed"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Move",
-											"parameters": {
-												"speed": "300",
-												"angle": "90"
-											}
-										}
-									],
-									"nodeListFalse": []
-								},
-								{
-									"type": "Keyboard",
-									"parameters": {
-										"key": "ArrowDown",
-										"key_Mode": "Pressed"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Move",
-											"parameters": {
-												"speed": "300",
-												"angle": "-90"
-											}
-										}
-									],
-									"nodeListFalse": []
 								}
 							]
 						}
