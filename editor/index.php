@@ -123,7 +123,9 @@
 		userId=1455;
 		userName="Editor";
 		gameId=Utils.id();
+		gameFolder="box-doger";
 		gameFolder="flying-plane";
+		gameFolder="asteroids";
 		parentGamesFolder="http://localhost/games"		
 		var app=new App(userId, gameId, gameFolder, parentGamesFolder);
 	</script>

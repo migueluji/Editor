@@ -36,7 +36,7 @@ class Actor {
             start:this.start || 0, volume: this.volume,
             pan:this.pan || 0 , loop:this.loop || false,
             // Physics
-            physicsOn:this.physicsOn || false, type:this.type || "Kinematic",
+            physicsOn:this.physicsOn || false, type:this.type || "Dynamic",
             fixedAngle:this.fixedAngle || false,
             velocityX:this.velocityX || 0, velocityY:this.velocityY || 0,
             angularVelocity:this.angularVelocity || 0, 

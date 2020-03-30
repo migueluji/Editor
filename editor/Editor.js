@@ -216,10 +216,10 @@ class Editor {
                 actor.y=value.y;
                 break;
             case property=="width":
-                actor.scaleX=value/originalWidth;
+                actor.scaleX=(value/actor.tileX)/originalWidth;
                 break;
             case property=="height":
-                actor.scaleY=value/originalHeight;
+                actor.scaleY=(value/actor.tileY)/originalHeight;
                 break;
             case property=="scaleX":
                 actor.width=originalWidth*value*actor.tileX;
