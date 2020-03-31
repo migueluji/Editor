@@ -13,9 +13,9 @@
 	"start": 0,
 	"pan": 0,
 	"loop": false,
-	"physicsOn": false,
+	"physicsOn": true,
 	"gravityX": 0,
-	"gravityY": -9.8,
+	"gravityY": 0,
 	"tagList": [],
 	"sceneList": [
 		{
@@ -25,11 +25,11 @@
 					"name": "Actor_2",
 					"sleeping": false,
 					"x": 0,
-					"y": 1.2661179698216074,
-					"width": 800,
-					"height": 480,
-					"scaleX": 0.78125,
-					"scaleY": 0.9375,
+					"y": 0,
+					"width": 802,
+					"height": 482,
+					"scaleX": 0.783203125,
+					"scaleY": 0.94140625,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
@@ -111,7 +111,7 @@
 					"pan": 0,
 					"loop": false,
 					"physicsOn": true,
-					"type": "Kinematic",
+					"type": "Dynamic",
 					"fixedAngle": false,
 					"velocityX": 0,
 					"velocityY": 0,
@@ -136,8 +136,8 @@
 											"type": "Rotate",
 											"parameters": {
 												"speed": "200",
-												"pivot_X": "Me.x",
-												"pivot_Y": "Me.y"
+												"pivot_X": "0",
+												"pivot_Y": "0"
 											}
 										}
 									],
@@ -156,6 +156,23 @@
 												"speed": "-200",
 												"pivot_X": "Me.x",
 												"pivot_Y": "Me.y"
+											}
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "ArrowUp",
+										"key_Mode": "Pressed"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Push",
+											"parameters": {
+												"force": "0.05",
+												"angle": "Me.angle"
 											}
 										}
 									],
