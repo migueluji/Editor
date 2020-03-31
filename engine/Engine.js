@@ -236,4 +236,32 @@ class Engine {
 
         this.destroyList = [];
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    printf() {
+
+        for(var i = 0; i < arguments.length; i++) {
+
+            console.log(arguments[i]);
+        }
+
+        console.log("-------------------------");
+    }
 }
