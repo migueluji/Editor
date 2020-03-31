@@ -355,7 +355,6 @@ class Logic {
 
         /** Definimos el nombre de la variable distancia unica (para el compilado de la expresion en el scope) */
         var distance = "distance" + Util.random();
-
         
         /** Definimos la expresion */
         var expression = "" + distance + " = distance([Me.x , Me.y], [" + parameters.x + ", " + parameters.y + "])" + " \n" +
@@ -391,7 +390,13 @@ class Logic {
                         "Me.angle = Me.angle + atan2(newY, newX) * 180 / PI * engine.game.deltaTime * " + parameters.speed + " \n";*/
 
         /** Definimos la expresion */
-        var expression = "Me.angle = Me.angle + engine.game.deltaTime * " + parameters.speed + " \n";
+        var expression = "dx = " + parameters.pivot_X + " - Me.x \n" + 
+                         "dy = " + parameters.pivot_Y + " - Me.y \n" + 
+                         "Me.x = Me.x + dx \n" + 
+                         "Me.y = Me.y + dy \n" + 
+                         "Me.angle = Me.angle + " + parameters.speed + " * engine.game.deltaTime \n";
+
+        console.log(expression);
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
         return new Do(expression, actor.scope);
@@ -416,6 +421,8 @@ class Logic {
 
         /** Configuramos la expresion para que llame al motor de fisicas, y que este ejecute la funcion que aplica la fuerza sobre el actor. */
         var expression = "engine.physics.ApplyForce(Me, " + parameters.force + ", (" + parameters.angle + ") * PI / 180)" + "\n";
+
+        console.log(expression);
 
         /* Creamos el nuevo nodo con su expresion correspondiente.*/
         return new Do(expression, actor.scope);

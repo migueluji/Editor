@@ -7,10 +7,9 @@ class Physics {
         this.rigidbodyList          = [];                       /** */
         this.triggerList            = [];                       /** */
 
-        this.gravity                = new b2Vec2(0.0, 0.0);     /** */
         this.velocityIterations     = 10.0;                     /** */
         this.positionIterations     = 10.0;                     /** */
-        this.world                  = new b2World(this.gravity, false); /** Gravity and sleep = false. */
+        this.world                  = new b2World(new b2Vec2(0.0, 0.0), false); /** Gravity and sleep = false. */
         
         this.PIXELS_PER_METER       = 100;                      /** Para compensar el factor de escala del sistema de referencia de Box2D */ 
         this.HALF_PIXELS_PER_METER  = this.PIXELS_PER_METER / 2;
@@ -293,8 +292,8 @@ class Physics {
      *  ############################################################################### */
     ApplyForce(actor, strength, angle) {
 
-        var thrustX = strength * Math.cos(-1*angle); // El -1 es porque box2d interpreta la direccion en sentido contrario.
-        var thrustY = strength * Math.sin(-1*angle);
+        var thrustX = strength * Math.cos(angle) * this.engine.game.deltaTime;
+        var thrustY = strength * Math.sin(angle) * this.engine.game.deltaTime;
 
         actor.rigidbody.m_body.ApplyForce(new b2Vec2(thrustX,thrustY), actor.rigidbody.m_body.GetWorldCenter());
     }
