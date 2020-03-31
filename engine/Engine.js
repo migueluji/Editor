@@ -55,20 +55,13 @@ class Engine {
         /** Actualizar la lista de escenas activas y la lista auxiliar de carga de actores. */
         this.sceneList[scene.name]  = {};
 
-        /** Inicializacion de los indices para el orden de visualizacion. */
-        var index = 0;
-
         /** Creacion de los actores en la memoria del motor. */
         for(var i in scene.actorList) {
 
-            scene.actorList[i].index = index;
-            index++;
+            this.actorList[scene.actorList[i].ID] = new Actor(scene.actorList[i], this);  
             
-            /** Si es un actor activo */
-            if(!scene.actorList[i].sleeping) {
-
-                this.actorList[scene.actorList[i].ID] = new Actor(scene.actorList[i], this);        
-            }
+            /** Si es un actor dormido */
+            if(scene.actorList[i].sleeping) { this.actorList[scene.actorList[i].ID].sleep(); }
 
             this.sceneList[scene.name][scene.actorList[i].ID] = scene.actorList[i];
         }
@@ -185,15 +178,14 @@ class Engine {
         let _name   = "Spawn_of_" + actorName + "_" + Util.random();
         let _actor  = Object.assign({}, this.game.sceneList[this.game.activeScene].actorList[actorName]);
 
-        _actor.index    = this.game.sceneList[this.game.activeScene].actorList[actorName].index + (1 - 1 / (this.game.elapsedTime));
+        //_actor.index    = this.game.sceneList[this.game.activeScene].actorList[actorName].index + (1 - 1 / (this.game.elapsedTime));
+        _actor.spawned  = this.actorList[actorName];
         _actor.sleeping = false;
         _actor.name     = _name;
         _actor.ID       = _name;
         _actor.x        = x;
         _actor.y        = y; 
         _actor.angle    = angle;
-
-        //console.log(_actor.index);
 
         this.spawnList.push(_actor);
     }
@@ -203,6 +195,7 @@ class Engine {
         for(var i = 0; i < this.spawnList.length; i++) {
 
             this.actorList[this.spawnList[i].ID] = new Actor(this.spawnList[i], this);
+            //console.log(this.actorList[this.spawnList[i].ID]);
         }
 
         this.spawnList = [];                /** Vaciamos la lista de actores a spawnear. */

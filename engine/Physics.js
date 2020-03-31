@@ -8,10 +8,9 @@ class Physics {
         this.triggerList            = [];                       /** */
 
         this.gravity                = new b2Vec2(0.0, 0.0);     /** */
-        this.sleep                  = false;                    /** */
         this.velocityIterations     = 10.0;                     /** */
         this.positionIterations     = 10.0;                     /** */
-        this.world                  = new b2World(this.gravity, this.sleep);
+        this.world                  = new b2World(this.gravity, false); /** Gravity and sleep = false. */
         
         this.PIXELS_PER_METER       = 100;                      /** Para compensar el factor de escala del sistema de referencia de Box2D */ 
         this.HALF_PIXELS_PER_METER  = this.PIXELS_PER_METER / 2;

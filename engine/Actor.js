@@ -23,7 +23,7 @@ class Actor {
         this.ID             = actor.ID                      || actor.name  + Util.random();
         this.sleeping       = actor.sleeping ? false : true || false;
         this.destroyActor   = actor.destroyActor            || false;
-        this.index          = actor.index                   || 0;                               /** Inidices para le orden de visualizacion. */
+        //this.index          = actor.index                   || 0;                               /** Inidices para le orden de visualizacion. */
         this.loaded         = false;
 
         /** Sprite properties

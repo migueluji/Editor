@@ -87,13 +87,13 @@ class Logic {
         this.nodeList = [];
     }
 
-    disableActor(actor) {
+    sleep(actor) {
 
         actor.__scriptListData  = Object.assign({}, actor.scriptList);
         actor.scriptList        = {};
     }
 
-    enableActor(actor) {
+    awake(actor) {
 
         actor.scriptList        = Object.assign({}, actor.__scriptListData);
         actor.__scriptListData  = {};
@@ -156,18 +156,6 @@ class Logic {
         actor.image = actor[animation].list[actor[animation].index];
         actor.sprite.texture = actor.texture;
         actor[animation].index = timerCondition ? ((actor[animation].index == actor[animation].maxIndex - 1) ? 0 : actor[animation].index + 1) : actor[animation].index;
-    }
-
-    
-
-    sleep(actor) {
-
-        // TODO
-    }
-
-    awake(actor) {
-
-        // TODO
     }
 
 
@@ -391,15 +379,19 @@ class Logic {
                          "Me.y = Me.y + (ry - Me.y) * engine.game.deltaTime * " + parameters.speed + " \n" + 
                          "Me.angle = Me.angle + atan2(ry, rx) * 180 / PI * engine.game.deltaTime * " + parameters.speed + " \n";*/
 
+
         /** Definimos la expresion */
-        var expression = "a = Me.angle * PI / 180 \n" +
-                         "Me.x = Me.x - " + parameters.pivot_X + " \n" + 
-                         "Me.y = Me.y - " + parameters.pivot_Y + " \n" + 
-                         "newX = Me.x * cos(a) - Me.y * sin(a) \n" +
-                         "newY = Me.x * sin(a) + Me.y * cos(a) \n" +
-                         "Me.x = newX + " + parameters.pivot_X + " \n" + 
-                         "Me.y = newY + " + parameters.pivot_Y + " \n" + 
-                         "Me.angle = Me.angle + atan2(newY, newX) * 180 / PI * engine.game.deltaTime * " + parameters.speed + " \n";
+        /*var expression = "a = Me.angle * PI / 180 \n" +
+                        "Me.x = Me.x - " + parameters.pivot_X + " \n" + 
+                        "Me.y = Me.y - " + parameters.pivot_Y + " \n" + 
+                        "newX = Me.x * cos(a) - Me.y * sin(a) \n" +
+                        "newY = Me.x * sin(a) + Me.y * cos(a) \n" +
+                        "Me.x = newX + " + parameters.pivot_X + " \n" + 
+                        "Me.y = newY + " + parameters.pivot_Y + " \n" + 
+                        "Me.angle = Me.angle + atan2(newY, newX) * 180 / PI * engine.game.deltaTime * " + parameters.speed + " \n";*/
+
+        /** Definimos la expresion */
+        var expression = "Me.angle = Me.angle + engine.game.deltaTime * " + parameters.speed + " \n";
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
         return new Do(expression, actor.scope);
