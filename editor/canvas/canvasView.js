@@ -49,25 +49,23 @@ class CanvasView {
     takeScreenshot(){
         console.log("take screenshoot");
 
-        var mask = new PIXI.Graphics()
-        .beginFill()
-        .drawRect(0,0,this.gameProperties.displayWidth,this.gameProperties.displayHeight)
-        .endFill();
+        var app = new PIXI.Application();
 
-         mask.position.x=this.frame.x+this.gameProperties.displayWidth/2;
-         mask.position.y=this.frame.y+this.gameProperties.displayHeight/2;
-
-        const container = new PIXI.Container();
-        const texture = this.app.renderer.generateTexture(this.app.stage);
-        const image = new PIXI.Sprite(texture);
-   //     image.anchor.set(0.5);
-   //     image.scale.y=-1;
-    container.addChild(image);
-       container.addChild(mask);
-
-        image.mask=mask;
+        app.renderer.resize(this.gameProperties.width,this.gameProperties.height);
+        app.stage.x =this.gameProperties.width/2;
+        app.stage.y =this.gameProperties.height/2;
  
-        this.app.renderer.extract.canvas(container).toBlob((b) => {
+        var scene= new PIXI.Container(); // create the scene container
+        scene.position ={x:-this.gameProperties.cameraX,y:this.gameProperties.cameraY};
+        scene.angle = this.gameProperties.cameraAngle;
+        scene.scale = {x:this.gameProperties.cameraZoom,y:-this.gameProperties.cameraZoom};
+  
+        this.actorList.forEach(actor => {
+            var displayActor = new DisplayActor(this,actor,this.actorList,this.gameProperties,this.loader); 
+            scene.addChild(displayActor);
+        });
+ 
+        this.app.renderer.extract.canvas(scene).toBlob((b) => {
             const a = document.createElement('a');
             document.body.append(a);
             a.download = 'screenshot';
@@ -165,7 +163,6 @@ class CanvasView {
 
     updateSelectedActor(actorID){
         if (actorID){ // if actorED != mull
-         //   console.log(actorID,this.selected,this.displayActor);
             (this.selected) ? this.displayActor.removeGizmo() : this.selected=true;
             var displayActorIndex =this.scene.children.findIndex(i=>i.id==actorID);
             this.displayActor = this.scene.children[displayActorIndex];
@@ -313,8 +310,6 @@ class CanvasView {
             stage.x -= (newScreenPos.x-x) ;
             stage.y -= (newScreenPos.y-y) ;
         }
-
-     //   console.log(stage.scale.x,stage.scale.y);
 
         this.app.stage=stage;
         this.hitArea(this.scene);

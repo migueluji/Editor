@@ -6,7 +6,7 @@
 	"cameraY": 0,
 	"cameraAngle": 0,
 	"cameraZoom": 1,
-	"backgroundColor": "#00ff00",
+	"backgroundColor": "#ffffff",
 	"soundOn": false,
 	"soundtrack": "",
 	"volume": 1,
@@ -22,7 +22,7 @@
 			"name": "Scene 1",
 			"actorList": [
 				{
-					"name": "Actor_2",
+					"name": "background",
 					"sleeping": false,
 					"x": 0,
 					"y": 0,
@@ -73,14 +73,14 @@
 					"scriptList": []
 				},
 				{
-					"name": "Actor_1",
+					"name": "ship",
 					"sleeping": false,
 					"x": 0,
 					"y": 0,
-					"width": 75,
-					"height": 99,
-					"scaleX": 1,
-					"scaleY": 1,
+					"width": 45,
+					"height": 59,
+					"scaleX": 0.6,
+					"scaleY": 0.5959595959595959,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
@@ -171,8 +171,111 @@
 										{
 											"type": "Push",
 											"parameters": {
-												"force": "10",
+												"force": "20",
 												"angle": "Me.angle"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "Correct_Position",
+							"nodeList": [
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.x",
+										"operation": "Greater",
+										"value_2": "400"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.x",
+												"value": "-400"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "Me.x",
+												"operation": "Less",
+												"value_2": "-400"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.x",
+														"value": "400"
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									]
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.y",
+										"operation": "Greater",
+										"value_2": "240"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.y",
+												"value": "-240"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "Me.y",
+												"operation": "Less",
+												"value_2": "-240"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.y",
+														"value": "240"
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "shoot",
+							"nodeList": [
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "Space",
+										"key_Mode": "Pressed"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "laser",
+												"x": 0,
+												"y": 0,
+												"angle": 0
 											}
 										}
 									],
@@ -183,122 +286,12 @@
 					]
 				},
 				{
-					"name": "Actor_1_copy",
-					"sleeping": false,
-					"x": -354.16450744297094,
-					"y": 271.75054852749395,
-					"width": 201.5555555555557,
-					"height": 266.0533333333335,
-					"scaleX": 2.6874074074074095,
-					"scaleY": 2.6874074074074095,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "",
-					"spriteOn": true,
-					"image": "playerShip1_blue.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": true,
-					"type": "Dynamic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": [
-						{
-							"name": "Ship_movement",
-							"nodeList": [
-								{
-									"type": "Keyboard",
-									"parameters": {
-										"key": "ArrowLeft",
-										"key_Mode": "Pressed"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Rotate",
-											"parameters": {
-												"speed": "200",
-												"pivot_X": "0",
-												"pivot_Y": "0"
-											}
-										}
-									],
-									"nodeListFalse": []
-								},
-								{
-									"type": "Keyboard",
-									"parameters": {
-										"key": "ArrowRight",
-										"key_Mode": "Pressed"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Rotate",
-											"parameters": {
-												"speed": "-200",
-												"pivot_X": "Me.x",
-												"pivot_Y": "Me.y"
-											}
-										}
-									],
-									"nodeListFalse": []
-								},
-								{
-									"type": "Keyboard",
-									"parameters": {
-										"key": "ArrowUp",
-										"key_Mode": "Pressed"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Push",
-											"parameters": {
-												"force": "0.05",
-												"angle": "Me.angle"
-											}
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						}
-					]
-				},
-				{
-					"name": "Actor_1_copy_2",
-					"sleeping": false,
-					"x": -60,
-					"y": 204,
-					"width": 75,
-					"height": 99,
+					"name": "laser",
+					"sleeping": true,
+					"x": -343.5480109739368,
+					"y": -214.35185185185173,
+					"width": 54,
+					"height": 9,
 					"scaleX": 1,
 					"scaleY": 1,
 					"angle": 0,
@@ -306,7 +299,7 @@
 					"collider": "Box",
 					"tags": "",
 					"spriteOn": true,
-					"image": "playerShip1_blue.png",
+					"image": "laserBlue01.png",
 					"color": "#ffffff",
 					"opacity": 1,
 					"flipX": false,
@@ -315,22 +308,22 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": false,
-					"text": "",
+					"textOn": true,
+					"text": "${Me.angle}",
 					"font": "Arial",
 					"size": 30,
-					"fill": "#000000",
+					"fill": "#ffffff",
 					"style": "Normal",
 					"align": "Center",
 					"offsetX": 0,
-					"offsetY": 0,
+					"offsetY": 34,
 					"soundOn": false,
 					"sound": "",
 					"start": 0,
 					"volume": 1,
 					"pan": 0,
 					"loop": false,
-					"physicsOn": true,
+					"physicsOn": false,
 					"type": "Dynamic",
 					"fixedAngle": false,
 					"velocityX": 0,
@@ -343,64 +336,42 @@
 					"dampingAngular": 0,
 					"scriptList": [
 						{
-							"name": "Ship_movement",
+							"name": "Movement",
 							"nodeList": [
 								{
-									"type": "Keyboard",
+									"type": "Check",
 									"parameters": {
-										"key": "ArrowLeft",
-										"key_Mode": "Pressed"
+										"property": "Me.init"
 									},
 									"nodeListTrue": [
 										{
-											"type": "Rotate",
+											"type": "Edit",
 											"parameters": {
-												"speed": "200",
-												"pivot_X": "0",
-												"pivot_Y": "0"
+												"property": "Me.init",
+												"value": false
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.angle",
+												"value": "ship.angle"
 											}
 										}
 									],
 									"nodeListFalse": []
 								},
 								{
-									"type": "Keyboard",
+									"type": "Move",
 									"parameters": {
-										"key": "ArrowRight",
-										"key_Mode": "Pressed"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Rotate",
-											"parameters": {
-												"speed": "-200",
-												"pivot_X": "Me.x",
-												"pivot_Y": "Me.y"
-											}
-										}
-									],
-									"nodeListFalse": []
-								},
-								{
-									"type": "Keyboard",
-									"parameters": {
-										"key": "ArrowUp",
-										"key_Mode": "Pressed"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Push",
-											"parameters": {
-												"force": "0.05",
-												"angle": "Me.angle"
-											}
-										}
-									],
-									"nodeListFalse": []
+										"speed": "300",
+										"angle": "Me.angle"
+									}
 								}
 							]
 						}
-					]
+					],
+					"init": false
 				}
 			]
 		}
