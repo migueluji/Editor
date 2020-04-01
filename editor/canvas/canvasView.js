@@ -35,7 +35,6 @@ class CanvasView {
 		this.html.querySelector('#duplicate').addEventListener("click",this.duplicateActorHandler.bind(this));
 		this.html.querySelector('#delete').addEventListener("click",this.removeActorHandler.bind(this));
         window.addEventListener("resize",this.resize.bind(this));
-        window.addEventListener("click",this.takePhoto.bind(this));
         this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
 
         this.actorButton = this.html.querySelector("#actorbutton");
@@ -47,21 +46,36 @@ class CanvasView {
         this.loadInitImages(game.imageList);
     }
 
-    takePhoto(){
+    takeScreenshot(){
+        console.log("take screenshoot");
+
+        var mask = new PIXI.Graphics()
+        .beginFill()
+        .drawRect(0,0,this.gameProperties.displayWidth,this.gameProperties.displayHeight)
+        .endFill();
+
+         mask.position.x=this.frame.x+this.gameProperties.displayWidth/2;
+         mask.position.y=this.frame.y+this.gameProperties.displayHeight/2;
+
+        const container = new PIXI.Container();
+        const texture = this.app.renderer.generateTexture(this.app.stage);
+        const image = new PIXI.Sprite(texture);
+   //     image.anchor.set(0.5);
+   //     image.scale.y=-1;
+    container.addChild(image);
+       container.addChild(mask);
+
+        image.mask=mask;
+ 
+        this.app.renderer.extract.canvas(container).toBlob((b) => {
+            const a = document.createElement('a');
+            document.body.append(a);
+            a.download = 'screenshot';
+            a.href = URL.createObjectURL(b);
+            a.click();
+            a.remove();
+        }, 'image/png');
         
-        // const texture = this.app.renderer.generateTexture(this.scene);
-        // //const mask=this.frame;
-        // //texture.mask=mask;
-        // const tilingSprite= new PIXI.TilingSprite(texture);
-        // tilingSprite.anchor.set(0.5001);
-        // tilingSprite.width=800;
-        // tilingSprite.height=480;
-        // tilingSprite.scale.y=-1;
-        // this.app.stage.addChild(tilingSprite);
-        
-        // // image.style.transform="scaleY(-1)";
-        // // console.log("click",image.style.transform);
-        // // document.body.appendChild(image);
     }
     loadInitImages(imageList){
             this.loader = new PIXI.Loader(app.parentGamesFolder+"/"+app.gameFolder+"/images");
