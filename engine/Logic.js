@@ -355,7 +355,6 @@ class Logic {
 
         /** Definimos el nombre de la variable distancia unica (para el compilado de la expresion en el scope) */
         var distance = "distance" + Util.random();
-
         
         /** Definimos la expresion */
         var expression = "" + distance + " = distance([Me.x , Me.y], [" + parameters.x + ", " + parameters.y + "])" + " \n" +
@@ -369,29 +368,14 @@ class Logic {
 
     Rotate(actor, parameters) {
 
-        /** Definimos la expresion */
-        /*var expression = "a = Me.angle * PI / 180 \n" +
-                         "px = " + parameters.pivot_X + " \n" + 
-                         "py = " + parameters.pivot_Y + " \n" + 
-                         "rx = cos(a) * (px - Me.x) - sin(a) * (py - Me.y) + Me.x \n" +
-                         "ry = sin(a) * (px - Me.x) + sin(a) * (py - Me.y) + Me.y \n" +
-                         "Me.x = Me.x + (rx - Me.x) * engine.game.deltaTime * " + parameters.speed + " \n" + 
-                         "Me.y = Me.y + (ry - Me.y) * engine.game.deltaTime * " + parameters.speed + " \n" + 
-                         "Me.angle = Me.angle + atan2(ry, rx) * 180 / PI * engine.game.deltaTime * " + parameters.speed + " \n";*/
-
+        /** Definimos el nombre de la variable distancia unica (para el compilado de la expresion en el scope). */
+        var distance = "distance" + Util.random();
 
         /** Definimos la expresion */
-        /*var expression = "a = Me.angle * PI / 180 \n" +
-                        "Me.x = Me.x - " + parameters.pivot_X + " \n" + 
-                        "Me.y = Me.y - " + parameters.pivot_Y + " \n" + 
-                        "newX = Me.x * cos(a) - Me.y * sin(a) \n" +
-                        "newY = Me.x * sin(a) + Me.y * cos(a) \n" +
-                        "Me.x = newX + " + parameters.pivot_X + " \n" + 
-                        "Me.y = newY + " + parameters.pivot_Y + " \n" + 
-                        "Me.angle = Me.angle + atan2(newY, newX) * 180 / PI * engine.game.deltaTime * " + parameters.speed + " \n";*/
-
-        /** Definimos la expresion */
-        var expression = "Me.angle = Me.angle + engine.game.deltaTime * " + parameters.speed + " \n";
+        var expression = "" + distance + " = distance([" + parameters.pivot_X + ", " + parameters.pivot_Y + "], [Me.x, Me.y]) \n" + 
+                         "Me.angle = Me.angle + " + parameters.speed + " * engine.game.deltaTime \n" + 
+                         "Me.x = " + parameters.pivot_X + " + " + distance + " * cos(Me.angle * PI / 180) \n" + 
+                         "Me.y = " + parameters.pivot_Y + " + " + distance + " * sin(Me.angle * PI / 180) \n";
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
         return new Do(expression, actor.scope);
@@ -399,14 +383,27 @@ class Logic {
 
     Rotate_To(actor, parameters) {
 
-        /** Definimos el nombre de la variable distancia unica (para el compilado de la expresion en el scope) */
+        /** Definimos el nombre de la variable distancia unica (para el compilado de la expresion en el scope). */
         var distance = "distance" + Util.random();
 
+        //console.log("----", parameters);
+
         /** Definimos la expresion */
-        var expression = "" + distance + " = distance([" + actor.name + ".x , " + actor.name + ".y], [" + parameters.targetX + ", " + parameters.targetY + "])" + " \n" +
-                         "" + distance + " = (" + distance + " < 1) ? Infinity : " + distance + "\n" + 
-                         actor.name + ".x = " + actor.name + ".x + (" + parameters.speed + " * (" + parameters.targetX + " - " + actor.name + ".x) / " + distance + ") * engine.game.deltaTime" + "\n" + 
-                         actor.name + ".y = " + actor.name + ".y + (" + parameters.speed + " * (" + parameters.targetY + " - " + actor.name + ".y) / " + distance + ") * engine.game.deltaTime" + "\n";
+        var expression = "" + distance + " = distance([" + parameters.pivot_X + ", " + parameters.pivot_Y + "], [Me.x, Me.y]) \n" + 
+                         "actor_dx = " + parameters.pivot_X + " - Me.x \n" + 
+                         "actor_dy = " + parameters.pivot_Y + " - Me.y \n" + 
+                         "target_dx = " + parameters.pivot_X + " - " + parameters.x + "\n" + 
+                         "target_dy = " + parameters.pivot_Y + " - " + parameters.y + "\n" + 
+                         "actor_a = atan2(actor_dy, actor_dx) \n" + 
+                         "target_a = atan2(target_dy, target_dx) \n" + 
+                         "da = target_a - actor_a \n" + 
+                         "da = (abs(da) > PI) ? actor_a - target_a : da \n" +  
+                         //"engine.printf(actor_a, target_a, da) \n" + 
+                         "Me.angle = Me.angle + da * " + parameters.speed + " * engine.game.deltaTime \n" + 
+                         "Me.x = " + parameters.pivot_X + " + " + distance + " * cos(Me.angle * PI / 180) \n" + 
+                         "Me.y = " + parameters.pivot_Y + " + " + distance + " * sin(Me.angle * PI / 180) \n";
+
+                         //console.log(expression);
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
         return new Do(expression, actor.scope);

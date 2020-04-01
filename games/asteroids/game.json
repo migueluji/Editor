@@ -136,8 +136,8 @@
 											"type": "Rotate",
 											"parameters": {
 												"speed": "200",
-												"pivot_X": "0",
-												"pivot_Y": "0"
+												"pivot_X": "Me.x",
+												"pivot_Y": "Me.y"
 											}
 										}
 									],
@@ -171,7 +171,7 @@
 										{
 											"type": "Push",
 											"parameters": {
-												"force": "0.05",
+												"force": "10",
 												"angle": "Me.angle"
 											}
 										}

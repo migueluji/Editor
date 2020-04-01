@@ -33,7 +33,7 @@ class Game {
          * --------------------------------------------------------------------- */
         this.physicsOn          = game.physicsOn            || true;    /** */
         this.gravityX           = game.gravityX             || 0.0;     /** */
-        this.gravityY           = game.gravityY             || 9.8;     /** */
+        this.gravityY           = game.gravityY             || 0.0;     /** */
 
         /** Propiedades de audio del juego
          * --------------------------------------------------------------------- */
@@ -171,13 +171,13 @@ class Game {
     get gravityX() { return this._gravityX; }
     set gravityX(value) {
         this._gravityX = value;
-        this.engine.physics.gravity.Set(this._gravityX, this._gravityY);
+        this.engine.physics.world.m_gravity.Set(this._gravityX, this._gravityY);
     }
 
     get gravityY() { return this._gravityY; }
     set gravityY(value) {
         this._gravityY = value;
-        this.engine.physics.gravity.Set(this._gravityX, this._gravityY);
+        this.engine.physics.world.m_gravity.Set(this._gravityX, this._gravityY);
     }
 
     get soundOn() { return this._soundOn; }
