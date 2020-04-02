@@ -23,7 +23,6 @@ class DisplayActor extends PIXI.Container {
    
         if ((!actor.spriteOn && !actor.textOn) || actor.image=="" || !existsImage){
             var color;
-         //   console.log(loader.resources,actor.image,existsImage);
             (!existsImage && actor.image!="") ? color=0xff0000 : color=0xaaaaaa;
             this.createBorder(color);
         } 
@@ -76,8 +75,6 @@ class DisplayActor extends PIXI.Container {
 
         var textureSize;
         (texture==PIXI.Texture.WHITE) ? textureSize={w:50,h:50} : textureSize={w:this.tilingSprite.texture.width,h:this.tilingSprite.texture.height};
-    //    textureSize={w:actor.width/actor.scaleX/actor.tileX,h:actor.height/actor.scaleY/actor.tileY};
-    //    console.log("displayActor",actor.width,actor.scaleX,actor.tileX,textureSize.w);
 
         this.tilingSprite.width=textureSize.w*actor.tileX;
         this.tilingSprite.height=textureSize.h*actor.tileY;
@@ -245,7 +242,6 @@ class DisplayActor extends PIXI.Container {
                 this.removeGizmo();
                 this.removeBorder();
                 if(this.flipX)  this.tilingSprite.scale={x:-this.tilingSprite.scale.x,y:this.tilingSprite.scale.y};
-            //    console.log(this.f)
                 this.x=0;this.y=0;this.angle=0;
                 var giro=1;
                 var diff={x:mouseMove.x-this.initPivot.x,y:mouseMove.y-this.initPivot.y}; // quadrant x,y
@@ -410,7 +406,7 @@ class DisplayActor extends PIXI.Container {
                             else newValue= '"error '+textElement + ": doesn't exist"+'"';
                         }
                     // adjust decimal values    
-                    if (!isNaN(newValue)){ //si es un número
+                    if (typeof(newValue)=="number"){ //si es un número
                         if (newValue % 1 != 0) {
                             var number=String(newValue).split(".");
                             if (number[1].length>2)	newValue=Number(newValue).toFixed(2);

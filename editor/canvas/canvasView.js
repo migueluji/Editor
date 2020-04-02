@@ -75,6 +75,7 @@ class CanvasView {
         }, 'image/png');
         
     }
+    
     loadInitImages(imageList){
             this.loader = new PIXI.Loader(app.parentGamesFolder+"/"+app.gameFolder+"/images");
             if (imageList.length==0) this.loader.add("");
