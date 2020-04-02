@@ -3,9 +3,12 @@ class Actor {
     constructor(actor, engine) {
 
         /**
-         * Asignacion del motor
+         * Propiedades de control del motor
          * --------------------------------------------------------------------- */
-        this.engine         = engine;
+        this.engine          = engine;
+        this.index           = actor.index                   || 0;                                  /** Indices para le orden de visualizacion. */
+        this.spawner         = false;                                                               /** Propiedad de control para el orden de visualizacion de los spawns. */
+        this.loaded          = false;   
 
         /** Configuracion de las propiedades de ejecucion en los componentes del motor.
          * --------------------------------------------------------------------- */
@@ -23,8 +26,6 @@ class Actor {
         this.ID              = actor.ID                      || actor.name  + Util.random();
         this.sleeping        = actor.sleeping ? false : true || false;
         this.destroyActor    = actor.destroyActor            || false;
-        //this.index          = actor.index                   || 0;                               /** Inidices para le orden de visualizacion. */
-        this.loaded          = false;
 
         /** Sprite properties
          * --------------------------------------------------------------------- */
@@ -81,8 +82,6 @@ class Actor {
         this.friction        = actor.friction               || 0.0;
         this.restitution     = actor.restitution            || 0.0;
         this.type            = actor.type                   || "Dynamic";
-
-        console.log(actor);
 
         /** Settings properties
          * --------------------------------------------------------------------- */
@@ -501,7 +500,7 @@ class Actor {
 
     get linearDamping() { return this._linearDamping; }
     set linearDamping(value) {
-        this._linearDamping = value; console.log(this.name, "entra", value); 
+        this._linearDamping = value;
         if(this._physicsOn) { this.rigidbody.m_body.SetLinearDamping(this._linearDamping); }
     }
 
@@ -527,5 +526,14 @@ class Actor {
     set restitution(value) {
         this._restitution = value;
         if(this._physicsOn) { this.rigidbody.SetRestitution(this._restitution); }
+    }
+
+    get index() { return this._index; }
+    set index(value) {
+
+        this._index = value;
+
+        if(this._spriteOn) { this.sprite.zIndex = this._index; }
+        if(this._textOn) { this.textSprite.zIndex = this._index; }
     }
 }

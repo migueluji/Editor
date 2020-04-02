@@ -19,8 +19,8 @@ class Render {
         this.stage                  = new PIXI.Container();
         PIXI.settings.SCALE_MODE    = PIXI.SCALE_MODES.NEAREST; /** Modo de escala para las texturas de PIXI (pixelizacion). */ 
         PIXI.settings.WRAP_MODE     = PIXI.WRAP_MODES.REPEAT;
-        //PIXI.settings.SORTABLE_CHILDREN = true;
-        //this.stage.sortableChildren = true;
+        PIXI.settings.SORTABLE_CHILDREN = true;
+        this.stage.sortableChildren = true;
         //this.stage.sortDirty = true;
 
         document.body.appendChild(this.renderer.view);          /** Añadimos PIXI.Renderer al DOM. */ 
@@ -132,12 +132,14 @@ class Render {
 
     sleep(actor) {
 
-        // TODO
+        if(actor.textOn)   { actor.textSprite.visible = false; }  /** Ocultamos el texto. */
+        if(actor.spriteOn) { actor.sprite.visible     = false;  } /** Ocultamos el sprite. */ 
     }
 
     awake(actor) {
 
-        // TODO
+        if(actor.textOn)   { actor.textSprite.visible = true; }  /** Mostramos el texto. */
+        if(actor.spriteOn) { actor.sprite.visible     = true;  } /** Mostramos el sprite. */
     }
 
     destroyActor(actor) {

@@ -182,8 +182,6 @@ class Util {
             }
         }
 
-        //console.log(expression);
-
         expression = Util.replace(expression, "Game.", "engine.game."); /** Comprobamos si hay que actualizar el indentificador del Game. */
 
         return expression;
@@ -191,18 +189,43 @@ class Util {
 
     static updateTextToScope(text, actor) {
 
-        var temp;
+        var temp = text;
 
         for(var i in actor.engine.actorList) {
 
-            temp = Util.replace(text, actor.engine.actorList[i].name + ".", "player.engine.actorList." + i + ".");
+            temp = Util.replace(temp, actor.engine.actorList[i].name + ".", "player.engine.actorList." + i + ".");
         }
 
         temp = Util.replace(temp, "Me.", "player.engine.actorList." + actor.ID + ".");
-        
-        //console.log("---", actor.name, ":", temp);
+
+        temp = Util.setDecimalLimitDisplay(temp);       /** Limitacion a dos decimales del display de valores numericos. */
         
         return temp;
+    }
+
+    static setDecimalLimitDisplay(text) {
+
+        var chunks = text.split("${");
+        var output = "";
+
+        for(var i = 0; i < chunks.length; i++) {
+
+            if(chunks[i].includes("player.engine.actorList")) {
+
+                var item = chunks[i].split("}")[0];
+
+                //console.log("${((typeof " + item + " == number) ? " + item + ".toFixed(2).replace(/[.,]00$/, '')" + " : " + item + ")}");
+
+                output += "${((typeof " + item + " == 'number') ? " + item + ".toFixed(2).replace(/[.,]00$/, '')" + " : " + item + ")}";
+                //output += "${" + Util.replace(chunks[i], "}", ".toFixed(2).replace(/[.,]00$/, '')}");
+            }
+            else {
+
+                output += chunks[i];
+            }
+        }
+
+        return output;
     }
 
     static replace(expression, target, replace) {

@@ -323,6 +323,9 @@ class Logic {
 
     Spawn(actor, parameters) {
 
+        /** Marcamos el actor como spawner. */
+        actor.spawner = true;
+
         /** Definimos la expresion */
         var expression = "engine.addSpawnedActor('" + parameters.actor + "', Me.x" + "+" + parameters.x + ", Me.y" + "+" + parameters.y + ", " + parameters.angle + ")" + "\n";
 

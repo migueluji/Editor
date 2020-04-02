@@ -19,7 +19,9 @@ class Engine {
         this.spawnList      = [];                   /** Lista auxiliar para la creacion de nuevos actores (spawn) tras cada iteraccion del ciclo de juego. */
         this.destroyList    = [];                   /** Lista auxilair para la eliminacion de actores tras cada iteracion del ciclo de juego. */
         
-        this.sceneHandler      = null;              /** Propiedad auxiliar de control de las transiciones entre escenas. */
+        this.sceneHandler   = null;                 /** Propiedad auxiliar de control de las transiciones entre escenas. */
+
+        this.index          = 0;                    /** Indices para el orden de visualizacion. */
 
         this.addScene(this.game.sceneList[this.game.activeScene]); /** Añadimos la primera escena. */
     }
@@ -55,6 +57,9 @@ class Engine {
         /** Actualizar la lista de escenas activas y la lista auxiliar de carga de actores. */
         this.sceneList[scene.name]  = {};
 
+        /** Actualizacion del valor maximo de index para la visualizacion. */
+        //this.index += Object.keys(scene.actorList).length;
+
         /** Creacion de los actores en la memoria del motor. */
         for(var i in scene.actorList) {
 
@@ -63,6 +68,10 @@ class Engine {
             /** Si es un actor dormido */
             if(scene.actorList[i].sleeping) { this.actorList[scene.actorList[i].ID].sleep(); }
 
+            /** Si es un actor a spawnear. */
+            this.index = this.actorList[scene.actorList[i].ID].spawner ? this.index + 1 : this.index;
+            this.actorList[scene.actorList[i].ID].index = this.index;
+            
             this.sceneList[scene.name][scene.actorList[i].ID] = scene.actorList[i];
         }
 
@@ -98,10 +107,10 @@ class Engine {
         this.destroyActors();
 
         Util.deepDestroy(this.actorList);
-        this.actorList = {};
-
+        this.actorList  = {};
         this.spawnList  = [];
         this.sceneList  = {};
+        this.index      = 0;
     }
 
     popScene() {
@@ -177,8 +186,6 @@ class Engine {
 
         let _name       = "Spawn_of_" + actorName + "_" + Util.random();
         let _actor      = Object.assign({}, this.game.sceneList[this.game.activeScene].actorList[actorName]);
-        //_actor.index    = this.game.sceneList[this.game.activeScene].actorList[actorName].index + (1 - 1 / (this.game.elapsedTime));
-        _actor.spawned  = this.actorList[actorName];
         _actor.sleeping = false;
         _actor.name     = _name;
         _actor.ID       = _name;
