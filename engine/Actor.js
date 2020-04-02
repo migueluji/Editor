@@ -6,8 +6,8 @@ class Actor {
          * Propiedades de control del motor
          * --------------------------------------------------------------------- */
         this.engine          = engine;
-        this.index           = actor.index                   || 0;                                  /** Indices para le orden de visualizacion. */
-        this.spawner         = false;                                                               /** Propiedad de control para el orden de visualizacion de los spawns. */
+        this.index           = actor.index  || 0;           /** Indices para le orden de visualizacion. */
+        this.spawn           = actor.spawn  || false;       /** Propiedad de control para el orden de visualizacion de los spawns. */
         this.loaded          = false;   
 
         /** Configuracion de las propiedades de ejecucion en los componentes del motor.
@@ -178,7 +178,6 @@ class Actor {
 
         if(this._spriteOn) { this.sprite.rotation = Util.degToRad(-this._angle); }
         if(this._textOn) { this.textSprite.rotation = Util.degToRad(-this._angle); }
-        //if(this._physicsOn) { this.rigidbody.m_body.SetAngle(Util.degToRad(this._angle)); }
     }
 
     get screen() { return this._screen; }
@@ -195,9 +194,7 @@ class Actor {
         }
         else {
 
-            //Util.destroy(this.engine.render.onScreenList, this.ID);
-
-            /** TODO. Ahora son arrays, hay que eliminarlos eficientemente. */
+            Util.removeByID(this.engine.render.onScreenList, this.ID);
         }
     }
 
@@ -471,7 +468,7 @@ class Actor {
     get physicsOn() { return this._physicsOn; }
     set physicsOn(value) {
         this._physicsOn = value;
-        //if(this.rigidbody != undefined) { this.rigidbody.m_body.SetActive(this._physicsOn); } // OJO CON ESTO, 
+        if(this._physicsOn) { this.rigidbody.m_body.SetActive(this._physicsOn); }  
     }
 
     get velocityX() { return this._velocityX; }

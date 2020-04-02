@@ -73,9 +73,38 @@ class Game {
         }
 
         /**
+         * Marcamos los actores que se van a spawnear (orden de visualizacion)
+         * --------------------------------------------------------------------- */
+        this.markSpawns(game);
+
+        /**
          * Actualizacion de la variable de control de la carga de informacion
          * --------------------------------------------------------------------- */
         this.loaded = true;
+    }
+
+    markSpawns(game) {
+
+        for(var i in game.sceneList) {
+
+            var spawnList = [];
+            
+            for(var j in this.sceneList[i].actorList) {
+
+                Util.findSpawns(this.sceneList[i].actorList[j].scriptList[0], spawnList);
+            }
+
+            for(var j = 0; j < spawnList.length; j++) {
+
+                for(var k in this.sceneList[i].actorList) {
+
+                    if(spawnList[j] == this.sceneList[i].actorList[k].name) {
+
+                        this.sceneList[i].actorList[k].spawn = true;
+                    }
+                }
+            }
+        }
     }
 
     

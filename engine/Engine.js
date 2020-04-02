@@ -57,9 +57,6 @@ class Engine {
         /** Actualizar la lista de escenas activas y la lista auxiliar de carga de actores. */
         this.sceneList[scene.name]  = {};
 
-        /** Actualizacion del valor maximo de index para la visualizacion. */
-        //this.index += Object.keys(scene.actorList).length;
-
         /** Creacion de los actores en la memoria del motor. */
         for(var i in scene.actorList) {
 
@@ -69,8 +66,10 @@ class Engine {
             if(scene.actorList[i].sleeping) { this.actorList[scene.actorList[i].ID].sleep(); }
 
             /** Si es un actor a spawnear. */
-            this.index = this.actorList[scene.actorList[i].ID].spawner ? this.index + 1 : this.index;
+            this.index = this.actorList[scene.actorList[i].ID].spawn ? this.index + 1 : this.index;
             this.actorList[scene.actorList[i].ID].index = this.index;
+
+            console.log(this.actorList[scene.actorList[i].ID].name, this.actorList[scene.actorList[i].ID].index);
             
             this.sceneList[scene.name][scene.actorList[i].ID] = scene.actorList[i];
         }

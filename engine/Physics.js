@@ -195,10 +195,10 @@ class Physics {
             listener.BeginContact = function(contact) { callbacks.BeginContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); };
         }
         
-        /*if(callbacks.EndContact) {
+        if(callbacks.EndContact) {
             
             listener.EndContact = function(contact) { callbacks.EndContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); };
-        }*/
+        }
 
         this.world.SetContactListener(listener);
     }
@@ -226,7 +226,7 @@ class Physics {
                 idA = idB = null;
             },
 
-            /*EndContact: function(idA, idB) {
+            EndContact: function(idA, idB) {
 
                 for(var i = 0; i < idB.tags.length; i++) { 
 
@@ -243,7 +243,7 @@ class Physics {
                 }
 
                 idA = idB = null;
-            }*/
+            }
         });
     }
 

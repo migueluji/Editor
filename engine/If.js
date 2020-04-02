@@ -15,6 +15,8 @@ class If {
 
         this.value = this.code.eval(this.scope).entries[0];
 
+        if(this.expression.includes("onstart")) console.log(this.expression, this.value);
+
         if(this.value) {
 
             for(var t in this.nodeListTrue) {

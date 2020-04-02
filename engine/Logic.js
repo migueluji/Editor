@@ -79,10 +79,7 @@ class Logic {
 
     compileExpressions() {
 
-        for(var i = 0; i < this.nodeList.length; i++) {
-
-            this.nodeList[i].compileExpression();
-        }
+        for(var i = 0; i < this.nodeList.length; i++) { this.nodeList[i].compileExpression(); }
 
         this.nodeList = [];
     }
@@ -121,10 +118,7 @@ class Logic {
 
     destroyScript(script) {
 
-        for(var i in script) {
-
-            script[i].destroy();
-        }
+        for(var i in script) { script[i].destroy(); }
     }
 
     reset() {
@@ -136,12 +130,7 @@ class Logic {
         this.engine.game.elapsedTime    += this.engine.game.deltaTime; 
 
         /** Contabilizar los timers */
-        for(var i in this.timerList) {
-
-            this.timerList[i].timer += this.engine.game.deltaTime;
-        }
-
-        // TODO: ¿Resetear las variables TAG de colision?
+        for(var i in this.timerList) { this.timerList[i].timer += this.engine.game.deltaTime; }
     }
     
     updateTimer(condition, timerProperty) {
@@ -322,9 +311,6 @@ class Logic {
     }
 
     Spawn(actor, parameters) {
-
-        /** Marcamos el actor como spawner. */
-        actor.spawner = true;
 
         /** Definimos la expresion */
         var expression = "engine.addSpawnedActor('" + parameters.actor + "', Me.x" + "+" + parameters.x + ", Me.y" + "+" + parameters.y + ", " + parameters.angle + ")" + "\n";

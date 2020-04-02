@@ -23,6 +23,30 @@ class Util {
         }
     }
 
+    static findSpawns(object, container) {
+
+        for(var i in object) {
+
+            if(object[i].nodeListTrue != undefined) { 
+
+                Util.findSpawns(object[i].nodeListTrue, container);
+            }
+
+            if(object[i].nodeListFalse != undefined) {
+
+                Util.findSpawns(object[i].nodeListFalse, container);
+            }
+
+            if(object[i].type == "Spawn") {
+                
+                container.push(object[i].parameters.actor);
+            }
+        }
+    }
+
+    /**
+     * 
+     */
     static removeByID(list, ID) {
 
         return list.filter(item => item.ID != ID);
