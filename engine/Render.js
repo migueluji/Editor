@@ -40,18 +40,7 @@ class Render {
         actor.sprite.anchor.set(0.5001);                            /** Establecemos su origen de coordenadas local en su centro. */
         actor.sprite.cacheAsBitmap = true;                          /** Activamos su cacheo (para mejorar el rendimiento). */
         this.spriteList.push(actor);                                /** Añadimos el actor a la lista de actualizacion de sprites. */
-
-        if(data.spawned == undefined) {
-
-            this.stage.addChild(actor.sprite);                      /** Añadimos el sprite al contenedor del sprites del actor. */
-        }
-        else {
-
-            //console.log(data.name, data.spawned.scriptList);
-
-            data.spawned.sprite.addChild(actor.sprite);             /** Añadimos el sprite al sprite del actor original (para respetar el orden de visualizacion). */
-        }
-        
+        this.stage.addChild(actor.sprite);                          /** Añadimos el sprite al contenedor del sprites del actor. */
     }
 
     setActorText(actor, data) {
@@ -119,21 +108,22 @@ class Render {
             actor.textStyle.padding       = actor.width;
 
             actor.textStyle.align = actor.align;
+            actor.textSprite.pivot.y = actor.offsetY;
 
             switch(actor.align) {
 
                 case "left": 
-                    actor.textSprite.pivot.x = actor.width / 2;
+                    actor.textSprite.pivot.x = actor.width / 2 + actor.offsetX;
                     actor.textSprite.anchor.x = 0.0;
                     break;
 
                 case "right": 
-                    actor.textSprite.pivot.x = -actor.width / 2;
+                    actor.textSprite.pivot.x = -actor.width / 2 + actor.offsetX;
                     actor.textSprite.anchor.x = 1.0;
                     break;
 
                 case "center": 
-                    actor.textSprite.pivot.x = 0.0;
+                    actor.textSprite.pivot.x = 0.0 + actor.offsetX;
                     actor.textSprite.anchor.x = 0.5;
                     break; 
             }

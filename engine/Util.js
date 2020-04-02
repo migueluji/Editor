@@ -110,6 +110,11 @@ class Util {
         return value.replace("#", "0x");
     }
 
+    static isEmpty(value) {
+
+        return Object.keys(value).length === 0;
+    }
+
     /**
      * 
      */

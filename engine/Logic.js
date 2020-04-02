@@ -89,14 +89,14 @@ class Logic {
 
     sleep(actor) {
 
-        actor.__scriptListData  = Object.assign({}, actor.scriptList);
-        actor.scriptList        = {};
+        actor.__scriptListData  = actor.scriptList;
+        actor.scriptList        = [];
     }
 
     awake(actor) {
 
-        actor.scriptList        = Object.assign({}, actor.__scriptListData);
-        actor.__scriptListData  = {};
+        actor.scriptList        = actor.__scriptListData;
+        actor.__scriptListData  = [];
         delete actor.__scriptListData;
     }
 
@@ -194,9 +194,9 @@ class Logic {
     }
 
     Check(actor, parameters) {
-        
+
         /** Definimos la expresion */
-        var expression = parameters.element + "." + parameters.property + "\n";
+        var expression = parameters.property + "\n";
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
         return new If(expression, actor.scope);

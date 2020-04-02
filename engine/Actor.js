@@ -5,7 +5,7 @@ class Actor {
         /**
          * Asignacion del motor
          * --------------------------------------------------------------------- */
-        this.engine = engine;
+        this.engine         = engine;
 
         /** Configuracion de las propiedades de ejecucion en los componentes del motor.
          * --------------------------------------------------------------------- */
@@ -18,55 +18,55 @@ class Actor {
         /**
          * General properties
          * --------------------------------------------------------------------- */
-        this.name           = actor.name                    || "NewActor" + Util.random();
-        this.scene          = this.engine.game.activeScene  || null;
-        this.ID             = actor.ID                      || actor.name  + Util.random();
-        this.sleeping       = actor.sleeping ? false : true || false;
-        this.destroyActor   = actor.destroyActor            || false;
+        this.name            = actor.name                    || "NewActor" + Util.random();
+        this.scene           = this.engine.game.activeScene  || null;
+        this.ID              = actor.ID                      || actor.name  + Util.random();
+        this.sleeping        = actor.sleeping ? false : true || false;
+        this.destroyActor    = actor.destroyActor            || false;
         //this.index          = actor.index                   || 0;                               /** Inidices para le orden de visualizacion. */
-        this.loaded         = false;
+        this.loaded          = false;
 
         /** Sprite properties
          * --------------------------------------------------------------------- */
-        this.image          = actor.image                   || "";
-        this.spriteOn       = actor.spriteOn                || false;
-        this.color          = actor.color                   || "0xffffff";
-        this.opacity        = actor.opacity                 || 1;
-        this.scrollX        = actor.scrollX                 || 0;
-        this.scrollY        = actor.scrollY                 || 0;
-        this.flipX          = actor.flipX                   || false;
-        this.flipY          = actor.flipY                   || false;
+        this.image           = actor.image                   || "";
+        this.spriteOn        = actor.spriteOn                || false;
+        this.color           = actor.color                   || "0xffffff";
+        this.opacity         = actor.opacity                 || 1;
+        this.scrollX         = actor.scrollX                 || 0;
+        this.scrollY         = actor.scrollY                 || 0;
+        this.flipX           = actor.flipX                   || false;
+        this.flipY           = actor.flipY                   || false;
 
         /** Text properties
          * --------------------------------------------------------------------- */
-        this.text           = actor.text                    || "";
-        this.textOn         = actor.textOn                  || false;
-        this.align          = actor.align                   || "left";
-        this.font           = actor.font                    || "Arial";
-        this.fill           = actor.fill                    || "#333333";
-        this.size           = actor.size                    || 30;
-        this.style          = actor.style                   || "normal";
-        this.offsetX        = actor.offsetX                 || 0;
-        this.offsetY        = actor.offsetY                 || 0;
+        this.text            = actor.text                    || "";
+        this.textOn          = actor.textOn                  || false;
+        this.align           = actor.align                   || "left";
+        this.font            = actor.font                    || "Arial";
+        this.fill            = actor.fill                    || "#333333";
+        this.size            = actor.size                    || 30;
+        this.style           = actor.style                   || "normal";
+        this.offsetX         = actor.offsetX                 || 0;
+        this.offsetY         = actor.offsetY                 || 0;
 
         /** Input properties
          * --------------------------------------------------------------------- */
-        this.interactiveOn  = false;
+        this.interactiveOn   = false;
 
         /** Audio properties
          * --------------------------------------------------------------------- */
-        this.sound          = actor.sound                   || "";          /** */
-        this.soundOn        = actor.soundOn                 || false;       /** */
-        this.pan            = actor.pan                     || 0;           /** */
-        this.volume         = actor.volume                  || 1;           /** */
-        this.start          = actor.start                   || false;       /** */
-        this.loop           = actor.loop                    || false;       /** */
+        this.sound           = actor.sound                   || "";          /** */
+        this.soundOn         = actor.soundOn                 || false;       /** */
+        this.pan             = actor.pan                     || 0;           /** */
+        this.volume          = actor.volume                  || 1;           /** */
+        this.start           = actor.start                   || false;       /** */
+        this.loop            = actor.loop                    || false;       /** */
 
         /** Collision properties
          * --------------------------------------------------------------------- */
-        this.tags           = actor.tags                    || [];
-        this.collider       = actor.collider                || "Circle";
-        this.physicVertices = actor.physicVertices          || null; 
+        this.tags            = actor.tags                    || [];
+        this.collider        = actor.collider                || "Circle";
+        this.physicVertices  = actor.physicVertices          || null; 
 
         /** Physics properties
          * --------------------------------------------------------------------- */
@@ -75,26 +75,28 @@ class Actor {
         this.velocityY       = actor.velocityY              || 0;
         this.angularVelocity = actor.angularVelocity        || 0;
         this.fixedAngle      = actor.fixedAngle             || false;
-        this.linearDamping   = actor.linearDamping          || 0.0;
-        this.angularDamping  = actor.angularDamping         || 0.0;
+        this.linearDamping   = actor.dampingLinear          || 0.0;
+        this.angularDamping  = actor.dampingAngular         || 0.0;
         this.density         = actor.density                || 0.0;
         this.friction        = actor.friction               || 0.0;
         this.restitution     = actor.restitution            || 0.0;
         this.type            = actor.type                   || "Dynamic";
 
+        console.log(actor);
+
         /** Settings properties
          * --------------------------------------------------------------------- */
-        this.x              = actor.x                       || 0;
-        this.y              = actor.y                       || 0;
-        this.angle          = actor.angle                   || 0;
-        this.screen         = actor.screen                  || false;
-        this.scaleX         = actor.scaleX                  || 1;
-        this.scaleY         = actor.scaleY                  || 1;
-        this.tileX          = actor.tileX                   || 1;
-        this.tileY          = actor.tileY                   || 1;
-        this.width          = actor.width                   || 50;
-        this.height         = actor.height                  || 50;
-        this.radius         = Math.max(this.width, this.height) / 2;
+        this.x               = actor.x                       || 0;
+        this.y               = actor.y                       || 0;
+        this.angle           = actor.angle                   || 0;
+        this.screen          = actor.screen                  || false;
+        this.scaleX          = actor.scaleX                  || 1;
+        this.scaleY          = actor.scaleY                  || 1;
+        this.tileX           = actor.tileX                   || 1;
+        this.tileY           = actor.tileY                   || 1;
+        this.width           = actor.width                   || 50;
+        this.height          = actor.height                  || 50;
+        this.radius          = Math.max(this.width, this.height) / 2;
 
         /** Logic properties
          * --------------------------------------------------------------------- */
@@ -499,7 +501,7 @@ class Actor {
 
     get linearDamping() { return this._linearDamping; }
     set linearDamping(value) {
-        this._linearDamping = value;
+        this._linearDamping = value; console.log(this.name, "entra", value); 
         if(this._physicsOn) { this.rigidbody.m_body.SetLinearDamping(this._linearDamping); }
     }
 

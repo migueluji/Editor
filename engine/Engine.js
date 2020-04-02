@@ -175,9 +175,8 @@ class Engine {
      * ---------------------------------------- */
     addSpawnedActor(actorName, x, y, angle) {
 
-        let _name   = "Spawn_of_" + actorName + "_" + Util.random();
-        let _actor  = Object.assign({}, this.game.sceneList[this.game.activeScene].actorList[actorName]);
-
+        let _name       = "Spawn_of_" + actorName + "_" + Util.random();
+        let _actor      = Object.assign({}, this.game.sceneList[this.game.activeScene].actorList[actorName]);
         //_actor.index    = this.game.sceneList[this.game.activeScene].actorList[actorName].index + (1 - 1 / (this.game.elapsedTime));
         _actor.spawned  = this.actorList[actorName];
         _actor.sleeping = false;
@@ -195,7 +194,6 @@ class Engine {
         for(var i = 0; i < this.spawnList.length; i++) {
 
             this.actorList[this.spawnList[i].ID] = new Actor(this.spawnList[i], this);
-            //console.log(this.actorList[this.spawnList[i].ID]);
         }
 
         this.spawnList = [];                /** Vaciamos la lista de actores a spawnear. */
@@ -262,6 +260,6 @@ class Engine {
             console.log(arguments[i]);
         }
 
-        console.log("-------------------------");
+        console.log("------------------------- ENTRAAAAAAAAAAAAAAAAAAAA");
     }
 }
