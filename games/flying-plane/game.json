@@ -25,7 +25,7 @@
 			"name": "Scene 1",
 			"actorList": [
 				{
-					"name": "Actor_1",
+					"name": "background",
 					"sleeping": false,
 					"x": 0,
 					"y": 0,
@@ -131,14 +131,14 @@
 								{
 									"type": "Move",
 									"parameters": {
-										"speed": "300",
+										"speed": "200",
 										"angle": "180"
 									}
 								},
 								{
 									"type": "Collision",
 									"parameters": {
-										"tags": "plane,border"
+										"tags": "plane"
 									},
 									"nodeListTrue": [
 										{
@@ -147,6 +147,23 @@
 												"property": "score.estrellas",
 												"value": "score.estrellas+1"
 											}
+										},
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "border"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
 										}
 									],
 									"nodeListFalse": []
@@ -156,58 +173,7 @@
 					]
 				},
 				{
-					"name": "Actor_2",
-					"sleeping": false,
-					"x": 0,
-					"y": -204,
-					"width": 808,
-					"height": 71,
-					"scaleX": 1,
-					"scaleY": 1,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "",
-					"spriteOn": true,
-					"image": "groundIce.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": -200,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": false,
-					"type": "Kinematic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": []
-				},
-				{
-					"name": "Actor_3",
+					"name": "plane",
 					"sleeping": false,
 					"x": -220,
 					"y": 5,
@@ -262,7 +228,7 @@
 								{
 									"type": "Move_To",
 									"parameters": {
-										"speed": "400",
+										"speed": "200",
 										"x": "Game.mouseX",
 										"y": "Game.mouseY"
 									}
@@ -284,7 +250,58 @@
 					]
 				},
 				{
-					"name": "Actor_5",
+					"name": "foreground",
+					"sleeping": false,
+					"x": 0,
+					"y": -204,
+					"width": 808,
+					"height": 71,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "groundIce.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": -300,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Kinematic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "generator",
 					"sleeping": false,
 					"x": 435.5,
 					"y": 7.5,
@@ -359,7 +376,7 @@
 					]
 				},
 				{
-					"name": "Actor_6",
+					"name": "wall",
 					"sleeping": false,
 					"x": -402,
 					"y": -0.25,
@@ -433,7 +450,7 @@
 					"tileX": 1,
 					"tileY": 1,
 					"textOn": true,
-					"text": "Estrellas: ${Me.estrellas}",
+					"text": "Stars: ${Me.estrellas}",
 					"font": "Tahoma",
 					"size": 30,
 					"fill": "#137dc4",
