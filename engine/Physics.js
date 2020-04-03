@@ -8,11 +8,14 @@ class Physics {
         this.triggerList            = [];                       /** */
 
         this.velocityIterations     = 10.0;                     /** */
-        this.positionIterations     = 10.0;                     /** */
+        this.positionIterations     = 8.0;                      /** */
         this.world                  = new b2World(new b2Vec2(0.0, 0.0), false); /** Gravity and sleep = false. */
         
         this.PIXELS_PER_METER       = 100;                      /** Para compensar el factor de escala del sistema de referencia de Box2D */ 
         this.HALF_PIXELS_PER_METER  = this.PIXELS_PER_METER / 2;
+        
+        this.deltaTime   = 1 / this.PIXELS_PER_METER; 
+        this.accumulator = 0.0;
 
         this.setContactListener();
     }
@@ -20,8 +23,17 @@ class Physics {
     run() {
 
         this.updateWorld();
-        this.world.Step(this.engine.game.deltaTime, this.velocityIterations, this.positionIterations);
+
+        this.accumulator += this.engine.game.deltaTime;
+
+        while(this.accumulator >= this.deltaTime) {
+
+            this.world.Step(this.deltaTime, this.velocityIterations, this.positionIterations);
+            this.accumulator -= this.deltaTime;
+        }
+        
         this.world.ClearForces();
+        
         this.updateGame();
     }
 
@@ -45,9 +57,12 @@ class Physics {
 
     updateActor(actor) {
 
-        actor.x     = actor.rigidbody.m_body.GetPosition().x * this.PIXELS_PER_METER;
-        actor.y     = actor.rigidbody.m_body.GetPosition().y * this.PIXELS_PER_METER;
-        actor.angle = Util.radToDeg(actor.rigidbody.m_body.GetAngle());
+        actor.x                 = actor.rigidbody.m_body.GetPosition().x * this.PIXELS_PER_METER;
+        actor.y                 = actor.rigidbody.m_body.GetPosition().y * this.PIXELS_PER_METER;
+        actor.angle             = Util.radToDeg(actor.rigidbody.m_body.GetAngle());
+        actor._velocityX         = actor.rigidbody.m_body.GetLinearVelocity().x * this.PIXELS_PER_METER;
+        actor._velocityY         = actor.rigidbody.m_body.GetLinearVelocity().y * this.PIXELS_PER_METER; 
+        actor._angularVelocity   = actor.rigidbody.m_body.GetAngularVelocity() * this.PIXELS_PER_METER; 
     }
 
     setActorPhysics(actor, data) {

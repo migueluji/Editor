@@ -187,7 +187,7 @@
 					"friction": 0.5,
 					"restitution": 0.5,
 					"dampingLinear": 1,
-					"dampingAngular": 0.01,
+					"dampingAngular": 0,
 					"scriptList": [
 						{
 							"name": "Ship_movement",
@@ -238,7 +238,7 @@
 										{
 											"type": "Push",
 											"parameters": {
-												"force": "5",
+												"force": "0.05",
 												"angle": "Me.angle"
 											}
 										}
@@ -509,6 +509,104 @@
 						}
 					],
 					"onstart": true
+				},
+				{
+					"name": "rock_copy",
+					"sleeping": false,
+					"x": -300,
+					"y": -155,
+					"width": 101,
+					"height": 84,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "meteorBrown_big1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": true,
+					"text": "${Me.steps}",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Destroy",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "laser"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "score.p",
+												"value": "score.p+1"
+											}
+										},
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "Impulse",
+							"nodeList": [
+								{
+									"type": "Move",
+									"parameters": {
+										"speed": "100",
+										"angle": 0
+									}
+								},
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.steps",
+										"value": "Me.steps + 1"
+									}
+								}
+							]
+						}
+					],
+					"onstart": true,
+					"steps": 0
 				}
 			]
 		}
