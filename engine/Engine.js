@@ -69,7 +69,7 @@ class Engine {
             this.index = this.actorList[scene.actorList[i].ID].spawn ? this.index + 1 : this.index;
             this.actorList[scene.actorList[i].ID].index = this.index;
 
-            console.log(this.actorList[scene.actorList[i].ID].name, this.actorList[scene.actorList[i].ID].index);
+            //console.log(this.actorList[scene.actorList[i].ID].name, this.actorList[scene.actorList[i].ID].index);
             
             this.sceneList[scene.name][scene.actorList[i].ID] = scene.actorList[i];
         }

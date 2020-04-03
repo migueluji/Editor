@@ -15,59 +15,37 @@ class Util {
      * 
      * @param {*} element 
      */
-    static deepDestroy(element) {
+    static deepDestroy(element) { for(var i in element) { Util.destroy(element, i); } }
 
-        for(var i in element) {
-
-            Util.destroy(element, i);
-        }
-    }
-
+    /**
+     * 
+     * @param {*}  
+     */
     static findSpawns(object, container) {
 
-        for(var i in object) {
+        for(var i = 0; i < object.length; i++) {
 
-            if(object[i].nodeListTrue != undefined) { 
-
-                Util.findSpawns(object[i].nodeListTrue, container);
-            }
-
-            if(object[i].nodeListFalse != undefined) {
-
-                Util.findSpawns(object[i].nodeListFalse, container);
-            }
-
-            if(object[i].type == "Spawn") {
-                
-                container.push(object[i].parameters.actor);
-            }
+            if(object[i].length != undefined) { Util.findSpawns(object[i], container); }
+            if(object[i].nodeListTrue != undefined) {  Util.findSpawns(object[i].nodeListTrue, container); }
+            if(object[i].nodeListFalse != undefined) { Util.findSpawns(object[i].nodeListFalse, container); }
+            if(object[i].type == "Spawn") { container.push(object[i].parameters.actor); }
         }
     }
 
     /**
      * 
      */
-    static removeByID(list, ID) {
-
-        return list.filter(item => item.ID != ID);
-    }
+    static removeByID(list, ID) { return list.filter(item => item.ID != ID); }
 
     /**
      * 
      */
-    static random() {
-
-        return Math.floor(1000000 * Math.random());
-    }
+    static random() { return Math.floor(1000000 * Math.random()); }
 
     /**
      * 
      */
-    
-    static clamp(number, min,  max) { 
-
-        return Math.min(Math.max(number, min), max);
-    }
+    static clamp(number, min,  max) {  return Math.min(Math.max(number, min), max); }
 
     /**
      * 
@@ -98,28 +76,15 @@ class Util {
     }
 
     /**
-     * 
+     * Milisegundos
      */
-    static getDate() {
-
-        return new Date() / 1000; // Se escala para tenerlo en milisegundos
-    }
+    static getDate() { return new Date() / 1000; }
 
     /**
      * 
      */
-    static degToRad(value) {
-
-        return value * Math.PI / 180.0;
-    }
-
-    /**
-     * 
-     */
-    static radToDeg(value) {
-
-        return value * 180.0 / Math.PI;
-    }
+    static degToRad(value) { return value * Math.PI / 180.0; }
+    static radToDeg(value) { return value * 180.0 / Math.PI; }
 
     static colorString(value) {
 
@@ -170,7 +135,6 @@ class Util {
             object = temp;
         }
     }
-    
 
     static updateExpressionNames(expression, scope) {
 
@@ -178,13 +142,11 @@ class Util {
 
         for(var i in scope) {
 
-            if((temp.search(scope[i].name) != -1) /* && (scope[i].scene == scope.Game.activeScene)*/ && (scope[i].ID != undefined)) {
+            if((temp.search(scope[i].name) != -1) && (scope[i].ID != undefined)) {
 
                 temp = temp.replace(new RegExp(scope[i].name, "g"), scope[i].ID);
             }
         }
-
-        //console.log(temp, scope);
 
         return temp;
     }
@@ -238,10 +200,7 @@ class Util {
 
                 var item = chunks[i].split("}")[0];
 
-                //console.log("${((typeof " + item + " == number) ? " + item + ".toFixed(2).replace(/[.,]00$/, '')" + " : " + item + ")}");
-
                 output += "${((typeof " + item + " == 'number') ? " + item + ".toFixed(2).replace(/[.,]00$/, '')" + " : " + item + ")}";
-                //output += "${" + Util.replace(chunks[i], "}", ".toFixed(2).replace(/[.,]00$/, '')}");
             }
             else {
 

@@ -7,30 +7,16 @@ class If {
         this.value          = null;             /** */
         this.scope          = scope || null;    /** */
 
-        this.nodeListTrue     = {};             /** */
-        this.nodeListFalse    = {};             /** */
+        this.nodeListTrue   = [];               /** */
+        this.nodeListFalse  = [];               /** */
     }
 
     run() {
 
         this.value = this.code.eval(this.scope).entries[0];
 
-        if(this.expression.includes("onstart")) console.log(this.expression, this.value);
-
-        if(this.value) {
-
-            for(var t in this.nodeListTrue) {
-
-                this.nodeListTrue[t].run();
-            }
-        }
-        else {
-
-            for(var f in this.nodeListFalse) {
-
-                this.nodeListFalse[f].run();
-            }
-        }
+        if(this.value) { for(var t in this.nodeListTrue) { this.nodeListTrue[t].run(); } }
+        else { for(var f in this.nodeListFalse) { this.nodeListFalse[f].run(); } }
     }
 
     compileExpression() {
@@ -41,14 +27,8 @@ class If {
 
     destroy() {
 
-        this.destroyBranch(this.nodeListTrue);
-        this.destroyBranch(this.nodeListFalse);
-
+        Util.deepDestroy(this.nodeListTrue);
+        Util.deepDestroy(this.nodeListFalse);
         Util.deepDestroy(this);
-    }
-
-    destroyBranch(branch) {
-
-        Util.deepDestroy(branch);
     }
 }

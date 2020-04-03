@@ -19,8 +19,5 @@ class Do {
         this.code       = math.compile(this.expression);                /** Compilamos la expresion con Math.js. */
     }
 
-    destroy() {
-
-        Util.deepDestroy(this);
-    }
+    destroy() { Util.deepDestroy(this); }
 }

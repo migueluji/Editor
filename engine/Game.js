@@ -91,7 +91,7 @@ class Game {
             
             for(var j in this.sceneList[i].actorList) {
 
-                Util.findSpawns(this.sceneList[i].actorList[j].scriptList[0], spawnList);
+                Util.findSpawns(this.sceneList[i].actorList[j].scriptList, spawnList);
             }
 
             for(var j = 0; j < spawnList.length; j++) {
@@ -104,6 +104,8 @@ class Game {
                     }
                 }
             }
+
+            console.log(spawnList)
         }
     }
 

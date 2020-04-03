@@ -187,7 +187,7 @@
 					"friction": 0.5,
 					"restitution": 0.5,
 					"dampingLinear": 1,
-					"dampingAngular": 0,
+					"dampingAngular": 0.01,
 					"scriptList": [
 						{
 							"name": "Ship_movement",
@@ -238,7 +238,7 @@
 										{
 											"type": "Push",
 											"parameters": {
-												"force": "20",
+												"force": "5",
 												"angle": "Me.angle"
 											}
 										}
@@ -498,7 +498,7 @@
 										{
 											"type": "Push",
 											"parameters": {
-												"force": "400",
+												"force": "5",
 												"angle": "0"
 											}
 										}

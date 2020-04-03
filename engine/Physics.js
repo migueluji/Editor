@@ -282,18 +282,14 @@ class Physics {
         Util.deepDestroy(actor.rigidbody, "m_body");
         Util.deepDestroy(actor.rigidbody);
     }
-
-
-
-
     
     /** ###############################################################################
      *  Elementos auxiliares para la ejecucion de las expresiones logicas 
      *  ############################################################################### */
     ApplyForce(actor, strength, angle) {
 
-        var thrustX = strength * Math.cos(angle) * this.engine.game.deltaTime;
-        var thrustY = strength * Math.sin(angle) * this.engine.game.deltaTime;
+        var thrustX = strength * Math.cos(angle);
+        var thrustY = strength * Math.sin(angle);
 
         actor.rigidbody.m_body.ApplyForce(new b2Vec2(thrustX,thrustY), actor.rigidbody.m_body.GetWorldCenter());
     }
@@ -307,5 +303,4 @@ class Physics {
 
         actor.rigidbody.m_body.ApplyTorque(angle);
     }
-
 }

@@ -15,6 +15,8 @@ class Player {
 
     onFileLoaded() {
 
+        console.log(this.file.data)
+
         var debugParser = Util.parser({}, this.file.data);
 
         this.engine = new Engine(debugParser);   /** Sin el parser, el parametro es "this.file.data"*/
