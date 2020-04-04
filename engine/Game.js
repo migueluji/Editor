@@ -75,7 +75,7 @@ class Game {
         /**
          * Marcamos los actores que se van a spawnear (orden de visualizacion)
          * --------------------------------------------------------------------- */
-        this.markSpawns(game);
+        this.markSpawns();
 
         /**
          * Actualizacion de la variable de control de la carga de informacion
@@ -83,9 +83,9 @@ class Game {
         this.loaded = true;
     }
 
-    markSpawns(game) {
+    markSpawns() {
 
-        for(var i in game.sceneList) {
+        for(var i in this.sceneList) {
 
             var spawnList = [];
             
@@ -93,6 +93,8 @@ class Game {
 
                 Util.findSpawns(this.sceneList[i].actorList[j].scriptList, spawnList);
             }
+
+            spawnList = Util.removeDuplicates(spawnList);
 
             for(var j = 0; j < spawnList.length; j++) {
 
@@ -104,8 +106,6 @@ class Game {
                     }
                 }
             }
-
-            console.log(spawnList)
         }
     }
 

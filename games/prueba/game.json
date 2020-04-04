@@ -13,14 +13,812 @@
 	"start": 0,
 	"pan": 0,
 	"loop": false,
-	"physicsOn": false,
+	"physicsOn": true,
 	"gravityX": 0,
 	"gravityY": -9.8,
 	"tagList": [
 		"plane",
-		"wall"
+		"wall",
+		"up",
+		"down"
 	],
 	"sceneList": [
+		{
+			"name": "Scene_8",
+			"actorList": [
+				{
+					"name": "Actor_1",
+					"sleeping": false,
+					"x": -0.5,
+					"y": -211.5,
+					"width": 802,
+					"height": 50,
+					"scaleX": 16.04,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "down",
+					"spriteOn": true,
+					"image": "",
+					"color": "#400040",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Static",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_2",
+					"sleeping": false,
+					"x": -180,
+					"y": 188.5,
+					"width": 88,
+					"height": 73,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "planeYellow3.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 1,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "up"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.color",
+												"value": "#ff0000"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.color",
+												"value": "#ffffff"
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_3",
+					"sleeping": false,
+					"x": 200,
+					"y": -65.5,
+					"width": 100,
+					"height": 100,
+					"scaleX": 2,
+					"scaleY": 2,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "",
+					"color": "#ff0000",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_3_copy",
+					"sleeping": false,
+					"x": 266,
+					"y": 95.5,
+					"width": 100,
+					"height": 100,
+					"scaleX": 2,
+					"scaleY": 2,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "",
+					"color": "#00ff00",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_5",
+					"sleeping": false,
+					"x": -177.25,
+					"y": 1.5,
+					"width": 437.5,
+					"height": 50,
+					"scaleX": 8.75,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "up",
+					"spriteOn": true,
+					"image": "",
+					"color": "#ff8000",
+					"opacity": 0.5,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				}
+			]
+		},
+		{
+			"name": "RenderTestSprite",
+			"actorList": [
+				{
+					"name": "Actor_1",
+					"sleeping": false,
+					"x": -49,
+					"y": 96,
+					"width": 53,
+					"height": 64,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "wall",
+					"spriteOn": true,
+					"image": "letterK.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 1.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_2",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "plane"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.color",
+												"value": "#ff0000"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.width",
+												"value": "Me.width +1"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					],
+					"debugvelocityx": 0
+				},
+				{
+					"name": "TriggerTest",
+					"sleeping": true,
+					"x": -288,
+					"y": 175,
+					"width": 53,
+					"height": 64,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 45,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "letterK.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 1.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_2",
+							"nodeList": [
+								{
+									"type": "Touch",
+									"parameters": {
+										"mode": "Down",
+										"on_Actor": true
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.color",
+												"value": "#ff0000"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "Script_3",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "wall"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.color",
+												"value": "#ff8000"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "Script_3_copy",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "plane"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.color",
+												"value": "#ffff00"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					],
+					"debugvelocityx": 0
+				},
+				{
+					"name": "Actor_2",
+					"sleeping": false,
+					"x": 0,
+					"y": -215,
+					"width": 800,
+					"height": 50,
+					"scaleX": 16,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "plane",
+					"spriteOn": true,
+					"image": "",
+					"color": "#00ff00",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Static",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 1,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_4",
+					"sleeping": false,
+					"x": 67,
+					"y": 81,
+					"width": 66,
+					"height": 64,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "letterM.png",
+					"color": "#000080",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Kinematic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "Space",
+										"key_Mode": "Pressed"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Rotate",
+											"parameters": {
+												"speed": "10",
+												"pivot_X": "0",
+												"pivot_Y": "0"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_4_copy",
+					"sleeping": false,
+					"x": 236,
+					"y": 80,
+					"width": 66,
+					"height": 64,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "letterM.png",
+					"color": "#000080",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Kinematic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "Space",
+										"key_Mode": "Pressed"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Rotate",
+											"parameters": {
+												"speed": "10",
+												"pivot_X": "0",
+												"pivot_Y": "0"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Trigger",
+					"sleeping": false,
+					"x": -12,
+					"y": -51,
+					"width": 404,
+					"height": 50,
+					"scaleX": 8.08,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "wall",
+					"spriteOn": true,
+					"image": "",
+					"color": "#004080",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": true,
+					"text": "¡¡¡¡TRIGGER!!!!",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#ffffff",
+					"style": "Bold",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Kinematic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "testWidth",
+					"sleeping": false,
+					"x": 152.5,
+					"y": 77,
+					"width": 100,
+					"height": 150,
+					"scaleX": 2,
+					"scaleY": 3,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "wall",
+					"spriteOn": true,
+					"image": "",
+					"color": "#ff0000",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Kinematic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				}
+			]
+		},
 		{
 			"name": "Init",
 			"actorList": [
@@ -1072,512 +1870,6 @@
 							]
 						}
 					]
-				}
-			]
-		},
-		{
-			"name": "RenderTestSprite",
-			"actorList": [
-				{
-					"name": "Actor_1",
-					"sleeping": false,
-					"x": -49,
-					"y": 96,
-					"width": 53,
-					"height": 64,
-					"scaleX": 1,
-					"scaleY": 1,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "wall",
-					"spriteOn": true,
-					"image": "letterK.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": true,
-					"type": "Dynamic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 1,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": [
-						{
-							"name": "Script_2",
-							"nodeList": [
-								{
-									"type": "Collision",
-									"parameters": {
-										"tags": "plane"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.color",
-												"value": "#ff0000"
-											}
-										},
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.width",
-												"value": "Me.width +1"
-											}
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						}
-					],
-					"debugvelocityx": 0
-				},
-				{
-					"name": "TriggerTest",
-					"sleeping": true,
-					"x": -288,
-					"y": 175,
-					"width": 53,
-					"height": 64,
-					"scaleX": 1,
-					"scaleY": 1,
-					"angle": 45,
-					"screen": false,
-					"collider": "Box",
-					"tags": "",
-					"spriteOn": true,
-					"image": "letterK.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": true,
-					"type": "Dynamic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 1.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": [
-						{
-							"name": "Script_2",
-							"nodeList": [
-								{
-									"type": "Touch",
-									"parameters": {
-										"mode": "Down",
-										"on_Actor": true
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.color",
-												"value": "#ff0000"
-											}
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						},
-						{
-							"name": "Script_3",
-							"nodeList": [
-								{
-									"type": "Collision",
-									"parameters": {
-										"tags": "wall"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.color",
-												"value": "#ff8000"
-											}
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						},
-						{
-							"name": "Script_3_copy",
-							"nodeList": [
-								{
-									"type": "Collision",
-									"parameters": {
-										"tags": "plane"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.color",
-												"value": "#ffff00"
-											}
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						}
-					],
-					"debugvelocityx": 0
-				},
-				{
-					"name": "Actor_2",
-					"sleeping": false,
-					"x": 0,
-					"y": -215,
-					"width": 800,
-					"height": 50,
-					"scaleX": 16,
-					"scaleY": 1,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "plane",
-					"spriteOn": true,
-					"image": "",
-					"color": "#00ff00",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": true,
-					"type": "Static",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": []
-				},
-				{
-					"name": "Actor_4",
-					"sleeping": false,
-					"x": 67,
-					"y": 81,
-					"width": 66,
-					"height": 64,
-					"scaleX": 1,
-					"scaleY": 1,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "",
-					"spriteOn": true,
-					"image": "letterM.png",
-					"color": "#000080",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": false,
-					"type": "Kinematic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": [
-						{
-							"name": "Script_1",
-							"nodeList": [
-								{
-									"type": "Keyboard",
-									"parameters": {
-										"key": "Space",
-										"key_Mode": "Pressed"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Rotate",
-											"parameters": {
-												"speed": "10",
-												"pivot_X": "0",
-												"pivot_Y": "0"
-											}
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						}
-					]
-				},
-				{
-					"name": "Actor_4_copy",
-					"sleeping": false,
-					"x": 236,
-					"y": 80,
-					"width": 66,
-					"height": 64,
-					"scaleX": 1,
-					"scaleY": 1,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "",
-					"spriteOn": true,
-					"image": "letterM.png",
-					"color": "#000080",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": false,
-					"type": "Kinematic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": [
-						{
-							"name": "Script_1",
-							"nodeList": [
-								{
-									"type": "Keyboard",
-									"parameters": {
-										"key": "Space",
-										"key_Mode": "Pressed"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Rotate",
-											"parameters": {
-												"speed": "10",
-												"pivot_X": "0",
-												"pivot_Y": "0"
-											}
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						}
-					]
-				},
-				{
-					"name": "Trigger",
-					"sleeping": false,
-					"x": -12,
-					"y": -51,
-					"width": 404,
-					"height": 50,
-					"scaleX": 8.08,
-					"scaleY": 1,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "wall",
-					"spriteOn": true,
-					"image": "",
-					"color": "#004080",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": true,
-					"text": "¡¡¡¡TRIGGER!!!!",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#ffffff",
-					"style": "Bold",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": false,
-					"type": "Kinematic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": []
-				},
-				{
-					"name": "testWidth",
-					"sleeping": false,
-					"x": 152.5,
-					"y": 77,
-					"width": 100,
-					"height": 150,
-					"scaleX": 2,
-					"scaleY": 3,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "wall",
-					"spriteOn": true,
-					"image": "",
-					"color": "#ff0000",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": false,
-					"type": "Kinematic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": []
 				}
 			]
 		},

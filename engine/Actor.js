@@ -122,15 +122,9 @@ class Actor {
         }
     }
 
-    setTextProperties() {
+    setTextProperties() { this.textSprite.text = eval("`" + this.text + "`"); }
 
-        this.textSprite.text = eval("`" + this.text + "`");
-    }
-
-    destroy() {
-
-        Util.deepDestroy(this);
-    }
+    destroy() { Util.deepDestroy(this); }
 
     sleep() {
 

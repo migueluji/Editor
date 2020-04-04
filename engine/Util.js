@@ -40,6 +40,18 @@ class Util {
     /**
      * 
      */
+    static removeDuplicates(array) {
+
+        return array.filter((item, index) => {
+            
+            return array.indexOf(item) === index;
+        });
+    }
+
+
+    /**
+     * 
+     */
     static random() { return Math.floor(1000000 * Math.random()); }
 
     /**
@@ -163,7 +175,7 @@ class Util {
                 /** Comprobamos si hay que actualizar el indentificador del actor a spawnear. */
                 if(expression.search("addSpawnedActor") != -1) {
 
-                    expression = expression.replace(new RegExp(scope.engine.sceneList[scope.engine.game.activeScene][i].name, "g"), scope.engine.sceneList[scope.engine.game.activeScene][i].ID);
+                    expression = expression.replace(new RegExp("'" + scope.engine.sceneList[scope.engine.game.activeScene][i].name + "'", "g"), "'" + scope.engine.sceneList[scope.engine.game.activeScene][i].ID + "'");
                 }
             }
         }

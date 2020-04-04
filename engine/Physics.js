@@ -11,11 +11,11 @@ class Physics {
         this.positionIterations     = 8.0;                      /** */
         this.world                  = new b2World(new b2Vec2(0.0, 0.0), false); /** Gravity and sleep = false. */
         
-        this.PIXELS_PER_METER       = 100;                      /** Para compensar el factor de escala del sistema de referencia de Box2D */ 
+        this.PIXELS_PER_METER       = 50;                       /** Para compensar el factor de escala del sistema de referencia de Box2D */ 
         this.HALF_PIXELS_PER_METER  = this.PIXELS_PER_METER / 2;
         
-        this.deltaTime   = 1 / this.PIXELS_PER_METER; 
-        this.accumulator = 0.0;
+        this.deltaTime              = 0.01;                     /** Valor de referencia para el ciclo de evaluacion de las fisicas. */
+        this.accumulator            = 0.00;                     /** Propiedad auxiliar para ajustar el numero de evaluaciones por iteracion fisica. */
 
         this.setContactListener();
     }
@@ -57,9 +57,9 @@ class Physics {
 
     updateActor(actor) {
 
-        actor.x                 = actor.rigidbody.m_body.GetPosition().x * this.PIXELS_PER_METER;
-        actor.y                 = actor.rigidbody.m_body.GetPosition().y * this.PIXELS_PER_METER;
-        actor.angle             = Util.radToDeg(actor.rigidbody.m_body.GetAngle());
+        actor.x                  = actor.rigidbody.m_body.GetPosition().x * this.PIXELS_PER_METER;
+        actor.y                  = actor.rigidbody.m_body.GetPosition().y * this.PIXELS_PER_METER;
+        actor.angle              = Util.radToDeg(actor.rigidbody.m_body.GetAngle());
         actor._velocityX         = actor.rigidbody.m_body.GetLinearVelocity().x * this.PIXELS_PER_METER;
         actor._velocityY         = actor.rigidbody.m_body.GetLinearVelocity().y * this.PIXELS_PER_METER; 
         actor._angularVelocity   = actor.rigidbody.m_body.GetAngularVelocity() * this.PIXELS_PER_METER; 
@@ -93,8 +93,8 @@ class Physics {
             }
 
             /* DEBUG -- Borrar sin problemas */
-                actor.physicsDebugSprite = new PIXI.Sprite();
-                this.engine.render.stage.addChild(actor.physicsDebugSprite);
+                //actor.physicsDebugSprite = new PIXI.Sprite();
+                //this.engine.render.stage.addChild(actor.physicsDebugSprite);
             /* FIN DEBUG */
         }
     }
@@ -105,9 +105,10 @@ class Physics {
 
             actor.radius = Math.max(actor.width, actor.height) / 2;
 
-            //this.destroyRigidbody(actor);
+            this.destroyRigidbody(actor);
             actor.rigidbody = this.createPhysicsBody(actor); /** Creacion del nuevo rigidbody en el sistema y en el mundo fisico de Box2D. */
-
+            actor.rigidbody.SetUserData(actor);              /** Definicion del objeto padre del rigidbody (NECESARIO PARA LA DETECCION DE COLISIONES). */
+            
             if(!actor.physicsOn) {
 
                 actor.rigidbody.SetSensor(true);            /** Activamos el rigidbody del actor como sensor, para que no interactue con otros rigidbodies. */
@@ -205,6 +206,11 @@ class Physics {
                 
         var listener = new Box2D.Dynamics.b2ContactListener;
 
+        if(callbacks.PreSolve) {
+
+            listener.PreSolve = function(contact) { callbacks.PreSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); };
+        }
+
         if(callbacks.BeginContact) {
 
             listener.BeginContact = function(contact) { callbacks.BeginContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); };
@@ -214,6 +220,11 @@ class Physics {
             
             listener.EndContact = function(contact) { callbacks.EndContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); };
         }
+        
+        if(callbacks.PostSolve) {
+            
+            listener.PostSolve = function(contact) { callbacks.PostSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); };
+        }
 
         this.world.SetContactListener(listener);
     }
@@ -222,44 +233,28 @@ class Physics {
 
         this.addContactListener({
 
-            BeginContact: function(idA, idB) {
-
-                for(var i = 0; i < idB.tags.length; i++) {
-
-                    var collisionVariable = "collidingWith" + idB.tags[i] + "Tag";
-
-                    if(idA[collisionVariable] != undefined) { idA[collisionVariable] = true; }
-                }
-
-                for(var i = 0; i < idA.tags.length; i++) {
-
-                    var collisionVariable = "collidingWith" + idA.tags[i] + "Tag";
-
-                    if(idB[collisionVariable] != undefined) { idB[collisionVariable] = true; }
-                }
-
-                idA = idB = null;
-            },
-
-            EndContact: function(idA, idB) {
-
-                for(var i = 0; i < idB.tags.length; i++) { 
-
-                    var collisionVariable = "collidingWith" + idB.tags[i] + "Tag";
-
-                    if(idA[collisionVariable] != undefined) { idA[collisionVariable] = false; }
-                }
-
-                for(var i = 0; i < idA.tags.length; i++) {
-
-                    var collisionVariable = "collidingWith" + idA.tags[i] + "Tag";
-
-                    if(idB[collisionVariable] != undefined) { idB[collisionVariable] = false; }
-                }
-
-                idA = idB = null;
-            }
+            PreSolve:     function(idA, idB) { Physics.collisionHandler(idA, idB, true); },
+            BeginContact: function(idA, idB) { Physics.collisionHandler(idA, idB, true); },
+            EndContact:   function(idA, idB) { Physics.collisionHandler(idA, idB, false); },
+            PostSolve:    function(idA, idB) { Physics.collisionHandler(idA, idB, false); }
         });
+    }
+
+    static collisionHandler(idA, idB, value) {
+
+        for(var i = 0; i < idB.tags.length; i++) { 
+
+            var collisionVariable = "collidingWith" + idB.tags[i] + "Tag";
+            if(idA[collisionVariable] != undefined) { idA[collisionVariable] = value; }
+        }
+
+        for(var i = 0; i < idA.tags.length; i++) {
+
+            var collisionVariable = "collidingWith" + idA.tags[i] + "Tag";
+            if(idB[collisionVariable] != undefined) { idB[collisionVariable] = value; }
+        }
+
+        idA = idB = null;
     }
 
     sleep(actor) {
