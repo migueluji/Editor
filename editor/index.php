@@ -125,8 +125,8 @@
 		gameId=Utils.id();
 	//	gameFolder="box-doger";
 	//	gameFolder="flying-plane";
-	//	gameFolder="asteroids";
-		gameFolder="prueba";
+		gameFolder="asteroids";
+	//	gameFolder="prueba";
 		parentGamesFolder="http://localhost/games"		
 		var app=new App(userId, gameId, gameFolder, parentGamesFolder);
 	</script>

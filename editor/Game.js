@@ -69,6 +69,13 @@ class Game {
         return(obj);
     }
 
+    get allProperties(){
+        var obj=Object.assign({},this.properties);
+        obj=Object.assign(obj,this.newProperties);
+        obj=Object.assign(obj,this.inputProperties);
+        return(obj);
+    }
+
     addScene(scene,pos) {
         this.sceneList.splice(pos,0,scene);
     }

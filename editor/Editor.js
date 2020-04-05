@@ -54,7 +54,7 @@ class Editor {
         if(property!="name"){
             this.openGameProperties();
             this.gamePropertiesView.updateGameProperty(property,value);
-            this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model);
+            this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model.allProperties);
         }
         else {
             if (!document.querySelector(".mdc-drawer").classList.contains("mdc-drawer--open")) this.drawerToggle();
@@ -135,7 +135,7 @@ class Editor {
         this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
         this.drawerScenesView.updateSelectedScene(sceneID);
         this.appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
-        this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model.properties); // actualiza el canvas
+        this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model.allProperties); // actualiza el canvas
         this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model.imageList); //update castView
         if (oldSelectedSceneIndex!=this.selectedSceneIndex) this.selectedActorIndex=null;
         switch (true) {
@@ -440,7 +440,6 @@ class Editor {
     getPropertiesList(element,type){
         var actor=null;
         var properties=[];
-        console.log("get properties",element,type);
         switch (element){
             case "Game": 
                 var object=Object.assign(this.model.newProperties,this.model.properties);
@@ -479,7 +478,7 @@ class Editor {
             case "Font"  : assetList=this.model.fontList; break;
             default: assetList=this.model.imageList; ; break; // images and animations
         }
-    //  console.log(assetList,input,option,this.canvasView);
+
         this.assetDialog = new AssetSelectionView(assetList,input,option,this.canvasView);
 
         var assetNameList=name.split(",");// selected asset (can include multiple names for animations)
@@ -532,7 +531,7 @@ class Editor {
         var node=document.querySelector(".dialog-full-screen");
         node.parentNode.removeChild(node);
         this.openAssetsDialog=false;
-        this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model);
+        this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model.allProperties);
     }
 
 }

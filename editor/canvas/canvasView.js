@@ -38,7 +38,7 @@ class CanvasView {
         this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
 
         this.actorButton = this.html.querySelector("#actorbutton");
-        this.gameProperties=game.properties;
+        this.gameProperties=game.allProperties;
         this.selected=false;
         this.displayActor=null;
         this.mouseDown=false;

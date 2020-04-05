@@ -27,7 +27,7 @@
 				{
 					"name": "background",
 					"sleeping": false,
-					"x": 0,
+					"x": -1,
 					"y": 0,
 					"width": 802,
 					"height": 482,
@@ -73,7 +73,27 @@
 					"restitution": 0.5,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
-					"scriptList": []
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.scrollX",
+										"value": "ship.velocityX/5"
+									}
+								},
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.scrollY",
+										"value": "ship.velocityY/5"
+									}
+								}
+							]
+						}
+					]
 				},
 				{
 					"name": "laser",
@@ -176,7 +196,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": true,
+					"textOn": false,
 					"text": "${Me.angularVelocity}",
 					"font": "Arial",
 					"size": 30,
@@ -252,7 +272,7 @@
 										{
 											"type": "Push",
 											"parameters": {
-												"force": "0.5",
+												"force": "1",
 												"angle": "Me.angle"
 											}
 										}
@@ -363,14 +383,41 @@
 									"nodeListFalse": []
 								}
 							]
+						},
+						{
+							"name": "Change_Scene",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "asteroid"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.score",
+												"value": "score.p"
+											}
+										},
+										{
+											"type": "Go_To",
+											"parameters": {
+												"scene": "Scene_2"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
 						}
 					]
 				},
 				{
 					"name": "score",
 					"sleeping": false,
-					"x": -287.75,
-					"y": 204,
+					"x": -280.9598765432099,
+					"y": 212.0246913580247,
 					"width": 200.5,
 					"height": 50,
 					"scaleX": 4.01,
@@ -391,7 +438,7 @@
 					"tileY": 1,
 					"textOn": true,
 					"text": "Score: ${Me.p}",
-					"font": "Tahoma",
+					"font": "Impact",
 					"size": 30,
 					"fill": "#ffffff",
 					"style": "Normal",
@@ -421,15 +468,15 @@
 				{
 					"name": "asteroid",
 					"sleeping": true,
-					"x": -267.5,
-					"y": -288,
+					"x": -258.7283950617284,
+					"y": -288.1851851851852,
 					"width": 101,
 					"height": 84,
 					"scaleX": 1,
 					"scaleY": 1,
 					"angle": 0,
 					"screen": false,
-					"collider": "Circle",
+					"collider": "Box",
 					"tags": "asteroid",
 					"spriteOn": true,
 					"image": "meteorBrown_big1.png",
@@ -441,7 +488,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": true,
+					"textOn": false,
 					"text": "${Me.velocityX}",
 					"font": "Arial",
 					"size": 30,
@@ -462,7 +509,7 @@
 					"velocityX": 0,
 					"velocityY": 0,
 					"angularVelocity": 0,
-					"density": 0.6,
+					"density": 1,
 					"friction": 0.5,
 					"restitution": 0.5,
 					"dampingLinear": 0,
@@ -530,7 +577,7 @@
 										{
 											"type": "Push",
 											"parameters": {
-												"force": "5",
+												"force": "63",
 												"angle": "random(1,360)"
 											}
 										}
@@ -547,14 +594,14 @@
 									"parameters": {
 										"value_1": "Me.x",
 										"operation": "Greater",
-										"value_2": "400"
+										"value_2": "500"
 									},
 									"nodeListTrue": [
 										{
 											"type": "Edit",
 											"parameters": {
 												"property": "Me.x",
-												"value": "-400"
+												"value": "-500"
 											}
 										}
 									],
@@ -564,14 +611,14 @@
 											"parameters": {
 												"value_1": "Me.x",
 												"operation": "Less",
-												"value_2": "-400"
+												"value_2": "-500"
 											},
 											"nodeListTrue": [
 												{
 													"type": "Edit",
 													"parameters": {
 														"property": "Me.x",
-														"value": "400"
+														"value": "500"
 													}
 												}
 											],
@@ -584,14 +631,14 @@
 									"parameters": {
 										"value_1": "Me.y",
 										"operation": "Greater",
-										"value_2": "240"
+										"value_2": "300"
 									},
 									"nodeListTrue": [
 										{
 											"type": "Edit",
 											"parameters": {
 												"property": "Me.y",
-												"value": "-240"
+												"value": "-300"
 											}
 										}
 									],
@@ -601,14 +648,14 @@
 											"parameters": {
 												"value_1": "Me.y",
 												"operation": "Less",
-												"value_2": "-240"
+												"value_2": "-300"
 											},
 											"nodeListTrue": [
 												{
 													"type": "Edit",
 													"parameters": {
 														"property": "Me.y",
-														"value": "240"
+														"value": "300"
 													}
 												}
 											],
@@ -624,15 +671,15 @@
 				{
 					"name": "asteroid_medium",
 					"sleeping": true,
-					"x": -175,
-					"y": -269,
+					"x": -182.80864197530866,
+					"y": -271,
 					"width": 43,
 					"height": 43,
 					"scaleX": 1,
 					"scaleY": 1,
 					"angle": 0,
 					"screen": false,
-					"collider": "Circle",
+					"collider": "Box",
 					"tags": "asteroid",
 					"spriteOn": true,
 					"image": "meteorBrown_med1.png",
@@ -644,7 +691,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": true,
+					"textOn": false,
 					"text": "${Me.velocityX}",
 					"font": "Arial",
 					"size": 30,
@@ -733,7 +780,7 @@
 										{
 											"type": "Push",
 											"parameters": {
-												"force": "5",
+												"force": "63",
 												"angle": "random(1,360)"
 											}
 										}
@@ -827,15 +874,15 @@
 				{
 					"name": "asteroid_small",
 					"sleeping": true,
-					"x": -112.5,
-					"y": -263,
+					"x": -127.9320987654321,
+					"y": -261.7654320987655,
 					"width": 28,
 					"height": 28,
 					"scaleX": 1,
 					"scaleY": 1,
 					"angle": 0,
 					"screen": false,
-					"collider": "Circle",
+					"collider": "Box",
 					"tags": "asteroid",
 					"spriteOn": true,
 					"image": "meteorBrown_small1.png",
@@ -847,7 +894,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": true,
+					"textOn": false,
 					"text": "${Me.velocityX}",
 					"font": "Arial",
 					"size": 30,
@@ -868,7 +915,7 @@
 					"velocityX": 0,
 					"velocityY": 0,
 					"angularVelocity": 0,
-					"density": 0.6,
+					"density": 1,
 					"friction": 0.5,
 					"restitution": 0.5,
 					"dampingLinear": 0,
@@ -918,7 +965,7 @@
 										{
 											"type": "Push",
 											"parameters": {
-												"force": "5",
+												"force": "63",
 												"angle": "random(1,360)"
 											}
 										}
@@ -1012,8 +1059,8 @@
 				{
 					"name": "generator",
 					"sleeping": false,
-					"x": 0.5,
-					"y": 272.5,
+					"x": 0,
+					"y": 267.5925925925926,
 					"width": 50,
 					"height": 50,
 					"scaleX": 1,
@@ -1085,6 +1132,187 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "Scene_2",
+			"actorList": [
+				{
+					"name": "Actor_1",
+					"sleeping": false,
+					"x": 0,
+					"y": 0,
+					"width": 802,
+					"height": 482,
+					"scaleX": 1.0442708333333333,
+					"scaleY": 0.94140625,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "purple.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 3,
+					"tileY": 2,
+					"textOn": true,
+					"text": "GAME OVER",
+					"font": "Impact",
+					"size": 100,
+					"fill": "#c0c0c0",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_2",
+					"sleeping": false,
+					"x": 0,
+					"y": -125,
+					"width": 132.5,
+					"height": 50,
+					"scaleX": 2.65,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "",
+					"color": "#c0c0c0",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": true,
+					"text": "START",
+					"font": "Impact",
+					"size": 30,
+					"fill": "#400080",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Touch",
+									"parameters": {
+										"mode": "Down",
+										"on_Actor": true
+									},
+									"nodeListTrue": [
+										{
+											"type": "Go_To",
+											"parameters": {
+												"scene": "Scene 1"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_3",
+					"sleeping": false,
+					"x": 0,
+					"y": 111,
+					"width": 164.5,
+					"height": 50,
+					"scaleX": 3.29,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": true,
+					"text": "Score: ${Game.score}",
+					"font": "Impact",
+					"size": 30,
+					"fill": "#ffffff",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				}
+			]
 		}
-	]
+	],
+	"score": 0
 }
