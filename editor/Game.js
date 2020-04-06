@@ -18,7 +18,7 @@ class Game {
         if (this.fontList) this.fontList.forEach((font,i) => this.fontList[i]=new Object(font));
         if (this.sceneList.length!=0) this.sceneList.forEach((scene,i) => this.sceneList[i]=new Scene(scene));
         else {
-            var scene= new Scene({"id":Utils.id(),"name":"Scene 1","actorList":[]});
+            var scene= new Scene({"id":Utils.id(),"name":"Scene_1","actorList":[]});
             this.sceneList.push(scene);
         }
     }

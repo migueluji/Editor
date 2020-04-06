@@ -86,7 +86,7 @@ class NewPropertyDialogView {
 					this.html.querySelector("#error").innerText="This property name already exists"
 				}
 				else{
-					(this.html.querySelector("#number").checked) ? this.value=0 : this.value=false;
+					(this.html.querySelector("#number").checked) ? this.value=0 : this.value=true;
 					if (this.type=="game-properties") CmdManager.addGamePropertyCmd(this.name,this.value);
 					else {
 						var actorID=document.querySelector(".actorselected").id;
