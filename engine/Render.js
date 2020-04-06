@@ -69,7 +69,7 @@ class Render {
     compileTexts() {
 
         for(var i = 0; i < this.textCompilationList.length; i++) {
-
+            
             this.textCompilationList[i].text = Util.updateTextToScope(this.textCompilationList[i].text, this.textCompilationList[i]);
         }
 
