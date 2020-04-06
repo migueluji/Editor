@@ -65,7 +65,7 @@ class CanvasView {
             scene.addChild(displayActor);
         });
  
-        this.app.renderer.extract.canvas(scene).toBlob((b) => {
+        app.renderer.extract.canvas(scene).toBlob((b) => {
             const a = document.createElement('a');
             document.body.append(a);
             a.download = 'screenshot';
