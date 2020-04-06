@@ -187,17 +187,16 @@ class Util {
 
     static updateTextToScope(text, actor) {
 
-        var temp = text;
+        var temp = Util.replace(text, "{Game.", "{player.engine.game.");                    /** Asignacion de la referencia al Game. */
+        temp = Util.replace(temp, "{Me.", "{player.engine.actorList." + actor.ID + ".");    /** Asignacion de la referencia al actor Me. */
 
-        for(var i in actor.engine.actorList) {
+        for(var i in actor.engine.actorList) {                                              /** Asignacion de las referencias a otros actores. */
 
-            temp = Util.replace(temp, actor.engine.actorList[i].name + ".", "player.engine.actorList." + i + ".");
+            temp = Util.replace(temp, "{" + actor.engine.actorList[i].name + ".", "{player.engine.actorList." + i + "."); 
         }
 
-        temp = Util.replace(temp, "Me.", "player.engine.actorList." + actor.ID + ".");
+        temp = Util.setDecimalLimitDisplay(temp);                                           /** Limitacion a dos decimales del display de valores numericos. */
 
-        temp = Util.setDecimalLimitDisplay(temp);       /** Limitacion a dos decimales del display de valores numericos. */
-        
         return temp;
     }
 
@@ -208,7 +207,7 @@ class Util {
 
         for(var i = 0; i < chunks.length; i++) {
 
-            if(chunks[i].includes("player.engine.actorList")) {
+            if(chunks[i].includes("player.engine.actorList") || chunks[i].includes("player.engine.game")) {
 
                 var item = chunks[i].split("}")[0];
 
@@ -227,7 +226,7 @@ class Util {
 
         var temp = expression;
 
-        if((expression.search(target) != -1)) { temp = temp.replace(new RegExp(target, "g"), replace); }
+        if(expression.includes(target)) {  temp = temp.replace(new RegExp(target, "g"), replace); }
 
         return temp;
     }
