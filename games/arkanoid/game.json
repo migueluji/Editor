@@ -387,7 +387,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": true,
+					"textOn": false,
 					"text": "${Me.velocityX}   kkk   ${Me.velocityY}",
 					"font": "Arial",
 					"size": 30,
@@ -441,7 +441,7 @@
 													"type": "Push",
 													"parameters": {
 														"force": "2",
-														"angle": "-160"
+														"angle": "random(-20,-160)"
 													}
 												}
 											],
@@ -469,7 +469,7 @@
 					"collider": "Box",
 					"tags": "",
 					"spriteOn": true,
-					"image": "element_green_rectangle.png",
+					"image": "element_blue_rectangle.png",
 					"color": "#ffffff",
 					"opacity": 1,
 					"flipX": false,
@@ -546,7 +546,7 @@
 					"collider": "Box",
 					"tags": "",
 					"spriteOn": true,
-					"image": "element_green_rectangle.png",
+					"image": "element_purple_rectangle.png",
 					"color": "#ffffff",
 					"opacity": 1,
 					"flipX": false,
@@ -700,7 +700,7 @@
 					"collider": "Box",
 					"tags": "",
 					"spriteOn": true,
-					"image": "element_green_rectangle.png",
+					"image": "element_red_rectangle.png",
 					"color": "#ffffff",
 					"opacity": 1,
 					"flipX": false,
@@ -854,7 +854,7 @@
 					"collider": "Box",
 					"tags": "",
 					"spriteOn": true,
-					"image": "element_green_rectangle.png",
+					"image": "element_grey_rectangle.png",
 					"color": "#ffffff",
 					"opacity": 1,
 					"flipX": false,
@@ -931,7 +931,7 @@
 					"collider": "Box",
 					"tags": "",
 					"spriteOn": true,
-					"image": "element_green_rectangle.png",
+					"image": "element_yellow_rectangle.png",
 					"color": "#ffffff",
 					"opacity": 1,
 					"flipX": false,
