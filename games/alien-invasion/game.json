@@ -1,0 +1,285 @@
+{
+	"name": "Alien Invasion",
+	"displayWidth": 800,
+	"displayHeight": 480,
+	"cameraX": 0,
+	"cameraY": 0,
+	"cameraAngle": 0,
+	"cameraZoom": 1,
+	"backgroundColor": "#ffffff",
+	"soundOn": false,
+	"soundtrack": "",
+	"volume": 1,
+	"start": 0,
+	"pan": 0,
+	"loop": false,
+	"physicsOn": false,
+	"gravityX": 0,
+	"gravityY": -9.8,
+	"tagList": [
+		"ground"
+	],
+	"sceneList": [
+		{
+			"name": "Scene_1",
+			"actorList": [
+				{
+					"name": "player",
+					"sleeping": false,
+					"x": -3.639469344164013,
+					"y": 166.10228899820117,
+					"width": 72,
+					"height": 72,
+					"scaleX": 0.18,
+					"scaleY": 0.18,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "w3.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Dynamic",
+					"fixedAngle": true,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Movement",
+							"nodeList": [
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "ArrowRight",
+										"key_Mode": "Pressed"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.flipX",
+												"value": false
+											}
+										},
+										{
+											"type": "Collision",
+											"parameters": {
+												"tags": "ground"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Animate",
+													"parameters": {
+														"animation": "w1.png,w2.png,w3.png,w4.png,w5.png,w6.png,w7.png,w8.png",
+														"fps": "24"
+													}
+												}
+											],
+											"nodeListFalse": [
+												{
+													"type": "Animate",
+													"parameters": {
+														"animation": "character_jump.png",
+														"fps": 24
+													}
+												}
+											]
+										},
+										{
+											"type": "Move",
+											"parameters": {
+												"speed": "300",
+												"angle": 0
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Keyboard",
+											"parameters": {
+												"key": "ArrowLeft",
+												"key_Mode": "Pressed"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.flipX",
+														"value": true
+													}
+												},
+												{
+													"type": "Collision",
+													"parameters": {
+														"tags": "ground"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Animate",
+															"parameters": {
+																"animation": "w1.png,w2.png,w3.png,w4.png,w5.png,w6.png,w7.png,w8.png",
+																"fps": 24
+															}
+														}
+													],
+													"nodeListFalse": [
+														{
+															"type": "Animate",
+															"parameters": {
+																"animation": "character_jump.png",
+																"fps": 24
+															}
+														}
+													]
+												},
+												{
+													"type": "Move",
+													"parameters": {
+														"speed": "-300",
+														"angle": 0
+													}
+												}
+											],
+											"nodeListFalse": [
+												{
+													"type": "Collision",
+													"parameters": {
+														"tags": "ground"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Animate",
+															"parameters": {
+																"animation": "character_stand.png",
+																"fps": 24
+															}
+														}
+													],
+													"nodeListFalse": [
+														{
+															"type": "Animate",
+															"parameters": {
+																"animation": "character_jump.png",
+																"fps": 24
+															}
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "Space",
+										"key_Mode": "Pressed"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Collision",
+											"parameters": {
+												"tags": "ground"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Push",
+													"parameters": {
+														"force": "3",
+														"angle": "90"
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_2",
+					"sleeping": false,
+					"x": -531,
+					"y": -88,
+					"width": 1250,
+					"height": 300,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "ground",
+					"spriteOn": true,
+					"image": "env_ufo.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Static",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				}
+			]
+		}
+	]
+}
