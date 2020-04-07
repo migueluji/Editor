@@ -48,12 +48,12 @@ class CanvasView {
 
     takeScreenshot(){
         console.log("take screenshoot");
-
         var app = new PIXI.Application();
 
-        app.renderer.resize(this.gameProperties.width,this.gameProperties.height);
-        app.stage.x =this.gameProperties.width/2;
-        app.stage.y =this.gameProperties.height/2;
+        var frame = new PIXI.Graphics(); // draw the camera frame
+        frame.beginFill();
+        frame.drawRect(-this.gameProperties.displayWidth/2.0,-this.gameProperties.displayHeight/2.0,this.gameProperties.displayWidth,this.gameProperties.displayHeight);
+        frame.endFill();
  
         var scene= new PIXI.Container(); // create the scene container
         scene.position ={x:-this.gameProperties.cameraX,y:this.gameProperties.cameraY};
@@ -64,6 +64,8 @@ class CanvasView {
             var displayActor = new DisplayActor(this,actor,this.actorList,this.gameProperties,this.loader); 
             scene.addChild(displayActor);
         });
+
+        scene.mask=frame;
  
         app.renderer.extract.canvas(scene).toBlob((b) => {
             const a = document.createElement('a');
@@ -141,7 +143,7 @@ class CanvasView {
         this.frame = new PIXI.Graphics(); // draw the camera frame
         this.frame.lineStyle(20, 0xDDDDDD, 1, 1, true);
         this.frame.drawRect(-this.gameProperties.displayWidth/2.0,-this.gameProperties.displayHeight/2.0,this.gameProperties.displayWidth,this.gameProperties.displayHeight);
-     
+
         this.scene= new PIXI.Container(); // create the scene container
         this.scene.position ={x:-this.gameProperties.cameraX,y:this.gameProperties.cameraY};
         this.scene.angle = this.gameProperties.cameraAngle;
