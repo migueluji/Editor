@@ -110,6 +110,8 @@ class Engine {
         this.spawnList  = [];
         this.sceneList  = {};
         this.index      = 0;
+
+        //this.physics.clearWorld();
     }
 
     popScene() {
@@ -132,7 +134,7 @@ class Engine {
             }
             else {
 
-                if(this.sceneHandler.stop == undefined) {  /** Comprobamos si tenemos que ir a una escena nueva. */
+                if(this.sceneHandler.stop == undefined) {   /** Comprobamos si tenemos que ir a una escena nueva. */
 
                     this.destroyAllScenes();
                 }

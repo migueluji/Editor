@@ -347,9 +347,9 @@ class Logic {
         
         /** Definimos la expresion */
         var expression = "" + distance + " = distance([Me.x , Me.y], [" + parameters.x + ", " + parameters.y + "])" + " \n" +
-                         "" + distance + " = (" + distance + " < 5) ? Infinity : " + distance + "\n" + 
-                         "Me.x = Me.x + (" + parameters.speed + " * (" + parameters.x + " - Me.x) / " + distance + ") * engine.game.deltaTime" + "\n" + 
-                         "Me.y = Me.y + (" + parameters.speed + " * (" + parameters.y + " - Me.y) / " + distance + ") * engine.game.deltaTime" + "\n";
+                         "" + distance + " = (" + distance + " < 7) ? 0 : (1 / " + distance + "  * engine.game.deltaTime)" + " \n" + 
+                         "Me.x = Me.x + (" + parameters.speed + " * (" + parameters.x + " - Me.x) * " + distance + ")" + "\n" + 
+                         "Me.y = Me.y + (" + parameters.speed + " * (" + parameters.y + " - Me.y) * " + distance + ")" + "\n";
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
         return new Do(expression, actor.scope);

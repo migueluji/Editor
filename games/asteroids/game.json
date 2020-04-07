@@ -272,7 +272,7 @@
 										{
 											"type": "Push",
 											"parameters": {
-												"force": "1",
+												"force": "0.2",
 												"angle": "Me.angle"
 											}
 										}
@@ -577,7 +577,7 @@
 										{
 											"type": "Push",
 											"parameters": {
-												"force": "63",
+												"force": "0.5",
 												"angle": "random(1,360)"
 											}
 										}

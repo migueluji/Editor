@@ -9,7 +9,7 @@ class Physics {
 
         this.velocityIterations     = 10.0;                     /** */
         this.positionIterations     = 8.0;                      /** */
-        this.world                  = new b2World(new b2Vec2(0.0, 0.0), false); /** Gravity and sleep = false. */
+        this.world                  = new b2World(new b2Vec2(0.0, 0.0), true); /** Gravity and sleep = true. */
         
         this.PIXELS_PER_METER       = 50;                       /** Para compensar el factor de escala del sistema de referencia de Box2D */ 
         this.HALF_PIXELS_PER_METER  = this.PIXELS_PER_METER / 2;
@@ -30,9 +30,8 @@ class Physics {
 
             this.world.Step(this.deltaTime, this.velocityIterations, this.positionIterations);
             this.accumulator -= this.deltaTime;
+            this.world.ClearForces();
         }
-        
-        this.world.ClearForces();
         
         this.updateGame();
     }
@@ -202,6 +201,20 @@ class Physics {
         debug.addChild(graphics);
     }
 
+    initWorld() {
+
+        this.world                  = new b2World(new b2Vec2(0.0, 0.0), true); /** Gravity and sleep = true. */
+        this.deltaTime              = 0.01;                     /** Valor de referencia para el ciclo de evaluacion de las fisicas. */
+        this.accumulator            = 0.00;                     /** Propiedad auxiliar para ajustar el numero de evaluaciones por iteracion fisica. */
+        this.setContactListener();
+    }
+
+    clearWorld() {
+
+        this.world = null;
+        this.initWorld();
+    }
+
     addContactListener(callbacks) {
                 
         var listener = new Box2D.Dynamics.b2ContactListener;
@@ -298,15 +311,15 @@ class Physics {
      *  ############################################################################### */
     ApplyForce(actor, strength, angle) {
 
-        var thrustX = strength * Math.cos(angle);
-        var thrustY = strength * Math.sin(angle);
+        var thrustX = strength * Math.cos(angle) * this.PIXELS_PER_METER;
+        var thrustY = strength * Math.sin(angle) * this.PIXELS_PER_METER;
 
         actor.rigidbody.m_body.ApplyForce(new b2Vec2(thrustX,thrustY), actor.rigidbody.m_body.GetWorldCenter());
     }
 
     ApplyForceTo(actor, strength, targetX, targetY) {
 
-        this.ApplyForce(actor, strength, Math.atan2(targetY - actor.y, targetX - actor.x));
+        this.ApplyForce(actor, strength * this.PIXELS_PER_METER, Math.atan2(targetY - actor.y, targetX - actor.x));
     }
 
     ApplyTorque(actor, angle) {
