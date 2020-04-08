@@ -127,8 +127,8 @@
 	//	gameFolder="box-doger";
 	//	gameFolder="flying-plane";
 	//	gameFolder="asteroids";
-	//	gameFolder="arkanoid";
-		gameFolder="alien-invasion";
+		gameFolder="arkanoid";
+	//	gameFolder="alien-invasion";
 		parentGamesFolder="http://localhost/games"		
 		var app=new App(userId, gameId, gameFolder, parentGamesFolder);
 	</script>
