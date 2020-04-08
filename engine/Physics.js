@@ -2,22 +2,33 @@ class Physics {
 
     constructor(engine) {
 
-        this.engine                 = engine;                   /** */
+        this.engine                 = engine;   /** */
 
-        this.rigidbodyList          = [];                       /** */
-        this.triggerList            = [];                       /** */
+        this.rigidbodyList          = [];       /** */
+        this.triggerList            = [];       /** */
 
-        this.velocityIterations     = 10.0;                     /** */
-        this.positionIterations     = 8.0;                      /** */
-        this.world                  = new b2World(new b2Vec2(0.0, 0.0), true); /** Gravity and sleep = true. */
-        
-        this.PIXELS_PER_METER       = 50;                       /** Para compensar el factor de escala del sistema de referencia de Box2D */ 
-        this.HALF_PIXELS_PER_METER  = this.PIXELS_PER_METER / 2;
-        
-        this.deltaTime              = 0.01;                     /** Valor de referencia para el ciclo de evaluacion de las fisicas. */
-        this.accumulator            = 0.00;                     /** Propiedad auxiliar para ajustar el numero de evaluaciones por iteracion fisica. */
+        this.velocityIterations     = 10.0;     /** */
+        this.positionIterations     = 8.0;      /** */
+        this.PIXELS_PER_METER       = 50.0;     /** Para compensar el factor de escala del sistema de referencia de Box2D */ 
+
+        this.world                  = null;     /** Gravity and sleep = true. */
+
+        this.initWorld();
+    }
+
+    initWorld() {
+
+        this.world       = new b2World(new b2Vec2(0.0, 0.0), true); /** Gravity and sleep = true. */
+        this.deltaTime   = 0.01;                                    /** Valor de referencia para el ciclo de evaluacion de las fisicas. */
+        this.accumulator = 0.00;                                    /** Propiedad auxiliar para ajustar el numero de evaluaciones por iteracion fisica. */
 
         this.setContactListener();
+    }
+
+    clearWorld() {
+
+        this.world = null;
+        this.initWorld();
     }
 
     run() {
@@ -77,7 +88,7 @@ class Physics {
          * -------------------------------------------------- */
         if(data.physicsOn || actor.triggerOn) {
 
-            actor.rigidbody = this.createPhysicsBody(data); /** Creacion del rigidbody en el sistema y en el mundo fisico de Box2D. */
+            actor.rigidbody = this.createPhysicsBody(data, actor); /** Creacion del rigidbody en el sistema y en el mundo fisico de Box2D. */
             actor.rigidbody.SetUserData(actor);             /** Definicion del objeto padre del rigidbody (NECESARIO PARA LA DETECCION DE COLISIONES). */
             actor.collisionList = (actor.collisionList == undefined) ? [] : actor.collisionList;
 
@@ -92,8 +103,8 @@ class Physics {
             }
 
             /* DEBUG -- Borrar sin problemas */
-                //actor.physicsDebugSprite = new PIXI.Sprite();
-                //this.engine.render.stage.addChild(actor.physicsDebugSprite);
+                actor.physicsDebugSprite = new PIXI.Sprite();
+                this.engine.render.stage.addChild(actor.physicsDebugSprite);
             /* FIN DEBUG */
         }
     }
@@ -105,7 +116,7 @@ class Physics {
             actor.radius = Math.max(actor.width, actor.height) / 2;
 
             this.destroyRigidbody(actor);
-            actor.rigidbody = this.createPhysicsBody(actor); /** Creacion del nuevo rigidbody en el sistema y en el mundo fisico de Box2D. */
+            actor.rigidbody = this.createPhysicsBody(actor, actor); /** Creacion del nuevo rigidbody en el sistema y en el mundo fisico de Box2D. */
             actor.rigidbody.SetUserData(actor);              /** Definicion del objeto padre del rigidbody (NECESARIO PARA LA DETECCION DE COLISIONES). */
             
             if(!actor.physicsOn) {
@@ -115,16 +126,16 @@ class Physics {
         }
     }
 
-    createPhysicsBody(data) {
+    createPhysicsBody(data, actor) {
 
         let body  = new b2BodyDef();
         body.type = this["set" + (data.physicsOn ? data.type : "Dynamic") + "Body"]();
 
-        let fixture   = new b2FixtureDef();
-        fixture.friction = data.friction;
-        fixture.density = data.density;   
+        let fixture         = new b2FixtureDef();
+        fixture.friction    = data.friction;
+        fixture.density     = data.density;   
         fixture.restitution = data.restitution;   
-        fixture.shape = this["set" + data.collider + "Shape"](data); /** Configuracion de la forma geometrica del objeto fisico */
+        fixture.shape       = this["set" + data.collider + "Shape"](data, actor); /** Configuracion de la forma geometrica del objeto fisico */
 
         return this.world.CreateBody(body).CreateFixture(fixture); 
     }
@@ -133,25 +144,36 @@ class Physics {
     setKinematicBody() { return b2Body.b2_kinematicBody; }
     setStaticBody() { return b2Body.b2_staticBody; }
 
-    setBoxShape(data) {
+    setBoxShape(data, actor) {
 
         var shape = new b2PolygonShape;
         shape.SetAsBox(data.width / 2 / this.PIXELS_PER_METER, data.height / 2 / this.PIXELS_PER_METER); // Tiene que ser la mitad.
         return shape;
     }
 
-    setCircleShape(data) {
+    setCircleShape(data, actor) {
 
         var shape       = new b2CircleShape;
         shape.m_radius  = (Math.max(data.width, data.height) / 2) / this.PIXELS_PER_METER;
         return shape;
     }
 
-    setPolygonShape(data) {
+    setPolygonShape(data, actor) {
 
-        // TODO (provisional con BOX)
-        console.log("POLYGON");
-        this.setBoxShape(data);
+        actor.sprite.calculateVertices();
+
+        console.log(actor.sprite.vertexData, actor.sprite.indices);
+
+        actor.polygonVertex = [];
+
+        for(var i = 0; i < actor.sprite.vertexData.length; i++) {
+
+            actor.polygonVertex.push(actor.sprite.vertexData[i]);
+
+            console.log(actor.polygonVertex[i] * this.PIXELS_PER_METER)
+        }
+
+        return this.setBoxShape(data);
     }
     
     createCustomPolygonShape(vertices, polygonShape) {
@@ -188,7 +210,7 @@ class Physics {
     }
 
     drawPolygonShape(debug, actor) {
-        
+
         let AABB = actor.rigidbody.GetAABB();
         let width = AABB.upperBound.x - AABB.lowerBound.x;
         let height = AABB.upperBound.y - AABB.lowerBound.y;
@@ -199,45 +221,26 @@ class Physics {
         graphics.lineStyle(5, 0x0000ff);
         graphics.drawRect(origin_x * this.PIXELS_PER_METER, origin_y * this.PIXELS_PER_METER, width * this.PIXELS_PER_METER, height * this.PIXELS_PER_METER);
         debug.addChild(graphics);
-    }
 
-    initWorld() {
+        /*var graphics = new PIXI.Graphics();
+        graphics.lineStyle(5, 0xff00ff);
 
-        this.world                  = new b2World(new b2Vec2(0.0, 0.0), true); /** Gravity and sleep = true. */
-        this.deltaTime              = 0.01;                     /** Valor de referencia para el ciclo de evaluacion de las fisicas. */
-        this.accumulator            = 0.00;                     /** Propiedad auxiliar para ajustar el numero de evaluaciones por iteracion fisica. */
-        this.setContactListener();
-    }
+        for(var i = 0; i < actor.sprite.vertexData.length; i += 2) {
 
-    clearWorld() {
+            graphics.drawRect(actor.sprite.vertexData[i] * this.PIXELS_PER_METER, actor.sprite.vertexData[i+1] * this.PIXELS_PER_METER);
+        }
 
-        this.world = null;
-        this.initWorld();
+        debug.addChild(graphics);*/
     }
 
     addContactListener(callbacks) {
                 
         var listener = new Box2D.Dynamics.b2ContactListener;
 
-        if(callbacks.PreSolve) {
-
-            listener.PreSolve = function(contact) { callbacks.PreSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); };
-        }
-
-        if(callbacks.BeginContact) {
-
-            listener.BeginContact = function(contact) { callbacks.BeginContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); };
-        }
-        
-        if(callbacks.EndContact) {
-            
-            listener.EndContact = function(contact) { callbacks.EndContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); };
-        }
-        
-        if(callbacks.PostSolve) {
-            
-            listener.PostSolve = function(contact) { callbacks.PostSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); };
-        }
+        if(callbacks.PreSolve)      { listener.PreSolve     = function(contact) { callbacks.PreSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
+        if(callbacks.BeginContact)  { listener.BeginContact = function(contact) { callbacks.BeginContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
+        if(callbacks.EndContact)    { listener.EndContact   = function(contact) { callbacks.EndContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
+        //if(callbacks.PostSolve)     { listener.PostSolve    = function(contact) { callbacks.PostSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
 
         this.world.SetContactListener(listener);
     }
@@ -246,14 +249,16 @@ class Physics {
 
         this.addContactListener({
 
-            PreSolve:     function(idA, idB) { Physics.collisionHandler(idA, idB, true); },
-            BeginContact: function(idA, idB) { Physics.collisionHandler(idA, idB, true); },
-            EndContact:   function(idA, idB) { Physics.collisionHandler(idA, idB, false); },
-            PostSolve:    function(idA, idB) { Physics.collisionHandler(idA, idB, false); }
+            PreSolve:     function(idA, idB) { Physics.collisionHandler(idA, idB, true, "presolve"); },
+            BeginContact: function(idA, idB) { Physics.collisionHandler(idA, idB, true, "begincontact"); },
+            EndContact:   function(idA, idB) { Physics.collisionHandler(idA, idB, false, "endcontact"); console.log("ENTRA")},
+            //PostSolve:    function(idA, idB) { Physics.collisionHandler(idA, idB, false, "postsolve"); }
         });
     }
 
-    static collisionHandler(idA, idB, value) {
+    static collisionHandler(idA, idB, value, id) {
+
+        console.log(idA.name, idB.name, id);
 
         for(var i = 0; i < idB.tags.length; i++) { 
 

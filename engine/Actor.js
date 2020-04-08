@@ -113,7 +113,7 @@ class Actor {
 
     setSpriteProperties() {
 
-        if(this.scrollX != 0 || this.scrollY != 0) {
+        if(this.spriteOn && (this.scrollX != 0 || this.scrollY != 0)) {
 
             this.sprite.cacheAsBitmap = false;
             this.sprite.tilePosition.x += this.scrollX * this.engine.game.deltaTime;

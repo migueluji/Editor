@@ -62,6 +62,8 @@ class Input {
             /** Si ademas tiene un sprite de texto */
             if(actor.textSprite != null) {
 
+                console.log("entra");
+
                 /** Configuramos las propiedades del motor de Render */
                 actor.textSprite.interactive = true;
                 actor.textSprite.buttonMode = true;
@@ -108,41 +110,14 @@ class Input {
         this.engine.game.mouseY = -1 * Math.floor(event.data.global.y - this.engine.render.renderer.height / 2 - this.engine.game.cameraY);
     }
 
-    actorPointerDownHandler(actor) {
-
-        //console.log("---------------------------------- DOWN", actor);
-
-        actor.pointer.down = true;
-        actor.pointer.up   = false;
-    }
-
-    actorPointerUpHandler(actor) {
-
-        //console.log("---------------------------------- UP", actor);
-
-        actor.pointer.down = false;
-        actor.pointer.up   = true;
-    }
-
-    actorPointerOverHandler(actor) {
-
-        //console.log("---------------------------------- IS OVER TRUE", actor);
-
-        actor.pointer.isOver = true;
-    }
-
-    actorPointerOutHandler(actor) {
-
-        //console.log("---------------------------------- IS OVER FALSE", actor);
-
-        actor.pointer.isOver = false;
-    }
+    actorPointerDownHandler(actor) { actor.pointer.down   = true;  actor.pointer.up = false; }
+    actorPointerUpHandler(actor)   { actor.pointer.down   = false; actor.pointer.up = true; }
+    actorPointerOverHandler(actor) { actor.pointer.isOver = true; }
+    actorPointerOutHandler(actor)  { actor.pointer.isOver = false; }
 
     keyDownHandler(event) {
 
         event.preventDefault();
-
-        //console.log(event);
 
         if(this.keyList.hasOwnProperty(event.code)) {
 
