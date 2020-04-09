@@ -27,7 +27,7 @@
 					"name": "spaceship",
 					"sleeping": false,
 					"x": 20.313751606151186,
-					"y": -173.59891524949808,
+					"y": -174.59891524949808,
 					"width": 1250,
 					"height": 300,
 					"scaleX": 1,
@@ -68,7 +68,7 @@
 					"velocityY": 0,
 					"angularVelocity": 0,
 					"density": 1,
-					"friction": 0.5,
+					"friction": 0.1,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
@@ -384,11 +384,11 @@
 					"name": "Actor_9",
 					"sleeping": false,
 					"x": 13.371352366853557,
-					"y": -38.06149511112136,
+					"y": -43.77906476265272,
 					"width": 365.7892924577787,
-					"height": 18.006731171631827,
+					"height": 29.441870474694554,
 					"scaleX": 7.315785849155573,
-					"scaleY": 0.3601346234326365,
+					"scaleY": 0.5888374094938911,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
@@ -740,12 +740,12 @@
 				{
 					"name": "Actor_9_copy_2",
 					"sleeping": false,
-					"x": -290.4288697401071,
-					"y": -91.54387732847316,
+					"x": -287.3287439819373,
+					"y": -98.84731593020854,
 					"width": 282.7717381233084,
-					"height": 18.006731171631827,
+					"height": 33.87506380310711,
 					"scaleX": 5.655434762466168,
-					"scaleY": 0.3601346234326365,
+					"scaleY": 0.6775012760621422,
 					"angle": 23,
 					"screen": false,
 					"collider": "Box",
@@ -782,7 +782,7 @@
 					"velocityY": 0,
 					"angularVelocity": 0,
 					"density": 1,
-					"friction": 0.5,
+					"friction": 1,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
@@ -791,12 +791,12 @@
 				{
 					"name": "Actor_9_copy_3",
 					"sleeping": false,
-					"x": 320.1548659927404,
-					"y": -90.07228379534455,
+					"x": 317.683023087785,
+					"y": -95.89558075092833,
 					"width": 282.7717381233084,
-					"height": 18.006731171631827,
+					"height": 30.65912932845404,
 					"scaleX": 5.655434762466168,
-					"scaleY": 0.3601346234326365,
+					"scaleY": 0.6131825865690808,
 					"angle": -23,
 					"screen": false,
 					"collider": "Box",
@@ -842,12 +842,12 @@
 				{
 					"name": "Actor_9_copy",
 					"sleeping": false,
-					"x": -488.3192977766466,
-					"y": -147.69037746703276,
+					"x": -488.243417537884,
+					"y": -152.0375534342746,
 					"width": 215.65085030117004,
-					"height": 18.006731171631827,
+					"height": 26.702407499738754,
 					"scaleX": 4.313017006023401,
-					"scaleY": 0.3601346234326365,
+					"scaleY": 0.5340481499947751,
 					"angle": 1,
 					"screen": false,
 					"collider": "Box",
@@ -893,12 +893,12 @@
 				{
 					"name": "Actor_9_copy_4",
 					"sleeping": false,
-					"x": 533.3763072206996,
-					"y": -147.42203818540992,
+					"x": 533.2374913754093,
+					"y": -151.3972038908258,
 					"width": 215.65085030117004,
-					"height": 18.006731171631827,
+					"height": 25.961908661648803,
 					"scaleX": 4.313017006023401,
-					"scaleY": 0.3601346234326365,
+					"scaleY": 0.519238173232976,
 					"angle": 358,
 					"screen": false,
 					"collider": "Box",
@@ -944,8 +944,8 @@
 				{
 					"name": "player",
 					"sleeping": false,
-					"x": -5.202670767868767,
-					"y": 166.10228899820117,
+					"x": 49.79732923213123,
+					"y": 162.10228899820117,
 					"width": 72,
 					"height": 72,
 					"scaleX": 0.18,
@@ -986,7 +986,7 @@
 					"velocityY": 0,
 					"angularVelocity": 0,
 					"density": 1,
-					"friction": 0.5,
+					"friction": 1,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
@@ -1033,10 +1033,10 @@
 											]
 										},
 										{
-											"type": "Move",
+											"type": "Edit",
 											"parameters": {
-												"speed": "300",
-												"angle": 0
+												"property": "Me.velocityX",
+												"value": "300"
 											}
 										}
 									],
@@ -1080,10 +1080,10 @@
 													]
 												},
 												{
-													"type": "Move",
+													"type": "Edit",
 													"parameters": {
-														"speed": "-300",
-														"angle": 0
+														"property": "Me.velocityX",
+														"value": "-300"
 													}
 												}
 											],
@@ -1132,7 +1132,7 @@
 												{
 													"type": "Push",
 													"parameters": {
-														"force": "3",
+														"force": "15",
 														"angle": "90"
 													}
 												}
