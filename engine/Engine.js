@@ -43,6 +43,7 @@ class Engine {
     resetEngine() {
 
         this.updateScenes();    /** Gestion de los cambios de escena (si fuera necesario). */
+        //this.physics.reset();
         this.input.reset();     /** Resetear las propiedades de input (mouse, keys, etc). */ 
         this.logic.reset();     /** Resetear las propiedades de logica (deltaTime, timer, etc). */ 
         this.spawnActors();     /** Spawnear los actores determinados por la lista. */ 

@@ -468,13 +468,13 @@ class Actor {
     get velocityX() { return this._velocityX; }
     set velocityX(value) { 
         this._velocityX = value;
-        if(this._physicsOn) { this.rigidbody.m_body.SetLinearVelocity(new b2Vec2(this._velocityX, this._velocityY)); } 
+        if(this._physicsOn) { this.rigidbody.m_body.SetLinearVelocity(new b2Vec2(this._velocityX / this.engine.physics.PIXELS_PER_METER, this._velocityY / this.engine.physics.PIXELS_PER_METER)); } 
     }
 
     get velocityY() { return this._velocityY; }
     set velocityY(value) { 
         this._velocityY = value;
-        if(this._physicsOn) { this.rigidbody.m_body.SetLinearVelocity(new b2Vec2(this._velocityX, this._velocityY)); } 
+        if(this._physicsOn) { this.rigidbody.m_body.SetLinearVelocity(new b2Vec2(this._velocityX / this.engine.physics.PIXELS_PER_METER, this._velocityY / this.engine.physics.PIXELS_PER_METER)); } 
     }
 
     get angularVelocity() { return this._angularVelocity; }

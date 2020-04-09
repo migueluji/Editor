@@ -57,7 +57,7 @@ class Physics {
 
         actor.rigidbody.m_body.SetPosition(new b2Vec2(actor.x / this.PIXELS_PER_METER, actor.y / this.PIXELS_PER_METER));
         actor.rigidbody.m_body.SetAngle(Util.degToRad(actor.angle));
-        //this.drawDebug(actor); // DEBUG
+        this.drawDebug(actor); // DEBUG
     }
 
     updateGame() {
@@ -162,8 +162,6 @@ class Physics {
 
         actor.sprite.calculateVertices();
 
-        console.log(actor.sprite.vertexData, actor.sprite.indices);
-
         actor.polygonVertex = [];
 
         for(var i = 0; i < actor.sprite.vertexData.length; i++) {
@@ -186,8 +184,6 @@ class Physics {
         }
 
         polygonShape.SetAsArray(_vertices, _vertices.length);
-
-        //console.log(_vertices);
     }
 
     drawDebug(actor) {
@@ -237,7 +233,7 @@ class Physics {
                 
         var listener = new Box2D.Dynamics.b2ContactListener;
 
-        if(callbacks.PreSolve)      { listener.PreSolve     = function(contact) { callbacks.PreSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
+        //if(callbacks.PreSolve)      { listener.PreSolve     = function(contact) { callbacks.PreSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
         if(callbacks.BeginContact)  { listener.BeginContact = function(contact) { callbacks.BeginContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
         if(callbacks.EndContact)    { listener.EndContact   = function(contact) { callbacks.EndContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
         //if(callbacks.PostSolve)     { listener.PostSolve    = function(contact) { callbacks.PostSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
@@ -249,16 +245,14 @@ class Physics {
 
         this.addContactListener({
 
-            PreSolve:     function(idA, idB) { Physics.collisionHandler(idA, idB, true, "presolve"); },
+            //PreSolve:     function(idA, idB) { Physics.collisionHandler(idA, idB, true, "presolve"); },
             BeginContact: function(idA, idB) { Physics.collisionHandler(idA, idB, true, "begincontact"); },
-            EndContact:   function(idA, idB) { Physics.collisionHandler(idA, idB, false, "endcontact"); console.log("ENTRA")},
+            EndContact:   function(idA, idB) { Physics.collisionHandler(idA, idB, false, "endcontact"); },
             //PostSolve:    function(idA, idB) { Physics.collisionHandler(idA, idB, false, "postsolve"); }
         });
     }
 
     static collisionHandler(idA, idB, value, id) {
-
-        console.log(idA.name, idB.name, id);
 
         for(var i = 0; i < idB.tags.length; i++) { 
 
@@ -291,15 +285,17 @@ class Physics {
          * ----------------------------------------------------------------------- */
         if(actor.rigidbody != undefined && actor.rigidbody != null) {
 
-            /** Eliminamos el actor del physics world 
-             * ----------------------------------------------------------------------- */
-            this.destroyRigidbody(actor);
-            Util.destroy(actor, "rigidbody");
+            actor.physicsDebugSprite.destroy();
             
             /** Eliminamos el actor de las listas de actores del motor de fisicas 
              * ----------------------------------------------------------------------- */
             if(actor.physicsOn) { this.rigidbodyList = Util.removeByID(this.rigidbodyList, actor.ID); }
             if(actor.triggerOn) { this.triggerList   = Util.removeByID(this.triggerList, actor.ID); }
+
+            /** Eliminamos el actor del physics world 
+             * ----------------------------------------------------------------------- */
+            this.destroyRigidbody(actor);
+            Util.destroy(actor, "rigidbody");
         }
     }
 
@@ -309,6 +305,22 @@ class Physics {
         actor.rigidbody.m_body.Destroy();
         Util.deepDestroy(actor.rigidbody, "m_body");
         Util.deepDestroy(actor.rigidbody);
+    }
+
+    reset() {
+
+        for(var i = 0; i < this.rigidbodyList.length; i++) {
+
+            for(var j in this.rigidbodyList[i]) {
+
+                if(j.includes("collidingWith")) {
+
+                    console.log(this.rigidbodyList[i].name, j);
+
+                    //this.rigidbodyList[i][j] = false;
+                }
+            }
+        }
     }
     
     /** ###############################################################################
