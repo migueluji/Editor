@@ -17,12 +17,486 @@
 	"gravityX": 0,
 	"gravityY": -9.8,
 	"tagList": [
-		"ground"
+		"ground",
+		"wall"
 	],
 	"sceneList": [
 		{
 			"name": "Scene_1",
 			"actorList": [
+				{
+					"name": "background",
+					"sleeping": false,
+					"x": 0,
+					"y": 0,
+					"width": 1280,
+					"height": 720,
+					"scaleX": 25.6,
+					"scaleY": 14.4,
+					"angle": 0,
+					"screen": true,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "",
+					"color": "#99b8d0",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.x",
+										"value": "Game.cameraX"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_26",
+					"sleeping": false,
+					"x": -42.31337245293941,
+					"y": -56.150007117092095,
+					"width": 1920,
+					"height": 1080,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "env_Clouds.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.x",
+										"value": "Game.cameraX/2"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_23",
+					"sleeping": false,
+					"x": 0,
+					"y": 0,
+					"width": 1920,
+					"height": 1080,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "env_Gherkin.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.x",
+										"value": "Game.cameraX/3"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_27",
+					"sleeping": false,
+					"x": 0,
+					"y": 0,
+					"width": 1920,
+					"height": 1080,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "env_BigBen.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.x",
+										"value": "Game.cameraX/3"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_24",
+					"sleeping": false,
+					"x": 0,
+					"y": -320,
+					"width": 1920,
+					"height": 370,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "env_Bank.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.x",
+										"value": "Game.cameraX/6"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_29",
+					"sleeping": false,
+					"x": 0,
+					"y": -780,
+					"width": 2400,
+					"height": 675,
+					"scaleX": 1.25,
+					"scaleY": 1.25,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "env_RiverBase.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_32",
+					"sleeping": false,
+					"x": 0,
+					"y": -780,
+					"width": 2400,
+					"height": 675,
+					"scaleX": 1.25,
+					"scaleY": 1.25,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "env_RiverMid.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 100,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_30",
+					"sleeping": false,
+					"x": 0,
+					"y": -780,
+					"width": 2400,
+					"height": 675,
+					"scaleX": 1.25,
+					"scaleY": 1.25,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "env_RiverTop.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 50,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
 				{
 					"name": "spaceship",
 					"sleeping": false,
@@ -70,6 +544,57 @@
 					"density": 1,
 					"friction": 0.1,
 					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "fog",
+					"sleeping": false,
+					"x": 0,
+					"y": 0,
+					"width": 1920,
+					"height": 1080,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "env_Fog.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 50,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
 					"scriptList": []
@@ -381,6 +906,57 @@
 					"scriptList": []
 				},
 				{
+					"name": "Actor_9_copy_4",
+					"sleeping": false,
+					"x": 505,
+					"y": -151.3972038908258,
+					"width": 215.65085030117004,
+					"height": 25.961908661648803,
+					"scaleX": 4.313017006023401,
+					"scaleY": 0.519238173232976,
+					"angle": 358,
+					"screen": false,
+					"collider": "Box",
+					"tags": "ground",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ff0000",
+					"opacity": 0.5,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Static",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 1,
+					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
 					"name": "Actor_9",
 					"sleeping": false,
 					"x": 0,
@@ -393,7 +969,7 @@
 					"screen": false,
 					"collider": "Box",
 					"tags": "ground",
-					"spriteOn": true,
+					"spriteOn": false,
 					"image": "",
 					"color": "#ff0000",
 					"opacity": 0.5,
@@ -444,7 +1020,7 @@
 					"screen": false,
 					"collider": "Box",
 					"tags": "",
-					"spriteOn": true,
+					"spriteOn": false,
 					"image": "",
 					"color": "#00ff00",
 					"opacity": 0.5,
@@ -495,7 +1071,7 @@
 					"screen": false,
 					"collider": "Box",
 					"tags": "",
-					"spriteOn": true,
+					"spriteOn": false,
 					"image": "",
 					"color": "#00ff00",
 					"opacity": 0.5,
@@ -546,7 +1122,7 @@
 					"screen": false,
 					"collider": "Box",
 					"tags": "",
-					"spriteOn": true,
+					"spriteOn": false,
 					"image": "",
 					"color": "#00ff00",
 					"opacity": 0.5,
@@ -597,7 +1173,7 @@
 					"screen": false,
 					"collider": "Box",
 					"tags": "ground",
-					"spriteOn": true,
+					"spriteOn": false,
 					"image": "",
 					"color": "#ff0000",
 					"opacity": 0.5,
@@ -648,7 +1224,7 @@
 					"screen": false,
 					"collider": "Box",
 					"tags": "ground",
-					"spriteOn": true,
+					"spriteOn": false,
 					"image": "",
 					"color": "#ff0000",
 					"opacity": 0.5,
@@ -699,7 +1275,7 @@
 					"screen": false,
 					"collider": "Box",
 					"tags": "ground",
-					"spriteOn": true,
+					"spriteOn": false,
 					"image": "",
 					"color": "#ff0000",
 					"opacity": 0.5,
@@ -750,7 +1326,7 @@
 					"screen": false,
 					"collider": "Box",
 					"tags": "ground",
-					"spriteOn": true,
+					"spriteOn": false,
 					"image": "",
 					"color": "#ff0000",
 					"opacity": 0.5,
@@ -789,7 +1365,7 @@
 					"scriptList": []
 				},
 				{
-					"name": "Actor_9_copy_11",
+					"name": "Left_Wall",
 					"sleeping": false,
 					"x": -883.0503360395749,
 					"y": 57.49480594344129,
@@ -800,8 +1376,8 @@
 					"angle": 90,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
-					"spriteOn": true,
+					"tags": "wall",
+					"spriteOn": false,
 					"image": "",
 					"color": "#00ff00",
 					"opacity": 0.5,
@@ -840,7 +1416,7 @@
 					"scriptList": []
 				},
 				{
-					"name": "Actor_9_copy_12",
+					"name": "Right_Wall",
 					"sleeping": false,
 					"x": 884.5858009174676,
 					"y": 54.909789254927546,
@@ -851,8 +1427,8 @@
 					"angle": 90,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
-					"spriteOn": true,
+					"tags": "wall",
+					"spriteOn": false,
 					"image": "",
 					"color": "#00ff00",
 					"opacity": 0.5,
@@ -903,7 +1479,7 @@
 					"screen": false,
 					"collider": "Box",
 					"tags": "ground",
-					"spriteOn": true,
+					"spriteOn": false,
 					"image": "",
 					"color": "#ff0000",
 					"opacity": 0.5,
@@ -954,7 +1530,7 @@
 					"screen": false,
 					"collider": "Box",
 					"tags": "ground",
-					"spriteOn": true,
+					"spriteOn": false,
 					"image": "",
 					"color": "#ff0000",
 					"opacity": 0.5,
@@ -1005,7 +1581,7 @@
 					"screen": false,
 					"collider": "Box",
 					"tags": "ground",
-					"spriteOn": true,
+					"spriteOn": false,
 					"image": "",
 					"color": "#ff0000",
 					"opacity": 0.5,
@@ -1044,22 +1620,22 @@
 					"scriptList": []
 				},
 				{
-					"name": "Actor_9_copy_4",
+					"name": "rocket_right",
 					"sleeping": false,
-					"x": 505,
-					"y": -151.3972038908258,
-					"width": 215.65085030117004,
-					"height": 25.961908661648803,
-					"scaleX": 4.313017006023401,
-					"scaleY": 0.519238173232976,
-					"angle": 358,
+					"x": -1267.8806831578743,
+					"y": -644.3475317565615,
+					"width": 82.8,
+					"height": 23.4,
+					"scaleX": 0.18,
+					"scaleY": 0.18,
+					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "ground",
+					"tags": "",
 					"spriteOn": true,
-					"image": "",
-					"color": "#ff0000",
-					"opacity": 0.5,
+					"image": "rocket_1.png",
+					"color": "#ffffff",
+					"opacity": 1,
 					"flipX": false,
 					"flipY": false,
 					"scrollX": 0,
@@ -1081,24 +1657,159 @@
 					"volume": 1,
 					"pan": 0,
 					"loop": false,
-					"physicsOn": true,
-					"type": "Static",
+					"physicsOn": false,
+					"type": "Dynamic",
 					"fixedAngle": false,
 					"velocityX": 0,
 					"velocityY": 0,
 					"angularVelocity": 0,
 					"density": 1,
-					"friction": 1,
-					"restitution": 0,
+					"friction": 0.5,
+					"restitution": 0.5,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
-					"scriptList": []
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "rocket_1.png,rocket_2.png",
+										"fps": 24
+									}
+								},
+								{
+									"type": "Move",
+									"parameters": {
+										"speed": "1000",
+										"angle": 0
+									}
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "wall"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "explosion",
+												"x": 0,
+												"y": 0,
+												"angle": 0
+											}
+										},
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "rocket_left",
+					"sleeping": false,
+					"x": -1269.6682466799305,
+					"y": -591.5720651523069,
+					"width": 82.8,
+					"height": 23.4,
+					"scaleX": 0.18,
+					"scaleY": 0.18,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "rocket_1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": true,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "rocket_1.png,rocket_2.png",
+										"fps": 24
+									}
+								},
+								{
+									"type": "Move",
+									"parameters": {
+										"speed": "-1000",
+										"angle": 0
+									}
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "wall"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "explosion",
+												"x": 0,
+												"y": 0,
+												"angle": 0
+											}
+										},
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
 				},
 				{
 					"name": "player",
 					"sleeping": false,
-					"x": 50.29732923213123,
-					"y": 162.10228899820117,
+					"x": 0,
+					"y": 180,
 					"width": 72,
 					"height": 72,
 					"scaleX": 0.18,
@@ -1117,7 +1828,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": true,
+					"textOn": false,
 					"text": "${Me.image}",
 					"font": "Arial",
 					"size": 20,
@@ -1276,13 +1987,6 @@
 									},
 									"nodeListTrue": [
 										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.color",
-												"value": "#ff0000"
-											}
-										},
-										{
 											"type": "Keyboard",
 											"parameters": {
 												"key": "ArrowUp",
@@ -1300,20 +2004,12 @@
 											"nodeListFalse": []
 										}
 									],
-									"nodeListFalse": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.color",
-												"value": "#ffffff"
-											}
-										}
-									]
+									"nodeListFalse": []
 								}
 							]
 						},
 						{
-							"name": "camera",
+							"name": "Camera",
 							"nodeList": [
 								{
 									"type": "Edit",
@@ -1327,7 +2023,7 @@
 									"parameters": {
 										"value_1": "Me.x",
 										"operation": "Greater",
-										"value_2": "-700"
+										"value_2": "-540"
 									},
 									"nodeListTrue": [
 										{
@@ -1335,7 +2031,7 @@
 											"parameters": {
 												"value_1": "Me.x",
 												"operation": "Less",
-												"value_2": "700"
+												"value_2": "540"
 											},
 											"nodeListTrue": [
 												{
@@ -1347,6 +2043,126 @@
 												}
 											],
 											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "Shoot",
+							"nodeList": [
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "Space",
+										"key_Mode": "Down"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Check",
+											"parameters": {
+												"property": "Me.flipX"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Spawn",
+													"parameters": {
+														"actor": "rocket_left",
+														"x": "0",
+														"y": "14",
+														"angle": "0"
+													}
+												}
+											],
+											"nodeListFalse": [
+												{
+													"type": "Spawn",
+													"parameters": {
+														"actor": "rocket_right",
+														"x": 0,
+														"y": "14",
+														"angle": 0
+													}
+												}
+											]
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "explosion",
+					"sleeping": false,
+					"x": -1271.131918549113,
+					"y": -713.0439680852761,
+					"width": 128,
+					"height": 128,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "explosion1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": true,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "explosion1.png,explosion2.png,explosion3.png,explosion4.png",
+										"fps": 24
+									}
+								},
+								{
+									"type": "Timer",
+									"parameters": {
+										"seconds": "0.3"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
 										}
 									],
 									"nodeListFalse": []
