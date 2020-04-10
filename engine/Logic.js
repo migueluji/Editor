@@ -303,6 +303,12 @@ class Logic {
             parameters.value = Util.colorString(parameters.value);
         }
 
+        /** Comprobamos si se pretende mofidicar una imagen. */
+        if(typeof parameters.value == "string" && (parameters.value.includes(".png") || parameters.value.includes(".jpg") || parameters.value.includes(".gif"))) {
+
+            parameters.value = "'" + parameters.value + "'";
+        }
+
         /** Definimos la expresion */
         var expression = parameters.property + " = " + parameters.value + "\n";
 

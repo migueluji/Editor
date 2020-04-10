@@ -282,9 +282,15 @@ class Actor {
 
         this._image = value;
 
-        if(this.sprite != null) this.sprite.cacheAsBitmap = false;
         this.texture = (_player.file.loader.resources[this._image] != undefined) ? _player.file.loader.resources[this._image].texture : PIXI.Texture.WHITE;
-        if(this.sprite != null) this.sprite.cacheAsBitmap = true;
+
+        if(this.sprite != null) {
+
+            this.sprite.cacheAsBitmap   = false;
+            this.sprite.texture         = this.texture;
+            this.sprite.alpha           = this._opacity;
+            this.sprite.cacheAsBitmap   = true;
+        }
 
         this.originalWidth  = this.texture.orig.width;
         this.originalHeight = this.texture.orig.height;
@@ -308,7 +314,12 @@ class Actor {
 
         this._opacity = Util.clamp(value, 0, 1);
 
-        if(this._spriteOn) { this.sprite.alpha = this._opacity; }
+        if(this._spriteOn) { 
+            
+            this.sprite.cacheAsBitmap = false;
+            this.sprite.alpha = this._opacity;
+            this.sprite.cacheAsBitmap = true;
+        }
     }
 
     get color() { return this._color; }
@@ -527,7 +538,7 @@ class Actor {
 
         this._index = value;
 
-        if(this._spriteOn) { this.sprite.zIndex = this._index; }
-        if(this._textOn) { this.textSprite.zIndex = this._index; }
+        if(this._spriteOn) { this.sprite.zIndex     = this._index; }
+        if(this._textOn)   { this.textSprite.zIndex = this._index; }
     }
 }

@@ -172,7 +172,7 @@ class Physics {
 
             actor.polygonVertex.push(actor.sprite.vertexData[i]);
 
-            console.log(actor.polygonVertex[i] * this.PIXELS_PER_METER)
+            //console.log(actor.polygonVertex[i] * this.PIXELS_PER_METER)
         }
 
         return this.setBoxShape(data);
