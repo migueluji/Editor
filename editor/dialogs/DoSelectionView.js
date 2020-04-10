@@ -163,7 +163,7 @@ class DoSelectionView {
 			}
 			this.node=new Node({"id":Utils.id(),"type":type,"parameters":parameters});
 			// change do this.node=new Do({"id":Utils.id(),"type":type,"parameters":parameters});
-			console.log("addNodeCmd",sceneID,actorID,scriptID,this.insert,this.node);
+			//console.log("addNodeCmd",sceneID,actorID,scriptID,this.insert,this.node);
 			CmdManager.addNodeCmd(sceneID,actorID,scriptID,this.insert,this.node);
 			this.closeDialog();
 		}

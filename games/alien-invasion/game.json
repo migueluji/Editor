@@ -93,6 +93,70 @@
 					]
 				},
 				{
+					"name": "Actor_38",
+					"sleeping": false,
+					"x": 0,
+					"y": 75,
+					"width": 2400,
+					"height": 1350,
+					"scaleX": 1.25,
+					"scaleY": 1.25,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "env_bg.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.x",
+										"value": "Game.cameraX/4"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
 					"name": "Actor_26",
 					"sleeping": false,
 					"x": -42.31337245293941,
@@ -111,7 +175,7 @@
 					"opacity": 1,
 					"flipX": false,
 					"flipY": false,
-					"scrollX": 0,
+					"scrollX": 100,
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
@@ -213,7 +277,7 @@
 									"type": "Edit",
 									"parameters": {
 										"property": "Me.x",
-										"value": "Game.cameraX/3"
+										"value": "Game.cameraX/5"
 									}
 								}
 							]
@@ -277,7 +341,7 @@
 									"type": "Edit",
 									"parameters": {
 										"property": "Me.x",
-										"value": "Game.cameraX/3"
+										"value": "Game.cameraX/5"
 									}
 								}
 							]
@@ -1893,7 +1957,7 @@
 													"type": "Edit",
 													"parameters": {
 														"property": "Me.velocityX",
-														"value": "300"
+														"value": "320"
 													}
 												}
 											],
@@ -1940,7 +2004,7 @@
 															"type": "Edit",
 															"parameters": {
 																"property": "Me.velocityX",
-																"value": "-300"
+																"value": "-320"
 															}
 														}
 													],
@@ -2073,7 +2137,7 @@
 													"type": "Spawn",
 													"parameters": {
 														"actor": "rocket_left",
-														"x": "0",
+														"x": "-40",
 														"y": "14",
 														"angle": "0"
 													}
@@ -2084,7 +2148,7 @@
 													"type": "Spawn",
 													"parameters": {
 														"actor": "rocket_right",
-														"x": 0,
+														"x": "40",
 														"y": "14",
 														"angle": 0
 													}
@@ -2122,8 +2186,89 @@
 									"nodeListFalse": []
 								}
 							]
+						},
+						{
+							"name": "hurt",
+							"nodeList": [
+								{
+									"type": "Check",
+									"parameters": {
+										"property": "Me.hurt"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Timer",
+											"parameters": {
+												"seconds": 1
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.hurt",
+														"value": false
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Collision",
+											"parameters": {
+												"tags": "enemy"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.life",
+														"value": "Me.life-1"
+													}
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.hurt",
+														"value": true
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									]
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.life",
+										"operation": "Equal",
+										"value_2": "0"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "deadplayer",
+												"x": 0,
+												"y": 0,
+												"angle": 0
+											}
+										},
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
 						}
-					]
+					],
+					"hurt": true,
+					"life": 10,
+					"maxlife": 10
 				},
 				{
 					"name": "explosion",
@@ -2141,7 +2286,7 @@
 					"spriteOn": true,
 					"image": "explosion1.png",
 					"color": "#ffffff",
-					"opacity": 1,
+					"opacity": 0.5,
 					"flipX": true,
 					"flipY": false,
 					"scrollX": 0,
@@ -2225,7 +2370,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": true,
+					"textOn": false,
 					"text": "${Me.velocityX}",
 					"font": "Arial",
 					"size": 30,
@@ -2310,7 +2455,7 @@
 							]
 						},
 						{
-							"name": "destroy",
+							"name": "hits",
 							"nodeList": [
 								{
 									"type": "Collision",
@@ -2318,6 +2463,70 @@
 										"tags": "rocket"
 									},
 									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.hits",
+												"value": "Me.hits-1"
+											}
+										},
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "Me.hits",
+												"operation": "Equal",
+												"value_2": "1"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.image",
+														"value": "char_enemy_alienShip-damaged.png"
+													}
+												}
+											],
+											"nodeListFalse": [
+												{
+													"type": "Compare",
+													"parameters": {
+														"value_1": "Me.hits",
+														"operation": "Equal",
+														"value_2": "0"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Delete",
+															"parameters": {}
+														}
+													],
+													"nodeListFalse": []
+												}
+											]
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "dead",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "river"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "splash",
+												"x": 0,
+												"y": 0,
+												"angle": 0
+											}
+										},
 										{
 											"type": "Delete",
 											"parameters": {}
@@ -2329,7 +2538,8 @@
 						}
 					],
 					"changedirection": true,
-					"velocity": 300
+					"velocity": 300,
+					"hits": 2
 				},
 				{
 					"name": "splash",
@@ -2411,11 +2621,11 @@
 				{
 					"name": "gameover",
 					"sleeping": false,
-					"x": 36.558678579585944,
+					"x": 22.720627533482798,
 					"y": -564.6497932491661,
-					"width": 933.2109193368299,
+					"width": 1831.2792561012254,
 					"height": 50,
-					"scaleX": 18.664218386736596,
+					"scaleX": 36.62558512202451,
 					"scaleY": 1,
 					"angle": 0,
 					"screen": false,
@@ -2458,6 +2668,299 @@
 					"dampingLinear": 0,
 					"dampingAngular": 0,
 					"scriptList": []
+				},
+				{
+					"name": "life",
+					"sleeping": false,
+					"x": -1277.1863327371784,
+					"y": -950.6928614194339,
+					"width": 60,
+					"height": 12,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "Health.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "position",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.x",
+										"value": "player.x"
+									}
+								},
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.y",
+										"value": "player.y+50"
+									}
+								}
+							]
+						},
+						{
+							"name": "colorandsize",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.scaleX",
+										"value": "player.life/player.maxlife"
+									}
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "player.life",
+										"operation": "Greater",
+										"value_2": "player.maxlife/2"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.color",
+												"value": "#00ff00"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "player.life",
+												"operation": "Greater",
+												"value_2": "player.maxlife/4"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.color",
+														"value": "#ffff00"
+													}
+												}
+											],
+											"nodeListFalse": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.color",
+														"value": "#ff0000"
+													}
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_40",
+					"sleeping": false,
+					"x": -1273.0328978763948,
+					"y": -997.465277817342,
+					"width": 64,
+					"height": 17,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "Health-bg.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.x",
+										"value": "life.x"
+									}
+								},
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.y",
+										"value": "life.y"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "deadplayer",
+					"sleeping": true,
+					"x": -1271.3233220282532,
+					"y": -1066.3091472066596,
+					"width": 72,
+					"height": 72,
+					"scaleX": 0.18,
+					"scaleY": 0.18,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "character_dead.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Move",
+									"parameters": {
+										"speed": "400",
+										"angle": "-90"
+									}
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "river"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "splash",
+												"x": 0,
+												"y": 0,
+												"angle": 0
+											}
+										},
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.cameraY",
+												"value": "Me.y"
+											}
+										}
+									]
+								}
+							]
+						}
+					]
 				}
 			]
 		},
