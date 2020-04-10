@@ -62,8 +62,6 @@ class Input {
             /** Si ademas tiene un sprite de texto */
             if(actor.textSprite != null) {
 
-                console.log("entra");
-
                 /** Configuramos las propiedades del motor de Render */
                 actor.textSprite.interactive = true;
                 actor.textSprite.buttonMode = true;
@@ -121,8 +119,8 @@ class Input {
 
         if(this.keyList.hasOwnProperty(event.code)) {
 
-            this.keyList[event.code].down       = true;
-            this.keyList[event.code].up         = false;
+            this.keyList[event.code].down       = !this.keyList[event.code].pressed
+            this.keyList[event.code].up         = false
             this.keyList[event.code].pressed    = true;
         }
     }
@@ -144,25 +142,20 @@ class Input {
         for(var i in this.keyList) {
 
             this.keyList[i].down = false;
-            this.keyList[i].up = true;
+            this.keyList[i].up   = false;
         }
         
         for(var i in this.actorList) {
 
             this.actorList[i].pointer.down   = false;
-            this.actorList[i].pointer.up     = true;
+            this.actorList[i].pointer.up     = false;
             this.actorList[i].pointer.isOver = false;
         }
     }
 
     destroyActor(actor) {
 
-        /** Si es interactivo, lo eliminamos de las listas de actualizacion del motor de render. */
-        if(actor.interactiveOn) {
-
-            actor.sprite.interactive = false;
-        }
-        
+        if(actor.interactiveOn) { actor.sprite.interactive = false; } /** Si es interactivo, lo eliminamos de las listas de actualizacion del motor de render. */
         this.actorList = Util.removeByID(this.actorList, actor.ID); /** Eliminamos el actor de la lista de actores del motor de input */
     }
 
