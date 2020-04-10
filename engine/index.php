@@ -63,7 +63,7 @@
 			//console.log(localStorage.getItem("localStorage_GameData"));
 			var parentGamesFolder="<?php echo $_POST['parentGamesFolder'];?>";
             var gameFolder="<?php echo $_POST['gameFolder'];?>";
-			var player = new Player({source: parentGamesFolder + "/" + gameFolder, data: localStorage.getItem("localStorage_GameData")});
+			var _player = new Player({source: parentGamesFolder + "/" + gameFolder, data: localStorage.getItem("localStorage_GameData")});
 
 		</script>
 

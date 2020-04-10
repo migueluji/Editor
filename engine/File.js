@@ -41,7 +41,7 @@ class File {
         });
         this.loader.load(()=>{
             console.log("Load finished!");
-            player.onFileLoaded();
+            _player.onFileLoaded();
         });
     }
 }

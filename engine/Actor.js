@@ -122,7 +122,10 @@ class Actor {
         }
     }
 
-    setTextProperties() { this.textSprite.text = eval("`" + this.text + "`"); }
+    setTextProperties() { 
+
+        this.textSprite.text = eval("`" + this.text + "`"); 
+    }
 
     destroy() { Util.deepDestroy(this); }
 
@@ -280,7 +283,7 @@ class Actor {
         this._image = value;
 
         if(this.sprite != null) this.sprite.cacheAsBitmap = false;
-        this.texture = (player.file.loader.resources[this._image] != undefined) ? player.file.loader.resources[this._image].texture : PIXI.Texture.WHITE;
+        this.texture = (_player.file.loader.resources[this._image] != undefined) ? _player.file.loader.resources[this._image].texture : PIXI.Texture.WHITE;
         if(this.sprite != null) this.sprite.cacheAsBitmap = true;
 
         this.originalWidth  = this.texture.orig.width;
@@ -434,7 +437,7 @@ class Actor {
 
         if(this._destroyActor) {
 
-            player.engine.addDestroyedActor(this);
+            this.engine.addDestroyedActor(this);
         }
     }
 

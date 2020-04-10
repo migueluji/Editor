@@ -187,12 +187,12 @@ class Util {
 
     static updateTextToScope(text, actor) {
 
-        var temp = Util.replace(text, "{Game.", "{player.engine.game.");                    /** Asignacion de la referencia al Game. */
-        temp = Util.replace(temp, "{Me.", "{player.engine.actorList." + actor.ID + ".");    /** Asignacion de la referencia al actor Me. */
+        var temp = Util.replace(text, "{Game.", "{_player.engine.game.");                    /** Asignacion de la referencia al Game. */
+        temp = Util.replace(temp, "{Me.", "{_player.engine.actorList." + actor.ID + ".");    /** Asignacion de la referencia al actor Me. */
 
         for(var i in actor.engine.actorList) {                                              /** Asignacion de las referencias a otros actores. */
 
-            temp = Util.replace(temp, "{" + actor.engine.actorList[i].name + ".", "{player.engine.actorList." + i + "."); 
+            temp = Util.replace(temp, "{" + actor.engine.actorList[i].name + ".", "{_player.engine.actorList." + i + ".");
         }
 
         temp = Util.setDecimalLimitDisplay(temp);                                           /** Limitacion a dos decimales del display de valores numericos. */
@@ -207,7 +207,7 @@ class Util {
 
         for(var i = 0; i < chunks.length; i++) {
 
-            if(chunks[i].includes("player.engine.actorList") || chunks[i].includes("player.engine.game")) {
+            if(chunks[i].includes("_player.engine.actorList") || chunks[i].includes("_player.engine.game")) {
 
                 var item = chunks[i].split("}")[0];
 

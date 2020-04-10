@@ -21,7 +21,6 @@ class Render {
         PIXI.settings.WRAP_MODE     = PIXI.WRAP_MODES.REPEAT;
         PIXI.settings.SORTABLE_CHILDREN = true;
         this.stage.sortableChildren = true;
-        //this.stage.sortDirty = true;
 
         document.body.appendChild(this.renderer.view);          /** Añadimos PIXI.Renderer al DOM. */ 
 
