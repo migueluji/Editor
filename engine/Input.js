@@ -62,8 +62,6 @@ class Input {
             /** Si ademas tiene un sprite de texto */
             if(actor.textSprite != null) {
 
-                console.log("entra");
-
                 /** Configuramos las propiedades del motor de Render */
                 actor.textSprite.interactive = true;
                 actor.textSprite.buttonMode = true;

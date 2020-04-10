@@ -11,6 +11,8 @@ class Physics {
         this.positionIterations     = 8.0;      /** */
         this.PIXELS_PER_METER       = 50.0;     /** Para compensar el factor de escala del sistema de referencia de Box2D */ 
 
+        this.collisionTrackList     = [];
+
         this.world                  = null;     /** Gravity and sleep = true. */
 
         this.initWorld();
@@ -23,8 +25,8 @@ class Physics {
         this.world       = new b2World(gravity, false); /** Gravity and sleep = false. Tiene que ser FALSE (si no linear_velocity puede no funcionar.) */
         this.world.SetContinuousPhysics(true);
 
-        this.deltaTime   = 0.01;                        /** Valor de referencia para el ciclo de evaluacion de las fisicas. */
-        this.accumulator = 0.00;                        /** Propiedad auxiliar para ajustar el numero de evaluaciones por iteracion fisica. */
+        this.deltaTime   = 1.0 / 120.0;                 /** Valor de referencia a 120 FPS para el ciclo de evaluacion de las fisicas. */
+        this.accumulator = 0.0;                         /** Propiedad auxiliar para ajustar el numero de evaluaciones por iteracion fisica. */
 
         this.setContactListener();
     }
@@ -79,6 +81,16 @@ class Physics {
         actor._angularVelocity   = actor.rigidbody.m_body.GetAngularVelocity()  * this.PIXELS_PER_METER; 
     }
 
+    reset() {
+
+        for(var i = 0; i < this.collisionTrackList.length; i++) {
+
+            this.collisionTrackList[i].actor[this.collisionTrackList[i].property] = false;
+        }
+
+        this.collisionTrackList = [];
+    }
+
     setActorPhysics(actor, data) {
 
         /**
@@ -94,7 +106,7 @@ class Physics {
 
             actor.rigidbody = this.createPhysicsBody(data, actor); /** Creacion del rigidbody en el sistema y en el mundo fisico de Box2D. */
             actor.rigidbody.SetUserData(actor);             /** Definicion del objeto padre del rigidbody (NECESARIO PARA LA DETECCION DE COLISIONES). */
-            actor.collisionList = (actor.collisionList == undefined) ? [] : actor.collisionList;
+            actor.collisionTrack = (actor.collisionTrack == undefined) ? {} : actor.collisionTrack;
 
             if(data.physicsOn) { 
                 
@@ -221,16 +233,6 @@ class Physics {
         graphics.lineStyle(5, 0x0000ff);
         graphics.drawRect(origin_x * this.PIXELS_PER_METER, origin_y * this.PIXELS_PER_METER, width * this.PIXELS_PER_METER, height * this.PIXELS_PER_METER);
         debug.addChild(graphics);
-
-        /*var graphics = new PIXI.Graphics();
-        graphics.lineStyle(5, 0xff00ff);
-
-        for(var i = 0; i < actor.sprite.vertexData.length; i += 2) {
-
-            graphics.drawRect(actor.sprite.vertexData[i] * this.PIXELS_PER_METER, actor.sprite.vertexData[i+1] * this.PIXELS_PER_METER);
-        }
-
-        debug.addChild(graphics);*/
     }
 
     addContactListener(callbacks) {
@@ -258,30 +260,38 @@ class Physics {
 
     static collisionHandler(idA, idB, value, id) {
 
-        for(var i = 0; i < idB.tags.length; i++) { 
-
-            var collisionVariable = "collidingWith" + idB.tags[i] + "Tag";
-            if(idA[collisionVariable] != undefined) { idA[collisionVariable] = value; }
-        }
-
-        for(var i = 0; i < idA.tags.length; i++) {
-
-            var collisionVariable = "collidingWith" + idA.tags[i] + "Tag";
-            if(idB[collisionVariable] != undefined) { idB[collisionVariable] = value; }
-        }
+        Physics.checkCollisionTags(idA, idB, value, id);
+        Physics.checkCollisionTags(idB, idA, value, id);
 
         idA = idB = null;
     }
 
-    sleep(actor) {
+    static checkCollisionTags(idA, idB, value, id) {
 
-        if(actor.triggerOn || actor.physicsOn) { actor.rigidbody.m_body.SetActive(false); }
+        for(var i = 0; i < idB.tags.length; i++) { 
+
+            var collisionVariable = "collidingWith" + idB.tags[i] + "Tag";
+
+            if(idA[collisionVariable] != undefined) { 
+
+                if(id == "endcontact") {
+
+                    if(idA.collisionTrack[collisionVariable].elapsedTime == player.engine.game.elapsedTime) { 
+                        
+                        player.engine.physics.collisionTrackList.push(idA.collisionTrack[collisionVariable]); 
+                    }
+                    else { idA[collisionVariable] = value;  }
+                }
+                else { idA[collisionVariable] = value; }
+
+                idA.collisionTrack[collisionVariable].elapsedTime = player.engine.game.elapsedTime;
+            }
+        }
     }
 
-    awake(actor) {
+    sleep(actor) { if(actor.triggerOn || actor.physicsOn) { actor.rigidbody.m_body.SetActive(false); } }
 
-        if(actor.triggerOn || actor.physicsOn) { actor.rigidbody.m_body.SetActive(true); }
-    }
+    awake(actor) { if(actor.triggerOn || actor.physicsOn) { actor.rigidbody.m_body.SetActive(true); } }
 
     destroyActor(actor) {
 
