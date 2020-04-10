@@ -53,8 +53,12 @@ class NewPropertyView {
 		if (panel.classList.contains("game-properties"))
 			CmdManager.changeGamePropertyCmd(this.property,this.value);
 		else {
-			var sceneID=document.querySelector(".sceneselected").id;
-			var actorID=document.querySelector(".actorselected").id;
+			var scene=document.querySelector(".sceneselected");
+			var actor=document.querySelector(".actorselected");
+			var sceneID=null;
+			var actorID=null;
+			if (scene) sceneID=scene.id;
+			if (actor) actorID=actor.id;
 			CmdManager.changeActorPropertyCmd(sceneID,actorID,this.property,this.value);
 		}
 	}
