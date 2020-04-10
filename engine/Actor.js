@@ -106,7 +106,7 @@ class Actor {
         for(var i in actor) { if(!(i in this)) { this[i] = actor[i]; } }
 
         /**
-         * Actualizacion de la variable de control de la carga de informacion
+         * Actualizacion de las variables de control de la carga de informacion.
          * --------------------------------------------------------------------- */
         this.loaded = true;
     }

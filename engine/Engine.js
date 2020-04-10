@@ -66,12 +66,12 @@ class Engine {
             /** Si es un actor dormido */
             if(scene.actorList[i].sleeping) { this.actorList[scene.actorList[i].ID].sleep(); }
 
-            /** Si es un actor a spawnear. */
-            this.index = this.actorList[scene.actorList[i].ID].spawn ? this.index + 1 : this.index;
+            /** Si es un actor a spawnear: se aumenta el indice, se asigna y se vuelve a aumentar . */
+            this.index = this.actorList[scene.actorList[i].ID].spawn ? this.index + 1 : this.index; 
             this.actorList[scene.actorList[i].ID].index = this.index;
+            this.game.sceneList[this.game.activeScene].actorList[scene.actorList[i].ID].index = this.index;
+            this.index = this.actorList[scene.actorList[i].ID].spawn ? this.index + 1 : this.index;
 
-            //console.log(this.actorList[scene.actorList[i].ID].name, this.actorList[scene.actorList[i].ID].index);
-            
             this.sceneList[scene.name][scene.actorList[i].ID] = scene.actorList[i];
         }
 
