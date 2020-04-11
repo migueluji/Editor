@@ -797,9 +797,86 @@
 					"scriptList": []
 				},
 				{
+					"name": "splash",
+					"sleeping": true,
+					"x": -1265.1115794005736,
+					"y": -848.2116878579458,
+					"width": 176,
+					"height": 128,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "splash1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "splash1.png,splash2.png,splash3.png,splash4.png,splash5.png",
+										"fps": 24
+									}
+								},
+								{
+									"type": "Timer",
+									"parameters": {
+										"seconds": "0.2"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
 					"name": "fog",
 					"sleeping": true,
-					"x": 0,
+					"x": -2.9120248709973566,
 					"y": 0,
 					"width": 1920,
 					"height": 1080,
@@ -1868,6 +1945,57 @@
 					"scriptList": []
 				},
 				{
+					"name": "gameover",
+					"sleeping": false,
+					"x": 0,
+					"y": -560,
+					"width": 1900,
+					"height": 50,
+					"scaleX": 38,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "river",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
 					"name": "rocket_right",
 					"sleeping": true,
 					"x": -1265.2065456022412,
@@ -2094,8 +2222,8 @@
 				{
 					"name": "player",
 					"sleeping": false,
-					"x": -135.31241510624056,
-					"y": 31.57056506203213,
+					"x": -560.4680462718583,
+					"y": 193.1879454023868,
 					"width": 72,
 					"height": 72,
 					"scaleX": 0.18,
@@ -2581,8 +2709,8 @@
 				{
 					"name": "alien",
 					"sleeping": true,
-					"x": -1265.3254815503744,
-					"y": -259.6355130800373,
+					"x": -1263.869469114876,
+					"y": -258.1795006445386,
 					"width": 100.8,
 					"height": 86.39999999999999,
 					"scaleX": 0.18,
@@ -2623,7 +2751,7 @@
 					"velocityY": 0,
 					"angularVelocity": 0,
 					"density": 2,
-					"friction": 0.5,
+					"friction": 1,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
@@ -2637,6 +2765,22 @@
 										"property": "Me.velocityX",
 										"value": "Me.velocity"
 									}
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "ground"
+									},
+									"nodeListTrue": [],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.velocityY",
+												"value": "-abs(Me.velocity)"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -2646,7 +2790,7 @@
 								{
 									"type": "Collision",
 									"parameters": {
-										"tags": "wall"
+										"tags": "wall,enemy"
 									},
 									"nodeListTrue": [
 										{
@@ -2710,10 +2854,21 @@
 											},
 											"nodeListTrue": [
 												{
-													"type": "Edit",
+													"type": "Spawn",
 													"parameters": {
-														"property": "Me.image",
-														"value": "char_enemy_alienShip-damaged.png"
+														"actor": "points",
+														"x": 0,
+														"y": 0,
+														"angle": 0
+													}
+												},
+												{
+													"type": "Spawn",
+													"parameters": {
+														"actor": "pointsShadow",
+														"x": 0,
+														"y": "-3",
+														"angle": 0
 													}
 												}
 											],
@@ -2726,6 +2881,24 @@
 														"value_2": "0"
 													},
 													"nodeListTrue": [
+														{
+															"type": "Spawn",
+															"parameters": {
+																"actor": "points",
+																"x": 0,
+																"y": 0,
+																"angle": 0
+															}
+														},
+														{
+															"type": "Spawn",
+															"parameters": {
+																"actor": "pointsShadow",
+																"x": 0,
+																"y": 0,
+																"angle": 0
+															}
+														},
 														{
 															"type": "Spawn",
 															"parameters": {
@@ -2780,134 +2953,6 @@
 					"changedirection": true,
 					"velocity": 400,
 					"hits": 2
-				},
-				{
-					"name": "splash",
-					"sleeping": true,
-					"x": -1265.1115794005736,
-					"y": -848.2116878579458,
-					"width": 176,
-					"height": 128,
-					"scaleX": 0.5,
-					"scaleY": 0.5,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "",
-					"spriteOn": true,
-					"image": "splash1.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": false,
-					"type": "Dynamic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": [
-						{
-							"name": "Script_1",
-							"nodeList": [
-								{
-									"type": "Animate",
-									"parameters": {
-										"animation": "splash1.png,splash2.png,splash3.png,splash4.png,splash5.png",
-										"fps": 24
-									}
-								},
-								{
-									"type": "Timer",
-									"parameters": {
-										"seconds": "0.2"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Delete",
-											"parameters": {}
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						}
-					]
-				},
-				{
-					"name": "gameover",
-					"sleeping": false,
-					"x": 0,
-					"y": -560,
-					"width": 1900,
-					"height": 50,
-					"scaleX": 38,
-					"scaleY": 1,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "river",
-					"spriteOn": false,
-					"image": "",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": false,
-					"type": "Dynamic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": []
 				},
 				{
 					"name": "life",
@@ -3233,10 +3278,10 @@
 					]
 				},
 				{
-					"name": "Actor_43",
+					"name": "spawner1",
 					"sleeping": false,
-					"x": -454.8974159184203,
-					"y": 435.9312742792946,
+					"x": -675,
+					"y": 500,
 					"width": 128,
 					"height": 128,
 					"scaleX": 0.5,
@@ -3288,7 +3333,7 @@
 								{
 									"type": "Timer",
 									"parameters": {
-										"seconds": "3"
+										"seconds": "random(3,6)"
 									},
 									"nodeListTrue": [
 										{
@@ -3317,6 +3362,444 @@
 											}
 										}
 									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "spawner2",
+					"sleeping": false,
+					"x": 575,
+					"y": 500,
+					"width": 128,
+					"height": 128,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "part_star.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Timer",
+									"parameters": {
+										"seconds": "random(3,6)"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "alien",
+												"x": 0,
+												"y": 0,
+												"angle": 0
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.opacity",
+												"value": "0.1"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.opacity",
+												"value": "Me.opacity+0.005"
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "spawner3",
+					"sleeping": false,
+					"x": -100,
+					"y": 500,
+					"width": 128,
+					"height": 128,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "part_star.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Timer",
+									"parameters": {
+										"seconds": "random(3,6)"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "alien",
+												"x": 0,
+												"y": 0,
+												"angle": 0
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.opacity",
+												"value": "0.1"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.opacity",
+												"value": "Me.opacity+0.005"
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "scoreShadow",
+					"sleeping": false,
+					"x": 0,
+					"y": 278,
+					"width": 455,
+					"height": 50,
+					"scaleX": 9.1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": true,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": true,
+					"text": "score: ${score.score}",
+					"font": "Arial Black",
+					"size": 60,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [],
+					"score": 0
+				},
+				{
+					"name": "score",
+					"sleeping": false,
+					"x": 0,
+					"y": 282,
+					"width": 455,
+					"height": 50,
+					"scaleX": 9.1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": true,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": true,
+					"text": "score: ${Me.score}",
+					"font": "Arial Black",
+					"size": 60,
+					"fill": "#ffffff",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [],
+					"score": 0
+				},
+				{
+					"name": "pointsShadow",
+					"sleeping": true,
+					"x": -1257.5776644718485,
+					"y": -446.9635618909182,
+					"width": 50,
+					"height": 50,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": true,
+					"text": "100",
+					"font": "Arial Black",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Move",
+									"parameters": {
+										"speed": "50",
+										"angle": "90"
+									}
+								},
+								{
+									"type": "Timer",
+									"parameters": {
+										"seconds": 1
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "points",
+					"sleeping": true,
+					"x": -1232.5776644718485,
+					"y": -471.9635618909182,
+					"width": 50,
+					"height": 50,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": true,
+					"text": "100",
+					"font": "Arial Black",
+					"size": 30,
+					"fill": "#ffffff",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Move",
+									"parameters": {
+										"speed": "50",
+										"angle": "90"
+									}
+								},
+								{
+									"type": "Timer",
+									"parameters": {
+										"seconds": 1
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
 								}
 							]
 						}
