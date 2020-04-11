@@ -306,7 +306,7 @@ class Logic {
         /** Comprobamos si se pretende mofidicar una imagen. */
         if(typeof parameters.value == "string" && (parameters.value.includes(".png") || parameters.value.includes(".jpg") || parameters.value.includes(".gif"))) {
 
-            parameters.value = "'" + parameters.value + "'";
+            parameters.value = parameters.value.includes("'") ? parameters.value : "'" + parameters.value + "'"; /** Para los spawns (el value imagen viene sin comillas del editor y mathjs lo interpreta como variable). */
         }
 
         /** Definimos la expresion */
