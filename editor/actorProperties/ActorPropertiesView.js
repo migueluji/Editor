@@ -110,7 +110,11 @@ class ActorPropertiesView {
 		if (this.property=="opacity" && this.value>1) this.value=1;  // special case for pixi
 		var scene=document.querySelector(".sceneselected");
 		var actor=document.querySelector(".actorselected");
-		if(scene.id && actor.id) CmdManager.changeActorPropertyCmd(scene.id,actor.id,this.property,this.value);
+		var sceneID=null;
+		var actorID=null;
+		if (scene) sceneID=scene.id;
+		if (actor) actorID=actor.id;
+		if(actorID!=null) CmdManager.changeActorPropertyCmd(scene.id,actor.id,this.property,this.value);
 	}
 
 	onChangeSelectHandler(element){
