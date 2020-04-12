@@ -22,7 +22,8 @@
 		"enemy",
 		"player",
 		"rocket",
-		"river"
+		"river",
+		"change"
 	],
 	"sceneList": [
 		{
@@ -349,6 +350,280 @@
 					]
 				},
 				{
+					"name": "taxi",
+					"sleeping": false,
+					"x": 1350,
+					"y": -308,
+					"width": 144,
+					"height": 80,
+					"scaleX": 0.4,
+					"scaleY": 0.4,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "car_1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "car_1.png,car_2.png,car_3.png,car_4.png,car_5.png,car_6.png",
+										"fps": 24
+									}
+								},
+								{
+									"type": "Move",
+									"parameters": {
+										"speed": "Me.velocity",
+										"angle": "0"
+									}
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "change"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Check",
+											"parameters": {
+												"property": "Me.changedirection"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.velocity",
+														"value": "-Me.velocity"
+													}
+												},
+												{
+													"type": "Check",
+													"parameters": {
+														"property": "Me.flipX"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.flipX",
+																"value": false
+															}
+														}
+													],
+													"nodeListFalse": [
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.flipX",
+																"value": true
+															}
+														}
+													]
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.changedirection",
+														"value": false
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.changedirection",
+												"value": true
+											}
+										}
+									]
+								}
+							]
+						}
+					],
+					"velocity": -420,
+					"changedirection": true
+				},
+				{
+					"name": "bus",
+					"sleeping": false,
+					"x": 0,
+					"y": -269,
+					"width": 204.8,
+					"height": 164,
+					"scaleX": 0.4,
+					"scaleY": 0.4,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "bus_1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "bus_1.png,bus_2.png,bus_3.png,bus_4.png,bus_5.png,bus_6.png",
+										"fps": 24
+									}
+								},
+								{
+									"type": "Move",
+									"parameters": {
+										"speed": "Me.velocity",
+										"angle": "0"
+									}
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "change"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Check",
+											"parameters": {
+												"property": "Me.changedirection"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.velocity",
+														"value": "-Me.velocity"
+													}
+												},
+												{
+													"type": "Check",
+													"parameters": {
+														"property": "Me.flipX"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.flipX",
+																"value": false
+															}
+														}
+													],
+													"nodeListFalse": [
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.flipX",
+																"value": true
+															}
+														}
+													]
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.changedirection",
+														"value": false
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.changedirection",
+												"value": true
+											}
+										}
+									]
+								}
+							]
+						}
+					],
+					"velocity": -400,
+					"changedirection": true
+				},
+				{
 					"name": "Actor_24",
 					"sleeping": false,
 					"x": 0,
@@ -416,12 +691,12 @@
 					"name": "deadalien",
 					"sleeping": true,
 					"x": -1403.234093804069,
-					"y": -1036.5728314709102,
+					"y": -1035.7216682957026,
 					"width": 107.28,
 					"height": 92.16,
 					"scaleX": 0.18,
 					"scaleY": 0.18,
-					"angle": 0,
+					"angle": -45,
 					"screen": false,
 					"collider": "Box",
 					"tags": "",
@@ -499,20 +774,20 @@
 					]
 				},
 				{
-					"name": "deadplayer",
+					"name": "wormdead",
 					"sleeping": true,
-					"x": -1271.3233220282532,
-					"y": -1066.3091472066596,
-					"width": 72,
-					"height": 72,
-					"scaleX": 0.18,
-					"scaleY": 0.18,
-					"angle": 0,
+					"x": -1402.0666627098722,
+					"y": -927.0890497881647,
+					"width": 68.39999999999999,
+					"height": 70.2,
+					"scaleX": 0.15,
+					"scaleY": 0.15,
+					"angle": -45,
 					"screen": false,
 					"collider": "Box",
 					"tags": "",
 					"spriteOn": true,
-					"image": "character_dead.png",
+					"image": "char_enemy_alienSlug-dead.png",
 					"color": "#ffffff",
 					"opacity": 1,
 					"flipX": false,
@@ -578,15 +853,7 @@
 											"parameters": {}
 										}
 									],
-									"nodeListFalse": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Game.cameraY",
-												"value": "Me.y"
-											}
-										}
-									]
+									"nodeListFalse": []
 								}
 							]
 						}
@@ -596,7 +863,7 @@
 					"name": "spaceship",
 					"sleeping": false,
 					"x": 0,
-					"y": -174.59891524949808,
+					"y": -212,
 					"width": 1250,
 					"height": 300,
 					"scaleX": 1,
@@ -797,6 +1064,77 @@
 					"scriptList": []
 				},
 				{
+					"name": "swan",
+					"sleeping": true,
+					"x": -1296.8989849191992,
+					"y": 24.926697099646958,
+					"width": 104,
+					"height": 104,
+					"scaleX": 0.4,
+					"scaleY": 0.4,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "swan_1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "swan_1.png,swan_2.png,swan_3.png,swan_4.png,swan_5.png,swan_6.png,swan_7.png,swan_8.png",
+										"fps": 24
+									}
+								},
+								{
+									"type": "Move",
+									"parameters": {
+										"speed": "300",
+										"angle": "180"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
 					"name": "splash",
 					"sleeping": true,
 					"x": -1265.1115794005736,
@@ -876,7 +1214,7 @@
 				{
 					"name": "fog",
 					"sleeping": true,
-					"x": -2.9120248709973566,
+					"x": -1.4336476628982382,
 					"y": 0,
 					"width": 1920,
 					"height": 1080,
@@ -888,7 +1226,7 @@
 					"tags": "",
 					"spriteOn": true,
 					"image": "env_Fog.png",
-					"color": "#ffffff",
+					"color": "#ff0000",
 					"opacity": 1,
 					"flipX": false,
 					"flipY": false,
@@ -928,7 +1266,7 @@
 					"name": "Left_Tower",
 					"sleeping": false,
 					"x": -1000,
-					"y": 0,
+					"y": -35,
 					"width": 630,
 					"height": 1080,
 					"scaleX": 1,
@@ -979,7 +1317,7 @@
 					"name": "Right_Tower",
 					"sleeping": false,
 					"x": 1000,
-					"y": 0,
+					"y": -35,
 					"width": 630,
 					"height": 1080,
 					"scaleX": 1,
@@ -1030,7 +1368,7 @@
 					"name": "Actor_7",
 					"sleeping": false,
 					"x": -522,
-					"y": -390,
+					"y": -425,
 					"width": 770,
 					"height": 160,
 					"scaleX": 1,
@@ -1081,7 +1419,7 @@
 					"name": "Actor_7_copy",
 					"sleeping": false,
 					"x": 522,
-					"y": -390,
+					"y": -425,
 					"width": 770,
 					"height": 160,
 					"scaleX": 1,
@@ -1132,7 +1470,7 @@
 					"name": "Actor_3",
 					"sleeping": false,
 					"x": -680,
-					"y": 30,
+					"y": 5,
 					"width": 440,
 					"height": 130,
 					"scaleX": 1,
@@ -1183,7 +1521,7 @@
 					"name": "Actor_3_copy",
 					"sleeping": false,
 					"x": 680,
-					"y": 30,
+					"y": 5,
 					"width": 440,
 					"height": 130,
 					"scaleX": 1,
@@ -1233,8 +1571,8 @@
 				{
 					"name": "Actor_9_copy_4",
 					"sleeping": false,
-					"x": 509.16072208372447,
-					"y": -151.54249950763077,
+					"x": 510.18096349292915,
+					"y": -187.2509488297957,
 					"width": 223.97736675746916,
 					"height": 25.961908661648803,
 					"scaleX": 4.479547335149383,
@@ -1284,8 +1622,8 @@
 				{
 					"name": "Actor_9",
 					"sleeping": false,
-					"x": 0,
-					"y": -44,
+					"x": -3.060724227614145,
+					"y": -82.76917354977911,
 					"width": 358.2659985957429,
 					"height": 29.441870474694554,
 					"scaleX": 7.165319971914857,
@@ -1335,8 +1673,8 @@
 				{
 					"name": "Actor_9_copy_9",
 					"sleeping": false,
-					"x": 4.446455227655747,
-					"y": -167,
+					"x": 4.51219618376814,
+					"y": -196.4157040426056,
 					"width": 1232.6508273090606,
 					"height": 22.999999999999996,
 					"scaleX": 24.653016546181213,
@@ -1386,8 +1724,8 @@
 				{
 					"name": "Actor_9_copy_10",
 					"sleeping": false,
-					"x": -680.0459561029368,
-					"y": 63.683006405843116,
+					"x": -679.5603172942057,
+					"y": 39.88670477801554,
 					"width": 390.1335149033685,
 					"height": 12.633987188313768,
 					"scaleX": 7.80267029806737,
@@ -1438,7 +1776,7 @@
 					"name": "Actor_9_copy_13",
 					"sleeping": false,
 					"x": 684.7718716027794,
-					"y": 64.60197130346582,
+					"y": 43.85706264963666,
 					"width": 392.8879713895044,
 					"height": 11.86800982557881,
 					"scaleX": 7.857759427790088,
@@ -1488,12 +1826,12 @@
 				{
 					"name": "Actor_9_copy_5",
 					"sleeping": false,
-					"x": 682.8481736890478,
-					"y": 72.10406580803578,
+					"x": 683.1882541587827,
+					"y": 54.03688833389455,
 					"width": 391.5914619587825,
-					"height": 18.006731171631827,
+					"height": 8.398652862671895,
 					"scaleX": 7.831829239175649,
-					"scaleY": 0.3601346234326365,
+					"scaleY": 0.1679730572534379,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
@@ -1539,12 +1877,12 @@
 				{
 					"name": "Actor_9_copy_7",
 					"sleeping": false,
-					"x": -680.9592172067695,
-					"y": 74.15896365856388,
+					"x": -683.1637621246479,
+					"y": 50.423816314322565,
 					"width": 391.5914619587825,
-					"height": 13.631444532817483,
+					"height": 8.62898936127894,
 					"scaleX": 7.831829239175649,
-					"scaleY": 0.27262889065634965,
+					"scaleY": 0.1725797872255788,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
@@ -1590,8 +1928,8 @@
 				{
 					"name": "Actor_9_copy_6",
 					"sleeping": false,
-					"x": 536.2516973805851,
-					"y": -332.723192917311,
+					"x": 533.5310536227058,
+					"y": -368.0915617697411,
 					"width": 738.2642802052112,
 					"height": 18.006731171631827,
 					"scaleX": 14.765285604104223,
@@ -1641,8 +1979,8 @@
 				{
 					"name": "Actor_9_copy_8",
 					"sleeping": false,
-					"x": -544.0696520822652,
-					"y": -331.8645052992154,
+					"x": -542.4463663788763,
+					"y": -369.20007647716113,
 					"width": 738.2642802052112,
 					"height": 18.006731171631827,
 					"scaleX": 14.765285604104223,
@@ -1744,10 +2082,10 @@
 					"name": "Right_Wall",
 					"sleeping": false,
 					"x": 884.5858009174676,
-					"y": 54.909789254927546,
-					"width": 790.5336441976997,
+					"y": 42.336280414658575,
+					"width": 815.6806618782376,
 					"height": 18.006731171631827,
-					"scaleX": 15.810672883953993,
+					"scaleX": 16.313613237564752,
 					"scaleY": 0.3601346234326365,
 					"angle": 90,
 					"screen": false,
@@ -1794,8 +2132,8 @@
 				{
 					"name": "Actor_9_copy_2",
 					"sleeping": false,
-					"x": -301,
-					"y": -99.26979238072457,
+					"x": -305.85638808731164,
+					"y": -138.1208970792185,
 					"width": 280.60924622178266,
 					"height": 33.87506380310711,
 					"scaleX": 5.612184924435653,
@@ -1845,8 +2183,8 @@
 				{
 					"name": "Actor_9_copy_3",
 					"sleeping": false,
-					"x": 303,
-					"y": -97.64859451908222,
+					"x": 295.7039656822792,
+					"y": -134.87171017347458,
 					"width": 273.7987454931498,
 					"height": 30.65912932845404,
 					"scaleX": 5.4759749098629955,
@@ -1896,8 +2234,8 @@
 				{
 					"name": "Actor_9_copy",
 					"sleeping": false,
-					"x": -507,
-					"y": -152.0375534342746,
+					"x": -507.4856388087311,
+					"y": -191.37429694149964,
 					"width": 210,
 					"height": 26,
 					"scaleX": 4.2,
@@ -2220,10 +2558,104 @@
 					]
 				},
 				{
+					"name": "deadplayer",
+					"sleeping": true,
+					"x": -1271.3233220282532,
+					"y": -1066.3091472066596,
+					"width": 72,
+					"height": 72,
+					"scaleX": 0.18,
+					"scaleY": 0.18,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "character_dead.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Move",
+									"parameters": {
+										"speed": "400",
+										"angle": "-90"
+									}
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "river"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "splash",
+												"x": 0,
+												"y": 0,
+												"angle": 0
+											}
+										},
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.cameraY",
+												"value": "Me.y"
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
 					"name": "player",
 					"sleeping": false,
-					"x": -560.4680462718583,
-					"y": 193.1879454023868,
+					"x": -54.93388877277937,
+					"y": 112.53852727996565,
 					"width": 72,
 					"height": 72,
 					"scaleX": 0.18,
@@ -2303,7 +2735,7 @@
 													"type": "Edit",
 													"parameters": {
 														"property": "Me.velocityX",
-														"value": "420"
+														"value": "450"
 													}
 												}
 											],
@@ -2350,7 +2782,7 @@
 															"type": "Edit",
 															"parameters": {
 																"property": "Me.velocityX",
-																"value": "-420"
+																"value": "-450"
 															}
 														}
 													],
@@ -2397,7 +2829,7 @@
 								{
 									"type": "Collision",
 									"parameters": {
-										"tags": "ground"
+										"tags": "ground,enemy"
 									},
 									"nodeListTrue": [
 										{
@@ -2411,7 +2843,7 @@
 													"type": "Edit",
 													"parameters": {
 														"property": "Me.velocityY",
-														"value": "500"
+														"value": "600"
 													}
 												}
 											],
@@ -2709,8 +3141,8 @@
 				{
 					"name": "alien",
 					"sleeping": true,
-					"x": -1263.869469114876,
-					"y": -258.1795006445386,
+					"x": -1263.0183059396686,
+					"y": -259.0306638197459,
 					"width": 100.8,
 					"height": 86.39999999999999,
 					"scaleX": 0.18,
@@ -2760,18 +3192,19 @@
 							"name": "movement",
 							"nodeList": [
 								{
-									"type": "Edit",
-									"parameters": {
-										"property": "Me.velocityX",
-										"value": "Me.velocity"
-									}
-								},
-								{
 									"type": "Collision",
 									"parameters": {
-										"tags": "ground"
+										"tags": "ground,enemy"
 									},
-									"nodeListTrue": [],
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.velocityX",
+												"value": "Me.velocity"
+											}
+										}
+									],
 									"nodeListFalse": [
 										{
 											"type": "Edit",
@@ -2854,6 +3287,13 @@
 											},
 											"nodeListTrue": [
 												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.image",
+														"value": "char_enemy_alienShip-damaged.png"
+													}
+												},
+												{
 													"type": "Spawn",
 													"parameters": {
 														"actor": "points",
@@ -2886,7 +3326,7 @@
 															"parameters": {
 																"actor": "points",
 																"x": 0,
-																"y": 0,
+																"y": "2",
 																"angle": 0
 															}
 														},
@@ -2916,6 +3356,238 @@
 													"nodeListFalse": []
 												}
 											]
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "dead",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "river"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "splash",
+												"x": 0,
+												"y": 0,
+												"angle": 0
+											}
+										},
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					],
+					"changedirection": true,
+					"velocity": 400,
+					"hits": 2
+				},
+				{
+					"name": "worm",
+					"sleeping": true,
+					"x": -1273.9775519990817,
+					"y": -146.77596550426404,
+					"width": 69,
+					"height": 69.6,
+					"scaleX": 0.15,
+					"scaleY": 0.15,
+					"angle": 0,
+					"screen": false,
+					"collider": "Circle",
+					"tags": "enemy",
+					"spriteOn": true,
+					"image": "worm01.png",
+					"color": "#ffffff",
+					"opacity": 0.8,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "${Me.velocityX}",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 71,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Dynamic",
+					"fixedAngle": true,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 1,
+					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "movement",
+							"nodeList": [
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "worm01.png,worm02.png,worm03.png,worm04.png,worm05.png,worm06.png,worm07.png,worm08.png,worm09.png,worm10.png,worm11.png,worm12.png,worm13.png,worm14.png",
+										"fps": 24
+									}
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "ground,enemy"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.velocityX",
+												"value": "Me.velocity"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.velocityY",
+												"value": "-abs(Me.velocity)"
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "change_direction",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "wall,enemy"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Check",
+											"parameters": {
+												"property": "Me.changedirection"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.velocity",
+														"value": "-Me.velocity"
+													}
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.changedirection",
+														"value": false
+													}
+												},
+												{
+													"type": "Check",
+													"parameters": {
+														"property": "Me.flipX"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.flipX",
+																"value": false
+															}
+														}
+													],
+													"nodeListFalse": [
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.flipX",
+																"value": true
+															}
+														}
+													]
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.changedirection",
+												"value": true
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "hits",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "rocket"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "points",
+												"x": 0,
+												"y": 0,
+												"angle": 0
+											}
+										},
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "pointsShadow",
+												"x": 0,
+												"y": "-3",
+												"angle": 0
+											}
+										},
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "wormdead",
+												"x": 0,
+												"y": 0,
+												"angle": 0
+											}
+										},
+										{
+											"type": "Delete",
+											"parameters": {}
 										}
 									],
 									"nodeListFalse": []
@@ -3278,10 +3950,10 @@
 					]
 				},
 				{
-					"name": "spawner1",
+					"name": "spawner",
 					"sleeping": false,
-					"x": -675,
-					"y": 500,
+					"x": -390.5279835546196,
+					"y": 610.1553028013559,
 					"width": 128,
 					"height": 128,
 					"scaleX": 0.5,
@@ -3289,7 +3961,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
+					"tags": "ground",
 					"spriteOn": true,
 					"image": "part_star.png",
 					"color": "#ffffff",
@@ -3339,7 +4011,7 @@
 										{
 											"type": "Spawn",
 											"parameters": {
-												"actor": "alien",
+												"actor": "worm",
 												"x": 0,
 												"y": 0,
 												"angle": 0
@@ -3368,10 +4040,10 @@
 					]
 				},
 				{
-					"name": "spawner2",
+					"name": "spawner_copy",
 					"sleeping": false,
-					"x": 575,
-					"y": 500,
+					"x": 195.02157499084547,
+					"y": 585.1336935164145,
 					"width": 128,
 					"height": 128,
 					"scaleX": 0.5,
@@ -3379,7 +4051,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
+					"tags": "ground",
 					"spriteOn": true,
 					"image": "part_star.png",
 					"color": "#ffffff",
@@ -3429,7 +4101,7 @@
 										{
 											"type": "Spawn",
 											"parameters": {
-												"actor": "alien",
+												"actor": "worm",
 												"x": 0,
 												"y": 0,
 												"angle": 0
@@ -3458,10 +4130,10 @@
 					]
 				},
 				{
-					"name": "spawner3",
+					"name": "spawner_copy_2",
 					"sleeping": false,
-					"x": -100,
-					"y": 500,
+					"x": -707.4390538106393,
+					"y": 475.89998154629535,
 					"width": 128,
 					"height": 128,
 					"scaleX": 0.5,
@@ -3469,7 +4141,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
+					"tags": "ground",
 					"spriteOn": true,
 					"image": "part_star.png",
 					"color": "#ffffff",
@@ -3731,8 +4403,8 @@
 				{
 					"name": "points",
 					"sleeping": true,
-					"x": -1232.5776644718485,
-					"y": -471.9635618909182,
+					"x": -1257.7514054760743,
+					"y": -443.5968002392806,
 					"width": 50,
 					"height": 50,
 					"scaleX": 1,
@@ -3795,6 +4467,13 @@
 									},
 									"nodeListTrue": [
 										{
+											"type": "Edit",
+											"parameters": {
+												"property": "score.score",
+												"value": "score.score+100"
+											}
+										},
+										{
 											"type": "Delete",
 											"parameters": {}
 										}
@@ -3804,6 +4483,183 @@
 							]
 						}
 					]
+				},
+				{
+					"name": "swanGenerator",
+					"sleeping": false,
+					"x": 1482.8578094179727,
+					"y": 244.694645070334,
+					"width": 50,
+					"height": 50,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Timer",
+									"parameters": {
+										"seconds": "3"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "swan",
+												"x": 0,
+												"y": 0,
+												"angle": 0
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "changeLeft",
+					"sleeping": false,
+					"x": -1500,
+					"y": -277.1094201452197,
+					"width": 50,
+					"height": 304.41329233069786,
+					"scaleX": 1,
+					"scaleY": 6.088265846613957,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "change",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "change",
+					"sleeping": false,
+					"x": 1500,
+					"y": -258.94880101132526,
+					"width": 50,
+					"height": 304.41329233069786,
+					"scaleX": 1,
+					"scaleY": 6.088265846613957,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "change",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
 				}
 			]
 		},
