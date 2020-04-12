@@ -23,7 +23,9 @@
 		"player",
 		"rocket",
 		"river",
-		"change"
+		"change",
+		"left",
+		"right"
 	],
 	"sceneList": [
 		{
@@ -1571,11 +1573,11 @@
 				{
 					"name": "Actor_9_copy_4",
 					"sleeping": false,
-					"x": 510.18096349292915,
-					"y": -187.2509488297957,
-					"width": 223.97736675746916,
+					"x": 499.0616741414059,
+					"y": -186.86265468943913,
+					"width": 201.72523265556032,
 					"height": 25.961908661648803,
-					"scaleX": 4.479547335149383,
+					"scaleX": 4.034504653111206,
 					"scaleY": 0.519238173232976,
 					"angle": 358,
 					"screen": false,
@@ -1673,16 +1675,16 @@
 				{
 					"name": "Actor_9_copy_9",
 					"sleeping": false,
-					"x": 4.51219618376814,
-					"y": -196.4157040426056,
-					"width": 1232.6508273090606,
-					"height": 22.999999999999996,
-					"scaleX": 24.653016546181213,
-					"scaleY": 0.4599999999999999,
+					"x": -362.3253711346597,
+					"y": -193.65687999452572,
+					"width": 498.97569267220484,
+					"height": 17.482351903840424,
+					"scaleX": 9.979513853444097,
+					"scaleY": 0.34964703807680847,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "wall",
+					"tags": "right",
 					"spriteOn": false,
 					"image": "",
 					"color": "#00ff00",
@@ -1715,7 +1717,58 @@
 					"velocityY": 0,
 					"angularVelocity": 0,
 					"density": 1,
-					"friction": 10,
+					"friction": 0,
+					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_9_copy_11",
+					"sleeping": false,
+					"x": 369.05266419638497,
+					"y": -199.6505544945904,
+					"width": 498.97569267220484,
+					"height": 22.999999999999996,
+					"scaleX": 9.979513853444097,
+					"scaleY": 0.4599999999999999,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "wall,left",
+					"spriteOn": false,
+					"image": "",
+					"color": "#00ff00",
+					"opacity": 0.5,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Static",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
@@ -1724,16 +1777,16 @@
 				{
 					"name": "Actor_9_copy_10",
 					"sleeping": false,
-					"x": -679.5603172942057,
+					"x": -682.4790922110216,
 					"y": 39.88670477801554,
-					"width": 390.1335149033685,
+					"width": 382.31731511082586,
 					"height": 12.633987188313768,
-					"scaleX": 7.80267029806737,
+					"scaleX": 7.646346302216517,
 					"scaleY": 0.25267974376627533,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "wall",
+					"tags": "wall,left",
 					"spriteOn": false,
 					"image": "",
 					"color": "#00ff00",
@@ -1784,7 +1837,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "wall",
+					"tags": "wall,right",
 					"spriteOn": false,
 					"image": "",
 					"color": "#00ff00",
@@ -1877,11 +1930,11 @@
 				{
 					"name": "Actor_9_copy_7",
 					"sleeping": false,
-					"x": -683.1637621246479,
-					"y": 50.423816314322565,
-					"width": 391.5914619587825,
+					"x": -682.4621799921259,
+					"y": 51.41314129377777,
+					"width": 391.015976264916,
 					"height": 8.62898936127894,
-					"scaleX": 7.831829239175649,
+					"scaleX": 7.82031952529832,
 					"scaleY": 0.1725797872255788,
 					"angle": 0,
 					"screen": false,
@@ -2030,16 +2083,16 @@
 				{
 					"name": "Left_Wall",
 					"sleeping": false,
-					"x": -883.0503360395749,
-					"y": 57.49480594344129,
-					"width": 786.8469749562339,
-					"height": 18.006731171631827,
-					"scaleX": 15.736939499124679,
-					"scaleY": 0.3601346234326365,
+					"x": -892.9442220834985,
+					"y": 46.61898490290412,
+					"width": 808.5986170373083,
+					"height": 37.794503259479136,
+					"scaleX": 16.171972340746166,
+					"scaleY": 0.7558900651895827,
 					"angle": 90,
 					"screen": false,
 					"collider": "Box",
-					"tags": "wall",
+					"tags": "wall,left",
 					"spriteOn": false,
 					"image": "",
 					"color": "#00ff00",
@@ -2072,7 +2125,7 @@
 					"velocityY": 0,
 					"angularVelocity": 0,
 					"density": 1,
-					"friction": 0.5,
+					"friction": 0,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
@@ -2081,16 +2134,16 @@
 				{
 					"name": "Right_Wall",
 					"sleeping": false,
-					"x": 884.5858009174676,
+					"x": 892.9952966903027,
 					"y": 42.336280414658575,
 					"width": 815.6806618782376,
-					"height": 18.006731171631827,
+					"height": 34.82572271730203,
 					"scaleX": 16.313613237564752,
-					"scaleY": 0.3601346234326365,
+					"scaleY": 0.6965144543460405,
 					"angle": 90,
 					"screen": false,
 					"collider": "Box",
-					"tags": "wall",
+					"tags": "wall,right",
 					"spriteOn": false,
 					"image": "",
 					"color": "#00ff00",
@@ -2123,7 +2176,7 @@
 					"velocityY": 0,
 					"angularVelocity": 0,
 					"density": 1,
-					"friction": 0.5,
+					"friction": 0,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
@@ -2132,12 +2185,12 @@
 				{
 					"name": "Actor_9_copy_2",
 					"sleeping": false,
-					"x": -305.85638808731164,
-					"y": -138.1208970792185,
+					"x": -308.7247369653957,
+					"y": -131.3634905887763,
 					"width": 280.60924622178266,
-					"height": 33.87506380310711,
+					"height": 19.19310647263156,
 					"scaleX": 5.612184924435653,
-					"scaleY": 0.6775012760621422,
+					"scaleY": 0.3838621294526312,
 					"angle": 23,
 					"screen": false,
 					"collider": "Box",
@@ -2234,12 +2287,12 @@
 				{
 					"name": "Actor_9_copy",
 					"sleeping": false,
-					"x": -507.4856388087311,
-					"y": -191.37429694149964,
-					"width": 210,
-					"height": 26,
-					"scaleX": 4.2,
-					"scaleY": 0.52,
+					"x": -492.0461127391401,
+					"y": -186.34130790144386,
+					"width": 182.4457696715504,
+					"height": 19.850318121389083,
+					"scaleX": 3.648915393431008,
+					"scaleY": 0.39700636242778164,
 					"angle": 1,
 					"screen": false,
 					"collider": "Box",
@@ -2654,7 +2707,7 @@
 				{
 					"name": "player",
 					"sleeping": false,
-					"x": -54.93388877277937,
+					"x": 0,
 					"y": 112.53852727996565,
 					"width": 72,
 					"height": 72,
@@ -2695,165 +2748,12 @@
 					"velocityX": 0,
 					"velocityY": 0,
 					"angularVelocity": 0,
-					"density": 1,
-					"friction": 1,
+					"density": 2,
+					"friction": 2,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
 					"scriptList": [
-						{
-							"name": "Movement",
-							"nodeList": [
-								{
-									"type": "Keyboard",
-									"parameters": {
-										"key": "ArrowRight",
-										"key_Mode": "Pressed"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.flipX",
-												"value": false
-											}
-										},
-										{
-											"type": "Collision",
-											"parameters": {
-												"tags": "ground"
-											},
-											"nodeListTrue": [
-												{
-													"type": "Animate",
-													"parameters": {
-														"animation": "w1.png,w2.png,w3.png,w4.png,w5.png,w6.png,w7.png,w8.png",
-														"fps": "24"
-													}
-												},
-												{
-													"type": "Edit",
-													"parameters": {
-														"property": "Me.velocityX",
-														"value": "450"
-													}
-												}
-											],
-											"nodeListFalse": [
-												{
-													"type": "Animate",
-													"parameters": {
-														"animation": "character_jump.png",
-														"fps": 24
-													}
-												}
-											]
-										}
-									],
-									"nodeListFalse": [
-										{
-											"type": "Keyboard",
-											"parameters": {
-												"key": "ArrowLeft",
-												"key_Mode": "Pressed"
-											},
-											"nodeListTrue": [
-												{
-													"type": "Edit",
-													"parameters": {
-														"property": "Me.flipX",
-														"value": true
-													}
-												},
-												{
-													"type": "Collision",
-													"parameters": {
-														"tags": "ground"
-													},
-													"nodeListTrue": [
-														{
-															"type": "Animate",
-															"parameters": {
-																"animation": "w1.png,w2.png,w3.png,w4.png,w5.png,w6.png,w7.png,w8.png",
-																"fps": 24
-															}
-														},
-														{
-															"type": "Edit",
-															"parameters": {
-																"property": "Me.velocityX",
-																"value": "-450"
-															}
-														}
-													],
-													"nodeListFalse": [
-														{
-															"type": "Animate",
-															"parameters": {
-																"animation": "character_jump.png",
-																"fps": 24
-															}
-														}
-													]
-												}
-											],
-											"nodeListFalse": [
-												{
-													"type": "Collision",
-													"parameters": {
-														"tags": "ground"
-													},
-													"nodeListTrue": [
-														{
-															"type": "Animate",
-															"parameters": {
-																"animation": "character_stand.png",
-																"fps": 24
-															}
-														}
-													],
-													"nodeListFalse": [
-														{
-															"type": "Animate",
-															"parameters": {
-																"animation": "character_jump.png",
-																"fps": 24
-															}
-														}
-													]
-												}
-											]
-										}
-									]
-								},
-								{
-									"type": "Collision",
-									"parameters": {
-										"tags": "ground,enemy"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Keyboard",
-											"parameters": {
-												"key": "ArrowUp",
-												"key_Mode": "Pressed"
-											},
-											"nodeListTrue": [
-												{
-													"type": "Edit",
-													"parameters": {
-														"property": "Me.velocityY",
-														"value": "600"
-													}
-												}
-											],
-											"nodeListFalse": []
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						},
 						{
 							"name": "Camera",
 							"nodeList": [
@@ -2939,7 +2839,7 @@
 							]
 						},
 						{
-							"name": "dead",
+							"name": "Dead",
 							"nodeList": [
 								{
 									"type": "Collision",
@@ -2976,7 +2876,7 @@
 							]
 						},
 						{
-							"name": "hurt",
+							"name": "Hurt",
 							"nodeList": [
 								{
 									"type": "Check",
@@ -3053,6 +2953,182 @@
 										}
 									],
 									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "Movement",
+							"nodeList": [
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "ArrowRight",
+										"key_Mode": "Pressed"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.flipX",
+												"value": false
+											}
+										},
+										{
+											"type": "Collision",
+											"parameters": {
+												"tags": "right"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.velocityX",
+														"value": "-10"
+													}
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.color",
+														"value": "#ff0000"
+													}
+												}
+											],
+											"nodeListFalse": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.velocityX",
+														"value": "400"
+													}
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.color",
+														"value": "#ffffff"
+													}
+												}
+											]
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Keyboard",
+											"parameters": {
+												"key": "ArrowLeft",
+												"key_Mode": "Pressed"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.flipX",
+														"value": true
+													}
+												},
+												{
+													"type": "Collision",
+													"parameters": {
+														"tags": "left"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.color",
+																"value": "#ff0000"
+															}
+														},
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.velocityX",
+																"value": "0"
+															}
+														}
+													],
+													"nodeListFalse": [
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.velocityX",
+																"value": "-400"
+															}
+														},
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.color",
+																"value": "#ffffff"
+															}
+														}
+													]
+												}
+											],
+											"nodeListFalse": []
+										}
+									]
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "ground"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "abs(Me.velocityX)",
+												"operation": "Greater",
+												"value_2": "0.5"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Animate",
+													"parameters": {
+														"animation": "w1.png,w2.png,w3.png,w4.png,w5.png,w6.png,w7.png,w8.png",
+														"fps": 24
+													}
+												}
+											],
+											"nodeListFalse": [
+												{
+													"type": "Animate",
+													"parameters": {
+														"animation": "character_stand.png",
+														"fps": "1"
+													}
+												}
+											]
+										},
+										{
+											"type": "Keyboard",
+											"parameters": {
+												"key": "ArrowUp",
+												"key_Mode": "Pressed"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.velocityY",
+														"value": "500"
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Animate",
+											"parameters": {
+												"animation": "character_jump.png",
+												"fps": "1"
+											}
+										}
+									]
 								}
 							]
 						}
@@ -3951,7 +4027,7 @@
 				},
 				{
 					"name": "spawner",
-					"sleeping": false,
+					"sleeping": true,
 					"x": -390.5279835546196,
 					"y": 610.1553028013559,
 					"width": 128,
@@ -4041,7 +4117,7 @@
 				},
 				{
 					"name": "spawner_copy",
-					"sleeping": false,
+					"sleeping": true,
 					"x": 195.02157499084547,
 					"y": 585.1336935164145,
 					"width": 128,
@@ -4131,7 +4207,7 @@
 				},
 				{
 					"name": "spawner_copy_2",
-					"sleeping": false,
+					"sleeping": true,
 					"x": -707.4390538106393,
 					"y": 475.89998154629535,
 					"width": 128,
@@ -4640,6 +4716,57 @@
 					"fill": "#000000",
 					"style": "Normal",
 					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_59",
+					"sleeping": false,
+					"x": -570.1365456236682,
+					"y": 332.8239809913476,
+					"width": 108.4997834080334,
+					"height": 43.01957986188676,
+					"scaleX": 2.169995668160668,
+					"scaleY": 0.8603915972377353,
+					"angle": 0,
+					"screen": true,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": true,
+					"text": "fps: ${Game.FPS}",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Left",
 					"offsetX": 0,
 					"offsetY": 0,
 					"soundOn": false,
