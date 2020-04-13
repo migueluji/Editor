@@ -2200,7 +2200,7 @@
 				{
 					"name": "Right_Wall",
 					"sleeping": false,
-					"x": 892.9952966903027,
+					"x": 894.2115967811567,
 					"y": 42.336280414658575,
 					"width": 815.6806618782376,
 					"height": 34.82572271730203,
@@ -3324,48 +3324,19 @@
 					"velocityX": 0,
 					"velocityY": 0,
 					"angularVelocity": 0,
-					"density": 2,
-					"friction": 1,
+					"density": 1,
+					"friction": 0,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
 					"scriptList": [
-						{
-							"name": "movement",
-							"nodeList": [
-								{
-									"type": "Collision",
-									"parameters": {
-										"tags": "ground,enemy"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.velocityX",
-												"value": "Me.velocity"
-											}
-										}
-									],
-									"nodeListFalse": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.velocityY",
-												"value": "-abs(Me.velocity)"
-											}
-										}
-									]
-								}
-							]
-						},
 						{
 							"name": "change_direction",
 							"nodeList": [
 								{
 									"type": "Collision",
 									"parameters": {
-										"tags": "wall,enemy"
+										"tags": "wall"
 									},
 									"nodeListTrue": [
 										{
@@ -3530,6 +3501,27 @@
 									"nodeListFalse": []
 								}
 							]
+						},
+						{
+							"name": "movement",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "ground"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.velocityX",
+												"value": "Me.velocity"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
 						}
 					],
 					"changedirection": true,
@@ -3539,8 +3531,8 @@
 				{
 					"name": "worm",
 					"sleeping": true,
-					"x": -1273.9775519990817,
-					"y": -146.77596550426404,
+					"x": -1272.816023342811,
+					"y": -145.61443684799326,
 					"width": 69,
 					"height": 69.6,
 					"scaleX": 0.15,
@@ -3580,55 +3572,19 @@
 					"velocityX": 0,
 					"velocityY": 0,
 					"angularVelocity": 0,
-					"density": 1,
-					"friction": 1,
+					"density": 0,
+					"friction": 0,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
 					"scriptList": [
-						{
-							"name": "movement",
-							"nodeList": [
-								{
-									"type": "Animate",
-									"parameters": {
-										"animation": "worm01.png,worm02.png,worm03.png,worm04.png,worm05.png,worm06.png,worm07.png,worm08.png,worm09.png,worm10.png,worm11.png,worm12.png,worm13.png,worm14.png",
-										"fps": 24
-									}
-								},
-								{
-									"type": "Collision",
-									"parameters": {
-										"tags": "ground,enemy"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.velocityX",
-												"value": "Me.velocity"
-											}
-										}
-									],
-									"nodeListFalse": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.velocityY",
-												"value": "-abs(Me.velocity)"
-											}
-										}
-									]
-								}
-							]
-						},
 						{
 							"name": "change_direction",
 							"nodeList": [
 								{
 									"type": "Collision",
 									"parameters": {
-										"tags": "wall,enemy"
+										"tags": "wall"
 									},
 									"nodeListTrue": [
 										{
@@ -3642,13 +3598,6 @@
 													"parameters": {
 														"property": "Me.velocity",
 														"value": "-Me.velocity"
-													}
-												},
-												{
-													"type": "Edit",
-													"parameters": {
-														"property": "Me.changedirection",
-														"value": false
 													}
 												},
 												{
@@ -3674,6 +3623,13 @@
 															}
 														}
 													]
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.changedirection",
+														"value": false
+													}
 												}
 											],
 											"nodeListFalse": []
@@ -3757,6 +3713,34 @@
 										{
 											"type": "Delete",
 											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "movement",
+							"nodeList": [
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "worm01.png,worm02.png,worm03.png,worm04.png,worm05.png,worm06.png,worm07.png,worm08.png,worm09.png,worm10.png,worm11.png,worm12.png,worm13.png,worm14.png",
+										"fps": 24
+									}
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "ground"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.velocityX",
+												"value": "Me.velocity"
+											}
 										}
 									],
 									"nodeListFalse": []
@@ -4092,97 +4076,7 @@
 					]
 				},
 				{
-					"name": "spawner",
-					"sleeping": true,
-					"x": -390.5279835546196,
-					"y": 610.1553028013559,
-					"width": 128,
-					"height": 128,
-					"scaleX": 0.5,
-					"scaleY": 0.5,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "ground",
-					"spriteOn": true,
-					"image": "part_star.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": false,
-					"type": "Dynamic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": [
-						{
-							"name": "Script_1",
-							"nodeList": [
-								{
-									"type": "Timer",
-									"parameters": {
-										"seconds": "random(3,6)"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Spawn",
-											"parameters": {
-												"actor": "worm",
-												"x": 0,
-												"y": 0,
-												"angle": 0
-											}
-										},
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.opacity",
-												"value": "0.1"
-											}
-										}
-									],
-									"nodeListFalse": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.opacity",
-												"value": "Me.opacity+0.005"
-											}
-										}
-									]
-								}
-							]
-						}
-					]
-				},
-				{
-					"name": "spawner_copy",
+					"name": "spawner3",
 					"sleeping": true,
 					"x": 195.02157499084547,
 					"y": 585.1336935164145,
@@ -4272,8 +4166,98 @@
 					]
 				},
 				{
-					"name": "spawner_copy_2",
+					"name": "spawner2",
 					"sleeping": true,
+					"x": -390.5279835546196,
+					"y": 610.1553028013559,
+					"width": 128,
+					"height": 128,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "ground",
+					"spriteOn": true,
+					"image": "part_star.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Timer",
+									"parameters": {
+										"seconds": "random(3,6)"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "worm",
+												"x": 0,
+												"y": 0,
+												"angle": 0
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.opacity",
+												"value": "0.1"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.opacity",
+												"value": "Me.opacity+0.005"
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "spawner1",
+					"sleeping": false,
 					"x": -707.4390538106393,
 					"y": 475.89998154629535,
 					"width": 128,
@@ -4322,7 +4306,7 @@
 					"dampingAngular": 0,
 					"scriptList": [
 						{
-							"name": "Script_1",
+							"name": "spawn",
 							"nodeList": [
 								{
 									"type": "Timer",
