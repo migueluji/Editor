@@ -489,6 +489,143 @@
 					"changedirection": true
 				},
 				{
+					"name": "taxi_copy",
+					"sleeping": false,
+					"x": 805.7928819944264,
+					"y": 233.38460337083484,
+					"width": 104,
+					"height": 104,
+					"scaleX": 0.4,
+					"scaleY": 0.4,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "swan_1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "swan_1.png,swan_2.png,swan_3.png,swan_4.png,swan_5.png,swan_6.png,swan_7.png,swan_8.png",
+										"fps": 24
+									}
+								},
+								{
+									"type": "Move",
+									"parameters": {
+										"speed": "Me.velocity",
+										"angle": "0"
+									}
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "change"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Check",
+											"parameters": {
+												"property": "Me.changedirection"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.velocity",
+														"value": "-Me.velocity"
+													}
+												},
+												{
+													"type": "Check",
+													"parameters": {
+														"property": "Me.flipX"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.flipX",
+																"value": false
+															}
+														}
+													],
+													"nodeListFalse": [
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.flipX",
+																"value": true
+															}
+														}
+													]
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.changedirection",
+														"value": false
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.changedirection",
+												"value": true
+											}
+										}
+									]
+								}
+							]
+						}
+					],
+					"velocity": -320,
+					"changedirection": true
+				},
+				{
 					"name": "bus",
 					"sleeping": false,
 					"x": 0,
@@ -1064,77 +1201,6 @@
 					"dampingLinear": 0,
 					"dampingAngular": 0,
 					"scriptList": []
-				},
-				{
-					"name": "swan",
-					"sleeping": true,
-					"x": -1296.8989849191992,
-					"y": 24.926697099646958,
-					"width": 104,
-					"height": 104,
-					"scaleX": 0.4,
-					"scaleY": 0.4,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "",
-					"spriteOn": true,
-					"image": "swan_1.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": false,
-					"type": "Dynamic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": [
-						{
-							"name": "Script_1",
-							"nodeList": [
-								{
-									"type": "Animate",
-									"parameters": {
-										"animation": "swan_1.png,swan_2.png,swan_3.png,swan_4.png,swan_5.png,swan_6.png,swan_7.png,swan_8.png",
-										"fps": 24
-									}
-								},
-								{
-									"type": "Move",
-									"parameters": {
-										"speed": "300",
-										"angle": "180"
-									}
-								}
-							]
-						}
-					]
 				},
 				{
 					"name": "splash",
@@ -1777,12 +1843,12 @@
 				{
 					"name": "Actor_9_copy_10",
 					"sleeping": false,
-					"x": -682.4790922110216,
-					"y": 39.88670477801554,
-					"width": 382.31731511082586,
-					"height": 12.633987188313768,
-					"scaleX": 7.646346302216517,
-					"scaleY": 0.25267974376627533,
+					"x": -680.6688742488142,
+					"y": 41.86235261145785,
+					"width": 385.9377510352406,
+					"height": 16.585282855198386,
+					"scaleX": 7.718755020704812,
+					"scaleY": 0.3317056571039677,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
@@ -1819,7 +1885,7 @@
 					"velocityY": 0,
 					"angularVelocity": 0,
 					"density": 1,
-					"friction": 10,
+					"friction": 0,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
@@ -1828,11 +1894,11 @@
 				{
 					"name": "Actor_9_copy_13",
 					"sleeping": false,
-					"x": 684.7718716027794,
+					"x": 684.0276165885031,
 					"y": 43.85706264963666,
-					"width": 392.8879713895044,
+					"width": 394.376481418057,
 					"height": 11.86800982557881,
-					"scaleX": 7.857759427790088,
+					"scaleX": 7.88752962836114,
 					"scaleY": 0.2373601965115762,
 					"angle": 0,
 					"screen": false,
@@ -1870,7 +1936,7 @@
 					"velocityY": 0,
 					"angularVelocity": 0,
 					"density": 1,
-					"friction": 10,
+					"friction": 0,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
@@ -1879,11 +1945,11 @@
 				{
 					"name": "Actor_9_copy_5",
 					"sleeping": false,
-					"x": 683.1882541587827,
-					"y": 54.03688833389455,
-					"width": 391.5914619587825,
+					"x": 697.9068500147042,
+					"y": 54.90617352264124,
+					"width": 376.93211845563275,
 					"height": 8.398652862671895,
-					"scaleX": 7.831829239175649,
+					"scaleX": 7.5386423691126545,
 					"scaleY": 0.1679730572534379,
 					"angle": 0,
 					"screen": false,
@@ -1930,11 +1996,11 @@
 				{
 					"name": "Actor_9_copy_7",
 					"sleeping": false,
-					"x": -682.4621799921259,
-					"y": 51.41314129377777,
-					"width": 391.015976264916,
+					"x": -690.6291917798833,
+					"y": 51.652370116327134,
+					"width": 374.2034950443027,
 					"height": 8.62898936127894,
-					"scaleX": 7.82031952529832,
+					"scaleX": 7.4840699008860545,
 					"scaleY": 0.1725797872255788,
 					"angle": 0,
 					"screen": false,
@@ -4561,89 +4627,14 @@
 					]
 				},
 				{
-					"name": "swanGenerator",
-					"sleeping": false,
-					"x": 1482.8578094179727,
-					"y": 244.694645070334,
-					"width": 50,
-					"height": 50,
-					"scaleX": 1,
-					"scaleY": 1,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "",
-					"spriteOn": false,
-					"image": "",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": false,
-					"type": "Dynamic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": [
-						{
-							"name": "Script_1",
-							"nodeList": [
-								{
-									"type": "Timer",
-									"parameters": {
-										"seconds": "3"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Spawn",
-											"parameters": {
-												"actor": "swan",
-												"x": 0,
-												"y": 0,
-												"angle": 0
-											}
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						}
-					]
-				},
-				{
 					"name": "changeLeft",
 					"sleeping": false,
 					"x": -1500,
-					"y": -277.1094201452197,
+					"y": -33.32633358750559,
 					"width": 50,
-					"height": 304.41329233069786,
+					"height": 791.9794654461261,
 					"scaleX": 1,
-					"scaleY": 6.088265846613957,
+					"scaleY": 15.839589308922523,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
@@ -4690,11 +4681,11 @@
 					"name": "change",
 					"sleeping": false,
 					"x": 1500,
-					"y": -258.94880101132526,
+					"y": -16.719318327922736,
 					"width": 50,
-					"height": 304.41329233069786,
+					"height": 788.872257697503,
 					"scaleX": 1,
-					"scaleY": 6.088265846613957,
+					"scaleY": 15.77744515395006,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
