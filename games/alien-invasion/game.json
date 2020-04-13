@@ -1219,7 +1219,7 @@
 				{
 					"name": "fog",
 					"sleeping": false,
-					"x": -1.4336476628982382,
+					"x": 0.37265075638151757,
 					"y": 0,
 					"width": 1920,
 					"height": 1080,
@@ -1618,7 +1618,7 @@
 					"velocityY": 0,
 					"angularVelocity": 0,
 					"density": 1,
-					"friction": 1,
+					"friction": 0,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
@@ -1669,7 +1669,7 @@
 					"velocityY": 0,
 					"angularVelocity": 0,
 					"density": 1,
-					"friction": 1,
+					"friction": 0,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
@@ -1729,12 +1729,12 @@
 				{
 					"name": "collider3",
 					"sleeping": false,
-					"x": -308.7247369653957,
-					"y": -131.3634905887763,
-					"width": 280.60924622178266,
-					"height": 19.19310647263156,
-					"scaleX": 5.612184924435653,
-					"scaleY": 0.3838621294526312,
+					"x": -301.94142339480084,
+					"y": -133.69468947864405,
+					"width": 272.5474357110391,
+					"height": 28.899855668377878,
+					"scaleX": 5.4509487142207815,
+					"scaleY": 0.5779971133675575,
 					"angle": 23,
 					"screen": false,
 					"collider": "Box",
@@ -1771,7 +1771,7 @@
 					"velocityY": 0,
 					"angularVelocity": 0,
 					"density": 1,
-					"friction": 1,
+					"friction": 0,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
@@ -1780,11 +1780,11 @@
 				{
 					"name": "collider4",
 					"sleeping": false,
-					"x": 297.0900155450679,
-					"y": -136.2577600362635,
-					"width": 273.7987454931498,
+					"x": 296.69942668194574,
+					"y": -136.0919649003762,
+					"width": 274.64738602265317,
 					"height": 30.65912932845404,
-					"scaleX": 5.4759749098629955,
+					"scaleX": 5.4929477204530635,
 					"scaleY": 0.6131825865690808,
 					"angle": -23,
 					"screen": false,
@@ -1822,7 +1822,7 @@
 					"velocityY": 0,
 					"angularVelocity": 0,
 					"density": 1,
-					"friction": 1,
+					"friction": 0,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
@@ -2282,7 +2282,7 @@
 					"angularVelocity": 0,
 					"density": 1,
 					"friction": 0,
-					"restitution": 0,
+					"restitution": 0.1,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
 					"scriptList": []
@@ -2761,11 +2761,22 @@
 							"name": "Camera",
 							"nodeList": [
 								{
-									"type": "Edit",
+									"type": "Compare",
 									"parameters": {
-										"property": "Game.cameraY",
-										"value": "Me.y"
-									}
+										"value_1": "Me.y",
+										"operation": "Less",
+										"value_2": "380"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.cameraY",
+												"value": "Me.y"
+											}
+										}
+									],
+									"nodeListFalse": []
 								},
 								{
 									"type": "Compare",
@@ -2988,13 +2999,6 @@
 														"property": "Me.velocityX",
 														"value": "-10"
 													}
-												},
-												{
-													"type": "Edit",
-													"parameters": {
-														"property": "Me.color",
-														"value": "#ff0000"
-													}
 												}
 											],
 											"nodeListFalse": [
@@ -3003,13 +3007,6 @@
 													"parameters": {
 														"property": "Me.velocityX",
 														"value": "400"
-													}
-												},
-												{
-													"type": "Edit",
-													"parameters": {
-														"property": "Me.color",
-														"value": "#ffffff"
 													}
 												}
 											]
@@ -3039,13 +3036,6 @@
 														{
 															"type": "Edit",
 															"parameters": {
-																"property": "Me.color",
-																"value": "#ff0000"
-															}
-														},
-														{
-															"type": "Edit",
-															"parameters": {
 																"property": "Me.velocityX",
 																"value": "0"
 															}
@@ -3057,13 +3047,6 @@
 															"parameters": {
 																"property": "Me.velocityX",
 																"value": "-400"
-															}
-														},
-														{
-															"type": "Edit",
-															"parameters": {
-																"property": "Me.color",
-																"value": "#ffffff"
 															}
 														}
 													]
@@ -3220,7 +3203,7 @@
 				{
 					"name": "alien",
 					"sleeping": true,
-					"x": -1300.2500957133311,
+					"x": -1305.782733417248,
 					"y": -102.65714677036419,
 					"width": 100.8,
 					"height": 86.39999999999999,
@@ -3268,12 +3251,33 @@
 					"dampingAngular": 0,
 					"scriptList": [
 						{
+							"name": "movement",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "ground,star"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.velocityX",
+												"value": "Me.velocity"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
 							"name": "change_direction",
 							"nodeList": [
 								{
 									"type": "Collision",
 									"parameters": {
-										"tags": "wall"
+										"tags": "wall,enemy"
 									},
 									"nodeListTrue": [
 										{
@@ -3438,27 +3442,6 @@
 									"nodeListFalse": []
 								}
 							]
-						},
-						{
-							"name": "movement",
-							"nodeList": [
-								{
-									"type": "Collision",
-									"parameters": {
-										"tags": "ground,star"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.velocityX",
-												"value": "Me.velocity"
-											}
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
 						}
 					],
 					"changedirection": true,
@@ -3468,8 +3451,8 @@
 				{
 					"name": "worm",
 					"sleeping": true,
-					"x": -1302.6014551617407,
-					"y": 129.90080747710806,
+					"x": -1300.7572425937685,
+					"y": 128.05659490913592,
 					"width": 69,
 					"height": 69.6,
 					"scaleX": 0.15,
@@ -3509,12 +3492,40 @@
 					"velocityX": 0,
 					"velocityY": 0,
 					"angularVelocity": 0,
-					"density": 0,
+					"density": 10,
 					"friction": 0,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
 					"scriptList": [
+						{
+							"name": "movement",
+							"nodeList": [
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "worm01.png,worm02.png,worm03.png,worm04.png,worm05.png,worm06.png,worm07.png,worm08.png,worm09.png,worm10.png,worm11.png,worm12.png,worm13.png,worm14.png",
+										"fps": 24
+									}
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "ground,star"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.velocityX",
+												"value": "Me.velocity"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
 						{
 							"name": "change_direction",
 							"nodeList": [
@@ -3650,34 +3661,6 @@
 										{
 											"type": "Delete",
 											"parameters": {}
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						},
-						{
-							"name": "movement",
-							"nodeList": [
-								{
-									"type": "Animate",
-									"parameters": {
-										"animation": "worm01.png,worm02.png,worm03.png,worm04.png,worm05.png,worm06.png,worm07.png,worm08.png,worm09.png,worm10.png,worm11.png,worm12.png,worm13.png,worm14.png",
-										"fps": 24
-									}
-								},
-								{
-									"type": "Collision",
-									"parameters": {
-										"tags": "ground,star"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.velocityX",
-												"value": "Me.velocity"
-											}
 										}
 									],
 									"nodeListFalse": []
@@ -4100,24 +4083,9 @@
 													}
 												}
 											]
-										},
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.opacity",
-												"value": "0.1"
-											}
 										}
 									],
-									"nodeListFalse": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.opacity",
-												"value": "Me.opacity+0.005"
-											}
-										}
-									]
+									"nodeListFalse": []
 								}
 							]
 						}
@@ -4237,8 +4205,8 @@
 				{
 					"name": "spawner1_copy_2",
 					"sleeping": false,
-					"x": -78.02999991869342,
-					"y": 621.5944302117869,
+					"x": -23.841047340301202,
+					"y": 627.0133254696261,
 					"width": 128,
 					"height": 128,
 					"scaleX": 0.5,
