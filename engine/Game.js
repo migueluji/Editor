@@ -47,7 +47,7 @@ class Game {
         /** Propiedades de lectura para la ejecucion
          * --------------------------------------------------------------------- */
         this.FPS                = 0.0;      /** */
-        this.deltaTime          = 0.025;      /** */
+        this.deltaTime          = 0.025;    /** */
         this.elapsedTime        = 0.0;      /** */
         this.mouseX             = 0;        /** */
         this.mouseY             = 0;        /** */

@@ -11,6 +11,8 @@ class Do {
     run() {
 
         this.value = this.code.eval(this.scope).entries[0];
+
+        //if(this.expression.includes("random")) console.log(math.eval("random(3, 6)"));
     }
 
     compileExpression() {

@@ -34,9 +34,10 @@ class Logic {
 
         if(data.scriptList != undefined && data.scriptList.length > 0) {
             
-            actor.scriptList = [];      /** Inicializamos la lista de scripts del actor. */
-            actor.scope      = {};      /** Inicializamos el scope del actor. */
-            this.actorList.push(actor); /** Añadimos el actor a la lista del motor de logica. */
+            actor.scriptList        = [];   /** Inicializamos la lista de scripts del actor. */
+            actor.scope             = {};   /** Inicializamos el scope del actor. */
+            actor.localTimerList    = [];   /** Inicializamos la lista de control de los timers. */
+            this.actorList.push(actor);     /** Añadimos el actor a la lista del motor de logica. */
 
             for(var i = 0; i < data.scriptList.length; i++) {
 
@@ -99,16 +100,29 @@ class Logic {
 
     destroyActor(actor) {
 
-        /** Eliminamos el actor del scope
-         * ----------------------------------------------------------------------- */
-        Util.deepDestroy(actor.scope);
+        if(actor.scriptList != undefined && actor.scriptList.length > 0) {
 
-        /** Eliminamos todos los scripts junto con sus nodos
-         * ----------------------------------------------------------------------- */
-        for(var i in actor.scriptList) {
+            /** Eliminamos el actor del scope.
+             * ----------------------------------------------------------------------- */
+            Util.deepDestroy(actor.scope);
 
-            this.destroyScript(actor.scriptList[i]);
-            Util.destroy(actor.scriptList, i);
+            /** Eliminamos sus timers y sus referencias.
+             * ----------------------------------------------------------------------- */
+            for(var i = 0; i < actor.localTimerList.length; i++) {
+
+                Util.destroy(this.timerList, actor.localTimerList[i].timerProperty);
+                actor.localTimerList[i] = null;
+            }
+
+            actor.localTimerList = null;
+
+            /** Eliminamos todos los scripts junto con sus nodos.
+             * ----------------------------------------------------------------------- */
+            for(var i in actor.scriptList) {
+
+                this.destroyScript(actor.scriptList[i]);
+                Util.destroy(actor.scriptList, i);
+            }
         }
         
         actor.scriptList = null;
@@ -126,6 +140,7 @@ class Logic {
         /** Actualizar las propiedades de elapsedTime y deltaTime. */
         this.currentTime                = Util.getDate();
         this.engine.game.deltaTime      = Util.clamp(this.currentTime - this.previousTime, 0, 0.025); // El clamp es para evitar picos indeseados.
+        this.engine.game.FPS            = Math.floor(1 / this.engine.game.deltaTime);
         this.previousTime               = this.currentTime;
         this.engine.game.elapsedTime    += this.engine.game.deltaTime; 
 
@@ -198,17 +213,30 @@ class Logic {
         "timer + ID" en este actor. */
         var timerProperty = "timer" + Util.random(); 
 
-        /* Añadimos la varible de control al engine. */
-        this.timerList[timerProperty] = {timer: 0.00, previousTime: 0.00};
-
-        /** Definimos el nombre de la condicion de timer unica (para el compilado de la expresion en el scope) */
+        /** Definimos el nombre de la condicion de timer unica (para el compilado de la expresion en el scope). */
         var timerCondition = "timerCondition" + Util.random();
-        
-        /** Definimos la expresion */
-        var expression = "" + timerCondition + " = engine.logic.timerList." + timerProperty + ".timer > " + parameters.seconds + "\n" +
-                         "engine.logic.updateTimer(" + timerCondition + ", engine.logic.timerList." + timerProperty + ")" + "\n";
 
-        /* Creamos el nuevo nodo con su expresion correspondiente. */
+        /** Definimos e inicializamos (a Infinity para que la primera vez sea false) la propiedad de segundos (para las funciones como random). */
+        var secondsProperty = "secondsProperty" + Util.random();
+        actor.scope[secondsProperty] = Infinity;
+
+        /** Definimos e inicializamos a true la propiedad de control de la evaluacion de segundos (para las funciones como random). */
+        var secondsCondition = "secondsCondition" + Util.random();
+        actor.scope[secondsCondition] = true;
+
+        /* Añadimos la varible de control al engine. */
+        this.timerList[timerProperty] = {timer: 0.00, previousTime: 0.00, timerProperty: timerProperty, timerCondition: timerCondition};
+
+        /** Añadimos las variables de control a las listas locales (si no existen, se crean), para gestionar su eliminacion. */
+        actor.localTimerList = (actor.localTimerList == undefined) ? [] : actor.localTimerList;
+        actor.localTimerList.push(this.timerList[timerProperty]);
+        
+        /** Definimos la expresion. */
+        var expression = "" + timerCondition +   " = engine.logic.timerList." + timerProperty + ".timer > " + secondsProperty + "\n" +
+                         "" + secondsProperty +  " = " + secondsCondition + " ? " + parameters.seconds + " : " + secondsProperty  + "\n" + 
+                         "" + secondsCondition + " = " + timerCondition + "\n" +
+                         "engine.logic.updateTimer(" + timerCondition + ", engine.logic.timerList." + timerProperty + ")" + "\n";
+                         
         return new If(expression, actor.scope);
     }
 
@@ -244,14 +272,8 @@ class Logic {
             expression += "Me." + collisionVariable;
 
             /** Comprobamos si es final de linea. */
-            if(i < tagList.length - 1) {
-
-                expression += " or ";
-            }
-            else {
-
-                expression += " \n ";
-            }
+            if(i < tagList.length - 1) { expression += " or "; }
+            else { expression += " \n "; }
         }
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
@@ -319,7 +341,7 @@ class Logic {
     Spawn(actor, parameters) {
 
         /** Definimos la expresion */
-        var expression = "engine.addSpawnedActor('" + parameters.actor + "', Me.x" + "+" + parameters.x + ", Me.y" + "+" + parameters.y + ", " + parameters.angle + ")" + "\n";
+        var expression = "engine.addSpawnedActor('" + parameters.actor + "', Me.x +" + parameters.x + ", Me.y +" + parameters.y + ", Me.angle +" + parameters.angle + ")" + "\n";
 
         /* Creamos el nuevo nodo con su expresion correspondiente.*/
         return new Do(expression, actor.scope);
@@ -440,17 +462,31 @@ class Logic {
         /** Creamos una propiedad de control de tipo timer con la nomenclatura "timer + ID" en el motor de logica, para este actor. */
         var timerProperty = "timer" + Util.random(); 
 
-        /** Añadimos la varible de control al engine. */
-        this.timerList[timerProperty] = {timer: 0.00, previousTime: 0.00};
+        /** Definimos el nombre de la condicion de timer unica (para el compilado de la expresion en el scope) */
+        var timerCondition = "timerCondition" + Util.random();
+
+        /** Definimos e inicializamos (a 0 para que la primera vez sea Infinity y por tanto false) la propiedad de FPS (para las funciones como random). */
+        var fpsProperty = "fpsProperty" + Util.random();
+        actor.scope[fpsProperty] = 0;
+
+        /** Definimos e inicializamos a true la propiedad de control de la evaluacion de FPS (para las funciones como random). */
+        var fpsCondition = "fpsCondition" + Util.random();
+        actor.scope[fpsCondition] = true;
+
+        /* Añadimos la varible de control al engine. */
+        this.timerList[timerProperty] = {timer: 0.00, previousTime: 0.00, timerProperty: timerProperty, timerCondition: timerCondition};
+
+        /** Añadimos las variables de control a las listas locales (si no existen, se crean), para gestionar su eliminacion. */
+        actor.localTimerList = (actor.localTimerList == undefined) ? [] : actor.localTimerList;
+        actor.localTimerList.push(this.timerList[timerProperty]);
 
         /** Creamos la variable que interpreta los FPSs como segundos por frame (SPF). */
         var SPF = 1.00 / parameters.fps;
 
-        /** Definimos el nombre de la condicion de timer unica (para el compilado de la expresion en el scope) */
-        var timerCondition = "timerCondition" + Util.random();
-        
         /** Definimos la expresion */
-        var expression = "" + timerCondition + " = engine.logic.timerList." + timerProperty + ".timer > " + SPF + "\n" + 
+        var expression = "" + timerCondition + " = engine.logic.timerList." + timerProperty + ".timer > 1 / " + fpsProperty + "\n" + 
+                         "" + fpsProperty +  " = " + fpsCondition + " ? " + parameters.fps + " : " + fpsProperty  + "\n" + 
+                         "" + fpsCondition + " = " + fpsCondition + "\n" +
                          "engine.logic.updateTimer(" + timerCondition + ", engine.logic.timerList." + timerProperty + ")" + "\n" +
                          "engine.logic.animateActor(Me, '" + animationProperty + "', " + timerCondition + ")" + "\n";
 

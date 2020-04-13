@@ -192,7 +192,7 @@ class Engine {
         _actor.ID       = _name;
         _actor.x        = x;
         _actor.y        = y; 
-        _actor.angle    = angle;
+        _actor.angle    = _actor.angle + angle; /** El angulo del actor original mas el parametro angle, es decir, el angulo del spawner y el determinado nodo spawn. */
 
         this.spawnList.push(_actor);
     }
