@@ -183,11 +183,12 @@ class Logic {
         switch(parameters.operation) {
 
             case "Less": operation = "<"; break;
-            case "Less_Equal": operation = "<="; break;
+            case "Less Equal": operation = "<="; break;
             case "Equal": operation = "=="; break;
-            case "Greater_Equal": operation = ">="; break;
+            case "Greater Equal": operation = ">="; break;
             case "Greater": operation = ">"; break;
             case "Different": operation = "!="; break;
+            default: console.log("ERROR. Compare undefined.", parameters.operation);
         }
         
         /** Definimos la expresion */
