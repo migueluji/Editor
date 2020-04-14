@@ -3998,8 +3998,8 @@
 				{
 					"name": "spawner1",
 					"sleeping": false,
-					"x": -707.4390538106393,
-					"y": 475.89998154629535,
+					"x": -639.4896274187895,
+					"y": 482.1722362901585,
 					"width": 128,
 					"height": 128,
 					"scaleX": 0.5,
@@ -4019,103 +4019,7 @@
 					"tileX": 1,
 					"tileY": 1,
 					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": false,
-					"type": "Dynamic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": [
-						{
-							"name": "spawn",
-							"nodeList": [
-								{
-									"type": "Timer",
-									"parameters": {
-										"seconds": "random(3,6)"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Compare",
-											"parameters": {
-												"value_1": "random(1,3)",
-												"operation": "Less",
-												"value_2": "2"
-											},
-											"nodeListTrue": [
-												{
-													"type": "Spawn",
-													"parameters": {
-														"actor": "alien",
-														"x": 0,
-														"y": 0,
-														"angle": 0
-													}
-												}
-											],
-											"nodeListFalse": [
-												{
-													"type": "Spawn",
-													"parameters": {
-														"actor": "worm",
-														"x": 0,
-														"y": 0,
-														"angle": 0
-													}
-												}
-											]
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						}
-					]
-				},
-				{
-					"name": "spawner1_copy",
-					"sleeping": false,
-					"x": -423.4316952827826,
-					"y": 613.9786887675382,
-					"width": 128,
-					"height": 128,
-					"scaleX": 0.5,
-					"scaleY": 0.5,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "star",
-					"spriteOn": true,
-					"image": "part_star.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
+					"text": "${Me.flash} - ${Me.opacity}",
 					"font": "Arial",
 					"size": 30,
 					"fill": "#000000",
@@ -4183,9 +4087,50 @@
 										{
 											"type": "Edit",
 											"parameters": {
-												"property": "Me.opacity",
-												"value": "0.1"
+												"property": "Me.flash",
+												"value": true
 											}
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Check",
+									"parameters": {
+										"property": "Me.flash"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.opacity",
+												"value": "Me.opacity-0.05"
+											}
+										},
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "Me.opacity",
+												"operation": "Greater Equal",
+												"value_2": "0"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.flash",
+														"value": false
+													}
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.opacity",
+														"value": "1"
+													}
+												}
+											],
+											"nodeListFalse": []
 										}
 									],
 									"nodeListFalse": [
@@ -4193,20 +4138,21 @@
 											"type": "Edit",
 											"parameters": {
 												"property": "Me.opacity",
-												"value": "Me.opacity+0.005"
+												"value": "1"
 											}
 										}
 									]
 								}
 							]
 						}
-					]
+					],
+					"flash": false
 				},
 				{
 					"name": "spawner1_copy_2",
 					"sleeping": false,
-					"x": -23.841047340301202,
-					"y": 627.0133254696261,
+					"x": -86.57485314364794,
+					"y": 659.9751396750643,
 					"width": 128,
 					"height": 128,
 					"scaleX": 0.5,
@@ -4226,7 +4172,7 @@
 					"tileX": 1,
 					"tileY": 1,
 					"textOn": false,
-					"text": "",
+					"text": "${Me.flash} - ${Me.opacity}",
 					"font": "Arial",
 					"size": 30,
 					"fill": "#000000",
@@ -4294,9 +4240,50 @@
 										{
 											"type": "Edit",
 											"parameters": {
-												"property": "Me.opacity",
-												"value": "0.1"
+												"property": "Me.flash",
+												"value": true
 											}
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Check",
+									"parameters": {
+										"property": "Me.flash"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.opacity",
+												"value": "Me.opacity-0.05"
+											}
+										},
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "Me.opacity",
+												"operation": "Equal",
+												"value_2": "0"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.flash",
+														"value": false
+													}
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.opacity",
+														"value": "1"
+													}
+												}
+											],
+											"nodeListFalse": []
 										}
 									],
 									"nodeListFalse": [
@@ -4304,14 +4291,168 @@
 											"type": "Edit",
 											"parameters": {
 												"property": "Me.opacity",
-												"value": "Me.opacity+0.005"
+												"value": "1"
 											}
 										}
 									]
 								}
 							]
 						}
-					]
+					],
+					"flash": false
+				},
+				{
+					"name": "spawner1_copy",
+					"sleeping": false,
+					"x": -401.23296612744514,
+					"y": 600.3887196083651,
+					"width": 128,
+					"height": 128,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "star",
+					"spriteOn": true,
+					"image": "part_star.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "${Me.flash} - ${Me.opacity}",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "spawn",
+							"nodeList": [
+								{
+									"type": "Timer",
+									"parameters": {
+										"seconds": "random(3,6)"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "random(1,3)",
+												"operation": "Less",
+												"value_2": "2"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Spawn",
+													"parameters": {
+														"actor": "alien",
+														"x": 0,
+														"y": 0,
+														"angle": 0
+													}
+												}
+											],
+											"nodeListFalse": [
+												{
+													"type": "Spawn",
+													"parameters": {
+														"actor": "worm",
+														"x": 0,
+														"y": 0,
+														"angle": 0
+													}
+												}
+											]
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.flash",
+												"value": true
+											}
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Check",
+									"parameters": {
+										"property": "Me.flash"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.opacity",
+												"value": "Me.opacity-0.05"
+											}
+										},
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "Me.opacity",
+												"operation": "Equal",
+												"value_2": "0"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.flash",
+														"value": false
+													}
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.opacity",
+														"value": "1"
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.opacity",
+												"value": "1"
+											}
+										}
+									]
+								}
+							]
+						}
+					],
+					"flash": false
 				},
 				{
 					"name": "scoreShadow",
