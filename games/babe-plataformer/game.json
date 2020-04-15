@@ -250,7 +250,22 @@
 									"parameters": {
 										"tags": "enemy"
 									},
-									"nodeListTrue": [],
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.lives",
+												"value": "Game.lives-1"
+											}
+										},
+										{
+											"type": "Add",
+											"parameters": {
+												"scene": "Scene_2",
+												"stop": true
+											}
+										}
+									],
 									"nodeListFalse": []
 								}
 							]
@@ -1152,6 +1167,82 @@
 					"dampingLinear": 0,
 					"dampingAngular": 0,
 					"scriptList": []
+				}
+			]
+		},
+		{
+			"name": "Scene_2",
+			"actorList": [
+				{
+					"name": "Actor_1",
+					"sleeping": false,
+					"x": -23,
+					"y": 0,
+					"width": 420,
+					"height": 50,
+					"scaleX": 8.4,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": true,
+					"text": "Continue",
+					"font": "Arial",
+					"size": 60,
+					"fill": "#804040",
+					"style": "Bold",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Touch",
+									"parameters": {
+										"mode": "Tap",
+										"on_Actor": true
+									},
+									"nodeListTrue": [
+										{
+											"type": "Remove",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
 				}
 			]
 		}
