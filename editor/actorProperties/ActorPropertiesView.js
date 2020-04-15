@@ -33,7 +33,7 @@ class ActorPropertiesView {
 
 	addView(html) {
 		var children=this.html.querySelector("."+html.classList[0]);
-		children.parentNode.replaceChild(html,children);
+		if(children!=null) children.parentNode.replaceChild(html,children);
 	}
 
 	updateActorName(name){

@@ -48,25 +48,27 @@ class CanvasView {
 
     takeScreenshot(){
         console.log("take screenshoot");
-        var app = new PIXI.Application();
+        const app = new PIXI.Application({
+            width: 800, height:600, backgroundColor: this.gameProperties.backgroundColor, resolution: window.devicePixelRatio || 1,
+        });
 
-        var frame = new PIXI.Graphics(); // draw the camera frame
+        const frame = new PIXI.Graphics(); // draw the camera frame
         frame.beginFill();
         frame.drawRect(-this.gameProperties.displayWidth/2.0,-this.gameProperties.displayHeight/2.0,this.gameProperties.displayWidth,this.gameProperties.displayHeight);
         frame.endFill();
  
-        var scene= new PIXI.Container(); // create the scene container
+        const scene= new PIXI.Container(); // create the scene container
         scene.position ={x:-this.gameProperties.cameraX,y:this.gameProperties.cameraY};
         scene.angle = this.gameProperties.cameraAngle;
         scene.scale = {x:this.gameProperties.cameraZoom,y:-this.gameProperties.cameraZoom};
-  
+        scene.mask=frame;
         this.actorList.forEach(actor => {
             var displayActor = new DisplayActor(this,actor,this.actorList,this.gameProperties,this.loader); 
             scene.addChild(displayActor);
         });
 
-        scene.mask=frame;
- 
+      
+
         app.renderer.extract.canvas(scene).toBlob((b) => {
             const a = document.createElement('a');
             document.body.append(a);

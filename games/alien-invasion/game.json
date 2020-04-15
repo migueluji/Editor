@@ -3120,8 +3120,8 @@
 						}
 					],
 					"hurt": true,
-					"life": 100,
-					"maxlife": 100
+					"life": 20,
+					"maxlife": 20
 				},
 				{
 					"name": "explosion",
@@ -3532,7 +3532,7 @@
 								{
 									"type": "Collision",
 									"parameters": {
-										"tags": "wall"
+										"tags": "wall,enemy"
 									},
 									"nodeListTrue": [
 										{
@@ -4822,7 +4822,7 @@
 					"scriptList": []
 				},
 				{
-					"name": "Actor_59",
+					"name": "fps",
 					"sleeping": false,
 					"x": -570.1365456236682,
 					"y": 332.8239809913476,
@@ -4844,7 +4844,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": true,
+					"textOn": false,
 					"text": "fps: ${Game.FPS}",
 					"font": "Arial",
 					"size": 30,
