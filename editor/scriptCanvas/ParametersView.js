@@ -36,7 +36,7 @@ class ParametersView  {
  						case "backgroundColor" : type="color";break;
 						case "fill" : type="color"; break;
 						case "collider" : type="select"; list=["Circle","Box","Polygon"];break;
-						case "style" : type="select"; list=["Normal","Italic","Bold","Italic-Bold"];break;
+						case "style" : type="select"; list=["Normal","Italic","Bold"];break;
 						case "align" : type="select"; list=["Left","Center","Right"];break;
 						case "type" : type="select"; list=["Dynamic","Kinematic","Static"];break;
 						case "currentScene": type ="select"; list=Command.getSceneListCmd(); break;

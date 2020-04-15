@@ -59,7 +59,6 @@ class ActorPropertiesTextView {
 									'<li class="mdc-list-item" data-value="Normal">Normal</li>'+
 									'<li class="mdc-list-item" data-value="Italic">Italic</li>'+
 									'<li class="mdc-list-item" data-value="Bold">Bold</li>'+
-								
 								'</ul>'+
 							'</div>'+
 						'</div>'+
