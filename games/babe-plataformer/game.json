@@ -13,7 +13,7 @@
 	"start": 0,
 	"pan": 0,
 	"loop": false,
-	"physicsOn": false,
+	"physicsOn": true,
 	"gravityX": 0,
 	"gravityY": -9.8,
 	"tagList": [
