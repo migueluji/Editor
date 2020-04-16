@@ -31,13 +31,13 @@ class Game {
 
         /** Propiedades fisicas del juego
          * --------------------------------------------------------------------- */
-        this.physicsOn          = game.physicsOn            || true;    /** */
+        this.physicsOn          = game.physicsOn;                       /** */
         this.gravityX           = game.gravityX             || 0.0;     /** */
         this.gravityY           = game.gravityY             || 0.0;     /** */
 
         /** Propiedades de audio del juego
          * --------------------------------------------------------------------- */
-        this.soundOn            = game.soundOn              || true;    /** */
+        this.soundOn            = game.soundOn;                         /** */
         this.soundFile          = game.sound                || "";      /** */
         this.pan                = game.pan                  || 0.0;     /** */
         this.volume             = game.volume               || 1.0;     /** */
@@ -107,6 +107,18 @@ class Game {
         }
     }
 
+    resetCamera() {
+
+        this.cameraX = this.data.cameraX;
+        this.cameraY = this.data.cameraY;
+    }
+
+    updateCamera() {
+
+        this.cameraX = this.cameraX;
+        this.cameraY = this.cameraY;
+    }
+
     
     /** ###############################################################################
      *  Control sobre el cambio de propiedades en ejecucion.
@@ -148,7 +160,7 @@ class Game {
     get displayWidth() { return this._displayWidth; }
     set displayWidth(value) {
         this._displayWidth = value;
-        this.engine.render.renderer.resize(this._displayWidth, this._displayHeight || 480);
+        this.engine.render.renderer.resize(this._displayWidth, this._displayHeight);
     }
 
     get displayHeight() { return this._displayHeight; }
@@ -168,6 +180,7 @@ class Game {
         this._cameraX = value;
         
         this.engine.render.stage.position.x = this._stageOrigin.x - this._cameraX;
+        this.engine.render.stage.hitArea = new PIXI.Rectangle(this._cameraX - this._displayWidth / 2, this._cameraY - this._displayHeight / 2, this._displayWidth, this._displayHeight);
         
         for(var i = 0; i < this.engine.render.onScreenList.length; i++) {
 
@@ -180,6 +193,8 @@ class Game {
         this._cameraY = value;
         
         this.engine.render.stage.position.y = this._stageOrigin.y + this._cameraY;
+        this.engine.render.stage.hitArea = new PIXI.Rectangle(this._cameraX - this._displayWidth / 2, this._cameraY - this._displayHeight / 2, this._displayWidth, this._displayHeight);
+
         
         for(var i = 0; i < this.engine.render.onScreenList.length; i++) {
 
@@ -197,6 +212,18 @@ class Game {
     set cameraZoom(value) {
         this._cameraZoom = value;
         this.engine.render.stage.scale.set(this._cameraZoom);
+    }
+
+    get physicsOn() { return this._physicsOn; }
+    set physicsOn(value) {
+        
+        if(this._physicsOn != value) {
+
+            if(value) { this.engine.physics.awakeRigidbodies(); }
+            else { this.engine.physics.sleepRigidbodies(); }
+        }
+        
+        this._physicsOn = value;
     }
 
     get gravityX() { return this._gravityX; }

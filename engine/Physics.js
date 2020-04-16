@@ -7,6 +7,8 @@ class Physics {
         this.rigidbodyList          = [];       /** */
         this.triggerList            = [];       /** */
 
+        this.__rigidbodyListData    = [];       /** Lista auxiliar para almacenar los rigidbodies cuando !Game.physicsOn. */
+
         this.velocityIterations     = 10.0;     /** */
         this.positionIterations     = 8.0;      /** */
         this.PIXELS_PER_METER       = 50.0;     /** Para compensar el factor de escala del sistema de referencia de Box2D */ 
@@ -92,18 +94,23 @@ class Physics {
          * -------------------------------------------------- */
         if(data.physicsOn || actor.triggerOn) {
 
-            actor.rigidbody = this.createPhysicsBody(data, actor); /** Creacion del rigidbody en el sistema y en el mundo fisico de Box2D. */
-            actor.rigidbody.SetUserData(actor);             /** Definicion del objeto padre del rigidbody (NECESARIO PARA LA DETECCION DE COLISIONES). */
+            actor.rigidbody = this.createPhysicsBody(data, actor);  /** Creacion del rigidbody en el sistema y en el mundo fisico de Box2D. */
+            actor.rigidbody.SetUserData(actor);                     /** Definicion del objeto padre del rigidbody (NECESARIO PARA LA DETECCION DE COLISIONES). */
             actor.collisionList = (actor.collisionList == undefined) ? [] : actor.collisionList;
 
             if(data.physicsOn) { 
-                
-                this.rigidbodyList.push(actor);             /** Añadimos el actor a la lista de rigidbodies. */
+
+                if(this.engine.game.physicsOn) { this.rigidbodyList.push(actor); } /** Añadimos el actor a la lista de rigidbodies. */
+                else {
+
+                    this.__rigidbodyListData.push(actor);       /** Añadimos el actor a la lista auxiliar de rigidbodies. */
+                    actor.rigidbody.m_body.SetActive(false);    /** Dormimos el rigidbody hasta que se activen las fisicas del juego. */
+                }
             } 
             else {
 
-                actor.rigidbody.SetSensor(true);            /** Activamos el rigidbody del actor como sensor, para que no interactue con otros rigidbodies. */
-                this.triggerList.push(actor);               /** Añadimos el actor a la lista de triggers. */
+                actor.rigidbody.SetSensor(true);    /** Activamos el rigidbody del actor como sensor, para que no interactue con otros rigidbodies. */
+                this.triggerList.push(actor);       /** Añadimos el actor a la lista de triggers. */
             }
 
             /* DEBUG -- Borrar sin problemas */
@@ -271,6 +278,33 @@ class Physics {
         }
 
         idA = idB = null;
+    }
+
+    sleepRigidbodies() {
+
+        console.log(this.rigidbodyList);
+
+        for(var i = 0; i < this.rigidbodyList.length; i++) {
+
+
+            console.log("entra");
+
+            this.rigidbodyList[i].rigidbody.m_body.SetActive(false);
+        }
+
+        this.__rigidbodyListData = this.rigidbodyList;
+        this.rigidbodyList = [];
+    }
+
+    awakeRigidbodies() {
+
+        this.rigidbodyList = this.__rigidbodyListData;
+        this.__rigidbodyListData = [];
+
+        for(var i = 0; i < this.rigidbodyList.length; i++) {
+
+            this.rigidbodyList[i].rigidbody.m_body.SetActive(true);
+        }
     }
 
     sleep(actor) { if(actor.triggerOn || actor.physicsOn) { actor.rigidbody.m_body.SetActive(false); } }

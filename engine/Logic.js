@@ -277,8 +277,6 @@ class Logic {
             else { expression += " \n "; }
         }
 
-        console.log(expression);
-
         /* Creamos el nuevo nodo con su expresion correspondiente. */
         return new If(expression, actor.scope);
     }

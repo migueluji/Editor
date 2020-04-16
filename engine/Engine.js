@@ -140,6 +140,7 @@ class Engine {
                 if(this.sceneHandler.stop == undefined) {   /** Comprobamos si tenemos que ir a una escena nueva. */
 
                     this.destroyAllScenes();
+                    this.game.resetCamera();
                 }
                 else if(this.sceneHandler.stop) {           /** Comprobamos si tenemos que añadir una escena nueva. */
 
@@ -148,10 +149,11 @@ class Engine {
                     this.destroyList = [];
                 }
 
-                this.game.activeScene = this.sceneHandler.scene;
+                this.game.activeScene       = this.sceneHandler.scene;
                 this.game.activeSceneNumber = this.game.sceneList[this.sceneHandler.scene].number;
                 this.addScene(this.game.sceneList[this.sceneHandler.scene]); /** Añadimos la nueva escena. */
-                this.sceneHandler = null;
+                this.game.updateCamera();
+                this.sceneHandler           = null;
             }
         }
     }
