@@ -92,221 +92,6 @@
 					]
 				},
 				{
-					"name": "Player",
-					"sleeping": false,
-					"x": -264.644143681901,
-					"y": -13.8669642479897,
-					"width": 66,
-					"height": 80,
-					"scaleX": 0.5,
-					"scaleY": 0.4968944099378882,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "player",
-					"spriteOn": true,
-					"image": "Purple_Front1.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": true,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": true,
-					"type": "Dynamic",
-					"fixedAngle": true,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": [
-						{
-							"name": "movement",
-							"nodeList": [
-								{
-									"type": "Keyboard",
-									"parameters": {
-										"key": "ArrowRight",
-										"key_Mode": "Pressed"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.flipX",
-												"value": false
-											}
-										},
-										{
-											"type": "Animate",
-											"parameters": {
-												"animation": "Purple_Right1.png,Purple_Right2.png,Purple_Right3.png",
-												"fps": 24
-											}
-										},
-										{
-											"type": "Move",
-											"parameters": {
-												"speed": "300",
-												"angle": 0
-											}
-										}
-									],
-									"nodeListFalse": []
-								},
-								{
-									"type": "Keyboard",
-									"parameters": {
-										"key": "ArrowLeft",
-										"key_Mode": "Pressed"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Animate",
-											"parameters": {
-												"animation": "Purple_Right1.png,Purple_Right2.png,Purple_Right3.png",
-												"fps": 24
-											}
-										},
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.flipX",
-												"value": true
-											}
-										},
-										{
-											"type": "Move",
-											"parameters": {
-												"speed": "-300",
-												"angle": 0
-											}
-										}
-									],
-									"nodeListFalse": []
-								},
-								{
-									"type": "Keyboard",
-									"parameters": {
-										"key": "ArrowUp",
-										"key_Mode": "Down"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Collision",
-											"parameters": {
-												"tags": "floor"
-											},
-											"nodeListTrue": [
-												{
-													"type": "Push",
-													"parameters": {
-														"force": "30",
-														"angle": "90"
-													}
-												}
-											],
-											"nodeListFalse": []
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						},
-						{
-							"name": "camera",
-							"nodeList": [
-								{
-									"type": "Compare",
-									"parameters": {
-										"value_1": "Me.x",
-										"operation": "Greater",
-										"value_2": "0"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Game.cameraX",
-												"value": "Me.x"
-											}
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						},
-						{
-							"name": "dead",
-							"nodeList": [
-								{
-									"type": "Collision",
-									"parameters": {
-										"tags": "enemy"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Compare",
-											"parameters": {
-												"value_1": "Game.lives",
-												"operation": "Greater",
-												"value_2": "1"
-											},
-											"nodeListTrue": [
-												{
-													"type": "Edit",
-													"parameters": {
-														"property": "Game.lives",
-														"value": "Game.lives-1"
-													}
-												},
-												{
-													"type": "Add",
-													"parameters": {
-														"scene": "Continue",
-														"stop": true
-													}
-												}
-											],
-											"nodeListFalse": [
-												{
-													"type": "Add",
-													"parameters": {
-														"scene": "Game_Over",
-														"stop": true
-													}
-												}
-											]
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						}
-					]
-				},
-				{
 					"name": "Actor_2",
 					"sleeping": false,
 					"x": -241,
@@ -1166,6 +951,281 @@
 					]
 				},
 				{
+					"name": "Actor_13",
+					"sleeping": false,
+					"x": 370.52056531850263,
+					"y": 200,
+					"width": 21,
+					"height": 21,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": true,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "CoinYellow.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Player",
+					"sleeping": false,
+					"x": -264.644143681901,
+					"y": -13.8669642479897,
+					"width": 66,
+					"height": 80,
+					"scaleX": 0.5,
+					"scaleY": 0.4968944099378882,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "player",
+					"spriteOn": true,
+					"image": "Purple_Front1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": true,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Dynamic",
+					"fixedAngle": true,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "movement",
+							"nodeList": [
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "ArrowRight",
+										"key_Mode": "Pressed"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.flipX",
+												"value": false
+											}
+										},
+										{
+											"type": "Animate",
+											"parameters": {
+												"animation": "Purple_Right1.png,Purple_Right2.png,Purple_Right3.png",
+												"fps": 24
+											}
+										},
+										{
+											"type": "Move",
+											"parameters": {
+												"speed": "300",
+												"angle": 0
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Keyboard",
+											"parameters": {
+												"key": "ArrowLeft",
+												"key_Mode": "Pressed"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Animate",
+													"parameters": {
+														"animation": "Purple_Right1.png,Purple_Right2.png,Purple_Right3.png",
+														"fps": 24
+													}
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.flipX",
+														"value": true
+													}
+												},
+												{
+													"type": "Move",
+													"parameters": {
+														"speed": "-300",
+														"angle": 0
+													}
+												}
+											],
+											"nodeListFalse": [
+												{
+													"type": "Animate",
+													"parameters": {
+														"animation": "Purple_Front1.png",
+														"fps": "2"
+													}
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "ArrowUp",
+										"key_Mode": "Down"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Collision",
+											"parameters": {
+												"tags": "floor"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Push",
+													"parameters": {
+														"force": "30",
+														"angle": "90"
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "camera",
+							"nodeList": [
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.x",
+										"operation": "Greater",
+										"value_2": "0"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.cameraX",
+												"value": "Me.x"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "dead",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "enemy"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "Game.lives",
+												"operation": "Greater",
+												"value_2": "1"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Add",
+													"parameters": {
+														"scene": "Continue",
+														"stop": true
+													}
+												}
+											],
+											"nodeListFalse": [
+												{
+													"type": "Add",
+													"parameters": {
+														"scene": "Game_Over",
+														"stop": true
+													}
+												}
+											]
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.lives",
+												"value": "Game.lives-1"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
 					"name": "Actor_12",
 					"sleeping": false,
 					"x": -360,
@@ -1389,57 +1449,6 @@
 							]
 						}
 					]
-				},
-				{
-					"name": "Actor_13",
-					"sleeping": false,
-					"x": 370.52056531850263,
-					"y": 200,
-					"width": 21,
-					"height": 21,
-					"scaleX": 1,
-					"scaleY": 1,
-					"angle": 0,
-					"screen": true,
-					"collider": "Box",
-					"tags": "",
-					"spriteOn": true,
-					"image": "CoinYellow.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": false,
-					"type": "Dynamic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": []
 				},
 				{
 					"name": "Actor_16",
