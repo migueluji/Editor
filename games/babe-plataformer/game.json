@@ -74,7 +74,22 @@
 					"restitution": 0.5,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
-					"scriptList": []
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "Enter",
+										"key_Mode": "Pressed"
+									},
+									"nodeListTrue": [],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
 				},
 				{
 					"name": "Player",

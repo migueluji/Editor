@@ -88,8 +88,8 @@ class ParametersView  {
 
 	 keyDownHandler(key,e){
 		e.preventDefault();
-		key.value=e.key;
-		if (key.value===" ") key.value="Space";
+		key.value=e.code;
+	//	if (key.value===" ") key.value="Space";
 		this.changeInputHandler(key);
 	 }
 
