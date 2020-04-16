@@ -15,8 +15,6 @@ class If {
 
         this.value = this.code.eval(this.scope).entries[0];
 
-        
-
         if(this.value) { for(var t in this.nodeListTrue) { this.nodeListTrue[t].run(); } }
         else { for(var f in this.nodeListFalse) { this.nodeListFalse[f].run(); } }
     }

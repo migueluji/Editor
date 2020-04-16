@@ -273,15 +273,9 @@ class Physics {
         idA = idB = null;
     }
 
-    sleep(actor) {
+    sleep(actor) { if(actor.triggerOn || actor.physicsOn) { actor.rigidbody.m_body.SetActive(false); } }
 
-        if(actor.triggerOn || actor.physicsOn) { actor.rigidbody.m_body.SetActive(false); }
-    }
-
-    awake(actor) {
-
-        if(actor.triggerOn || actor.physicsOn) { actor.rigidbody.m_body.SetActive(true); }
-    }
+    awake(actor) { if(actor.triggerOn || actor.physicsOn) { actor.rigidbody.m_body.SetActive(true); } }
 
     destroyActor(actor) {
 

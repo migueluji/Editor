@@ -277,6 +277,8 @@ class Logic {
             else { expression += " \n "; }
         }
 
+        console.log(expression);
+
         /* Creamos el nuevo nodo con su expresion correspondiente. */
         return new If(expression, actor.scope);
     }
@@ -298,12 +300,15 @@ class Logic {
 
         var expression;
 
+        /** Adaptamos el modo de entrada. */
+        parameters.mode = parameters.mode == "Tap" ? "down" : parameters.mode.toLowerCase();
+
         /** Si el evento es sobre el actor, utilizamos la propiedad en el actor. 
          *  Si no, utilizaremos los parametros del motor de Input. */
         if(parameters.on_Actor) {
 
             /** Definimos la expresion */
-            expression = "Me.pointer." + parameters.mode.toLowerCase() + "\n";
+            expression = "Me.pointer." + parameters.mode + "\n";
 
             /** Activamos la variable de control de interaccion. */
             actor.interactiveOn = true;
@@ -311,7 +316,7 @@ class Logic {
         else {
 
             /** Definimos la expresion */
-            expression = "engine.input.pointer." + parameters.mode.toLowerCase() + "\n";
+            expression = "engine.input.pointer." + parameters.mode + "\n";
         }
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
@@ -330,6 +335,12 @@ class Logic {
         if(typeof parameters.value == "string" && (parameters.value.includes(".png") || parameters.value.includes(".jpg") || parameters.value.includes(".gif"))) {
 
             parameters.value = parameters.value.includes("'") ? parameters.value : "'" + parameters.value + "'"; /** Para los spawns (el value imagen viene sin comillas del editor y mathjs lo interpreta como variable). */
+        }
+
+        /** Comprobamos si se pretende mofidicar el texto. */
+        if(parameters.property.includes(".text")) {
+
+            parameters.value = "'" + parameters.value + "'"; /** Para que math lo interprete como string. */
         }
 
         /** Definimos la expresion */
@@ -526,6 +537,8 @@ class Logic {
 
         /** Definimos la expresion */
         var expression = "engine.removeSceneHandler()" + "\n";
+
+        console.log(actor, parameters, expression);
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
         return new Do(expression, actor.scope);

@@ -133,38 +133,36 @@ class Render {
 
     sleep(actor) {
 
-        if(actor.textOn)   { actor.textSprite.visible = false; }  /** Ocultamos el texto. */
-        if(actor.spriteOn) { actor.sprite.visible     = false;  } /** Ocultamos el sprite. */ 
+        if(actor.textOn)   { actor.textSprite.visible = false; } /** Ocultamos el texto. */
+        if(actor.spriteOn) { actor.sprite.visible     = false; } /** Ocultamos el sprite. */ 
     }
 
     awake(actor) {
 
-        if(actor.textOn)   { actor.textSprite.visible = true; }  /** Mostramos el texto. */
-        if(actor.spriteOn) { actor.sprite.visible     = true;  } /** Mostramos el sprite. */
+        if(actor.textOn)   { actor.textSprite.visible = true; } /** Mostramos el texto. */
+        if(actor.spriteOn) { actor.sprite.visible     = true; } /** Mostramos el sprite. */
     }
 
     destroyActor(actor) {
-
+        
+        /** Eliminamos el texto. */
         if(actor.textOn) {
 
-            /** Eliminamos el texto. */
             actor.textSprite.destroy({children: true, texture: false, baseTexture: false});
             Util.destroy(actor, "textSprite");
             this.textList = Util.removeByID(this.textList, actor.ID); /** Eliminamos el actor de la lista de texto. */
         }
-
+        
+        /** Eliminamos el sprite. */
         if(actor.spriteOn) {
 
-            /** Eliminamos el sprite. */
             actor.sprite.destroy({children: true, texture: false, baseTexture: false});
             Util.destroy(actor, "sprite");
             this.spriteList = Util.removeByID(this.spriteList, actor.ID); /** Eliminamos el actor de la lista de sprites. */
         }
-
-        if(actor.screen) {
-
-            this.onScreenList = Util.removeByID(this.onScreenList, actor.ID); /** Eliminamos el actor de la lista de actores onScreen. */
-        }
+        
+        /** Eliminamos el actor de la lista de actores onScreen. */
+        if(actor.screen) { this.onScreenList = Util.removeByID(this.onScreenList, actor.ID);  }
     }
 
     loadFonts(fonts) {

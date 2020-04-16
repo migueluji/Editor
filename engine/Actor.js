@@ -122,20 +122,17 @@ class Actor {
         }
     }
 
-    setTextProperties() { 
-
-        this.textSprite.text = eval("`" + this.text + "`"); 
-    }
+    setTextProperties() {  this.textSprite.text = eval("`" + this.text + "`");  }
 
     destroy() { Util.deepDestroy(this); }
 
-    sleep() {
+    sleep(renderVisible) {
 
         this.engine.physics.sleep(this);
         this.engine.input.sleep(this);
         this.engine.logic.sleep(this);
         this.engine.audio.sleep(this);
-        this.engine.render.sleep(this);
+        if(!renderVisible) { this.engine.render.sleep(this); }
     }
 
     awake() {
@@ -289,11 +286,15 @@ class Actor {
             this.sprite.cacheAsBitmap   = false;
             this.sprite.texture         = this.texture;
             this.sprite.alpha           = this._opacity;
+            this.sprite.anchor.set(0.5001);
             this.sprite.cacheAsBitmap   = true;
         }
 
         this.originalWidth  = this.texture.orig.width;
         this.originalHeight = this.texture.orig.height;
+        
+        this._width  = this.originalWidth * this._tileX * this._scaleX;
+        this._height = this.originalHeight * this._tileY * this._scaleY;
     }
 
     get spriteOn() { return this._spriteOn; }
@@ -359,7 +360,9 @@ class Actor {
     get text() { return this._text; }
     set text(value) {
 
-        this._text = value;
+        this._text = this.loaded ? Util.updateTextToScope(value, this) : value;
+
+        if(this._textOn) { this.textSprite.text = this._text; }
     }
 
     get font() { return this._font; }

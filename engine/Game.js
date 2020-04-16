@@ -65,12 +65,10 @@ class Game {
          * --------------------------------------------------------------------- */
         for(var i in game) { if(this[i] == null) { this[i] = game[i]; } }
 
-        /** Añadimos los nombres de escenas a la lista
+        /** Añadimos los nombres y los numeros de escenas a la lista
          * --------------------------------------------------------------------- */
-        for(var i in game.sceneList) {
-
-            this.sceneList[i].name = i;
-        }
+        var number = 0;
+        for(var i in game.sceneList) { this.sceneList[i].name = i; this.sceneList[i].number = number; number++; }
 
         /**
          * Marcamos los actores que se van a spawnear (orden de visualizacion)
@@ -124,6 +122,8 @@ class Game {
     set activeSceneNumber(value) {
 
         this._activeSceneNumber = value;
+
+        if(this.loaded) { this._activeScene = Util.getElementByPropertyValue(this.sceneList, "number", this._activeSceneNumber).name; }
     }
 
     get exit() { return this._exit; }

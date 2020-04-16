@@ -116,6 +116,13 @@ class Util {
         return Object.keys(value).length === 0;
     }
 
+    static getElementByPropertyValue(object, element, value) {
+
+        for(var i in object) { if(object[i][element] == value) { return object[i]; } }
+
+        return null;
+    }
+
     /**
      * 
      */
