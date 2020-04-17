@@ -292,9 +292,13 @@ class Actor {
 
         this.originalWidth  = this.texture.orig.width;
         this.originalHeight = this.texture.orig.height;
-        
+
         this._width  = this.originalWidth * this._tileX * this._scaleX;
         this._height = this.originalHeight * this._tileY * this._scaleY;
+
+        this.engine.render.updateSpriteDimensions(this);
+        //this.engine.render.updateTextDimensions(this);
+        //this.engine.physics.updateRigidbody(this);
     }
 
     get spriteOn() { return this._spriteOn; }
