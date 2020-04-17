@@ -126,11 +126,12 @@
 
 	//	gameFolder="prueba";
 	//	gameFolder="box-doger";
+		gameFolder="bird";
 	//	gameFolder="flying-plane";
 	//	gameFolder="asteroids";
 	//	gameFolder="arkanoid";
 	//	gameFolder="alien-invasion";
-		gameFolder="babe-plataformer";
+	//	gameFolder="babe-plataformer";
 		parentGamesFolder="http://localhost/games"		
 		var app=new App(userId, gameId, gameFolder, parentGamesFolder);
 	</script>
