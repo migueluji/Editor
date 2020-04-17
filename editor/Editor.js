@@ -235,21 +235,23 @@ class Editor {
                 actor.height=originalHeight*value*actor.scaleY;
                 break;
             case property=="scale":
+                console.log("::::");
                 actor.x=value.x;
                 actor.y=value.y;
                 actor.angle=value.angle;
-                actor.width=originalWidth*value.scaleX;
-                actor.height=originalHeight*value.scaleY;
+                actor.width=originalWidth*value.scaleX*actor.tileX;
+                actor.height=originalHeight*value.scaleY*actor.tileY;
                 actor.scaleX=value.scaleX;
                 actor.scaleY=value.scaleY;
                 actor.flipX=value.flipX;
                 break;
             case property=="scaleNoUniform": 
+                console.log("::::");
                 actor.x=value.x;
                 actor.y=value.y;
                 actor.angle=value.angle;
-                actor.width=originalWidth*value.scaleX;
-                actor.height=originalHeight*value.scaleY;
+                actor.width=originalWidth*value.scaleX*actor.tileX;
+                actor.height=originalHeight*value.scaleY*actor.tileY;
                 actor.scaleX=value.scaleX;
                 actor.scaleY=value.scaleY;
                 actor.flipX=value.flipX;
