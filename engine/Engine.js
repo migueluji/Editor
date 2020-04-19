@@ -252,6 +252,6 @@ class Engine {
             console.log(arguments[i]);
         }
 
-        console.log("------------------------- ENTRAAAAAAAAAAAAAAAAAAAA");
+        console.log("-------------------------");
     }
 }
