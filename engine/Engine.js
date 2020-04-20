@@ -136,8 +136,8 @@ class Engine {
 
         if(this.sceneHandler != null) {
 
-            console.log("........");
-            console.log(this.game.activeSceneNumber, this.game.activeScene, this.sceneHandler, this.sceneList);
+            //console.log("........");
+            //console.log(this.game.activeSceneNumber, this.game.activeScene, this.sceneHandler, this.sceneList);
 
             if(this.sceneHandler.scene == "") {             /** Comprobamos si tenemos que eliminar la ultima escena. */ 
 

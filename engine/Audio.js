@@ -8,13 +8,18 @@ class Audio {
         this.sound      = null;     /** */
     }
 
-    setActorAudio(actor) {
-
+    setActorAudio(actor, data) {
+        
         /** Comprobamos que el actor tiene un sonido. */
-        if(actor.soundOn) {
+        if(data.soundOn) {
+
+            console.log("ENTRAAAAAAAAA");
+            console.log(data.sound, data.soundOn)
+
+        
 
             /** Creamos el objeto de audio. */
-            this.createSound({source: actor.soundFile, play: actor.playSound, volume: actor.volume, pan: actor.pan, loop: actor.loop}, false);
+            this.createSound({source: data.sound, play: true, volume: data.volume, pan: data.pan, loop: data.loop}, false);
         
             /** Añadimos el actor a la lista del motor de audio */
             this.actorList.push(actor);
@@ -41,7 +46,7 @@ class Audio {
         console.log(sound);
 
         return new Howl({
-            src: [sound.source],
+            src: [_player.file.source + "/sounds/" + sound.source],
             autoplay: sound.play,
             loop: sound.loop || false,
             volume: sound.volume,

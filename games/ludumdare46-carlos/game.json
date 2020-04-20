@@ -7,12 +7,12 @@
 	"cameraAngle": 0,
 	"cameraZoom": 1,
 	"backgroundColor": "#eb8d00",
-	"soundOn": false,
+	"soundOn": true,
 	"soundtrack": "",
 	"volume": 1,
 	"start": 0,
 	"pan": 0,
-	"loop": false,
+	"loop": true,
 	"physicsOn": true,
 	"gravityX": 0,
 	"gravityY": 0,
@@ -61,12 +61,12 @@
 					"align": "Center",
 					"offsetX": 0,
 					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
+					"soundOn": true,
+					"sound": "0267.ogg",
 					"start": 0,
-					"volume": 1,
+					"volume": 0.2,
 					"pan": 0,
-					"loop": false,
+					"loop": true,
 					"physicsOn": false,
 					"type": "Dynamic",
 					"fixedAngle": false,
@@ -146,6 +146,28 @@
 												"property": "Me.image",
 												"value": "instructionsHOVER.png"
 											}
+										},
+										{
+											"type": "Check",
+											"parameters": {
+												"property": "Me.hover"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Play",
+													"parameters": {
+														"sound_File": "switch6.ogg"
+													}
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.hover",
+														"value": false
+													}
+												}
+											],
+											"nodeListFalse": []
 										}
 									],
 									"nodeListFalse": [
@@ -154,6 +176,13 @@
 											"parameters": {
 												"property": "Me.image",
 												"value": "instructions.png"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.hover",
+												"value": true
 											}
 										}
 									]
@@ -177,7 +206,8 @@
 								}
 							]
 						}
-					]
+					],
+					"hover": false
 				},
 				{
 					"name": "Actor_1_copy_5",
@@ -245,6 +275,28 @@
 												"property": "Me.image",
 												"value": "creditsHOVER.png"
 											}
+										},
+										{
+											"type": "Check",
+											"parameters": {
+												"property": "Me.hover"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Play",
+													"parameters": {
+														"sound_File": "switch6.ogg"
+													}
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.hover",
+														"value": false
+													}
+												}
+											],
+											"nodeListFalse": []
 										}
 									],
 									"nodeListFalse": [
@@ -253,6 +305,13 @@
 											"parameters": {
 												"property": "Me.image",
 												"value": "credits.png"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.hover",
+												"value": true
 											}
 										}
 									]
@@ -276,7 +335,8 @@
 								}
 							]
 						}
-					]
+					],
+					"hover": true
 				},
 				{
 					"name": "Actor_1_copy_6",
@@ -339,6 +399,21 @@
 									},
 									"nodeListTrue": [
 										{
+											"type": "Check",
+											"parameters": {
+												"property": "Game.keyboard"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Play",
+													"parameters": {
+														"sound_File": "switch6.ogg"
+													}
+												}
+											],
+											"nodeListFalse": []
+										},
+										{
 											"type": "Edit",
 											"parameters": {
 												"property": "Game.keyboard",
@@ -379,7 +454,8 @@
 								}
 							]
 						}
-					]
+					],
+					"click": true
 				},
 				{
 					"name": "Actor_1_copy_7",
@@ -442,6 +518,21 @@
 									},
 									"nodeListTrue": [
 										{
+											"type": "Check",
+											"parameters": {
+												"property": "Game.keyboard"
+											},
+											"nodeListTrue": [],
+											"nodeListFalse": [
+												{
+													"type": "Play",
+													"parameters": {
+														"sound_File": "switch6.ogg"
+													}
+												}
+											]
+										},
+										{
 											"type": "Edit",
 											"parameters": {
 												"property": "Game.keyboard",
@@ -482,7 +573,8 @@
 								}
 							]
 						}
-					]
+					],
+					"click": true
 				},
 				{
 					"name": "Actor_1_copy",
@@ -684,6 +776,28 @@
 												"property": "Me.image",
 												"value": "playHOVER.png"
 											}
+										},
+										{
+											"type": "Check",
+											"parameters": {
+												"property": "Me.hover"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Play",
+													"parameters": {
+														"sound_File": "switch6.ogg"
+													}
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.hover",
+														"value": false
+													}
+												}
+											],
+											"nodeListFalse": []
 										}
 									],
 									"nodeListFalse": [
@@ -693,12 +807,20 @@
 												"property": "Me.image",
 												"value": "play.png"
 											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.hover",
+												"value": true
+											}
 										}
 									]
 								}
 							]
 						}
-					]
+					],
+					"hover": false
 				}
 			]
 		},
@@ -765,6 +887,12 @@
 										"on_Actor": true
 									},
 									"nodeListTrue": [
+										{
+											"type": "Play",
+											"parameters": {
+												"sound_File": "switch5.ogg"
+											}
+										},
 										{
 											"type": "Remove",
 											"parameters": {}
@@ -1096,6 +1224,12 @@
 										"on_Actor": true
 									},
 									"nodeListTrue": [
+										{
+											"type": "Play",
+											"parameters": {
+												"sound_File": "switch5.ogg"
+											}
+										},
 										{
 											"type": "Remove",
 											"parameters": {}
@@ -1536,12 +1670,27 @@
 											},
 											"nodeListTrue": [
 												{
+													"type": "Play",
+													"parameters": {
+														"sound_File": "cloth4.ogg"
+													}
+												},
+												{
 													"type": "Spawn",
 													"parameters": {
 														"actor": "egg",
 														"x": 0,
 														"y": 0,
 														"angle": 0
+													}
+												},
+												{
+													"type": "Spawn",
+													"parameters": {
+														"actor": "minus50",
+														"x": "random(-20, 20)",
+														"y": "random(-20, 20)",
+														"angle": "-1 * Me.angle"
 													}
 												},
 												{
@@ -1660,7 +1809,7 @@
 					"tags": "",
 					"spriteOn": true,
 					"image": "bigTrail.png",
-					"color": "#ffffff",
+					"color": "#d9d9d9",
 					"opacity": 1,
 					"flipX": false,
 					"flipY": false,
@@ -1739,7 +1888,7 @@
 					"tags": "",
 					"spriteOn": true,
 					"image": "bigTrail.png",
-					"color": "#ffffff",
+					"color": "#d9d9d9",
 					"opacity": 1,
 					"flipX": false,
 					"flipY": false,
@@ -2349,12 +2498,12 @@
 				{
 					"name": "babyTurtle",
 					"sleeping": true,
-					"x": 137.97219225749882,
-					"y": 528.1717080126986,
-					"width": 18.5,
-					"height": 15.5,
-					"scaleX": 0.5,
-					"scaleY": 0.5,
+					"x": 138.97219225749882,
+					"y": 528.4062759139331,
+					"width": 2.5900000000000003,
+					"height": 2.1700000000000004,
+					"scaleX": 0.07,
+					"scaleY": 0.07,
 					"angle": 90,
 					"screen": false,
 					"collider": "Box",
@@ -2503,6 +2652,21 @@
 											}
 										},
 										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "plus100",
+												"x": "random(-20, 20)",
+												"y": "random(-40, 20)",
+												"angle": "-1 * Me.angle"
+											}
+										},
+										{
+											"type": "Play",
+											"parameters": {
+												"sound_File": "handleCoins.ogg"
+											}
+										},
+										{
 											"type": "Delete",
 											"parameters": {}
 										}
@@ -2535,11 +2699,35 @@
 													"nodeListTrue": [],
 													"nodeListFalse": [
 														{
-															"type": "Edit",
+															"type": "Check",
 															"parameters": {
-																"property": "Me.catched",
-																"value": true
-															}
+																"property": "Me.catched"
+															},
+															"nodeListTrue": [],
+															"nodeListFalse": [
+																{
+																	"type": "Spawn",
+																	"parameters": {
+																		"actor": "minus50",
+																		"x": "random(-20, 20)",
+																		"y": "random(-20, 20)",
+																		"angle": "-1 * Me.angle"
+																	}
+																},
+																{
+																	"type": "Play",
+																	"parameters": {
+																		"sound_File": "scratch_004.ogg"
+																	}
+																},
+																{
+																	"type": "Edit",
+																	"parameters": {
+																		"property": "Me.catched",
+																		"value": true
+																	}
+																}
+															]
 														}
 													]
 												}
@@ -2579,7 +2767,7 @@
 											"type": "Edit",
 											"parameters": {
 												"property": "Game.score",
-												"value": "Game.score - 1"
+												"value": "Game.score - 0.5"
 											}
 										},
 										{
@@ -2639,6 +2827,18 @@
 											"nodeListFalse": []
 										}
 									]
+								}
+							]
+						},
+						{
+							"name": "animation",
+							"nodeList": [
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "turtleAnim01.png,turtleAnim02.png,turtleAnim03.png,turtleAnim04.png,turtleAnim05.png,turtleAnim06.png,turtleAnim07.png,turtleAnim08.png,turtleAnim09.png,turtleAnim10.png,turtleAnim11.png,turtleAnim12.png,turtleAnim13.png",
+										"fps": "12"
+									}
 								}
 							]
 						}
@@ -2886,8 +3086,8 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": true,
-					"text": "",
+					"textOn": false,
+					"text": "${Me.velocity}",
 					"font": "Arial",
 					"size": 30,
 					"fill": "#ffffff",
@@ -2972,11 +3172,30 @@
 														}
 													],
 													"nodeListFalse": []
-												},
+												}
+											],
+											"nodeListFalse": []
+										},
+										{
+											"type": "Keyboard",
+											"parameters": {
+												"key": "ArrowLeft",
+												"key_Mode": "Pressed"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.angle",
+														"value": "Me.angle+3"
+													}
+												}
+											],
+											"nodeListFalse": [
 												{
 													"type": "Keyboard",
 													"parameters": {
-														"key": "ArrowLeft",
+														"key": "ArrowRight",
 														"key_Mode": "Pressed"
 													},
 													"nodeListTrue": [
@@ -2984,32 +3203,13 @@
 															"type": "Edit",
 															"parameters": {
 																"property": "Me.angle",
-																"value": "Me.angle+3"
+																"value": "Me.angle - 3"
 															}
 														}
 													],
-													"nodeListFalse": [
-														{
-															"type": "Keyboard",
-															"parameters": {
-																"key": "ArrowRight",
-																"key_Mode": "Pressed"
-															},
-															"nodeListTrue": [
-																{
-																	"type": "Edit",
-																	"parameters": {
-																		"property": "Me.angle",
-																		"value": "Me.angle - 3"
-																	}
-																}
-															],
-															"nodeListFalse": []
-														}
-													]
+													"nodeListFalse": []
 												}
-											],
-											"nodeListFalse": []
+											]
 										}
 									],
 									"nodeListFalse": []
@@ -3075,11 +3275,30 @@
 														}
 													],
 													"nodeListFalse": []
-												},
+												}
+											],
+											"nodeListFalse": []
+										},
+										{
+											"type": "Keyboard",
+											"parameters": {
+												"key": "KeyA",
+												"key_Mode": "Pressed"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.angle",
+														"value": "Me.angle+3"
+													}
+												}
+											],
+											"nodeListFalse": [
 												{
 													"type": "Keyboard",
 													"parameters": {
-														"key": "KeyA",
+														"key": "KeyD",
 														"key_Mode": "Pressed"
 													},
 													"nodeListTrue": [
@@ -3087,32 +3306,13 @@
 															"type": "Edit",
 															"parameters": {
 																"property": "Me.angle",
-																"value": "Me.angle+3"
+																"value": "Me.angle - 3"
 															}
 														}
 													],
-													"nodeListFalse": [
-														{
-															"type": "Keyboard",
-															"parameters": {
-																"key": "KeyD",
-																"key_Mode": "Pressed"
-															},
-															"nodeListTrue": [
-																{
-																	"type": "Edit",
-																	"parameters": {
-																		"property": "Me.angle",
-																		"value": "Me.angle - 3"
-																	}
-																}
-															],
-															"nodeListFalse": []
-														}
-													]
+													"nodeListFalse": []
 												}
-											],
-											"nodeListFalse": []
+											]
 										}
 									],
 									"nodeListFalse": []
@@ -3175,7 +3375,7 @@
 										{
 											"type": "Move_To",
 											"parameters": {
-												"speed": "100",
+												"speed": "150",
 												"x": "Game.mouseX",
 												"y": "Game.mouseY"
 											}
@@ -3230,10 +3430,81 @@
 									]
 								}
 							]
+						},
+						{
+							"name": "animation",
+							"nodeList": [
+								{
+									"type": "Check",
+									"parameters": {
+										"property": "Game.keyboard"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.velocity",
+												"value": "sqrt(Me.velocityX * Me.velocityX + Me.velocityY * Me.velocityY) / 3"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.velocity",
+												"value": "distance([Me.x, Me.y], [Game.mouseX, Game.mouseY])"
+											}
+										},
+										{
+											"type": "Collision",
+											"parameters": {
+												"tags": "sea"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.velocity",
+														"value": "1.5 * Me.velocity"
+													}
+												}
+											],
+											"nodeListFalse": []
+										},
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "Me.velocity",
+												"operation": "Less",
+												"value_2": "10"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.velocity",
+														"value": "0"
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									]
+								},
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "turtleAnim01.png,turtleAnim02.png,turtleAnim03.png,turtleAnim04.png,turtleAnim05.png,turtleAnim06.png,turtleAnim07.png,turtleAnim08.png,turtleAnim09.png,turtleAnim10.png,turtleAnim11.png,turtleAnim12.png,turtleAnim13.png",
+										"fps": "Me.velocity"
+									}
+								}
+							]
 						}
 					],
 					"pushforce": 0.05,
-					"keyboard": true
+					"keyboard": true,
+					"velocity": 0
 				},
 				{
 					"name": "cloudRight",
@@ -3798,6 +4069,180 @@
 					]
 				},
 				{
+					"name": "plus100",
+					"sleeping": true,
+					"x": 328.58024691358037,
+					"y": 505.5185185185185,
+					"width": 110,
+					"height": 34,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "plus100.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.opacity",
+										"operation": "Less",
+										"value_2": "0.1"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.opacity",
+												"value": "Me.opacity *0.95"
+											}
+										},
+										{
+											"type": "Move",
+											"parameters": {
+												"speed": "100",
+												"angle": "90"
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "minus50",
+					"sleeping": true,
+					"x": 465.9259259259261,
+					"y": 507.679012345679,
+					"width": 72,
+					"height": 35,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "minus50.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.opacity",
+										"operation": "Less",
+										"value_2": "0.1"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Move",
+											"parameters": {
+												"speed": "100",
+												"angle": "90"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.opacity",
+												"value": "Me.opacity *0.95"
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
 					"name": "gullSpawn",
 					"sleeping": false,
 					"x": 0,
@@ -3853,7 +4298,7 @@
 								{
 									"type": "Timer",
 									"parameters": {
-										"seconds": "15"
+										"seconds": "7"
 									},
 									"nodeListTrue": [
 										{
@@ -3881,7 +4326,7 @@
 											"type": "Spawn",
 											"parameters": {
 												"actor": "gull",
-												"x": "random(-300,300)",
+												"x": "random(-400,400)",
 												"y": 0,
 												"angle": 0
 											}
@@ -3892,7 +4337,7 @@
 							]
 						}
 					],
-					"spawnrate": 5
+					"spawnrate": 7
 				},
 				{
 					"name": "destroyer",
@@ -4634,7 +5079,7 @@
 					"name": "gameManager",
 					"sleeping": false,
 					"x": -245.96549758110496,
-					"y": 416.541910578973,
+					"y": 415.541910578973,
 					"width": 50,
 					"height": 50,
 					"scaleX": 1,
@@ -4662,12 +5107,12 @@
 					"align": "Center",
 					"offsetX": 0,
 					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
+					"soundOn": true,
+					"sound": "0267.ogg",
 					"start": 0,
-					"volume": 1,
+					"volume": 0.2,
 					"pan": 0,
-					"loop": false,
+					"loop": true,
 					"physicsOn": false,
 					"type": "Dynamic",
 					"fixedAngle": false,
@@ -4738,7 +5183,7 @@
 					"tags": "",
 					"spriteOn": true,
 					"image": "",
-					"color": "#000000",
+					"color": "#ffffff",
 					"opacity": 0.2,
 					"flipX": false,
 					"flipY": false,
@@ -5050,7 +5495,7 @@
 					"name": "Actor_1_copy_2",
 					"sleeping": false,
 					"x": 0,
-					"y": -150,
+					"y": -120,
 					"width": 947,
 					"height": 117,
 					"scaleX": 1,
@@ -5100,6 +5545,13 @@
 							"name": "Script_1",
 							"nodeList": [
 								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Game.score",
+										"value": "15"
+									}
+								},
+								{
 									"type": "Touch",
 									"parameters": {
 										"mode": "Down",
@@ -5107,9 +5559,22 @@
 									},
 									"nodeListTrue": [
 										{
+											"type": "Play",
+											"parameters": {
+												"sound_File": "switch5.ogg"
+											}
+										},
+										{
 											"type": "Go_To",
 											"parameters": {
 												"scene": "Init"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.turtlessaved",
+												"value": "0"
 											}
 										}
 									],
@@ -5123,9 +5588,22 @@
 									},
 									"nodeListTrue": [
 										{
+											"type": "Play",
+											"parameters": {
+												"sound_File": "switch5.ogg"
+											}
+										},
+										{
 											"type": "Go_To",
 											"parameters": {
 												"scene": "Init"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.turtlessaved",
+												"value": "0"
 											}
 										}
 									],
@@ -5134,6 +5612,140 @@
 							]
 						}
 					]
+				},
+				{
+					"name": "Actor_7",
+					"sleeping": false,
+					"x": 134,
+					"y": -205,
+					"width": 307,
+					"height": 35,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "back.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Touch",
+									"parameters": {
+										"mode": "Is Over",
+										"on_Actor": true
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.image",
+												"value": "backHOVER.png"
+											}
+										},
+										{
+											"type": "Check",
+											"parameters": {
+												"property": "Me.hover"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.hover",
+														"value": false
+													}
+												},
+												{
+													"type": "Play",
+													"parameters": {
+														"sound_File": "switch6.ogg"
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.image",
+												"value": "back.png"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.hover",
+												"value": true
+											}
+										}
+									]
+								},
+								{
+									"type": "Touch",
+									"parameters": {
+										"mode": "Down",
+										"on_Actor": true
+									},
+									"nodeListTrue": [
+										{
+											"type": "Play",
+											"parameters": {
+												"sound_File": "switch5.ogg"
+											}
+										},
+										{
+											"type": "Go_To",
+											"parameters": {
+												"scene": "Menu"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					],
+					"hover": true
 				}
 			]
 		}
@@ -5142,5 +5754,5 @@
 	"turtlessaved": 0,
 	"activeholes": 0,
 	"maxholes": 3,
-	"keyboard": false
+	"keyboard": true
 }
