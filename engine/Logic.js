@@ -304,7 +304,7 @@ class Logic {
         var expression;
 
         /** Adaptamos el modo de entrada. */
-        parameters.mode = parameters.mode == "Tap" ? "down" : parameters.mode.toLowerCase();
+        parameters.mode = parameters.mode == "Tap" ? "tap" : parameters.mode.toLowerCase();
         parameters.mode = parameters.mode == "is over" ? "over" : parameters.mode;
 
         /** Si el evento es sobre el actor, utilizamos la propiedad en el actor. 
@@ -524,7 +524,7 @@ class Logic {
 
 
 
-        
+
         //var expression = "engine.audio.PlaySound('" + parameters.sound_File + "', true, " + parameters.volume + ", " + parameters.pan + ")" + "\n";
         var expression = "engine.audio.PlaySound('" + parameters.sound_File + "', true, 1, 0)" + "\n";
 
