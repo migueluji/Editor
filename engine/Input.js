@@ -8,7 +8,7 @@ class Input {
         this.actorList  = [];                                       /** */
 
         this.keyList    = {};                                       /** */
-        this.pointer    = {down: false, up: true, isOver: false};   /** */
+        this.pointer    = {down: false, up: true, over: false};   /** */
 
         document.addEventListener("keydown", this.keyDownHandler.bind(this));
         document.addEventListener("keyup", this.keyUpHandler.bind(this));
@@ -22,7 +22,7 @@ class Input {
         if(actor.interactiveOn) {
 
             /** Añadimos la propiedad de control de eventos de pointer en el actor*/
-            actor.pointer = {down: false, up: true, isOver: false};
+            actor.pointer = {down: false, up: true, over: false};
 
             /** Comprobamos si tiene un sprite render asignado, si no lo creamos. */
             if(actor.sprite == null) {
@@ -110,8 +110,8 @@ class Input {
 
     actorPointerDownHandler(actor) { actor.pointer.down   = true;  actor.pointer.up = false; }
     actorPointerUpHandler(actor)   { actor.pointer.down   = false; actor.pointer.up = true; }
-    actorPointerOverHandler(actor) { actor.pointer.isOver = true; }
-    actorPointerOutHandler(actor)  { actor.pointer.isOver = false; }
+    actorPointerOverHandler(actor) { actor.pointer.over = true; }
+    actorPointerOutHandler(actor)  { actor.pointer.over = false; }
 
     keyDownHandler(event) {
 
@@ -149,7 +149,7 @@ class Input {
 
             this.actorList[i].pointer.down   = false;
             this.actorList[i].pointer.up     = false;
-            this.actorList[i].pointer.isOver = false;
+            //this.actorList[i].pointer.over = false;
         }
     }
 

@@ -120,20 +120,28 @@ class Engine {
         this.destroyScene(sceneName, this.sceneList[sceneName]);
         this.destroyActors();   // eliminar los actores determinados por la lista
         delete this.sceneList[sceneName];
+        this.game.activeScene = Util.getLastKey(this.sceneList);
+        this.game.activeSceneNumber = this.game.sceneList[this.game.activeScene].number;
         this.enableScene();
-        this.removeScene = false;
+
+        for(var i in this.actorList) {
+
+            
+
+            console.log(this.actorList[i].scriptList)
+        }
     }
 
     updateScenes() {
 
         if(this.sceneHandler != null) {
 
+            console.log("........");
+            console.log(this.game.activeSceneNumber, this.game.activeScene, this.sceneHandler, this.sceneList);
+
             if(this.sceneHandler.scene == "") {             /** Comprobamos si tenemos que eliminar la ultima escena. */ 
 
                 this.popScene();
-                this.game.activeSceneNumber--;
-                if(this.game.activeSceneNumber > -1) { this.enableScene(); }
-                this.sceneHandler = null;
             }
             else {
 
@@ -153,8 +161,9 @@ class Engine {
                 this.game.activeSceneNumber = this.game.sceneList[this.sceneHandler.scene].number;
                 this.addScene(this.game.sceneList[this.sceneHandler.scene]); /** Añadimos la nueva escena. */
                 this.game.updateCamera();
-                this.sceneHandler           = null;
             }
+            
+            this.sceneHandler = null;
         }
     }
 

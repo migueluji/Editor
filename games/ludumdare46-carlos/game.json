@@ -1,12 +1,12 @@
 {
 	"name": "LudumDare",
-	"displayWidth": 1800,
-	"displayHeight": 1480,
+	"displayWidth": 800,
+	"displayHeight": 480,
 	"cameraX": 0,
 	"cameraY": 0,
 	"cameraAngle": 0,
 	"cameraZoom": 1,
-	"backgroundColor": "#ffa54a",
+	"backgroundColor": "#eb8d00",
 	"soundOn": false,
 	"soundtrack": "",
 	"volume": 1,
@@ -27,13 +27,1453 @@
 	],
 	"sceneList": [
 		{
+			"name": "Menu",
+			"actorList": [
+				{
+					"name": "Actor_1",
+					"sleeping": false,
+					"x": 15,
+					"y": 182.5158846497899,
+					"width": 192.72,
+					"height": 59.400000000000006,
+					"scaleX": 0.66,
+					"scaleY": 0.66,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "keep.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_1_copy_4",
+					"sleeping": false,
+					"x": 37.96973162298809,
+					"y": -110.48411535021012,
+					"width": 327,
+					"height": 35,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "instructions.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Touch",
+									"parameters": {
+										"mode": "Is Over",
+										"on_Actor": true
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.image",
+												"value": "instructionsHOVER.png"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.image",
+												"value": "instructions.png"
+											}
+										}
+									]
+								},
+								{
+									"type": "Touch",
+									"parameters": {
+										"mode": "Down",
+										"on_Actor": true
+									},
+									"nodeListTrue": [
+										{
+											"type": "Add",
+											"parameters": {
+												"scene": "Instructions",
+												"stop": false
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_1_copy_5",
+					"sleeping": false,
+					"x": 37.96973162298809,
+					"y": -153.48411535021012,
+					"width": 188,
+					"height": 33,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "credits.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Touch",
+									"parameters": {
+										"mode": "Is Over",
+										"on_Actor": true
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.image",
+												"value": "creditsHOVER.png"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.image",
+												"value": "credits.png"
+											}
+										}
+									]
+								},
+								{
+									"type": "Touch",
+									"parameters": {
+										"mode": "Down",
+										"on_Actor": true
+									},
+									"nodeListTrue": [
+										{
+											"type": "Add",
+											"parameters": {
+												"scene": "Credits",
+												"stop": false
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_1_copy_6",
+					"sleeping": false,
+					"x": -39.03026837701191,
+					"y": -200,
+					"width": 116,
+					"height": 28,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "mouse.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Touch",
+									"parameters": {
+										"mode": "Down",
+										"on_Actor": true
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.keyboard",
+												"value": false
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "Script_2",
+							"nodeList": [
+								{
+									"type": "Check",
+									"parameters": {
+										"property": "Game.keyboard"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.image",
+												"value": "mouse.png"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.image",
+												"value": "mouseHOVER.png"
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_1_copy_7",
+					"sleeping": false,
+					"x": 144.9697316229881,
+					"y": -200,
+					"width": 185,
+					"height": 28,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "keyboard.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Touch",
+									"parameters": {
+										"mode": "Down",
+										"on_Actor": true
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.keyboard",
+												"value": true
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "Script_2",
+							"nodeList": [
+								{
+									"type": "Check",
+									"parameters": {
+										"property": "Game.keyboard"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.image",
+												"value": "keyboardHOVER.png"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.image",
+												"value": "keyboard.png"
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_1_copy",
+					"sleeping": false,
+					"x": 75,
+					"y": 122.51588464978991,
+					"width": 206.58,
+					"height": 59.400000000000006,
+					"scaleX": 0.66,
+					"scaleY": 0.66,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "them.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_1_copy_2",
+					"sleeping": false,
+					"x": 0,
+					"y": 60.51588464978991,
+					"width": 240.9,
+					"height": 59.400000000000006,
+					"scaleX": 0.66,
+					"scaleY": 0.66,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "alive.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_1_copy_3",
+					"sleeping": false,
+					"x": 0,
+					"y": -32.48411535021009,
+					"width": 947,
+					"height": 113,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "play.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Touch",
+									"parameters": {
+										"mode": "Down",
+										"on_Actor": true
+									},
+									"nodeListTrue": [
+										{
+											"type": "Go_To",
+											"parameters": {
+												"scene": "Init"
+											}
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "Space",
+										"key_Mode": "Down"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Go_To",
+											"parameters": {
+												"scene": "Init"
+											}
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Touch",
+									"parameters": {
+										"mode": "Is Over",
+										"on_Actor": true
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.image",
+												"value": "playHOVER.png"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.image",
+												"value": "play.png"
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Instructions",
+			"actorList": [
+				{
+					"name": "Actor_1",
+					"sleeping": false,
+					"x": 9,
+					"y": -6.991145218418012,
+					"width": 1016,
+					"height": 552.982290436836,
+					"scaleX": 20.32,
+					"scaleY": 11.05964580873672,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "",
+					"color": "#eb8d00",
+					"opacity": 0.95,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Touch",
+									"parameters": {
+										"mode": "Down",
+										"on_Actor": true
+									},
+									"nodeListTrue": [
+										{
+											"type": "Remove",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_2",
+					"sleeping": false,
+					"x": 186,
+					"y": 4.5,
+					"width": 371,
+					"height": 370,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "instructionsPage.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_3",
+					"sleeping": false,
+					"x": -218,
+					"y": -12.5,
+					"width": 246,
+					"height": 209,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 47.174744114610064,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "turtleBig.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_3_copy",
+					"sleeping": false,
+					"x": -219,
+					"y": 157.5,
+					"width": 24.6,
+					"height": 20.900000000000002,
+					"scaleX": 0.1,
+					"scaleY": 0.1,
+					"angle": 36.86989764584402,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "turtleBig.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_3_copy_2",
+					"sleeping": false,
+					"x": -116,
+					"y": 117.5,
+					"width": 24.6,
+					"height": 20.900000000000002,
+					"scaleX": 0.1,
+					"scaleY": 0.1,
+					"angle": 57.52880770915152,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "turtleBig.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_3_copy_3",
+					"sleeping": false,
+					"x": -278,
+					"y": 96.5,
+					"width": 24.6,
+					"height": 20.900000000000002,
+					"scaleX": 0.1,
+					"scaleY": 0.1,
+					"angle": 37.69424046668918,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "turtleBig.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				}
+			]
+		},
+		{
+			"name": "Credits",
+			"actorList": [
+				{
+					"name": "Actor_1",
+					"sleeping": false,
+					"x": 9,
+					"y": -6.991145218418012,
+					"width": 1016,
+					"height": 552.982290436836,
+					"scaleX": 20.32,
+					"scaleY": 11.05964580873672,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "",
+					"color": "#eb8d00",
+					"opacity": 0.95,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Touch",
+									"parameters": {
+										"mode": "Down",
+										"on_Actor": true
+									},
+									"nodeListTrue": [
+										{
+											"type": "Remove",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_2",
+					"sleeping": false,
+					"x": 151,
+					"y": 1.5,
+					"width": 384,
+					"height": 85,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "createdBy.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_7",
+					"sleeping": false,
+					"x": -245.50826232645187,
+					"y": -59.34940555776669,
+					"width": 152,
+					"height": 244,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 314.2760828303274,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "bigTrail.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_7_copy",
+					"sleeping": false,
+					"x": -302.50826232645187,
+					"y": -92.34940555776669,
+					"width": 152,
+					"height": 244,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 314.2760828303274,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "bigTrail.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_3",
+					"sleeping": false,
+					"x": -218,
+					"y": -12.5,
+					"width": 246,
+					"height": 209,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 47.174744114610064,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "turtleBig.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_3_copy",
+					"sleeping": false,
+					"x": -219,
+					"y": 157.5,
+					"width": 24.6,
+					"height": 20.900000000000002,
+					"scaleX": 0.1,
+					"scaleY": 0.1,
+					"angle": 36.86989764584402,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "turtleBig.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_3_copy_2",
+					"sleeping": false,
+					"x": -116,
+					"y": 117.5,
+					"width": 24.6,
+					"height": 20.900000000000002,
+					"scaleX": 0.1,
+					"scaleY": 0.1,
+					"angle": 57.52880770915152,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "turtleBig.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_3_copy_3",
+					"sleeping": false,
+					"x": -278,
+					"y": 96.5,
+					"width": 24.6,
+					"height": 20.900000000000002,
+					"scaleX": 0.1,
+					"scaleY": 0.1,
+					"angle": 37.69424046668918,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "turtleBig.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				}
+			]
+		},
+		{
 			"name": "Init",
 			"actorList": [
 				{
 					"name": "hole",
 					"sleeping": true,
-					"x": -663.0086877000456,
-					"y": 17.954580094497715,
+					"x": -402.82626869535545,
+					"y": 596.3958509174249,
 					"width": 94.05000000000001,
 					"height": 60.06,
 					"scaleX": 0.33,
@@ -92,7 +1532,7 @@
 										{
 											"type": "Timer",
 											"parameters": {
-												"seconds": "7"
+												"seconds": "3"
 											},
 											"nodeListTrue": [
 												{
@@ -206,6 +1646,164 @@
 					"spawned": true
 				},
 				{
+					"name": "bigTrail",
+					"sleeping": true,
+					"x": 317.8586597571509,
+					"y": 553.7347965249198,
+					"width": 30.400000000000002,
+					"height": 48.800000000000004,
+					"scaleX": 0.2,
+					"scaleY": 0.2,
+					"angle": 90,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "bigTrail.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.opacity",
+										"value": "Me.opacity * 0.95"
+									}
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.opacity",
+										"operation": "Less",
+										"value_2": "0.1"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "smallTrail",
+					"sleeping": true,
+					"x": 388.36632610289416,
+					"y": 555.8309370184083,
+					"width": 10.64,
+					"height": 17.080000000000002,
+					"scaleX": 0.07,
+					"scaleY": 0.07,
+					"angle": 90,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "bigTrail.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.opacity",
+										"value": "Me.opacity * 0.99"
+									}
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.opacity",
+										"operation": "Less",
+										"value_2": "0.1"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
 					"name": "sea",
 					"sleeping": false,
 					"x": 0,
@@ -308,14 +1906,200 @@
 					"offset": 1
 				},
 				{
+					"name": "bigTrailWater",
+					"sleeping": true,
+					"x": 308.8370946763953,
+					"y": 605.8503440412993,
+					"width": 43.2,
+					"height": 22.200000000000003,
+					"scaleX": 0.2,
+					"scaleY": 0.2,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "bigTrailWater.png",
+					"color": "#ffffff",
+					"opacity": 0.3,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.opacity",
+										"value": "Me.opacity * 0.95"
+									}
+								},
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.scaleX",
+										"value": "Me.scaleX+0.005"
+									}
+								},
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.scaleY",
+										"value": "Me.scaleY+0.005"
+									}
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.opacity",
+										"operation": "Less",
+										"value_2": "0.1"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "smallTrailWater",
+					"sleeping": true,
+					"x": 416.14162142536657,
+					"y": 611.3335020964738,
+					"width": 29.44,
+					"height": 15.44,
+					"scaleX": 0.08,
+					"scaleY": 0.08,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "bigTrailWater.png",
+					"color": "#ffffff",
+					"opacity": 0.15,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.opacity",
+										"value": "Me.opacity * 0.95"
+									}
+								},
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.scaleX",
+										"value": "Me.scaleX+0.001"
+									}
+								},
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.scaleY",
+										"value": "Me.scaleY+0.0005"
+									}
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.opacity",
+										"operation": "Less",
+										"value_2": "0.1"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
 					"name": "seaTrigger",
 					"sleeping": false,
 					"x": 0,
-					"y": 168,
+					"y": 154.25,
 					"width": 856,
-					"height": 164,
+					"height": 191.5,
 					"scaleX": 17.12,
-					"scaleY": 3.28,
+					"scaleY": 3.83,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
@@ -565,15 +2349,15 @@
 				{
 					"name": "babyTurtle",
 					"sleeping": true,
-					"x": -663.4825805694485,
-					"y": 87.79081862974203,
+					"x": 137.97219225749882,
+					"y": 528.1717080126986,
 					"width": 18.5,
 					"height": 15.5,
 					"scaleX": 0.5,
 					"scaleY": 0.5,
 					"angle": 90,
 					"screen": false,
-					"collider": "Circle",
+					"collider": "Box",
 					"tags": "",
 					"spriteOn": true,
 					"image": "turtleSmal.png",
@@ -653,18 +2437,27 @@
 									]
 								},
 								{
-									"type": "Edit",
+									"type": "Check",
 									"parameters": {
-										"property": "Me.angle",
-										"value": "Me.angle + Me.offset"
-									}
-								},
-								{
-									"type": "Move",
-									"parameters": {
-										"speed": "10",
-										"angle": "Me.angle"
-									}
+										"property": "Me.catched"
+									},
+									"nodeListTrue": [],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.angle",
+												"value": "Me.angle + Me.offset"
+											}
+										},
+										{
+											"type": "Move",
+											"parameters": {
+												"speed": "10",
+												"angle": "Me.angle"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -797,6 +2590,57 @@
 									"nodeListFalse": []
 								}
 							]
+						},
+						{
+							"name": "trail",
+							"nodeList": [
+								{
+									"type": "Check",
+									"parameters": {
+										"property": "Me.catched"
+									},
+									"nodeListTrue": [],
+									"nodeListFalse": [
+										{
+											"type": "Timer",
+											"parameters": {
+												"seconds": "0.5"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Collision",
+													"parameters": {
+														"tags": "sea"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Spawn",
+															"parameters": {
+																"actor": "smallTrailWater",
+																"x": 0,
+																"y": 0,
+																"angle": 0
+															}
+														}
+													],
+													"nodeListFalse": [
+														{
+															"type": "Spawn",
+															"parameters": {
+																"actor": "smallTrail",
+																"x": 0,
+																"y": 0,
+																"angle": 0
+															}
+														}
+													]
+												}
+											],
+											"nodeListFalse": []
+										}
+									]
+								}
+							]
 						}
 					],
 					"offset": 1,
@@ -805,12 +2649,12 @@
 				{
 					"name": "egg",
 					"sleeping": true,
-					"x": -664.9579461057151,
-					"y": 318.4553478019832,
-					"width": 19.5,
-					"height": 26.25,
-					"scaleX": 0.75,
-					"scaleY": 0.75,
+					"x": 137.4968267212323,
+					"y": 585.606938744299,
+					"width": 1.3,
+					"height": 1.75,
+					"scaleX": 0.05,
+					"scaleY": 0.05,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
@@ -853,6 +2697,36 @@
 					"dampingAngular": 0,
 					"scriptList": [
 						{
+							"name": "initScale",
+							"nodeList": [
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.scaleX",
+										"operation": "Less",
+										"value_2": "0.75"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.scaleX",
+												"value": "Me.scaleX + 0.01"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.scaleY",
+												"value": "Me.scaleY + 0.01"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
 							"name": "states",
 							"nodeList": [
 								{
@@ -866,7 +2740,7 @@
 										{
 											"type": "Timer",
 											"parameters": {
-												"seconds": "7"
+												"seconds": "random(2,4)"
 											},
 											"nodeListTrue": [
 												{
@@ -955,8 +2829,25 @@
 													},
 													"nodeListTrue": [
 														{
-															"type": "Delete",
-															"parameters": {}
+															"type": "Timer",
+															"parameters": {
+																"seconds": "2"
+															},
+															"nodeListTrue": [
+																{
+																	"type": "Delete",
+																	"parameters": {}
+																}
+															],
+															"nodeListFalse": [
+																{
+																	"type": "Edit",
+																	"parameters": {
+																		"property": "Me.opacity",
+																		"value": "Me.opacity - 0.01"
+																	}
+																}
+															]
 														}
 													],
 													"nodeListFalse": []
@@ -969,7 +2860,8 @@
 						}
 					],
 					"state": 0,
-					"birth": true
+					"birth": true,
+					"init": true
 				},
 				{
 					"name": "bigTurtle",
@@ -1025,56 +2917,205 @@
 							"name": "movement",
 							"nodeList": [
 								{
-									"type": "Keyboard",
+									"type": "Check",
 									"parameters": {
-										"key": "ArrowUp",
-										"key_Mode": "Pressed"
+										"property": "Game.keyboard"
 									},
 									"nodeListTrue": [
-										{
-											"type": "Push",
-											"parameters": {
-												"force": "Me.pushforce",
-												"angle": "Me.angle"
-											}
-										}
-									],
-									"nodeListFalse": []
-								},
-								{
-									"type": "Keyboard",
-									"parameters": {
-										"key": "ArrowLeft",
-										"key_Mode": "Pressed"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.angle",
-												"value": "Me.angle+3"
-											}
-										}
-									],
-									"nodeListFalse": [
 										{
 											"type": "Keyboard",
 											"parameters": {
-												"key": "ArrowRight",
+												"key": "ArrowUp",
 												"key_Mode": "Pressed"
 											},
 											"nodeListTrue": [
 												{
-													"type": "Edit",
+													"type": "Push",
 													"parameters": {
-														"property": "Me.angle",
-														"value": "Me.angle - 3"
+														"force": "Me.pushforce",
+														"angle": "Me.angle"
 													}
+												},
+												{
+													"type": "Timer",
+													"parameters": {
+														"seconds": "0.05"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Collision",
+															"parameters": {
+																"tags": "sea"
+															},
+															"nodeListTrue": [
+																{
+																	"type": "Spawn",
+																	"parameters": {
+																		"actor": "bigTrailWater",
+																		"x": 0,
+																		"y": 0,
+																		"angle": 0
+																	}
+																}
+															],
+															"nodeListFalse": [
+																{
+																	"type": "Spawn",
+																	"parameters": {
+																		"actor": "bigTrail",
+																		"x": 0,
+																		"y": 0,
+																		"angle": 0
+																	}
+																}
+															]
+														}
+													],
+													"nodeListFalse": []
+												},
+												{
+													"type": "Keyboard",
+													"parameters": {
+														"key": "ArrowLeft",
+														"key_Mode": "Pressed"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.angle",
+																"value": "Me.angle+3"
+															}
+														}
+													],
+													"nodeListFalse": [
+														{
+															"type": "Keyboard",
+															"parameters": {
+																"key": "ArrowRight",
+																"key_Mode": "Pressed"
+															},
+															"nodeListTrue": [
+																{
+																	"type": "Edit",
+																	"parameters": {
+																		"property": "Me.angle",
+																		"value": "Me.angle - 3"
+																	}
+																}
+															],
+															"nodeListFalse": []
+														}
+													]
 												}
 											],
 											"nodeListFalse": []
 										}
-									]
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "movement_awd",
+							"nodeList": [
+								{
+									"type": "Check",
+									"parameters": {
+										"property": "Game.keyboard"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Keyboard",
+											"parameters": {
+												"key": "KeyW",
+												"key_Mode": "Pressed"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Push",
+													"parameters": {
+														"force": "Me.pushforce",
+														"angle": "Me.angle"
+													}
+												},
+												{
+													"type": "Timer",
+													"parameters": {
+														"seconds": "0.05"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Collision",
+															"parameters": {
+																"tags": "sea"
+															},
+															"nodeListTrue": [
+																{
+																	"type": "Spawn",
+																	"parameters": {
+																		"actor": "bigTrailWater",
+																		"x": 0,
+																		"y": 0,
+																		"angle": 0
+																	}
+																}
+															],
+															"nodeListFalse": [
+																{
+																	"type": "Spawn",
+																	"parameters": {
+																		"actor": "bigTrail",
+																		"x": 0,
+																		"y": 0,
+																		"angle": 0
+																	}
+																}
+															]
+														}
+													],
+													"nodeListFalse": []
+												},
+												{
+													"type": "Keyboard",
+													"parameters": {
+														"key": "KeyA",
+														"key_Mode": "Pressed"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.angle",
+																"value": "Me.angle+3"
+															}
+														}
+													],
+													"nodeListFalse": [
+														{
+															"type": "Keyboard",
+															"parameters": {
+																"key": "KeyD",
+																"key_Mode": "Pressed"
+															},
+															"nodeListTrue": [
+																{
+																	"type": "Edit",
+																	"parameters": {
+																		"property": "Me.angle",
+																		"value": "Me.angle - 3"
+																	}
+																}
+															],
+															"nodeListFalse": []
+														}
+													]
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": []
 								}
 							]
 						},
@@ -1120,15 +3161,249 @@
 									]
 								}
 							]
+						},
+						{
+							"name": "movement_mouse",
+							"nodeList": [
+								{
+									"type": "Check",
+									"parameters": {
+										"property": "Game.keyboard"
+									},
+									"nodeListTrue": [],
+									"nodeListFalse": [
+										{
+											"type": "Move_To",
+											"parameters": {
+												"speed": "100",
+												"x": "Game.mouseX",
+												"y": "Game.mouseY"
+											}
+										},
+										{
+											"type": "Rotate_To",
+											"parameters": {
+												"speed": "10",
+												"x": "Game.mouseX",
+												"y": "Game.mouseY",
+												"pivot_X": "Me.x",
+												"pivot_Y": "Me.y"
+											}
+										},
+										{
+											"type": "Timer",
+											"parameters": {
+												"seconds": "0.1"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Collision",
+													"parameters": {
+														"tags": "sea"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Spawn",
+															"parameters": {
+																"actor": "bigTrailWater",
+																"x": 0,
+																"y": 0,
+																"angle": 0
+															}
+														}
+													],
+													"nodeListFalse": [
+														{
+															"type": "Spawn",
+															"parameters": {
+																"actor": "bigTrail",
+																"x": 0,
+																"y": 0,
+																"angle": 0
+															}
+														}
+													]
+												}
+											],
+											"nodeListFalse": []
+										}
+									]
+								}
+							]
 						}
 					],
-					"pushforce": 0.05
+					"pushforce": 0.05,
+					"keyboard": true
+				},
+				{
+					"name": "cloudRight",
+					"sleeping": true,
+					"x": 608.947760506906,
+					"y": 947.4656996409794,
+					"width": 453,
+					"height": 286.5,
+					"scaleX": 1.5,
+					"scaleY": 1.5,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "cloud.png",
+					"color": "#ffffff",
+					"opacity": 0.2,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "destroy"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "Script_2",
+							"nodeList": [
+								{
+									"type": "Move",
+									"parameters": {
+										"speed": "100",
+										"angle": "180"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "cloudLeft",
+					"sleeping": true,
+					"x": 634.4185330665657,
+					"y": 1326.9938347645666,
+					"width": 453,
+					"height": 286.5,
+					"scaleX": 1.5,
+					"scaleY": 1.5,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "cloud.png",
+					"color": "#ffffff",
+					"opacity": 0.2,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "destroy"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "Script_2",
+							"nodeList": [
+								{
+									"type": "Move",
+									"parameters": {
+										"speed": "100",
+										"angle": 0
+									}
+								}
+							]
+						}
+					]
 				},
 				{
 					"name": "gullShadow",
 					"sleeping": true,
-					"x": -961.8724279835391,
-					"y": 202.43484224965704,
+					"x": -88.4028784677937,
+					"y": 801.783628885461,
 					"width": 277.2,
 					"height": 135.96,
 					"scaleX": 0.33,
@@ -1205,8 +3480,8 @@
 				{
 					"name": "gull",
 					"sleeping": true,
-					"x": -670,
-					"y": 199,
+					"x": -102.60087132671833,
+					"y": 603.2119723822865,
 					"width": 277.2,
 					"height": 135.96,
 					"scaleX": 0.33,
@@ -1292,6 +3567,15 @@
 												"actor": "gullTrigger",
 												"x": 0,
 												"y": "20",
+												"angle": 0
+											}
+										},
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "wingsTrigger",
+												"x": 0,
+												"y": 0,
 												"angle": 0
 											}
 										},
@@ -1458,14 +3742,7 @@
 											"type": "Edit",
 											"parameters": {
 												"property": "Me.color",
-												"value": "#134f5c"
-											}
-										},
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "timeCount.fill",
-												"value": "#134f5c"
+												"value": "#d9d9d9"
 											}
 										}
 									],
@@ -1482,14 +3759,7 @@
 													"type": "Edit",
 													"parameters": {
 														"property": "Me.color",
-														"value": "#eb8d00"
-													}
-												},
-												{
-													"type": "Edit",
-													"parameters": {
-														"property": "timeCount.fill",
-														"value": "#eb8d00"
+														"value": "#134f5c"
 													}
 												}
 											],
@@ -1498,14 +3768,7 @@
 													"type": "Edit",
 													"parameters": {
 														"property": "Me.color",
-														"value": "#d9d9d9"
-													}
-												},
-												{
-													"type": "Edit",
-													"parameters": {
-														"property": "timeCount.fill",
-														"value": "#d9d9d9"
+														"value": "#eb8d00"
 													}
 												}
 											]
@@ -1629,7 +3892,7 @@
 							]
 						}
 					],
-					"spawnrate": 10
+					"spawnrate": 5
 				},
 				{
 					"name": "destroyer",
@@ -1683,17 +3946,119 @@
 					"scriptList": []
 				},
 				{
-					"name": "gullTrigger",
-					"sleeping": true,
-					"x": -670.5,
-					"y": 195,
-					"width": 70,
-					"height": 140,
-					"scaleX": 1.4,
-					"scaleY": 2.8,
+					"name": "destroyer_copy",
+					"sleeping": false,
+					"x": 1395.5647448647273,
+					"y": -22.160555228906958,
+					"width": 152.0602147954539,
+					"height": 718.8462669897659,
+					"scaleX": 3.041204295909078,
+					"scaleY": 14.376925339795319,
 					"angle": 0,
 					"screen": false,
-					"collider": "Circle",
+					"collider": "Box",
+					"tags": "destroy",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "destroyer_copy_2",
+					"sleeping": false,
+					"x": -1376.1331140566326,
+					"y": -25.83139716695979,
+					"width": 152.0602147954539,
+					"height": 718.8462669897659,
+					"scaleX": 3.041204295909078,
+					"scaleY": 14.376925339795319,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "destroy",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "wingsTrigger",
+					"sleeping": true,
+					"x": -104.34454746595048,
+					"y": 601.9905692978235,
+					"width": 260.7113337553759,
+					"height": 30,
+					"scaleX": 5.214226675107518,
+					"scaleY": 0.6,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
 					"tags": "gull",
 					"spriteOn": false,
 					"image": "",
@@ -1760,89 +4125,38 @@
 					]
 				},
 				{
-					"name": "timeCOuontback",
-					"sleeping": false,
-					"x": 2,
-					"y": 148,
-					"width": 50,
-					"height": 50,
-					"scaleX": 1,
-					"scaleY": 1,
+					"name": "gullTrigger",
+					"sleeping": true,
+					"x": -101.44775486866848,
+					"y": 603.0757880063514,
+					"width": 34.76151116738344,
+					"height": 136.91848337695387,
+					"scaleX": 0.6952302233476688,
+					"scaleY": 2.7383696675390774,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
+					"tags": "gull",
 					"spriteOn": false,
 					"image": "",
-					"color": "#ffffff",
-					"opacity": 1,
+					"color": "#8000ff",
+					"opacity": 0,
 					"flipX": false,
 					"flipY": false,
 					"scrollX": 0,
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": true,
-					"text": "${Game.turtlessaved}",
+					"textOn": false,
+					"text": "",
 					"font": "Arial",
-					"size": 50,
+					"size": 30,
 					"fill": "#000000",
-					"style": "Bold",
+					"style": "Normal",
 					"align": "Center",
 					"offsetX": 0,
 					"offsetY": 0,
-					"soundOn": true,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": false,
-					"type": "Dynamic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": []
-				},
-				{
-					"name": "timeCount",
-					"sleeping": false,
-					"x": 0,
-					"y": 150,
-					"width": 50,
-					"height": 50,
-					"scaleX": 1,
-					"scaleY": 1,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "",
-					"spriteOn": false,
-					"image": "",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": true,
-					"text": "${Game.turtlessaved}",
-					"font": "Arial",
-					"size": 50,
-					"fill": "#eb8d00",
-					"style": "Bold",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": true,
+					"soundOn": false,
 					"sound": "",
 					"start": 0,
 					"volume": 1,
@@ -1862,7 +4176,28 @@
 					"scriptList": [
 						{
 							"name": "Script_1",
-							"nodeList": []
+							"nodeList": [
+								{
+									"type": "Move",
+									"parameters": {
+										"speed": "150",
+										"angle": "270"
+									}
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "destroy"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
 						}
 					]
 				},
@@ -1922,7 +4257,7 @@
 								{
 									"type": "Timer",
 									"parameters": {
-										"seconds": "random(4,10)"
+										"seconds": "random(2,7)"
 									},
 									"nodeListTrue": [
 										{
@@ -1962,7 +4297,7 @@
 				{
 					"name": "holeSpawnPoint1_copy",
 					"sleeping": false,
-					"x": 350,
+					"x": 348.4758420972412,
 					"y": -100,
 					"width": 50,
 					"height": 50,
@@ -2015,7 +4350,7 @@
 								{
 									"type": "Timer",
 									"parameters": {
-										"seconds": "random(4,10)"
+										"seconds": "random(2,7)"
 									},
 									"nodeListTrue": [
 										{
@@ -2108,7 +4443,7 @@
 								{
 									"type": "Timer",
 									"parameters": {
-										"seconds": "random(4,10)"
+										"seconds": "random(2,7)"
 									},
 									"nodeListTrue": [
 										{
@@ -2144,6 +4479,244 @@
 							]
 						}
 					]
+				},
+				{
+					"name": "Actor_26",
+					"sleeping": false,
+					"x": 739.6330525151957,
+					"y": 5.097930780836904,
+					"width": 50,
+					"height": 50,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Timer",
+									"parameters": {
+										"seconds": "random(10, 20)"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "cloudRight",
+												"x": 0,
+												"y": "random(-200, 200)",
+												"angle": "random(0, 360)"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_26_copy",
+					"sleeping": false,
+					"x": -637.3669474848043,
+					"y": -20.902069219163096,
+					"width": 50,
+					"height": 50,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Timer",
+									"parameters": {
+										"seconds": "random(10, 20)"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "cloudLeft",
+												"x": 0,
+												"y": "random(-200, 200)",
+												"angle": "random(0, 360)"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "gameManager",
+					"sleeping": false,
+					"x": -245.96549758110496,
+					"y": 416.541910578973,
+					"width": 50,
+					"height": 50,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Check",
+									"parameters": {
+										"property": "Me.startgame"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.turtlessaved",
+												"value": "0"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.score",
+												"value": "15"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.startgame",
+												"value": false
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					],
+					"startgame": true
 				}
 			]
 		},
@@ -2153,11 +4726,11 @@
 				{
 					"name": "BACKGROUND",
 					"sleeping": false,
-					"x": 0,
-					"y": 0,
-					"width": 800,
+					"x": -4.5,
+					"y": 1,
+					"width": 1109,
 					"height": 800,
-					"scaleX": 16,
+					"scaleX": 22.18,
 					"scaleY": 16,
 					"angle": 0,
 					"screen": false,
@@ -2166,7 +4739,7 @@
 					"spriteOn": true,
 					"image": "",
 					"color": "#000000",
-					"opacity": 0.1,
+					"opacity": 0.2,
 					"flipX": false,
 					"flipY": false,
 					"scrollX": 0,
@@ -2202,13 +4775,13 @@
 					"scriptList": []
 				},
 				{
-					"name": "Actor_1",
+					"name": "score_copy",
 					"sleeping": false,
-					"x": 0,
-					"y": 0,
-					"width": 300,
+					"x": 146,
+					"y": 99,
+					"width": 195,
 					"height": 50,
-					"scaleX": 6,
+					"scaleX": 3.9,
 					"scaleY": 1,
 					"angle": 0,
 					"screen": false,
@@ -2225,9 +4798,179 @@
 					"tileX": 1,
 					"tileY": 1,
 					"textOn": true,
-					"text": "${Game.turtlessaved}",
-					"font": "Verdana",
+					"text": "${Me.customscore}",
+					"font": "Courier New",
 					"size": 100,
+					"fill": "#000000",
+					"style": "Bold",
+					"align": "Right",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.customscore",
+										"operation": "Less",
+										"value_2": "Game.turtlessaved"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Timer",
+											"parameters": {
+												"seconds": "0.08"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.customscore",
+														"value": "Me.customscore+1"
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					],
+					"customscore": 0
+				},
+				{
+					"name": "score",
+					"sleeping": false,
+					"x": 140,
+					"y": 106,
+					"width": 195,
+					"height": 50,
+					"scaleX": 3.9,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": true,
+					"text": "${Me.customscore}",
+					"font": "Courier New",
+					"size": 100,
+					"fill": "#ffffff",
+					"style": "Bold",
+					"align": "Right",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.customscore",
+										"operation": "Less",
+										"value_2": "Game.turtlessaved"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Timer",
+											"parameters": {
+												"seconds": "0.08"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.customscore",
+														"value": "Me.customscore+1"
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					],
+					"customscore": 0
+				},
+				{
+					"name": "Actor_1_copy_5",
+					"sleeping": false,
+					"x": 80,
+					"y": 35,
+					"width": 307.5,
+					"height": 54,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "turtles.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "TURTLES SAVED",
+					"font": "Verdana",
+					"size": 50,
 					"fill": "#ffffff",
 					"style": "Bold",
 					"align": "Center",
@@ -2253,20 +4996,20 @@
 					"scriptList": []
 				},
 				{
-					"name": "Actor_1_copy",
+					"name": "Actor_1_copy_3",
 					"sleeping": false,
-					"x": 0,
-					"y": -100,
-					"width": 600,
-					"height": 50,
-					"scaleX": 12,
-					"scaleY": 1,
+					"x": 123,
+					"y": -20,
+					"width": 224,
+					"height": 53,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
 					"tags": "",
-					"spriteOn": false,
-					"image": "",
+					"spriteOn": true,
+					"image": "saved.png",
 					"color": "#ffffff",
 					"opacity": 1,
 					"flipX": false,
@@ -2275,7 +5018,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": true,
+					"textOn": false,
 					"text": "TURTLES SAVED",
 					"font": "Verdana",
 					"size": 50,
@@ -2307,17 +5050,17 @@
 					"name": "Actor_1_copy_2",
 					"sleeping": false,
 					"x": 0,
-					"y": -175,
-					"width": 300,
-					"height": 75,
-					"scaleX": 6,
-					"scaleY": 1.5,
+					"y": -150,
+					"width": 947,
+					"height": 117,
+					"scaleX": 1,
+					"scaleY": 1,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
 					"tags": "",
 					"spriteOn": true,
-					"image": "",
+					"image": "replay.png",
 					"color": "#ffffff",
 					"opacity": 1,
 					"flipX": false,
@@ -2326,7 +5069,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": true,
+					"textOn": false,
 					"text": "REPLAY",
 					"font": "Verdana",
 					"size": 50,
@@ -2371,6 +5114,22 @@
 										}
 									],
 									"nodeListFalse": []
+								},
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "Space",
+										"key_Mode": "Down"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Go_To",
+											"parameters": {
+												"scene": "Init"
+											}
+										}
+									],
+									"nodeListFalse": []
 								}
 							]
 						}
@@ -2382,5 +5141,6 @@
 	"score": 15,
 	"turtlessaved": 0,
 	"activeholes": 0,
-	"maxholes": 3
+	"maxholes": 3,
+	"keyboard": false
 }

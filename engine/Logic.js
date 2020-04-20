@@ -93,9 +93,14 @@ class Logic {
 
     awake(actor) {
 
-        actor.scriptList        = actor.__scriptListData;
-        actor.__scriptListData  = [];
-        delete actor.__scriptListData;
+        if(actor.__scriptListData != undefined) { 
+
+            console.log(actor.scriptList, actor.__scriptListData);
+
+            actor.scriptList        = actor.__scriptListData;
+            actor.__scriptListData  = [];
+            delete actor.__scriptListData;
+        }
     }
 
     destroyActor(actor) {
@@ -300,6 +305,7 @@ class Logic {
 
         /** Adaptamos el modo de entrada. */
         parameters.mode = parameters.mode == "Tap" ? "down" : parameters.mode.toLowerCase();
+        parameters.mode = parameters.mode == "is over" ? "over" : parameters.mode;
 
         /** Si el evento es sobre el actor, utilizamos la propiedad en el actor. 
          *  Si no, utilizaremos los parametros del motor de Input. */

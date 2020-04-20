@@ -39,9 +39,6 @@ class Render {
         actor.sprite.anchor.set(0.5001);                            /** Establecemos su origen de coordenadas local en su centro. */
         actor.sprite.zIndex = data.index;                           /** Determinamos su orden de visualizacion. */
         actor.sprite.alpha  = data.opacity;
-        
-        console.log(data.name, data.opacity, actor.sprite.alpha);
-        
         actor.sprite.cacheAsBitmap = true;                          /** Activamos su cacheo (para mejorar el rendimiento). */
         this.spriteList.push(actor);                                /** Añadimos el actor a la lista de actualizacion de sprites. */
         this.stage.addChild(actor.sprite);                          /** Añadimos el sprite al contenedor del sprites del actor. */
