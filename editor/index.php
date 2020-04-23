@@ -124,7 +124,7 @@
 		userName="Editor";
 		gameId=Utils.id();
 
-	//	gameFolder="prueba";
+		gameFolder="prueba";
 	//	gameFolder="box-doger";
 	//	gameFolder="bird";
 	//	gameFolder="flying-plane";
@@ -132,7 +132,7 @@
 	//	gameFolder="arkanoid";
 	//	gameFolder="alien-invasion";
 	//	gameFolder="babe-plataformer";
-	    gameFolder="ludumdare46-carlos";
+	//  gameFolder="ludumdare46-carlos";
 		parentGamesFolder="http://localhost/games"		
 		var app=new App(userId, gameId, gameFolder, parentGamesFolder);
 	</script>

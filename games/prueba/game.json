@@ -144,28 +144,24 @@
 											}
 										}
 									],
-									"nodeListFalse": []
-								}
-							]
-						},
-						{
-							"name": "Script_2",
-							"nodeList": [
-								{
-									"type": "Collision",
-									"parameters": {
-										"tags": "down"
-									},
-									"nodeListTrue": [
+									"nodeListFalse": [
 										{
-											"type": "Edit",
+											"type": "Collision",
 											"parameters": {
-												"property": "Me.color",
-												"value": "#00ff00"
-											}
+												"tags": "down"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.color",
+														"value": "#ffffff"
+													}
+												}
+											],
+											"nodeListFalse": []
 										}
-									],
-									"nodeListFalse": []
+									]
 								}
 							]
 						}
@@ -276,12 +272,12 @@
 				{
 					"name": "Actor_5",
 					"sleeping": false,
-					"x": -177.25,
-					"y": 1.5,
-					"width": 437.5,
-					"height": 50,
-					"scaleX": 8.75,
-					"scaleY": 1,
+					"x": -182,
+					"y": 145.5,
+					"width": 334,
+					"height": 248,
+					"scaleX": 6.68,
+					"scaleY": 4.96,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",

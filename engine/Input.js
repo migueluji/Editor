@@ -101,6 +101,7 @@ class Input {
 
         this.pointer.down = false;
         this.pointer.up   = true;
+        this.pointer.tap  = false;
     }
 
     pointerMoveHandler(event) {
@@ -109,10 +110,29 @@ class Input {
         this.engine.game.mouseY = -1 * Math.floor(event.data.global.y - this.engine.render.renderer.height / 2 - this.engine.game.cameraY);
     }
 
-    actorPointerDownHandler(actor) { actor.pointer.down   = true;  actor.pointer.up = false; }
-    actorPointerUpHandler(actor)   { actor.pointer.down   = false; actor.pointer.up = true; }
-    actorPointerOverHandler(actor) { actor.pointer.over = true; }
-    actorPointerOutHandler(actor)  { actor.pointer.over = false; }
+    actorPointerDownHandler(actor) { 
+
+        actor.pointer.down = true;  
+        actor.pointer.up = false;   
+        actor.pointer.tap = true; 
+    }
+   
+    actorPointerUpHandler(actor) { 
+        
+        actor.pointer.down = false; 
+        actor.pointer.up = true;   
+        actor.pointer.tap = false; 
+    }
+
+    actorPointerOverHandler(actor) { 
+        
+        actor.pointer.over = true; 
+    }
+
+    actorPointerOutHandler(actor) { 
+        
+        actor.pointer.over = false; 
+    }
 
     keyDownHandler(event) {
 
@@ -140,6 +160,8 @@ class Input {
 
     reset() {
 
+        this.pointer.tap  = false;
+
         for(var i in this.keyList) {
 
             this.keyList[i].down = false;
@@ -147,9 +169,7 @@ class Input {
         }
         
         for(var i in this.actorList) {
-
-            this.actorList[i].pointer.down   = false;
-            this.actorList[i].pointer.up     = false;
+            
             this.actorList[i].pointer.tap    = false;
         }
     }
@@ -159,8 +179,6 @@ class Input {
         if(actor.interactiveOn) { actor.sprite.interactive = false; } /** Si es interactivo, lo eliminamos de las listas de actualizacion del motor de render. */
         this.actorList = Util.removeByID(this.actorList, actor.ID); /** Eliminamos el actor de la lista de actores del motor de input */
     }
-
-    
 
     sleep(actor) {
 
