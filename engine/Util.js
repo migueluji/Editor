@@ -302,26 +302,15 @@ class Util {
                 for(var k = 0; k < container.sceneList[i].actorList[j].scriptList.length; k++) {
 
                     scriptList.push(container.sceneList[i].actorList[j].scriptList[k].nodeList);
-                    //Util.destroy(scriptList[container.sceneList[i].actorList[j].scriptList[k].name], "name");
                 }
 
                 actorList[container.sceneList[i].actorList[j].ID].scriptList = scriptList;
-
-                
-
-                //console.log("-----", container.sceneList[i].actorList[j].name);
-
-               // Util.destroy(actorList[container.sceneList[i].actorList[j].name], "name");
             }
 
             sceneList[container.sceneList[i].name].actorList = actorList;
-
-            //Util.destroy(sceneList[container.sceneList[i].name], "name");
         }
 
         container.sceneList = sceneList;
-
-        //console.log(container);
 
         return container;
     }

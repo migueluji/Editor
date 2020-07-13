@@ -357,7 +357,9 @@ class Logic {
     Spawn(actor, parameters) {
 
         /** Definimos la expresion */
-        var expression = "engine.addSpawnedActor('" + parameters.actor + "', Me.x +" + parameters.x + ", Me.y +" + parameters.y + ", Me.angle +" + parameters.angle + ")" + "\n";
+        var expression = "engine.addSpawnedActor('" + parameters.actor + "', Me.x +" + parameters.x + ", Me.y +" + parameters.y + ", Me.angle + " + parameters.angle + ")" + "\n";
+
+        console.log(expression, parameters);
 
         /* Creamos el nuevo nodo con su expresion correspondiente.*/
         return new Do(expression, actor.scope);

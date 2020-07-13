@@ -376,7 +376,7 @@
 												"actor": "laser",
 												"x": 0,
 												"y": 0,
-												"angle": "Me.angle"
+												"angle": "0"
 											}
 										}
 									],
