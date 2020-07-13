@@ -1,0 +1,9 @@
+{
+    "name": "elegantthemes/submodule-core",
+    "require": {},
+    "require-dev": {
+        "lucatume/wp-browser": "^2.0",
+        "codeception/phpunit-wrapper": ">7",
+        "phpunit/phpunit": ">7 <8"
+    }
+}
