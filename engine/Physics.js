@@ -244,9 +244,9 @@ class Physics {
                 
         var listener = new Box2D.Dynamics.b2ContactListener;
 
-        if(callbacks.PreSolve)      { listener.PreSolve     = function(contact) { callbacks.PreSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
+        //if(callbacks.PreSolve)      { listener.PreSolve     = function(contact) { callbacks.PreSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
         if(callbacks.BeginContact)  { listener.BeginContact = function(contact) { callbacks.BeginContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
-        if(callbacks.PostSolve)     { listener.PostSolve    = function(contact) { callbacks.PostSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
+        //if(callbacks.PostSolve)     { listener.PostSolve    = function(contact) { callbacks.PostSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
         if(callbacks.EndContact)    { listener.EndContact   = function(contact) { callbacks.EndContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
         
         this.world.SetContactListener(listener);
@@ -264,8 +264,6 @@ class Physics {
     }
 
     static collisionHandler(idA, idB, value, id) {
-
-        console.log(id);
 
         for(var i = 0; i < idB.tags.length; i++) { 
 
@@ -287,10 +285,7 @@ class Physics {
         console.log(this.rigidbodyList);
 
         for(var i = 0; i < this.rigidbodyList.length; i++) {
-
-
-            console.log("entra");
-
+            
             this.rigidbodyList[i].rigidbody.m_body.SetActive(false);
         }
 
