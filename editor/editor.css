@@ -6,6 +6,7 @@ html{
     --mdc-theme-secondary: #2E64EC;
     --my-theme-if:#ecb62e;
     --my-theme-do:#2ec3ec;
+    --mdc-typography-font-family:Lato;
 }
 body{
     margin:0;
