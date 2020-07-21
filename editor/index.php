@@ -127,7 +127,7 @@
 
 	//	gameFolder="prueba";
 	//	gameFolder="box-doger";
-	//	gameFolder="bird";
+	//  gameFolder="bird";
 	//	gameFolder="flying-plane";
 		gameFolder="asteroids";
 	//	gameFolder="arkanoid";

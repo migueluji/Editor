@@ -1250,7 +1250,7 @@
 										{
 											"type": "Go_To",
 											"parameters": {
-												"scene": "Scene 1"
+												"scene": "Scene_1"
 											}
 										}
 									],
