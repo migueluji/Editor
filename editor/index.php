@@ -119,7 +119,7 @@
 		var gameId="<?php echo $_POST['idgame'];?>";
 		var gameName="<?php echo $_POST['gamename'];?>";
 		var gameFolder="<?php echo $_POST['gamefolder'];?>";
-		var parentGamesFolder="https://<?php echo $_SERVER['SERVER_NAME'];?>/games-js";
+		var serverGamesFolder="https://<?php echo $_SERVER['SERVER_NAME'];?>/games-js";
 	*/
 		userId=1455;
 		userName="Editor";
@@ -134,8 +134,8 @@
 	//	gameFolder="alien-invasion";
 	//	gameFolder="babe-plataformer";
 	//  gameFolder="ludumdare46-carlos";
-		parentGamesFolder="http://localhost/games"		
-		var app=new App(userId, gameId, gameFolder, parentGamesFolder);
+		serverGamesFolder="http://localhost/games"		
+		var app=new App(userId, gameId, gameFolder, serverGamesFolder);
 	</script>
 	<script type="text/javascript">
 		let type = "WebGL"

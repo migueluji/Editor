@@ -14,7 +14,7 @@
 			html, body {
 				width:100%;
 				height:100%;
-				background: #333333;
+				background: #FFFFFF;
 			}
  
 			canvas {
@@ -61,9 +61,9 @@
 		<script>
 		
 			//console.log(localStorage.getItem("localStorage_GameData"));
-			var parentGamesFolder="<?php echo $_POST['parentGamesFolder'];?>";
+			var serverGamesFolder="<?php echo $_POST['serverGamesFolder'];?>";
             var gameFolder="<?php echo $_POST['gameFolder'];?>";
-			var _player = new Player({source: parentGamesFolder + "/" + gameFolder, data: localStorage.getItem("localStorage_GameData")});
+			var _player = new Player({source: serverGamesFolder + "/" + gameFolder, data: localStorage.getItem("localStorage_GameData")});
 
 
 

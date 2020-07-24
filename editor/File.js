@@ -13,7 +13,7 @@ class File {
     }
   
     static save(json) {
-        var url=app.parentGamesFolder+"/saveJson.php?gameId="+app.gameId+"&gameFolder="+app.gameFolder;
+        var url=app.serverGamesFolder+"/saveJson.php?gameId="+app.gameId+"&gameFolder="+app.gameFolder;
 		var xhr = new XMLHttpRequest();
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-type", "application/json");
@@ -30,7 +30,7 @@ class File {
 	 	var destination;
 	    if(type=="Image" || type=="Animation") 	destination="images";
 		if(type=="Sound")   destination="sounds";
-		var url=app.parentGamesFolder+"/uploadAsset.php?gameFolder="+gameFolder+"&assetFolder="+destination;
+		var url=app.serverGamesFolder+"/uploadAsset.php?gameFolder="+gameFolder+"&assetFolder="+destination;
 		
 		var xhr = new XMLHttpRequest();
         xhr.open("POST", url, true);
@@ -49,7 +49,7 @@ class File {
 		if(type=="Image" || type=="Animation")	assetFolder="images";
 		else if(type=="Sound") assetFolder="sounds";
 		// console.log("Delete asset: "+fileName+" in "+assetFolder);
-		var url=app.parentGamesFolder+"/deleteAsset.php?gameFolder="+gameFolder+"&assetFolder="+assetFolder+"&filename="+fileName;
+		var url=app.serverGamesFolder+"/deleteAsset.php?gameFolder="+gameFolder+"&assetFolder="+assetFolder+"&filename="+fileName;
 		var xhr = new XMLHttpRequest();
 		xhr.assetID=assetID;
 		xhr.fileName=fileName;

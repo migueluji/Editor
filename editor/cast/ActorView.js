@@ -45,7 +45,7 @@ class ActorView {
 				var image = new Image();
 				image.classList="mdc-list-item__graphic material-icons";
 				image.style="position:absolute;width:36px;height:auto;border-radius:unset";
-				image.src=app.parentGamesFolder+"/"+app.gameFolder+"/images/"+actor.image;
+				image.src=app.serverGamesFolder+"/"+app.gameFolder+"/images/"+actor.image;
 				span.appendChild(image);
 		}
 	}

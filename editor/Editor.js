@@ -84,10 +84,12 @@ class Editor {
         Object.assign(gameData,this.model);
         gameData=JSON.stringify(gameData, (key,value)=>{if(key!="id")return value}, '\t');
         localStorage.setItem("localStorage_GameData",gameData);
+
         var form = document.createElement("form");
         form.setAttribute("method", "post");
         form.setAttribute("action", "../engine/index.php");
         form.setAttribute("target", "_blank");
+
         var inputFolder = document.createElement('input');
         inputFolder.type = 'text';
         inputFolder.name = "gameFolder";
@@ -96,11 +98,13 @@ class Editor {
         
         var inputUrl = document.createElement('input');
         inputUrl.type = 'text';
-        inputUrl.name = "parentGamesFolder";
-        inputUrl.value = app.parentGamesFolder;
+        inputUrl.name = "serverGamesFolder";
+        inputUrl.value = app.serverGamesFolder;
+        console.log("directorio",inputUrl.value);
         form.appendChild(inputUrl);
         document.body.appendChild(form);
         form.submit();
+
         document.body.removeChild(form); 
     }
 

@@ -20,7 +20,7 @@ class AssetView {
 		switch (option) {
 			case "Sound" : img.src="./images/sound.png"; break;
 			case "Font" : img.src="./images/font.png"; break;
-			default : img.src=app.parentGamesFolder+"/"+app.gameFolder+"/images/"+asset.name; break;
+			default : img.src=app.serverGamesFolder+"/"+app.gameFolder+"/images/"+asset.name; break;
 		}
 		img.onload= function(){
 			//console.log("load image",asset.name,img.naturalWidth,img.naturalHeight);

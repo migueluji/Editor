@@ -81,7 +81,7 @@ class CanvasView {
     }
     
     loadInitImages(imageList){
-            this.loader = new PIXI.Loader(app.parentGamesFolder+"/"+app.gameFolder+"/images");
+            this.loader = new PIXI.Loader(app.serverGamesFolder+"/"+app.gameFolder+"/images");
             if (imageList.length==0) this.loader.add("");
             else this.loader.add(imageList);   
              
