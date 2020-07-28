@@ -43,7 +43,8 @@ class CanvasView {
         this.displayActor=null;
         this.mouseDown=false;
         this.diff={x:0,y:0} 
-        this.loadInitImages(game.imageList);
+        this.initApp();
+
     }
 
     takeScreenshot(){
@@ -67,8 +68,6 @@ class CanvasView {
             scene.addChild(displayActor);
         });
 
-      
-
         app.renderer.extract.canvas(scene).toBlob((b) => {
             const a = document.createElement('a');
             document.body.append(a);
@@ -80,31 +79,15 @@ class CanvasView {
         
     }
     
-    loadInitImages(imageList){
-            this.loader = new PIXI.Loader(app.serverGamesFolder+"/"+app.gameFolder+"/images");
-            if (imageList.length==0) this.loader.add("");
-            else this.loader.add(imageList);   
-             
-            this.loader.onLoad.add((loader,resource) => {
-                console.log(resource.name," loaded");
-            });
-            this.loader.load(()=>{
-                console.log("Load finished!");
-                this.initApp();
-                if (this.loader.resources[""]) delete this.loader.resources[""];
-            });
-           
-    }
-
     loadImage(image){
-        while(this.loader.loading);
-        this.loader.add(image);
+        while(app.file.loader.loading);
+        app.file.loader.add(image);
     }
 
     deleteImage (image){
-        while(this.loader.loading);
-        this.loader.resources[image].texture.destroy(true);
-        delete this.loader.resources[image];
+        while(app.file.loader.loading);
+        app.file.loader.resources[image].texture.destroy(true);
+        delete app.file.loader.resources[image];
     }
 
     initApp(){
@@ -152,7 +135,7 @@ class CanvasView {
         this.scene.scale = {x:this.gameProperties.cameraZoom,y:-this.gameProperties.cameraZoom};
   
         this.actorList.forEach(actor => {
-            var displayActor = new DisplayActor(this,actor,this.actorList,this.gameProperties,this.loader); 
+            var displayActor = new DisplayActor(this,actor,this.actorList,this.gameProperties); 
             this.scene.addChild(displayActor);
         });
 

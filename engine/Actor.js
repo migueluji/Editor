@@ -280,7 +280,7 @@ class Actor {
         this._image = value;
 
         this.texture = (_player.file.loader.resources[this._image] != undefined) ? _player.file.loader.resources[this._image].texture : PIXI.Texture.WHITE;
-
+   
         if(this.sprite != null) {
 
             this.sprite.cacheAsBitmap   = false;

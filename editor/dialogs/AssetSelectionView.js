@@ -164,7 +164,7 @@ class AssetSelectionView {
 	updateLoader(){
 		var buttons=this.html.querySelectorAll("button");
 		buttons.forEach(i=>i.disabled=true); // disable cancel, ok, upload and delete buttons
-		this.canvasView.loader.load(()=>{ 
+		app.file.loader.load(()=>{ 
 			buttons.forEach(i=>i.disabled=false); // enable all buttons when loaded asset
 		});
 	}

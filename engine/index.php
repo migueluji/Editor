@@ -40,7 +40,7 @@
 
         <script src="Player.js"></script>
 
-        <script src="File.js"></script>
+        <script src="../editor/File.js"></script>
 		<script src="Engine.js"></script>
 
 		<script src="Game.js"></script>
@@ -60,37 +60,18 @@
 
 		<script>
 		
-			//console.log(localStorage.getItem("localStorage_GameData"));
 			var serverGamesFolder="<?php echo $_POST['serverGamesFolder'];?>";
-            var gameFolder="<?php echo $_POST['gameFolder'];?>";
-			var _player = new Player({source: serverGamesFolder + "/" + gameFolder, data: localStorage.getItem("localStorage_GameData")});
+			var gameFolder="<?php echo $_POST['gameFolder'];?>";
 
+			serverGamesFolder="http://localhost/games";
+			gameFolder="alien-invasion";
 
+			var editor=true; /* to kown if the engine has been launched from the editor */
 
-			// https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Map
-
-
-			/*var actor1 = { x: 1, y: 0, script: { parameters: "timer" }, collider: "box"};
-			var actor2 = { x: 23, y: 32, script: { parameters: "node" }, collider: "circle"};
-
-			var array = [["actor1", actor1], ["actor2", actor2]];
-			var map = new Map(array);
-
-			console.log(map.get("clave1")); // devuelve "valor1"
-
-			// Usando la función Array.from para transformar el mapa a un Array 2D clave-valor.
-			console.log(Array.from(map)); // Muestra exactamente el mismo Array que kvArray
-
-			// O usando los iteradores de claves o valores y convirtiendo a array.
-			console.log(Array.from(map.keys())); // Muestra ["clave1", "clave2"]
-
-			for(var [clave, valor] of map) {
-
-				console.log(clave, valor);
-			}
-
-			console.log(map.get("actor1"));*/
-
+			var json=null;
+			if (editor) json=JSON.parse(localStorage.getItem("localStorage_GameData"));
+			
+			var _player=new Player(serverGamesFolder,gameFolder,json);
 
 		</script>
 

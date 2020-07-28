@@ -121,21 +121,22 @@
 		var gameFolder="<?php echo $_POST['gamefolder'];?>";
 		var serverGamesFolder="https://<?php echo $_SERVER['SERVER_NAME'];?>/games-js";
 	*/
-		userId=1455;
-		userName="Editor";
+	//	userId=1455;
+	//	userName="Editor";
 		gameId=Utils.id();
+		serverGamesFolder="http://localhost/games";
 
 	//	gameFolder="prueba";
 	//	gameFolder="box-doger";
 	//  gameFolder="bird";
 	//	gameFolder="flying-plane";
-		gameFolder="asteroids";
+	//	gameFolder="asteroids";
 	//	gameFolder="arkanoid";
-	//	gameFolder="alien-invasion";
+		gameFolder="alien-invasion";
 	//	gameFolder="babe-plataformer";
 	//  gameFolder="ludumdare46-carlos";
-		serverGamesFolder="http://localhost/games"		
-		var app=new App(userId, gameId, gameFolder, serverGamesFolder);
+			
+		var app=new App(/*userId, gameId,*/ serverGamesFolder,gameFolder);
 	</script>
 	<script type="text/javascript">
 		let type = "WebGL"

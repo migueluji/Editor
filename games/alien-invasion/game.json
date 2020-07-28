@@ -2721,7 +2721,7 @@
 					"collider": "Circle",
 					"tags": "",
 					"spriteOn": true,
-					"image": "w3.png",
+					"image": "character_jump.png",
 					"color": "#ffffff",
 					"opacity": 1,
 					"flipX": false,

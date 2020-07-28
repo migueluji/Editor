@@ -1,15 +1,27 @@
 class File {
     
-    load(URL) {		
+    load(URL,app) {		
         var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() {
             if(this.readyState == this.DONE && this.status == 200){
-                var json=JSON.parse(this.responseText);    		   
+                var json=JSON.parse(this.responseText);   	   
                 app.onFileLoaded(json);
            }
         }
         xhr.open("GET", URL, true);
         xhr.send();
+    }
+
+    loadAssets(URL,imageList,app) {
+        this.loader = new PIXI.Loader(URL);
+        this.loader.add(imageList);
+        this.loader.onLoad.add((loader, resource) => { 
+            console.log(resource.name," loaded");
+        });
+        this.loader.load(()=>{
+            console.log("Load finished!");
+            app.onAssetLoaded();
+        });
     }
   
     static save(json) {

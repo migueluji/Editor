@@ -1,32 +1,22 @@
 class Player {
 
-    constructor(player) {
-
-        this.file   = new File(player); /** */
-        this.engine = null;             /** */
-
-        this.init();
+    constructor(serverGamesFolder,gameFolder,json) {
+        this.file   = new File();
+        this.data=json;
+        this.serverGamesFolder=serverGamesFolder;
+        this.gameFolder=gameFolder;
+        (json) ? this.file.loadAssets(serverGamesFolder+"/"+gameFolder+"/images",json.imageList,this):
+                 this.file.load(serverGamesFolder+"/loadJson.php?gameFolder="+gameFolder,this);
     }
 
-    init() {
-
-        this.file.load();
+    onFileLoaded(json) {
+        this.data=json;
+        this.file.loadAssets(this.serverGamesFolder+"/"+this.gameFolder+"/images",this.data.imageList,this);
     }
 
-    onFileLoaded() {
-
-        console.log(this.file.data)
-
-        var debugParser = Util.parser({}, this.file.data);
-
+    onAssetLoaded(){
+        var debugParser = Util.parser({}, this.data);
         this.engine = new Engine(debugParser);   /** Sin el parser, el parametro es "this.file.data"*/
-        //this.engine = new Engine(this.file.data);
-
-        this.run();
-    }
-
-    run() {
-
         this.engine.gameLoop();
     }
 }

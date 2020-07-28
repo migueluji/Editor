@@ -205,9 +205,9 @@ class Editor {
 
         var originalWidth=50;
         var originalHeight=50;
-        if(this.canvasView.loader.resources.hasOwnProperty(actor.image)){
-            originalWidth= this.canvasView.loader.resources[actor.image].texture.width;
-            originalHeight= this.canvasView.loader.resources[actor.image].texture.height;
+        if(app.file.loader.resources.hasOwnProperty(actor.image)){
+            originalWidth= app.file.loader.resources[actor.image].texture.width;
+            originalHeight= app.file.loader.resources[actor.image].texture.height;
         }
 
         switch  (true) {
