@@ -11,9 +11,9 @@ class ActorPropertiesView {
 						'<span class="mdc-toolbar__title clip-text">Actor Properties</span>'+
 					'</section>'+
 					'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">'+
-						'<button id="codebutton" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">code</button>'+
-						'<button id="addproperty" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">add_circle_outline</button>'+
-						'<button id="closebutton" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">close</button>'+
+						'<button id="codebutton" style="color:white" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">code</button>'+
+						'<button id="addproperty" style="color:white" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">add_circle_outline</button>'+
+						'<button id="closebutton" style="color:white" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">close</button>'+
 					'</section>'+
 				'</div>'+
 			'</header>'+
@@ -59,7 +59,7 @@ class ActorPropertiesView {
 		if (property == "physicsOn") this.physicsView.onClickHandler();
 		if (property == "collider" || property=="style" || property=="align" || property=="type") { // select properties
 			element.querySelector(".mdc-select__selected-text").innerHTML=value;
-			element.querySelector("span").classList.add("mdc-floating-label--float-above");
+			element.querySelector(".mdc-floating-label").classList.add("mdc-floating-label--float-above");
 		}
 	}
 

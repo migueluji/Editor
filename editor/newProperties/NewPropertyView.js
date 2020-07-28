@@ -4,7 +4,7 @@ class NewPropertyView {
 		 this.html = document.createElement("li");
 		 this.html.innerHTML =
 			'<div class="new-property mdc-list-item mdc-ripple-upgraded">'+
-				// aqui se inserta la propiedad
+				// here is where the property is inserted
 				'<button id="more" class="mdc-button mdc-list-item__meta material-icons">more_vert</button>'+
 			'</div>'+
 			'<div class="mdc-menu-surface--anchor menu-new-property">'+
@@ -88,12 +88,13 @@ class NewPropertyView {
 
 //Utils
 	newNumberPropertyView (){
-		var html=document.createElement('div');
-		html.className +="mdc-text-field mdc-ripple-upgraded text-field--full";
+		var html=document.createElement('label');
+		html.className +="mdc-text-field mdc-text-field--filled";
 		html.innerHTML=
-			'<input id="property" type="number" step="0.1" class="mdc-text-field__input">'+
-			'<label id="label" class="mdc-floating-label" for="text-field-filled"></label>'+
-			'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>';
+			'<span class="mdc-text-field__ripple"></span>'+
+			'<input id="property" value="" class="mdc-text-field__input" type="number">'+
+			'<span  id="label" class="mdc-floating-label" id="my-label-id"></span>'+
+			'<span class="mdc-line-ripple"></span>';
 		return html;
 	}
 

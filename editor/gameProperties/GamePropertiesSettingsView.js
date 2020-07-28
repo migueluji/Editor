@@ -10,49 +10,56 @@ class GamePropertiesSettingsView {
 			'</li>'+
 			'<div class="properties-panel open">'+
 				'<div class="two-properties">'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="displayWidth" min="1" type="number" value="1"  class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Display Width</label>'+
-						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="displayHeight" min="1" type="number" value="1"  class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Display Height</label>'+
-						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="displayWidth" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Display Width</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="displayHeight" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Display Height</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
 				'</div>'+
 				'<div class="two-properties">'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="cameraX" type="number" value="0"  class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Camera X</label>'+
-						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="cameraY" type="number" value="0"  class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Camera Y</label>'+
-						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="cameraX" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Camera X</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="cameraY" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Camera Y</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
 				'</div>'+	
 				'<div class="two-properties">'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="cameraAngle" type="number" value="0"  class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Camera Angle</label>'+
-						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="cameraZoom" min="0" step="0.1" type="number" value="0"  class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Camera Zoom</label>'+
-						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="cameraAngle" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Camera Angle</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="cameraZoom" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Camera Zoom</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
 				'</div>'+	
 				'<div class="two-properties">'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="backgroundColor" type="color" value="#ffffff"  class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Background Color</label>'+
-						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
-					'<div class="mdc-ripple-upgraded text-field--end" style="width:100%">'+
-					'</div>'+	
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input style="transform: translateY(8px);" id="backgroundColor" value="#ffffff" class="mdc-text-field__input" type="color">'+
+						'<span class="mdc-floating-label" id="my-label-id">Background Color</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<div style="width:100%; margin-right:32px">'+
+					'</div>'+			
 				'</div>'+							
 			'</div>';
 		this.html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));

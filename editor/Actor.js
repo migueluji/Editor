@@ -25,17 +25,17 @@ class Actor {
             flipX:this.flipX || false , flipY:this.flipY || false ,
             scrollX:this.scrollX || 0, scrollY:this.scrollY || 0,
             tileX:this.tileX, tileY:this.tileY,
-            // Text
+            // // Text
             textOn:this.textOn || false, text:this.text || "",
             font:this.font || "Arial", size:this.size || 30,
             fill:this.fill || "#000000" , style:this.style || "Normal" ,
             align:this.align || "Center", offsetX:this.offsetX || 0,
             offsetY:this.offsetY || 0,
-            // Sound
+            // // Sound
             soundOn:this.soundOn || false, sound:this.sound || "",
             start:this.start || 0, volume: this.volume,
             pan:this.pan || 0 , loop:this.loop || false,
-            // Physics
+            // // Physics
             physicsOn:this.physicsOn || false, type:this.type || "Dynamic",
             fixedAngle:this.fixedAngle || false,
             velocityX:this.velocityX || 0, velocityY:this.velocityY || 0,

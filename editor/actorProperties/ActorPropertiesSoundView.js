@@ -17,33 +17,37 @@ class ActorPropertiesSoundView {
 				'</div>'+
 			'</li>'+
 			'<div class="properties-panel">'+
-				'<div class="mdc-text-field mdc-text-field--with-trailing-icon mdc-ripple-upgraded text-field--full">'+
-					'<input id="sound" type="text" value="value" class="mdc-text-field__input">'+ //sound file
-						'<label class="mdc-floating-label" for="text-field-filled">Sound</label>'+
-						'<button id="soundbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
-							'<i class="material-icons mdc-button_icon">folder</i>'+
-						'</button>'+
-					'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
+				'<label style="width: -webkit-fill-available;" class="mdc-text-field mdc-text-field--filled">'+
+					'<span class="mdc-text-field__ripple"></span>'+
+					'<input id="sound" value="1" class="mdc-text-field__input" type="text">'+
+					'<span class="mdc-floating-label" id="my-label-id">Sound</span>'+
+					'<button id="soundbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
+						'<i class="material-icons mdc-button_icon">folder</i>'+
+					'</button>'+
+					'<span class="mdc-line-ripple"></span>'+
+				'</label>'+
+				'<div class="two-properties">'+	
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="volume" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Volume</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="start" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Start</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
 				'</div>'+
 				'<div class="two-properties">'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="volume" min="0" step="0.1" type="number" value="1" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Volume</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="start" min="0" step="0.1" type="number" value="0" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Start</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-						'</div>'+	
-				'</div>'+
-				'<div class="two-properties">'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="pan" step="0.1" min="-1" max="1" type="number" value="0" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Pan</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
-					'<div class="mdc-form-field">'+
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="pan" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Pan</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<div style="margin-right:32px" class="mdc-form-field">'+
 						'<label class="text-check-label">Loop</label>'+
 						'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
 							'<input id="loop" value="true" type="checkbox" class="mdc-checkbox__native-control">'+

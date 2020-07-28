@@ -17,25 +17,28 @@ class ActorPropertiesSpriteView {
 				'</div>'+
 			'</li>'+
 			'<div class="properties-panel">'+
-				'<div class="mdc-text-field mdc-text-field--with-trailing-icon mdc-ripple-upgraded text-field--full">'+
-					'<input id="image" type="text" value="value" readonly="readonly" class="mdc-text-field__input">'+ //image file
-						'<label class="mdc-floating-label" for="text-field-filled">Image</label>'+
-						'<button id="imagebutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
-							'<i class="material-icons mdc-button_icon">folder</i>'+
-						'</button>'+
-					'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-				'</div>'+
+				'<label style="width: -webkit-fill-available;" class="mdc-text-field mdc-text-field--filled">'+
+					'<span class="mdc-text-field__ripple"></span>'+
+					'<input id="image" value="1" class="mdc-text-field__input" type="text">'+
+					'<span class="mdc-floating-label" id="my-label-id">Image</span>'+
+					'<button id="imagebutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
+						'<i class="material-icons mdc-button_icon">folder</i>'+
+					'</button>'+
+					'<span class="mdc-line-ripple"></span>'+
+				'</label>'+
 				'<div class="two-properties">'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="color" type="color" value="#ffffff" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Color</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="opacity" min="0" max="1" step="0.1" type="number" value="1" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Opacity</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-						'</div>'+	
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input style="transform: translateY(8px);" id="color" value="#ffffff" class="mdc-text-field__input" type="color">'+
+						'<span class="mdc-floating-label" id="my-label-id">Color</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="opacity" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Opacity</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
 				'</div>'+
 				'<div class="two-properties">'+	
 					'<div class="mdc-form-field">'+
@@ -62,29 +65,33 @@ class ActorPropertiesSpriteView {
 					'</div>'+	
 				'</div>'+
 				'<div class="two-properties">'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="scrollX" type="number" value="0" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Scroll X</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="scrollY" type="number" value="0" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Scroll Y</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="scrollX" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Scroll X</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="scrollY" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Scroll Y</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
 				'</div>'+
 				'<div class="two-properties">'+	
-				'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-					'<input id="tileX" min="1" step="1" type="number" value="0" class="mdc-text-field__input">'+
-					'<label class="mdc-floating-label" for="text-field-filled">Tile X</label>'+
-						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-				'</div>'+	
-				'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-					'<input id="tileY" min="1" step="1" type="number" value="0" class="mdc-text-field__input">'+
-					'<label class="mdc-floating-label" for="text-field-filled">Tile Y</label>'+
-						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-				'</div>'+	
-			'</div>'+
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="tileX" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Tile X</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="tileY" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Tile Y</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+				'</div>'+
 			'</div>';	
 
 		var spriteOn=this.html.querySelector("#spriteOn");

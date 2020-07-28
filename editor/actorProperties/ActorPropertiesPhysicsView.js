@@ -18,24 +18,37 @@ class ActorPropertiesPhysicsView {
 			'</li>'+
 			'<div class="properties-panel">'+
 				'<div class="two-properties">'+	
-					'<div style="width:50%; margin-top:4px">'+
-						'<div id="type" type="text" class="mdc-select">'+
-							'<div class="mdc-select__anchor" style="width:100%">'+
-								'<i class="mdc-select__dropdown-icon"></i>'+
-								'<div class="mdc-select__selected-text"></div>'+
-								'<span class="mdc-floating-label mdc-floating-label--float-above">Type</span>'+
-								'<div class="mdc-line-ripple"></div>'+
-							'</div>'+
-							'<div class="mdc-select__menu mdc-menu mdc-menu-surface" style="width:100%">'+
-								'<ul class="mdc-list">'+
-									'<li class="mdc-list-item" data-value="Dynamic">Dynamic</li>'+
-									'<li class="mdc-list-item" data-value="Kinematic">Kinematic</li>'+
-									'<li class="mdc-list-item" data-value="Static">Static</li>'+
-								'</ul>'+
-							'</div>'+
+					'<div id="type" style="min-width:50%" class="mdc-select mdc-select--filled">'+
+						'<div style="background:white" class="mdc-select__anchor">'+
+							'<span class="mdc-select__ripple"></span>'+
+							'<span class="mdc-select__selected-text"></span>'+
+							'<span class="mdc-select__dropdown-icon">'+
+								'<svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5">'+
+									'<polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd" points="7 10 12 15 17 10"></polygon>'+
+									'<polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd" points="7 15 12 10 17 15"></polygon>'+
+								'</svg>'+
+							'</span>'+
+							'<span class="mdc-floating-label">Type</span>'+
+							'<span class="mdc-line-ripple"></span>'+
+						'</div>'+
+						'<div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">'+
+							'<ul class="mdc-list">'+
+								'<li class="mdc-list-item"  data-value="Dynamic">'+
+									'<span class="mdc-list-item__ripple"></span>'+
+									'<span class="mdc-list-item__text">Dynamic</span>'+
+								'</li>'+
+								'<li class="mdc-list-item" data-value="Kinematic">'+
+									'<span class="mdc-list-item__ripple"></span>'+
+									'<span class="mdc-list-item__text">Kinematic</span>'+
+								'</li>'+
+								'<li class="mdc-list-item" data-value="Static">'+
+									'<span class="mdc-list-item__ripple"></span>'+
+									'<span class="mdc-list-item__text">Static</span>'+
+								'</li>'+
+							'</ul>'+
 						'</div>'+
 					'</div>'+
-					'<div class="mdc-form-field">'+
+					'<div style="margin-right:32px"  class="mdc-form-field">'+
 						'<label class="text-check-label">Fixed Angle</label>'+
 						'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
 							'<input id="fixedAngle" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
@@ -48,52 +61,60 @@ class ActorPropertiesPhysicsView {
 					'</div>'+	
 				'</div>'+
 				'<div class="two-properties">'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="velocityX" type="number" step="any" value="0" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Velocity X</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="velocityY" type="number" step="any" value="0" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Velocity Y</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="velocityX" value="0" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Velocity X</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="velocityY" value="0" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Velocity Y</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+				
 				'</div>'+
 				'<div class="two-properties">'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="angularVelocity" type="number" step="any" value="0" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Angular Velocity</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="density" type="number" step="any" value="1" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Density</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="angularVelocity" value="0" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Angular Velocity</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="density" value="0" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Density</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
 				'</div>'+
 				'<div class="two-properties">'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="friction" type="number" step="any" value="0.5" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Friction</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="restitution" type="number" step="any"value="0.5" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Restitution</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="friction" value="0" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Friction</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="restitution" value="0" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Restitution</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
 				'</div>'+
 				'<div class="two-properties">'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="dampingLinear" type="number" step="any" value="0" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Damping Linear</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="dampingAngular" type="number" step="any" value="0" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Damping Angular</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="dampingLinear" value="0" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Damping Linear</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="dampingAngular" value="0" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Damping Angular</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
 				'</div>'+
 			'</div>';	
 

@@ -10,6 +10,7 @@ class AppBarView {
 				'<span id="sceneName" class="mdc-top-app-bar__title"></span>'+
 			'</section>'+
 			'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">'+
+				'<button id="settings" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">settings</button>'+
 				'<button id="save" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">save</button>'+
 				'<button id="undo" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">undo</button>'+
 				'<button id="redo" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">redo</button>'+
@@ -24,6 +25,7 @@ class AppBarView {
 		this.html.querySelector("#redo").addEventListener("click",CmdManager.redo.bind(CmdManager));
 		this.html.querySelector("#cast").addEventListener("click",Command.openCastCmd.bind(Command));
 		this.html.querySelector("#play").addEventListener("click",Command.playGameCmd.bind(Command));
+		this.html.querySelector("#settings").addEventListener("click",Command.openGamePropertiesCmd.bind(Command));
   }
 
 	updateSceneName(sceneName) {

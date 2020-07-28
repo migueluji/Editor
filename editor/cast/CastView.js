@@ -11,8 +11,8 @@ class CastView {
 				 '<span class="mdc-toolbar__title">Cast</span>'+
 			 '</section>'+
 			'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">'+
-		 		'<button id="addactor" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">add_circle_outline</button>'+
-				'<button id="closebutton" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">close</button>'+
+		 		'<button id="addactor" style="color:white" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">add_circle_outline</button>'+
+				'<button id="closebutton" style="color:white" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">close</button>'+
 			 '</section>'+
 		 '</div>'+
 		'</header>'+

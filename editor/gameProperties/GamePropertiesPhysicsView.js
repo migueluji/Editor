@@ -18,16 +18,18 @@ class GamePropertiesPhysicsView {
 			'</li>'+
 			'<div class="properties-panel">'+
 				'<div class="two-properties">'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="gravityX" step="0.1" type="number" value="1" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Gravity X</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-					'</div>'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="gravityY" step="0.1" type="number" value="0" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Gravity Y</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-						'</div>'+	
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="gravityX" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Gravity X</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="gravityY" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Gravity Y</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
 				'</div>'+
 			'</div>';	
 

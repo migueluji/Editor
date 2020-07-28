@@ -1,5 +1,5 @@
 {
-	"name": "Alien Invasion",
+	"name": "Alien Invasion 2",
 	"displayWidth": 1280,
 	"displayHeight": 720,
 	"cameraX": 0,
@@ -7,8 +7,8 @@
 	"cameraAngle": 0,
 	"cameraZoom": 1,
 	"backgroundColor": "#ffffff",
-	"soundOn": false,
-	"soundtrack": "",
+	"soundOn": true,
+	"soundtrack": "jump_01.wav",
 	"volume": 1,
 	"start": 0,
 	"pan": 0,

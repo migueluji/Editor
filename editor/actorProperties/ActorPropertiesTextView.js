@@ -17,82 +17,114 @@ class ActorPropertiesTextView {
 				'</div>'+
 			'</li>'+
 			'<div class="properties-panel">'+
-				'<div class="mdc-text-field mdc-text-field--with-trailing-icon mdc-ripple-upgraded text-field--full">'+
-					'<input id="text" type="text" value="value" class="mdc-text-field__input">'+ // text
-						'<label class="mdc-floating-label" for="text-field-filled">Text</label>'+
-						'<button id="textbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
-							'<i class="material-icons mdc-button_icon">add_box</i>'+
-						'</button>'+
-					'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-				'</div>'+
-				'<div class="mdc-text-field mdc-text-field--with-trailing-icon mdc-ripple-upgraded text-field--full">'+
-					'<input id="font" type="text" value="value" class="mdc-text-field__input">'+ // font file
-						'<label class="mdc-floating-label" for="text-field-filled">Font</label>'+
-						'<button id="fontbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
-							'<i class="material-icons mdc-button_icon">folder</i>'+
-						'</button>'+
-					'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
+				'<label style="width: -webkit-fill-available;" class="mdc-text-field mdc-text-field--filled">'+
+					'<span class="mdc-text-field__ripple"></span>'+
+					'<input id="text" value="1" class="mdc-text-field__input" type="text">'+
+					'<span class="mdc-floating-label" id="my-label-id">Text</span>'+
+					'<button id="textbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
+						'<i class="material-icons mdc-button_icon">folder</i>'+
+					'</button>'+
+					'<span class="mdc-line-ripple"></span>'+
+				'</label>'+
+				'<label style="width: -webkit-fill-available;" class="mdc-text-field mdc-text-field--filled">'+
+					'<span class="mdc-text-field__ripple"></span>'+
+					'<input id="font" value="1" class="mdc-text-field__input" type="text">'+
+					'<span class="mdc-floating-label" id="my-label-id">Font</span>'+
+					'<button id="fontbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
+						'<i class="material-icons mdc-button_icon">folder</i>'+
+					'</button>'+
+					'<span class="mdc-line-ripple"></span>'+
+				'</label>'+
+				'<div class="two-properties">'+	
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input  style="transform: translateY(8px);"  id="fill" value="#ffffff" class="mdc-text-field__input" type="color">'+
+						'<span class="mdc-floating-label" id="my-label-id">Fill</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="size" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Size</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
 				'</div>'+
 				'<div class="two-properties">'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-						'<input id="fill" type="color" value="#ffffff" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Fill</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
+					'<div id="style" style="min-width:50%" class="mdc-select mdc-select--filled">'+
+						'<div style="background:white" class="mdc-select__anchor">'+
+							'<span class="mdc-select__ripple"></span>'+
+							'<span class="mdc-select__selected-text"></span>'+
+							'<span class="mdc-select__dropdown-icon">'+
+								'<svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5">'+
+									'<polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd" points="7 10 12 15 17 10"></polygon>'+
+									'<polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd" points="7 15 12 10 17 15"></polygon>'+
+								'</svg>'+
+							'</span>'+
+							'<span class="mdc-floating-label">Style</span>'+
+							'<span class="mdc-line-ripple"></span>'+
+						'</div>'+
+						'<div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">'+
+							'<ul class="mdc-list">'+
+								'<li class="mdc-list-item"  data-value="Normal">'+
+									'<span class="mdc-list-item__ripple"></span>'+
+									'<span class="mdc-list-item__text">Normal</span>'+
+								'</li>'+
+								'<li class="mdc-list-item" data-value="Italic">'+
+									'<span class="mdc-list-item__ripple"></span>'+
+									'<span class="mdc-list-item__text">Italic</span>'+
+								'</li>'+
+								'<li class="mdc-list-item" data-value="Bold">'+
+								'<span class="mdc-list-item__ripple"></span>'+
+								'<span class="mdc-list-item__text">Bold</span>'+
+							'</li>'+
+							'</ul>'+
+						'</div>'+
+					'</div>'+		
+					'<div id="align" style="min-width:50%" class="mdc-select mdc-select--filled">'+
+						'<div style="background:white" class="mdc-select__anchor">'+
+							'<span class="mdc-select__ripple"></span>'+
+							'<span class="mdc-select__selected-text"></span>'+
+							'<span class="mdc-select__dropdown-icon">'+
+								'<svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5">'+
+									'<polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd" points="7 10 12 15 17 10"></polygon>'+
+									'<polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd" points="7 15 12 10 17 15"></polygon>'+
+								'</svg>'+
+							'</span>'+
+							'<span class="mdc-floating-label">Align</span>'+
+							'<span class="mdc-line-ripple"></span>'+
+						'</div>'+
+						'<div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">'+
+							'<ul class="mdc-list">'+
+								'<li class="mdc-list-item"  data-value="Left">'+
+									'<span class="mdc-list-item__ripple"></span>'+
+									'<span class="mdc-list-item__text">Left</span>'+
+								'</li>'+
+								'<li class="mdc-list-item" data-value="Center">'+
+									'<span class="mdc-list-item__ripple"></span>'+
+									'<span class="mdc-list-item__text">Center</span>'+
+								'</li>'+
+								'<li class="mdc-list-item" data-value="Right">'+
+								'<span class="mdc-list-item__ripple"></span>'+
+								'<span class="mdc-list-item__text">Right</span>'+
+							'</li>'+
+							'</ul>'+
+						'</div>'+
 					'</div>'+	
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-						'<input id="size" min="1"  type="number" value="20" class="mdc-text-field__input">'+
-						'<label class="mdc-floating-label" for="text-field-filled">Size</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-						'</div>'+	
 				'</div>'+
 				'<div class="two-properties">'+	
-					'<div style="width:50%; margin-top:4px">'+
-						'<div id="style" type="text" class="mdc-select">'+
-							'<div class="mdc-select__anchor" style="width:100%">'+
-								'<i class="mdc-select__dropdown-icon"></i>'+
-								'<div class="mdc-select__selected-text"></div>'+
-								'<span class="mdc-floating-label mdc-floating-label--float-above">Style</span>'+
-								'<div class="mdc-line-ripple"></div>'+
-							'</div>'+
-							'<div class="mdc-select__menu mdc-menu mdc-menu-surface" style="width:100%">'+
-								'<ul class="mdc-list">'+
-									'<li class="mdc-list-item" data-value="Normal">Normal</li>'+
-									'<li class="mdc-list-item" data-value="Italic">Italic</li>'+
-									'<li class="mdc-list-item" data-value="Bold">Bold</li>'+
-								'</ul>'+
-							'</div>'+
-						'</div>'+
-					'</div>'+
-					'<div style="width:50%; margin-top:4px">'+
-						'<div id="align" type="text" class="mdc-select">'+
-							'<div class="mdc-select__anchor" style="width:100%">'+
-								'<i class="mdc-select__dropdown-icon"></i>'+
-								'<div class="mdc-select__selected-text"></div>'+
-								'<span class="mdc-floating-label mdc-floating-label--float-above">Align</span>'+
-								'<div class="mdc-line-ripple"></div>'+
-							'</div>'+
-							'<div class="mdc-select__menu mdc-menu mdc-menu-surface" style="width:100%">'+
-								'<ul class="mdc-list">'+
-									'<li class="mdc-list-item" data-value="Left">Left</li>'+
-									'<li class="mdc-list-item" data-value="Center">Center</li>'+
-									'<li class="mdc-list-item" data-value="Right">Right</li>'+
-								'</ul>'+
-							'</div>'+
-						'</div>'+
-					'</div>'+
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="offsetX" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Offset X</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="offsetY" value="1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" id="my-label-id">Offset Y</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
 				'</div>'+
-				'<div class="two-properties">'+	
-				'<div class="mdc-text-field mdc-ripple-upgraded text-field--start">'+
-					'<input id="offsetX" type="number" value="0" class="mdc-text-field__input">'+
-					'<label class="mdc-floating-label" for="text-field-filled">Offset X</label>'+
-						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-				'</div>'+	
-				'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-					'<input id="offsetY" type="number" value="0" class="mdc-text-field__input">'+
-					'<label class="mdc-floating-label" for="text-field-filled">Offset Y</label>'+
-						'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-				'</div>'+	
-			'</div>'+
 			'</div>';	
 
 		var textOn=this.html.querySelector("#textOn");
