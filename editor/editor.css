@@ -168,6 +168,7 @@ button{
 .list{
     height: 100%;
     overflow-y: auto;
+    border-left: 1px solid lightgray;
 }
 .list-bottom{
     margin-bottom: 56px;
