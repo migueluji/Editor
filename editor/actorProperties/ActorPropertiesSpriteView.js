@@ -20,7 +20,7 @@ class ActorPropertiesSpriteView {
 				'<label style="width: -webkit-fill-available;" class="mdc-text-field mdc-text-field--filled">'+
 					'<span class="mdc-text-field__ripple"></span>'+
 					'<input id="image" value="1" class="mdc-text-field__input" type="text">'+
-					'<span class="mdc-floating-label" id="my-label-id">Image</span>'+
+					'<span class="mdc-floating-label" >Image</span>'+
 					'<button id="imagebutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
 						'<i class="material-icons mdc-button_icon">folder</i>'+
 					'</button>'+
@@ -30,13 +30,13 @@ class ActorPropertiesSpriteView {
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input style="transform: translateY(8px);" id="color" value="#ffffff" class="mdc-text-field__input" type="color">'+
-						'<span class="mdc-floating-label" id="my-label-id">Color</span>'+
+						'<span class="mdc-floating-label" >Color</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="opacity" value="1" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Opacity</span>'+
+						'<span class="mdc-floating-label" >Opacity</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 				'</div>'+
@@ -68,13 +68,13 @@ class ActorPropertiesSpriteView {
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="scrollX" value="1" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Scroll X</span>'+
+						'<span class="mdc-floating-label" >Scroll X</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="scrollY" value="1" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Scroll Y</span>'+
+						'<span class="mdc-floating-label" >Scroll Y</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 				'</div>'+
@@ -82,13 +82,13 @@ class ActorPropertiesSpriteView {
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="tileX" value="1" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Tile X</span>'+
+						'<span class="mdc-floating-label" >Tile X</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="tileY" value="1" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Tile Y</span>'+
+						'<span class="mdc-floating-label" >Tile Y</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 				'</div>'+

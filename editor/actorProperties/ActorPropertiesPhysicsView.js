@@ -48,7 +48,7 @@ class ActorPropertiesPhysicsView {
 							'</ul>'+
 						'</div>'+
 					'</div>'+
-					'<div style="margin-right:32px"  class="mdc-form-field">'+
+					'<div class="mdc-form-field">'+
 						'<label class="text-check-label">Fixed Angle</label>'+
 						'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
 							'<input id="fixedAngle" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
@@ -64,13 +64,13 @@ class ActorPropertiesPhysicsView {
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="velocityX" value="0" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Velocity X</span>'+
+						'<span class="mdc-floating-label" >Velocity X</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="velocityY" value="0" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Velocity Y</span>'+
+						'<span class="mdc-floating-label" >Velocity Y</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+				
 				'</div>'+
@@ -78,13 +78,13 @@ class ActorPropertiesPhysicsView {
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="angularVelocity" value="0" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Angular Velocity</span>'+
+						'<span class="mdc-floating-label" >Angular Velocity</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="density" value="0" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Density</span>'+
+						'<span class="mdc-floating-label" >Density</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 				'</div>'+
@@ -92,13 +92,13 @@ class ActorPropertiesPhysicsView {
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="friction" value="0" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Friction</span>'+
+						'<span class="mdc-floating-label" >Friction</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="restitution" value="0" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Restitution</span>'+
+						'<span class="mdc-floating-label" >Restitution</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 				'</div>'+
@@ -106,13 +106,13 @@ class ActorPropertiesPhysicsView {
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="dampingLinear" value="0" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Damping Linear</span>'+
+						'<span class="mdc-floating-label" >Damping Linear</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="dampingAngular" value="0" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Damping Angular</span>'+
+						'<span class="mdc-floating-label" >Damping Angular</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 				'</div>'+

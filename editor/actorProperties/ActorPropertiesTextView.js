@@ -20,7 +20,7 @@ class ActorPropertiesTextView {
 				'<label style="width: -webkit-fill-available;" class="mdc-text-field mdc-text-field--filled">'+
 					'<span class="mdc-text-field__ripple"></span>'+
 					'<input id="text" value="1" class="mdc-text-field__input" type="text">'+
-					'<span class="mdc-floating-label" id="my-label-id">Text</span>'+
+					'<span class="mdc-floating-label" >Text</span>'+
 					'<button id="textbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
 						'<i class="material-icons mdc-button_icon">folder</i>'+
 					'</button>'+
@@ -29,7 +29,7 @@ class ActorPropertiesTextView {
 				'<label style="width: -webkit-fill-available;" class="mdc-text-field mdc-text-field--filled">'+
 					'<span class="mdc-text-field__ripple"></span>'+
 					'<input id="font" value="1" class="mdc-text-field__input" type="text">'+
-					'<span class="mdc-floating-label" id="my-label-id">Font</span>'+
+					'<span class="mdc-floating-label" >Font</span>'+
 					'<button id="fontbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
 						'<i class="material-icons mdc-button_icon">folder</i>'+
 					'</button>'+
@@ -39,13 +39,13 @@ class ActorPropertiesTextView {
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input  style="transform: translateY(8px);"  id="fill" value="#ffffff" class="mdc-text-field__input" type="color">'+
-						'<span class="mdc-floating-label" id="my-label-id">Fill</span>'+
+						'<span class="mdc-floating-label" >Fill</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="size" value="1" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Size</span>'+
+						'<span class="mdc-floating-label" >Size</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 				'</div>'+
@@ -115,13 +115,13 @@ class ActorPropertiesTextView {
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="offsetX" value="1" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Offset X</span>'+
+						'<span class="mdc-floating-label" >Offset X</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="offsetY" value="1" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Offset Y</span>'+
+						'<span class="mdc-floating-label" >Offset Y</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 				'</div>'+

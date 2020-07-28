@@ -20,7 +20,7 @@ class ActorPropertiesSoundView {
 				'<label style="width: -webkit-fill-available;" class="mdc-text-field mdc-text-field--filled">'+
 					'<span class="mdc-text-field__ripple"></span>'+
 					'<input id="sound" value="1" class="mdc-text-field__input" type="text">'+
-					'<span class="mdc-floating-label" id="my-label-id">Sound</span>'+
+					'<span class="mdc-floating-label" >Sound</span>'+
 					'<button id="soundbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
 						'<i class="material-icons mdc-button_icon">folder</i>'+
 					'</button>'+
@@ -30,13 +30,13 @@ class ActorPropertiesSoundView {
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="volume" value="1" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Volume</span>'+
+						'<span class="mdc-floating-label" >Volume</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="start" value="1" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Start</span>'+
+						'<span class="mdc-floating-label" >Start</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 				'</div>'+
@@ -44,10 +44,10 @@ class ActorPropertiesSoundView {
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="pan" value="1" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Pan</span>'+
+						'<span class="mdc-floating-label" >Pan</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
-					'<div style="margin-right:32px" class="mdc-form-field">'+
+					'<div class="mdc-form-field">'+
 						'<label class="text-check-label">Loop</label>'+
 						'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
 							'<input id="loop" value="true" type="checkbox" class="mdc-checkbox__native-control">'+

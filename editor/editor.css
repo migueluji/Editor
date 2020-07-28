@@ -15,16 +15,11 @@ body{
 button{
     outline:0;
 }
-
-.mdc-ripple-upgraded {
-    margin: 4px;
-}
 .editor-frame-root{
     overflow: hidden;
     display: flex;
     height: 100%;
 }
-
 .mdc-drawer-app-content{
     width:100%;
     height: 100%;
@@ -211,9 +206,11 @@ button{
 }
 .mdc-text-field{
     width: 100%;
+    margin: 4px 8px;
 }
 .mdc-form-field{
     width: 100%;
+    margin: 4px 16px;
 }
 .mdc-form-field>label{
     padding-left: 16px;
@@ -286,4 +283,9 @@ button{
 }
 .mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
     color:var(--mdc-theme-primary);
+}
+.mdc-select .mdc-select__anchor {
+    padding-left: 16px;
+    padding-right: 0;
+    margin: 4px 8px 4px 8px;
 }

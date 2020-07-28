@@ -9,7 +9,7 @@ class DrawerHeaderView {
                    ' <label class="mdc-text-field mdc-text-field--filled">'+
                         '<span class="mdc-text-field__ripple"></span>'+
                         '<input id="gamename" value="'+gameName+'" class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">'+
-                        '<span class="mdc-floating-label" id="my-label-id">Game Name</span>'+
+                        '<span class="mdc-floating-label" >Game Name</span>'+
                         '<span class="mdc-line-ripple"></span>'+
                     '</label>'+
             '</div>';

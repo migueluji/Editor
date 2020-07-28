@@ -93,7 +93,7 @@ class NewPropertyView {
 		html.innerHTML=
 			'<span class="mdc-text-field__ripple"></span>'+
 			'<input id="property" value="" class="mdc-text-field__input" type="number">'+
-			'<span  id="label" class="mdc-floating-label" id="my-label-id"></span>'+
+			'<span  id="label" class="mdc-floating-label" ></span>'+
 			'<span class="mdc-line-ripple"></span>';
 		return html;
 	}

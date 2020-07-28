@@ -8,7 +8,7 @@ class ActorPropertiesSettingsView {
 				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
 				'Settings'+
 				'<div class="mdc-form-field">'+
-					'<label class="text-check-label" style="padding-left: 90px">Sleeping</label>'+
+					'<label class="text-check-label" style="padding-left: 75px">Sleeping</label>'+
 					'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
 						'<input id="sleeping" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
 						'<div class="mdc-checkbox__background">'+
@@ -24,13 +24,13 @@ class ActorPropertiesSettingsView {
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="x" value="0" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">X</span>'+
+						'<span class="mdc-floating-label" >X</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="y" value="0" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Y</span>'+
+						'<span class="mdc-floating-label" >Y</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 				'</div>'+
@@ -38,13 +38,13 @@ class ActorPropertiesSettingsView {
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="width" value="0" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Width</span>'+
+						'<span class="mdc-floating-label" >Width</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="height" value="0" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Height</span>'+
+						'<span class="mdc-floating-label" >Height</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 				'</div>'+
@@ -52,13 +52,13 @@ class ActorPropertiesSettingsView {
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="scaleX" value="0" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Scale X</span>'+
+						'<span class="mdc-floating-label" >Scale X</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="scaleY" value="0" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Scale Y</span>'+
+						'<span class="mdc-floating-label" >Scale Y</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 				'</div>'+
@@ -66,7 +66,7 @@ class ActorPropertiesSettingsView {
 					'<label class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="angle" value="0" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" id="my-label-id">Angle</span>'+
+						'<span class="mdc-floating-label" >Angle</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<div class="mdc-form-field">'+
