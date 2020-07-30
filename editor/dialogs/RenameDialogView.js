@@ -6,14 +6,13 @@ class RenameDialogView {
 		 this.html.innerHTML =
 				'<div class="mdc-card">'+
 					'<h2 id="title" class="demo-card__title mdc-typography--headline6">Rename    </h2>'+
-					'<div class=text-field-container">'+
-						'<div class="mdc-text-field mdc-ripple-upgraded text-field--full">'+
-							'<input id="input" type="text"  class="mdc-text-field__input" spellcheck="false">'+
-							'<label class="mdc-floating-label">New name</label>'+
-							'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-						'</div>'+
-						'<p style="color:red" class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="error"></p>'+
-					'</div>'+
+					'<label style="width:auto;margin:0px" class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="input" value="" class="mdc-text-field__input" type="text">'+
+						'<span class="mdc-floating-label">New name</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<p style="color:red" class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="error"></p>'+
 				'<div>'+				
 				'<div class="mdc-card__actions">'+
 					'<div class="mdc-card__action-icons">'+

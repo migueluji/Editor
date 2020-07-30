@@ -16,7 +16,7 @@ class TagSelectionView {
 						'<div>'+
 					'</header>'+
 					'<div id="filecanvas" style="height: 240px;overflow: auto;padding: 8px 0px;border-bottom: 1px solid lightgray;border-top: 1px solid lightgray;">'+	
-						'<ul class="mdc-image-list" style="width:280px"></ul>'+// Asset List
+						'<ul class="mdc-image-list" style="width:280px"></ul>'+// Tag List
 					'</div>'+
 					'<div class="mdc-card__actions">'+
 						'<div class="mdc-card__action-icons">'+
@@ -73,15 +73,14 @@ class TagSelectionView {
 		})
 
 		this.input.value=this.tags;
+		console.log(this.tags,this.input.value);
 		if ("createEvent" in document) {
 			var event = document.createEvent("HTMLEvents");
-			console.log(this.input.form,this.input.form,this.input.name);
 			if (this.input.name=="script") event.initEvent("input", false, true);
 			else event.initEvent("change", false, true);
 			this.input.dispatchEvent(event);
 			this.input.focus();
 	   }
-
 	}
 
 	cancelBackgroundHandler(e){

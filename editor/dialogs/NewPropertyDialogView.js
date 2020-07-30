@@ -5,15 +5,14 @@ class NewPropertyDialogView {
 		 this.html.className +="dialog-full-screen";
 		 this.html.innerHTML =
 				'<div class="mdc-card">'+
-					'<h2 class="demo-card__title mdc-typography--headline6">Introduce new property    </h2>'+
-					'<div class=text-field-container">'+
-						'<div class="mdc-text-field mdc-ripple-upgraded text-field--full">'+
-							'<input id="propertyname" type="text"  class="mdc-text-field__input">'+
-							'<label class="mdc-floating-label">Property name</label>'+
-							'<div class="mdc-line-ripple"></div>'+
-						'</div>'+
-						'<p style="color:red" class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="error"></p>'+
-					'</div>'+
+					'<h2 class="demo-card__title mdc-typography--headline6">Introduce new property</h2>'+
+					'<label style="width:auto;margin:0px" class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="propertyname" value="" class="mdc-text-field__input" type="text">'+
+						'<span class="mdc-floating-label">Property name</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<p style="color:red" class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="error"></p>'+
 				'<div>'+
 				'<h3 class="mdc-typography--subtitle1">Property type</h3>'+
 				'<div class="mdc-form-field">'+
@@ -79,7 +78,7 @@ class NewPropertyDialogView {
 		}
 		else {
 			if ("abcdefghijklmnñopqrstuvwxyz".indexOf(this.name[0]) < 0)	{
-				this.html.querySelector("#error").innerText="The first character need to be a letter";
+				this.html.querySelector("#error").innerText="The first character needs to be a letter";
 			}
 			else{
 				if (panel.querySelector("#"+this.name)){

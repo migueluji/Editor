@@ -6,14 +6,13 @@ class NewTagDialogView {
 		 this.html.innerHTML =
 				'<div class="mdc-card">'+
 					'<h2 class="demo-card__title mdc-typography--headline6">Introduce New Tag    </h2>'+
-					'<div class=text-field-container">'+
-						'<div class="mdc-text-field mdc-ripple-upgraded text-field--full">'+
-							'<input id="tagname" type="text"  class="mdc-text-field__input">'+
-							'<label class="mdc-floating-label">Tag Name</label>'+
-							'<div class="mdc-line-ripple"></div>'+
-						'</div>'+
-						'<p style="color:red" class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="error"></p>'+
-					'</div>'+
+					'<label style="width:auto;margin:0px" class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="tagname" value="" class="mdc-text-field__input" type="text">'+
+						'<span class="mdc-floating-label">Tag name</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+
+					'<p style="color:red" class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="error"></p>'+
 				'<div>'+					
 				'<div class="mdc-card__actions">'+
 					'<div class="mdc-card__action-icons">'+
@@ -64,5 +63,4 @@ class NewTagDialogView {
 	cancelBackgroundHandler(e){
 		if (e.target===this.html)	this.cancelButtonHandler();
 	}
-
 }

@@ -107,12 +107,13 @@ class ActorPropertiesSettingsView {
 								'</li>'+
 							'</ul>'+
 						'</div>'+
-					'</div>'+			
-					'<div class="mdc-text-field mdc-ripple-upgraded text-field--end">'+
-					 	'<input id="tags" type="text" value="text"  class="mdc-text-field__input" readonly="readonly">'+
-					 	'<label class="mdc-floating-label" for="text-field-filled">Tags</label>'+
-					 	'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
 					'</div>'+	
+					'<label class="mdc-text-field mdc-text-field--filled">'+
+						'<span class="mdc-text-field__ripple"></span>'+
+						'<input id="tags" value="text" class="mdc-text-field__input" type="text" readonly="readonly">'+
+						'<span class="mdc-floating-label" >Tags</span>'+
+						'<span class="mdc-line-ripple"></span>'+
+					'</label>'+		
 				'</div>'+				
 			'</div>';
 		this.html.querySelector("#expandbutton").addEventListener("click",this.propertyGroupHandler.bind(this));
