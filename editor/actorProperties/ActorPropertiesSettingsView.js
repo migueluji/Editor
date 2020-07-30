@@ -21,13 +21,13 @@ class ActorPropertiesSettingsView {
 			'</li>'+
 			'<div class="properties-panel open">'+
 				'<div class="two-properties">'+	
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="x" value="0" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >X</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="y" value="0" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Y</span>'+
@@ -35,13 +35,13 @@ class ActorPropertiesSettingsView {
 					'</label>'+
 				'</div>'+
 				'<div class="two-properties">'+	
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="width" value="0" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Width</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="height" value="0" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Height</span>'+
@@ -49,13 +49,13 @@ class ActorPropertiesSettingsView {
 					'</label>'+
 				'</div>'+
 				'<div class="two-properties">'+	
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="scaleX" value="0" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Scale X</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="scaleY" value="0" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Scale Y</span>'+
@@ -63,13 +63,13 @@ class ActorPropertiesSettingsView {
 					'</label>'+
 				'</div>'+
 				'<div class="two-properties">'+	
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="angle" value="0" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Angle</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
-					'<div class="mdc-form-field">'+
+					'<div style="min-width: calc(50% - 16px);"class="half-text mdc-form-field">'+
 						'<label class="text-check-label">Screen</label>'+
 						'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
 							'<input id="screen" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
@@ -82,7 +82,7 @@ class ActorPropertiesSettingsView {
 					'</div>'+	
 				'</div>'+	
 				'<div class="two-properties">'+	
-					'<div id="collider" style="min-width:50%" class="mdc-select mdc-select--filled">'+
+					'<div id="collider" style="min-width: calc(50% - 16px);" class="half-text mdc-select mdc-select--filled">'+
 						'<div style="background:white" class="mdc-select__anchor">'+
 							'<span class="mdc-select__ripple"></span>'+
 							'<span class="mdc-select__selected-text"></span>'+
@@ -108,7 +108,7 @@ class ActorPropertiesSettingsView {
 							'</ul>'+
 						'</div>'+
 					'</div>'+	
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="tags" value="text" class="mdc-text-field__input" type="text" readonly="readonly">'+
 						'<span class="mdc-floating-label" >Tags</span>'+

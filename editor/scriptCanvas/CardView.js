@@ -7,11 +7,11 @@ class CardView {
 		this.html.innerHTML =
 		  	'<div class="card-background"></div>'+
 			'<div style=" -webkit-user-select: none;" class="mdc-card__primary-action card-title '+color+'">'+
-				'<div  style="pointer-events:none" class="circle">'+
+				'<div class="circle">'+
 					'<i  class="nodeIcon material-icons mdc-chip_icon">'+icon+'</i>'+
 				'</div>'+
-				'<span style="pointer-events:none" class="nodelabel mdc-list-item__text">'+
-					'<span style="pointer-events:none" class="mdc-list-item__primary-text card-title_label">'+text+'</span>'+
+				'<span class="nodelabel mdc-list-item__text">'+
+					'<span class="mdc-list-item__primary-text card-title_label">'+text+'</span>'+
 				'</span>'+
 				 '<i id="close" class="chipIcon ge-chip-button material-icons">close</i>'+
 			'</div>'+

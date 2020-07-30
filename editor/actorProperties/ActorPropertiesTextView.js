@@ -17,7 +17,7 @@ class ActorPropertiesTextView {
 				'</div>'+
 			'</li>'+
 			'<div class="properties-panel">'+
-				'<label style="width: -webkit-fill-available;" class="mdc-text-field mdc-text-field--filled">'+
+				'<label style="width: -webkit-fill-available;" class="half-text mdc-text-field mdc-text-field--filled">'+
 					'<span class="mdc-text-field__ripple"></span>'+
 					'<input id="text" value="1" class="mdc-text-field__input" type="text">'+
 					'<span class="mdc-floating-label" >Text</span>'+
@@ -26,7 +26,7 @@ class ActorPropertiesTextView {
 					'</button>'+
 					'<span class="mdc-line-ripple"></span>'+
 				'</label>'+
-				'<label style="width: -webkit-fill-available;" class="mdc-text-field mdc-text-field--filled">'+
+				'<label style="width: -webkit-fill-available;" class="half-text mdc-text-field mdc-text-field--filled">'+
 					'<span class="mdc-text-field__ripple"></span>'+
 					'<input id="font" value="1" class="mdc-text-field__input" type="text">'+
 					'<span class="mdc-floating-label" >Font</span>'+
@@ -36,13 +36,13 @@ class ActorPropertiesTextView {
 					'<span class="mdc-line-ripple"></span>'+
 				'</label>'+
 				'<div class="two-properties">'+	
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input  style="transform: translateY(8px);"  id="fill" value="#ffffff" class="mdc-text-field__input" type="color">'+
 						'<span class="mdc-floating-label" >Fill</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="size" value="1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Size</span>'+
@@ -50,7 +50,7 @@ class ActorPropertiesTextView {
 					'</label>'+
 				'</div>'+
 				'<div class="two-properties">'+	
-					'<div id="style" style="min-width:50%" class="mdc-select mdc-select--filled">'+
+					'<div id="style" style="min-width:auto" class="half-text mdc-select mdc-select--filled">'+
 						'<div style="background:white" class="mdc-select__anchor">'+
 							'<span class="mdc-select__ripple"></span>'+
 							'<span class="mdc-select__selected-text"></span>'+
@@ -80,7 +80,7 @@ class ActorPropertiesTextView {
 							'</ul>'+
 						'</div>'+
 					'</div>'+		
-					'<div id="align" style="min-width:50%" class="mdc-select mdc-select--filled">'+
+					'<div id="align" style="min-width:auto" class="half-text mdc-select mdc-select--filled">'+
 						'<div style="background:white" class="mdc-select__anchor">'+
 							'<span class="mdc-select__ripple"></span>'+
 							'<span class="mdc-select__selected-text"></span>'+
@@ -112,13 +112,13 @@ class ActorPropertiesTextView {
 					'</div>'+	
 				'</div>'+
 				'<div class="two-properties">'+	
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="offsetX" value="1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Offset X</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="offsetY" value="1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Offset Y</span>'+

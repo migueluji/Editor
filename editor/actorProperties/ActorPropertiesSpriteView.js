@@ -17,7 +17,7 @@ class ActorPropertiesSpriteView {
 				'</div>'+
 			'</li>'+
 			'<div class="properties-panel">'+
-				'<label style="width: -webkit-fill-available;" class="mdc-text-field mdc-text-field--filled">'+
+				'<label style="width: -webkit-fill-available;" class="half-text mdc-text-field mdc-text-field--filled">'+
 					'<span class="mdc-text-field__ripple"></span>'+
 					'<input id="image" value="1" class="mdc-text-field__input" type="text">'+
 					'<span class="mdc-floating-label" >Image</span>'+
@@ -27,13 +27,13 @@ class ActorPropertiesSpriteView {
 					'<span class="mdc-line-ripple"></span>'+
 				'</label>'+
 				'<div class="two-properties">'+	
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input style="transform: translateY(8px);" id="color" value="#ffffff" class="mdc-text-field__input" type="color">'+
 						'<span class="mdc-floating-label" >Color</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="opacity" value="1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Opacity</span>'+
@@ -41,7 +41,7 @@ class ActorPropertiesSpriteView {
 					'</label>'+
 				'</div>'+
 				'<div class="two-properties">'+	
-					'<div class="mdc-form-field">'+
+					'<div style="height: 64px;min-width: calc(50% - 16px);" class="half-text mdc-form-field">'+
 						'<label class="text-check-label">Flip X</label>'+
 						'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
 							'<input id="flipX" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
@@ -52,7 +52,7 @@ class ActorPropertiesSpriteView {
 							'</div>'+
 						'</div>'+
 					'</div>'+	
-					'<div class="mdc-form-field">'+
+					'<div style="min-width: calc(50% - 16px);" class="half-text mdc-form-field">'+
 						'<label class="text-check-label">Flip Y</label>'+
 						'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
 							'<input id="flipY" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
@@ -65,13 +65,13 @@ class ActorPropertiesSpriteView {
 					'</div>'+	
 				'</div>'+
 				'<div class="two-properties">'+	
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text  mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="scrollX" value="1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Scroll X</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="scrollY" value="1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Scroll Y</span>'+
@@ -79,13 +79,13 @@ class ActorPropertiesSpriteView {
 					'</label>'+
 				'</div>'+
 				'<div class="two-properties">'+	
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="tileX" value="1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Tile X</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="tileY" value="1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Tile Y</span>'+

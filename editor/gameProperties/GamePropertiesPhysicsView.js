@@ -18,13 +18,13 @@ class GamePropertiesPhysicsView {
 			'</li>'+
 			'<div class="properties-panel">'+
 				'<div class="two-properties">'+	
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="gravityX" value="1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Gravity X</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
-					'<label class="mdc-text-field mdc-text-field--filled">'+
+					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="gravityY" value="1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Gravity Y</span>'+

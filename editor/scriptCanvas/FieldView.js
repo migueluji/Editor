@@ -38,14 +38,20 @@ class FieldView  {
 	select(key,value,list,option){
 		this.html.className +="text-field--full";
 		this.html.innerHTML=
-			'<div class="mdc-select">'+
-				'<div class="mdc-select__anchor" style="width:100%">'+
-					'<i class="mdc-select__dropdown-icon"></i>'+
-					'<div class="mdc-select__selected-text"></div>'+
-					'<span class="mdc-floating-label mdc-floating-label--float-above"></span>'+
-					'<div class="mdc-line-ripple"></div>'+
+			'<div style="width:100%" class="mdc-select mdc-select--filled">'+
+				'<div style="background:white" class="mdc-select__anchor">'+
+					'<span class="mdc-select__ripple"></span>'+
+					'<span class="mdc-select__selected-text"></span>'+
+					'<span class="mdc-select__dropdown-icon">'+
+						'<svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5">'+
+							'<polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd" points="7 10 12 15 17 10"></polygon>'+
+							'<polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd" points="7 15 12 10 17 15"></polygon>'+
+						'</svg>'+
+					'</span>'+
+					'<span class="mdc-floating-label"></span>'+
+					'<span class="mdc-line-ripple"></span>'+
 				'</div>'+
-				'<div class="mdc-select__menu mdc-menu mdc-menu-surface" style="width:100%">'+
+				'<div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">'+
 					'<ul class="mdc-list"></ul>'+
 				'</div>'+
 			'</div>';
@@ -56,12 +62,16 @@ class FieldView  {
 			var item = document.createElement("li");
 			item.classList.add("mdc-list-item");
 			item.setAttribute("data-value",property);
-			item.innerHTML=property;
+			item.innerHTML=
+				'<span class="mdc-list-item__ripple"></span>'+
+				'<span class="mdc-list-item__text">'+property+'</span>';
+			console.log(item);
 			if(item.dataset.value==value){
 				item.classList.add("mdc-list-item--selected");
 				item.setAttribute("tabIndex","0");
 				item.setAttribute("aria-selected","true");
 			}
+			console.log(item);
 			if 	((i!=0 && ["fps","displayWidth","sleeping","spriteOn","textOn","soundOn","physicsOn"].includes(property)) ||
 				(option=="Number" && i!=0 && ["x","opacity","size","start","velocityX"].includes(property)) ||
 				((list[i-1]=="Me"))){
@@ -73,19 +83,20 @@ class FieldView  {
 			listView.appendChild(item);
 		});
 		key=key.charAt(0).toUpperCase() + key.slice(1);
-		this.html.querySelector("span").textContent=key.replace("_"," ");	
+		this.html.querySelector(".mdc-floating-label").textContent=key.replace("_"," ");	
 	}
 
 	input(type,key,value,list){
 		this.html.innerHTML =
-			'<div class="text-field--full mdc-text-field mdc-ripple-upgraded">'+
-				'<input name="script" class="mdc-text-field__input" style="padding-right:36px">'+
-				'<label class="mdc-floating-label"></label>'+
-				'<button id="button" class="mdc-button mdc-button-upgraded upload-button" style="padding:0px;right:8px;min-width: 24px;">'+
+			'<label style="width: -webkit-fill-available;" class="mdc-text-field mdc-text-field--filled">'+
+				'<span class="mdc-text-field__ripple"></span>'+
+				'<input name="script" class="mdc-text-field__input">'+
+				'<span class="mdc-floating-label"></span>'+
+				'<button id="button" class="mdc-button mdc-button-upgraded upload-button">'+
 					'<i class="material-icons mdc-button_icon">more_vert</i>'+
 				'</button>'+
-				'<div class="mdc-line-ripple" style="transform-ori	gin: 50.5px center 0px;"></div>'+
-			'</div>'+
+				'<span class="mdc-line-ripple"></span>'+
+			'</label>'+
 			'<div class="mdc-menu-surface--anchor" style="left:180px;top:-56px">'+
 				'<div class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
 					'<ul class="mdc-list" role="menu" aria-hidden="true">'+
@@ -107,16 +118,19 @@ class FieldView  {
 		this.input = this.html.querySelector("input");
 		this.input.spellcheck=false;
 		this.input.id="Value";
+
 		(value!=null && value[0]=="#") ? this.input.type="color" : this.input.type="text"; 
 		this.input.value=value;
 		this.input.id=key;
 
 		key=key.charAt(0).toUpperCase() + key.slice(1);
-		this.html.querySelector("label").textContent=key.replace("_"," ");	
+		this.html.querySelector(".mdc-floating-label").textContent=key.replace("_"," ");	
 		
 		var button=this.html.querySelector("button");
-		
+		console.log(this.html,button);
+	
 		var icon=button.querySelector('i');
+		
 		switch (type){
 			case "file": 
 				icon.innerHTML="folder";
