@@ -9,8 +9,7 @@ class App {
     }
     onFileLoaded(json){
         this.data=json;
-        (Object.keys(json).length) ?  this.file.loadAssets(this.serverGamesFolder+"/"+this.gameFolder+"/images",json.imageList,this) :
-                                      this.onAssetLoaded();
+        this.file.loadAssets(this.serverGamesFolder+"/"+this.gameFolder+"/images",json.imageList,this);
     }
 
     onAssetLoaded(){
