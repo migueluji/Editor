@@ -100,7 +100,6 @@ class Editor {
         inputUrl.type = 'text';
         inputUrl.name = "serverGamesFolder";
         inputUrl.value = app.serverGamesFolder;
-        console.log("directorio",inputUrl.value);
         form.appendChild(inputUrl);
         document.body.appendChild(form);
         form.submit();

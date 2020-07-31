@@ -49,28 +49,35 @@ class CanvasView {
 
     takeScreenshot(){
         console.log("take screenshoot");
-        const app = new PIXI.Application({
+        const pixiApp = new PIXI.Application({
             width: 800, height:600, backgroundColor: this.gameProperties.backgroundColor, resolution: window.devicePixelRatio || 1,
         });
 
         const frame = new PIXI.Graphics(); // draw the camera frame
-        frame.beginFill();
+        frame.beginFill(0xaaaaaa);
         frame.drawRect(-this.gameProperties.displayWidth/2.0,-this.gameProperties.displayHeight/2.0,this.gameProperties.displayWidth,this.gameProperties.displayHeight);
         frame.endFill();
  
+        const frameTexture = new PIXI.Sprite(PIXI.Texture.WHITE); // draw background sprite
+        frameTexture.tint="0x"+String(this.gameProperties.backgroundColor).substr(1);;
+        frameTexture.width=this.gameProperties.displayWidth*3/this.gameProperties.cameraZoom;
+        frameTexture.height=this.gameProperties.displayHeight*3/this.gameProperties.cameraZoom;
+        frameTexture.anchor.set(0.5);
+
         const scene= new PIXI.Container(); // create the scene container
+        scene.addChild(frameTexture);
         scene.position ={x:-this.gameProperties.cameraX,y:this.gameProperties.cameraY};
         scene.angle = this.gameProperties.cameraAngle;
         scene.scale = {x:this.gameProperties.cameraZoom,y:-this.gameProperties.cameraZoom};
-        scene.mask=frame;
+        scene.mask=frame;      
+
         this.actorList.forEach(actor => {
-            var displayActor = new DisplayActor(this,actor,this.actorList,this.gameProperties,this.loader); 
+            var displayActor = new DisplayActor(this,actor,this.actorList,this.gameProperties); 
             scene.addChild(displayActor);
         });
-
-        app.renderer.extract.canvas(scene).toBlob((b) => {
+  
+        pixiApp.renderer.extract.canvas(scene).toBlob((b) => {
             const a = document.createElement('a');
-            document.body.append(a);
             a.download = 'screenshot';
             a.href = URL.createObjectURL(b);
             a.click();

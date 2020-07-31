@@ -4,7 +4,7 @@ class File {
         var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() {
             if(this.readyState == this.DONE && this.status == 200){
-                var json=JSON.parse(this.responseText);   	   
+                var json=JSON.parse(this.responseText);  	   
                 app.onFileLoaded(json);
            }
         }

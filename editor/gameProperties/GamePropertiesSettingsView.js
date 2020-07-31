@@ -40,13 +40,13 @@ class GamePropertiesSettingsView {
 				'<div class="two-properties">'+	
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="cameraAngle" value="1" class="mdc-text-field__input" type="number">'+
+						'<input id="cameraAngle" value="1.0" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Camera Angle</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="cameraZoom" value="1" class="mdc-text-field__input" type="number">'+
+						'<input id="cameraZoom" step="0.1" value="1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Camera Zoom</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
