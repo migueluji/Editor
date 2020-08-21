@@ -236,7 +236,7 @@
 										{
 											"type": "Rotate",
 											"parameters": {
-												"speed": "200",
+												"speed": "300",
 												"pivot_X": "Me.x",
 												"pivot_Y": "Me.y"
 											}
@@ -254,7 +254,7 @@
 										{
 											"type": "Rotate",
 											"parameters": {
-												"speed": "-200",
+												"speed": "-100",
 												"pivot_X": "Me.x",
 												"pivot_Y": "Me.y"
 											}
@@ -272,7 +272,7 @@
 										{
 											"type": "Push",
 											"parameters": {
-												"force": "0.2",
+												"force": "0.1",
 												"angle": "Me.angle"
 											}
 										}
@@ -468,7 +468,7 @@
 				{
 					"name": "asteroid",
 					"sleeping": true,
-					"x": -258.7283950617284,
+					"x": -260.2283950617284,
 					"y": -288.1851851851852,
 					"width": 101,
 					"height": 84,
@@ -509,7 +509,7 @@
 					"velocityX": 0,
 					"velocityY": 0,
 					"angularVelocity": 0,
-					"density": 1,
+					"density": 0.6,
 					"friction": 0.5,
 					"restitution": 0.5,
 					"dampingLinear": 0,
@@ -577,7 +577,7 @@
 										{
 											"type": "Push",
 											"parameters": {
-												"force": "0.5",
+												"force": "2",
 												"angle": "random(1,360)"
 											}
 										}
@@ -735,26 +735,26 @@
 											}
 										},
 										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "asteroid_small",
+												"x": 0,
+												"y": 0,
+												"angle": 0
+											}
+										},
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "asteroid_small",
+												"x": 0,
+												"y": 0,
+												"angle": 0
+											}
+										},
+										{
 											"type": "Delete",
 											"parameters": {}
-										},
-										{
-											"type": "Spawn",
-											"parameters": {
-												"actor": "asteroid_small",
-												"x": 0,
-												"y": 0,
-												"angle": 0
-											}
-										},
-										{
-											"type": "Spawn",
-											"parameters": {
-												"actor": "asteroid_small",
-												"x": 0,
-												"y": 0,
-												"angle": 0
-											}
 										}
 									],
 									"nodeListFalse": []
@@ -780,7 +780,7 @@
 										{
 											"type": "Push",
 											"parameters": {
-												"force": "63",
+												"force": "2",
 												"angle": "random(1,360)"
 											}
 										}
@@ -874,7 +874,7 @@
 				{
 					"name": "asteroid_small",
 					"sleeping": true,
-					"x": -127.9320987654321,
+					"x": -128.9320987654321,
 					"y": -261.7654320987655,
 					"width": 28,
 					"height": 28,
@@ -965,7 +965,7 @@
 										{
 											"type": "Push",
 											"parameters": {
-												"force": "63",
+												"force": "2",
 												"angle": "random(1,360)"
 											}
 										}
@@ -1060,7 +1060,7 @@
 					"name": "generator",
 					"sleeping": false,
 					"x": 0,
-					"y": 267.5925925925926,
+					"y": 275.5,
 					"width": 50,
 					"height": 50,
 					"scaleX": 1,

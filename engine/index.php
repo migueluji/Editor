@@ -63,9 +63,6 @@
 			var serverGamesFolder="<?php echo $_POST['serverGamesFolder'];?>";
 			var gameFolder="<?php echo $_POST['gameFolder'];?>";
 
-			serverGamesFolder="http://localhost/games";
-			gameFolder="alien-invasion";
-
 			var editor=true; /* to kown if the engine has been launched from the editor */
 
 			var json=null;
