@@ -1,7 +1,6 @@
 <?php
-	// require_once('../wp-load.php');
 	 
-	 $subDir = $_GET["assetFolder"];	
+	$subDir = $_GET["assetFolder"];	
     $gameFolder= $_GET['gameFolder'];
 	$fileName=$_GET['filename'];
 	

@@ -505,8 +505,8 @@ class Editor {
 
     uploadFile(file,type){
         var formData = new FormData();
-        formData.append('asset-file', file, file.name); 				
-    	File.uploadFile(app.gameFolder, file.name, formData, type);			
+        formData.append('file', file, file.name); 				
+        File.uploadFile(file,formData,type);		
     }
 
     addAsset(name, type){

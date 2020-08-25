@@ -42,20 +42,21 @@ class File {
         xhr.send(json);
     }
 
-	static uploadFile(gameFolder, fileName, formData, type){
-        console.log("file",formData);
-	 	var destination;
-	    if(type=="Image" || type=="Animation") 	destination="images";
-		if(type=="Sound")   destination="sounds";
-		var url=app.serverGamesFolder+"/uploadAsset.php?gameFolder="+gameFolder+"&assetFolder="+destination;
-		
+    static uploadFile(file, formData, type){
+        var destination;
+        switch (true) {
+            case (type=="Image") || (type=="Animation") : destination="images"; break;
+            case (type=="Sound") : destination="sounds"; break;
+            case (type=="ScreenShoot") : destination=""; break;
+        }
+		var url=app.serverGamesFolder+"/uploadFile.php?gameFolder="+app.gameFolder+"&assetFolder="+destination;
 		var xhr = new XMLHttpRequest();
         xhr.open("POST", url, true);
 		xhr.type=type;
-		xhr.fileName=fileName;
+		xhr.fileName=file.name;
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4)		
-                if (xhr.status == 200)  Command.addAssetCmd(this.fileName, this.type);
+                if (xhr.status == 200) {if (destination!="") Command.addAssetCmd(this.fileName, this.type);}
                 else  alert("Server Error! "+xhr.responseText);	
         }	
         xhr.send(formData);		
@@ -65,7 +66,6 @@ class File {
 		var assetFolder="";
 		if(type=="Image" || type=="Animation")	assetFolder="images";
 		else if(type=="Sound") assetFolder="sounds";
-		// console.log("Delete asset: "+fileName+" in "+assetFolder);
 		var url=app.serverGamesFolder+"/deleteAsset.php?gameFolder="+gameFolder+"&assetFolder="+assetFolder+"&filename="+fileName;
 		var xhr = new XMLHttpRequest();
 		xhr.assetID=assetID;
