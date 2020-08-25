@@ -272,10 +272,10 @@ class Logic {
             actor.collisionList.push(collisionVariable);
 
             /* Añadimos la varible de control al actor. */
-            actor[collisionVariable] = false;
+            actor[collisionVariable] = {value: false, end: false};
 
             /** Actualizamos la expresion */
-            expression += "Me." + collisionVariable;
+            expression += "Me." + collisionVariable + ".value";
 
             /** Comprobamos si es final de linea. */
             if(i < tagList.length - 1) { expression += " or "; }
