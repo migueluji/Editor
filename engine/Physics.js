@@ -22,11 +22,11 @@ class Physics {
 
         let gravity = (this.engine.game == undefined) ? new b2Vec2(0.0, 0.0) : new b2Vec2(this.engine.game.gravityX, this.engine.game.gravityY);
 
-        this.world       = new b2World(gravity, false); /** Gravity and sleep = false. Tiene que ser FALSE (si no linear_velocity puede no funcionar.) */
+        this.world = new b2World(gravity, false); /** Gravity and sleep = false. Tiene que ser FALSE (si no linear_velocity puede no funcionar.) */
         this.world.SetContinuousPhysics(true);
 
-        this.deltaTime   = 0.01;                        /** Valor de referencia para el ciclo de evaluacion de las fisicas. */
-        this.accumulator = 0.00;                        /** Propiedad auxiliar para ajustar el numero de evaluaciones por iteracion fisica. */
+        this.deltaTime   = 0.010;                        /** Valor de referencia para el ciclo de evaluacion de las fisicas. */
+        this.accumulator = 0.000;                        /** Propiedad auxiliar para ajustar el numero de evaluaciones por iteracion fisica. */
 
         this.setContactListener();
     }
@@ -53,6 +53,33 @@ class Physics {
         this.updateGame();
     }
 
+    reset() {
+
+        var rb, col;
+
+        for(var i = 0; i < this.rigidbodyList.length; i++) { // TODO: ¿Se podria hacer con maps o filters?
+
+            rb = this.rigidbodyList[i];
+
+            for(var j = 0; j < rb.collisionList.length; j++) {
+                
+                col = rb[rb.collisionList[j]];
+                col.value = col.end ? false : col.value;
+            }
+        }
+
+        for(var i = 0; i < this.triggerList.length; i++) {// TODO: ¿Se podria hacer con maps o filters?
+
+            rb = this.triggerList[i];
+
+            for(var j = 0; j < rb.collisionList.length; j++) {
+                
+                col = rb[rb.collisionList[j]];
+                col.value = col.end ? false : col.value;
+            }
+        }
+    }
+
     updateWorld() {
 
         for(var i = 0; i < this.rigidbodyList.length; i++) { this.updateBody(this.rigidbodyList[i]); }
@@ -63,7 +90,7 @@ class Physics {
 
         actor.rigidbody.m_body.SetPosition(new b2Vec2(actor.x / this.PIXELS_PER_METER, actor.y / this.PIXELS_PER_METER));
         actor.rigidbody.m_body.SetAngle(Util.degToRad(actor.angle));
-        //this.drawDebug(actor); // DEBUG
+        // this.drawDebug(actor); // DEBUG
     }
 
     updateGame() {
@@ -178,8 +205,6 @@ class Physics {
         for(var i = 0; i < actor.sprite.vertexData.length; i++) {
 
             actor.polygonVertex.push(actor.sprite.vertexData[i]);
-
-            //console.log(actor.polygonVertex[i] * this.PIXELS_PER_METER)
         }
 
         return this.setBoxShape(data);
@@ -208,8 +233,6 @@ class Physics {
 
     drawCircleShape(debug, actor) {
 
-        console.log()
-
         var graphics = new PIXI.Graphics();
         graphics.lineStyle(5, 0xff0000);
         graphics.drawCircle(actor.rigidbody.m_body.m_xf.position.x * this.PIXELS_PER_METER, -actor.rigidbody.m_body.m_xf.position.y * this.PIXELS_PER_METER, actor.rigidbody.m_shape.GetRadius() * this.PIXELS_PER_METER); //actor.rigidbody.m_shape.m_radius
@@ -228,25 +251,15 @@ class Physics {
         graphics.lineStyle(5, 0x0000ff);
         graphics.drawRect(origin_x * this.PIXELS_PER_METER, origin_y * this.PIXELS_PER_METER, width * this.PIXELS_PER_METER, height * this.PIXELS_PER_METER);
         debug.addChild(graphics);
-
-        /*var graphics = new PIXI.Graphics();
-        graphics.lineStyle(5, 0xff00ff);
-
-        for(var i = 0; i < actor.sprite.vertexData.length; i += 2) {
-
-            graphics.drawRect(actor.sprite.vertexData[i] * this.PIXELS_PER_METER, actor.sprite.vertexData[i+1] * this.PIXELS_PER_METER);
-        }
-
-        debug.addChild(graphics);*/
     }
 
     addContactListener(callbacks) {
                 
         var listener = new Box2D.Dynamics.b2ContactListener;
-
-        //if(callbacks.PreSolve)      { listener.PreSolve     = function(contact) { callbacks.PreSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
+        
         if(callbacks.BeginContact)  { listener.BeginContact = function(contact) { callbacks.BeginContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
-        //if(callbacks.PostSolve)     { listener.PostSolve    = function(contact) { callbacks.PostSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
+        //if(callbacks.PreSolve)      { listener.PreSolve     = function(contact) { callbacks.PreSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; } // TODO: Con esto descomentado hay problemas con la deteccion y respuesta de colisiones.
+        if(callbacks.PostSolve)     { listener.PostSolve    = function(contact) { callbacks.PostSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
         if(callbacks.EndContact)    { listener.EndContact   = function(contact) { callbacks.EndContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
         
         this.world.SetContactListener(listener);
@@ -256,9 +269,9 @@ class Physics {
 
         this.addContactListener({
 
-            PreSolve:     function(idA, idB) { Physics.collisionHandler(idA, idB, true, "presolve"); },
-            BeginContact: function(idA, idB) { Physics.collisionHandler(idA, idB, true, "begincontact"); },
-            PostSolve:    function(idA, idB) { Physics.collisionHandler(idA, idB, true, "postsolve"); },
+            BeginContact: function(idA, idB) { Physics.collisionHandler(idA, idB, true,  "begincontact"); },
+            //PreSolve:     function(idA, idB) { Physics.collisionHandler(idA, idB, true,  "presolve"); }, // TODO: Borrar, no descomentar jamas. Da problemas.
+            PostSolve:    function(idA, idB) { Physics.collisionHandler(idA, idB, true,  "postsolve"); },
             EndContact:   function(idA, idB) { Physics.collisionHandler(idA, idB, false, "endcontact"); }
         });
     }
@@ -268,13 +281,23 @@ class Physics {
         for(var i = 0; i < idB.tags.length; i++) { 
 
             var collisionVariable = "collidingWith" + idB.tags[i] + "Tag";
-            if(idA[collisionVariable] != undefined) { idA[collisionVariable] = value; }
+
+            if(idA[collisionVariable] != undefined) { 
+                
+                idA[collisionVariable].end = (id == "endcontact");
+                idA[collisionVariable].value = idA[collisionVariable].end ? true : value;
+            }
         }
 
         for(var i = 0; i < idA.tags.length; i++) {
 
             var collisionVariable = "collidingWith" + idA.tags[i] + "Tag";
-            if(idB[collisionVariable] != undefined) { idB[collisionVariable] = value; }
+
+            if(idB[collisionVariable] != undefined) { 
+                
+                idB[collisionVariable].end = (id == "endcontact");
+                idB[collisionVariable].value = idB[collisionVariable].end ? true : value;
+            }
         }
 
         idA = idB = null;

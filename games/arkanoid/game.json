@@ -456,7 +456,7 @@
 					"onstart": true
 				},
 				{
-					"name": "Actor_8",
+					"name": "blue",
 					"sleeping": false,
 					"x": -100,
 					"y": 90,
@@ -533,7 +533,7 @@
 					]
 				},
 				{
-					"name": "Actor_8_copy",
+					"name": "purple",
 					"sleeping": false,
 					"x": 100,
 					"y": 90,
@@ -610,7 +610,7 @@
 					]
 				},
 				{
-					"name": "Actor_8_copy_2",
+					"name": "greenright",
 					"sleeping": false,
 					"x": 280,
 					"y": 90,
@@ -687,7 +687,7 @@
 					]
 				},
 				{
-					"name": "Actor_8_copy_3",
+					"name": "red",
 					"sleeping": false,
 					"x": -280,
 					"y": 90,
@@ -764,7 +764,7 @@
 					]
 				},
 				{
-					"name": "Actor_8_copy_4",
+					"name": "greenleft",
 					"sleeping": false,
 					"x": -200,
 					"y": 160,
@@ -841,7 +841,7 @@
 					]
 				},
 				{
-					"name": "Actor_8_copy_5",
+					"name": "grey",
 					"sleeping": false,
 					"x": 0,
 					"y": 160,
@@ -900,15 +900,15 @@
 									},
 									"nodeListTrue": [
 										{
-											"type": "Delete",
-											"parameters": {}
-										},
-										{
 											"type": "Edit",
 											"parameters": {
 												"property": "score.b",
 												"value": "score.b-1"
 											}
+										},
+										{
+											"type": "Delete",
+											"parameters": {}
 										}
 									],
 									"nodeListFalse": []
@@ -918,7 +918,7 @@
 					]
 				},
 				{
-					"name": "Actor_8_copy_6",
+					"name": "yellow",
 					"sleeping": false,
 					"x": 200,
 					"y": 160,
