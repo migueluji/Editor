@@ -78,7 +78,7 @@ class Command {
         return(this.editor.getPropertiesList(element,type));
     }
     
-    // ASSETS
+// ASSETS
     static addAssetCmd(name,type){
         this.editor.addAsset(name,type);
     }

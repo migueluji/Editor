@@ -75,17 +75,41 @@ class CanvasView {
             var displayActor = new DisplayActor(this,actor,this.actorList,this.gameProperties); 
             scene.addChild(displayActor);
         });
-  
-        pixiApp.renderer.extract.canvas(scene).toBlob((b) => {
-            const a = document.createElement('a');
-            a.download = 'screenshot';
-            a.href = URL.createObjectURL(b);
-            a.click();
-            a.remove();
-        }, 'image/png');
+    //    const image = pixiApp.renderer.extract.image(scene);
+    //    document.body.appendChild(image);
+    //   
+   //     formData.append('asset-file',image,"game.png");
+         var xhr = new XMLHttpRequest();
+         var url=app.serverGamesFolder+"/uploadScreenShoot.php?gameFolder="+gameFolder;
+         xhr.open("POST", url,true);
+	// 	xhr.type="Image";
+	// 	xhr.fileName="game.png";
+        xhr.onreadystatechange = function () {
+             if (xhr.readyState == 4)		
+                 if (xhr.status == 200) alert(xhr.responseText);
+                 else  alert("Server Error! "+xhr.responseText);	
+        }	
+    // //    console.log("take",app.serverGamesFolder,xhr.fileName,formData,xhr.type,url);
+    //     xhr.send(image);		 
+         pixiApp.renderer.extract.canvas(scene).toBlob((b) => {
+        //      const a = document.createElement('a');
+        //      a.download = 'screenshot';
+        //      a.href = URL.createObjectURL(b);
+        //      a.click();
+        //      a.remove();
+                var formData= new FormData();
+                formData.append("asset-file",b,"game.png");
+                xhr.send(formData);
+
+                console.log(b,xhr);
+         }, 'image/png');
         
     }
-    
+    // uploadFile(file,type){
+    //     var formData = new FormData();
+    //     formData.append('asset-file', file, file.name); 				
+    // 	File.uploadFile(app.gameFolder, file.name, formData, type);			
+    // }
     loadImage(image){
         while(app.file.loader.loading);
         app.file.loader.add(image);
