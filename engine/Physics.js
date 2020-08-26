@@ -68,7 +68,7 @@ class Physics {
             }
         }
 
-        for(var i = 0; i < this.triggerList.length; i++) {// TODO: ¿Se podria hacer con maps o filters?
+        for(var i = 0; i < this.triggerList.length; i++) { // TODO: ¿Se podria hacer con maps o filters?
 
             rb = this.triggerList[i];
 
@@ -285,7 +285,7 @@ class Physics {
             if(idA[collisionVariable] != undefined) { 
                 
                 idA[collisionVariable].end = (id == "endcontact");
-                idA[collisionVariable].value = idA[collisionVariable].end ? true : value;
+                idA[collisionVariable].value = idA[collisionVariable].end ? false : value;
             }
         }
 
@@ -296,7 +296,7 @@ class Physics {
             if(idB[collisionVariable] != undefined) { 
                 
                 idB[collisionVariable].end = (id == "endcontact");
-                idB[collisionVariable].value = idB[collisionVariable].end ? true : value;
+                idB[collisionVariable].value = idB[collisionVariable].end ? false : value;
             }
         }
 
