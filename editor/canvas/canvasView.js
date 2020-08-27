@@ -2,6 +2,7 @@ class CanvasView {
 
     constructor(game,sceneIndex) {  
         this.actorList=game.sceneList[sceneIndex].actorList;
+        this.mainActorList=game.sceneList[0].actorList; // actorList to take screenShoot
         this.drawerOffset=256;
 		this.html = document.createElement("div");
         this.html.className +="canvas";
@@ -49,12 +50,15 @@ class CanvasView {
 
     takeScreenshot(){
         const pixiApp = new PIXI.Application({
-            width: 800, height:600, backgroundColor: this.gameProperties.backgroundColor, resolution: window.devicePixelRatio || 1,
+            width: 400, height:300, backgroundColor: this.gameProperties.backgroundColor, resolution: window.devicePixelRatio || 1, transparent:true,
         });
+     
+        var stage= new PIXI.Container();
 
         const frame = new PIXI.Graphics(); // draw the camera frame
-        frame.beginFill(0xaaaaaa);
-        frame.drawRect(-this.gameProperties.displayWidth/2.0,-this.gameProperties.displayHeight/2.0,this.gameProperties.displayWidth,this.gameProperties.displayHeight);
+        frame.beginFill(0xffffff);
+      //  frame.drawRect(-this.gameProperties.displayWidth/2.0,-this.gameProperties.displayHeight/2.0,this.gameProperties.displayWidth,this.gameProperties.displayHeight);
+        frame.drawRect(-400,-300,800,600);
         frame.endFill();
  
         const frameTexture = new PIXI.Sprite(PIXI.Texture.WHITE); // draw background sprite
@@ -68,14 +72,16 @@ class CanvasView {
         scene.position ={x:-this.gameProperties.cameraX,y:this.gameProperties.cameraY};
         scene.angle = this.gameProperties.cameraAngle;
         scene.scale = {x:this.gameProperties.cameraZoom,y:-this.gameProperties.cameraZoom};
-        scene.mask=frame;      
+        scene.mask=frame;  
 
-        this.actorList.forEach(actor => {
-            var displayActor = new DisplayActor(this,actor,this.actorList,this.gameProperties); 
+        this.mainActorList.forEach(actor => {
+            var displayActor = new DisplayActor(this,actor,this.mainActorList,this.gameProperties); 
             scene.addChild(displayActor);
         });
+        
+        stage.addChild(scene);
 
-        pixiApp.renderer.extract.canvas(scene).toBlob((blob) => {
+        pixiApp.renderer.extract.canvas(stage).toBlob((blob) => {
                 var formData= new FormData();
                 formData.append("file",blob,"game.png");
                 File.uploadFile(blob,formData,"ScreenShoot");

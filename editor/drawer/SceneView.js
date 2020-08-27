@@ -4,35 +4,43 @@ class SceneView {
 		this.html = document.createElement("li");
 		this.html.setAttribute("draggable","true");
 		this.html.innerHTML =
-			'<div class="mdc-list-item mdc-ripple-upgraded" role="option" aria-selected="false">'+
-				'<span style="font-size:36px" class="mdc-list-item__graphic material-icons" aria-hidden="true">panorama_wide_angle</span>'+
-				'<span class="mdc-list-item__text"></span>'+
-				'<button id="more" class="mdc-button mdc-list-item__meta material-icons">more_vert</button>'+
-			'</div>'+
-			'<div class="mdc-menu-surface--anchor menu-scene">'+
-				'<div class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
-					'<ul class="mdc-list" role="menu" aria-hidden="true">'+
-						'<li id="rename" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Rename</li>'+
-						'<li id="duplicate" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Duplicate</li>'+
-						'<li id="delete" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Delete</li>'+
-					'</ul>'+
+			'<li class="mdc-image-list__item">'+
+				'<div class="mdc-image-list__image-aspect-container">'+
+					'<img class="mdc-image-list__image" src="http://localhost/games/alien-invasion/game.png">'+
 				'</div>'+
-			'</div>';
-		this.html.querySelector("#more").addEventListener("click",this.menuSceneHandler.bind(this));
-		this.html.querySelector("#rename").addEventListener("click",this.renameSceneHandler.bind(this));
-		this.html.querySelector('#duplicate').addEventListener("click",this.duplicateSceneHandler.bind(this));
-		this.html.querySelector('#delete').addEventListener("click",this.removeSceneHandler.bind(this));
-		this.html.addEventListener("dragstart",this.dragstartSceneHandler.bind(this));
-		this.html.addEventListener("dragover",this.dragoverSceneHandler.bind(this));
-		this.html.addEventListener("dragleave",this.dragleaveSceneHandler.bind(this));
-		this.html.addEventListener("drop",this.dropSceneHandler.bind(this));
-		this.html.addEventListener("click",this.selectSceneHandler.bind(this));
-		this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
+				'<div class="mdc-image-list__supporting">'+
+					'<span class="mdc-image-list__label">Text label</span>'+
+				'</div>'+
+			'</li>';
+			// '<div class="mdc-list-item mdc-ripple-upgraded" role="option" aria-selected="false">'+
+			// 	'<span style="font-size:36px" class="mdc-list-item__graphic material-icons" aria-hidden="true">panorama_wide_angle</span>'+
+			// 	'<span class="mdc-list-item__text"></span>'+
+			// 	'<button id="more" class="mdc-button mdc-list-item__meta material-icons">more_vert</button>'+
+			// '</div>'+
+			// // '<div class="mdc-menu-surface--anchor menu-scene">'+
+			// // 	'<div class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
+			// // 		'<ul class="mdc-list" role="menu" aria-hidden="true">'+
+			// // 			'<li id="rename" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Rename</li>'+
+			// // 			'<li id="duplicate" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Duplicate</li>'+
+			// // 			'<li id="delete" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Delete</li>'+
+			// // 		'</ul>'+
+			// // 	'</div>'+
+			// // '</div>';
+		// this.html.querySelector("#more").addEventListener("click",this.menuSceneHandler.bind(this));
+		// this.html.querySelector("#rename").addEventListener("click",this.renameSceneHandler.bind(this));
+		// this.html.querySelector('#duplicate').addEventListener("click",this.duplicateSceneHandler.bind(this));
+		// this.html.querySelector('#delete').addEventListener("click",this.removeSceneHandler.bind(this));
+		// this.html.addEventListener("dragstart",this.dragstartSceneHandler.bind(this));
+		// this.html.addEventListener("dragover",this.dragoverSceneHandler.bind(this));
+		// this.html.addEventListener("dragleave",this.dragleaveSceneHandler.bind(this));
+		// this.html.addEventListener("drop",this.dropSceneHandler.bind(this));
+		// this.html.addEventListener("click",this.selectSceneHandler.bind(this));
+		// this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
 	}
     
   addView(scene) {
 		this.html.id=scene.id;
-		this.html.querySelector(".mdc-list-item__text").innerHTML=scene.name.split("_").join(" ");;
+	//	this.html.querySelector(".mdc-list-item__text").innerHTML=scene.name.split("_").join(" ");;
 	}
 	  
 // Handlers

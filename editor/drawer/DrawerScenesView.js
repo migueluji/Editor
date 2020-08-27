@@ -8,7 +8,8 @@ class DrawerScenesView {
 					'<i class="material-icons mdc-button__icon">add</i>'+
 					'<span class="mdc-button__label">add scene</span>'+
 			'</button>'+ 
-			'<ul class="mdc-list  mdc-list--avatar-list"></ul>';
+			'<ul id="scenes" style="display:block" class="mdc-image-list"></ul>';
+		//	'<ul class="mdc-list  mdc-list--avatar-list"></ul>';
 		this.html.querySelector("#addscene").addEventListener("click",this.addSceneHandler.bind(this));
 		this.init(sceneList);
 	}
@@ -26,7 +27,8 @@ class DrawerScenesView {
 	}
 
   	addScene(sceneView,scenePos) {
-		var element = this.html.querySelector(".mdc-list");
+		//var element = this.html.querySelector(".mdc-list");
+		var element = this.html.querySelector("#scenes");
 		element.insertBefore(sceneView.html,element.childNodes[scenePos]);
 	}
 
