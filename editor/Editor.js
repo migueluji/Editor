@@ -144,7 +144,6 @@ class Editor {
         switch (true) {
            case SideSheetView.isOpenCast(): this.openCast();break;
            case SideSheetView.isOpenGameProperties(): this.openGameProperties(); break;
-     //      case (SideSheetView.isOpenActorProperties() && oldSelectedSceneIndex==this.selectedSceneIndex) : this.openActorProperties(); break;
            default :SideSheetView.closeSheetHandler(); this.view.openCanvas("canvas"); break;
         }
     }
