@@ -14,16 +14,17 @@ class Editor {
         else this.appBarView=new AppBarView(gameModel.sceneList[0].name);
         this.view.addView(this.appBarView.html);
 
-        //Drawer 
-        this.drawerHeaderView= new DrawerHeaderView(gameModel.name);
-        this.drawerScenesView= new DrawerScenesView(gameModel.sceneList);
-        this.view.addView(this.drawerScenesView.html);
-        this.view.addView(this.drawerHeaderView.html);
-
+        // canvas
         this.canvasView = new CanvasView(gameModel,this.selectedSceneIndex);
         this.view.addView(this.canvasView.html);
         this.scriptCanvasView = new ScriptCanvasView();
         this.view.addView(this.scriptCanvasView.html);
+        
+        //Drawer 
+        this.drawerHeaderView= new DrawerHeaderView(gameModel.name);
+        this.drawerScenesView= new DrawerScenesView(gameModel.sceneList,this.canvasView);
+        this.view.addView(this.drawerScenesView.html);
+        this.view.addView(this.drawerHeaderView.html);
 
         //Side Sheet
         this.sideSheetView=new SideSheetView();
@@ -76,7 +77,7 @@ class Editor {
         delete saveToFile.imageList;
         delete saveToFile.soundList;
         File.save(JSON.stringify(saveToFile, (key,value)=>{if(key!="id")return value}, '\t'));
-        this.canvasView.takeScreenshot();
+        this.canvasView.takeScreenshot(800,600,0,this.model.sceneList[0].actorList,true);
      }
 
      playGame(){
@@ -87,8 +88,8 @@ class Editor {
 
         var form = document.createElement("form");
         form.setAttribute("method", "post");
-        form.setAttribute("action", "../engine/index.php");
-        form.setAttribute("target", "_blank");
+        form.setAttribute("action", "../engine/");
+        form.setAttribute("target", "play");
 
         var inputFolder = document.createElement('input');
         inputFolder.type = 'text';
@@ -102,8 +103,13 @@ class Editor {
         inputUrl.value = app.serverGamesFolder;
         form.appendChild(inputUrl);
         document.body.appendChild(form);
-        form.submit();
+        console.log(form);
 
+        // var windowProperties='titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,height='+this.model.displayHeight+',width='+this.model.displayWidth;
+        // console.log(windowProperties);
+        // var win=window.open('','play',windowProperties);
+        // win.moveTo(((screen.width-this.model.displayWidth)/2),((screen.height-this.model.displayHeight)/2));  
+        form.submit();
         document.body.removeChild(form); 
     }
 
@@ -146,6 +152,11 @@ class Editor {
            case SideSheetView.isOpenGameProperties(): this.openGameProperties(); break;
            default :SideSheetView.closeSheetHandler(); this.view.openCanvas("canvas"); break;
         }
+        var d;
+        var w=this.model.displayWidth;
+        var h=this.model.displayHeight;
+        (w>h) ? d=h : d=w ;
+        this.canvasView.takeScreenshot(d,d,sceneID,this.model.sceneList[this.selectedSceneIndex].actorList,false);
     }
 
     openCast(){

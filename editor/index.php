@@ -131,13 +131,13 @@
 	// 	gameFolder="bird";
 	//	gameFolder="flying-plane";
 	//	gameFolder="asteroids";
-	//	gameFolder="arkanoid";
-		gameFolder="alien-invasion";
+		gameFolder="arkanoid";
+	//	gameFolder="alien-invasion";
 	//	gameFolder="babe-plataformer";
 	//  gameFolder="ludumdare46-carlos";
 	//	gameFolder="empty";
 			
-		var app=new App(/*userId, gameId,*/ serverGamesFolder,gameFolder);
+		var app=new App(serverGamesFolder,gameFolder);
 	</script>
 	<script type="text/javascript">
 		let type = "WebGL"

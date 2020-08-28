@@ -9,13 +9,13 @@ class AppBarView {
 				'<button id="drawer" class="material-icons mdc-top-app-bar__navigation-icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">menu</button>'+
 				'<span id="sceneName" class="mdc-top-app-bar__title"></span>'+
 			'</section>'+
+			'<button id="play" style="font-size:36px" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">play_arrow</button>'+
 			'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">'+
-				'<button id="settings" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">settings</button>'+
-				'<button id="save" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">save</button>'+
 				'<button id="undo" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">undo</button>'+
 				'<button id="redo" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">redo</button>'+
 				'<button id="cast" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">list</button>'+
-				'<button id="play" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">play_circle_filled</button>'+
+				'<button id="save" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">save</button>'+
+				'<button id="settings" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">settings</button>'+
 			'</section>'+
 		'</div>';
 		this.updateSceneName(sceneName);	

@@ -5,8 +5,7 @@ class SceneView {
 		this.html.setAttribute("draggable","true");
 		this.html.innerHTML =
 			'<div style="height:72px" class="mdc-list-item mdc-ripple-upgraded" role="option" aria-selected="false">'+
-				//'<span style="font-size:36px" class="mdc-list-item__graphic material-icons" aria-hidden="true">panorama_wide_angle</span>'+
-				'<img style="margin-right:16px;height:56px; width:56px" class="mdc-image-list__image" src="http://localhost/games/alien-invasion/game.png"></img>'+
+				'<img style="border-radius:10%;margin-right:16px;height:56px; width:56px" class="mdc-image-list__image" src=""></img>'+
 				'<span class="mdc-list-item__text"></span>'+
 				'<button id="more" style="margin-right:-12px" class="mdc-button mdc-list-item__meta material-icons">more_vert</button>'+
 			'</div>'+
@@ -33,7 +32,7 @@ class SceneView {
     
   addView(scene) {
 		this.html.id=scene.id;
-		this.html.querySelector(".mdc-list-item__text").innerHTML=scene.name.split("_").join(" ");;
+		this.html.querySelector(".mdc-list-item__text").innerHTML=scene.name.split("_").join(" ");
 	}
 	  
 // Handlers

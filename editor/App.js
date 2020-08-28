@@ -1,7 +1,5 @@
 class App {
-    constructor(/*userId, gameId,*/ serverGamesFolder,gameFolder){		
-	//	this.userId=userId;
-    //	this.gameId=gameId;
+    constructor(serverGamesFolder,gameFolder){		
         this.file=new File();
         this.serverGamesFolder=serverGamesFolder;
         this.gameFolder=gameFolder;

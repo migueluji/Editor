@@ -1,27 +1,31 @@
 class DrawerScenesView {
 
-	constructor(sceneList) {   
+	constructor(sceneList,canvas) {   
 		this.html = document.createElement("div");
 		this.html.className +="mdc-drawer__content";
 		this.html.innerHTML =
-			'<button id="addscene" class="mdc-button mdc-button--unelevated mdc-ripple-upgraded  add-scene-button">'+
+			'<button id="addscene" style="margin-bottom:12px" class="mdc-button mdc-button--unelevated mdc-ripple-upgraded  add-scene-button">'+
 					'<i class="material-icons mdc-button__icon">add</i>'+
 					'<span class="mdc-button__label">add scene</span>'+
 			'</button>'+ 
 			'<ul id="scenes" class="mdc-list  mdc-list--avatar-list"></ul>';
 		this.html.querySelector("#addscene").addEventListener("click",this.addSceneHandler.bind(this));
-		this.init(sceneList);
+		this.init(sceneList,canvas);
 	}
 
-	init(sceneList){
+	init(sceneList,canvas){
 		var scenePos=0;
 		sceneList.forEach(scene => {
 			scenePos++;
 			var sceneView = new SceneView();
 			sceneView.addView(scene);
+			var d;
+			var w=canvas.gameProperties.displayWidth;
+			var h=canvas.gameProperties.displayHeight;
+			(w>h) ? d=h : d=w ;
+			canvas.takeScreenshot(d,d,scene.id,scene.actorList,false);
 			this.addScene(sceneView,scenePos);
 		});	
-		console.log(sceneList);
 		if (sceneList[0]) this.updateSelectedScene(sceneList[0].id);
 	}
 

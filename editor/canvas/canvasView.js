@@ -2,7 +2,7 @@ class CanvasView {
 
     constructor(game,sceneIndex) {  
         this.actorList=game.sceneList[sceneIndex].actorList;
-        this.mainActorList=game.sceneList[0].actorList; // actorList to take screenShoot
+     //   this.mainActorList=game.sceneList[0].actorList; // actorList to take screenShoot
         this.drawerOffset=256;
 		this.html = document.createElement("div");
         this.html.className +="canvas";
@@ -45,20 +45,16 @@ class CanvasView {
         this.mouseDown=false;
         this.diff={x:0,y:0} 
         this.initApp();
-
+        this.pixiApp = new PIXI.Application(); // one WebGL context for all screenshots
     }
 
-    takeScreenshot(){
-        const pixiApp = new PIXI.Application({
-            width: 400, height:300, backgroundColor: this.gameProperties.backgroundColor, resolution: window.devicePixelRatio || 1, transparent:true,
-        });
-     
+    takeScreenshot(w,h,sceneID,actorList,upload){
+        
         var stage= new PIXI.Container();
 
         const frame = new PIXI.Graphics(); // draw the camera frame
         frame.beginFill(0xffffff);
-      //  frame.drawRect(-this.gameProperties.displayWidth/2.0,-this.gameProperties.displayHeight/2.0,this.gameProperties.displayWidth,this.gameProperties.displayHeight);
-        frame.drawRect(-400,-300,800,600);
+        frame.drawRect(-w/2.0,-h/2.0,w,h);
         frame.endFill();
  
         const frameTexture = new PIXI.Sprite(PIXI.Texture.WHITE); // draw background sprite
@@ -74,19 +70,26 @@ class CanvasView {
         scene.scale = {x:this.gameProperties.cameraZoom,y:-this.gameProperties.cameraZoom};
         scene.mask=frame;  
 
-        this.mainActorList.forEach(actor => {
-            var displayActor = new DisplayActor(this,actor,this.mainActorList,this.gameProperties); 
+        actorList.forEach(actor => {
+            var displayActor = new DisplayActor(this,actor,actorList,this.gameProperties); 
             scene.addChild(displayActor);
         });
         
         stage.addChild(scene);
+   
 
-        pixiApp.renderer.extract.canvas(stage).toBlob((blob) => {
-                var formData= new FormData();
-                formData.append("file",blob,"game.png");
-                File.uploadFile(blob,formData,"ScreenShoot");
+        this.pixiApp.renderer.extract.canvas(stage).toBlob((blob) => {
+                if (upload){
+                    var formData= new FormData();
+                    formData.append("file",blob,"game.png");
+                    File.uploadFile(blob,formData,"ScreenShoot");
+                }
+                else {
+                    var image=document.querySelector("#"+sceneID).querySelector("img");
+                    var url=window.URL || Window.webkitURL;
+                    image.src=url.createObjectURL(blob);
+                }
         }, 'image/png');
-        
     }
 
     loadImage(image){
