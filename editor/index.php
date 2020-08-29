@@ -138,6 +138,7 @@
 	//	gameFolder="empty";
 			
 		var app=new App(serverGamesFolder,gameFolder);
+		
 	</script>
 	<script type="text/javascript">
 		let type = "WebGL"

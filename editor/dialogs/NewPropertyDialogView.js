@@ -12,7 +12,7 @@ class NewPropertyDialogView {
 						'<span class="mdc-floating-label">Property name</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
-					'<p style="color:red" class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="error"></p>'+
+					'<p style="color:#b00020" class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="error"></p>'+
 				'<div>'+
 				'<h3 class="mdc-typography--subtitle1">Property type</h3>'+
 				'<div class="mdc-form-field">'+
@@ -78,7 +78,7 @@ class NewPropertyDialogView {
 		}
 		else {
 			if ("abcdefghijklmnñopqrstuvwxyz".indexOf(this.name[0]) < 0)	{
-				this.html.querySelector("#error").innerText="The first character needs to be a letter";
+				this.html.querySelector("#error").innerText="The first character must be a letter";
 			}
 			else{
 				if (panel.querySelector("#"+this.name)){

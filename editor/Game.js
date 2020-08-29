@@ -27,13 +27,14 @@ class Game {
         var obj={
             // Settings
             displayWidth:this.displayWidth || 800, displayHeight:this.displayHeight || 480, 
-            cameraX:this.cameraX || 0, cameraY:this.cameraY || 0, cameraAngle:this.cameraAngle || 0, cameraZoom:this.cameraZoom || 1,
+            cameraX:this.cameraX || 0, cameraY:this.cameraY || 0, cameraAngle:this.cameraAngle || 0, cameraZoom:this.cameraZoom,
             backgroundColor:this.backgroundColor || "#ffffff",
             // Sound
             soundOn:this.soundOn || false, soundtrack:this.soundtrack || "", volume:this.volume || 1, start:this.start || 0, pan:this.pan || 0, loop:this.loop || false, 
             // Physics
             physicsOn:this.physicsOn || true, gravityX: this.gravityX || 0, gravityY:this.gravityY || -9.8
         }
+        if(obj.cameraZoom==undefined) obj.cameraZoom=1;
         return(obj);
     }
 

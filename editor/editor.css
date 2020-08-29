@@ -130,7 +130,7 @@ button{
     height:100%;
 }
 .mdc-card{
-    padding: 0px 16px;
+    padding: 8px 24px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -140,7 +140,6 @@ button{
 .side-sheet{
     width: 320px;
     height: 100%;
-   // border-left: 1px solid lightgray;
     background: white;
     z-index: 5;
 }
@@ -208,10 +207,10 @@ button{
     width: 100%;
     margin: 4px 8px;
 } */
-/* .mdc-form-field{
+.mdc-form-field{
     width: 100%;
     margin: 4px 16px;
-} */
+}
 .mdc-form-field>label{
     padding-left: 16px;
     color: rgba(0,0,0,0.6);
@@ -288,8 +287,3 @@ button{
     width: 50%;
     margin:0px 8px;
 }
-/* .mdc-select .mdc-select__anchor {
-    padding-left: 16px;
-    padding-right: 0;
-    margin: 4px 8px 4px 8px;
-} */
