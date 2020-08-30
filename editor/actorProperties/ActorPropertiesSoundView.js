@@ -19,7 +19,7 @@ class ActorPropertiesSoundView {
 			'<div class="properties-panel">'+
 				'<label style="width: -webkit-fill-available;" class="half-text mdc-text-field mdc-text-field--filled">'+
 					'<span class="mdc-text-field__ripple"></span>'+
-					'<input id="sound" value="1" class="mdc-text-field__input" type="text">'+
+					'<input id="sound" value="sound" style="width:200px" class="mdc-text-field__input" type="text">'+
 					'<span class="mdc-floating-label" >Sound</span>'+
 					'<button id="soundbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
 						'<i class="material-icons mdc-button_icon">folder</i>'+
@@ -29,13 +29,13 @@ class ActorPropertiesSoundView {
 				'<div class="two-properties">'+	
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="volume" value="1" class="mdc-text-field__input" type="number">'+
+						'<input id="volume" value="1" min="0" step="0.1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Volume</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="start" value="1" class="mdc-text-field__input" type="number">'+
+						'<input id="start"  value="0" min="0" step="0.1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Start</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
@@ -43,7 +43,7 @@ class ActorPropertiesSoundView {
 				'<div class="two-properties">'+	
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="pan" value="1" class="mdc-text-field__input" type="number">'+
+						'<input id="pan" value="0" min="-1" max="1" step="0.1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Pan</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+

@@ -17,7 +17,7 @@ class CastView {
 		 '</div>'+
 		'</header>'+
 		'<div class="list">'+
-			'<ul class="list-bottom mdc-list  mdc-list--avatar-list"></ul>'+ 
+			'<ul class="mdc-list  mdc-list--avatar-list"></ul>'+ 
 		'</div>';
 		this.html.querySelector("#closebutton").addEventListener("click",SideSheetView.closeSheetHandler);
 		this.html.querySelector("#addactor").addEventListener("click",this.addActorHandler.bind(this));

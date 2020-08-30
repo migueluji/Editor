@@ -19,7 +19,7 @@ class ActorPropertiesTextView {
 			'<div class="properties-panel">'+
 				'<label style="width: -webkit-fill-available;" class="half-text mdc-text-field mdc-text-field--filled">'+
 					'<span class="mdc-text-field__ripple"></span>'+
-					'<input id="text" value="1" class="mdc-text-field__input" type="text">'+
+					'<input id="text" value="Text" style="width:200px" class="mdc-text-field__input" type="text">'+
 					'<span class="mdc-floating-label" >Text</span>'+
 					'<button id="textbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
 						'<i class="material-icons mdc-button_icon">folder</i>'+
@@ -28,7 +28,7 @@ class ActorPropertiesTextView {
 				'</label>'+
 				'<label style="width: -webkit-fill-available;" class="half-text mdc-text-field mdc-text-field--filled">'+
 					'<span class="mdc-text-field__ripple"></span>'+
-					'<input id="font" value="1" class="mdc-text-field__input" type="text">'+
+					'<input id="font" value="Font" style="width:200px" class="mdc-text-field__input" type="text">'+
 					'<span class="mdc-floating-label" >Font</span>'+
 					'<button id="fontbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
 						'<i class="material-icons mdc-button_icon">folder</i>'+
@@ -44,7 +44,7 @@ class ActorPropertiesTextView {
 					'</label>'+
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="size" value="1" class="mdc-text-field__input" type="number">'+
+						'<input id="size" value="12" min="1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Size</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
@@ -65,7 +65,7 @@ class ActorPropertiesTextView {
 						'</div>'+
 						'<div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">'+
 							'<ul class="mdc-list">'+
-								'<li class="mdc-list-item"  data-value="Normal">'+
+								'<li class="mdc-list-item mdc-list-item--selected"  data-value="Normal">'+
 									'<span class="mdc-list-item__ripple"></span>'+
 									'<span class="mdc-list-item__text">Normal</span>'+
 								'</li>'+
@@ -95,7 +95,7 @@ class ActorPropertiesTextView {
 						'</div>'+
 						'<div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">'+
 							'<ul class="mdc-list">'+
-								'<li class="mdc-list-item"  data-value="Left">'+
+								'<li class="mdc-list-item mdc-list-item--selected"  data-value="Left">'+
 									'<span class="mdc-list-item__ripple"></span>'+
 									'<span class="mdc-list-item__text">Left</span>'+
 								'</li>'+

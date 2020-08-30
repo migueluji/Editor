@@ -37,13 +37,13 @@ class ActorPropertiesSettingsView {
 				'<div class="two-properties">'+	
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="width" value="0" class="mdc-text-field__input" type="number">'+
+						'<input id="width" min="0" value="0" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Width</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="height" value="0" class="mdc-text-field__input" type="number">'+
+						'<input id="height" min="0" value="0" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Height</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
@@ -51,13 +51,13 @@ class ActorPropertiesSettingsView {
 				'<div class="two-properties">'+	
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="scaleX" value="0" class="mdc-text-field__input" type="number">'+
+						'<input id="scaleX" step="0.1" value="0" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Scale X</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="scaleY" value="0" class="mdc-text-field__input" type="number">'+
+						'<input id="scaleY" step="0.1" value="0" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Scale Y</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
@@ -65,7 +65,7 @@ class ActorPropertiesSettingsView {
 				'<div class="two-properties">'+	
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="angle" value="0" class="mdc-text-field__input" type="number">'+
+						'<input id="angle" value="0" step="1" min="-360" max="360" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Angle</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
@@ -97,7 +97,7 @@ class ActorPropertiesSettingsView {
 						'</div>'+
 						'<div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">'+
 							'<ul class="mdc-list">'+
-								'<li class="mdc-list-item"  data-value="Box">'+
+								'<li class="mdc-list-item mdc-list-item--selected"  data-value="Box">'+
 									'<span class="mdc-list-item__ripple"></span>'+
 									'<span class="mdc-list-item__text">Box</span>'+
 								'</li>'+

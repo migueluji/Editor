@@ -19,7 +19,7 @@ class ActorPropertiesSpriteView {
 			'<div class="properties-panel">'+
 				'<label style="width: -webkit-fill-available;" class="half-text mdc-text-field mdc-text-field--filled">'+
 					'<span class="mdc-text-field__ripple"></span>'+
-					'<input id="image" value="1" class="mdc-text-field__input" type="text">'+
+					'<input id="image" style="width:200px" value="Image" class="mdc-text-field__input" type="text">'+
 					'<span class="mdc-floating-label" >Image</span>'+
 					'<button id="imagebutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
 						'<i class="material-icons mdc-button_icon">folder</i>'+
@@ -35,7 +35,7 @@ class ActorPropertiesSpriteView {
 					'</label>'+
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="opacity" value="1" class="mdc-text-field__input" type="number">'+
+						'<input id="opacity" value="1" min="0" max="1" step="0.1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Opacity</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
@@ -67,13 +67,13 @@ class ActorPropertiesSpriteView {
 				'<div class="two-properties">'+	
 					'<label class="half-text  mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="scrollX" value="1" class="mdc-text-field__input" type="number">'+
+						'<input id="scrollX" value="0" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Scroll X</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="scrollY" value="1" class="mdc-text-field__input" type="number">'+
+						'<input id="scrollY" value="0" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Scroll Y</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
@@ -81,13 +81,13 @@ class ActorPropertiesSpriteView {
 				'<div class="two-properties">'+	
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="tileX" value="1" class="mdc-text-field__input" type="number">'+
+						'<input id="tileX" value="1" min="1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Tile X</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="tileY" value="1" class="mdc-text-field__input" type="number">'+
+						'<input id="tileY" value="1" min="1" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Tile Y</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+

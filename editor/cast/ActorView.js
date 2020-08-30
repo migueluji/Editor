@@ -5,9 +5,9 @@ class ActorView {
 		this.html.setAttribute("draggable","true");
 		this.html.innerHTML =
 			'<div class="mdc-list-item mdc-ripple-upgraded" role="option" aria-selected="false">'+
-				'<span style="font-size:36px" class="mdc-list-item__graphic material-icons" aria-hidden="true">account_circle</span>'+
+				'<span style="font-size:40px" class="mdc-list-item__graphic material-icons" aria-hidden="true">account_circle</span>'+
 				'<span class="mdc-list-item__text"></span>'+
-				'<button id="more" class="mdc-button mdc-list-item__meta material-icons">more_vert</button>'+
+				'<button id="more" style="margin-right:-8px" class="mdc-button mdc-list-item__meta material-icons">more_vert</button>'+
 			'</div>'+
 			'<div class="mdc-menu-surface--anchor menu-actor">'+
 				'<div class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
@@ -36,17 +36,17 @@ class ActorView {
 	}
    
   addView(actor) {
-//	  	console.log("addView",actor);
 		this.html.id=actor.id;
 		this.html.querySelector(".mdc-list-item__text").innerHTML=actor.name.split("_").join(" ");
-		if (actor.image){// miodifica el icono por defecto por la imagen del actor
+		if (actor.image){// change the default image to the actor image 
+			var div=this.html.querySelector(".mdc-list-item");
 			var span=this.html.querySelector(".mdc-list-item__graphic");
-				span.innerHTML="";
+				span.remove();
 				var image = new Image();
 				image.classList="mdc-list-item__graphic material-icons";
-				image.style="position:absolute;width:36px;height:auto;border-radius:unset";
+				image.style="width:40px;height:auto;border-radius:unset";
 				image.src=app.serverGamesFolder+"/"+app.gameFolder+"/images/"+actor.image;
-				span.appendChild(image);
+				div.insertBefore(image,div.childNodes[0]);
 		}
 	}
 

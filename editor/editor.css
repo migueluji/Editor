@@ -164,9 +164,6 @@ button{
     overflow-y: auto;
     border-left: 1px solid lightgray;
 }
-.list-bottom{
-    margin-bottom: 56px;
-}
 .properties-section{
     border-bottom:1px solid lightgray;
     background-color:white;
