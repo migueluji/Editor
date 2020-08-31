@@ -272,7 +272,7 @@ class Logic {
             actor.collisionList.push(collisionVariable);
 
             /* Añadimos la varible de control al actor. */
-            actor[collisionVariable] = {value: false, end: false};
+            actor[collisionVariable] = {value: false, end: false, iter: -1};
 
             /** Actualizamos la expresion */
             expression += "Me." + collisionVariable + ".value";

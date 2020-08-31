@@ -65,6 +65,7 @@ class Physics {
                 
                 col = rb[rb.collisionList[j]];
                 col.value = col.end ? false : col.value;
+                col.end = false;
             }
         }
 
@@ -76,6 +77,7 @@ class Physics {
                 
                 col = rb[rb.collisionList[j]];
                 col.value = col.end ? false : col.value;
+                col.end = false;
             }
         }
     }
@@ -259,7 +261,7 @@ class Physics {
         
         if(callbacks.BeginContact)  { listener.BeginContact = function(contact) { callbacks.BeginContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
         //if(callbacks.PreSolve)      { listener.PreSolve     = function(contact) { callbacks.PreSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; } // TODO: Con esto descomentado hay problemas con la deteccion y respuesta de colisiones.
-        if(callbacks.PostSolve)     { listener.PostSolve    = function(contact) { callbacks.PostSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
+        //if(callbacks.PostSolve)     { listener.PostSolve    = function(contact) { callbacks.PostSolve(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
         if(callbacks.EndContact)    { listener.EndContact   = function(contact) { callbacks.EndContact(contact.GetFixtureA().m_userData, contact.GetFixtureB().m_userData); }; }
         
         this.world.SetContactListener(listener);
@@ -271,32 +273,36 @@ class Physics {
 
             BeginContact: function(idA, idB) { Physics.collisionHandler(idA, idB, true,  "begincontact"); },
             //PreSolve:     function(idA, idB) { Physics.collisionHandler(idA, idB, true,  "presolve"); }, // TODO: Borrar, no descomentar jamas. Da problemas.
-            PostSolve:    function(idA, idB) { Physics.collisionHandler(idA, idB, true,  "postsolve"); },
+            //PostSolve:    function(idA, idB) { Physics.collisionHandler(idA, idB, true,  "postsolve"); },
             EndContact:   function(idA, idB) { Physics.collisionHandler(idA, idB, false, "endcontact"); }
         });
     }
 
     static collisionHandler(idA, idB, value, id) {
 
+        var collisionVariable;
+
         for(var i = 0; i < idB.tags.length; i++) { 
 
-            var collisionVariable = "collidingWith" + idB.tags[i] + "Tag";
+            collisionVariable = "collidingWith" + idB.tags[i] + "Tag";
 
             if(idA[collisionVariable] != undefined) { 
                 
-                idA[collisionVariable].end = (id == "endcontact");
-                idA[collisionVariable].value = idA[collisionVariable].end ? false : value;
+                idA[collisionVariable].end   = (id == "endcontact" && idA[collisionVariable].iter == idA.engine.iteration);
+                idA[collisionVariable].iter  = idA.engine.iteration;
+                idA[collisionVariable].value = (idA[collisionVariable].end) ? true : value;
             }
         }
 
         for(var i = 0; i < idA.tags.length; i++) {
 
-            var collisionVariable = "collidingWith" + idA.tags[i] + "Tag";
+            collisionVariable = "collidingWith" + idA.tags[i] + "Tag";
 
             if(idB[collisionVariable] != undefined) { 
                 
-                idB[collisionVariable].end = (id == "endcontact");
-                idB[collisionVariable].value = idB[collisionVariable].end ? false : value;
+                idB[collisionVariable].end   = (id == "endcontact" && idB[collisionVariable].iter == idB.engine.iteration);
+                idB[collisionVariable].iter  = idB.engine.iteration;
+                idB[collisionVariable].value = (idB[collisionVariable].end) ? true : value;
             }
         }
 

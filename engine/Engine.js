@@ -23,6 +23,8 @@ class Engine {
 
         this.index          = 0;                    /** Indices para el orden de visualizacion. */
 
+        this.iteration = 0;
+
         this.addScene(this.game.sceneList[this.game.activeScene]); /** Añadimos la primera escena. */
     }
 
@@ -34,6 +36,8 @@ class Engine {
         this.physics.run();
         this.logic.run();
         this.render.run();
+
+        this.iteration++;
 
         this.resetEngine();
 
