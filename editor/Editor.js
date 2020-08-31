@@ -103,12 +103,7 @@ class Editor {
         inputUrl.value = app.serverGamesFolder;
         form.appendChild(inputUrl);
         document.body.appendChild(form);
-        console.log(form);
 
-        // var windowProperties='titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,height='+this.model.displayHeight+',width='+this.model.displayWidth;
-        // console.log(windowProperties);
-        // var win=window.open('','play',windowProperties);
-        // win.moveTo(((screen.width-this.model.displayWidth)/2),((screen.height-this.model.displayHeight)/2));  
         form.submit();
         document.body.removeChild(form); 
     }
