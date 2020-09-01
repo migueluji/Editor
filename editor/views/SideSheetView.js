@@ -2,7 +2,7 @@ class SideSheetView {
 
     constructor() {   
 		 this.html = document.createElement("aside");
-		 this.html.className +="side-sheet";
+		 this.html.className +="side-sheet mdc-elevation--z1";
 		 this.html.style.display="none";
 		 this.html.innerHTML =
 				 '<div class="game-properties"></div>'+

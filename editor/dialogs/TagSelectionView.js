@@ -4,7 +4,7 @@ class TagSelectionView {
 		this.html = document.createElement("div");
 		this.html.className +="dialog-full-screen";
 		this.html.innerHTML =
-		 		'<div class="mdc-card" style="padding:0px">'+
+		 		'<div class="mdc-elevation--z24 mdc-card" style="padding:0px">'+
 					'<header class="mdc-top-app-bar--dense">'+
 						'<div class="mdc-top-app-bar__row">'+
 							'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">'+

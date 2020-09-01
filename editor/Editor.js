@@ -77,7 +77,7 @@ class Editor {
         delete saveToFile.imageList;
         delete saveToFile.soundList;
         File.save(JSON.stringify(saveToFile, (key,value)=>{if(key!="id")return value}, '\t'));
-        this.canvasView.takeScreenshot(800,600,0,this.model.sceneList[0].actorList,true);
+        this.canvasView.takeScreenshot(this.model.displayWidth,this.model.displayHeight,0,this.model.sceneList[0].actorList,true);
      }
 
      playGame(){

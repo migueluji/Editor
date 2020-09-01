@@ -4,7 +4,7 @@ class NewPropertyDialogView {
 		 this.html = document.createElement("div");
 		 this.html.className +="dialog-full-screen";
 		 this.html.innerHTML =
-				'<div class="mdc-card">'+
+				'<div class="mdc-elevation--z24 mdc-card">'+
 					'<h2 class="demo-card__title mdc-typography--headline6">Introduce new property</h2>'+
 					'<label style="width:auto;margin:0px" class="mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+

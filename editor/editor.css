@@ -3,6 +3,9 @@
 html{
     height: 100%;
 }
+.mdc-list-item:hover{
+    background-color: rgba(46,100,236,0.025);
+}
 :root{
     --mdc-theme-primary: #2E64EC;
     --mdc-theme-secondary: #2E64EC;
@@ -69,7 +72,7 @@ button{
     position: relative;
 }
 .menu-scene{
-     z-index:2; 
+    z-index:2; 
     transform:translate(130px,-48px);
     width: 0px;
 }
@@ -90,11 +93,11 @@ button{
     width: 0px;
 }
 .menu-field{
-     transform: translate(-116px, 60px);
+    transform: translate(-116px, 60px);
     z-index: 2;
 }
 .mdc-fab{
-    z-index: 2;
+    z-index: 1;
 }
 .mdc-menu .mdc-list-item {
     margin: 0px;
@@ -106,7 +109,7 @@ button{
     padding-left:16px;
 }
 .over{
-    border: 1px  solid lightgray;
+    border: 1px  solid lightgrey;
     opacity: 0.5;
 }
 .main-content{
@@ -125,7 +128,7 @@ button{
     display: table;
 }
 .dialog-full-screen{
-    z-index:100;
+    z-index:10;
     position:absolute;
     background-color:rgba(0,0,0,0.2);
     width:100%;
@@ -143,7 +146,7 @@ button{
     width: 320px;
     height: 100%;
     background: white;
-    z-index: 5;
+    z-index: 1;
 }
 .scene-properties{
     height: 100%;
@@ -159,12 +162,12 @@ button{
     padding: 0px;
     height: 100%;
     overflow-y: auto;
-    border-left: 1px solid lightgray;
+ //   border-left: 1px solid lightgray;
 }
 .list{
     height: 100%;
     overflow-y: auto;
-    border-left: 1px solid lightgray;
+//border-left: 1px solid lightgray;
 }
 .properties-section{
     border-bottom:1px solid lightgray;
@@ -189,7 +192,7 @@ button{
     display: none;
 }
 .properties-bar{
-    border-bottom: 1px solid lightgray;
+   // border-bottom: 1px solid lightgray;
     user-select: none;
     background:#2ec3ec; 
     color:white;
@@ -206,14 +209,14 @@ button{
     width: 100%;
     margin: 4px 8px;
 } */
-.mdc-form-field{
+/* .mdc-form-field{
     width: 100%;
     margin: 4px 16px;
 }
 .mdc-form-field>label{
     padding-left: 16px;
-    color: rgba(0,0,0,0.6);
-}
+    //color: rgba(0,0,0,0.6);
+} */
 .mdc-text-field:not(.mdc-text-field--disabled) {
     background-color: white;
 }
@@ -254,9 +257,9 @@ button{
 .open{
     display: block;
 }
-:not(.mdc-list--non-interactive)>:not(.mdc-list-item--disabled).mdc-list-item::before, :not(.mdc-list--non-interactive)>:not(.mdc-list-item--disabled).mdc-list-item::after {
-    background-color:transparent; 
-}
+/* :not(.mdc-list--non-interactive)>:not(.mdc-list-item--disabled).mdc-list-item::before, :not(.mdc-list--non-interactive)>:not(.mdc-list-item--disabled).mdc-list-item::after {
+    //background-color:transparent; 
+} */
 .mdc-top-app-bar__action-item, .mdc-top-app-bar__navigation-icon {
     padding: 12px;
     border: none;

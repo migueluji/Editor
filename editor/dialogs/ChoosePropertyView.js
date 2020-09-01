@@ -6,7 +6,7 @@ class ChoosePropertyView {
 		 this.html = document.createElement("div");
 		 this.html.className +="dialog-full-screen";
 		 this.html.innerHTML =
-				'<div class="mdc-card" style="width:270px">'+
+				'<div class="mdc-elevation--z24 mdc-card" style="width:270px">'+
 					'<h2 id="title" class="demo-card__title mdc-typography--headline6">Choose Property</h2>'+
 					'<div class="text-field-container"></div>'+
 				'<div>'+				

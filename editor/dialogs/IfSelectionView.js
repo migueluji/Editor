@@ -5,7 +5,7 @@ class IfSelectionView {
 			this.html = document.createElement("div");
 			this.html.className +="dialog-full-screen";
 			this.html.innerHTML =
-				'<div class="mdc-card">'+
+				'<div class="mdc-elevation--z24 mdc-card">'+
 				'<h2 id="title" class="demo-card__title mdc-typography--headline6">Select Condition</h2>'+
 				'<ul style="width:320px;margin-bottom: 8px;" class="mdc-image-list">'+
 					'<li id="compare" class="selection-item mdc-image-list__item">'+

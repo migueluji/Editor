@@ -4,7 +4,7 @@ class EditorView {
 		 this.html = document.createElement("div");
 		 this.html.className +="editor-frame-root";
 		 this.html.innerHTML =
-            '<aside class="mdc-drawer mdc-drawer--dismissible mdc-drawer--open">'+ //DRAWER
+            '<aside class="mdc-elevation--z2 mdc-drawer mdc-drawer--dismissible mdc-drawer--open">'+ //DRAWER
                 '<div class="mdc-drawer__header"></div>'+ //header
                 '<div class="mdc-drawer__content"></div>'+ //content
             '</aside>'+
