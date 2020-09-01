@@ -162,12 +162,10 @@ button{
     padding: 0px;
     height: 100%;
     overflow-y: auto;
- //   border-left: 1px solid lightgray;
 }
 .list{
     height: 100%;
     overflow-y: auto;
-//border-left: 1px solid lightgray;
 }
 .properties-section{
     border-bottom:1px solid lightgray;
@@ -192,7 +190,6 @@ button{
     display: none;
 }
 .properties-bar{
-   // border-bottom: 1px solid lightgray;
     user-select: none;
     background:#2ec3ec; 
     color:white;
