@@ -11,6 +11,7 @@ class DrawerScenesView {
 			'<ul id="scenes" class="mdc-list  mdc-list--avatar-list"></ul>';
 		this.html.querySelector("#addscene").addEventListener("click",this.addSceneHandler.bind(this));
 		this.init(sceneList,canvas);
+		
 	}
 
 	init(sceneList,canvas){
