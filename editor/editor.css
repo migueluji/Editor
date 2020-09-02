@@ -31,15 +31,9 @@ button{
     display:flex;
     flex-direction: column;
 }
-.add-scene-button{
-    margin-top: 16px;
-    margin-bottom: 8px;
-    width: 64%;
-    left: 18%;
-}
-.sceneselected{
-    background-color: #e6e9fc;
-}
+/* .sceneselected{
+  //  background-color: #e6e9fc;
+} */
 .actorselected{
     background-color: #e6e9fc;
 }
@@ -109,7 +103,7 @@ button{
     padding-left:16px;
 }
 .over{
-    border: 1px  solid lightgrey;
+    border: 1px  solid lightgray;
     opacity: 0.5;
 }
 .main-content{

@@ -1,6 +1,6 @@
 class RemoveSceneCmd extends Command {
     
-    constructor (sceneID){
+    constructor(sceneID){
         super();
         this.pos=this.editor.model.sceneList.findIndex(i => i.id == sceneID);
         this.scene=this.editor.model.sceneList[this.pos];
