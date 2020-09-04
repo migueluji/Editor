@@ -12,15 +12,22 @@ class DrawerHeaderView {
                         '<span class="mdc-floating-label" >Game Name</span>'+
                         '<span class="mdc-line-ripple"></span>'+
                     '</label>'+
-            '</div>';
-            
+            '</div>'+
+            '<button style="margin: 24px 18%;" id="addscene" class="mdc-button mdc-button--raised">'+
+                '<div class="mdc-button__ripple"></div>'+
+                '<i class="material-icons mdc-button__icon" aria-hidden="true">add</i>'+
+                '<span class="mdc-button__label">add scene</span>'+
+            '</button>';
+
+        this.html.querySelector("#addscene").addEventListener("click",this.addSceneHandler.bind(this));    
+        mdc.ripple.MDCRipple.attachTo(this.html.querySelector("#addscene"));
+        
         var element=this.html.querySelector('.mdc-text-field');
         mdc.textField.MDCTextField.attachTo(element);
 
         var input =this.html.querySelector("#gamename");
 		input.addEventListener("keypress",Utils.keyPressHandler.bind(this,input));
-        input.addEventListener("change",this.onChangeInputHandler.bind(this,input));
-        
+        input.addEventListener("change",this.onChangeInputHandler.bind(this,input)); 
     }
 
     updateGameName(name){
@@ -30,7 +37,11 @@ class DrawerHeaderView {
     }
 
 // Handlers
-	onChangeInputHandler(input){
+    addSceneHandler() {
+        CmdManager.addSceneCmd(this.html.parentNode.querySelectorAll(".mdc-list-item__text").length);
+    }    
+
+    onChangeInputHandler(input){
         this.value=String(input.value).trim();
 		if (this.value==="") this.value="Untitled Game";
    		CmdManager.changeGamePropertyCmd("name",this.value);

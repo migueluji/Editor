@@ -19,6 +19,10 @@ class Command {
     }
     
 // SCENES
+    static openSceneMenuCmd(sceneID,x,y){
+        this.editor.openSceneMenu(sceneID,x,y);
+    }
+
     static selectSceneCmd(sceneID){
         this.editor.selectScene(sceneID);
     }
@@ -32,6 +36,14 @@ class Command {
     }
 
 // ACTORS
+    static openActorMenuCmd(actorID,x,y){
+        this.editor.openActorMenu(actorID,x,y);
+    }
+
+    static openActorScriptMenuCmd(scriptID,x,y){
+        this.editor.openActorScriptMenu(scriptID,x,y);
+    }
+
     static selectActorCmd(actorID){
         this.editor.selectActor(actorID);
     }

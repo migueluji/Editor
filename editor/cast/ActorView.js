@@ -3,96 +3,49 @@ class ActorView {
     constructor() {
 		this.html = document.createElement("li");
 		this.html.setAttribute("draggable","true");
+		this.html.style.height="56px";
+		this.html.className ="mdc-list-item";
 		this.html.innerHTML =
-			'<div class="mdc-list-item mdc-ripple-upgraded" role="option" aria-selected="false">'+
-				'<span style="font-size:40px" class="mdc-list-item__graphic material-icons" aria-hidden="true">account_circle</span>'+
-				'<span class="mdc-list-item__text"></span>'+
-				'<button id="more" style="margin-right:-8px" class="mdc-button mdc-list-item__meta material-icons">more_vert</button>'+
-			'</div>'+
-			'<div class="mdc-menu-surface--anchor menu-actor">'+
-				'<div class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
-					'<ul class="mdc-list" role="menu" aria-hidden="true">'+
-						'<li id="properties" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Properties</li>'+
-						'<li id="scripts" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Scripts</li>'+
-						'<li class="mdc-list-divider" role="separator" tabindex="-1"></li>'+
-						'<li id="rename" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Rename</li>'+
-						'<li id="duplicate" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Duplicate</li>'+
-						'<li id="delete" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Delete</li>'+
-					'</ul>'+
-				'</div>'+
+			'<span class="mdc-list-item__ripple"></span>'+
+			'<span style="font-size: 40px;" class="mdc-list-item__graphic material-icons">account_circle</span>'+
+			'<span class="mdc-list-item__text"></span>'+
+			'<div aria-hidden="true" class="mdc-list-item__meta">'+
+				'<button id="morebutton" data-mdc-ripple-is-unbounded="" class="mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">more_vert</button>'+
 			'</div>';
-		this.html.querySelector("#more").addEventListener("click",this.menuActorHandler.bind(this));
-		this.html.querySelector("#properties").addEventListener("click",this.propertiesActorHandler.bind(this));
-		this.html.querySelector("#scripts").addEventListener("click",this.scriptsActorHandler.bind(this));
-		this.html.querySelector("#rename").addEventListener("click",this.renameActorHandler.bind(this));
-		this.html.querySelector('#duplicate').addEventListener("click",this.duplicateActorHandler.bind(this));
-		this.html.querySelector('#delete').addEventListener("click",this.removeActorHandler.bind(this));
+
+		mdc.ripple.MDCRipple.attachTo(this.html.querySelector('#morebutton')); 
+		mdc.ripple.MDCRipple.attachTo(this.html); 
+
+		this.html.querySelector("#morebutton").addEventListener("click",this.menuActorHandler.bind(this));
 		this.html.addEventListener("dragstart",this.dragstartActorHandler.bind(this));
 		this.html.addEventListener("dragover",this.dragoverActorHandler.bind(this));
 		this.html.addEventListener("dragleave",this.dragleaveActorHandler.bind(this));
 		this.html.addEventListener("drop",this.dropActorHandler.bind(this));
 	  	this.html.addEventListener("click",this.selectActorHandler.bind(this));
-		this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
 	}
    
   addView(actor) {
 		this.html.id=actor.id;
 		this.html.querySelector(".mdc-list-item__text").innerHTML=actor.name.split("_").join(" ");
 		if (actor.image){// change the default image to the actor image 
-			var div=this.html.querySelector(".mdc-list-item");
 			var span=this.html.querySelector(".mdc-list-item__graphic");
-				span.remove();
-				var image = new Image();
-				image.classList="mdc-list-item__graphic material-icons";
-				image.style="width:40px;height:auto;border-radius:unset";
-				image.src=app.serverGamesFolder+"/"+app.gameFolder+"/images/"+actor.image;
-				div.insertBefore(image,div.childNodes[0]);
+			span.innerHTML="";
+			var image = new Image();
+			image.style="width:40px;height:40px;object-fit:contain";
+			image.src=app.serverGamesFolder+"/"+app.gameFolder+"/images/"+actor.image;
+			span.appendChild(image);
 		}
 	}
 
 // Handlers
 	selectActorHandler(e){
-		if (e.srcElement.nodeName!="LI") {//solo selecciona el actor si se hace click fuera de la lista del menu
-			if(this.html.classList.contains("actorselected")){
-				(e.srcElement.nodeName!="BUTTON") ? Command.selectActorCmd(null): false;
-			} 
-			else{
-				Command.selectActorCmd(this.html.id);
-			}
-		}
+		Command.selectActorCmd(this.html.id);
 	}
 
-	menuActorHandler(e){
-		e.preventDefault();
-		this.menu.open = true;
-	}
-
-	propertiesActorHandler(){
-		Command.openActorPropertiesCmd();
-	}
-
-	scriptsActorHandler(){
-		Command.openActorScriptsCmd();
-	}
-
-	renameActorHandler(){
-		var dialog = new RenameDialogView("actor",this.html.id);
-		var editorFrame=document.querySelector(".editor-frame-root");
-		editorFrame.appendChild(dialog.html);
-		dialog.html.querySelector("input").focus();
-	}
-
-	duplicateActorHandler(){
-		var sceneID=document.querySelector(".sceneselected").id;
-		CmdManager.duplicateActorCmd(sceneID,this.html.id);
-	}
-
-	removeActorHandler(){
-		var sceneID=document.querySelector(".sceneselected").id;
-		var text =document.querySelector("#"+this.html.id).firstChild.firstChild.nextSibling.innerText;
-		if (confirm('Are you sure you want to delete "'+text+'" actor?')){
-				CmdManager.removeActorCmd(sceneID,this.html.id); 
-		}
+	menuActorHandler(){
+		var button=this.html.querySelector("#morebutton");
+		var position=button.getBoundingClientRect();
+		Command.openActorMenuCmd(this.html.id,position.x,position.y);
 	}
 
 	dragstartActorHandler(e){

@@ -5,7 +5,7 @@ class ActorPropertiesSettingsView {
 		 this.html.className +="actor-properties-settings properties-section";
 		 this.html.innerHTML =
 			'<li class="mdc-list-item mdc-ripple-upgraded properties-section-title">'+
-				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
+				'<button id="expandbutton" style="margin-right:8px" class="mdc-icon-button material-icons mdc-top-app-bar__action-item">expand_more</button>'+
 				'Settings'+
 				'<div class="mdc-form-field">'+
 					'<label class="text-check-label" style="padding-left: 75px">Sleeping</label>'+

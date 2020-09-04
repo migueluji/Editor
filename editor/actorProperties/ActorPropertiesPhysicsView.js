@@ -5,7 +5,7 @@ class ActorPropertiesPhysicsView {
 		 this.html.className +="actor-properties-physics properties-section";
 		 this.html.innerHTML =
 			'<li class="mdc-list-item mdc-ripple-upgraded properties-section-title">'+
-				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
+				'<button id="expandbutton" style="margin-right:8px" class="mdc-icon-button material-icons mdc-top-app-bar__action-item">expand_more</button>'+
 				'Physics'+
 				'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
 					'<input id="physicsOn" value="true" type="checkbox" class="mdc-checkbox__native-control">'+

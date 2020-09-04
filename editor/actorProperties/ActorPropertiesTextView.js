@@ -5,8 +5,7 @@ class ActorPropertiesTextView {
 		 this.html.className +="actor-properties-text properties-section";
 		 this.html.innerHTML =
 			'<li class="mdc-list-item mdc-ripple-upgraded properties-section-title">'+
-				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
-				'Text'+
+				'<button id="expandbutton" style="margin-right:8px" class="mdc-icon-button material-icons mdc-top-app-bar__action-item">expand_more</button>'+				'Text'+
 				'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
 					'<input id="textOn" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
 					'<div class="mdc-checkbox__background">'+

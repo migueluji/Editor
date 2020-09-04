@@ -134,6 +134,10 @@ class Editor {
     }
 
  /* Scene editor commands */
+    openSceneMenu(sceneID,x,y){
+        this.drawerScenesView.openSceneMenu(sceneID,x,y);
+    }
+
     selectScene(sceneID){
         var oldSelectedSceneIndex=this.selectedSceneIndex;
         this.selectedSceneIndex = this.model.sceneList.findIndex(i => i.id == sceneID);
@@ -324,6 +328,14 @@ class Editor {
     }
 
 /* Actor editor commands */
+    openActorMenu(actorID,x,y){
+        this.castView.openActorMenu(actorID,x,y);
+    }
+
+    openActorScriptMenu(scriptID,x,y){
+        this.actorScriptsView.openActorScriptMenu(scriptID,x,y);
+    }
+
     selectActor(actorID){
         if (actorID) this.selectedActorIndex=this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.id==actorID);
         else this.selectedActorIndex=null;

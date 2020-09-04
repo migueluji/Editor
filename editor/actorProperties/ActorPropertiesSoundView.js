@@ -5,7 +5,7 @@ class ActorPropertiesSoundView {
 		 this.html.className +="actor-properties-sound properties-section";
 		 this.html.innerHTML =
 			'<li class="mdc-list-item mdc-ripple-upgraded properties-section-title">'+
-				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
+				'<button id="expandbutton" style="margin-right:8px" class="mdc-icon-button material-icons mdc-top-app-bar__action-item">expand_more</button>'+
 				'Sound'+
 				'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
 					'<input id="soundOn" value="true" type="checkbox" class="mdc-checkbox__native-control">'+
@@ -30,8 +30,6 @@ class ActorPropertiesSoundView {
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="volume" value="1" min="0" step="0.1" class="mdc-text-field__input" type="number">'+
-						'<span class="mdc-floating-label" >Volume</span>'+
-						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+

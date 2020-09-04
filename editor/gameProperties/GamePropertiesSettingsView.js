@@ -5,7 +5,7 @@ class GamePropertiesSettingsView {
 		 this.html.className +="game-properties-settings properties-section";
 		 this.html.innerHTML =
 			'<li class="mdc-list-item mdc-ripple-upgraded properties-section-title">'+
-				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
+				'<button style="margin-right:8px" id="expandbutton" class="mdc-icon-button material-icons">expand_more</button>'+
 				'Settings'+
 			'</li>'+
 			'<div class="properties-panel open">'+

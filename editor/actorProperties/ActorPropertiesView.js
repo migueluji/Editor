@@ -11,9 +11,9 @@ class ActorPropertiesView {
 						'<span class="mdc-toolbar__title clip-text">Actor Properties</span>'+
 					'</section>'+
 					'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">'+
-						'<button id="codebutton" style="color:white" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">code</button>'+
-						'<button id="addproperty" style="color:white" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">add_circle_outline</button>'+
-						'<button id="closebutton" style="color:white" class="material-icons mdc-top-app-bar__action-item mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">close</button>'+
+						'<button id="codebutton" class="mdc-icon-button material-icons mdc-top-app-bar__action-item">code</button>'+
+						'<button id="addproperty" class="mdc-icon-button material-icons mdc-top-app-bar__action-item">add_circle_outline</button>'+
+						'<button id="closebutton" class="mdc-icon-button material-icons mdc-top-app-bar__action-item">close</button>'+
 					'</section>'+
 				'</div>'+
 			'</header>'+

@@ -3,25 +3,29 @@ class ScriptView {
     constructor() {
 		this.html = document.createElement("li");
 		this.html.setAttribute("draggable","true");
+		this.html.style.height="56px";
+		this.html.className ="mdc-list-item";
 		this.html.innerHTML =
-			'<div class="mdc-list-item mdc-ripple-upgraded" role="option" aria-selected="false">'+
-				'<span style="font-size:36px" class="mdc-list-item__graphic material-icons" aria-hidden="true">code</span>'+
-				'<span class="mdc-list-item__text"></span>'+
-				'<button id="more" class="mdc-button mdc-list-item__meta material-icons">more_vert</button>'+
-			'</div>'+
-			'<div class="mdc-menu-surface--anchor menu-script">'+
-				'<div class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
-					'<ul class="mdc-list" role="menu" aria-hidden="true">'+
-						'<li id="rename" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Rename</li>'+
-						'<li id="duplicate" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Duplicate</li>'+
-						'<li id="delete" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Delete</li>'+
-					'</ul>'+
-				'</div>'+
+			'<span class="mdc-list-item__ripple"></span>'+
+			'<span style="font-size: 40px;" class="mdc-list-item__graphic material-icons">code</span>'+
+			'<span class="mdc-list-item__text"></span>'+
+			'<div aria-hidden="true" class="mdc-list-item__meta">'+
+				'<button id="morebutton" data-mdc-ripple-is-unbounded="" class="mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">more_vert</button>'+
 			'</div>';
-		this.html.querySelector("#more").addEventListener("click",this.menuScriptHandler.bind(this));
-		this.html.querySelector("#rename").addEventListener("click",this.renameScriptHandler.bind(this));
-		this.html.querySelector('#duplicate').addEventListener("click",this.duplicateScriptHandler.bind(this));
-		this.html.querySelector('#delete').addEventListener("click",this.removeScriptHandler.bind(this));
+
+			// '<div class="mdc-list-item mdc-ripple-upgraded" role="option" aria-selected="false">'+
+			// 	'<span style="font-size:36px" class="mdc-list-item__graphic material-icons" aria-hidden="true">code</span>'+
+			// 	'<span class="mdc-list-item__text"></span>'+
+			// 	'<button id="more" class="mdc-button mdc-list-item__meta material-icons">more_vert</button>'+
+			// '</div>';
+
+		this.html.querySelector("#morebutton").addEventListener("click",this.menuScriptHandler.bind(this));
+		mdc.ripple.MDCRipple.attachTo(this.html.querySelector('#morebutton')); 
+		mdc.ripple.MDCRipple.attachTo(this.html); 
+
+		// this.html.querySelector("#rename").addEventListener("click",this.renameScriptHandler.bind(this));
+		// this.html.querySelector('#duplicate').addEventListener("click",this.duplicateScriptHandler.bind(this));
+		// this.html.querySelector('#delete').addEventListener("click",this.removeScriptHandler.bind(this));
 		
 		this.html.addEventListener("dragstart",this.dragstartScriptHandler.bind(this));
 		this.html.addEventListener("dragover",this.dragoverScriptHandler.bind(this));
@@ -29,7 +33,7 @@ class ScriptView {
 		this.html.addEventListener("drop",this.dropScriptHandler.bind(this));
 	    this.html.addEventListener("click",this.selectScriptHandler.bind(this));
 
-		this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
+	//	this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
 	}
    
   addView(script) {
@@ -39,36 +43,39 @@ class ScriptView {
 
 // Handlers
 	selectScriptHandler(e){
-			if (e.srcElement.nodeName!="LI" && this.html.classList.contains("scriptselected")==false){
+		//	if (e.srcElement.nodeName!="LI" && this.html.classList.contains("scriptselected")==false){
 					Command.selectScriptCmd(this.html.id);
-			}
+		//	}
 	}
 
 	menuScriptHandler(){
-		this.menu.open = true;
+	//	this.menu.open = true;
+		var button=this.html.querySelector("#morebutton");
+		var position=button.getBoundingClientRect();
+		Command.openActorScriptMenuCmd(this.html.id,position.x,position.y);
 	}
 
-	renameScriptHandler(){
-		var dialog = new RenameDialogView("script",this.html.id);
-		var editorFrame=document.querySelector(".editor-frame-root");
-		editorFrame.appendChild(dialog.html);
-		dialog.html.querySelector("input").focus();
-	}
+	// renameScriptHandler(){
+	// 	var dialog = new RenameDialogView("script",this.html.id);
+	// 	var editorFrame=document.querySelector(".editor-frame-root");
+	// 	editorFrame.appendChild(dialog.html);
+	// 	dialog.html.querySelector("input").focus();
+	// }
 
-	duplicateScriptHandler(){
-		var sceneSelected=document.querySelector(".sceneselected").id;
-		var actorSelected=document.querySelector(".actorselected").id;
-		CmdManager.duplicateScriptCmd(sceneSelected,actorSelected,this.html.id);
-	}
+	// duplicateScriptHandler(){
+	// 	var sceneSelected=document.querySelector(".sceneselected").id;
+	// 	var actorSelected=document.querySelector(".actorselected").id;
+	// 	CmdManager.duplicateScriptCmd(sceneSelected,actorSelected,this.html.id);
+	// }
 
-	removeScriptHandler(){
-		var sceneSelected=document.querySelector(".sceneselected").id;
-		var actorSelected=document.querySelector(".actorselected").id;
-		var text =document.querySelector("#"+this.html.id).firstChild.firstChild.nextSibling.innerText;
-		if (confirm('Are you sure you want to delete "'+text+'" script?')){
-				CmdManager.removeScriptCmd(sceneSelected,actorSelected,this.html.id); 
-		}
-	}
+	// removeScriptHandler(){
+	// 	var sceneSelected=document.querySelector(".sceneselected").id;
+	// 	var actorSelected=document.querySelector(".actorselected").id;
+	// 	var text =document.querySelector("#"+this.html.id).firstChild.firstChild.nextSibling.innerText;
+	// 	if (confirm('Are you sure you want to delete "'+text+'" script?')){
+	// 			CmdManager.removeScriptCmd(sceneSelected,actorSelected,this.html.id); 
+	// 	}
+	// }
 
 	dragstartScriptHandler(e){
 		e.dataTransfer.setData('text/html', this.html.outerHTML);

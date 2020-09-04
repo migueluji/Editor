@@ -7,7 +7,7 @@
 	"cameraAngle": 0,
 	"cameraZoom": 1,
 	"backgroundColor": "#ffffff",
-	"soundOn": false,
+	"soundOn": true,
 	"soundtrack": "",
 	"volume": 1,
 	"start": 0,

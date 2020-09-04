@@ -4,18 +4,35 @@ class DrawerScenesView {
 		this.html = document.createElement("div");
 		this.html.className +="mdc-drawer__content";
 		this.html.innerHTML =
-			'<button style="margin: 16px 22%;" id="addscene" class="mdc-button mdc-button--raised">'+
-				'<div class="mdc-button__ripple"></div>'+
-				'<i class="material-icons mdc-button__icon" aria-hidden="true">add</i>'+
-				'<span class="mdc-button__label">add scene</span>'+
-			'</button>'+
-			'<ul id="scenes"  class="mdc-list mdc-list--image-list" role="listbox">';
-		this.html.querySelector("#addscene").addEventListener("click",this.addSceneHandler.bind(this));
-		this.init(sceneList,canvas);
+			'<div id="mymenu" style="position:fixed" class="mdc-menu mdc-menu-surface">'+
+				'<ul id="mylist" class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">'+
+					'<li id="rename" class="mdc-list-item" role="menuitem">'+
+						'<span class="mdc-list-item__ripple"></span>'+
+						'<span class="mdc-list-item__text">Rename</span>'+
+					'</li>'+
+					'<li id="duplicate" class="mdc-list-item" role="menuitem">'+
+						'<span class="mdc-list-item__ripple"></span>'+
+						'<span class="mdc-list-item__text">Duplicate</span>'+
+					'</li>'+
+					'<li id="delete" class="mdc-list-item" role="menuitem">'+
+					'<span class="mdc-list-item__ripple"></span>'+
+					'<span class="mdc-list-item__text">Delete</span>'+
+				'</li>'+
+				'</ul>'+
+			'</div>'+
+			'<ul id="scenes" class="mdc-list mdc-list--image-list" role="listbox">';
+		this.html.querySelector("#rename").addEventListener("click",this.renameSceneHandler.bind(this));
+		this.html.querySelector("#duplicate").addEventListener("click",this.duplicateSceneHandler.bind(this));
+		this.html.querySelector("#delete").addEventListener("click",this.removeSceneHandler.bind(this));
 
-		mdc.ripple.MDCRipple.attachTo(this.html.querySelector("#addscene"));
-		const list=mdc.list.MDCList.attachTo(this.html.querySelector("#scenes"));
-		list.singleSelection=true;
+		this.init(sceneList,canvas);
+		this.menu=mdc.menu.MDCMenu.attachTo(this.html.querySelector("#mymenu"));
+	}
+
+	openSceneMenu(sceneID,x,y){
+		this.id=sceneID;
+		this.menu.open = true;
+		this.menu.setAbsolutePosition(x, y);
 	}
 
 	init(sceneList,canvas){
@@ -52,14 +69,32 @@ class DrawerScenesView {
 		var sceneSelected=this.html.querySelector(".sceneselected");
 		if (sceneSelected) {
 			sceneSelected.classList.remove("sceneselected");
-		//	sceneSelected.classList.remove("mdc-list-item--selected");
+			sceneSelected.classList.remove("mdc-list-item--selected");
 		}
 		this.html.querySelector('#'+sceneID).classList.add("sceneselected");
-		//this.html.querySelector('#'+sceneID).classList.add("mdc-list-item--selected");
+		this.html.querySelector('#'+sceneID).classList.add("mdc-list-item--selected");
 	}
 
-//Handlers
-	addSceneHandler() {
-		CmdManager.addSceneCmd(this.html.querySelectorAll(".mdc-list-item__text").length);
+// Handlers
+	renameSceneHandler(){
+		var dialog = new RenameDialogView("scene",this.id);
+		var editorFrame=document.querySelector(".editor-frame-root");
+		editorFrame.appendChild(dialog.html);
+		dialog.html.querySelector("#input").focus();
 	}
+
+	duplicateSceneHandler(){
+		CmdManager.duplicateSceneCmd(this.id);
+	}
+
+	removeSceneHandler (){
+		var ul =document.querySelector("#"+this.id).parentNode;
+		if (ul.children.length==1) alert ("This scene cannot be deleted!");
+		else {
+			var element =document.querySelector("#"+this.id);
+			var text=element.querySelector(".mdc-list-item__text").innerText;
+			if (confirm('Are you sure you want to delete "'+text+'" scene?')) CmdManager.removeSceneCmd(this.id);
+		}
+	}
+
 }

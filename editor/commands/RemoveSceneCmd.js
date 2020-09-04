@@ -15,5 +15,4 @@ class RemoveSceneCmd extends Command {
     undo(){
         this.editor.addScene(this.scene,this.pos);
     }
-
 }

@@ -2,31 +2,22 @@ class NewPropertyView {
 
     constructor(property,value) {   
 		 this.html = document.createElement("li");
+		 this.html.className ="new-property mdc-list-item mdc-ripple-upgraded";
+		 this.html.style.height="auto";
 		 this.html.innerHTML =
-			'<div class="new-property mdc-list-item mdc-ripple-upgraded">'+
-				// here is where the property is inserted
-				'<button id="more" class="mdc-button mdc-list-item__meta material-icons">more_vert</button>'+
-			'</div>'+
-			'<div class="mdc-menu-surface--anchor menu-new-property">'+
-				'<div class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
-					'<ul class="mdc-list" role="menu" aria-hidden="true">'+
-						'<li id="delete" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Delete</li>'+
-					'</ul>'+
-				'</div>';
-			'</div>';
+			// here is where the property is inserted
+			'<button id="delete" class="mdc-button mdc-list-item__meta material-icons">delete</button>';
 		this.property=property;
 		this.value=value;
 		this.createFrame(property,value);
 
-		this.html.querySelector("#more").addEventListener("click",this.menuNewPropertyHandler.bind(this));
 		this.html.querySelector('#delete').addEventListener("click",this.removeNewPropertyHandler.bind(this));
-		this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
 	}
 
 	createFrame(property,value){
 		var list=this.html.querySelector(".new-property");
-		(typeof(value)==='number') ?	list.insertBefore(this.newNumberPropertyView(),list.childNodes[0]) :
-										list.insertBefore(this.newBooleanPropertyView(),list.childNodes[0]);
+		(typeof(value)==='number') ?	this.html.insertBefore(this.newNumberPropertyView(),this.html.childNodes[0]) :
+										this.html.insertBefore(this.newBooleanPropertyView(),this.html.childNodes[0]);
 
 		this.html.querySelector("#property").value=value;
 		this.html.querySelector("#property").id=property;
@@ -35,7 +26,8 @@ class NewPropertyView {
 		var text=this.html.querySelector('.mdc-text-field');
 		if (text != null) {
 			mdc.textField.MDCTextField.attachTo(text);
-			text.firstChild.addEventListener("change",this.onChangeInputHandler.bind(this,text.firstChild));
+			var input =text.querySelector("input");
+			input.addEventListener("change",this.onChangeInputHandler.bind(this,input));
 		}
 		else{
 			var checkbox=this.html.querySelector(".mdc-checkbox");
@@ -43,7 +35,6 @@ class NewPropertyView {
 			value ? this.html.querySelector("#"+property).checked=true : this.html.querySelector("#"+property).checked=false;
 		}
 	}
-
 
 //Handler
 	onChangeInputHandler(element){
@@ -61,10 +52,6 @@ class NewPropertyView {
 			if (actor) actorID=actor.id;
 			CmdManager.changeActorPropertyCmd(sceneID,actorID,this.property,this.value);
 		}
-	}
-
-	menuNewPropertyHandler(){
-		this.menu.open = true;
 	}
 
 	removeNewPropertyHandler(){

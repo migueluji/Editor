@@ -5,7 +5,7 @@ class GamePropertiesSoundView {
 		 this.html.className +="game-properties-sound properties-section properties-section--disable";
 		 this.html.innerHTML =
 			'<li class="mdc-list-item mdc-ripple-upgraded properties-section-title">'+
-				'<button id="expandbutton" class="material-icons mdc-top-app-bar__action-item" >expand_more</button>'+
+				'<button id="expandbutton" style="margin-right:8px" class="mdc-icon-button material-icons mdc-top-app-bar__action-item">expand_more</button>'+
 				'Sound'+
 				'<div class="mdc-checkbox mdc-list-item__meta mdc-checkbox--upgraded mdc-ripple-upgraded mdc-ripple-upgraded--unbounded">'+
 					'<input id="soundOn" value="true" type="checkbox" class="mdc-checkbox__native-control">'+

@@ -2,15 +2,15 @@ class CanvasView {
 
     constructor(game,sceneIndex) {  
         this.actorList=game.sceneList[sceneIndex].actorList;
-     //   this.mainActorList=game.sceneList[0].actorList; // actorList to take screenShoot
         this.drawerOffset=256;
 		this.html = document.createElement("div");
         this.html.className +="canvas";
         this.html.style.display="block";
         this.html.style.transform="";
         this.html.innerHTML =
-            '<button id="addactor"  class="add-actor mdc-fab mdc-ripple-upgraded add-property-button">'+
-                '<i class="material-icons">add</i>'+
+            '<button id="addactor"  class="mdc-fab add-actor-button">'+
+                '<div class="mdc-fab__ripple"></div>'+
+                '<span class="mdc-fab__icon material-icons">add</span>'+
             '</button>'+
             '<button id="actorbutton" style="visibility:hidden" class="mdc-fab mdc-ripple-upgrade actor-canvas-button">'+
                 '<i class="material-icons">more_vert</i>'+
@@ -26,8 +26,10 @@ class CanvasView {
                         '<li id="delete" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Delete</li>'+
                 '</ul>'+
                 '</div>'+
-            '</div>';
+            '</div>';            
         this.html.querySelector("#actorbutton").addEventListener("click",this.menuActorHandler.bind(this));
+        const fabRipple=mdc.ripple.MDCRipple.attachTo(this.html.querySelector('#addactor'));
+
         this.html.querySelector("#addactor").addEventListener("click",this.addActorHandler.bind(this));
         this.html.addEventListener("wheel",this.mouseStageWheel.bind(this));
         this.html.querySelector("#properties").addEventListener("click",this.propertiesActorHandler.bind(this));

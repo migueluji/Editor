@@ -42,10 +42,15 @@
 }
 .do-button{
     background-color:var(--my-theme-do);
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
 }
 .if-button{
     background-color:var(--my-theme-if);
+    position: absolute;
     bottom: 86px;
+    right: 16px;
 }
 .selection-item.mdc-image-list__item{
     margin: auto;

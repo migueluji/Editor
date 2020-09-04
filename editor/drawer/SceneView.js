@@ -3,35 +3,23 @@ class SceneView {
     constructor() {
 		this.html = document.createElement("li");
 		this.html.setAttribute("draggable","true");
-		this.html.className ="mdc-list-item mdc-ripple-upgraded"
+		this.html.className ="mdc-list-item"
 		this.html.innerHTML =
 				'<span class="mdc-list-item__ripple"></span>'+
 				'<span class="mdc-list-item__graphic">'+
-					'<img src="" widht="56" height="56"></img>'+
+					'<img style="border: 1px solid lightgray;" src="" widht="56" height="56"></img>'+
 				'</span>'+
 				'<span class="mdc-list-item__text"></span>'+
 				'<div aria-hidden="true" class="mdc-list-item__meta">'+
 					'<button id="morebutton" data-mdc-ripple-is-unbounded="" class="mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">more_vert</button>'+
-					'<div style="z-index:10;position:fixed" class="mdc-menu-surface--anchor">'+
-						'<div class="mdc-menu mdc-menu-surface">'+					
-							'<ul class="mdc-list" role="menu" aria-hidden="true">'+
-								'<li id="rename" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Rename</li>'+
-								'<li id="duplicate" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Duplicate</li>'+
-								'<li id="delete" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Delete</li>'+
-							'</ul>'+
-						'</div>'+
-					'</div>'+
 				'</div>';
+		this.html.addEventListener("click",this.selectSceneHandler.bind(this));
 		this.html.querySelector("#morebutton").addEventListener("click",this.menuSceneHandler.bind(this));
- 		this.html.querySelector("#rename").addEventListener("click",this.renameSceneHandler.bind(this));
-		this.html.querySelector('#duplicate').addEventListener("click",this.duplicateSceneHandler.bind(this));
-		this.html.querySelector('#delete').addEventListener("click",this.removeSceneHandler.bind(this));
 		this.html.addEventListener("dragstart",this.dragstartSceneHandler.bind(this));
 		this.html.addEventListener("dragover",this.dragoverSceneHandler.bind(this));
 		this.html.addEventListener("dragleave",this.dragleaveSceneHandler.bind(this));
 		this.html.addEventListener("drop",this.dropSceneHandler.bind(this));
-		this.html.addEventListener("click",this.selectSceneHandler.bind(this));
-		this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
+		
 		mdc.ripple.MDCRipple.attachTo(this.html.querySelector('#morebutton')); 
 		mdc.ripple.MDCRipple.attachTo(this.html); 
 	}
@@ -44,32 +32,13 @@ class SceneView {
 // Handlers
 	selectSceneHandler(e){
 		var scene=document.querySelector(".sceneselected");
-		if (scene && scene.id!=this.html.id)	Command.selectSceneCmd(this.html.id);
+		if (scene && scene.id!=this.html.id && e.target.id!="delete") Command.selectSceneCmd(this.html.id); // delete, to avoid select when the delete option is pressed
 	}
 
 	menuSceneHandler(){
-		this.menu.open = true;
-	}
-
-	renameSceneHandler(){
-		var dialog = new RenameDialogView("scene",this.html.id);
-		var editorFrame=document.querySelector(".editor-frame-root");
-		editorFrame.appendChild(dialog.html);
-		dialog.html.querySelector("#input").focus();
-	}
-
-	duplicateSceneHandler(){
-		CmdManager.duplicateSceneCmd(this.html.id);
-	}
-
-	removeSceneHandler (){
-		var ul =document.querySelector("#"+this.html.id).parentNode;
-		if (ul.children.length==1) alert ("This scene cannot be deleted!");
-		else {
-			var element =document.querySelector("#"+this.html.id);
-			var text=element.querySelector(".mdc-list-item__text").innerText;
-			if (confirm('Are you sure you want to delete "'+text+'" scene?'))CmdManager.removeSceneCmd(this.html.id);
-		}
+		var button=this.html.querySelector("#morebutton");
+		var position=button.getBoundingClientRect();
+		Command.openSceneMenuCmd(this.html.id,position.x,position.y);
 	}
 
 	dragstartSceneHandler(e){
@@ -88,9 +57,6 @@ class SceneView {
 	};
 
 	dropSceneHandler(e){
-		// if(e.stopPropagation){
-		// 	e.stopPropagation();
-		// }
 		e.preventDefault();
 		var element= document.createElement("li");
 		element.innerHTML=e.dataTransfer.getData('text/html');
@@ -117,5 +83,3 @@ class SceneView {
 		return count++;
 	}
 }
-
-
