@@ -13,27 +13,15 @@ class ScriptView {
 				'<button id="morebutton" data-mdc-ripple-is-unbounded="" class="mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">more_vert</button>'+
 			'</div>';
 
-			// '<div class="mdc-list-item mdc-ripple-upgraded" role="option" aria-selected="false">'+
-			// 	'<span style="font-size:36px" class="mdc-list-item__graphic material-icons" aria-hidden="true">code</span>'+
-			// 	'<span class="mdc-list-item__text"></span>'+
-			// 	'<button id="more" class="mdc-button mdc-list-item__meta material-icons">more_vert</button>'+
-			// '</div>';
-
 		this.html.querySelector("#morebutton").addEventListener("click",this.menuScriptHandler.bind(this));
 		mdc.ripple.MDCRipple.attachTo(this.html.querySelector('#morebutton')); 
 		mdc.ripple.MDCRipple.attachTo(this.html); 
-
-		// this.html.querySelector("#rename").addEventListener("click",this.renameScriptHandler.bind(this));
-		// this.html.querySelector('#duplicate').addEventListener("click",this.duplicateScriptHandler.bind(this));
-		// this.html.querySelector('#delete').addEventListener("click",this.removeScriptHandler.bind(this));
 		
 		this.html.addEventListener("dragstart",this.dragstartScriptHandler.bind(this));
 		this.html.addEventListener("dragover",this.dragoverScriptHandler.bind(this));
 		this.html.addEventListener("dragleave",this.dragleaveScriptHandler.bind(this));
 		this.html.addEventListener("drop",this.dropScriptHandler.bind(this));
 	    this.html.addEventListener("click",this.selectScriptHandler.bind(this));
-
-	//	this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
 	}
    
   addView(script) {
@@ -43,42 +31,19 @@ class ScriptView {
 
 // Handlers
 	selectScriptHandler(e){
-		//	if (e.srcElement.nodeName!="LI" && this.html.classList.contains("scriptselected")==false){
-					Command.selectScriptCmd(this.html.id);
-		//	}
+		Command.selectScriptCmd(this.html.id);
 	}
 
 	menuScriptHandler(){
-	//	this.menu.open = true;
 		var button=this.html.querySelector("#morebutton");
 		var position=button.getBoundingClientRect();
 		Command.openActorScriptMenuCmd(this.html.id,position.x,position.y);
 	}
 
-	// renameScriptHandler(){
-	// 	var dialog = new RenameDialogView("script",this.html.id);
-	// 	var editorFrame=document.querySelector(".editor-frame-root");
-	// 	editorFrame.appendChild(dialog.html);
-	// 	dialog.html.querySelector("input").focus();
-	// }
-
-	// duplicateScriptHandler(){
-	// 	var sceneSelected=document.querySelector(".sceneselected").id;
-	// 	var actorSelected=document.querySelector(".actorselected").id;
-	// 	CmdManager.duplicateScriptCmd(sceneSelected,actorSelected,this.html.id);
-	// }
-
-	// removeScriptHandler(){
-	// 	var sceneSelected=document.querySelector(".sceneselected").id;
-	// 	var actorSelected=document.querySelector(".actorselected").id;
-	// 	var text =document.querySelector("#"+this.html.id).firstChild.firstChild.nextSibling.innerText;
-	// 	if (confirm('Are you sure you want to delete "'+text+'" script?')){
-	// 			CmdManager.removeScriptCmd(sceneSelected,actorSelected,this.html.id); 
-	// 	}
-	// }
-
 	dragstartScriptHandler(e){
 		e.dataTransfer.setData('text/html', this.html.outerHTML);
+		var image = new Image();
+		e.dataTransfer.setDragImage(image,0,0);
 	}
 
 	dragoverScriptHandler(e){
@@ -91,9 +56,7 @@ class ScriptView {
 	};
 
 	dropScriptHandler(e){
-		if(e.stopPropagation){
-			e.stopPropagation();
-		}
+		e.preventDefault();
 		var element= document.createElement("div");
 		element.innerHTML=e.dataTransfer.getData('text/html');
 		element=element.firstElementChild;

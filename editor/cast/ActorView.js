@@ -50,6 +50,8 @@ class ActorView {
 
 	dragstartActorHandler(e){
 		e.dataTransfer.setData('text/html', this.html.outerHTML);
+		var image = new Image();
+		e.dataTransfer.setDragImage(image,0,0);
 	}
 
 	dragoverActorHandler(e){
@@ -62,14 +64,11 @@ class ActorView {
 	};
 
 	dropActorHandler(e){
-		if(e.stopPropagation){
-			e.stopPropagation();
-		}
+		e.preventDefault();
 		var element= document.createElement("div");
 		element.innerHTML=e.dataTransfer.getData('text/html');
 		element=element.firstElementChild;
 		var sceneSelected=document.querySelector(".sceneselected").id;
-		console.log(sceneSelected,element.id,this.position(this.html,this.html.parentNode));
 		CmdManager.moveActorCmd(sceneSelected,element.id,this.position(this.html,this.html.parentNode));
 		this.html.classList.remove("over");
 		if (element.querySelector(".actorselected")){
