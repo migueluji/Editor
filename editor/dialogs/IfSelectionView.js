@@ -26,7 +26,7 @@ class IfSelectionView {
 					'</li>'+
 					'<li class="selection-item mdc-image-list__item">'+
 						'<div class="condition-circle mdc-image-list__image-aspect-container">'+
-							'<button style="color:white"class="selection-icon mdc-icon-button material-icons">hdr_wea</button>'+
+							'<button style="color:white"class="selection-icon mdc-icon-button material-icons">hdr_weak</button>'+
 						'</div>'+
 						'<div class="mdc-image-list__supporting">'+
 							'<span class="selection-label mdc-image-list__label">Collision</span>'+//collision

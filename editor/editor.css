@@ -153,11 +153,11 @@ body{
     position: absolute;
     right: 0px;
 }
-.mdc-image-list__image-aspect-container.image-list--selected{
-    border:2px solid var(--mdc-theme-secondary);
+.image-list{
+     border:2px solid white;
 }
-.mdc-image-list__image-aspect-container{
-   // border:2px solid white;
+.image-list.image-list--selected{
+    border:2px solid var(--mdc-theme-secondary);
 }
 .mdc-image-list__item.image-file{
     width: 100px;

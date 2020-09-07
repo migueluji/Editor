@@ -4,7 +4,7 @@ class AssetView {
 			this.html = document.createElement("li");
 			this.html.className +="mdc-image-list__item image-file";
 			this.html.innerHTML =
-				'<div class="mdc-image-list__image-aspect-container" style="margin:-2px">'+
+				'<div class="image-list mdc-image-list__image-aspect-container" style="margin:-2px">'+
 					'<img class="mdc-image-list__image" style="pointer-events:none" src="">'+
 				'</div>'+
 				'<div class="mdc-image-list__supporting">'+
