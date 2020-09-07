@@ -10,7 +10,7 @@ class IfSelectionView {
 				'<ul style="width:320px;margin-bottom: 8px;" class="mdc-image-list">'+
 					'<li id="compare" class="selection-item mdc-image-list__item">'+
 						'<div class="condition-circle mdc-image-list__image-aspect-container">'+
-							'<i class="selection-icon material-icons">code</i>'+ 
+							'<button style="color:white"class="selection-icon mdc-icon-button material-icons">code</button>'+
 						'</div>'+
 						'<div class="mdc-image-list__supporting">'+
 							'<span class="selection-label mdc-image-list__label">Compare</span>'+//compare
@@ -18,7 +18,7 @@ class IfSelectionView {
 					'</li>'+
 					'<li class="selection-item mdc-image-list__item">'+
 						'<div class="condition-circle mdc-image-list__image-aspect-container">'+
-							'<i class="selection-icon material-icons">check</i>'+ 
+							'<button style="color:white"class="selection-icon mdc-icon-button material-icons">check</button>'+
 						'</div>'+
 						'<div class="mdc-image-list__supporting">'+
 							'<span class="selection-label mdc-image-list__label">Check</span>'+//check
@@ -26,7 +26,7 @@ class IfSelectionView {
 					'</li>'+
 					'<li class="selection-item mdc-image-list__item">'+
 						'<div class="condition-circle mdc-image-list__image-aspect-container">'+
-							'<i class="selection-icon material-icons">hdr_weak</i>'+
+							'<button style="color:white"class="selection-icon mdc-icon-button material-icons">hdr_wea</button>'+
 						'</div>'+
 						'<div class="mdc-image-list__supporting">'+
 							'<span class="selection-label mdc-image-list__label">Collision</span>'+//collision
@@ -34,7 +34,7 @@ class IfSelectionView {
 					'</li>'+
 					'<li class="selection-item mdc-image-list__item">'+
 						'<div class="condition-circle mdc-image-list__image-aspect-container">'+
-							'<i class="selection-icon material-icons">timer</i>'+
+							'<button style="color:white"class="selection-icon mdc-icon-button material-icons">timer</button>'+
 						'</div>'+
 						'<div class="mdc-image-list__supporting">'+
 							'<span class="selection-label mdc-image-list__label">Timer</span>'+//timer
@@ -42,7 +42,7 @@ class IfSelectionView {
 					'</li>'+
 					'<li class="selection-item mdc-image-list__item">'+
 						'<div class="condition-circle mdc-image-list__image-aspect-container">'+
-							'<i class="selection-icon material-icons">touch_app</i>'+
+							'<button style="color:white"class="selection-icon mdc-icon-button material-icons">touch_app</button>'+
 						'</div>'+
 						'<div class="mdc-image-list__supporting">'+
 							'<span class="selection-label mdc-image-list__label">Touch</span>'+//touch
@@ -50,7 +50,7 @@ class IfSelectionView {
 					'</li>'+
 					'<li class="selection-item mdc-image-list__item">'+
 						'<div class="condition-circle mdc-image-list__image-aspect-container">'+
-							'<i class="selection-icon material-icons">keyboard</i>'+
+							'<button style="color:white"class="selection-icon mdc-icon-button material-icons">keyboard</button>'+
 						'</div>'+
 						'<div class="mdc-image-list__supporting">'+
 							'<span class="selection-label mdc-image-list__label">Keyboard</span>'+//keyboard

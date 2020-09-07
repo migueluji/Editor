@@ -8,12 +8,12 @@ class CardView {
 		  	'<div class="card-background"></div>'+
 			'<div style=" -webkit-user-select: none;" class="mdc-card__primary-action card-title '+color+'">'+
 				'<div class="circle">'+
-					'<i  class="nodeIcon material-icons mdc-chip_icon">'+icon+'</i>'+
+					'<button class="nodeIcon mdc-icon-button material-icons mdc-top-app-bar__action-item">'+icon+'</button>'+
 				'</div>'+
 				'<span class="nodelabel mdc-list-item__text">'+
 					'<span class="mdc-list-item__primary-text card-title_label">'+text+'</span>'+
 				'</span>'+
-				 '<i id="close" class="chipIcon ge-chip-button material-icons">close</i>'+
+				'<button id="close" class="chipIcon ge-chip-button mdc-icon-button material-icons mdc-top-app-bar__action-item">close</button>'+
 			'</div>'+
 			'<div class="mdc-card__actions"></div>';
 		if (color=="if") this.html.classList.add("moveup");
