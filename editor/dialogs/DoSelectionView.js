@@ -137,7 +137,8 @@ class DoSelectionView {
 	
 // Handlers
 	addActionHandler(e){
-		if (e.target.tagName== "I"){
+		console.log(e.target.tagName);
+		if (e.target.tagName== "BUTTON"){
 			var sceneID=document.querySelector(".sceneselected").id;
 			var actorID=document.querySelector(".actorselected").id;
 			var scriptID=document.querySelector(".scriptselected").id;

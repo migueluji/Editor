@@ -65,7 +65,7 @@ class IfSelectionView {
 
 // Handlers
 	addNodeHandler(e){
-		if (e.target.tagName== "I"){
+		if (e.target.tagName== "BUTTON"){
 			var sceneID=document.querySelector(".sceneselected").id;
 			var actorID=document.querySelector(".actorselected").id;
 			var scriptID=document.querySelector(".scriptselected").id;
