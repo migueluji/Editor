@@ -38,7 +38,7 @@ class DrawerHeaderView {
 
 // Handlers
     addSceneHandler() {
-        CmdManager.addSceneCmd(this.html.parentNode.querySelectorAll(".mdc-list-item__text").length);
+        CmdManager.addSceneCmd(this.html.parentNode.querySelector("#scenes").querySelectorAll("li").length);
     }    
 
     onChangeInputHandler(input){

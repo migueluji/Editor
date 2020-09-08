@@ -16,6 +16,7 @@ class ChoosePropertyView {
 						'<button id="okbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded"><span class="mdc-button__ripple"></span>Ok</button>'+
 					'</div>'+
 				'</div>';
+		
 		var editorFrame=document.querySelector(".editor-frame-root");
 		editorFrame.appendChild(this.html);
 		
@@ -48,6 +49,7 @@ class ChoosePropertyView {
 				case "Element" : type="select"; list=["Game","Me"]; list=list.concat(Command.getActorListCmd()); break;
 				case "Property" : type="select"; list=Command.getPropertiesListCmd(parameters.Element,this.option); break;
 			}
+			console.log(type,field,list,this.option);
 			var fieldView = new FieldView(type,field,parameters[field],list,this.option);
 			this.container.appendChild(fieldView.html);	
 		}

@@ -38,7 +38,7 @@ class FieldView  {
 	select(key,value,list,option){
 		this.html.className +="text-field--full";
 		this.html.innerHTML=
-			'<div style="width:100%" class="mdc-select mdc-select--filled">'+
+			'<div style="width:100%;margin:4px 0px" class="mdc-select mdc-select--filled">'+
 				'<div style="background:white" class="mdc-select__anchor">'+
 					'<span class="mdc-select__ripple"></span>'+
 					'<span class="mdc-select__selected-text"></span>'+
@@ -58,6 +58,7 @@ class FieldView  {
 		var separator;
 		this.html.querySelector(".mdc-select").id=key;
 		var listView=this.html.querySelector("ul");
+
 		list.forEach((property,i)=>{
 			var item = document.createElement("li");
 			item.classList.add("mdc-list-item");
@@ -65,13 +66,11 @@ class FieldView  {
 			item.innerHTML=
 				'<span class="mdc-list-item__ripple"></span>'+
 				'<span class="mdc-list-item__text">'+property+'</span>';
-			console.log(item);
 			if(item.dataset.value==value){
 				item.classList.add("mdc-list-item--selected");
 				item.setAttribute("tabIndex","0");
 				item.setAttribute("aria-selected","true");
 			}
-			console.log(item);
 			if 	((i!=0 && ["fps","displayWidth","sleeping","spriteOn","textOn","soundOn","physicsOn"].includes(property)) ||
 				(option=="Number" && i!=0 && ["x","opacity","size","start","velocityX"].includes(property)) ||
 				((list[i-1]=="Me"))){
@@ -83,38 +82,72 @@ class FieldView  {
 			listView.appendChild(item);
 		});
 		key=key.charAt(0).toUpperCase() + key.slice(1);
-		this.html.querySelector(".mdc-floating-label").textContent=key.replace("_"," ");	
+		this.html.querySelector(".mdc-floating-label").textContent=key.replace("_"," ");
 	}
 
 	input(type,key,value,list){
 		this.html.innerHTML =
-			'<label style="width: -webkit-fill-available;" class="mdc-text-field mdc-text-field--filled">'+
+			'<label style="width: -webkit-fill-available;margin:4px 0px" class="mdc-text-field mdc-text-field--filled">'+
 				'<span class="mdc-text-field__ripple"></span>'+
 				'<input name="script" class="mdc-text-field__input">'+
 				'<span class="mdc-floating-label"></span>'+
-				'<button id="button" class="mdc-button mdc-button-upgraded upload-button">'+
+				'<button id="button" style="margin-right:-8px" class="mdc-menu-surface--anchor mdc-button mdc-button-upgraded upload-button">'+
 					'<i class="material-icons mdc-button_icon">more_vert</i>'+
 				'</button>'+
 				'<span class="mdc-line-ripple"></span>'+
 			'</label>'+
-			'<div class="mdc-menu-surface--anchor" style="left:180px;top:-56px">'+
-				'<div class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
-					'<ul class="mdc-list" role="menu" aria-hidden="true">'+
-						'<li id="property" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Property</li>'+
-						'<li class="mdc-list-divider" role="separator" tabindex="-1"></li>'+
-						'<li id="sqrt" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Sqrt</li>'+
-						'<li id="abs" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Abs</li>'+
-						'<li id="random" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Random</li>'+
-						'<li id="integer" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Integer</li>'+
-						'<li id="sin" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Sin</li>'+
-						'<li id="cos" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Cos</li>'+
-						'<li id="tan" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Tan</li>'+
-						'<li id="asin" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Asin</li>'+
-						'<li id="acos" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Acos</li>'+
-						'<li id="atan" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Atan</li>'+
+			'<div class="mdc-menu-surface--anchor">'+
+				'<div id="menufunctions" class="mdc-menu mdc-menu-surface">'+
+					'<ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">'+
+						'<li id="property" class="mdc-list-item" role="menuitem">'+
+							'<span class="mdc-list-item__ripple"></span>'+
+							'<span class="mdc-list-item__text">Property</span>'+
+						'</li>'+
+						'<li role="separator" class="mdc-list-divider"></li>'+
+						'<li id="sqrt" class="mdc-list-item" role="menuitem">'+
+							'<span class="mdc-list-item__ripple"></span>'+
+							'<span class="mdc-list-item__text">Sqrt</span>'+
+						'</li>'+
+						'<li id="abs" class="mdc-list-item" role="menuitem">'+
+							'<span class="mdc-list-item__ripple"></span>'+
+							'<span class="mdc-list-item__text">Abs</span>'+
+						'</li>'+
+						'<li id="random" class="mdc-list-item" role="menuitem">'+
+							'<span class="mdc-list-item__ripple"></span>'+
+							'<span class="mdc-list-item__text">Random</span>'+
+						'</li>'+
+						'<li id="integer" class="mdc-list-item" role="menuitem">'+
+						'<span class="mdc-list-item__ripple"></span>'+
+							'<span class="mdc-list-item__text">Integer</span>'+
+						'</li>'+
+						'<li id="sin" class="mdc-list-item" role="menuitem">'+
+							'<span class="mdc-list-item__ripple"></span>'+
+							'<span class="mdc-list-item__text">Sin</span>'+
+						'</li>'+
+						'<li id="cos" class="mdc-list-item" role="menuitem">'+
+							'<span class="mdc-list-item__ripple"></span>'+
+							'<span class="mdc-list-item__text">Cos</span>'+
+						'</li>'+
+						'<li id="tan" class="mdc-list-item" role="menuitem">'+
+							'<span class="mdc-list-item__ripple"></span>'+
+							'<span class="mdc-list-item__text">Tan</span>'+
+						'</li>'+
+						'<li id="asin" class="mdc-list-item" role="menuitem">'+
+						'<span class="mdc-list-item__ripple"></span>'+
+							'<span class="mdc-list-item__text">Asin</span>'+
+						'</li>'+
+						'<li id="acos" class="mdc-list-item" role="menuitem">'+
+							'<span class="mdc-list-item__ripple"></span>'+
+							'<span class="mdc-list-item__text">Acos</span>'+
+						'</li>'+
+						'<li id="atan" class="mdc-list-item" role="menuitem">'+
+							'<span class="mdc-list-item__ripple"></span>'+
+							'<span class="mdc-list-item__text">Atan</span>'+
+						'</li>'+
 					'</ul>'+
 				'</div>'+
 			'</div>';	
+
 		this.input = this.html.querySelector("input");
 		this.input.spellcheck=false;
 		this.input.id="Value";
@@ -127,8 +160,6 @@ class FieldView  {
 		this.html.querySelector(".mdc-floating-label").textContent=key.replace("_"," ");	
 		
 		var button=this.html.querySelector("button");
-		console.log(this.html,button);
-	
 		var icon=button.querySelector('i');
 		
 		switch (type){
@@ -151,7 +182,9 @@ class FieldView  {
 				button.addEventListener("click",this.openPropertiesHandler.bind(this,list)); break;
 			default:			
 				button.addEventListener("click",this.menuHandler.bind(this));
-				this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('.mdc-menu'));
+				var menuHtml=this.html.querySelector("#menufunctions");
+				this.menu = mdc.menu.MDCMenu.attachTo(menuHtml);
+				menuHtml.style="height:268px;margin-left:96px;margin-top:-48px";
 				var menuItems=this.html.querySelectorAll("li");
 				menuItems.forEach(item=>{
 					item.addEventListener("click",this.menuItemHandler.bind(this,item.id));

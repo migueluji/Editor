@@ -16,17 +16,33 @@ class CanvasView {
                 '<i class="material-icons">more_vert</i>'+
             '</button>'+
             '<div class="mdc-menu-surface--anchor">'+
-                '<div id="menuActor" class="mdc-menu mdc-menu-surface mdc-menu-surface--close" tabindex="-1">'+
-                    '<ul class="mdc-list" role="menu" aria-hidden="true">'+
-                        '<li id="properties" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Properties</li>'+
-                        '<li id="scripts" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Scripts</li>'+
-                        '<li class="mdc-list-divider" role="separator" tabindex="-1"></li>'+
-                        '<li id="rename" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Rename</li>'+
-                        '<li id="duplicate" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Duplicate</li>'+
-                        '<li id="delete" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Delete</li>'+
-                '</ul>'+
+                '<div id="menuActor" class="mdc-menu mdc-menu-surface">'+
+                    '<ul id="mylist" class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">'+
+                            '<li id="properties" class="mdc-list-item" role="menuitem">'+
+                                '<span class="mdc-list-item__ripple"></span>'+
+                                '<span class="mdc-list-item__text">Properties</span>'+
+                            '</li>'+
+                            '<li id="scripts" class="mdc-list-item" role="menuitem">'+
+                                '<span class="mdc-list-item__ripple"></span>'+
+                                '<span class="mdc-list-item__text">Scripts</span>'+
+                            '</li>'+
+                            '<li role="separator" class="mdc-list-divider"></li>'+
+                            '<li id="rename" class="mdc-list-item" role="menuitem">'+
+                                '<span class="mdc-list-item__ripple"></span>'+
+                                '<span class="mdc-list-item__text">Rename</span>'+
+                            '</li>'+
+                            '<li id="duplicate" class="mdc-list-item" role="menuitem">'+
+                                '<span class="mdc-list-item__ripple"></span>'+
+                                '<span class="mdc-list-item__text">Duplicate</span>'+
+                            '</li>'+
+                            '<li id="delete" class="mdc-list-item" role="menuitem">'+
+                                '<span class="mdc-list-item__ripple"></span>'+
+                                '<span class="mdc-list-item__text">Delete</span>'+
+                            '</li>'+
+                        '</li>'+
+                    '</ul>'+
                 '</div>'+
-            '</div>';            
+            '</div>';      
         this.html.querySelector("#actorbutton").addEventListener("click",this.menuActorHandler.bind(this));
         const fabRipple=mdc.ripple.MDCRipple.attachTo(this.html.querySelector('#addactor'));
 

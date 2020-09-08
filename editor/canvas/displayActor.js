@@ -24,7 +24,7 @@ class DisplayActor extends PIXI.Container {
         if ((!actor.spriteOn && !actor.textOn) || actor.image=="" || !existsImage){
             var color;
             (!existsImage && actor.image!="") ? color=0xff0000 : color=0xaaaaaa;
-            this.createBorder(color);
+            if(!actor.textOn) this.createBorder(color);
         } 
         if (actor.text && actor.textOn) this.createText(actor,cast,game);
 
