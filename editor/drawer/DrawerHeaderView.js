@@ -2,7 +2,8 @@ class DrawerHeaderView {
 
     constructor(gameName) {   
 		this.html = document.createElement("div");
-		this.html.className +="mdc-drawer__header";
+        this.html.className +="mdc-drawer__header";
+        this.html.style="padding-bottom: 12px;"
 		this.html.innerHTML =
             '<img style="width:100%; padding:24px 0px 8px" src="./images/gamesonomy.png"></img>'+
             '<div class="two-properties">'+	

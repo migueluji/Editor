@@ -20,7 +20,7 @@ class DrawerScenesView {
 				'</li>'+
 				'</ul>'+
 			'</div>'+
-			'<ul id="scenes" class="mdc-list mdc-list--image-list" role="listbox">';
+			'<ul id="scenes" style="padding:0px" class="mdc-list mdc-list--image-list" role="listbox">';
 		this.html.querySelector("#rename").addEventListener("click",this.renameSceneHandler.bind(this));
 		this.html.querySelector("#duplicate").addEventListener("click",this.duplicateSceneHandler.bind(this));
 		this.html.querySelector("#delete").addEventListener("click",this.removeSceneHandler.bind(this));
