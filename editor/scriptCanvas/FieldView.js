@@ -51,7 +51,7 @@ class FieldView  {
 					'<span class="mdc-floating-label"></span>'+
 					'<span class="mdc-line-ripple"></span>'+
 				'</div>'+
-				'<div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">'+
+				'<div style="height:352px" class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">'+
 					'<ul class="mdc-list"></ul>'+
 				'</div>'+
 			'</div>';
@@ -185,7 +185,7 @@ class FieldView  {
 				button.addEventListener("click",this.menuHandler.bind(this));
 				var menuHtml=this.html.querySelector("#menufunctions");
 				this.menu = mdc.menu.MDCMenu.attachTo(menuHtml);
-				menuHtml.style="height:268px;margin-left:96px;margin-top:-48px";
+				menuHtml.style="height:368px;margin-left:96px;margin-top:-48px";
 				var menuItems=this.html.querySelectorAll("li");
 				menuItems.forEach(item=>{
 					item.addEventListener("click",this.menuItemHandler.bind(this,item.id));
