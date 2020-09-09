@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
 html{
     height: 100%;
 }
@@ -36,7 +37,7 @@ body{
 .selected{
     background-color: #e6e9fc;
 }
-.add-actor-button{/*fav button*/
+.add-actor-button{/*fab button*/
     position: absolute;
     bottom: 16px;
     right: 16px;

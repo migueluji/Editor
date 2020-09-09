@@ -2,8 +2,6 @@
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8">
-	<meta name="theme-color" content="#000000">
-	<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 	<title>Gamesonomy Editor</title>
 	
 	<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"></link>
@@ -109,7 +107,7 @@
 	<script src="./commands/RemoveTagCmd.js"></script>
 	
 </head>
-<body class="mdc-typography">
+<body>
 	<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 	<script>
 	/*    
@@ -135,7 +133,7 @@
 	//	gameFolder="babe-plataformer";
 	//  gameFolder="ludumdare46-carlos";
 	//	gameFolder="empty";
-			
+	
 		var app=new App(serverGamesFolder,gameFolder);
 		
 	</script>
@@ -146,6 +144,5 @@
 		}
 		PIXI.utils.sayHello(type);
 	</script>
-	
 </body>
 </html>
