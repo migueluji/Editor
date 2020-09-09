@@ -30,6 +30,8 @@ class ActorPropertiesSoundView {
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
 						'<input id="volume" value="1" min="0" step="0.1" class="mdc-text-field__input" type="number">'+
+						'<span class="mdc-floating-label" >Volume</span>'+
+						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
