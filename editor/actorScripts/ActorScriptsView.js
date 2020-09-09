@@ -29,9 +29,9 @@ class ActorScriptsView {
 						'<span class="mdc-toolbar__title clip-text">Actor Scripts</span>'+
 					'</section>'+
 					'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">'+
-						'<button id="propertiesbutton" style="color:white" class="mdc-icon-button material-icons mdc-top-app-bar__action-item">settings</button>'+
-						'<button id="addscript" style="color:white" class="mdc-icon-button material-icons mdc-top-app-bar__action-item">add_circle_outline</button>'+
-						'<button id="closebutton" style="color:white" class="mdc-icon-button material-icons mdc-top-app-bar__action-item">close</button>'+
+						'<button id="propertiesbutton"  class="mdc-icon-button material-icons mdc-top-app-bar__action-item">settings</button>'+
+						'<button id="addscript" class="mdc-icon-button material-icons mdc-top-app-bar__action-item">add_circle_outline</button>'+
+						'<button id="closebutton" class="mdc-icon-button material-icons mdc-top-app-bar__action-item">close</button>'+
 					'</section>'+
 				'</div>'+
 			'</header>'+

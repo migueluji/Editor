@@ -12,7 +12,7 @@ class RenameDialogView {
 						'<span class="mdc-floating-label">New name</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
-					'<p style="color:red" class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="error"></p>'+
+					'<p style="color:var(--mdc-theme-error);" class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="error"></p>'+
 				'<div>'+				
 				'<div class="mdc-card__actions">'+
 					'<div class="mdc-card__action-icons">'+
