@@ -42,7 +42,7 @@ class CastView {
 					'</section>'+
 				'</div>'+
 			'</header>'+
-			'<ul id="actorlist" class="mdc-list  mdc-list--image-list" role="listbox"></ul>'; 
+			'<ul id="actorlist" style="overflow:auto" class="mdc-list  mdc-list--image-list" role="listbox"></ul>'; 
 
 		this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('#mymenu'));
 	

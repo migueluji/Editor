@@ -145,11 +145,13 @@ class Editor {
         this.appBarView.updateSceneName(this.model.sceneList[this.selectedSceneIndex].name);
         this.canvasView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model.allProperties); // actualiza el canvas
         this.castView.update(this.model.sceneList[this.selectedSceneIndex].actorList,this.model.imageList); //update castView
-        if (oldSelectedSceneIndex!=this.selectedSceneIndex) this.selectedActorIndex=null;
-        switch (true) {
-           case SideSheetView.isOpenCast(): this.openCast();break;
-           case SideSheetView.isOpenGameProperties(): this.openGameProperties(); break;
-           default :SideSheetView.closeSheetHandler(); this.view.openCanvas("canvas"); break;
+        if (oldSelectedSceneIndex!=this.selectedSceneIndex) {
+            this.selectedActorIndex=null;
+            switch (true) {
+            case SideSheetView.isOpenCast(): this.openCast();break;
+            case SideSheetView.isOpenGameProperties(): this.openGameProperties(); break;
+            default :SideSheetView.closeSheetHandler(); this.view.openCanvas("canvas"); break;
+            }
         }
         var d;
         var w=this.model.displayWidth;
@@ -267,11 +269,9 @@ class Editor {
                 actor.flipX=value.flipX;
                 break;
         }
-        var isOpen = SideSheetView.isOpenActorProperties();
         this.selectScene(sceneID);
         this.selectActor(actorID);      
         if (property=="name") this.openCast();
-        else if (isOpen) this.openActorProperties();
      }
 
     addActorProperty(sceneID,actorID,property,value){
@@ -312,6 +312,7 @@ class Editor {
         this.openActorScripts();
         if (this.model.sceneList[scenePos].actorList[actorPos].scriptList.length==scriptPos){
             if(scriptPos>0) this.selectScript(this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos-1].id);
+            else   this.view.openCanvas("canvas");
         }
         else this.selectScript(this.model.sceneList[scenePos].actorList[actorPos].scriptList[this.selectedScriptIndex].id);
     }
@@ -337,13 +338,14 @@ class Editor {
     }
 
     selectActor(actorID){
-        if (actorID) this.selectedActorIndex=this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.id==actorID);
+        if (actorID) {
+            this.selectedActorIndex=this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.id==actorID);
+            if(SideSheetView.isOpenActorProperties()) this.openActorProperties();
+            if(SideSheetView.isOpenActorScripts()) this.openActorScripts();
+            this.canvasView.updateSelectedActor(actorID);
+            this.castView.updateSelectedActor(actorID);
+        }
         else this.selectedActorIndex=null;
-        if (SideSheetView.isOpenActorProperties() && actorID!=null) this.openActorProperties();
-        if ((SideSheetView.isOpenActorScripts() && actorID!=null) || (actorID==null && !SideSheetView.isOpenCast()))  
-            SideSheetView.closeSheetHandler();
-        this.canvasView.updateSelectedActor(actorID);
-        this.castView.updateSelectedActor(actorID);
     }
 
     openActorProperties(){
@@ -356,7 +358,9 @@ class Editor {
         var scriptList=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].scriptList;
         this.selectedScriptIndex=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].scriptList.findIndex(i=>i.id==scriptID);
         this.actorScriptsView.updateSelectedScript(scriptID);
+        this.view.openCanvas("scriptcanvas");
         this.scriptCanvasView.update(scriptList[this.selectedScriptIndex].nodeList); 
+        
     }
 
     openActorScripts(){
@@ -364,11 +368,6 @@ class Editor {
         var actorName=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].name;
         this.actorScriptsView.update(actorName,scriptList);
         SideSheetView.openSheetHandler("actor-scripts");
-        if (scriptList.length>0) {
-            this.view.openCanvas("scriptcanvas");
-            this.selectScript(scriptList[scriptList.length-1].id);
-        }
-        else this.view.openCanvas("canvas");
     }
 
     closeActorScripts(){

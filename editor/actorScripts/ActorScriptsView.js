@@ -35,7 +35,7 @@ class ActorScriptsView {
 					'</section>'+
 				'</div>'+
 			'</header>'+
-			'<ul id="scriptlist" class="list-bottom mdc-list  mdc-list--avatar-list"></ul>';
+			'<ul id="scriptlist" style="overflow:auto" class="list-bottom mdc-list  mdc-list--avatar-list"></ul>';
 		
 		this.menu = mdc.menu.MDCMenu.attachTo(this.html.querySelector('#mymenu'));
 

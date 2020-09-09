@@ -72,8 +72,9 @@ class FieldView  {
 				item.setAttribute("aria-selected","true");
 			}
 			if 	((i!=0 && ["fps","displayWidth","sleeping","spriteOn","textOn","soundOn","physicsOn"].includes(property)) ||
-				(option=="Number" && i!=0 && ["x","opacity","size","start","velocityX"].includes(property)) ||
+				(option=="Number" && i!=0 && ["","opacity","size","start","velocityX"].includes(property)) || // change is you want "" by "x"
 				((list[i-1]=="Me"))){
+				console.log("separator");
 				separator = document.createElement("li");
 				separator.className +="mdc-list-divider";
 				separator.setAttribute("role","separator");

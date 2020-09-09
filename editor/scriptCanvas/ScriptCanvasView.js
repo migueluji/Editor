@@ -87,7 +87,6 @@ class ScriptCanvasView {
 // Handlers
     unselectNodeHandler(e){  
         if (e.target.classList[0]=="script-background") {
- //           console.log("unselect",e.target);
             if (e.target.querySelector(".open")==null){
                 e.preventDefault();
                 Command.selectNodeCmd(null);
@@ -97,13 +96,12 @@ class ScriptCanvasView {
 
     mouseDowndHandler(e){  
         if(e.target.classList[0]=="script-background"){
-        //    console.log("down",this.x,this.y);
             e = e || window.event;
             e.preventDefault();
             this.x0=e.clientX;
             this.y0=e.clientY;
             this.down=true;
-        }// else if (e.target.classList[0]=="card-background") this.update(this.nodeList);
+        }
     }
 
     mouseUpHandler(e){
@@ -111,7 +109,6 @@ class ScriptCanvasView {
             this.down=false;
             this.traslateX=this.traslateX+(this.x1-this.x0);
             this.traslateY=this.traslateY+(this.y1-this.y0);
-   //         console.log("up",this.x,this.y);
         }
   
     }
@@ -124,7 +121,6 @@ class ScriptCanvasView {
             this.y1=e.clientY;
             this.x=this.centerX+this.traslateX+(this.x1-this.x0);
             this.y=this.centerY+this.traslateY+(this.y1-this.y0);
- //         console.log("move",this.x,this.y);
             e.target.style.transform="translate("+this.x+"px,"+this.y+"px)";
         }
     }
@@ -160,20 +156,23 @@ class ScriptCanvasView {
     }
 
     update(nodeList){
+       
         this.selected="no";
-        var list =this.html.querySelector(".nodelist"); 
-        var scriptID = document.querySelector(".scriptselected").id;
-		while (list.firstChild)	list.removeChild(list.firstChild);
+        var list =this.html.querySelector(".nodelist");
+        var script = document.querySelector(".scriptselected");
+        var scriptID;
+        if (script) scriptID = script.id;
+        while (list.firstChild)	list.removeChild(list.firstChild);
         this.updateNodeList(list,nodeList);
         this.redrawFrames();
 
         if (this.scriptID!=scriptID) this.init(); // first update of nodeList
+        this.scriptID=scriptID;
 
         this.x=this.centerX+this.traslateX;
         this.y=this.centerY+this.traslateY;
         this.background.style.transform="translate("+this.x+"px,"+this.y+"px)";
         this.nodeList=nodeList;
-        this.scriptID=scriptID;
     }
 
     updateNodeList(html,nodeList){
