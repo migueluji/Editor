@@ -185,6 +185,7 @@ body{
 .mdc-toolbar__title{
     padding: 18px;
     font-size: 1.25em;
+    font-family: var( --mdc-typography-font-family);
 }
 .clip-text{
     text-overflow: ellipsis;

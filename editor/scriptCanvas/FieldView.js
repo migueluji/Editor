@@ -51,7 +51,7 @@ class FieldView  {
 					'<span class="mdc-floating-label"></span>'+
 					'<span class="mdc-line-ripple"></span>'+
 				'</div>'+
-				'<div style="height:352px" class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">'+
+				'<div id="menu" class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">'+
 					'<ul class="mdc-list"></ul>'+
 				'</div>'+
 			'</div>';
@@ -84,6 +84,8 @@ class FieldView  {
 		});
 		key=key.charAt(0).toUpperCase() + key.slice(1);
 		this.html.querySelector(".mdc-floating-label").textContent=key.replace("_"," ");
+		console.log("key",key,value);
+		if(key=="Property") this.html.querySelector("#menu").style="height:352px";
 	}
 
 	input(type,key,value,list){

@@ -130,7 +130,6 @@
     pointer-events:auto;
 }
 .nodelabel{
-    width: 72px;
     height: auto;
     margin: -14px 0px 0px 8px;
     pointer-events:none;
@@ -170,6 +169,8 @@
 .card-title{
     flex-direction: row;
     color: white;
+    font-size: 1.25em;
+    font-family: var( --mdc-typography-font-family);
 }
 .card-title_label{
     margin-top:16px;
