@@ -59,6 +59,7 @@ class FieldView  {
 		this.html.querySelector(".mdc-select").id=key;
 		var listView=this.html.querySelector("ul");
 
+		var counter=0;
 		list.forEach((property,i)=>{
 			var item = document.createElement("li");
 			item.classList.add("mdc-list-item");
@@ -81,11 +82,12 @@ class FieldView  {
 				listView.appendChild(separator);
 			}
 			listView.appendChild(item);
+			counter++;
 		});
 		key=key.charAt(0).toUpperCase() + key.slice(1);
 		this.html.querySelector(".mdc-floating-label").textContent=key.replace("_"," ");
-		console.log("key",key,value);
-		if(key=="Property") this.html.querySelector("#menu").style="height:352px";
+		console.log("key",counter,key,value,this.html.querySelector("#menu").style.maxHeight);
+		if(counter>7) this.html.querySelector("#menu").style="height:354px";
 	}
 
 	input(type,key,value,list){
