@@ -128,11 +128,11 @@
 	// 	gameFolder="bird";
 	//	gameFolder="flying-plane";
 	//	gameFolder="asteroids";
-	//	gameFolder="arkanoid";
+		gameFolder="arkanoid";
 	//	gameFolder="alien-invasion";
 	//	gameFolder="babe-plataformer";
 	//  gameFolder="ludumdare46-carlos";
-		gameFolder="empty";
+	//	gameFolder="empty";
 
 		var app=new App(serverGamesFolder,gameFolder);
 		

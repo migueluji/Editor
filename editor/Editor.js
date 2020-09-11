@@ -342,10 +342,13 @@ class Editor {
             this.selectedActorIndex=this.model.sceneList[this.selectedSceneIndex].actorList.findIndex(i=>i.id==actorID);
             if(SideSheetView.isOpenActorProperties()) this.openActorProperties();
             if(SideSheetView.isOpenActorScripts()) this.openActorScripts();
-            this.canvasView.updateSelectedActor(actorID);
-            this.castView.updateSelectedActor(actorID);
         }
-        else this.selectedActorIndex=null;
+        else {
+            this.selectedActorIndex=null;
+            if(SideSheetView.isOpenActorProperties() || SideSheetView.isOpenActorScripts() )SideSheetView.closeSheetHandler();
+        }
+        this.canvasView.updateSelectedActor(actorID);
+        this.castView.updateSelectedActor(actorID);
     }
 
     openActorProperties(){

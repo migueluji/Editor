@@ -155,7 +155,7 @@ class CanvasView {
 
         this.app.stage.removeChildren();
         this.app.renderer.backgroundColor="0x"+String(this.gameProperties.backgroundColor).substr(1);
-
+      
         this.frame = new PIXI.Graphics(); // draw the camera frame
         this.frame.lineStyle(20, 0xDDDDDD, 1, 1, true);
         this.frame.drawRect(-this.gameProperties.displayWidth/2.0,-this.gameProperties.displayHeight/2.0,this.gameProperties.displayWidth,this.gameProperties.displayHeight);
