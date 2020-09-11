@@ -117,7 +117,7 @@ body{
 }
 .properties-section{
     border-bottom:1px solid lightgray;
-    background-color:white;
+    background-color:var(--mdc-theme-background);
 }
 .properties-section.properties-section--disable{
     background-color:rgba(0,0,0,0.05);
@@ -135,7 +135,7 @@ body{
 }
 .properties-bar{
     user-select: none;
-    background:#2ec3ec; 
+    background:var(--my-theme-do); 
     color:white;
 }
 .two-properties{
