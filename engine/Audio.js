@@ -12,15 +12,8 @@ class Audio {
         
         /** Comprobamos que el actor tiene un sonido. */
         if(data.soundOn) {
-
-            console.log("ENTRAAAAAAAAA");
-            console.log(data.sound, data.soundOn)
-
-        
-
             /** Creamos el objeto de audio. */
             this.createSound({source: data.sound, play: true, volume: data.volume, pan: data.pan, loop: data.loop}, false);
-        
             /** Añadimos el actor a la lista del motor de audio */
             this.actorList.push(actor);
         }
@@ -43,20 +36,17 @@ class Audio {
 
     createSound(sound, destroy) {
 
-        console.log(sound);
-
-        return new Howl({
-            src: [_player.file.source + "/sounds/" + sound.source],
-            autoplay: sound.play,
-            loop: sound.loop || false,
-            volume: sound.volume,
-            stereo: sound.pan,
-            format: sound.source.split(".")[1],
-            onend: function() {
-                console.log(this);
-                console.log('Audio track Finished!');
-                if(destroy) { this.unload(); }
-            }
+        return new Howl({  
+           //src: [_player.file.source + "/sounds/" + sound.source],
+            src: [serverGamesFolder+"/"+gameFolder+"/sounds/" + sound.source],
+                autoplay: sound.play,
+                loop: sound.loop || false,
+                volume: sound.volume,
+                stereo: sound.pan,
+                format: sound.source.split(".")[1],
+                onend: function() {
+                    if(destroy) { this.unload(); }
+                }
         });
     }
 
@@ -75,6 +65,7 @@ class Audio {
      *  ############################################################################### */
     PlaySound(soundFile, play, volume, pan) {
 
-        this.createSound({source: soundFile, play: play, volume: volume, pan: pan}, true);
+      var s=  this.createSound({source: soundFile, play: play, volume: volume, pan: pan}, true);
+      s.play(); // Miguel
     }
 }

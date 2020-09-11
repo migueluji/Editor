@@ -15,7 +15,7 @@ class TagView {
 					'</div>'+
 					'<div class="mdc-checkbox__ripple"></div>'+
 				'</div>'+
-				'<p>'+tag+'</p>'+
+				'<p style="font-family: var(--mdc-typography-font-family);">'+tag+'</p>'+
 				'<span id="removebutton" class="mdc-list-item__meta material-icons" aria-hidden="true">cancel</span>';
 			
 			this.html.querySelector("#removebutton").addEventListener("click",this.removeTagHandler.bind(this));

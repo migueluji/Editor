@@ -17,7 +17,8 @@
 	"gravityX": 0,
 	"gravityY": 0,
 	"tagList": [
-		"ball"
+		"ball",
+		"block"
 	],
 	"sceneList": [
 		{
@@ -86,7 +87,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
+					"tags": "block",
 					"spriteOn": false,
 					"image": "",
 					"color": "#ffffff",
@@ -128,8 +129,8 @@
 				{
 					"name": "wall_copy",
 					"sleeping": false,
-					"x": 0,
-					"y": -265,
+					"x": -3.3870175616860934,
+					"y": -266.693508780843,
 					"width": 800,
 					"height": 50,
 					"scaleX": 16,
@@ -137,7 +138,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
+					"tags": "block",
 					"spriteOn": false,
 					"image": "",
 					"color": "#ffffff",
@@ -209,8 +210,8 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
-					"spriteOn": false,
+					"tags": "block",
+					"spriteOn": true,
 					"image": "",
 					"color": "#ffffff",
 					"opacity": 1,
@@ -260,7 +261,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
+					"tags": "block",
 					"spriteOn": false,
 					"image": "",
 					"color": "#ffffff",
@@ -311,7 +312,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
+					"tags": "block",
 					"spriteOn": true,
 					"image": "paddleRed.png",
 					"color": "#ffffff",
@@ -368,7 +369,7 @@
 					"name": "ball",
 					"sleeping": false,
 					"x": 0,
-					"y": -60,
+					"y": -61,
 					"width": 22,
 					"height": 22,
 					"scaleX": 1,
@@ -451,6 +452,26 @@
 									"nodeListFalse": []
 								}
 							]
+						},
+						{
+							"name": "Script_2",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "block"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Play",
+											"parameters": {
+												"sound_File": "Arkanoid SFX (1).wav"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
 						}
 					],
 					"onstart": true
@@ -467,7 +488,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
+					"tags": "block",
 					"spriteOn": true,
 					"image": "element_blue_rectangle.png",
 					"color": "#ffffff",
@@ -544,7 +565,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
+					"tags": "block",
 					"spriteOn": true,
 					"image": "element_purple_rectangle.png",
 					"color": "#ffffff",
@@ -621,7 +642,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
+					"tags": "block",
 					"spriteOn": true,
 					"image": "element_green_rectangle.png",
 					"color": "#ffffff",
@@ -689,7 +710,7 @@
 				{
 					"name": "red",
 					"sleeping": false,
-					"x": -280,
+					"x": -278.306491219157,
 					"y": 90,
 					"width": 64,
 					"height": 32,
@@ -698,7 +719,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
+					"tags": "block",
 					"spriteOn": true,
 					"image": "element_red_rectangle.png",
 					"color": "#ffffff",
@@ -775,7 +796,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
+					"tags": "block",
 					"spriteOn": true,
 					"image": "element_green_rectangle.png",
 					"color": "#ffffff",
@@ -852,7 +873,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
+					"tags": "block",
 					"spriteOn": true,
 					"image": "element_grey_rectangle.png",
 					"color": "#ffffff",
@@ -929,7 +950,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "",
+					"tags": "block",
 					"spriteOn": true,
 					"image": "element_yellow_rectangle.png",
 					"color": "#ffffff",
