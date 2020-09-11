@@ -137,7 +137,6 @@ class DoSelectionView {
 	
 // Handlers
 	addActionHandler(e){
-		console.log(e.target.tagName);
 		if (e.target.tagName== "BUTTON"){
 			var sceneID=document.querySelector(".sceneselected").id;
 			var actorID=document.querySelector(".actorselected").id;
@@ -163,8 +162,6 @@ class DoSelectionView {
 				case "Remove" :     parameters= new Object({});break;
 			}
 			this.node=new Node({"id":Utils.id(),"type":type,"parameters":parameters});
-			// change do this.node=new Do({"id":Utils.id(),"type":type,"parameters":parameters});
-			//console.log("addNodeCmd",sceneID,actorID,scriptID,this.insert,this.node);
 			CmdManager.addNodeCmd(sceneID,actorID,scriptID,this.insert,this.node);
 			this.closeDialog();
 		}

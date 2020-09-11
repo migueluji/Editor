@@ -9,13 +9,11 @@ class Script {
     }
 
     addNode(insert,node){ // father, side, position, node 
-        //console.log("añadir",insert,node);
         if (insert.parentID==null){ //script vacio
             this.nodeList.splice(insert.position,0,node);
         }
         else {
             var nodeList=this.findNode(this.nodeList,insert.parentID); // returns parent nodeList and position
-         //   console.log(this.nodeList,insert.parentID,nodeList);
             if (nodeList) {
                 if (insert.side=="right") nodeList.list[nodeList.position].nodeListTrue.splice(insert.position,0,node);
                 else if (insert.side=="left") nodeList.list[nodeList.position].nodeListFalse.splice(insert.position,0,node);
@@ -38,19 +36,14 @@ class Script {
         if (nodeList) nodeList.forEach((node,i)=>{
             nodeList[i]= new Node(node);
             if (node.hasOwnProperty("nodeListTrue")) { // si es un IF
-               // nodeList[i]= new If(node);
                 if(node.nodeListTrue) this.assignNodes(node.nodeListTrue);
                 if(node.nodeListFalse)this.assignNodes(node.nodeListFalse);
-            }
-            else {
-               // nodeList[i]=new Do(node);
             }
         });
     }
 
     findNode(nodeList,nodeID,parentID,side){
         var pos = 0;
-   //     console.log("find node",parentID,side);
         var found = undefined;
         while (pos < nodeList.length){
             if (nodeList[pos].id==nodeID){

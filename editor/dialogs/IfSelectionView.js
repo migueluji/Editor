@@ -80,8 +80,6 @@ class IfSelectionView {
 				case "Keyboard":    parameters= new Object({"key":null,"key_Mode":"Pressed"});break;
 			}
 			this.node= new Node({"id":Utils.id(),"type":type,"parameters":parameters,"nodeListTrue":[],"nodeListFalse":[]});
-	// change if node		this.node= new If({"id":Utils.id(),"type":type,"parameters":parameters,"nodeListTrue":[],"nodeListFalse":[]});
-	//		console.log("addNodeCmd",sceneID,actorID,scriptID,this.insert,this.node);
 			CmdManager.addNodeCmd(sceneID,actorID,scriptID,this.insert,this.node);
 			this.closeDialog();
 		}

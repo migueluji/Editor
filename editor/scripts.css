@@ -131,6 +131,7 @@
 }
 .nodelabel{
     height: auto;
+    width: 72px;
     margin: -14px 0px 0px 8px;
     pointer-events:none;
 }
@@ -144,13 +145,14 @@
     position: absolute;
     transform:translateX(-30px);
     display: none;
-    color: gray;
+    color: grey;
+    font-family: var(--mdc-typography-font-family);
 }
 .yestext{
     position: absolute;
     transform:translateX(178px);
-    display: none;
-    color:gray;
+    color: grey;
+    font-family: var(--mdc-typography-font-family);
 }
 .action-card{
     background-color:white;

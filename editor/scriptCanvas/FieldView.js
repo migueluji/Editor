@@ -59,7 +59,7 @@ class FieldView  {
 		this.html.querySelector(".mdc-select").id=key;
 		var listView=this.html.querySelector("ul");
 
-		var counter=0;
+		var menuSize=16;
 		list.forEach((property,i)=>{
 			var item = document.createElement("li");
 			item.classList.add("mdc-list-item");
@@ -75,19 +75,18 @@ class FieldView  {
 			if 	((i!=0 && ["fps","displayWidth","sleeping","spriteOn","textOn","soundOn","physicsOn"].includes(property)) ||
 				(option=="Number" && i!=0 && ["","opacity","size","start","velocityX"].includes(property)) || // change is you want "" by "x"
 				((list[i-1]=="Me"))){
-				console.log("separator");
 				separator = document.createElement("li");
 				separator.className +="mdc-list-divider";
 				separator.setAttribute("role","separator");
 				listView.appendChild(separator);
+				if (menuSize<336) menuSize=menuSize+16;
 			}
+			if (menuSize<336) menuSize=menuSize+48;
 			listView.appendChild(item);
-			counter++;
 		});
 		key=key.charAt(0).toUpperCase() + key.slice(1);
 		this.html.querySelector(".mdc-floating-label").textContent=key.replace("_"," ");
-		console.log("key",counter,key,value,this.html.querySelector("#menu").style.maxHeight);
-		if(counter>7) this.html.querySelector("#menu").style="height:354px";
+		this.html.querySelector("#menu").style="height:"+menuSize+"px";
 	}
 
 	input(type,key,value,list){
@@ -189,7 +188,7 @@ class FieldView  {
 				button.addEventListener("click",this.menuHandler.bind(this));
 				var menuHtml=this.html.querySelector("#menufunctions");
 				this.menu = mdc.menu.MDCMenu.attachTo(menuHtml);
-				menuHtml.style="height:368px;margin-left:96px;margin-top:-48px";
+				menuHtml.style="height:312px;margin-left:96px;margin-top:-48px";
 				var menuItems=this.html.querySelectorAll("li");
 				menuItems.forEach(item=>{
 					item.addEventListener("click",this.menuItemHandler.bind(this,item.id));
