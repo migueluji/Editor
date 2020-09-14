@@ -12,8 +12,8 @@ html{
     --my-theme-on-second-bar:black;
     --my-theme-if:#ecb62e;
     --my-theme-on-if:black;
-    --my-theme-do:#2ec3ec;
-    --my-theme-on-do:black;
+    --my-theme-do:#2E64EC;
+    --my-theme-on-do:white;
     --mdc-typography-font-family:Lato;
 }
 .mdc-checkbox__native-control:checked~.mdc-checkbox__background .mdc-checkbox__checkmark {
