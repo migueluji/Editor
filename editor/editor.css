@@ -5,7 +5,8 @@ html{
 }
 :root{
     --mdc-theme-primary: #2E64EC;
-    --mdc-theme-secondary: #2E64EC;
+    --mdc-theme-secondary: #2ec3ec;
+    --mdc-theme-on-secondary: black;
     --my-theme-if:#ecb62e;
     --my-theme-do:#2ec3ec;
     --mdc-typography-font-family:Lato;
@@ -135,8 +136,8 @@ body{
 }
 .properties-bar{
     user-select: none;
-    background:var(--my-theme-do); 
-    color:white;
+    background:var(--mdc-theme-secondary); 
+    color:var(--mdc-theme-on-secondary);
 }
 .two-properties{
     width: 100%;

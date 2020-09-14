@@ -10,7 +10,7 @@ class DoSelectionView {
 					'<ul style="width:320px;margin-bottom: 8px;" class="mdc-image-list">'+
 						'<li id="edit" class="selection-item mdc-image-list__item">'+
 							'<div class="action-circle mdc-image-list__image-aspect-container">'+
-								'<button style="color:white" class="mdc-icon-button material-icons">edit</button>'+
+								'<button class="mdc-icon-button material-icons">edit</button>'+
 							'</div>'+
 							'<div class="mdc-image-list__supporting">'+
 								'<span class="selection-label mdc-image-list__label">Edit</span>'+//edit
@@ -18,7 +18,7 @@ class DoSelectionView {
 						'</li>'+
 						'<li id="spawn" class="selection-item mdc-image-list__item">'+
 							'<div class="action-circle mdc-image-list__image-aspect-container">'+
-								'<button style="color:white" class="mdc-icon-button material-icons">person_add</button>'+
+								'<button class="mdc-icon-button material-icons">person_add</button>'+
 							'</div>'+
 							'<div class="mdc-image-list__supporting">'+
 								'<span class="selection-label mdc-image-list__label">Spawn</span>'+//spawn
@@ -26,7 +26,7 @@ class DoSelectionView {
 						'</li>'+
 						'<li class="selection-item mdc-image-list__item">'+
 							'<div class="action-circle mdc-image-list__image-aspect-container">'+
-								'<button style="color:white" class="mdc-icon-button material-icons">delete</button>'+
+								'<button class="mdc-icon-button material-icons">delete</button>'+
 							'</div>'+
 							'<div class="mdc-image-list__supporting">'+
 								'<span class="selection-label mdc-image-list__label">Delete</span>'+//delete
@@ -34,7 +34,7 @@ class DoSelectionView {
 						'</li>'+
 						'<li class="selection-item mdc-image-list__item">'+
 							'<div class="action-circle mdc-image-list__image-aspect-container">'+
-								'<button style="color:white" class="mdc-icon-button material-icons">movie_creation</button>'+
+								'<button class="mdc-icon-button material-icons">movie_creation</button>'+
 							'</div>'+
 							'<div class="mdc-image-list__supporting">'+
 								'<span class="selection-label mdc-image-list__label">Animate</span>'+//animate
@@ -42,7 +42,7 @@ class DoSelectionView {
 						'</li>'+
 						'<li class="selection-item mdc-image-list__item">'+
 							'<div class="action-circle mdc-image-list__image-aspect-container">'+
-								'<button style="color:white" class="mdc-icon-button material-icons">volume_up</button>'+
+								'<button class="mdc-icon-button material-icons">volume_up</button>'+
 							'</div>'+
 							'<div class="mdc-image-list__supporting">'+
 								'<span class="selection-label mdc-image-list__label">Play</span>'+//play sound
@@ -50,7 +50,7 @@ class DoSelectionView {
 						'</li>'+
 						'<li class="selection-item mdc-image-list__item">'+
 							'<div class="action-circle mdc-image-list__image-aspect-container">'+
-								'<button style="color:white" class="mdc-icon-button material-icons">navigation</button>'+
+								'<button class="mdc-icon-button material-icons">navigation</button>'+
 							'</div>'+
 							'<div class="mdc-image-list__supporting">'+
 								'<span class="selection-label mdc-image-list__label">Move</span>'+//move
@@ -58,7 +58,7 @@ class DoSelectionView {
 						'</li>'+
 						'<li class="selection-item mdc-image-list__item">'+
 							'<div class="action-circle mdc-image-list__image-aspect-container">'+
-								'<button style="color:white" class="mdc-icon-button material-icons">place</button>'+
+								'<button class="mdc-icon-button material-icons">place</button>'+
 							'</div>'+
 							'<div class="mdc-image-list__supporting">'+
 								'<span class="selection-label mdc-image-list__label">Move To</span>'+//move to
@@ -66,7 +66,7 @@ class DoSelectionView {
 						'</li>'+
 						'<li class="selection-item mdc-image-list__item">'+
 							'<div class="action-circle mdc-image-list__image-aspect-container">'+
-								'<button style="color:white" class="mdc-icon-button material-icons">rotate_left</button>'+
+								'<button class="mdc-icon-button material-icons">rotate_left</button>'+
 							'</div>'+
 							'<div class="mdc-image-list__supporting">'+
 								'<span class="selection-label mdc-image-list__label">Rotate</span>'+//rotate
@@ -74,7 +74,7 @@ class DoSelectionView {
 						'</li>'+
 						'<li class="selection-item mdc-image-list__item">'+
 							'<div class="action-circle mdc-image-list__image-aspect-container">'+
-								'<button style="color:white" class="mdc-icon-button material-icons">rotate_90_degrees_ccw</button>'+
+								'<button class="mdc-icon-button material-icons">rotate_90_degrees_ccw</button>'+
 							'</div>'+
 							'<div class="mdc-image-list__supporting">'+
 								'<span class="selection-label mdc-image-list__label">Rotate To</span>'+//rotate to
@@ -82,7 +82,7 @@ class DoSelectionView {
 						'</li>'+
 						'<li class="selection-item mdc-image-list__item">'+
 							'<div class="action-circle mdc-image-list__image-aspect-container">'+
-								'<button style="color:white" class="mdc-icon-button material-icons">call_made</button>'+
+								'<button class="mdc-icon-button material-icons">call_made</button>'+
 							'</div>'+
 							'<div class="mdc-image-list__supporting">'+
 								'<span class="selection-label mdc-image-list__label">Push</span>'+//push
@@ -90,7 +90,7 @@ class DoSelectionView {
 						'</li>'+
 						'<li class="selection-item mdc-image-list__item">'+
 							'<div class="action-circle mdc-image-list__image-aspect-container">'+
-								'<button style="color:white" class="mdc-icon-button material-icons">keyboard_tab</button>'+
+								'<button class="mdc-icon-button material-icons">keyboard_tab</button>'+
 							'</div>'+
 							'<div class="mdc-image-list__supporting">'+
 								'<span class="selection-label mdc-image-list__label">Push To</span>'+//push to
@@ -98,7 +98,7 @@ class DoSelectionView {
 						'</li>'+
 						'<li class="selection-item mdc-image-list__item">'+
 							'<div class="action-circle mdc-image-list__image-aspect-container">'+
-								'<button style="color:white" class="mdc-icon-button material-icons">sync</button>'+
+								'<button class="mdc-icon-button material-icons">sync</button>'+
 							'</div>'+
 							'<div class="mdc-image-list__supporting">'+
 								'<span class="selection-label mdc-image-list__label">Torque</span>'+//torque
@@ -106,7 +106,7 @@ class DoSelectionView {
 						'</li>'+
 						'<li class="selection-item mdc-image-list__item">'+
 							'<div class="action-circle mdc-image-list__image-aspect-container">'+
-								'<button style="color:white" class="mdc-icon-button material-icons">input</button>'+
+								'<button class="mdc-icon-button material-icons">input</button>'+
 							'</div>'+
 							'<div class="mdc-image-list__supporting">'+
 								'<span class="selection-label mdc-image-list__label">Go To</span>'+//go to
@@ -114,7 +114,7 @@ class DoSelectionView {
 						'</li>'+
 						'<li class="selection-item mdc-image-list__item">'+
 							'<div class="action-circle mdc-image-list__image-aspect-container">'+
-								'<button style="color:white" class="mdc-icon-button material-icons">present_to_all</button>'+
+								'<button class="mdc-icon-button material-icons">present_to_all</button>'+
 							'</div>'+
 							'<div class="mdc-image-list__supporting">'+
 								'<span class="selection-label mdc-image-list__label">Add</span>'+//add scene
@@ -122,7 +122,7 @@ class DoSelectionView {
 						'</li>'+
 						'<li class="selection-item mdc-image-list__item">'+
 							'<div class="action-circle mdc-image-list__image-aspect-container">'+
-								'<button style="color:white" class="mdc-icon-button material-icons">cancel_presentation</button>'+
+								'<button class="mdc-icon-button material-icons">cancel_presentation</button>'+
 							'</div>'+
 							'<div class="mdc-image-list__supporting">'+
 								'<span class="selection-label mdc-image-list__label">Remove</span>'+//remove scene

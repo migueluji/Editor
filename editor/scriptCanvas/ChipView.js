@@ -9,7 +9,7 @@ class ChipView  {
 			'<div id="open" class="'+color+' circle">'+
 				'<button class="nodeIcon mdc-icon-button material-icons mdc-top-app-bar__action-item">'+icon+'</button>'+
 			'</div>'+
-			'<span class="nodelabel mdc-list-item__text">'+
+			'<span style="width:72px" class="nodelabel mdc-list-item__text">'+
 				'<span class="mdc-list-item__primary-text">'+text+'</span>'+
 				'<span class="mdc-list-item__secondary-text">'+Object.values(node.parameters)+'</span>'+
 			'</span>'+

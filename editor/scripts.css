@@ -120,7 +120,7 @@
     border-radius: 50%;
 }
 .nodeIcon{
-    color: white;
+    color:var(--mdc-theme-on-secondary);
     position: absolute;
     pointer-events:none;
 }
@@ -131,7 +131,6 @@
 }
 .nodelabel{
     height: auto;
-    width: 72px;
     margin: -14px 0px 0px 8px;
     pointer-events:none;
 }
@@ -170,7 +169,7 @@
 }
 .card-title{
     flex-direction: row;
-    color: white;
+    color: var(--mdc-theme-on-secondary);
     font-size: 1.25em;
     font-family: var( --mdc-typography-font-family);
 }
