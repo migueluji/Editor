@@ -42,12 +42,14 @@
 }
 .do-button{
     background-color:var(--my-theme-do);
+    color:var(--my-theme-on-do);
     position: absolute;
     bottom: 16px;
     right: 16px;
 }
 .if-button{
     background-color:var(--my-theme-if);
+    color:var(--my-theme-on-if);
     position: absolute;
     bottom: 86px;
     right: 16px;
@@ -58,6 +60,7 @@
 }
 .action-circle{
     background-color:var(--my-theme-do);
+    color:var(--my-theme-on-do,white);
     border-radius: 50%;
     width: 48px;
     height: 48px;
@@ -66,6 +69,7 @@
 }
 .condition-circle{
     background-color:var(--my-theme-if);
+    color:var(--my-theme-on-if,white);
     border-radius: 50%;
     width: 48px;
     height: 48px;
@@ -110,9 +114,11 @@
 }
 .if {
     background-color:var(--my-theme-if);
+    color:var(--my-theme-on-if,black);
 }
 .do {
     background-color: var(--my-theme-do);
+    color:var(--my-theme-on-do,black);
 }
 .circle {
     width: 48px;
@@ -120,7 +126,6 @@
     border-radius: 50%;
 }
 .nodeIcon{
-    color:var(--mdc-theme-on-secondary);
     position: absolute;
     pointer-events:none;
 }
@@ -169,7 +174,6 @@
 }
 .card-title{
     flex-direction: row;
-    color: var(--mdc-theme-on-secondary);
     font-size: 1.25em;
     font-family: var( --mdc-typography-font-family);
 }

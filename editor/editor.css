@@ -5,11 +5,19 @@ html{
 }
 :root{
     --mdc-theme-primary: #2E64EC;
-    --mdc-theme-secondary: #2ec3ec;
-    --mdc-theme-on-secondary: black;
+    --mdc-theme-secondary: #2E64EC;
+    --mdc-theme-on-primary: white;
+    --mdc-theme-on-secondary: white;
+    --my-theme-second-bar: white;
+    --my-theme-on-second-bar:black;
     --my-theme-if:#ecb62e;
+    --my-theme-on-if:black;
     --my-theme-do:#2ec3ec;
+    --my-theme-on-do:black;
     --mdc-typography-font-family:Lato;
+}
+.mdc-checkbox__native-control:checked~.mdc-checkbox__background .mdc-checkbox__checkmark {
+    color: var(--mdc-theme-on-secondary);
 }
 body{
     margin:0;
@@ -136,8 +144,8 @@ body{
 }
 .properties-bar{
     user-select: none;
-    background:var(--mdc-theme-secondary); 
-    color:var(--mdc-theme-on-secondary);
+    background:var(--my-theme-second-bar); 
+    color:var(--my-theme-on-second-bar);
 }
 .two-properties{
     width: 100%;

@@ -6,7 +6,7 @@ class ActorPropertiesView {
 		 this.html.style.display="none";
 		 this.html.innerHTML =
 			'<header class="mdc-top-app-bar--dense properties-bar">'+
-				'<div class="mdc-top-app-bar__row">'+
+				'<div style="z-index:1" class="mdc-elevation--z1 mdc-top-app-bar__row">'+
 					'<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">'+
 						'<span class="mdc-toolbar__title clip-text">Actor Properties</span>'+
 					'</section>'+
