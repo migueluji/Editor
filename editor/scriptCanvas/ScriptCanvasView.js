@@ -80,12 +80,13 @@ class ScriptCanvasView {
             else this.selected="no";
         }
         else {
-            this.selected=null; // cambiar por "no"
+            this.selected="no"; // cambiar por "no"
         }
 	}
 
 // Handlers
     unselectNodeHandler(e){  
+     //   console.log("unselectNode",e.target.classList[0],this.down);
         if (e.target.classList[0]=="script-background") {
             if (e.target.querySelector(".open")==null){
                 e.preventDefault();
@@ -101,19 +102,25 @@ class ScriptCanvasView {
             this.x0=e.clientX;
             this.y0=e.clientY;
             this.down=true;
+       //     console.log(this.x0,this.y0);
         }
+        else this.down=false;
+       // console.log("mouseDown",e.target.classList[0],this.down);
+ 
     }
 
     mouseUpHandler(e){
+    
         if (this.down){
             this.down=false;
             this.traslateX=this.traslateX+(this.x1-this.x0);
             this.traslateY=this.traslateY+(this.y1-this.y0);
         }
-  
+        //console.log("mouseUp",e.target.classList[0],this.down);
     }
     
     mouseMoveHandler(e){
+        //console.log("mouseMove",e.target.classList[0],this.down);
         if (this.down && e.target.classList[0]=="script-background"){
             e = e || window.event;
             e.preventDefault();
@@ -148,15 +155,17 @@ class ScriptCanvasView {
         this.centerX=(this.html.clientWidth-this.background.clientWidth)/2;
         this.centerY=0;
         this.traslateX=this.traslateY=0;
+     //   console.log("init",this.centerX,this.centerY);
     }
 
     updateStageDrawer(){
+     //   console.log("updateStageDrawer");
         this.init(); 
         this.update(this.nodeList);
     }
 
     update(nodeList){
-       
+     //   console.log("update",this.selected, this.down);
         this.selected="no";
         var list =this.html.querySelector(".nodelist");
         var script = document.querySelector(".scriptselected");
@@ -164,6 +173,7 @@ class ScriptCanvasView {
         if (script) scriptID = script.id;
         while (list.firstChild)	list.removeChild(list.firstChild);
         this.updateNodeList(list,nodeList);
+        this.updateSelectedNode(null);
         this.redrawFrames();
 
         if (this.scriptID!=scriptID) this.init(); // first update of nodeList

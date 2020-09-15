@@ -122,6 +122,7 @@ class DisplayActor extends PIXI.Container {
     }
 
     removeGizmo(){
+        console.log("removeGizmo",this, this.gizmo);
         if (!this.visibleActor) this.createBorder();
         this.removeChild(this.gizmo);
     }

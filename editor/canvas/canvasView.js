@@ -181,7 +181,8 @@ class CanvasView {
     }
 
     updateSelectedActor(actorID){
-        if (actorID){ // if actorED != mull
+        console.log("updateSelectedActor",actorID,this.selected,this.displayActor);
+        if (actorID){ // if actorID != mull
             (this.selected) ? this.displayActor.removeGizmo() : this.selected=true;
             var displayActorIndex =this.scene.children.findIndex(i=>i.id==actorID);
             this.displayActor = this.scene.children[displayActorIndex];
