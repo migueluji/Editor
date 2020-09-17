@@ -124,11 +124,11 @@
 		serverGamesFolder="http://localhost/games";
 
 	//	gameFolder="prueba";
-	//	gameFolder="box-doger";
+		gameFolder="box-doger";
 	// 	gameFolder="bird";
 	//	gameFolder="flying-plane";
 	//	gameFolder="asteroids";
-		gameFolder="arkanoid";
+	//	gameFolder="arkanoid";
 	//	gameFolder="alien-invasion";
 	//	gameFolder="babe-plataformer";
 	//  gameFolder="ludumdare46-carlos";

@@ -99,7 +99,7 @@ class CanvasView {
         this.pixiApp.renderer.extract.canvas(stage).toBlob((blob) => {
                 if (upload){
                     var formData= new FormData();
-                    formData.append("file",blob,"game.png");
+                    formData.append("file",blob,"image.jpg");
                     File.uploadFile(blob,formData,"ScreenShoot");
                 }
                 else {
