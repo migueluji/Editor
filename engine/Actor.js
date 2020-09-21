@@ -483,7 +483,11 @@ class Actor {
     get physicsOn() { return this._physicsOn; }
     set physicsOn(value) {
         this._physicsOn = value;
-        if(this._physicsOn) { this.rigidbody.m_body.SetActive(this._physicsOn); }  
+
+        if(this.rigidbody != null) {
+
+            this.rigidbody.m_body.SetActive(this._physicsOn);
+        }
     }
 
     get velocityX() { return this._velocityX; }
