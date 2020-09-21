@@ -124,7 +124,7 @@
 		serverGamesFolder="http://localhost/games";
 
 	//	gameFolder="prueba";
-		gameFolder="box-doger";
+	//	gameFolder="box-doger";
 	// 	gameFolder="bird";
 	//	gameFolder="flying-plane";
 	//	gameFolder="asteroids";
@@ -133,6 +133,7 @@
 	//	gameFolder="babe-plataformer";
 	//  gameFolder="ludumdare46-carlos";
 	//	gameFolder="empty";
+		gameFolder="prehistoric";
 
 		var app=new App(serverGamesFolder,gameFolder);
 		
