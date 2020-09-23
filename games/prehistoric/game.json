@@ -18,8 +18,9 @@
 	"gravityY": -9.8,
 	"tagList": [
 		"ground",
-		"rightwall",
-		"leftwall"
+		"right",
+		"left",
+		"bone"
 	],
 	"sceneList": [
 		{
@@ -30,9 +31,9 @@
 					"sleeping": false,
 					"x": -1.9006832557161033,
 					"y": 62,
-					"width": 1280,
+					"width": 1600,
 					"height": 600,
-					"scaleX": 0.8,
+					"scaleX": 1,
 					"scaleY": 1,
 					"angle": 0,
 					"screen": false,
@@ -44,7 +45,7 @@
 					"opacity": 1,
 					"flipX": false,
 					"flipY": false,
-					"scrollX": 0,
+					"scrollX": 8,
 					"scrollY": 0,
 					"tileX": 2,
 					"tileY": 1,
@@ -74,16 +75,29 @@
 					"restitution": 0.5,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
-					"scriptList": []
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.x",
+										"value": "Girl_Collider.x/10"
+									}
+								}
+							]
+						}
+					]
 				},
 				{
 					"name": "Far_mountains",
 					"sleeping": false,
 					"x": 0,
 					"y": -11,
-					"width": 1280,
+					"width": 1600,
 					"height": 481,
-					"scaleX": 0.8,
+					"scaleX": 1,
 					"scaleY": 1,
 					"angle": 0,
 					"screen": false,
@@ -125,16 +139,29 @@
 					"restitution": 0.5,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
-					"scriptList": []
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.x",
+										"value": "Girl_Collider.x/20"
+									}
+								}
+							]
+						}
+					]
 				},
 				{
 					"name": "Mountains",
 					"sleeping": false,
 					"x": 0,
 					"y": -73.9006832557161,
-					"width": 1280,
+					"width": 1600,
 					"height": 450,
-					"scaleX": 0.8,
+					"scaleX": 1,
 					"scaleY": 1,
 					"angle": 0,
 					"screen": false,
@@ -176,17 +203,387 @@
 					"restitution": 0.5,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.x",
+										"value": "Girl_Collider.x/25"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Tree",
+					"sleeping": false,
+					"x": -575,
+					"y": -138,
+					"width": 112,
+					"height": 112,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "tree.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Tree_copy",
+					"sleeping": false,
+					"x": 575,
+					"y": -138,
+					"width": 112,
+					"height": 112,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "tree.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Tree_copy_2",
+					"sleeping": false,
+					"x": -82,
+					"y": -138,
+					"width": 112,
+					"height": 112,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "tree.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "House_right",
+					"sleeping": false,
+					"x": 417,
+					"y": -130,
+					"width": 209,
+					"height": 128,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "house1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": true,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "House_left",
+					"sleeping": false,
+					"x": -417,
+					"y": -130,
+					"width": 209,
+					"height": 128,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "house1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Platform1_right",
+					"sleeping": false,
+					"x": 531,
+					"y": -220,
+					"width": 212,
+					"height": 96,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "house2.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": true,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Platform_right",
+					"sleeping": false,
+					"x": 407,
+					"y": -220,
+					"width": 212,
+					"height": 96,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "house2.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
 					"scriptList": []
 				},
 				{
 					"name": "Platform",
 					"sleeping": false,
-					"x": 52,
-					"y": -198,
-					"width": 318,
-					"height": 144,
-					"scaleX": 1.5,
-					"scaleY": 1.5,
+					"x": -65,
+					"y": -220,
+					"width": 212,
+					"height": 96,
+					"scaleX": 1,
+					"scaleY": 1,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
@@ -232,12 +629,114 @@
 				{
 					"name": "Platform1",
 					"sleeping": false,
-					"x": -41.815031625753704,
-					"y": -198,
-					"width": 318,
-					"height": 144,
-					"scaleX": 1.5,
-					"scaleY": 1.5,
+					"x": 58,
+					"y": -220,
+					"width": 212,
+					"height": 96,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "house2.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Platform_left",
+					"sleeping": false,
+					"x": -531,
+					"y": -220,
+					"width": 212,
+					"height": 96,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "house2.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Platform1_left",
+					"sleeping": false,
+					"x": -407,
+					"y": -220,
+					"width": 212,
+					"height": 96,
+					"scaleX": 1,
+					"scaleY": 1,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
@@ -281,112 +780,10 @@
 					"scriptList": []
 				},
 				{
-					"name": "House_right",
-					"sleeping": false,
-					"x": -485,
-					"y": -173,
-					"width": 313.5,
-					"height": 192,
-					"scaleX": 1.5,
-					"scaleY": 1.5,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "",
-					"spriteOn": true,
-					"image": "house1.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": false,
-					"type": "Dynamic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": []
-				},
-				{
-					"name": "House_left",
-					"sleeping": false,
-					"x": 485,
-					"y": -172,
-					"width": 313.5,
-					"height": 192,
-					"scaleX": 1.5,
-					"scaleY": 1.5,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "",
-					"spriteOn": true,
-					"image": "house1.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": true,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": false,
-					"type": "Dynamic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": []
-				},
-				{
 					"name": "Grass",
 					"sleeping": false,
 					"x": 0.2911176756911118,
-					"y": -304,
+					"y": -304.7110309102419,
 					"width": 1280,
 					"height": 112,
 					"scaleX": 0.4,
@@ -436,8 +833,8 @@
 				{
 					"name": "Girl_Collider",
 					"sleeping": false,
-					"x": -6,
-					"y": 64,
+					"x": 0,
+					"y": 0,
 					"width": 65,
 					"height": 65,
 					"scaleX": 1.3,
@@ -446,7 +843,7 @@
 					"screen": false,
 					"collider": "Circle",
 					"tags": "",
-					"spriteOn": true,
+					"spriteOn": false,
 					"image": "",
 					"color": "#ffffff",
 					"opacity": 1,
@@ -494,11 +891,28 @@
 									},
 									"nodeListTrue": [
 										{
-											"type": "Edit",
+											"type": "Collision",
 											"parameters": {
-												"property": "Me.velocityX",
-												"value": "400"
-											}
+												"tags": "right"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.velocityX",
+														"value": "0"
+													}
+												}
+											],
+											"nodeListFalse": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.velocityX",
+														"value": "400"
+													}
+												}
+											]
 										}
 									],
 									"nodeListFalse": [
@@ -538,7 +952,7 @@
 													"type": "Edit",
 													"parameters": {
 														"property": "Me.velocityY",
-														"value": "500"
+														"value": "400"
 													}
 												}
 											],
@@ -552,10 +966,123 @@
 					]
 				},
 				{
+					"name": "Bone",
+					"sleeping": true,
+					"x": -140,
+					"y": -421,
+					"width": 30,
+					"height": 27,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "bone",
+					"spriteOn": true,
+					"image": "bone.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Check",
+									"parameters": {
+										"property": "Me.init"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.init",
+												"value": false
+											}
+										},
+										{
+											"type": "Check",
+											"parameters": {
+												"property": "Girl.flipX"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.velocity",
+														"value": "-Me.velocity"
+													}
+												}
+											],
+											"nodeListFalse": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.velocity",
+														"value": "Me.velocity"
+													}
+												}
+											]
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Move",
+									"parameters": {
+										"speed": "Me.velocity",
+										"angle": 0
+									}
+								},
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.angle",
+										"value": "Me.angle-20"
+									}
+								}
+							]
+						}
+					],
+					"init": true,
+					"velocity": 800
+				},
+				{
 					"name": "Girl",
 					"sleeping": false,
-					"x": -33.37174211248282,
-					"y": 433.3717421124828,
+					"x": -1.3717421124828206,
+					"y": 70.37174211248282,
 					"width": 128,
 					"height": 128,
 					"scaleX": 1,
@@ -574,7 +1101,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": true,
+					"textOn": false,
 					"text": "${Girl_Collider.velocityX} ${Girl_Collider.velocityY}",
 					"font": "Arial",
 					"size": 30,
@@ -602,7 +1129,7 @@
 					"dampingAngular": 0,
 					"scriptList": [
 						{
-							"name": "Input",
+							"name": "Animations",
 							"nodeList": [
 								{
 									"type": "Compare",
@@ -705,23 +1232,47 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "Spawn_bone",
+							"nodeList": [
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "Space",
+										"key_Mode": "Down"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "Bone",
+												"x": 0,
+												"y": 0,
+												"angle": 0
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
 						}
 					]
 				},
 				{
 					"name": "Roof_collider",
 					"sleeping": false,
-					"x": 7.75,
-					"y": -154.25,
-					"width": 331.5,
+					"x": -9.250508381006824,
+					"y": -196.4321305749653,
+					"width": 302.50101676201365,
 					"height": 12.5,
-					"scaleX": 6.63,
+					"scaleX": 6.050020335240273,
 					"scaleY": 0.25,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
 					"tags": "ground",
-					"spriteOn": true,
+					"spriteOn": false,
 					"image": "",
 					"color": "#ffffff",
 					"opacity": 1,
@@ -731,7 +1282,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": true,
+					"textOn": false,
 					"text": "${Me.physicsOn}",
 					"font": "Arial",
 					"size": 30,
@@ -766,7 +1317,7 @@
 									"parameters": {
 										"value_1": "Girl_Collider.y",
 										"operation": "Less",
-										"value_2": "Me.y"
+										"value_2": "Me.y+35"
 									},
 									"nodeListTrue": [
 										{
@@ -808,17 +1359,17 @@
 				{
 					"name": "Roof_collider_copy_2",
 					"sleeping": false,
-					"x": -501.5531818846316,
-					"y": -81.68159287324102,
-					"width": 331.5,
+					"x": 467.74949161899315,
+					"y": -196.4321305749653,
+					"width": 302.50101676201365,
 					"height": 12.5,
-					"scaleX": 6.63,
+					"scaleX": 6.050020335240273,
 					"scaleY": 0.25,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
 					"tags": "ground",
-					"spriteOn": true,
+					"spriteOn": false,
 					"image": "",
 					"color": "#ffffff",
 					"opacity": 1,
@@ -828,7 +1379,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": true,
+					"textOn": false,
 					"text": "${Me.physicsOn}",
 					"font": "Arial",
 					"size": 30,
@@ -863,7 +1414,201 @@
 									"parameters": {
 										"value_1": "Girl_Collider.y",
 										"operation": "Less",
-										"value_2": "Me.y"
+										"value_2": "Me.y+35"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.physicsOn",
+												"value": false
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.color",
+												"value": "#ea1a1a"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.physicsOn",
+												"value": true
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.color",
+												"value": "#08f764"
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Roof_collider_copy_3",
+					"sleeping": false,
+					"x": -464.25050838100685,
+					"y": -195.4321305749653,
+					"width": 302.50101676201365,
+					"height": 12.5,
+					"scaleX": 6.050020335240273,
+					"scaleY": 0.25,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "ground",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "${Me.physicsOn}",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Static",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Girl_Collider.y",
+										"operation": "Less",
+										"value_2": "Me.y+35"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.physicsOn",
+												"value": false
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.color",
+												"value": "#ea1a1a"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.physicsOn",
+												"value": true
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.color",
+												"value": "#08f764"
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Roof_collider_copy_4",
+					"sleeping": false,
+					"x": -408.75050838100685,
+					"y": -74.4321305749653,
+					"width": 169.50101676201365,
+					"height": 12.5,
+					"scaleX": 3.390020335240273,
+					"scaleY": 0.25,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "ground",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "${Me.physicsOn}",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Static",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Girl_Collider.y",
+										"operation": "Less",
+										"value_2": "Me.y+35"
 									},
 									"nodeListTrue": [
 										{
@@ -905,17 +1650,17 @@
 				{
 					"name": "Roof_collider_copy",
 					"sleeping": false,
-					"x": 495.03840519583343,
-					"y": -81.68159287324124,
-					"width": 331.5,
+					"x": 409.24949161899315,
+					"y": -73.4321305749653,
+					"width": 169.50101676201365,
 					"height": 12.5,
-					"scaleX": 6.63,
+					"scaleX": 3.390020335240273,
 					"scaleY": 0.25,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
 					"tags": "ground",
-					"spriteOn": true,
+					"spriteOn": false,
 					"image": "",
 					"color": "#ffffff",
 					"opacity": 1,
@@ -925,7 +1670,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": true,
+					"textOn": false,
 					"text": "${Me.physicsOn}",
 					"font": "Arial",
 					"size": 30,
@@ -960,7 +1705,7 @@
 									"parameters": {
 										"value_1": "Girl_Collider.y",
 										"operation": "Less",
-										"value_2": "Me.y"
+										"value_2": "Me.y+35"
 									},
 									"nodeListTrue": [
 										{
@@ -1049,6 +1794,397 @@
 					"dampingLinear": 0,
 					"dampingAngular": 0,
 					"scriptList": []
+				},
+				{
+					"name": "Actor_24_copy",
+					"sleeping": false,
+					"x": 639,
+					"y": 0,
+					"width": 32,
+					"height": 736,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "right",
+					"spriteOn": true,
+					"image": "liana.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 8,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Static",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 0,
+					"friction": 0,
+					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_24",
+					"sleeping": false,
+					"x": -639,
+					"y": 6,
+					"width": 32,
+					"height": 736,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "left",
+					"spriteOn": true,
+					"image": "liana.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 8,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Static",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 0,
+					"friction": 0,
+					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_24_copy_2",
+					"sleeping": false,
+					"x": 0,
+					"y": 360,
+					"width": 32,
+					"height": 1288,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 90,
+					"screen": false,
+					"collider": "Box",
+					"tags": "right",
+					"spriteOn": true,
+					"image": "liana.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 14,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Static",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 0,
+					"friction": 0,
+					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_24_copy_3",
+					"sleeping": false,
+					"x": 0,
+					"y": -360,
+					"width": 32,
+					"height": 1288,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 90,
+					"screen": false,
+					"collider": "Box",
+					"tags": "right",
+					"spriteOn": true,
+					"image": "liana.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 14,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Static",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 0,
+					"friction": 0,
+					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Pterodactyl",
+					"sleeping": true,
+					"x": 866.827160493827,
+					"y": -9.888888888889028,
+					"width": 104,
+					"height": 75,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "pterodactyl-fly-1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "pterodactyl-fly-1.png,pterodactyl-fly-2.png,pterodactyl-fly-3.png,pterodactyl-fly-4.png",
+										"fps": 24
+									}
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.x",
+										"operation": "Greater",
+										"value_2": "Girl.x"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Move_To",
+											"parameters": {
+												"speed": "200",
+												"x": "Girl.x",
+												"y": "Girl.y+random(20,80)"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Move_To",
+											"parameters": {
+												"speed": "200",
+												"x": "-1000",
+												"y": "Girl.y"
+											}
+										}
+									]
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "bone"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.color",
+												"value": "#f82a2a"
+											}
+										},
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_30",
+					"sleeping": false,
+					"x": 733.4259259259261,
+					"y": 6.8580246913580964,
+					"width": 50,
+					"height": 50,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Timer",
+									"parameters": {
+										"seconds": "3"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "Pterodactyl",
+												"x": 0,
+												"y": "random (-100,240)",
+												"angle": 0
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
 				}
 			]
 		}

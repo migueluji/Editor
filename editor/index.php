@@ -134,6 +134,7 @@
 	//  gameFolder="ludumdare46-carlos";
 	//	gameFolder="empty";
 		gameFolder="prehistoric";
+	//	gameFolder="pirate-bomb";
 
 		var app=new App(serverGamesFolder,gameFolder);
 		
