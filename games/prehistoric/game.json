@@ -20,7 +20,7 @@
 		"ground",
 		"right",
 		"left",
-		"bone"
+		"bonetag"
 	],
 	"sceneList": [
 		{
@@ -967,7 +967,7 @@
 				},
 				{
 					"name": "Bone",
-					"sleeping": true,
+					"sleeping": false,
 					"x": -140,
 					"y": -421,
 					"width": 30,
@@ -977,7 +977,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "bone",
+					"tags": "bonetag",
 					"spriteOn": true,
 					"image": "bone.png",
 					"color": "#ffffff",
@@ -2082,7 +2082,7 @@
 											"parameters": {
 												"speed": "200",
 												"x": "-1000",
-												"y": "Girl.y"
+												"y": "Girl.y+100"
 											}
 										}
 									]
@@ -2090,7 +2090,7 @@
 								{
 									"type": "Collision",
 									"parameters": {
-										"tags": "bone"
+										"tags": "bonetag"
 									},
 									"nodeListTrue": [
 										{
