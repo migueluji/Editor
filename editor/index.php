@@ -110,6 +110,8 @@
 <body>
 	<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 	<script>
+
+		window.onbeforeunload = () => "";
 	/*    
 		var userId="<?php echo $_POST['iduser'];?>";
 		var userName="<?php echo $_POST['nameuser'];?>";
@@ -135,6 +137,7 @@
 	//	gameFolder="empty";
 	//	gameFolder="prehistoric";
 	//	gameFolder="pirate-bomb";
+
 
 		var app=new App(serverGamesFolder,gameFolder);
 		
