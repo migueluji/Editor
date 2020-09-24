@@ -35,7 +35,7 @@ class ParametersView  {
 						case "tags" : type="tags"; break;
  						case "backgroundColor" : type="color";break;
 						case "fill" : type="color"; break;
-						case "collider" : type="select"; list=["Circle","Box","Polygon"];break;
+						case "collider" : type="select"; list=["Circle","Box"];break;
 						case "style" : type="select"; list=["Normal","Italic","Bold"];break;
 						case "align" : type="select"; list=["Left","Center","Right"];break;
 						case "type" : type="select"; list=["Dynamic","Kinematic","Static"];break;

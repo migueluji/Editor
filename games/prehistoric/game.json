@@ -1,7 +1,7 @@
 {
 	"name": "Prehistoric",
-	"displayWidth": 1280,
-	"displayHeight": 720,
+	"displayWidth": 960,
+	"displayHeight": 540,
 	"cameraX": 0,
 	"cameraY": 0,
 	"cameraAngle": 0,
@@ -29,7 +29,7 @@
 				{
 					"name": "Sky",
 					"sleeping": false,
-					"x": -1.9006832557161033,
+					"x": 0,
 					"y": 62,
 					"width": 1600,
 					"height": 600,
@@ -45,7 +45,7 @@
 					"opacity": 1,
 					"flipX": false,
 					"flipY": false,
-					"scrollX": 8,
+					"scrollX": 50,
 					"scrollY": 0,
 					"tileX": 2,
 					"tileY": 1,
@@ -75,20 +75,7 @@
 					"restitution": 0.5,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
-					"scriptList": [
-						{
-							"name": "Script_1",
-							"nodeList": [
-								{
-									"type": "Edit",
-									"parameters": {
-										"property": "Me.x",
-										"value": "Girl_Collider.x/10"
-									}
-								}
-							]
-						}
-					]
+					"scriptList": []
 				},
 				{
 					"name": "Far_mountains",
@@ -147,7 +134,7 @@
 									"type": "Edit",
 									"parameters": {
 										"property": "Me.x",
-										"value": "Girl_Collider.x/20"
+										"value": "Game.cameraX/25"
 									}
 								}
 							]
@@ -211,7 +198,71 @@
 									"type": "Edit",
 									"parameters": {
 										"property": "Me.x",
-										"value": "Girl_Collider.x/25"
+										"value": "Game.cameraX/20"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Forest",
+					"sleeping": false,
+					"x": 0,
+					"y": -194,
+					"width": 1600,
+					"height": 186.5,
+					"scaleX": 0.5,
+					"scaleY": 0.5,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "forest-1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 4,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.x",
+										"value": "Game.cameraX/15"
 									}
 								}
 							]
@@ -444,6 +495,108 @@
 					"scrollX": 0,
 					"scrollY": 0,
 					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_35",
+					"sleeping": false,
+					"x": 234,
+					"y": -245,
+					"width": 180,
+					"height": 41,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "spikes1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 2,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_35_copy",
+					"sleeping": false,
+					"x": -259,
+					"y": -245,
+					"width": 180,
+					"height": 41,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "spikes1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 2,
 					"tileY": 1,
 					"textOn": false,
 					"text": "",
@@ -780,6 +933,134 @@
 					"scriptList": []
 				},
 				{
+					"name": "Actor_33",
+					"sleeping": false,
+					"x": 72.85052938769451,
+					"y": -159.4901755121229,
+					"width": 119,
+					"height": 74,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "fire-meat-1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": true,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "fire-meat-1.png,fire-meat-2.png,fire-meat-3.png,fire-meat-4.png",
+										"fps": "4"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_34",
+					"sleeping": false,
+					"x": 20.37046398345467,
+					"y": -155.2061411265871,
+					"width": 130.6258311659809,
+					"height": 128,
+					"scaleX": 1.0205143059842259,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "caverman-1-idle1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "caverman-1-idle1.png,caverman-1-idle2.png,caverman-1-idle3.png,caverman-1-idle4.png,caverman-1-idle5.png,caverman-1-idle6.png",
+										"fps": 24
+									}
+								}
+							]
+						}
+					]
+				},
+				{
 					"name": "Grass",
 					"sleeping": false,
 					"x": 0.2911176756911118,
@@ -833,8 +1114,8 @@
 				{
 					"name": "Girl_Collider",
 					"sleeping": false,
-					"x": 0,
-					"y": 0,
+					"x": -78.12449753705843,
+					"y": -11.506708939566721,
 					"width": 65,
 					"height": 65,
 					"scaleX": 1.3,
@@ -875,7 +1156,7 @@
 					"velocityY": 0,
 					"angularVelocity": 0,
 					"density": 2,
-					"friction": 2,
+					"friction": 4,
 					"restitution": 0,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
@@ -909,7 +1190,7 @@
 													"type": "Edit",
 													"parameters": {
 														"property": "Me.velocityX",
-														"value": "400"
+														"value": "380"
 													}
 												}
 											]
@@ -927,7 +1208,7 @@
 													"type": "Edit",
 													"parameters": {
 														"property": "Me.velocityX",
-														"value": "-400"
+														"value": "-380"
 													}
 												}
 											],
@@ -952,7 +1233,7 @@
 													"type": "Edit",
 													"parameters": {
 														"property": "Me.velocityY",
-														"value": "400"
+														"value": "380"
 													}
 												}
 											],
@@ -1081,8 +1362,8 @@
 				{
 					"name": "Girl",
 					"sleeping": false,
-					"x": -1.3717421124828206,
-					"y": 70.37174211248282,
+					"x": -87.61546424621069,
+					"y": 29.219586781346266,
 					"width": 128,
 					"height": 128,
 					"scaleX": 1,
@@ -1251,6 +1532,69 @@
 												"y": 0,
 												"angle": 0
 											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "Camera",
+							"nodeList": [
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.x",
+										"operation": "Greater",
+										"value_2": "-165"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "Me.x",
+												"operation": "Greater",
+												"value_2": "165"
+											},
+											"nodeListTrue": [],
+											"nodeListFalse": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Game.cameraX",
+														"value": "Me.x"
+													}
+												}
+											]
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.y",
+										"operation": "Greater",
+										"value_2": "-90"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "Me.y",
+												"operation": "Greater",
+												"value_2": "90"
+											},
+											"nodeListTrue": [],
+											"nodeListFalse": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Game.cameraY",
+														"value": "Me.y"
+													}
+												}
+											]
 										}
 									],
 									"nodeListFalse": []
@@ -1796,210 +2140,6 @@
 					"scriptList": []
 				},
 				{
-					"name": "Actor_24_copy",
-					"sleeping": false,
-					"x": 639,
-					"y": 0,
-					"width": 32,
-					"height": 736,
-					"scaleX": 1,
-					"scaleY": 1,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "right",
-					"spriteOn": true,
-					"image": "liana.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 8,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": true,
-					"type": "Static",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 0,
-					"friction": 0,
-					"restitution": 0,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": []
-				},
-				{
-					"name": "Actor_24",
-					"sleeping": false,
-					"x": -639,
-					"y": 6,
-					"width": 32,
-					"height": 736,
-					"scaleX": 1,
-					"scaleY": 1,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "left",
-					"spriteOn": true,
-					"image": "liana.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 8,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": true,
-					"type": "Static",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 0,
-					"friction": 0,
-					"restitution": 0,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": []
-				},
-				{
-					"name": "Actor_24_copy_2",
-					"sleeping": false,
-					"x": 0,
-					"y": 360,
-					"width": 32,
-					"height": 1288,
-					"scaleX": 1,
-					"scaleY": 1,
-					"angle": 90,
-					"screen": false,
-					"collider": "Box",
-					"tags": "right",
-					"spriteOn": true,
-					"image": "liana.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 14,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": true,
-					"type": "Static",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 0,
-					"friction": 0,
-					"restitution": 0,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": []
-				},
-				{
-					"name": "Actor_24_copy_3",
-					"sleeping": false,
-					"x": 0,
-					"y": -360,
-					"width": 32,
-					"height": 1288,
-					"scaleX": 1,
-					"scaleY": 1,
-					"angle": 90,
-					"screen": false,
-					"collider": "Box",
-					"tags": "right",
-					"spriteOn": true,
-					"image": "liana.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 14,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": true,
-					"type": "Static",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 0,
-					"friction": 0,
-					"restitution": 0,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": []
-				},
-				{
 					"name": "Pterodactyl",
 					"sleeping": true,
 					"x": 866.827160493827,
@@ -2185,6 +2325,384 @@
 							]
 						}
 					]
+				},
+				{
+					"name": "Tyranosaur",
+					"sleeping": false,
+					"x": 417.6756677538038,
+					"y": -235,
+					"width": 210,
+					"height": 210,
+					"scaleX": 1.4,
+					"scaleY": 1.4,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "tyranosaur-walk-1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "abs(Girl.x-Me.x)",
+										"operation": "Greater",
+										"value_2": "100"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Animate",
+											"parameters": {
+												"animation": "tyranosaur-walk-1.png,tyranosaur-walk-2.png,tyranosaur-walk-3.png,tyranosaur-walk-4.png,tyranosaur-walk-5.png,tyranosaur-walk-6.png,tyranosaur-walk-7.png,tyranosaur-walk-8.png",
+												"fps": "12"
+											}
+										},
+										{
+											"type": "Move_To",
+											"parameters": {
+												"speed": "100",
+												"x": "Girl.x",
+												"y": "Me.y"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.idle",
+												"value": false
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Animate",
+											"parameters": {
+												"animation": "tyranosaur-idle-1.png,tyranosaur-idle-2.png,tyranosaur-idle-3.png,tyranosaur-idle-4.png,tyranosaur-idle-5.png,tyranosaur-idle-6.png",
+												"fps": "12"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.idle",
+												"value": true
+											}
+										}
+									]
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.x",
+										"operation": "Less",
+										"value_2": "Girl.x"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Timer",
+											"parameters": {
+												"seconds": "3"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.flipX",
+														"value": true
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "Girl.x",
+												"operation": "Less",
+												"value_2": "Me.x"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Timer",
+													"parameters": {
+														"seconds": "3"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.flipX",
+																"value": false
+															}
+														}
+													],
+													"nodeListFalse": []
+												}
+											],
+											"nodeListFalse": []
+										}
+									]
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "bonetag"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					],
+					"idle": true
+				},
+				{
+					"name": "Actor_24_copy",
+					"sleeping": false,
+					"x": 479,
+					"y": 0,
+					"width": 32,
+					"height": 552,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": true,
+					"collider": "Box",
+					"tags": "right",
+					"spriteOn": true,
+					"image": "liana.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 6,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Static",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 0,
+					"friction": 0,
+					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_24",
+					"sleeping": false,
+					"x": -479,
+					"y": 0,
+					"width": 32,
+					"height": 552,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": true,
+					"collider": "Box",
+					"tags": "left",
+					"spriteOn": true,
+					"image": "liana.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": true,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 6,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Static",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 0,
+					"friction": 0,
+					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_24_copy_2",
+					"sleeping": false,
+					"x": 0,
+					"y": 269,
+					"width": 32,
+					"height": 1012,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 90,
+					"screen": true,
+					"collider": "Box",
+					"tags": "right",
+					"spriteOn": true,
+					"image": "liana.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 11,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Static",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 0,
+					"friction": 0,
+					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
+				{
+					"name": "Actor_24_copy_3",
+					"sleeping": false,
+					"x": 11.56689284094682,
+					"y": -269,
+					"width": 32,
+					"height": 1012,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 90,
+					"screen": true,
+					"collider": "Box",
+					"tags": "right",
+					"spriteOn": true,
+					"image": "liana.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": true,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 11,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Static",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 0,
+					"friction": 0,
+					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
 				}
 			]
 		}

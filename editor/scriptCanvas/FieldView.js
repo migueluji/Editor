@@ -93,7 +93,7 @@ class FieldView  {
 		this.html.innerHTML =
 			'<label style="width: -webkit-fill-available;margin:4px 0px" class="mdc-text-field mdc-text-field--filled">'+
 				'<span class="mdc-text-field__ripple"></span>'+
-				'<input name="script" class="mdc-text-field__input">'+
+				'<input name="script" class="mdc-text-field__input" style="display: inline-block;text-overflow: ellipsis;width: calc(85%);">'+ //ellipsis style
 				'<span class="mdc-floating-label"></span>'+
 				'<button id="button" style="margin-right:-8px" class="mdc-menu-surface--anchor mdc-button mdc-button-upgraded upload-button">'+
 					'<i class="material-icons mdc-button_icon">more_vert</i>'+
@@ -178,7 +178,7 @@ class FieldView  {
 				icon.innerHTML="label";
 				button.addEventListener("click",this.opentTagsHandler.bind(this));break;
 			case "color": 
-				icon.style.display="none"; break;
+				icon.style.display="none"; this.input.style="transform: translateY(8px)"; break;
 			case "key": 
 				icon.style.display="none"; break;
 			case "properties":

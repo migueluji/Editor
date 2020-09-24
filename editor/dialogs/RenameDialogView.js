@@ -1,26 +1,26 @@
 class RenameDialogView {
 
     constructor(element,elementID) {   
-		 this.html = document.createElement("div");
-		 this.html.className +="dialog-full-screen";
-		 this.html.innerHTML =
-				'<div class="mdc-elevation--z24 mdc-card">'+
-					'<h2 id="title" class="demo-card__title mdc-typography--headline6">Rename    </h2>'+
-					'<label style="width:auto;margin:0px" class="mdc-text-field mdc-text-field--filled">'+
-						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="input" value="" class="mdc-text-field__input" type="text">'+
-						'<span class="mdc-floating-label">New name</span>'+
-						'<span class="mdc-line-ripple"></span>'+
-					'</label>'+
-					'<p style="color:var(--mdc-theme-error);" class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="error"></p>'+
-				'<div>'+				
-				'<div class="mdc-card__actions">'+
-					'<div class="mdc-card__action-icons">'+
-						'<button id="cancelbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded"><span class="mdc-button__ripple"></span>Cancel</button>'+
-						'<button id="okbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded"><span class="mdc-button__ripple"></span>Ok</button>'+
-					'</div>'+
-				'</div>';
-				
+		var value=document.querySelector("#"+elementID).querySelector(".mdc-list-item__text").innerHTML;
+		this.html = document.createElement("div");
+		this.html.className +="dialog-full-screen";
+		this.html.innerHTML =
+			'<div class="mdc-elevation--z24 mdc-card">'+
+				'<h2 id="title" class="demo-card__title mdc-typography--headline6">Rename    </h2>'+
+				'<label style="width:auto;margin:0px" class="mdc-text-field mdc-text-field--filled">'+
+					'<span class="mdc-text-field__ripple"></span>'+
+					'<input id="input" value="'+value+'" class="mdc-text-field__input" type="text">'+
+					'<span class="mdc-floating-label">New name</span>'+
+					'<span class="mdc-line-ripple"></span>'+
+				'</label>'+
+				'<p style="color:var(--mdc-theme-error);" class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="error"></p>'+
+			'<div>'+				
+			'<div class="mdc-card__actions">'+
+				'<div class="mdc-card__action-icons">'+
+					'<button id="cancelbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded"><span class="mdc-button__ripple"></span>Cancel</button>'+
+					'<button id="okbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded"><span class="mdc-button__ripple"></span>Ok</button>'+
+				'</div>'+
+			'</div>';
 		this.element=element;
 		this.elementID=elementID;
 		this.panel=null;
@@ -33,6 +33,8 @@ class RenameDialogView {
 		this.html.addEventListener("keypress",this.enterKeyHandler.bind(this));
 		this.html.querySelector("#cancelbutton").addEventListener("click",this.cancelButtonHandler.bind(this));
 		this.html.addEventListener("click",this.cancelBackgroundHandler.bind(this));
+
+		this.html.querySelector("#input").select();
   }
 
 // Handlers

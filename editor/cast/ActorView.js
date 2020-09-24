@@ -24,7 +24,7 @@ class ActorView {
 	  	this.html.addEventListener("click",this.selectActorHandler.bind(this));
 	}
    
-  addView(actor) {
+  	addView(actor) {
 		this.html.id=actor.id;
 		this.html.querySelector(".mdc-list-item__text").innerHTML=actor.name.split("_").join(" ");
 		if (actor.image){// change the default image to the actor image 

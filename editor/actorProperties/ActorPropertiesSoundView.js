@@ -19,7 +19,7 @@ class ActorPropertiesSoundView {
 			'<div class="properties-panel">'+
 				'<label style="width: -webkit-fill-available;" class="half-text mdc-text-field mdc-text-field--filled">'+
 					'<span class="mdc-text-field__ripple"></span>'+
-					'<input id="sound" value="sound" style="width:200px" class="mdc-text-field__input" type="text">'+
+					'<input id="sound" value="sound" style="width:212px" class="mdc-text-field__input" type="text">'+
 					'<span class="mdc-floating-label" >Sound</span>'+
 					'<button id="soundbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
 						'<i class="material-icons mdc-button_icon">folder</i>'+
