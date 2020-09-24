@@ -3,19 +3,19 @@ class ChoosePropertyView {
     constructor(input,option) {   
 		this.input=input;
 		this.option=option;
-		 this.html = document.createElement("div");
-		 this.html.className +="dialog-full-screen";
-		 this.html.innerHTML =
-				'<div class="mdc-elevation--z24 mdc-card" style="width:270px">'+
-					'<h2 id="title" class="demo-card__title mdc-typography--headline6">Choose Property</h2>'+
-					'<div class="text-field-container"></div>'+
-				'<div>'+				
-				'<div class="mdc-card__actions">'+
-					'<div class="mdc-card__action-icons">'+
-						'<button id="cancelbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded"><span class="mdc-button__ripple"></span>Cancel</button>'+
-						'<button id="okbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded"><span class="mdc-button__ripple"></span>Ok</button>'+
-					'</div>'+
-				'</div>';
+		this.html = document.createElement("div");
+		this.html.className +="dialog-full-screen";
+		this.html.innerHTML =
+			'<div class="mdc-elevation--z24 mdc-card" style="width:270px">'+
+				'<h2 id="title" class="demo-card__title mdc-typography--headline6">Choose Property</h2>'+
+				'<div class="text-field-container"></div>'+
+			'<div>'+				
+			'<div class="mdc-card__actions">'+
+				'<div class="mdc-card__action-icons">'+
+					'<button id="cancelbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded"><span class="mdc-button__ripple"></span>Cancel</button>'+
+					'<button id="okbutton" class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded"><span class="mdc-button__ripple"></span>Ok</button>'+
+				'</div>'+
+			'</div>';
 		
 		var editorFrame=document.querySelector(".editor-frame-root");
 		editorFrame.appendChild(this.html);

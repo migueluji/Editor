@@ -178,7 +178,7 @@ class FieldView  {
 				icon.innerHTML="label";
 				button.addEventListener("click",this.opentTagsHandler.bind(this));break;
 			case "color": 
-				icon.style.display="none"; this.input.style="transform: translateY(8px)"; break;
+				icon.style.display="none"; this.input.style="transform: translateY(8px)"; break; // ajust color picker
 			case "key": 
 				icon.style.display="none"; break;
 			case "properties":

@@ -8,7 +8,7 @@ class CanvasView {
         this.html.style.display="block";
         this.html.style.transform="";
         this.html.innerHTML =
-            '<button id="addactor"  class="mdc-fab add-actor-button">'+
+            '<button id="addactor" style="z-index:2" class="mdc-fab add-actor-button">'+
                 '<div class="mdc-fab__ripple"></div>'+
                 '<span class="mdc-fab__icon material-icons">add</span>'+
             '</button>'+
