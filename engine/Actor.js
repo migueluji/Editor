@@ -482,11 +482,25 @@ class Actor {
 
     get physicsOn() { return this._physicsOn; }
     set physicsOn(value) {
+
         this._physicsOn = value;
 
-        if(this.rigidbody != null) {
+        if(this.loaded) {
 
-            this.rigidbody.m_body.SetActive(this._physicsOn);
+            if(this._physicsOn) {
+
+                this.rigidbody.m_body.SetActive(this._physicsOn);
+                this.rigidbody.SetSensor(false);
+            }
+            else if(!this._physicsOn && this.triggerOn) {
+
+                this.rigidbody.SetSensor(true);
+            }
+            else {
+
+                this.rigidbody.m_body.SetActive(this._physicsOn);
+                this.rigidbody.SetSensor(false);
+            }
         }
     }
 
