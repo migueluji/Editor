@@ -1,27 +1,27 @@
 class ScriptCanvasView {
 
     constructor() {   
-		 this.html = document.createElement("div");
-         this.html.className +="scriptcanvas";
-         this.html.style.display="none";
-         this.html.style.transform="";
-         this.html.innerHTML =
-            '<button id="addif" class="if-button mdc-fab mdc-ripple-upgraded add-property-button">'+
-                '<span class="button-text">IF</span>'+
-            '</button>'+
-            '<button id="adddo" class="do-button mdc-fab mdc-ripple-upgraded add-property-button">'+
-                '<span class="button-text">DO</span>'+
-            '</button>'+
-            '<div class="script-background">'+
-                '<div class="init">'+
-                    '<svg style="pointer-events:none;position: relative; z-index: -1" height="10px" width="50px">'+
-                        '<line id="rule-line" x1="8" y1="8" x2="8" y2="400" style="stroke:lightgray;stroke-width:2"></line>'+
-                    '</svg>'+
-                '</div>'+
-                '<div class="nodelist"></div>'+
-                '<div class="end">'+
-                '</div>'+
-            '</div>';
+        this.html = document.createElement("div");
+        this.html.className +="scriptcanvas";
+        this.html.style.display="none";
+        this.html.style.transform="";
+        this.html.innerHTML =
+        '<button id="addif" class="if-button mdc-fab mdc-ripple-upgraded add-property-button">'+
+            '<span class="button-text">IF</span>'+
+        '</button>'+
+        '<button id="adddo" class="do-button mdc-fab mdc-ripple-upgraded add-property-button">'+
+            '<span class="button-text">DO</span>'+
+        '</button>'+
+        '<div class="script-background">'+
+            '<div class="init">'+
+                '<svg style="pointer-events:none;position: relative; z-index: -1" height="10px" width="50px">'+
+                    '<line id="rule-line" x1="8" y1="8" x2="8" y2="400" style="stroke:lightgray;stroke-width:2"></line>'+
+                '</svg>'+
+            '</div>'+
+            '<div class="nodelist"></div>'+
+            '<div class="end">'+
+            '</div>'+
+        '</div>';
         this.html.querySelector("#adddo").addEventListener("click",this.addDoHandler.bind(this));
         this.html.querySelector("#addif").addEventListener("click",this.addIfHandler.bind(this));
         this.html.addEventListener("mousemove",this.mouseMoveHandler.bind(this));
@@ -86,7 +86,6 @@ class ScriptCanvasView {
 
 // Handlers
     unselectNodeHandler(e){  
-     //   console.log("unselectNode",e.target.classList[0],this.down);
         if (e.target.classList[0]=="script-background") {
             if (e.target.querySelector(".open")==null){
                 e.preventDefault();
@@ -102,25 +101,19 @@ class ScriptCanvasView {
             this.x0=e.clientX;
             this.y0=e.clientY;
             this.down=true;
-       //     console.log(this.x0,this.y0);
         }
         else this.down=false;
-       // console.log("mouseDown",e.target.classList[0],this.down);
- 
     }
 
     mouseUpHandler(e){
-    
         if (this.down){
             this.down=false;
             this.traslateX=this.traslateX+(this.x1-this.x0);
             this.traslateY=this.traslateY+(this.y1-this.y0);
         }
-        //console.log("mouseUp",e.target.classList[0],this.down);
     }
     
     mouseMoveHandler(e){
-        //console.log("mouseMove",e.target.classList[0],this.down);
         if (this.down && e.target.classList[0]=="script-background"){
             e = e || window.event;
             e.preventDefault();
@@ -153,19 +146,16 @@ class ScriptCanvasView {
 // Utilities
     init(){
         this.centerX=(this.html.clientWidth-this.background.clientWidth)/2;
-        this.centerY=0;
+        this.centerY=-4000; // due to top margin of green circle
         this.traslateX=this.traslateY=0;
-     //   console.log("init",this.centerX,this.centerY);
     }
 
     updateStageDrawer(){
-     //   console.log("updateStageDrawer");
         this.init(); 
         this.update(this.nodeList);
     }
 
     update(nodeList){
-     //   console.log("update",this.selected, this.down);
         this.selected="no";
         var list =this.html.querySelector(".nodelist");
         var script = document.querySelector(".scriptselected");
@@ -214,8 +204,8 @@ class ScriptCanvasView {
         frames.forEach(frame=>{
             var upNodeChildren=frame.parentNode.children;
             var childrenWidht1=upNodeChildren[2].clientWidth+16; 
-            var childrenWidht2=upNodeChildren[3].clientWidth+16; // 16 por el margen de 8px 
-            var boxWidth = childrenWidht1/2+childrenWidht2/2-4; // 4 por el borde
+            var childrenWidht2=upNodeChildren[3].clientWidth+16; // 16 due to margin of 8px 
+            var boxWidth = childrenWidht1/2+childrenWidht2/2-4; // 4 due to border
             frame.style.height=frame.parentNode.parentNode.clientHeight-28+"px";
             frame.style.width=boxWidth+"px";
             var position=childrenWidht1/2;
@@ -240,7 +230,7 @@ class ScriptCanvasView {
         else {
             if (node.firstChild.classList.contains("condition")){ // Insert into condition node
                 insert.parentID=node.id;
-                if (node.firstChild.querySelector(".yestext").style.display=="block"){ // insertar en un nodo condición en el yes
+                if (node.firstChild.querySelector(".yestext").style.display=="block"){ // insertar in a codition node in the yes side
                     insert.side="right";
                     insert.position=(node.querySelector(".yes").childNodes.length-1)/2;
                 }

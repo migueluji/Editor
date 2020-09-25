@@ -14,7 +14,7 @@
     height: 10000px;
 }
 .init {
-    margin: 64px auto 0px auto;
+    margin: 4064px auto 0px auto; /* margin top, height is 10000*/
     width: 16px;
     height: 16px;
     background-color: #76ff03;
