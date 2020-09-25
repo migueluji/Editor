@@ -1,8 +1,12 @@
 class App {
     constructor(serverGamesFolder,gameFolder){		
-        this.file=new File();
+        this.file = new File();
         this.serverGamesFolder=serverGamesFolder;
         this.gameFolder=gameFolder;
+
+        this.load = new LoadingView("var(--mdc-theme-primary)");
+        document.body.appendChild(this.load.html);
+
         this.file.load(this.serverGamesFolder+"/loadJson.php?gameFolder="+this.gameFolder,this);
     }
     onFileLoaded(json){
@@ -14,5 +18,6 @@ class App {
         var editor = new Editor(new EditorView(),new Game(this.data));
         new CmdManager(editor);
         document.body.appendChild(editor.view.html);
+        this.load.closeDialog();
     }
 }

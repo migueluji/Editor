@@ -32,7 +32,9 @@
 	</head>
 	
 	<body>
-
+		<link rel="stylesheet" type="text/css" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"></link>
+		<link rel="stylesheet" href="../editor/editor.css"></link>
+		<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 		<script src="libraries/math.js"></script>
 		<script src="https://pixijs.download/release/pixi.min.js"></script>
 		<script src="libraries/box2d.min.js"></script>
@@ -41,6 +43,7 @@
         <script src="Player.js"></script>
 
         <script src="../editor/File.js"></script>
+		<script src="../editor/dialogs/LoadingView.js"></script>
 		<script src="Engine.js"></script>
 
 		<script src="Game.js"></script>

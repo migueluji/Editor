@@ -49,6 +49,7 @@
 	<script src="./dialogs/TagSelectionView.js"></script>
 	<script src="./dialogs/TagView.js"></script>
 	<script src="./dialogs/NewTagDialogView.js"></script>
+	<script src="./dialogs/LoadingView.js"></script>
 
 	<script src="./drawer/DrawerHeaderView.js"></script>
 	<script src="./drawer/DrawerScenesView.js"></script>
