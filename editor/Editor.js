@@ -77,7 +77,7 @@ class Editor {
         delete saveToFile.imageList;
         delete saveToFile.soundList;
         File.save(JSON.stringify(saveToFile, (key,value)=>{if(key!="id")return value}, '\t'));
-        this.canvasView.takeScreenshot(this.model.displayWidth,this.model.displayHeight,0,this.model.sceneList[0].actorList,true);
+        this.canvasView.takeScreenshot(400,240,0,this.model.sceneList[0].actorList,true); // 400x240 size of image for server 
      }
 
      playGame(){
@@ -153,10 +153,7 @@ class Editor {
             default :SideSheetView.closeSheetHandler(); this.view.openCanvas("canvas"); break;
             }
         }
-        var d;
-        var w=this.model.displayWidth;
-        var h=this.model.displayHeight;
-        (w>h) ? d=h : d=w ;
+        var d=64;
         this.canvasView.takeScreenshot(d,d,sceneID,this.model.sceneList[this.selectedSceneIndex].actorList,false);
     }
 

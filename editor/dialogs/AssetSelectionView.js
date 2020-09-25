@@ -92,9 +92,10 @@ class AssetSelectionView {
 	uploadAssetHandler(e){
 		var input = this.html.querySelector("#files")
 		if (this.type=="Sound") {
-		input.accept="audio/*";
-		} else {
-		input.accept="image/*";
+			input.accept="audio/*";
+		} 
+		else {
+			input.accept="image/*";
 		}
 		input.value="";
 		input.click();

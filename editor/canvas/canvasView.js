@@ -88,15 +88,20 @@ class CanvasView {
         scene.angle = this.gameProperties.cameraAngle;
         scene.scale = {x:this.gameProperties.cameraZoom,y:-this.gameProperties.cameraZoom};
         scene.mask=frame;  
+    
 
         actorList.forEach(actor => {
             var displayActor = new DisplayActor(this,actor,actorList,this.gameProperties); 
             scene.addChild(displayActor);
         });
-        
         stage.addChild(scene);
-   
-
+    
+        var sx=w/this.gameProperties.displayWidth;
+        var sy=h/this.gameProperties.displayHeight;
+        var s;
+        (sy>sx) ? s=sy : s=sx;
+        stage.scale.x=stage.scale.y=s; 
+       
         this.pixiApp.renderer.extract.canvas(stage).toBlob((blob) => {
                 if (upload){
                     var formData= new FormData();

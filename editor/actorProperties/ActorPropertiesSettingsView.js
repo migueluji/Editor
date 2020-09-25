@@ -51,13 +51,13 @@ class ActorPropertiesSettingsView {
 				'<div class="two-properties">'+	
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="scaleX" step="0.1" value="0" class="mdc-text-field__input" type="number">'+
+						'<input id="scaleX" step="0.01" value="0" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Scale X</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+
 					'<label class="half-text mdc-text-field mdc-text-field--filled">'+
 						'<span class="mdc-text-field__ripple"></span>'+
-						'<input id="scaleY" step="0.1" value="0" class="mdc-text-field__input" type="number">'+
+						'<input id="scaleY" step="0.01" value="0" class="mdc-text-field__input" type="number">'+
 						'<span class="mdc-floating-label" >Scale Y</span>'+
 						'<span class="mdc-line-ripple"></span>'+
 					'</label>'+

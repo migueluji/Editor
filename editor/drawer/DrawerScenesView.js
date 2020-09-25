@@ -41,10 +41,10 @@ class DrawerScenesView {
 			scenePos++;
 			var sceneView = new SceneView();
 			sceneView.addView(scene);
-			var d;
-			var w=canvas.gameProperties.displayWidth;
-			var h=canvas.gameProperties.displayHeight;
-			(w>h) ? d=h : d=w ;
+			var d=64;
+			// var w=canvas.gameProperties.displayWidth;
+			// var h=canvas.gameProperties.displayHeight;
+			// (w>h) ? d=h : d=w ;
 			canvas.takeScreenshot(d,d,scene.id,scene.actorList,false);
 			this.addScene(sceneView,scenePos);
 		});	

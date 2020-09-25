@@ -1,7 +1,7 @@
 {
 	"name": "Box Doger",
 	"displayWidth": 800,
-	"displayHeight": 480,
+	"displayHeight": 420,
 	"cameraX": 0,
 	"cameraY": 0,
 	"cameraAngle": 0,
@@ -129,7 +129,7 @@
 					"name": "player",
 					"sleeping": false,
 					"x": 0,
-					"y": 30,
+					"y": 32,
 					"width": 67.2,
 					"height": 72,
 					"scaleX": 0.12,
