@@ -1155,7 +1155,7 @@
 					"velocityX": 0,
 					"velocityY": 0,
 					"angularVelocity": 0,
-					"density": 2,
+					"density": 30,
 					"friction": 4,
 					"restitution": 0,
 					"dampingLinear": 0,
@@ -1190,7 +1190,7 @@
 													"type": "Edit",
 													"parameters": {
 														"property": "Me.velocityX",
-														"value": "380"
+														"value": "350"
 													}
 												}
 											]
@@ -1208,7 +1208,7 @@
 													"type": "Edit",
 													"parameters": {
 														"property": "Me.velocityX",
-														"value": "-380"
+														"value": "-350"
 													}
 												}
 											],
@@ -1230,10 +1230,20 @@
 											},
 											"nodeListTrue": [
 												{
+													"type": "Compare",
+													"parameters": {
+														"value_1": "Me.velocityY",
+														"operation": "Greater",
+														"value_2": "10"
+													},
+													"nodeListTrue": [],
+													"nodeListFalse": []
+												},
+												{
 													"type": "Edit",
 													"parameters": {
 														"property": "Me.velocityY",
-														"value": "380"
+														"value": "350"
 													}
 												}
 											],
