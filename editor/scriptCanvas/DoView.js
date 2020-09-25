@@ -5,6 +5,6 @@ class DoView extends NodeView {
 			this.html.classList.add("element");
 			this.html.innerHTML=
 				'<div class="mdc-chip"></div>'+
-				'<div class="mdc-card"></div>';
+				'<div style="display:none" class="mdc-card"></div>';
 	}
 }

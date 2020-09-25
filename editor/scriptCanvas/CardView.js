@@ -4,6 +4,7 @@ class CardView {
 		var text=node.type.replace("_"," ");
 		this.html = document.createElement("div");
 		this.html.className +="mdc-card action-card";
+		this.html.style="display:block";
 		this.html.innerHTML =
 		  	'<div class="card-background"></div>'+
 			'<div style=" -webkit-user-select: none;" class="mdc-card__primary-action card-title '+color+'">'+
