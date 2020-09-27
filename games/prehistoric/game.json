@@ -1779,11 +1779,35 @@
 										}
 									],
 									"nodeListFalse": []
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.live",
+										"operation": "Less Equal",
+										"value_2": "0"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										},
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "Dead_Girl",
+												"x": 0,
+												"y": 0,
+												"angle": 0
+											}
+										}
+									],
+									"nodeListFalse": []
 								}
 							]
 						}
 					],
-					"live": 100
+					"live": 20
 				},
 				{
 					"name": "Roof_collider",
@@ -2529,16 +2553,16 @@
 					"sleeping": false,
 					"x": 417.6756677538038,
 					"y": -235,
-					"width": 210,
-					"height": 210,
-					"scaleX": 1.4,
-					"scaleY": 1.4,
+					"width": 196.3,
+					"height": 136.5,
+					"scaleX": 1.3,
+					"scaleY": 1.3,
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
 					"tags": "enemy",
 					"spriteOn": true,
-					"image": "tyranosaur-walk-1.png",
+					"image": "ti1.png",
 					"color": "#ffffff",
 					"opacity": 1,
 					"flipX": false,
@@ -2588,7 +2612,7 @@
 										{
 											"type": "Animate",
 											"parameters": {
-												"animation": "tyranosaur-walk-1.png,tyranosaur-walk-2.png,tyranosaur-walk-3.png,tyranosaur-walk-4.png,tyranosaur-walk-5.png,tyranosaur-walk-6.png,tyranosaur-walk-7.png,tyranosaur-walk-8.png",
+												"animation": "tr1.png,tr2.png,tr3.png,tr4.png,tr5.png,tr6.png,tr7.png,tr8.png",
 												"fps": "12"
 											}
 										},
@@ -2612,7 +2636,7 @@
 										{
 											"type": "Animate",
 											"parameters": {
-												"animation": "tyranosaur-idle-1.png,tyranosaur-idle-2.png,tyranosaur-idle-3.png,tyranosaur-idle-4.png,tyranosaur-idle-5.png,tyranosaur-idle-6.png",
+												"animation": "ti1.png,ti2.png,ti3.png,ti4.png,ti5.png,ti6.png",
 												"fps": "12"
 											}
 										},
@@ -2801,10 +2825,10 @@
 					"scriptList": []
 				},
 				{
-					"name": "Actor_35",
-					"sleeping": false,
-					"x": 11.976900818185205,
-					"y": 100.86761071802071,
+					"name": "Dead_Girl",
+					"sleeping": true,
+					"x": 675.9000832598861,
+					"y": 284.681053790723,
 					"width": 99,
 					"height": 74,
 					"scaleX": 1,
@@ -2857,8 +2881,28 @@
 									"type": "Animate",
 									"parameters": {
 										"animation": "d1.png,d2.png,d3.png,d4.png,d5.png,d6.png,d7.png",
-										"fps": "2"
+										"fps": "3.5"
 									}
+								},
+								{
+									"type": "Move",
+									"parameters": {
+										"speed": "200",
+										"angle": "-90"
+									}
+								},
+								{
+									"type": "Timer",
+									"parameters": {
+										"seconds": "2"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
 								}
 							]
 						}
