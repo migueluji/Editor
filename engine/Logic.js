@@ -487,7 +487,7 @@ class Logic {
 
         /** Definimos e inicializamos a true la propiedad de control de la evaluacion de FPS (para las funciones como random). */
         var fpsCondition = "fpsCondition" + Util.random();
-        actor.scope[fpsCondition] = true;
+        actor.scope[fpsCondition] = true; 
 
         /* Añadimos la varible de control al engine. */
         this.timerList[timerProperty] = {timer: 0.00, previousTime: 0.00, timerProperty: timerProperty, timerCondition: timerCondition};
