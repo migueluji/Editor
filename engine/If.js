@@ -13,29 +13,10 @@ class If {
 
     run() {
 
-        try {
+        this.value = this.code.eval(this.scope).entries[0];
 
-            this.value = this.code.eval(this.scope).entries[0];
-        }
-        catch(error) {
-
-            console.error(error);
-        }
-
-        if(this.value) { 
-            
-            for(var t in this.nodeListTrue) { 
-
-                this.nodeListTrue[t].run(); 
-            } 
-        }
-        else { 
-            
-            for(var f in this.nodeListFalse) { 
-                
-                this.nodeListFalse[f].run(); 
-            }
-        }
+        if(this.value) { for(var t in this.nodeListTrue) { this.nodeListTrue[t].run(); } }
+        else { for(var f in this.nodeListFalse) { this.nodeListFalse[f].run(); } }
     }
 
     compileExpression() {
