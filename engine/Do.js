@@ -10,7 +10,14 @@ class Do {
 
     run() {
 
-        this.value = this.code.eval(this.scope).entries[0];
+        try {
+
+            this.value = this.code.eval(this.scope).entries[0];
+        }
+        catch(error) {
+
+            console.error(error);
+        }
     }
 
     compileExpression() {
