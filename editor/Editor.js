@@ -533,7 +533,7 @@ class Editor {
         this.assetDialog.addAsset(assetView);
     }
 
-    deleteFile(assetID, fileName, type){    	
+    deleteFile(assetID, fileName, type){   
             File.deleteFile(app.gameFolder, assetID, fileName, type);
     }
     

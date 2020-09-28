@@ -126,7 +126,8 @@ class AssetSelectionView {
 		if (this.selectedAsset){
 			var name=document.querySelector("#"+this.selectedAsset).firstChild.nextSibling.textContent;
 			if (confirm('Are you sure you want to delete "'+name+'" asset?')){				
-				Command.deleteFileCmd(this.selectedAsset, name, this.type)
+				Command.deleteFileCmd(this.selectedAsset[0], name, this.type);
+				this.selectedAsset.shift();
 			}
 		}
 		this.updateLoader();

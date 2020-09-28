@@ -74,7 +74,9 @@ class File {
         xhr.open("GET", url, true);
         xhr.onreadystatechange = function () {
            if (xhr.readyState == 4)
-                if (xhr.status == 200)  Command.removeAssetCmd(this.assetID, this.type);	
+                if (xhr.status == 200)  {
+                    Command.removeAssetCmd(assetID,type);	
+                }  
                 else alert("Server Error! "+xhr.responseText);				
         }		
         xhr.send();		
