@@ -359,8 +359,7 @@ class Editor {
         this.selectedScriptIndex=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].scriptList.findIndex(i=>i.id==scriptID);
         this.actorScriptsView.updateSelectedScript(scriptID);
         this.view.openCanvas("scriptcanvas");
-        this.scriptCanvasView.update(scriptList[this.selectedScriptIndex].nodeList); 
-        
+        this.scriptCanvasView.update(scriptList[this.selectedScriptIndex].nodeList);    
     }
 
     openActorScripts(){

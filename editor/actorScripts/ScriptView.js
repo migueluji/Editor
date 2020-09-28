@@ -30,7 +30,7 @@ class ScriptView {
 	}
 
 // Handlers
-	selectScriptHandler(e){
+	selectScriptHandler(){
 		Command.selectScriptCmd(this.html.id);
 	}
 

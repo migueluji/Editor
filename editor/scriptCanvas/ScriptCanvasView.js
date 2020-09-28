@@ -166,7 +166,8 @@ class ScriptCanvasView {
         this.updateSelectedNode(null);
         this.redrawFrames();
 
-        if (this.scriptID!=scriptID) this.init(); // first update of nodeList
+    //    if (this.scriptID!=scriptID) this.init(); // first update of nodeList
+        this.init();
         this.scriptID=scriptID;
 
         this.x=this.centerX+this.traslateX;
