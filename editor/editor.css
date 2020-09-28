@@ -32,6 +32,11 @@ body{
     border-radius: 10px;
     background-clip: content-box;
 }
+.mdc-circular-progress{
+    left: 50%;
+    top: 50%;
+    --mdc-theme-primary: white;
+}
 .editor-frame-root{
     overflow: hidden;
     display: flex;
