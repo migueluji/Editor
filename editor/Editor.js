@@ -296,7 +296,7 @@ class Editor {
         this.selectScene(sceneID);
         this.selectActor(actorID);
         this.openActorScripts();
-        this.selectScript(script.id);
+        this.selectScript(script.id,false);
     }
 
     removeScript(sceneID,actorID,scriptID){
@@ -308,10 +308,10 @@ class Editor {
         this.selectActor(actorID);
         this.openActorScripts();
         if (this.model.sceneList[scenePos].actorList[actorPos].scriptList.length==scriptPos){
-            if(scriptPos>0) this.selectScript(this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos-1].id);
+            if(scriptPos>0) this.selectScript(this.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos-1].id,false);
             else   this.view.openCanvas("canvas");
         }
-        else this.selectScript(this.model.sceneList[scenePos].actorList[actorPos].scriptList[this.selectedScriptIndex].id);
+        else this.selectScript(this.model.sceneList[scenePos].actorList[actorPos].scriptList[this.selectedScriptIndex].id,false);
     }
 
     renameScript(sceneID,actorID,scriptID,scriptName){
@@ -322,7 +322,7 @@ class Editor {
         this.selectScene(sceneID); //necesario para los comandos de deshacer
         this.selectActor(actorID);
         this.openActorScripts();
-        this.selectScript(scriptID);
+        this.selectScript(scriptID,false);
     }
 
 /* Actor editor commands */
@@ -354,12 +354,12 @@ class Editor {
         this.view.openCanvas("canvas");
     }
 
-    selectScript(scriptID){ 
+    selectScript(scriptID,init){ 
         var scriptList=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].scriptList;
         this.selectedScriptIndex=this.model.sceneList[this.selectedSceneIndex].actorList[this.selectedActorIndex].scriptList.findIndex(i=>i.id==scriptID);
         this.actorScriptsView.updateSelectedScript(scriptID);
         this.view.openCanvas("scriptcanvas");
-        this.scriptCanvasView.update(scriptList[this.selectedScriptIndex].nodeList);    
+        this.scriptCanvasView.update(scriptList[this.selectedScriptIndex].nodeList,init);    
     }
 
     openActorScripts(){
@@ -406,7 +406,7 @@ class Editor {
       this.selectScene(sceneID); //necesario para los comandos de deshacer
       this.selectActor(actorID);
       this.openActorScripts();
-      this.selectScript(scriptID);
+      this.selectScript(scriptID,false);
       this.selectNode(node.id);
     }
 
@@ -419,7 +419,7 @@ class Editor {
         this.selectScene(sceneID); //necesario para los comandos de deshacer
         this.selectActor(actorID);
         this.openActorScripts();
-        this.selectScript(scriptID);
+        this.selectScript(scriptID,false);
         this.selectNode(null);
     }
 
@@ -431,7 +431,7 @@ class Editor {
         this.selectScene(sceneID); //necesario para los comandos de deshacer
         this.selectActor(actorID);
         this.openActorScripts();
-        this.selectScript(scriptID);
+        this.selectScript(scriptID,false);
         this.selectNode(nodeID);
     }
 

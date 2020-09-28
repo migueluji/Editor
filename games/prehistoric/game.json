@@ -1102,10 +1102,10 @@
 				{
 					"name": "Actor_34",
 					"sleeping": false,
-					"x": 20.37046398345467,
-					"y": -155.2061411265871,
-					"width": 130.6258311659809,
-					"height": 128,
+					"x": 22.37046398345467,
+					"y": -160.2061411265871,
+					"width": 98.9898876804699,
+					"height": 71,
 					"scaleX": 1.0205143059842259,
 					"scaleY": 1,
 					"angle": 0,
@@ -1113,7 +1113,7 @@
 					"collider": "Box",
 					"tags": "",
 					"spriteOn": true,
-					"image": "caverman-1-idle1.png",
+					"image": "ci1.png",
 					"color": "#ffffff",
 					"opacity": 1,
 					"flipX": false,
@@ -1155,7 +1155,7 @@
 								{
 									"type": "Animate",
 									"parameters": {
-										"animation": "caverman-1-idle1.png,caverman-1-idle2.png,caverman-1-idle3.png,caverman-1-idle4.png,caverman-1-idle5.png,caverman-1-idle6.png",
+										"animation": "ci1.png,ci2.png,ci3.png,ci4.png,ci5.png,ci6.png",
 										"fps": 24
 									}
 								}
@@ -1476,8 +1476,8 @@
 				{
 					"name": "Girl",
 					"sleeping": false,
-					"x": -205.3357268037064,
-					"y": 72.74976034303172,
+					"x": -66.63735765266236,
+					"y": 69.7014445375142,
 					"width": 99,
 					"height": 74,
 					"scaleX": 1,
@@ -1789,8 +1789,11 @@
 									},
 									"nodeListTrue": [
 										{
-											"type": "Delete",
-											"parameters": {}
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.sleeping",
+												"value": true
+											}
 										},
 										{
 											"type": "Spawn",
@@ -2350,8 +2353,8 @@
 					"sleeping": true,
 					"x": 685.827160493827,
 					"y": 172.11111111111097,
-					"width": 104,
-					"height": 75,
+					"width": 126,
+					"height": 113,
 					"scaleX": 1,
 					"scaleY": 1,
 					"angle": 0,
@@ -2359,10 +2362,10 @@
 					"collider": "Box",
 					"tags": "enemy",
 					"spriteOn": true,
-					"image": "pterodactyl-fly-1.png",
+					"image": "pf1.png",
 					"color": "#ffffff",
 					"opacity": 1,
-					"flipX": false,
+					"flipX": true,
 					"flipY": false,
 					"scrollX": 0,
 					"scrollY": 0,
@@ -2401,7 +2404,7 @@
 								{
 									"type": "Animate",
 									"parameters": {
-										"animation": "pterodactyl-fly-1.png,pterodactyl-fly-2.png,pterodactyl-fly-3.png,pterodactyl-fly-4.png",
+										"animation": "pf1.png,pf2.png,pf3.png,pf4.png",
 										"fps": 24
 									}
 								},

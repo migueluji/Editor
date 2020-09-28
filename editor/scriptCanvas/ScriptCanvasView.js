@@ -155,7 +155,7 @@ class ScriptCanvasView {
         this.update(this.nodeList);
     }
 
-    update(nodeList){
+    update(nodeList,init){
         this.selected="no";
         var list =this.html.querySelector(".nodelist");
         var script = document.querySelector(".scriptselected");
@@ -166,8 +166,8 @@ class ScriptCanvasView {
         this.updateSelectedNode(null);
         this.redrawFrames();
 
-    //    if (this.scriptID!=scriptID) this.init(); // first update of nodeList
-        this.init();
+        //if (this.scriptID!=scriptID) this.init(); // first update of nodeList
+        if (init) this.init();
         this.scriptID=scriptID;
 
         this.x=this.centerX+this.traslateX;

@@ -53,7 +53,7 @@ class Command {
     }
 
     static selectScriptCmd(scriptID){
-        this.editor.selectScript(scriptID);
+        this.editor.selectScript(scriptID,true);//init script position
     }
 
     static openActorScriptsCmd(){
