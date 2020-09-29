@@ -105,7 +105,7 @@ class ScriptCanvasView {
             this.down=true;
         }
         else this.down=false;
-        console.log("down",this.down,e.target.classList[0]);
+    //     console.log("down",this.down,e.target.classList[0]);
     }
 
     mouseUpHandler(e){
@@ -116,7 +116,7 @@ class ScriptCanvasView {
             this.traslateX=this.traslateX+(this.x1-this.x0);
             this.traslateY=this.traslateY+(this.y1-this.y0);
         }
-        console.log("up",this.down,e.target.classList[0]);
+    //      console.log("up",this.down,e.target.classList[0]);
     }
     
     mouseMoveHandler(e){
@@ -129,7 +129,7 @@ class ScriptCanvasView {
             this.y=this.centerY+this.traslateY+(this.y1-this.y0);
             e.target.style.transform="translate("+this.x+"px,"+this.y+"px)";
         }
-        console.log("move",this.down,e.target.classList[0]);
+    //      console.log("move",this.down,e.target.classList[0]);
     }
 
     addDoHandler(e){
