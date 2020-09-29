@@ -1322,6 +1322,24 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "Destroy",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "enemy"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
 						}
 					],
 					"init": true,
@@ -1476,8 +1494,8 @@
 				{
 					"name": "Girl",
 					"sleeping": false,
-					"x": -66.63735765266236,
-					"y": 69.7014445375142,
+					"x": -70.5959875322001,
+					"y": 65.74281465797658,
 					"width": 99,
 					"height": 74,
 					"scaleX": 1,
@@ -1496,7 +1514,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": true,
+					"textOn": false,
 					"text": "${Me.live}",
 					"font": "Arial",
 					"size": 30,
@@ -1810,7 +1828,7 @@
 							]
 						}
 					],
-					"live": 20
+					"live": 100
 				},
 				{
 					"name": "Roof_collider",
@@ -2574,8 +2592,8 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": false,
-					"text": "",
+					"textOn": true,
+					"text": "${Me.live}",
 					"font": "Arial",
 					"size": 30,
 					"fill": "#000000",
@@ -2706,7 +2724,12 @@
 											"nodeListFalse": []
 										}
 									]
-								},
+								}
+							]
+						},
+						{
+							"name": "Hurt",
+							"nodeList": [
 								{
 									"type": "Collision",
 									"parameters": {
@@ -2714,8 +2737,26 @@
 									},
 									"nodeListTrue": [
 										{
-											"type": "Delete",
-											"parameters": {}
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.live",
+												"value": "Me.live-1"
+											}
+										},
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "Me.live",
+												"operation": "Less Equal",
+												"value_2": "0"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Delete",
+													"parameters": {}
+												}
+											],
+											"nodeListFalse": []
 										}
 									],
 									"nodeListFalse": []
@@ -2723,7 +2764,7 @@
 							]
 						}
 					],
-					"idle": true
+					"live": 10
 				},
 				{
 					"name": "Right",
@@ -2898,6 +2939,231 @@
 									"type": "Timer",
 									"parameters": {
 										"seconds": "2"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "LiveBar",
+					"sleeping": false,
+					"x": 473.12040070597584,
+					"y": 320.8104794495935,
+					"width": 50,
+					"height": 5,
+					"scaleX": 1,
+					"scaleY": 0.1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.x",
+										"value": "Girl.x"
+									}
+								},
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.y",
+										"value": "Girl.y+40"
+									}
+								},
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.width",
+										"value": "Girl.live/2"
+									}
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Girl.live",
+										"operation": "Greater Equal",
+										"value_2": "50"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.color",
+												"value": "#33db55"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "Girl.live",
+												"operation": "Greater Equal",
+												"value_2": "25"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.color",
+														"value": "#e79d1d"
+													}
+												}
+											],
+											"nodeListFalse": [
+												{
+													"type": "Compare",
+													"parameters": {
+														"value_1": "Girl.live",
+														"operation": "Greater",
+														"value_2": "0"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.color",
+																"value": "#f40606"
+															}
+														}
+													],
+													"nodeListFalse": [
+														{
+															"type": "Delete",
+															"parameters": {}
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Actor_39",
+					"sleeping": false,
+					"x": 474.16350799082653,
+					"y": 320.66592351380757,
+					"width": 56,
+					"height": 10,
+					"scaleX": 0.3684210526315789,
+					"scaleY": 0.2702702702702703,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "health-bar-top-2.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.x",
+										"value": "LiveBar.x"
+									}
+								},
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.y",
+										"value": "LiveBar.y"
+									}
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Girl.live",
+										"operation": "Less Equal",
+										"value_2": "0"
 									},
 									"nodeListTrue": [
 										{
