@@ -17,7 +17,7 @@
     margin: 4064px auto 0px auto; /* margin top, height is 10000*/
     width: 16px;
     height: 16px;
-    background-color: #76ff03;
+    background-color: lightgray;
     border-radius: 16px;
     border: 2px solid lightgray;
     pointer-events:none;

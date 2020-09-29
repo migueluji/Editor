@@ -24,17 +24,18 @@ class ScriptCanvasView {
         '</div>';
         this.html.querySelector("#adddo").addEventListener("click",this.addDoHandler.bind(this));
         this.html.querySelector("#addif").addEventListener("click",this.addIfHandler.bind(this));
-        this.html.addEventListener("mousemove",this.mouseMoveHandler.bind(this));
-        this.html.addEventListener("mousedown",this.mouseDowndHandler.bind(this));
-        this.html.addEventListener("mouseup",this.mouseUpHandler.bind(this));
-        this.html.addEventListener("mouseleave",this.mouseUpHandler.bind(this));
-        this.html.addEventListener("click",this.unselectNodeHandler.bind(this));
+        this.background=this.html.querySelector(".script-background");
+        this.background.addEventListener("mousemove",this.mouseMoveHandler.bind(this));
+        this.background.addEventListener("mousedown",this.mouseDowndHandler.bind(this));
+        this.background.addEventListener("mouseup",this.mouseUpHandler.bind(this));
+        this.background.addEventListener("mouseleave",this.mouseUpHandler.bind(this));
+        this.background.addEventListener("click",this.unselectNodeHandler.bind(this));
         this.selectedNode=null;
         this.selected=null;
         this.drawerX=0;
         this.scriptID=null;
 
-        this.background=this.html.querySelector(".script-background");
+      
         this.traslateX=this.traslateY=0;
   }
 
@@ -43,20 +44,20 @@ class ScriptCanvasView {
     }
 
     updateSelectedNode(nodeID){
-        // deselecciona etiquetas yes, no
+        // unselect tags yes, no
         var listno =this.html.querySelectorAll(".notext");
         var listyes =this.html.querySelectorAll(".yestext");
         listno.forEach(element=> element.style.display="none");
         listyes.forEach(element=> element.style.display="none");
-        // deselecciona antiguo nodo
+        // select old node
         var nodesSelected=this.html.querySelectorAll(".nodeselected");
         var chipsSelected=this.html.querySelectorAll(".mdc-elevation--z6");
 		nodesSelected.forEach(i=>i.classList.remove("nodeselected"));
         chipsSelected.forEach(i=>i.classList.remove("mdc-elevation--z6"));
-        // cierra ventanas de tarjetas
+        // close cards 
         var cards=this.html.querySelectorAll(".action-card");
         cards.forEach(i=>i.classList.remove("open"));
-        // selecciona el nuevo nodo
+        // select new node
 		if (nodeID!=null)  {
             var node = this.html.querySelector("#"+nodeID);
             var chip = node.querySelector(".mdc-chip");
@@ -64,7 +65,7 @@ class ScriptCanvasView {
             chip.classList.add("mdc-elevation--z6");;
             if(node.firstChild.classList.contains("condition")){
                 if (this.selectedNode!=nodeID) {
-                    this.selected=null; // se reinicia si el nodo es diferente // cambiar por "no"
+                    this.selected=null; // restart if the node is different 
                     this.selectedNode=nodeID;
                 }
                 if (this.selected==null) {
@@ -80,7 +81,7 @@ class ScriptCanvasView {
             else this.selected="no";
         }
         else {
-            this.selected="no"; // cambiar por "no"
+            this.selected="no";
         }
 	}
 
@@ -88,6 +89,7 @@ class ScriptCanvasView {
     unselectNodeHandler(e){  
         if (e.target.classList[0]=="script-background") {
             if (e.target.querySelector(".open")==null){
+                e = e || window.event;
                 e.preventDefault();
                 Command.selectNodeCmd(null);
             }  
@@ -98,19 +100,23 @@ class ScriptCanvasView {
         if(e.target.classList[0]=="script-background"){
             e = e || window.event;
             e.preventDefault();
-            this.x0=e.clientX;
-            this.y0=e.clientY;
+            this.x0=this.x1=e.clientX;
+            this.y0=this.y1=e.clientY;
             this.down=true;
         }
         else this.down=false;
+        console.log("down",this.down,e.target.classList[0]);
     }
 
     mouseUpHandler(e){
         if (this.down){
+            e = e || window.event;
+            e.preventDefault();
             this.down=false;
             this.traslateX=this.traslateX+(this.x1-this.x0);
             this.traslateY=this.traslateY+(this.y1-this.y0);
         }
+        console.log("up",this.down,e.target.classList[0]);
     }
     
     mouseMoveHandler(e){
@@ -123,6 +129,7 @@ class ScriptCanvasView {
             this.y=this.centerY+this.traslateY+(this.y1-this.y0);
             e.target.style.transform="translate("+this.x+"px,"+this.y+"px)";
         }
+        console.log("move",this.down,e.target.classList[0]);
     }
 
     addDoHandler(e){
