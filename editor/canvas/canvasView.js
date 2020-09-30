@@ -187,7 +187,6 @@ class CanvasView {
     }
 
     updateSelectedActor(actorID){
-        console.log("updateSelectedActor",actorID,this.selected);
         if (actorID){ // if actorID != mull
             
             var displayActorIndex =this.scene.children.findIndex(i=>i.id==actorID);

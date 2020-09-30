@@ -1353,6 +1353,21 @@
 										"x": "1000",
 										"y": "Me.y"
 									}
+								},
+								{
+									"type": "Timer",
+									"parameters": {
+										"seconds": "random(2,4)"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Play",
+											"parameters": {
+												"sound_File": "dinosaur-5.wav"
+											}
+										}
+									],
+									"nodeListFalse": []
 								}
 							]
 						}
@@ -3468,7 +3483,7 @@
 					"dampingAngular": 0,
 					"scriptList": [
 						{
-							"name": "Script_1",
+							"name": "Move",
 							"nodeList": [
 								{
 									"type": "Check",
@@ -3538,7 +3553,7 @@
 										{
 											"type": "Play",
 											"parameters": {
-												"sound_File": "wood-5.wav"
+												"sound_File": "wood-1.wav"
 											}
 										},
 										{
@@ -4816,6 +4831,12 @@
 									},
 									"nodeListTrue": [
 										{
+											"type": "Play",
+											"parameters": {
+												"sound_File": "dinosaur-5.wav"
+											}
+										},
+										{
 											"type": "Spawn",
 											"parameters": {
 												"actor": "Pterodactyl",
@@ -4890,6 +4911,12 @@
 										"seconds": "5"
 									},
 									"nodeListTrue": [
+										{
+											"type": "Play",
+											"parameters": {
+												"sound_File": "dinosaur-5.wav"
+											}
+										},
 										{
 											"type": "Spawn",
 											"parameters": {
