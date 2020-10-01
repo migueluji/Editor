@@ -3268,13 +3268,6 @@
 												{
 													"type": "Edit",
 													"parameters": {
-														"property": "Me.color",
-														"value": "#fd8b8b"
-													}
-												},
-												{
-													"type": "Edit",
-													"parameters": {
 														"property": "Me.live",
 														"value": "Me.live-1"
 													}
@@ -3283,15 +3276,7 @@
 											"nodeListFalse": []
 										}
 									],
-									"nodeListFalse": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.color",
-												"value": "#ffffff"
-											}
-										}
-									]
+									"nodeListFalse": []
 								},
 								{
 									"type": "Compare",
