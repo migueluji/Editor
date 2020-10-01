@@ -6,7 +6,7 @@
 	"cameraY": 0,
 	"cameraAngle": 0,
 	"cameraZoom": 1,
-	"backgroundColor": "#f2f2f2",
+	"backgroundColor": "#ffffff",
 	"soundOn": true,
 	"soundtrack": "theme-2.mp3",
 	"volume": 1,
@@ -1444,7 +1444,7 @@
 					"text": "PREHISTORIC",
 					"font": "Impact",
 					"size": 45,
-					"fill": "#ffffff",
+					"fill": "#fafafa",
 					"style": "Normal",
 					"align": "Center",
 					"offsetX": 0,
@@ -1495,7 +1495,7 @@
 					"text": "SURVIVAL",
 					"font": "Impact",
 					"size": 60,
-					"fill": "#ffffff",
+					"fill": "#fafafa",
 					"style": "Normal",
 					"align": "Center",
 					"offsetX": 0,
@@ -3268,6 +3268,13 @@
 												{
 													"type": "Edit",
 													"parameters": {
+														"property": "Me.color",
+														"value": "#fd8b8b"
+													}
+												},
+												{
+													"type": "Edit",
+													"parameters": {
 														"property": "Me.live",
 														"value": "Me.live-1"
 													}
@@ -3276,7 +3283,15 @@
 											"nodeListFalse": []
 										}
 									],
-									"nodeListFalse": []
+									"nodeListFalse": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.color",
+												"value": "#ffffff"
+											}
+										}
+									]
 								},
 								{
 									"type": "Compare",
@@ -3971,8 +3986,8 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": false,
-					"text": "",
+					"textOn": true,
+					"text": "Spaw Pterodactyl",
 					"font": "Arial",
 					"size": 30,
 					"fill": "#000000",
@@ -4052,8 +4067,8 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": false,
-					"text": "",
+					"textOn": true,
+					"text": "Spawn dragon",
 					"font": "Arial",
 					"size": 30,
 					"fill": "#000000",
@@ -4133,8 +4148,8 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": false,
-					"text": "${Me.anotherone}",
+					"textOn": true,
+					"text": "Spawn Tyranosaur",
 					"font": "Arial",
 					"size": 30,
 					"fill": "#000000",
@@ -4499,8 +4514,8 @@
 				{
 					"name": "Dead_Tyranosaur",
 					"sleeping": true,
-					"x": 641.2885741742116,
-					"y": 426.15296694759263,
+					"x": 646.8556835404538,
+					"y": 403.88452948262346,
 					"width": 166.10000000000002,
 					"height": 131.25,
 					"scaleX": 1.1,
@@ -5284,8 +5299,8 @@
 				{
 					"name": "Actor_39",
 					"sleeping": false,
-					"x": 474.16350799082653,
-					"y": 333.1058222863759,
+					"x": 472.6954374980635,
+					"y": 332.50438086177877,
 					"width": 56,
 					"height": 10,
 					"scaleX": 0.3684210526315789,
@@ -5370,8 +5385,8 @@
 				{
 					"name": "Points",
 					"sleeping": true,
-					"x": 368.16182091945836,
-					"y": 322.4404707015816,
+					"x": 353.2809375834927,
+					"y": 334.49227219651505,
 					"width": 50,
 					"height": 50,
 					"scaleX": 1,
@@ -5455,7 +5470,7 @@
 					"name": "Points50",
 					"sleeping": true,
 					"x": 285.5949637377248,
-					"y": 322.75806742386317,
+					"y": 330.6663789448121,
 					"width": 50,
 					"height": 50,
 					"scaleX": 1,
@@ -5559,7 +5574,7 @@
 					"tileX": 1,
 					"tileY": 1,
 					"textOn": true,
-					"text": "SCORE: ${Me.score}",
+					"text": "SCORE ${Me.score}",
 					"font": "Impact",
 					"size": 30,
 					"fill": "#292929",
@@ -5619,7 +5634,7 @@
 					"text": "GAME OVER",
 					"font": "Impact",
 					"size": 60,
-					"fill": "#ffffff",
+					"fill": "#fafafa",
 					"style": "Normal",
 					"align": "Center",
 					"offsetX": 0,
@@ -5670,7 +5685,7 @@
 					"text": "Press space to play again",
 					"font": "Impact",
 					"size": 30,
-					"fill": "#ffffff",
+					"fill": "#fafafa",
 					"style": "Normal",
 					"align": "Center",
 					"offsetX": 0,

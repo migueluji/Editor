@@ -187,28 +187,30 @@ class CanvasView {
     }
 
     updateSelectedActor(actorID){
-        console.log("updateSelectedActor",actorID);
+       // console.log("updateSelectedActor",actorID,this.displayActor);
         if (actorID){ // if actorID != mull
             (this.selected) ? this.displayActor.removeGizmo() : this.selected=true;
             var displayActorIndex =this.scene.children.findIndex(i=>i.id==actorID);
             this.displayActor = this.scene.children[displayActorIndex];
-            
-            if (this.displayActor!=undefined) this.displayActor.createGizmo();
+         //   console.log("dentro",displayActorIndex,this.displayActor);
+            if (this.displayActor!=undefined) {
+                this.displayActor.createGizmo();
            
-            this.actorButton.style.visibility="visible";
-
-            var p=this.displayActor.points;
-            p[0].y=-p[0].y;
-    
-            var xMax=0; var xMin=0; var yMax=0; var yMin=0;
-            p.forEach((i,index) => {
-                i=Utils.rotatePoint(i,-this.displayActor.angle);
-                if (i.x<xMin) xMin=i.x; if (i.x>xMax) xMax=i.x;
-                if (i.y>yMin ) yMin=i.y; if (i.y<yMax && index!=0) yMax=i.y;
-            });
-    
-            this.actorButton.style.left=((this.displayActor.transform.position.x+xMax+8)*this.app.stage.scale.x+this.app.stage.x)+"px";
-            this.actorButton.style.top=((-this.displayActor.transform.position.y+yMax)*this.app.stage.scale.y+this.app.stage.y)+"px";
+                var p=this.displayActor.points;
+                p[0].y=-p[0].y;
+        
+                var xMax=0; var xMin=0; var yMax=0; var yMin=0;
+                p.forEach((i,index) => {
+                    i=Utils.rotatePoint(i,-this.displayActor.angle);
+                    if (i.x<xMin) xMin=i.x; if (i.x>xMax) xMax=i.x;
+                    if (i.y>yMin ) yMin=i.y; if (i.y<yMax && index!=0) yMax=i.y;
+                });
+                this.actorButton.style.left=((this.displayActor.transform.position.x+xMax+8)*this.app.stage.scale.x+this.app.stage.x)+"px";
+                this.actorButton.style.top=((-this.displayActor.transform.position.y+yMax)*this.app.stage.scale.y+this.app.stage.y)+"px";
+                this.actorButton.style.visibility="visible";
+                this.selected=true;
+            }
+            else this.selected=false;
         }
         else{
             if (this.selected) this.displayActor.removeGizmo();
@@ -269,6 +271,7 @@ class CanvasView {
     }
 
     resize(){
+        console.log("resize",this.selected,this.displayActor);
         if (this.html.style.display=="block"){ 
             this.app.renderer.resize(window.innerWidth,window.innerHeight);
             this.update(this.actorList,this.gameProperties);
@@ -302,7 +305,7 @@ class CanvasView {
 
     mouseStageWheel(e){
         this.zoom(e.deltaY,e.offsetX,e.offsetY);
-        if (this.selected) Command.selectActorCmd(this.displayActor.id);
+        if (this.selected && this.displayActor) Command.selectActorCmd(this.displayActor.id);
     }
 
 // Utils
