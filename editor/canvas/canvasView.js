@@ -187,11 +187,12 @@ class CanvasView {
     }
 
     updateSelectedActor(actorID){
+        console.log("updateSelectedActor",actorID);
         if (actorID){ // if actorID != mull
-            
+            (this.selected) ? this.displayActor.removeGizmo() : this.selected=true;
             var displayActorIndex =this.scene.children.findIndex(i=>i.id==actorID);
             this.displayActor = this.scene.children[displayActorIndex];
-            (this.selected) ? this.displayActor.removeGizmo() : this.selected=true;
+            
             if (this.displayActor!=undefined) this.displayActor.createGizmo();
            
             this.actorButton.style.visibility="visible";
