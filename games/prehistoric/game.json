@@ -6,7 +6,7 @@
 	"cameraY": 0,
 	"cameraAngle": 0,
 	"cameraZoom": 1,
-	"backgroundColor": "#ffffff",
+	"backgroundColor": "#f2f2f2",
 	"soundOn": true,
 	"soundtrack": "theme-2.mp3",
 	"volume": 1,
@@ -3949,164 +3949,6 @@
 					"scriptList": []
 				},
 				{
-					"name": "Dragon",
-					"sleeping": true,
-					"x": -213.0443036066863,
-					"y": 412.0470001387977,
-					"width": 98,
-					"height": 65,
-					"scaleX": 1,
-					"scaleY": 1,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "enemy",
-					"spriteOn": true,
-					"image": "df1.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": false,
-					"type": "Dynamic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": [
-						{
-							"name": "Behaviour",
-							"nodeList": [
-								{
-									"type": "Animate",
-									"parameters": {
-										"animation": "df1.png,df2.png,df3.png,df4.png,df5.png",
-										"fps": 24
-									}
-								},
-								{
-									"type": "Compare",
-									"parameters": {
-										"value_1": "Me.x",
-										"operation": "Less",
-										"value_2": "Girl.x"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Move_To",
-											"parameters": {
-												"speed": "200",
-												"x": "Girl.x",
-												"y": "Girl.y+random(20,80)"
-											}
-										}
-									],
-									"nodeListFalse": [
-										{
-											"type": "Move_To",
-											"parameters": {
-												"speed": "200",
-												"x": "1000",
-												"y": "Girl.y+100"
-											}
-										}
-									]
-								},
-								{
-									"type": "Compare",
-									"parameters": {
-										"value_1": "Me.x",
-										"operation": "Greater",
-										"value_2": "700"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Delete",
-											"parameters": {}
-										}
-									],
-									"nodeListFalse": [
-										{
-											"type": "Collision",
-											"parameters": {
-												"tags": "bone"
-											},
-											"nodeListTrue": [
-												{
-													"type": "Spawn",
-													"parameters": {
-														"actor": "Points",
-														"x": 0,
-														"y": 0,
-														"angle": 0
-													}
-												},
-												{
-													"type": "Edit",
-													"parameters": {
-														"property": "Me.live",
-														"value": "Me.live-1"
-													}
-												},
-												{
-													"type": "Compare",
-													"parameters": {
-														"value_1": "Me.live",
-														"operation": "Less Equal",
-														"value_2": "0"
-													},
-													"nodeListTrue": [
-														{
-															"type": "Spawn",
-															"parameters": {
-																"actor": "Dead_dragon",
-																"x": 0,
-																"y": 0,
-																"angle": 0
-															}
-														},
-														{
-															"type": "Delete",
-															"parameters": {}
-														}
-													],
-													"nodeListFalse": []
-												}
-											],
-											"nodeListFalse": []
-										}
-									]
-								}
-							]
-						}
-					],
-					"live": 3
-				},
-				{
 					"name": "Spawner_Pterodactyl",
 					"sleeping": false,
 					"x": 836.4343208339551,
@@ -4269,164 +4111,6 @@
 					]
 				},
 				{
-					"name": "Pterodactyl",
-					"sleeping": true,
-					"x": 216.72522820030815,
-					"y": 417.66988433335007,
-					"width": 126,
-					"height": 113,
-					"scaleX": 1,
-					"scaleY": 1,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "enemy",
-					"spriteOn": true,
-					"image": "pf1.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": true,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": false,
-					"type": "Dynamic",
-					"fixedAngle": false,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 1,
-					"friction": 0.5,
-					"restitution": 0.5,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": [
-						{
-							"name": "Behaviour",
-							"nodeList": [
-								{
-									"type": "Animate",
-									"parameters": {
-										"animation": "pf1.png,pf2.png,pf3.png,pf4.png",
-										"fps": 24
-									}
-								},
-								{
-									"type": "Compare",
-									"parameters": {
-										"value_1": "Me.x",
-										"operation": "Greater",
-										"value_2": "Girl.x"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Move_To",
-											"parameters": {
-												"speed": "300",
-												"x": "Girl.x",
-												"y": "Girl.y+random(20,80)"
-											}
-										}
-									],
-									"nodeListFalse": [
-										{
-											"type": "Move_To",
-											"parameters": {
-												"speed": "300",
-												"x": "-1000",
-												"y": "Girl.y+100"
-											}
-										}
-									]
-								},
-								{
-									"type": "Compare",
-									"parameters": {
-										"value_1": "Me.x",
-										"operation": "Less",
-										"value_2": "-700"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Delete",
-											"parameters": {}
-										}
-									],
-									"nodeListFalse": [
-										{
-											"type": "Collision",
-											"parameters": {
-												"tags": "bone"
-											},
-											"nodeListTrue": [
-												{
-													"type": "Spawn",
-													"parameters": {
-														"actor": "Points",
-														"x": 0,
-														"y": 0,
-														"angle": 0
-													}
-												},
-												{
-													"type": "Edit",
-													"parameters": {
-														"property": "Me.live",
-														"value": "Me.live-1"
-													}
-												},
-												{
-													"type": "Compare",
-													"parameters": {
-														"value_1": "Me.live",
-														"operation": "Less Equal",
-														"value_2": "0"
-													},
-													"nodeListTrue": [
-														{
-															"type": "Spawn",
-															"parameters": {
-																"actor": "Dead_Pterodactyl",
-																"x": 0,
-																"y": 0,
-																"angle": 0
-															}
-														},
-														{
-															"type": "Delete",
-															"parameters": {}
-														}
-													],
-													"nodeListFalse": []
-												}
-											],
-											"nodeListFalse": []
-										}
-									]
-								}
-							]
-						}
-					],
-					"live": 2
-				},
-				{
 					"name": "Spawner_Tyranosaur",
 					"sleeping": false,
 					"x": 830.6187860599518,
@@ -4514,6 +4198,120 @@
 						}
 					],
 					"anotherone": true
+				},
+				{
+					"name": "Dead_Girl",
+					"sleeping": true,
+					"x": 89.43799245394553,
+					"y": 398.82354561954315,
+					"width": 99,
+					"height": 74,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "d1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": true,
+					"type": "Dynamic",
+					"fixedAngle": true,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 0,
+					"friction": 0,
+					"restitution": 0,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Check",
+									"parameters": {
+										"property": "Me.dead"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Animate",
+											"parameters": {
+												"animation": "d7.png",
+												"fps": 24
+											}
+										},
+										{
+											"type": "Timer",
+											"parameters": {
+												"seconds": 1
+											},
+											"nodeListTrue": [
+												{
+													"type": "Add",
+													"parameters": {
+														"scene": "Scene_3",
+														"stop": false
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Animate",
+											"parameters": {
+												"animation": "d1.png,d2.png,d3.png,d4.png,d5.png,d6.png,d7.png",
+												"fps": "7"
+											}
+										},
+										{
+											"type": "Timer",
+											"parameters": {
+												"seconds": 1
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.dead",
+														"value": true
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									]
+								}
+							]
+						}
+					],
+					"dead": false
 				},
 				{
 					"name": "Tyranosaur",
@@ -4699,120 +4497,6 @@
 					"live": 10
 				},
 				{
-					"name": "Dead_Girl",
-					"sleeping": true,
-					"x": 89.43799245394553,
-					"y": 398.82354561954315,
-					"width": 99,
-					"height": 74,
-					"scaleX": 1,
-					"scaleY": 1,
-					"angle": 0,
-					"screen": false,
-					"collider": "Box",
-					"tags": "",
-					"spriteOn": true,
-					"image": "d1.png",
-					"color": "#ffffff",
-					"opacity": 1,
-					"flipX": false,
-					"flipY": false,
-					"scrollX": 0,
-					"scrollY": 0,
-					"tileX": 1,
-					"tileY": 1,
-					"textOn": false,
-					"text": "",
-					"font": "Arial",
-					"size": 30,
-					"fill": "#000000",
-					"style": "Normal",
-					"align": "Center",
-					"offsetX": 0,
-					"offsetY": 0,
-					"soundOn": false,
-					"sound": "",
-					"start": 0,
-					"volume": 1,
-					"pan": 0,
-					"loop": false,
-					"physicsOn": true,
-					"type": "Dynamic",
-					"fixedAngle": true,
-					"velocityX": 0,
-					"velocityY": 0,
-					"angularVelocity": 0,
-					"density": 0,
-					"friction": 0,
-					"restitution": 0,
-					"dampingLinear": 0,
-					"dampingAngular": 0,
-					"scriptList": [
-						{
-							"name": "Script_1",
-							"nodeList": [
-								{
-									"type": "Check",
-									"parameters": {
-										"property": "Me.dead"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Animate",
-											"parameters": {
-												"animation": "d7.png",
-												"fps": 24
-											}
-										},
-										{
-											"type": "Timer",
-											"parameters": {
-												"seconds": 1
-											},
-											"nodeListTrue": [
-												{
-													"type": "Add",
-													"parameters": {
-														"scene": "Scene_3",
-														"stop": false
-													}
-												}
-											],
-											"nodeListFalse": []
-										}
-									],
-									"nodeListFalse": [
-										{
-											"type": "Animate",
-											"parameters": {
-												"animation": "d1.png,d2.png,d3.png,d4.png,d5.png,d6.png,d7.png",
-												"fps": "7"
-											}
-										},
-										{
-											"type": "Timer",
-											"parameters": {
-												"seconds": 1
-											},
-											"nodeListTrue": [
-												{
-													"type": "Edit",
-													"parameters": {
-														"property": "Me.dead",
-														"value": true
-													}
-												}
-											],
-											"nodeListFalse": []
-										}
-									]
-								}
-							]
-						}
-					],
-					"dead": false
-				},
-				{
 					"name": "Dead_Tyranosaur",
 					"sleeping": true,
 					"x": 641.2885741742116,
@@ -4906,6 +4590,164 @@
 					]
 				},
 				{
+					"name": "Pterodactyl",
+					"sleeping": true,
+					"x": 216.72522820030815,
+					"y": 417.66988433335007,
+					"width": 126,
+					"height": 113,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "enemy",
+					"spriteOn": true,
+					"image": "pf1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": true,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Behaviour",
+							"nodeList": [
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "pf1.png,pf2.png,pf3.png,pf4.png",
+										"fps": 24
+									}
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.x",
+										"operation": "Greater",
+										"value_2": "Girl.x"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Move_To",
+											"parameters": {
+												"speed": "300",
+												"x": "Girl.x",
+												"y": "Girl.y+random(20,80)"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Move_To",
+											"parameters": {
+												"speed": "300",
+												"x": "-1000",
+												"y": "Girl.y+100"
+											}
+										}
+									]
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.x",
+										"operation": "Less",
+										"value_2": "-700"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Collision",
+											"parameters": {
+												"tags": "bone"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Spawn",
+													"parameters": {
+														"actor": "Points",
+														"x": 0,
+														"y": 0,
+														"angle": 0
+													}
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.live",
+														"value": "Me.live-1"
+													}
+												},
+												{
+													"type": "Compare",
+													"parameters": {
+														"value_1": "Me.live",
+														"operation": "Less Equal",
+														"value_2": "0"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Spawn",
+															"parameters": {
+																"actor": "Dead_Pterodactyl",
+																"x": 0,
+																"y": 0,
+																"angle": 0
+															}
+														},
+														{
+															"type": "Delete",
+															"parameters": {}
+														}
+													],
+													"nodeListFalse": []
+												}
+											],
+											"nodeListFalse": []
+										}
+									]
+								}
+							]
+						}
+					],
+					"live": 2
+				},
+				{
 					"name": "Dead_Pterodactyl",
 					"sleeping": true,
 					"x": 337.61826730622863,
@@ -4997,6 +4839,164 @@
 							]
 						}
 					]
+				},
+				{
+					"name": "Dragon",
+					"sleeping": true,
+					"x": -213.0443036066863,
+					"y": 412.0470001387977,
+					"width": 98,
+					"height": 65,
+					"scaleX": 1,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "enemy",
+					"spriteOn": true,
+					"image": "df1.png",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Behaviour",
+							"nodeList": [
+								{
+									"type": "Animate",
+									"parameters": {
+										"animation": "df1.png,df2.png,df3.png,df4.png,df5.png",
+										"fps": 24
+									}
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.x",
+										"operation": "Less",
+										"value_2": "Girl.x"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Move_To",
+											"parameters": {
+												"speed": "200",
+												"x": "Girl.x",
+												"y": "Girl.y+random(20,80)"
+											}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Move_To",
+											"parameters": {
+												"speed": "200",
+												"x": "1000",
+												"y": "Girl.y+100"
+											}
+										}
+									]
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.x",
+										"operation": "Greater",
+										"value_2": "700"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": [
+										{
+											"type": "Collision",
+											"parameters": {
+												"tags": "bone"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Spawn",
+													"parameters": {
+														"actor": "Points",
+														"x": 0,
+														"y": 0,
+														"angle": 0
+													}
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.live",
+														"value": "Me.live-1"
+													}
+												},
+												{
+													"type": "Compare",
+													"parameters": {
+														"value_1": "Me.live",
+														"operation": "Less Equal",
+														"value_2": "0"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Spawn",
+															"parameters": {
+																"actor": "Dead_dragon",
+																"x": 0,
+																"y": 0,
+																"angle": 0
+															}
+														},
+														{
+															"type": "Delete",
+															"parameters": {}
+														}
+													],
+													"nodeListFalse": []
+												}
+											],
+											"nodeListFalse": []
+										}
+									]
+								}
+							]
+						}
+					],
+					"live": 3
 				},
 				{
 					"name": "Dead_dragon",
