@@ -4272,18 +4272,27 @@
 											},
 											"nodeListTrue": [
 												{
-													"type": "Edit",
+													"type": "Check",
 													"parameters": {
-														"property": "Me.sleeping",
-														"value": true
-													}
-												},
-												{
-													"type": "Add",
-													"parameters": {
-														"scene": "Scene_3",
-														"stop": false
-													}
+														"property": "Me.stop"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.stop",
+																"value": false
+															}
+														},
+														{
+															"type": "Add",
+															"parameters": {
+																"scene": "Scene_3",
+																"stop": false
+															}
+														}
+													],
+													"nodeListFalse": []
 												}
 											],
 											"nodeListFalse": []
@@ -4318,7 +4327,8 @@
 							]
 						}
 					],
-					"dead": false
+					"dead": false,
+					"stop": true
 				},
 				{
 					"name": "Tyranosaur",
@@ -5289,7 +5299,7 @@
 					]
 				},
 				{
-					"name": "Actor_39",
+					"name": "LiveFrame",
 					"sleeping": false,
 					"x": 472.6954374980635,
 					"y": 332.50438086177877,
