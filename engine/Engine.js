@@ -79,6 +79,8 @@ class Engine {
             this.sceneList[scene.name][scene.actorList[i].ID] = scene.actorList[i];
         }
 
+        // console.log(this.physics.rigidbodyList);
+
         this.logic.compileExpressions();    /** Compilamos las expresiones logicas de los nuevos actores. */
         this.render.compileTexts();         /** Compilamos los textos de los nuevos actores. */
     }
@@ -116,6 +118,8 @@ class Engine {
         this.sceneList  = {};
         this.index      = 0;
 
+        // this.clearLists();
+
         this.physics.clearWorld();
     }
 
@@ -129,20 +133,17 @@ class Engine {
         this.game.activeSceneNumber = this.game.sceneList[this.game.activeScene].number;
         this.enableScene();
 
-        for(var i in this.actorList) {
+        // for(var i in this.actorList) {
 
             
 
-            console.log(this.actorList[i].scriptList)
-        }
+        //     console.log(this.actorList[i].scriptList)
+        // }
     }
 
     updateScenes() {
 
         if(this.sceneHandler != null) {
-
-            //console.log("........");
-            //console.log(this.game.activeSceneNumber, this.game.activeScene, this.sceneHandler, this.sceneList);
 
             if(this.sceneHandler.scene == "") {             /** Comprobamos si tenemos que eliminar la ultima escena. */ 
 
@@ -164,6 +165,7 @@ class Engine {
 
                 this.game.activeScene       = this.sceneHandler.scene;
                 this.game.activeSceneNumber = this.game.sceneList[this.sceneHandler.scene].number;
+                this.clearLists();
                 this.addScene(this.game.sceneList[this.sceneHandler.scene]); /** Añadimos la nueva escena. */
                 this.game.updateCamera();
             }
@@ -175,7 +177,11 @@ class Engine {
     disableScene() {
 
         var scene = this.sceneList[this.game.activeScene];
-        for(var i in scene) { this.actorList[scene[i].ID].sleep(true); }
+
+        for(var i in scene) {
+
+            this.actorList[scene[i].ID].sleep(true);
+        }
     }
 
     enableScene() {
@@ -211,6 +217,7 @@ class Engine {
         this.render.compileTexts();         /** Compilamos los textos de los nuevos actores. */
     }
 
+
     /* ----------------------------------------
      *  DESTROY MANAGEMENT
      * ---------------------------------------- */
@@ -240,6 +247,37 @@ class Engine {
 
         this.destroyList = [];
     }
+
+    clearLists() {
+
+        // console.log("\n \n \n ");
+
+        for(var i = this.physics.rigidbodyList.length - 1; i >= 0; i--) {
+
+            if(this.physics.rigidbodyList[i].name == undefined) {
+
+                delete this.physics.rigidbodyList[i];
+                this.physics.rigidbodyList.pop();
+            }
+        }
+
+        // for(var i in this.physics.rigidbodyList) {
+
+        //     console.log(this.physics.rigidbodyList[i].name);
+        // }
+
+        // console.log("RIGIDBODY", this.physics.rigidbodyList);
+        // console.log("TRIGGERS", this.physics.triggerList);
+        // console.log("INPUT", this.input.actorList);
+        // console.log("LOGIC", this.logic.actorList);
+        // console.log("AUDIO", this.audio.actorList);
+        // console.log("SPRITES", this.render.spriteList);
+        // console.log("TEXTS", this.render.textList);
+        // console.log("ENGINE", this.actorList);
+    }
+
+
+
 
 
 

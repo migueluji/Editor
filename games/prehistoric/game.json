@@ -4272,6 +4272,13 @@
 											},
 											"nodeListTrue": [
 												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.sleeping",
+														"value": true
+													}
+												},
+												{
 													"type": "Add",
 													"parameters": {
 														"scene": "Scene_3",

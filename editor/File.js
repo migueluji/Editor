@@ -17,7 +17,7 @@ class File {
         if(imageList) this.loader.add(imageList);
         else this.loader.add("Loader","http://localhost/editor/images/gamesonomy.png");// trick to initialize the loader when there is not /image folder
         this.loader.onLoad.add((loader, resource) => { 
-            console.log(resource.name," loaded");
+            // console.log(resource.name," loaded");
         });
         this.loader.load(()=>{
             console.log("Load finished!");

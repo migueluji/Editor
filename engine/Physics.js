@@ -62,7 +62,7 @@ class Physics {
             rb = this.rigidbodyList[i];
 
             for(var j = 0; j < rb.collisionList.length; j++) {
-                
+            
                 col = rb[rb.collisionList[j]];
                 col.value = col.end ? false : col.value;
                 col.end = false;
@@ -310,8 +310,6 @@ class Physics {
     }
 
     sleepRigidbodies() {
-
-        console.log(this.rigidbodyList);
 
         for(var i = 0; i < this.rigidbodyList.length; i++) {
             

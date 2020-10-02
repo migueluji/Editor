@@ -474,7 +474,7 @@ class Actor {
 
             this.sleep();
         }
-        else if(this.loaded) {
+        else if(this.loaded && this._sleeping) {
 
             this.awake();
         }
