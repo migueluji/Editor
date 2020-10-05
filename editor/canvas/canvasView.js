@@ -271,7 +271,7 @@ class CanvasView {
     }
 
     resize(){
-        console.log("resize",this.selected,this.displayActor);
+    //    console.log("resize",this.selected,this.displayActor);
         if (this.html.style.display=="block"){ 
             this.app.renderer.resize(window.innerWidth,window.innerHeight);
             this.update(this.actorList,this.gameProperties);

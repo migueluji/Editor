@@ -17,10 +17,10 @@ class File {
         if(imageList) this.loader.add(imageList);
         else this.loader.add("Loader","http://localhost/editor/images/gamesonomy.png");// trick to initialize the loader when there is not /image folder
         this.loader.onLoad.add((loader, resource) => { 
-            // console.log(resource.name," loaded");
+          //   console.log(resource.name," loaded");
         });
         this.loader.load(()=>{
-            console.log("Load finished!");
+         //   console.log("Load finished!");
             if(app.file.loader.resources.hasOwnProperty("Loader")) {
                 app.file.loader.resources["Loader"].texture.destroy(true);
                 delete app.file.loader.resources["Loader"];

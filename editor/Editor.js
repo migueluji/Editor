@@ -1,7 +1,7 @@
 class Editor {
     
     constructor(editorView,gameModel) {
-        console.log(gameModel);
+      //  console.log(gameModel);
         this.view = editorView;
         this.model = gameModel;
         this.selectedSceneIndex=0;
