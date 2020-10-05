@@ -178,7 +178,6 @@ class DisplayActor extends PIXI.Container {
     }
 
     onPointerMove(e){
-        
         if (this.operation){
             this.canvas.updateActorButton();
             var mouseMove= e.data.getLocalPosition(this.parent);
