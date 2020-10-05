@@ -142,12 +142,5 @@
 		var app=new App(serverGamesFolder,gameFolder);
 		
 	</script>
-	<script type="text/javascript">
-		let type = "WebGL"
-		if(!PIXI.utils.isWebGLSupported()){
-			type = "canvas"
-		}
-		PIXI.utils.sayHello(type);
-	</script>
 </body>
 </html>
