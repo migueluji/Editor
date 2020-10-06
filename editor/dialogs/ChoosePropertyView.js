@@ -37,7 +37,7 @@ class ChoosePropertyView {
 		this.html.addEventListener("click",this.cancelBackgroundHandler.bind(this));
   }
 	removeFields(){
-		while (this.container.firstChild){ // elimina todos los elementos de la lista
+		while (this.container.firstChild){ // remove all items from the list
 			this.container.removeChild(this.container.firstChild);
 		};
 	}

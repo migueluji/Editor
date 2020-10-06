@@ -52,7 +52,7 @@ class ParametersView  {
 	}
 
 	removeFields(){
-		while (this.html.firstChild){ // elimina todos los elementos de la lista
+		while (this.html.firstChild){ // remove all items from the list
 			this.html.removeChild(this.html.firstChild);
 		};
 	}

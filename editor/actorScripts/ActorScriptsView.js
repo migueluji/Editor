@@ -113,11 +113,11 @@ class ActorScriptsView {
 	update(actorName,scriptList){
 		this.updateActorName(actorName);
 		var element =this.html.querySelector("#scriptlist"); 
-		while (element.firstChild){ // elimina todos los elementos de la lista
+		while (element.firstChild){ // remove all items from the list
 			element.removeChild(element.firstChild);
 		};
 		var scriptPos=0;
-		scriptList.forEach(script=>{ // añade los nuevos elementos a la lista
+		scriptList.forEach(script=>{ // add the new items to the list
 			scriptPos++;
 			var scriptView = new ScriptView();
 			scriptView.addView(script);

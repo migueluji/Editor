@@ -125,11 +125,11 @@ class CastView {
 // Utils
 	update(cast,imageList){
 		var element =this.html.querySelector("#actorlist"); 
-		while (element.firstChild){ // elimina todos los elementos de la lista
+		while (element.firstChild){ // remove all items from the list
 			element.removeChild(element.firstChild);
 		};
 		if (cast) 
-			cast.forEach(actor=>{ // añade los nuevos elementos a la lista
+			cast.forEach(actor=>{ // add the new items to the list
 				var actorView  = new ActorView();
 				var actorData={id:actor.id,name:actor.name};
 				if (!imageList.find(i=>i.name==actor.image)) actorData.image=null;
