@@ -45,6 +45,7 @@ class ChoosePropertyView {
 	addFields(parameters){
 		for (const field in parameters) {
 			var list=null;
+			var type;
 			switch(field){
 				case "Element" : type="select"; list=["Game","Me"]; list=list.concat(Command.getActorListCmd()); break;
 				case "Property" : type="select"; list=Command.getPropertiesListCmd(parameters.Element,this.option); list.unshift("");break;
