@@ -22,9 +22,8 @@ class DisplayActor extends PIXI.Container {
         this.createSprite(actor,texture); 
    
         if ((!actor.spriteOn && !actor.textOn) || actor.image=="" || !existsImage){
-            var color;
-            (!existsImage && actor.image!="") ? color=0xff0000 : color=0xaaaaaa;
-            if(!actor.textOn) this.createBorder(color);
+            (!existsImage && actor.image!="") ? this.borderColor=0xff0000 : this.borderColor=0xaaaaaa;
+            if(!actor.textOn) this.createBorder();
         } 
         if (actor.text && actor.textOn) this.createText(actor,cast,game);
 
@@ -82,11 +81,11 @@ class DisplayActor extends PIXI.Container {
         this.addChild(this.tilingSprite);
     }
 
-    createBorder(color){
+    createBorder(){
         var w = this.tilingSprite.width*this.tilingSprite.scale.x;
         var h = this.tilingSprite.height*this.tilingSprite.scale.y;
         this.border = new PIXI.Graphics();
-        this.border.lineStyle(1, color, 1, 0, true);
+        this.border.lineStyle(1, this.borderColor, 1, 0, true);
         this.border.moveTo(-w/2,h/2);
         this.border.lineTo(w/2,h/2);
         this.border.lineTo(w/2,-h/2);
