@@ -11,6 +11,7 @@ class ParametersView  {
 
 	addFields(parameters){
 		for (const field in parameters) {
+			var type;
 			var list=null;
 			switch(field){
 				case "operation" : type="select"; list=["Less","Less Equal","Equal","Greater Equal","Greater","Different"];break;
