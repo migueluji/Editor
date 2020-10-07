@@ -296,7 +296,7 @@ class Editor {
         this.selectScene(sceneID);
         this.selectActor(actorID);
         this.openActorScripts();
-        this.selectScript(script.id,false);
+        this.selectScript(script.id,true);
     }
 
     removeScript(sceneID,actorID,scriptID){

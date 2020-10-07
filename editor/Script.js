@@ -13,7 +13,7 @@ class Script {
             this.nodeList.splice(insert.position,0,node);
         }
         else {
-            var nodeList=this.findNode(this.nodeList,insert.parentID); // returns parent nodeList and position
+            var nodeList=this.findNode(this.nodeList,insert.parentID,null,null); // returns parent nodeList and position
             if (nodeList) {
                 if (insert.side=="right") nodeList.list[nodeList.position].nodeListTrue.splice(insert.position,0,node);
                 else if (insert.side=="left") nodeList.list[nodeList.position].nodeListFalse.splice(insert.position,0,node);
@@ -22,12 +22,12 @@ class Script {
     }
 
     removeNode(nodeID){
-        var founded = this.findNode(this.nodeList,nodeID);
+        var founded = this.findNode(this.nodeList,nodeID,null,null);
         if (founded) founded.list.splice(founded.position,1);
     }
 
     changeNode(nodeID,parameters){
-        var founded=this.findNode(this.nodeList,nodeID);
+        var founded=this.findNode(this.nodeList,nodeID,null,null);
         founded.list[founded.position].parameters=parameters;
     }
 

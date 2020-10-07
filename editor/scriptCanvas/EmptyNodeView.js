@@ -57,10 +57,9 @@ class EmptyNodeView {
 			else if (parent.classList.contains("no")) insert.side="left";
 		insert.position=i/2;
 
-		 var node=document.createElement("div");
-		 node.innerHTML=e.dataTransfer.getData('text/html');
-		 var nodeID=node.firstElementChild.id;
-
+		var node=document.createElement("div");
+		node.innerHTML=e.dataTransfer.getData('text/html');
+		var nodeID=node.firstElementChild.id;
 		CmdManager.moveNodeCmd(sceneSelected,actorSelected,scriptSelected,insert,nodeID);
 	}
  }

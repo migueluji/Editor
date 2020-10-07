@@ -1,5 +1,5 @@
 {
-	"name": "Prehistoric",
+	"name": "Prehistoric Survival",
 	"displayWidth": 960,
 	"displayHeight": 540,
 	"cameraX": 0,
@@ -1485,6 +1485,7 @@
 					"image": "",
 					"color": "#ffffff",
 					"opacity": 1,
+					"flipX": false,
 					"flipY": false,
 					"scrollX": 0,
 					"scrollY": 0,
@@ -2973,8 +2974,8 @@
 				{
 					"name": "Girl",
 					"sleeping": false,
-					"x": -70.5959875322001,
-					"y": 65.74281465797658,
+					"x": -69.24454298680669,
+					"y": 67.09425920336999,
 					"width": 99,
 					"height": 74,
 					"scaleX": 1,
@@ -3307,7 +3308,7 @@
 							]
 						}
 					],
-					"live": 100
+					"live": 50
 				},
 				{
 					"name": "Roof_collider",
@@ -5222,7 +5223,7 @@
 									"type": "Edit",
 									"parameters": {
 										"property": "Me.width",
-										"value": "Girl.live/2"
+										"value": "Girl.live"
 									}
 								},
 								{
@@ -5237,7 +5238,7 @@
 									"parameters": {
 										"value_1": "Girl.live",
 										"operation": "Greater Equal",
-										"value_2": "50"
+										"value_2": "25"
 									},
 									"nodeListTrue": [
 										{
@@ -5254,7 +5255,7 @@
 											"parameters": {
 												"value_1": "Girl.live",
 												"operation": "Greater Equal",
-												"value_2": "25"
+												"value_2": "10"
 											},
 											"nodeListTrue": [
 												{

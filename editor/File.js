@@ -53,11 +53,12 @@ class File {
 		var xhr = new XMLHttpRequest();
         xhr.open("POST", url, true);
 		xhr.type=type;
-		xhr.fileName=file.name;
+        xhr.fileName=file.name;
         xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4)		
+            if (xhr.readyState == 4){		
                 if (xhr.status == 200) {if (destination!="") Command.addAssetCmd(this.fileName, this.type);}
                 else  alert("Server Error! "+xhr.responseText);	
+            }
         }	
         xhr.send(formData);		
     }

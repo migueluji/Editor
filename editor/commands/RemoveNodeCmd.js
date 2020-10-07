@@ -11,7 +11,7 @@ class RemoveNodeCmd extends Command {
         var scriptPos=this.editor.model.sceneList[scenePos].actorList[actorPos].scriptList.findIndex(i=>i.id==scriptID);
         var script=this.editor.model.sceneList[scenePos].actorList[actorPos].scriptList[scriptPos];
 
-        var founded = script.findNode(script.nodeList,nodeID);
+        var founded = script.findNode(script.nodeList,nodeID,null,null);
         this.node = founded.list[founded.position];
         this.insert={"parentID":founded.parentID,"side":founded.side,"position":founded.position}
 
