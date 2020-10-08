@@ -59,7 +59,8 @@ class EmptyNodeView {
 
 		var node=document.createElement("div");
 		node.innerHTML=e.dataTransfer.getData('text/html');
-		var nodeID=node.firstElementChild.id;
+		var nodeID=node.querySelector(".node").id;
+
 		CmdManager.moveNodeCmd(sceneSelected,actorSelected,scriptSelected,insert,nodeID);
 	}
  }
