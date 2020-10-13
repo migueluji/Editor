@@ -67,7 +67,8 @@ class ActorView {
 		e.preventDefault();
 		var element= document.createElement("div");
 		element.innerHTML=e.dataTransfer.getData('text/html');
-		element=element.firstElementChild;
+		//element=element.firstElementChild;
+		element=element.querySelector(".mdc-list-item");
 		var sceneSelected=document.querySelector(".sceneselected").id;
 		CmdManager.moveActorCmd(sceneSelected,element.id,this.position(this.html,this.html.parentNode));
 		this.html.classList.remove("over");

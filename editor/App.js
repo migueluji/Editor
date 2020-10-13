@@ -9,6 +9,7 @@ class App {
 
         this.file.load(this.serverGamesFolder+"/loadJson.php?gameFolder="+this.gameFolder,this);
     }
+    
     onFileLoaded(json){
         this.data=json;
         this.file.loadAssets(this.serverGamesFolder+"/"+this.gameFolder+"/images",json.imageList,this);

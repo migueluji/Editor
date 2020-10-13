@@ -10,6 +10,10 @@ class Command {
         this.editor.saveGame();
     }
 
+    static takeScreenshot(){
+        this.editor.takeScreenshot();
+    }  
+
     static openGamePropertiesCmd(){
         this.editor.openGameProperties();
     }

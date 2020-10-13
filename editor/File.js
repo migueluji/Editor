@@ -34,10 +34,17 @@ class File {
 		var xhr = new XMLHttpRequest();
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-type", "application/json");
-        xhr.onreadystatechange = function () {		
-            if (xhr.readyState == 4) 
-                if (xhr.status == 200) alert(xhr.responseText);
-                else   alert("Server Error! "+xhr.responseText);
+        var upload=false;
+        xhr.onreadystatechange = function () {	
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    alert(xhr.responseText); 
+                    Command.takeScreenshot();
+                }  
+                else  if (xhr.status == 404) alert ("DEMO VERSION - The Game cannot be saved")
+                      else alert("Server Error! "+xhr.responseText);
+                return upload;
+            }   
         }		
         xhr.send(json);
     }
@@ -57,7 +64,8 @@ class File {
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4){		
                 if (xhr.status == 200) {if (destination!="") Command.addAssetCmd(this.fileName, this.type);}
-                else  alert("Server Error! "+xhr.responseText);	
+                else  if (xhr.status == 404) alert("DEMO VERSION - It was not possible to upload asset files");	
+                      else alert("Server Error! "+xhr.responseText);
             }
         }	
         xhr.send(formData);		
@@ -75,10 +83,9 @@ class File {
         xhr.open("GET", url, true);
         xhr.onreadystatechange = function () {
            if (xhr.readyState == 4)
-                if (xhr.status == 200)  {
-                    Command.removeAssetCmd(assetID,type);	
-                }  
-                else alert("Server Error! "+xhr.responseText);				
+                if (xhr.status == 200) Command.removeAssetCmd(assetID,type);	
+                else if ( xhr.status == 404) alert("DEMO VERSION - It was not possible to delete asset files");	
+                     else alert("Server Error! "+xhr.responseText);				
         }		
         xhr.send();		
     }
