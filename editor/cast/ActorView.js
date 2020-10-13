@@ -21,7 +21,7 @@ class ActorView {
 		this.html.addEventListener("dragover",this.dragoverActorHandler.bind(this));
 		this.html.addEventListener("dragleave",this.dragleaveActorHandler.bind(this));
 		this.html.addEventListener("drop",this.dropActorHandler.bind(this));
-	  	this.html.addEventListener("click",this.selectActorHandler.bind(this));
+		this.html.addEventListener("click",this.selectActorHandler.bind(this));
 	}
    
   	addView(actor) {
