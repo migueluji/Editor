@@ -1,8 +1,9 @@
 class App {
-    constructor(serverGamesFolder,gameFolder){		
+    constructor(serverGamesFolder,gameFolder,gameId){		
         this.file = new File();
         this.serverGamesFolder=serverGamesFolder;
-        this.gameFolder=gameFolder;
+        this.gameFolder = gameFolder;
+        this.gameId = gameId;
 
         this.load = new LoadingView("var(--mdc-theme-primary)");
         document.body.appendChild(this.load.html);

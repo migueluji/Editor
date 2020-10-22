@@ -113,6 +113,9 @@
 	<script>
 
 		window.onbeforeunload = () => "";
+		gameId=Utils.id();
+		serverGamesFolder="http://localhost/games";
+
 	/*    
 		var userId="<?php echo $_POST['iduser'];?>";
 		var userName="<?php echo $_POST['nameuser'];?>";
@@ -123,8 +126,6 @@
 	*/
 	//	userId=1455;
 	//	userName="Editor";
-		gameId=Utils.id();
-		serverGamesFolder="http://localhost/games";
 
 	//	gameFolder="prueba";
 	//	gameFolder="box-doger";
@@ -139,7 +140,7 @@
 		gameFolder="prehistoric";
 	//	gameFolder="pirate-bomb";
 
-		var app=new App(serverGamesFolder,gameFolder);
+		var app=new App(serverGamesFolder,gameFolder,gameId);
 		
 	</script>
 </body>
