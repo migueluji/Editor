@@ -260,41 +260,7 @@ class Engine {
                 this.physics.rigidbodyList.pop();
             }
         }
-
-        // for(var i in this.physics.rigidbodyList) {
-
-        //     console.log(this.physics.rigidbodyList[i].name);
-        // }
-
-        // console.log("RIGIDBODY", this.physics.rigidbodyList);
-        // console.log("TRIGGERS", this.physics.triggerList);
-        // console.log("INPUT", this.input.actorList);
-        // console.log("LOGIC", this.logic.actorList);
-        // console.log("AUDIO", this.audio.actorList);
-        // console.log("SPRITES", this.render.spriteList);
-        // console.log("TEXTS", this.render.textList);
-        // console.log("ENGINE", this.actorList);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     printf() {
