@@ -127,7 +127,7 @@
 	//	userId=1455;
 	//	userName="Editor";
 
-	//	gameFolder="prueba";
+		gameFolder="prueba";
 	//	gameFolder="box-doger";
 	// 	gameFolder="bird";
 	//	gameFolder="flying-plane";
@@ -137,7 +137,7 @@
 	//	gameFolder="babe-plataformer";
 	//  gameFolder="ludumdare46-carlos";
 	//	gameFolder="empty";
-		gameFolder="prehistoric";
+	//	gameFolder="prehistoric";
 	//	gameFolder="pirate-bomb";
 
 		var app=new App(serverGamesFolder,gameFolder,gameId);
