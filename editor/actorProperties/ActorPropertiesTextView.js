@@ -21,7 +21,7 @@ class ActorPropertiesTextView {
 					'<input id="text" value="Text" style="width:212px" class="mdc-text-field__input" type="text">'+
 					'<span class="mdc-floating-label" >Text</span>'+
 					'<button id="textbutton" class="mdc-button mdc-button-upgraded upload-button" style="top:10px">'+
-						'<i class="material-icons mdc-button_icon">folder</i>'+
+						'<i class="material-icons mdc-button_icon">add_box</i>'+
 					'</button>'+
 					'<span class="mdc-line-ripple"></span>'+
 				'</label>'+
