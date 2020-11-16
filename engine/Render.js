@@ -83,7 +83,7 @@ class Render {
         if(actor.spriteOn) { 
 
             actor.sprite.cacheAsBitmap  = false; 
-            
+
             if(actor.image != "") { 
 
                 actor.sprite.width      = actor.width   * (1 / actor.scaleX);
