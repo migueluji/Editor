@@ -106,7 +106,7 @@ class AssetSelectionView {
 		var list =this.html.querySelectorAll(".mdc-image-list__label");
 		for( var i=0; i<files.length;i++){
 			var j=0;
-			while((j<list.length) && (files[i].name!=list[j].innerText)){
+			while((j<list.length) && (files[i].name.toUpperCase()!=list[j].innerText.toUpperCase())){
 				j++;
 			};
 			if (j==list.length) {
