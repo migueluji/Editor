@@ -127,11 +127,11 @@
 	//	userId=1455;
 	//	userName="Editor";
 
-		gameFolder="prueba";
+	//	gameFolder="prueba";
 	//	gameFolder="box-doger";
 	// 	gameFolder="bird";
 	//	gameFolder="flying-plane";
-	//	gameFolder="asteroids";
+		gameFolder="asteroids";
 	//	gameFolder="arkanoid";
 	//	gameFolder="alien-invasion";
 	//	gameFolder="babe-plataformer";
