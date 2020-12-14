@@ -115,7 +115,7 @@ class Actor {
 
         this.sprite.alpha = this.opacity;
 
-        if(this.spriteOn && (this.scrollX != 0 || this.scrollY != 0)) {
+        if(this.sleeping && this.spriteOn && (this.scrollX != 0 || this.scrollY != 0)) {
 
             this.sprite.cacheAsBitmap = false;
             this.sprite.tilePosition.x += this.scrollX * this.engine.game.deltaTime;

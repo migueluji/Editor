@@ -11,11 +11,13 @@ class Util {
         delete element[property];
     }
 
+    
     /**
      * 
      * @param {*} element 
      */
     static deepDestroy(element) { for(var i in element) { Util.destroy(element, i); } }
+
 
     /**
      * 
@@ -32,10 +34,12 @@ class Util {
         }
     }
 
+
     /**
      * 
      */
     static removeByID(list, ID) { return list.filter(item => item.ID != ID); }
+
 
     /**
      * 
@@ -54,10 +58,12 @@ class Util {
      */
     static random() { return Math.floor(1000000 * Math.random()); }
 
+
     /**
      * 
      */
-    static clamp(number, min,  max) {  return Math.min(Math.max(number, min), max); }
+    static clamp(number, min,  max) { return Math.min(Math.max(number, min), max); }
+
 
     /**
      * 
@@ -66,6 +72,7 @@ class Util {
 
         return expression.replace(/Me./g, actor.name + "."); // El flag /-/g es para eliminar todas las ocurrencias, por defecto "replace" solo se carga la primera.
     }
+
 
     /**
      * 
@@ -87,10 +94,12 @@ class Util {
         return test;
     }
 
+
     /**
      * Milisegundos
      */
     static getDate() { return new Date() / 1000; }
+
 
     /**
      * 
@@ -103,6 +112,7 @@ class Util {
         return "'" + Util.colorFormat(value) + "'"; 
     }
 
+
     /**
      * 
      */
@@ -111,11 +121,19 @@ class Util {
         return value.replace("#", "0x");
     }
 
+    
+    /**
+     * 
+     */
     static isEmpty(value) {
 
         return Object.keys(value).length === 0;
     }
 
+    
+    /**
+     * 
+     */
     static getElementByPropertyValue(object, element, value) {
 
         for(var i in object) { if(object[i][element] == value) { return object[i]; } }
@@ -123,6 +141,7 @@ class Util {
         return null;
     }
 
+    
     /**
      * 
      */
@@ -155,6 +174,10 @@ class Util {
         }
     }
 
+    
+    /**
+     * 
+     */
     static updateExpressionNames(expression, scope) {
 
         var temp = expression;
@@ -170,6 +193,10 @@ class Util {
         return temp;
     }
 
+    
+    /**
+     * 
+     */
     static checkScope(expression, scope) {
 
         for(var i in scope.engine.sceneList[scope.engine.game.activeScene]) {
@@ -192,6 +219,10 @@ class Util {
         return expression;
     }
 
+    
+    /**
+     * 
+     */
     static updateTextToScope(text, actor) {
 
         var temp = Util.replace(text, "{Game.", "{_player.engine.game.");                    /** Asignacion de la referencia al Game. */
@@ -207,9 +238,13 @@ class Util {
         return temp;
     }
 
+    
+    /**
+     * 
+     */
     static setDecimalLimitDisplay(text) {
 
-        var chunks = text.split("${");
+        var chunks = text.split(/\${|}/i);
         var output = "";
 
         for(var i = 0; i < chunks.length; i++) {
@@ -229,6 +264,10 @@ class Util {
         return output;
     }
 
+    
+    /**
+     * 
+     */
     static replace(expression, target, replace) {
 
         var temp = expression;
@@ -238,16 +277,28 @@ class Util {
         return temp;
     }
 
+    
+    /**
+     * 
+     */
     static getLastKey(object) {
 
         return Object.keys(object)[Object.keys(object).length - 1];
     }
 
+    
+    /**
+     * 
+     */
     static getLastElement(object) {
 
         return object[Util.getLastKey(object)];
     }
 
+    
+    /**
+     * 
+     */
     static getLocation() {
 
         if(navigator.geolocation) {
@@ -259,7 +310,11 @@ class Util {
           console.log("Geolocation is not supported by this browser.");
         }
     }
-      
+
+    
+    /**
+     * 
+     */
     static showPosition(position) {
 
         console.log(position.coords);
@@ -267,6 +322,10 @@ class Util {
         return {latitude: position.coords.latitude, longitude: position.coords.longitude};
     }
 
+    
+    /**
+     * 
+     */
     static getAccelerometer() {
 
 			let accelerometer = new Accelerometer({frequency: 60});
@@ -279,6 +338,10 @@ class Util {
             accelerometer.start();
     }
 
+    
+    /**
+     * 
+     */
     static parser(container, data) {
 
         Object.assign(container, data);

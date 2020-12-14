@@ -79,8 +79,6 @@ class Engine {
             this.sceneList[scene.name][scene.actorList[i].ID] = scene.actorList[i];
         }
 
-        // console.log(this.physics.rigidbodyList);
-
         this.logic.compileExpressions();    /** Compilamos las expresiones logicas de los nuevos actores. */
         this.render.compileTexts();         /** Compilamos los textos de los nuevos actores. */
     }
@@ -132,13 +130,6 @@ class Engine {
         this.game.activeScene = Util.getLastKey(this.sceneList);
         this.game.activeSceneNumber = this.game.sceneList[this.game.activeScene].number;
         this.enableScene();
-
-        // for(var i in this.actorList) {
-
-            
-
-        //     console.log(this.actorList[i].scriptList)
-        // }
     }
 
     updateScenes() {
@@ -150,6 +141,8 @@ class Engine {
                 this.popScene();
             }
             else {
+
+                console.log(this.sceneHandler);
 
                 if(this.sceneHandler.stop == undefined) {   /** Comprobamos si tenemos que ir a una escena nueva. */
 
@@ -163,7 +156,7 @@ class Engine {
                     this.destroyList = [];
                 }
 
-                this.game.activeScene       = this.sceneHandler.scene;
+                this.game.activeScene = this.sceneHandler.scene;
                 this.game.activeSceneNumber = this.game.sceneList[this.sceneHandler.scene].number;
                 this.clearLists();
                 this.addScene(this.game.sceneList[this.sceneHandler.scene]); /** Añadimos la nueva escena. */
@@ -178,9 +171,14 @@ class Engine {
 
         var scene = this.sceneList[this.game.activeScene];
 
+        console.log(scene);
+
         for(var i in scene) {
 
             this.actorList[scene[i].ID].sleep(true);
+            
+
+            console.log(scene[i].ID);
         }
     }
 
@@ -249,8 +247,6 @@ class Engine {
     }
 
     clearLists() {
-
-        // console.log("\n \n \n ");
 
         for(var i = this.physics.rigidbodyList.length - 1; i >= 0; i--) {
 
