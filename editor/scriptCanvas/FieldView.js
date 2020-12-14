@@ -120,9 +120,9 @@ class FieldView  {
 							'<span class="mdc-list-item__ripple"></span>'+
 							'<span class="mdc-list-item__text">Random</span>'+
 						'</li>'+
-						'<li id="integer" class="mdc-list-item" role="menuitem">'+
+						'<li id="round" class="mdc-list-item" role="menuitem">'+
 						'<span class="mdc-list-item__ripple"></span>'+
-							'<span class="mdc-list-item__text">Integer</span>'+
+							'<span class="mdc-list-item__text">Round</span>'+
 						'</li>'+
 						'<li id="sin" class="mdc-list-item" role="menuitem">'+
 							'<span class="mdc-list-item__ripple"></span>'+
