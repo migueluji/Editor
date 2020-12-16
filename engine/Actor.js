@@ -24,7 +24,7 @@ class Actor {
         this.name            = actor.name                    || "NewActor" + Util.random();
         this.scene           = this.engine.game.activeScene  || null;
         this.ID              = actor.ID                      || actor.name  + Util.random();
-        this.sleeping        = actor.sleeping ? false : true || false;
+        this.sleeping        = actor.sleeping;
         this.destroyActor    = actor.destroyActor            || false;
 
         /** Sprite properties
@@ -115,7 +115,7 @@ class Actor {
 
         this.sprite.alpha = this.opacity;
 
-        if(this.sleeping && this.spriteOn && (this.scrollX != 0 || this.scrollY != 0)) {
+        if(!this._sleeping && this.spriteOn && (this.scrollX != 0 || this.scrollY != 0)) {
 
             this.sprite.cacheAsBitmap = false;
             this.sprite.tilePosition.x += this.scrollX * this.engine.game.deltaTime;
@@ -134,7 +134,7 @@ class Actor {
         this.engine.input.sleep(this);
         this.engine.logic.sleep(this);
         this.engine.audio.sleep(this);
-        if(!renderVisible) { this.engine.render.sleep(this); }
+        if(renderVisible != undefined && !renderVisible) { this.engine.render.sleep(this); }
     }
 
     awake() {
@@ -474,9 +474,10 @@ class Actor {
 
         if(this.loaded && this._sleeping) {
 
-            this.sleep();
+            var renderVisible = this.___sleeping != undefined;
+            this.sleep(renderVisible);
         }
-        else if(this.loaded && this._sleeping) {
+        else if(this.loaded && !this._sleeping) {
 
             this.awake();
         }

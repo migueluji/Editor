@@ -121,17 +121,6 @@ class Engine {
         this.physics.clearWorld();
     }
 
-    popScene() {
-
-        var sceneName = Util.getLastKey(this.sceneList);
-        this.destroyScene(sceneName, this.sceneList[sceneName]);
-        this.destroyActors();   // eliminar los actores determinados por la lista
-        delete this.sceneList[sceneName];
-        this.game.activeScene = Util.getLastKey(this.sceneList);
-        this.game.activeSceneNumber = this.game.sceneList[this.game.activeScene].number;
-        this.enableScene();
-    }
-
     updateScenes() {
 
         if(this.sceneHandler != null) {
@@ -142,8 +131,6 @@ class Engine {
             }
             else {
 
-                console.log(this.sceneHandler);
-
                 if(this.sceneHandler.stop == undefined) {   /** Comprobamos si tenemos que ir a una escena nueva. */
 
                     this.destroyAllScenes();
@@ -152,7 +139,7 @@ class Engine {
                 else if(this.sceneHandler.stop) {           /** Comprobamos si tenemos que añadir una escena nueva. */
 
                     this.disableScene();
-                    this.spawnList   = [];
+                    this.spawnList = [];
                     this.destroyList = [];
                 }
 
@@ -167,25 +154,38 @@ class Engine {
         }
     }
 
+    popScene() {
+
+        this.destroyScene(this.game.activeScene, this.sceneList[this.game.activeScene]);
+        this.destroyActors();   // eliminar los actores determinados por la lista
+        delete this.sceneList[this.game.activeScene];
+        this.game.activeScene = Util.getLastKey(this.sceneList);
+        this.game.activeSceneNumber = this.game.sceneList[this.game.activeScene].number;
+        this.enableScene();
+    }
+
     disableScene() {
 
-        var scene = this.sceneList[this.game.activeScene];
+        for(var i in this.actorList) {
 
-        console.log(scene);
+            if(this.actorList[i].scene == this.game.activeScene) {
 
-        for(var i in scene) {
-
-            this.actorList[scene[i].ID].sleep(true);
-            
-
-            console.log(scene[i].ID);
+                this.actorList[i].___sleeping = this.actorList[i].sleeping ? true : false;
+                this.actorList[i].sleeping = true;
+            }
         }
     }
 
     enableScene() {
 
-        var scene = this.sceneList[this.game.activeScene];
-        for(var i in scene) { this.actorList[scene[i].ID].awake(); }
+        for(var i in this.actorList) {
+
+            if(this.actorList[i].scene == this.game.activeScene) {
+
+                this.actorList[i].sleeping = this.actorList[i].___sleeping ? true : false;
+                delete this.actorList[i].___sleeping;
+            }
+        }
     }
     
     /* ----------------------------------------
