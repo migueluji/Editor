@@ -127,7 +127,8 @@
 	//	userId=1455;
 	//	userName="Editor";
 
-		gameFolder="prueba";
+	//	gameFolder="prueba";
+		gameFolder="null";
 	//	gameFolder="box-doger";
 	// 	gameFolder="bird";
 	//	gameFolder="flying-plane";

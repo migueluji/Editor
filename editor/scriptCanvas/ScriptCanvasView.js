@@ -191,19 +191,22 @@ class ScriptCanvasView {
         this.addNode(html,chip.html,nodePos);
         nodeList.forEach(node=>{
             nodePos++;
-            if (node.nodeListTrue!=null) nodeView = new IfView();
-            else nodeView = new DoView();
-            nodeView.addView(node);
-            this.addNode(html,nodeView.html,nodePos); 
-            var chip = new EmptyNodeView(this);
-            nodePos++;
-            this.addNode(html,chip.html,nodePos);
-            if (node.nodeListTrue) {
-                this.updateNodeList(nodeView.html.querySelector(".yes"),node.nodeListTrue);
-            }  
-            if (node.nodeListFalse) {
-                this.updateNodeList(nodeView.html.querySelector(".no"),node.nodeListFalse);
+            if ('type' in node) { // to avoid "null" error
+                if (node.nodeListTrue!=null) nodeView = new IfView();
+                else nodeView = new DoView();
+                nodeView.addView(node);
+                this.addNode(html,nodeView.html,nodePos); 
+                var chip = new EmptyNodeView(this);
+                nodePos++;
+                this.addNode(html,chip.html,nodePos);
+                if (node.nodeListTrue) {
+                    this.updateNodeList(nodeView.html.querySelector(".yes"),node.nodeListTrue);
+                }  
+                if (node.nodeListFalse) {
+                    this.updateNodeList(nodeView.html.querySelector(".no"),node.nodeListFalse);
+                }
             }
+
         });
     }
 

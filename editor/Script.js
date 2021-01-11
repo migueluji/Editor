@@ -35,7 +35,7 @@ class Script {
     assignNodes(nodeList){
         if (nodeList) nodeList.forEach((node,i)=>{
             nodeList[i]= new Node(node);
-            if (node.hasOwnProperty("nodeListTrue")) { // si es un IF
+            if (node && node.hasOwnProperty("nodeListTrue")) { // if node exist and is a condition
                 if(node.nodeListTrue) this.assignNodes(node.nodeListTrue);
                 if(node.nodeListFalse)this.assignNodes(node.nodeListFalse);
             }
