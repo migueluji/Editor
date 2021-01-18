@@ -128,7 +128,8 @@
 	//	userName="Editor";
 
 	//	gameFolder="prueba";
-		gameFolder="null";
+	//	gameFolder="null";
+		gameFolder="move";
 	//	gameFolder="box-doger";
 	// 	gameFolder="bird";
 	//	gameFolder="flying-plane";
