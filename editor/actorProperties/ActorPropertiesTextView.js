@@ -50,7 +50,7 @@ class ActorPropertiesTextView {
 				'</div>'+
 				'<div class="two-properties">'+	
 					'<div id="style" style="min-width:auto" class="half-text mdc-select mdc-select--filled">'+
-						'<div style="background:white" class="mdc-select__anchor">'+
+						'<div style="width:auto;background:white" class="mdc-select__anchor">'+
 							'<span class="mdc-select__ripple"></span>'+
 							'<span class="mdc-select__selected-text"></span>'+
 							'<span class="mdc-select__dropdown-icon">'+
@@ -80,7 +80,7 @@ class ActorPropertiesTextView {
 						'</div>'+
 					'</div>'+		
 					'<div id="align" style="min-width:auto" class="half-text mdc-select mdc-select--filled">'+
-						'<div style="background:white" class="mdc-select__anchor">'+
+						'<div style="width:auto;background:white" class="mdc-select__anchor">'+
 							'<span class="mdc-select__ripple"></span>'+
 							'<span class="mdc-select__selected-text"></span>'+
 							'<span class="mdc-select__dropdown-icon">'+
