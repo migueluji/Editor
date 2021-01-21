@@ -15,7 +15,7 @@ class File {
     loadAssets(URL,imageList,app) {
         this.loader = new PIXI.Loader(URL);
         if(imageList) this.loader.add(imageList);
-        else this.loader.add("Loader","/images/gamesonomy.png");// trick to initialize the loader when there is not /image folder
+        else this.loader.add("Loader","https://gamesonomy.com/editor/images/gamesonomy.png");// trick to initialize the loader when there is not /image folder
         this.loader.onLoad.add((loader, resource) => { 
             // console.log(resource.name," loaded");
         });
