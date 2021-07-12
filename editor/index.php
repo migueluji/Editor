@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Gamesonomy Editor</title>
 	
-	<link rel="stylesheet" type="text/css" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"></link>
+	<link rel="stylesheet" type="text/css" href="https://unpkg.com/material-components-web@10.0.0/dist/material-components-web.min.css"></link>
 
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="editor.css"></link>
@@ -135,8 +135,8 @@
 	//	gameFolder="alien-invasion";
 	//	gameFolder="babe-plataformer";
 	//  gameFolder="ludumdare46-carlos";
-	//	gameFolder="empty";
-		gameFolder="prehistoric";
+		gameFolder="empty";
+	//	gameFolder="prehistoric";
 	//	gameFolder="pirate-bomb";
 
 		var app=new App(serverGamesFolder,gameFolder);
