@@ -10,7 +10,7 @@ class History {
         this.undos.push(cmd);
         cmd.execute();
         this.redos=[];
-        console.log("history.execute: ",cmd);
+//        console.log("history.execute: ",cmd);
     }
     
     undo(){
@@ -19,7 +19,7 @@ class History {
             cmd=this.undos.pop();
             cmd.undo();
             this.redos.push(cmd);
-            console.log("history.undo [",this.undos.length,"] ",cmd);
+  //          console.log("history.undo [",this.undos.length,"] ",cmd);
         }
         return cmd;
     }
@@ -30,7 +30,7 @@ class History {
             cmd=this.redos.pop();
             cmd.execute();
             this.undos.push(cmd);
-            console.log("history.redo [",this.redos.length,"] ",cmd);
+   //         console.log("history.redo [",this.redos.length,"] ",cmd);
         }
         return cmd;
     }

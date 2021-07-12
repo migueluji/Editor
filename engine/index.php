@@ -1,9 +1,7 @@
 <!DOCTYPE HTML>
 
 <html>
-	
 	<head>
-
 		<style type="text/css">
 			
 			* {

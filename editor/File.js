@@ -15,12 +15,12 @@ class File {
     loadAssets(URL,imageList,app) {
         this.loader = new PIXI.Loader(URL);
         if(imageList) this.loader.add(imageList);
-        else this.loader.add("Loader","http://localhost/editor/images/gamesonomy.png");// trick to initialize the loader when there is not /image folder
+        else this.loader.add("Loader","https://gamesonomy.com/editor/images/gamesonomy.png");// trick to initialize the loader when there is not /image folder
         this.loader.onLoad.add((loader, resource) => { 
-            console.log(resource.name," loaded");
+            // console.log(resource.name," loaded");
         });
         this.loader.load(()=>{
-            console.log("Load finished!");
+           // console.log("Load finished!");
             if(app.file.loader.resources.hasOwnProperty("Loader")) {
                 app.file.loader.resources["Loader"].texture.destroy(true);
                 delete app.file.loader.resources["Loader"];
@@ -34,10 +34,17 @@ class File {
 		var xhr = new XMLHttpRequest();
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-type", "application/json");
-        xhr.onreadystatechange = function () {		
-            if (xhr.readyState == 4) 
-                if (xhr.status == 200) alert(xhr.responseText);
-                else   alert("Server Error! "+xhr.responseText);
+        var upload=false;
+        xhr.onreadystatechange = function () {	
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    alert(xhr.responseText); 
+                    Command.takeScreenshot();
+                }  
+                else  if (xhr.status == 404) alert ("DEMO VERSION - The Game cannot be saved")
+                      else alert("Server Error! "+xhr.responseText);
+                return upload;
+            }   
         }		
         xhr.send(json);
     }
@@ -53,11 +60,13 @@ class File {
 		var xhr = new XMLHttpRequest();
         xhr.open("POST", url, true);
 		xhr.type=type;
-		xhr.fileName=file.name;
+        xhr.fileName=file.name;
         xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4)		
+            if (xhr.readyState == 4){		
                 if (xhr.status == 200) {if (destination!="") Command.addAssetCmd(this.fileName, this.type);}
-                else  alert("Server Error! "+xhr.responseText);	
+                else  if (xhr.status == 404) alert("DEMO VERSION - It was not possible to upload asset files");	
+                      else alert("Server Error! "+xhr.responseText);
+            }
         }	
         xhr.send(formData);		
     }
@@ -74,10 +83,9 @@ class File {
         xhr.open("GET", url, true);
         xhr.onreadystatechange = function () {
            if (xhr.readyState == 4)
-                if (xhr.status == 200)  {
-                    Command.removeAssetCmd(assetID,type);	
-                }  
-                else alert("Server Error! "+xhr.responseText);				
+                if (xhr.status == 200) Command.removeAssetCmd(assetID,type);	
+                else if ( xhr.status == 404) alert("DEMO VERSION - It was not possible to delete asset files");	
+                     else alert("Server Error! "+xhr.responseText);				
         }		
         xhr.send();		
     }

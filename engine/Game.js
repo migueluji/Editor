@@ -38,11 +38,11 @@ class Game {
         /** Propiedades de audio del juego
          * --------------------------------------------------------------------- */
         this.soundOn            = game.soundOn;                         /** */
-        this.soundFile          = game.sound                || "";      /** */
         this.pan                = game.pan                  || 0.0;     /** */
         this.volume             = game.volume               || 1.0;     /** */
         this.playSound          = game.playSound            || false;   /** */
         this.loop               = game.loop                 || false;   /** */
+        this.soundtrack         = game.soundtrack           || "";      /** */
 
         /** Propiedades de lectura para la ejecucion
          * --------------------------------------------------------------------- */
@@ -243,12 +243,13 @@ class Game {
         this._soundOn = value;
     }
 
-    get soundFile() { return this._soundFile; }
-    set soundFile(value) {
-        this._soundFile = value;
+    get soundtrack() { return this._soundtrack; }
+    set soundtrack(value) {
+        this._soundtrack = value;
 
-        if(this.loaded && this._soundOn) {
-            this.engine.audio.setSound(this._soundFile);
+        if(this._soundOn) {
+
+            this.engine.audio.setSound(this._soundtrack, true, this.volume, this.pan, this.loop);
         }
     }
 

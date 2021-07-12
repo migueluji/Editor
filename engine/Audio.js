@@ -24,9 +24,9 @@ class Audio {
         this.actorList = Util.removeByID(this.actorList, actor.ID); /** Eliminamos el actor de la lista de actores del motor de audio. */
     }
 
-    setSound() {
+    setSound(sound, play, volume, pan, loop) {
 
-        this.sound = this.createSound({source: this.soundFile, play: this.playSound, volume: this.volume, pan: this.pan, loop: this.loop}, false);
+        this.sound = this.createSound({source: sound, play: play, volume: volume, pan: pan, loop: loop}, false);
     }
 
     play() {
@@ -65,7 +65,7 @@ class Audio {
      *  ############################################################################### */
     PlaySound(soundFile, play, volume, pan) {
 
-      var s=  this.createSound({source: soundFile, play: play, volume: volume, pan: pan}, true);
-      s.play(); // Miguel
+        var s=  this.createSound({source: soundFile, play: play, volume: volume, pan: pan}, true);
+        s.play(); // Miguel
     }
 }

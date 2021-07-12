@@ -63,12 +63,22 @@ class CanvasView {
         this.displayActor=null;
         this.mouseDown=false;
         this.diff={x:0,y:0} 
+ 
+        this.appRenderer = new PIXI.Renderer();
+        this.appStage = new  PIXI.Container();
+
+        requestAnimationFrame(animate.bind(this));
+        function animate(){
+            requestAnimationFrame(animate.bind(this));
+            this.appRenderer.render(this.appStage);
+        };
+
         this.initApp();
-        this.pixiApp = new PIXI.Application(); // one WebGL context for all screenshots
     }
 
     takeScreenshot(w,h,sceneID,actorList,upload){
-        
+
+        var renderer = this.appRenderer;
         var stage= new PIXI.Container();
 
         const frame = new PIXI.Graphics(); // draw the camera frame
@@ -89,7 +99,6 @@ class CanvasView {
         scene.scale = {x:this.gameProperties.cameraZoom,y:-this.gameProperties.cameraZoom};
         scene.mask=frame;  
     
-
         actorList.forEach(actor => {
             var displayActor = new DisplayActor(this,actor,actorList,this.gameProperties); 
             scene.addChild(displayActor);
@@ -102,7 +111,7 @@ class CanvasView {
         (sy>sx) ? s=sy : s=sx;
         stage.scale.x=stage.scale.y=s; 
        
-        this.pixiApp.renderer.extract.canvas(stage).toBlob((blob) => {
+        renderer.extract.canvas(stage).toBlob((blob) => {
                 if (upload){
                     var formData= new FormData();
                     formData.append("file",blob,"image.jpg");
@@ -128,39 +137,40 @@ class CanvasView {
     }
 
     initApp(){
-        this.app = new PIXI.Application();
-        this.app.renderer.view.style.position = "absolute";
-        this.app.renderer.view.style.display = "block"; 
-        this.html.appendChild(this.app.view);
 
-        this.app.stage.interactive=true;
-        this.app.stage
+        this.appRenderer.view.style.position = "absolute";
+        this.appRenderer.view.style.display = "block"; 
+        this.html.appendChild(this.appRenderer.view);
+
+        this.appStage.interactive=true;
+        this.appStage
             .on("pointerdown",this.mouseStageDown.bind(this))
             .on("pointermove",this.mouseStageMove.bind(this))   
             .on("pointerupoutside",this.mouseStageUp.bind(this)) 
             .on("pointerup",this.mouseStageUp.bind(this));     
 
-        this.app.renderer.resize(window.innerWidth,window.innerHeight);
+        this.appRenderer.resize(window.innerWidth,window.innerHeight);
         this.initStage={x:window.innerWidth/2.0-this.drawerOffset,y:window.innerHeight/2.0-32}
-        this.app.stage.x =this.initStage.x ;
-        this.app.stage.y =this.initStage.y ;
+        this.appStage.x =this.initStage.x ;
+        this.appStage.y =this.initStage.y ;
  
         this.update(this.actorList,this.gameProperties); 
     }
 
     updateStageDrawer(){
         var drawerApp=document.querySelector(".mdc-drawer-app-content");
-        if (drawerApp.getBoundingClientRect().x == 0) this.app.stage.x = this.app.stage.x+this.drawerOffset;
-        else this.app.stage.x = this.app.stage.x-this.drawerOffset; 
+        if (drawerApp.getBoundingClientRect().x == 0) this.appStage.x = this.appStage.x+this.drawerOffset;
+        else this.appStage.x = this.appStage.x-this.drawerOffset; 
         this.hitArea(this.scene);
     }
 
     update(actorList,gameProperties){
+
         this.actorList=actorList;
         this.gameProperties=gameProperties;
 
-        this.app.stage.removeChildren();
-        this.app.renderer.backgroundColor="0x"+String(this.gameProperties.backgroundColor).substr(1);
+        this.appStage.removeChildren();
+        this.appRenderer.backgroundColor="0x"+String(this.gameProperties.backgroundColor).substr(1);
       
         this.frame = new PIXI.Graphics(); // draw the camera frame
         this.frame.lineStyle(20, 0xDDDDDD, 1, 1, true);
@@ -170,14 +180,14 @@ class CanvasView {
         this.scene.position ={x:-this.gameProperties.cameraX,y:this.gameProperties.cameraY};
         this.scene.angle = this.gameProperties.cameraAngle;
         this.scene.scale = {x:this.gameProperties.cameraZoom,y:-this.gameProperties.cameraZoom};
-  
+
         this.actorList.forEach(actor => {
             var displayActor = new DisplayActor(this,actor,this.actorList,this.gameProperties); 
             this.scene.addChild(displayActor);
         });
 
-        this.app.stage.addChild(this.scene);
-        this.app.stage.addChild(this.frame);
+        this.appStage.addChild(this.scene);
+        this.appStage.addChild(this.frame);
         this.hitArea(this.scene);
         this.updateActorButton();  
     }
@@ -191,22 +201,24 @@ class CanvasView {
             (this.selected) ? this.displayActor.removeGizmo() : this.selected=true;
             var displayActorIndex =this.scene.children.findIndex(i=>i.id==actorID);
             this.displayActor = this.scene.children[displayActorIndex];
-            if (this.displayActor!=undefined) this.displayActor.createGizmo();
+            if (this.displayActor!=undefined) {
+                this.displayActor.createGizmo();
            
-            this.actorButton.style.visibility="visible";
-
-            var p=this.displayActor.points;
-            p[0].y=-p[0].y;
-    
-            var xMax=0; var xMin=0; var yMax=0; var yMin=0;
-            p.forEach((i,index) => {
-                i=Utils.rotatePoint(i,-this.displayActor.angle);
-                if (i.x<xMin) xMin=i.x; if (i.x>xMax) xMax=i.x;
-                if (i.y>yMin ) yMin=i.y; if (i.y<yMax && index!=0) yMax=i.y;
-            });
-    
-            this.actorButton.style.left=((this.displayActor.transform.position.x+xMax+8)*this.app.stage.scale.x+this.app.stage.x)+"px";
-            this.actorButton.style.top=((-this.displayActor.transform.position.y+yMax)*this.app.stage.scale.y+this.app.stage.y)+"px";
+                var p=this.displayActor.points;
+                p[0].y=-p[0].y;
+        
+                var xMax=0; var xMin=0; var yMax=0; var yMin=0;
+                p.forEach((i,index) => {
+                    i=Utils.rotatePoint(i,-this.displayActor.angle);
+                    if (i.x<xMin) xMin=i.x; if (i.x>xMax) xMax=i.x;
+                    if (i.y>yMin ) yMin=i.y; if (i.y<yMax && index!=0) yMax=i.y;
+                });
+                this.actorButton.style.left=((this.displayActor.transform.position.x+xMax+8)*this.appStage.scale.x+this.appStage.x)+"px";
+                this.actorButton.style.top=((-this.displayActor.transform.position.y+yMax)*this.appStage.scale.y+this.appStage.y)+"px";
+                this.actorButton.style.visibility="visible";
+                this.selected=true;
+            }
+            else this.selected=false;
         }
         else{
             if (this.selected) this.displayActor.removeGizmo();
@@ -216,15 +228,16 @@ class CanvasView {
     }
 
     positionToAddActor(){
-        var position={x:0,y:this.app.stage.y};
+        var position={x:0,y:this.appStage.y};
         var drawerApp=document.querySelector(".mdc-drawer-app-content");
-        (drawerApp.getBoundingClientRect().x==0) ? position.x = this.app.stage.x : position.x = this.app.stage.x+this.drawerOffset;
+        (drawerApp.getBoundingClientRect().x==0) ? position.x = this.appStage.x : position.x = this.appStage.x+this.drawerOffset;
         position.x=-position.x+window.innerWidth/2.0;
         position.y=position.y-window.innerHeight/2+32; 
-        position.x=position.x / this.app.stage.scale.x;
-        position.y=position.y / this.app.stage.scale.y;
+        position.x=position.x / this.appStage.scale.x;
+        position.y=position.y / this.appStage.scale.y;
         return (position);
     }
+    
 // Handlers
     propertiesActorHandler(e){
         Command.openActorPropertiesCmd();
@@ -268,7 +281,7 @@ class CanvasView {
 
     resize(){
         if (this.html.style.display=="block"){ 
-            this.app.renderer.resize(window.innerWidth,window.innerHeight);
+            this.appRenderer.resize(window.innerWidth,window.innerHeight);
             this.update(this.actorList,this.gameProperties);
             if (this.selected) Command.selectActorCmd(this.displayActor.id);
         }
@@ -277,15 +290,15 @@ class CanvasView {
     mouseStageDown(e){
         if (e.target instanceof DisplayActor == false){
             this.position0={x:e.data.global.x,y:e.data.global.y};
-            this.stage={x:this.app.stage.x,y:this.app.stage.y};
+            this.stage={x:this.appStage.x,y:this.appStage.y};
             this.mouseDown=true;
             if (this.selected) Command.selectActorCmd(null);
         }
     }
 
     mouseStageUp(){
-        this.app.stage.hitArea.x -=this.diff.x;
-        this.app.stage.hitArea.y +=this.diff.y;
+        this.appStage.hitArea.x -=this.diff.x;
+        this.appStage.hitArea.y +=this.diff.y;
         this.mouseDown=false;
     }
 
@@ -293,26 +306,26 @@ class CanvasView {
        if (this.mouseDown){ 
          var position1={x:e.data.global.x,y:e.data.global.y};
          this.diff={x:position1.x-this.position0.x,y:position1.y-this.position0.y};
-         this.app.stage.x = this.stage.x+this.diff.x;
-         this.app.stage.y = this.stage.y+this.diff.y;
+         this.appStage.x = this.stage.x+this.diff.x;
+         this.appStage.y = this.stage.y+this.diff.y;
        }
     }
 
     mouseStageWheel(e){
         this.zoom(e.deltaY,e.offsetX,e.offsetY);
-        if (this.selected) Command.selectActorCmd(this.displayActor.id);
+        if (this.selected && this.displayActor) Command.selectActorCmd(this.displayActor.id);
     }
 
 // Utils
     hitArea(container){
         var width=window.innerWidth/container.scale.x;
         var height=window.innerHeight/container.scale.y;
-        this.app.stage.hitArea = new PIXI.Rectangle(-width*50,height*50,width*100,-height*100);
+        this.appStage.hitArea = new PIXI.Rectangle(-width*50,height*50,width*100,-height*100);
     }
 
     zoom (s,x,y){
         s = s > 0 ? 0.9: 1.1;
-        var stage = this.app.stage;
+        var stage = this.appStage;
         var worldPos = {x: (x - stage.x ) / stage.scale.x, y: (y - stage.y)/stage.scale.y};
         var newScale = {x: stage.scale.x * s, y: stage.scale.y * s};
         var newScreenPos = {x: worldPos.x * newScale.x + stage.x, y: worldPos.y * newScale.y + stage.y};
@@ -333,7 +346,7 @@ class CanvasView {
             stage.y -= (newScreenPos.y-y) ;
         }
 
-        this.app.stage=stage;
+        this.appStage=stage;
         this.hitArea(this.scene);
     }
 }

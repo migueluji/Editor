@@ -95,8 +95,6 @@ class Logic {
 
         if(actor.__scriptListData != undefined) { 
 
-            console.log(actor.scriptList, actor.__scriptListData);
-
             actor.scriptList        = actor.__scriptListData;
             actor.__scriptListData  = [];
             delete actor.__scriptListData;
@@ -148,16 +146,14 @@ class Logic {
         this.engine.game.FPS            = Math.floor(1 / this.engine.game.deltaTime);
         this.previousTime               = this.currentTime;
         this.engine.game.elapsedTime    += this.engine.game.deltaTime; 
-
-        /** Contabilizar los timers */
-        for(var i in this.timerList) { this.timerList[i].timer += this.engine.game.deltaTime; }
     }
     
     updateTimer(condition, timerProperty) {
 
-        timerProperty.timer         = condition ? 0 : timerProperty.timer;
-        timerProperty.previousTime  = condition ? this.engine.game.elapsedTime : timerProperty.previousTime;
-        timerProperty.timer = (timerProperty.previousTime > (this.engine.game.elapsedTime - this.engine.game.deltaTime * 1.07)) ? 0 : timerProperty.timer;
+        timerProperty.timer += this.engine.game.deltaTime;
+        timerProperty.timer = condition ? 0 : timerProperty.timer;
+        timerProperty.timer = (timerProperty.iteration + 1 != this.engine.iteration) ? 0 : timerProperty.timer;
+        timerProperty.iteration = this.engine.iteration;
     }
 
     animateActor(actor, animation, timerCondition) {
@@ -231,7 +227,7 @@ class Logic {
         actor.scope[secondsCondition] = true;
 
         /* Añadimos la varible de control al engine. */
-        this.timerList[timerProperty] = {timer: 0.00, previousTime: 0.00, timerProperty: timerProperty, timerCondition: timerCondition};
+        this.timerList[timerProperty] = {timer: 0.00, timerProperty: timerProperty, timerCondition: timerCondition, iteration: -1};
 
         /** Añadimos las variables de control a las listas locales (si no existen, se crean), para gestionar su eliminacion. */
         actor.localTimerList = (actor.localTimerList == undefined) ? [] : actor.localTimerList;
@@ -541,8 +537,6 @@ class Logic {
 
         /** Definimos la expresion */
         var expression = "engine.removeSceneHandler()" + "\n";
-
-        console.log(actor, parameters, expression);
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
         return new Do(expression, actor.scope);

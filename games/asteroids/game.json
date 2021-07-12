@@ -119,7 +119,7 @@
 					"tileX": 1,
 					"tileY": 1,
 					"textOn": false,
-					"text": "${Me.angle}",
+					"text": "",
 					"font": "Arial",
 					"size": 30,
 					"fill": "#ffffff",
@@ -149,10 +149,17 @@
 							"name": "Movement",
 							"nodeList": [
 								{
-									"type": "Move",
+									"type": "Edit",
 									"parameters": {
-										"speed": "600",
-										"angle": "Me.angle"
+										"property": "Me.x",
+										"value": "Me.x+600*Game.deltaTime*cos(Me.angle*0.0174532)"
+									}
+								},
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.y",
+										"value": "Me.y+Game.deltaTime*600*sin(Me.angle*0.0174532)"
 									}
 								},
 								{
@@ -234,11 +241,10 @@
 									},
 									"nodeListTrue": [
 										{
-											"type": "Rotate",
+											"type": "Edit",
 											"parameters": {
-												"speed": "300",
-												"pivot_X": "Me.x",
-												"pivot_Y": "Me.y"
+												"property": "Me.angle",
+												"value": "Me.angle+100*Game.deltaTime"
 											}
 										}
 									],
@@ -1121,7 +1127,7 @@
 												"actor": "asteroid",
 												"x": "random(-400,400)",
 												"y": 0,
-												"angle": 0
+												"angle": "random(1,360)"
 											}
 										}
 									],

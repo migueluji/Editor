@@ -55,31 +55,20 @@ class Physics {
 
     reset() {
 
-        var rb, col;
+        this.resetCollisionFlags(this.triggerList);
+        this.resetCollisionFlags(this.rigidbodyList);
+    }
 
-        for(var i = 0; i < this.rigidbodyList.length; i++) { // TODO: ¿Se podria hacer con maps o filters?
+    resetCollisionFlags(list) {
 
-            rb = this.rigidbodyList[i];
-
-            for(var j = 0; j < rb.collisionList.length; j++) {
+        list.forEach(i => { 
+            
+            i.collisionList.forEach(j => { 
                 
-                col = rb[rb.collisionList[j]];
-                col.value = col.end ? false : col.value;
-                col.end = false;
-            }
-        }
-
-        for(var i = 0; i < this.triggerList.length; i++) { // TODO: ¿Se podria hacer con maps o filters?
-
-            rb = this.triggerList[i];
-
-            for(var j = 0; j < rb.collisionList.length; j++) {
-                
-                col = rb[rb.collisionList[j]];
-                col.value = col.end ? false : col.value;
-                col.end = false;
-            }
-        }
+                i[j].value = i[j].end ? false : i[j].value; 
+                i[j].end = !i[j].value && i[j].end; 
+            });
+        });
     }
 
     updateWorld() {
@@ -310,8 +299,6 @@ class Physics {
     }
 
     sleepRigidbodies() {
-
-        console.log(this.rigidbodyList);
 
         for(var i = 0; i < this.rigidbodyList.length; i++) {
             

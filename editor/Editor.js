@@ -1,7 +1,7 @@
 class Editor {
     
     constructor(editorView,gameModel) {
-        console.log(gameModel);
+      //  console.log(gameModel);
         this.view = editorView;
         this.model = gameModel;
         this.selectedSceneIndex=0;
@@ -77,6 +77,9 @@ class Editor {
         delete saveToFile.imageList;
         delete saveToFile.soundList;
         File.save(JSON.stringify(saveToFile, (key,value)=>{if(key!="id")return value}, '\t'));
+     }
+
+     takeScreenshot(){
         this.canvasView.takeScreenshot(400,240,0,this.model.sceneList[0].actorList,true); // 400x240 size of image for server 
      }
 
@@ -296,7 +299,7 @@ class Editor {
         this.selectScene(sceneID);
         this.selectActor(actorID);
         this.openActorScripts();
-        this.selectScript(script.id,false);
+        this.selectScript(script.id,true);
     }
 
     removeScript(sceneID,actorID,scriptID){

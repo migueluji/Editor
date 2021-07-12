@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
 	"name": "tetris",
 	"displayWidth": 480,
 	"displayHeight": 800,
@@ -333,4 +334,6 @@
 			]
 		}
 	]
+=======
+>>>>>>> 7315a398fbb5c8bdf4a00f51ae338437dcb3c583
 }

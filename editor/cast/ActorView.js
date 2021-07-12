@@ -21,7 +21,7 @@ class ActorView {
 		this.html.addEventListener("dragover",this.dragoverActorHandler.bind(this));
 		this.html.addEventListener("dragleave",this.dragleaveActorHandler.bind(this));
 		this.html.addEventListener("drop",this.dropActorHandler.bind(this));
-	  	this.html.addEventListener("click",this.selectActorHandler.bind(this));
+		this.html.addEventListener("click",this.selectActorHandler.bind(this));
 	}
    
   	addView(actor) {
@@ -67,7 +67,8 @@ class ActorView {
 		e.preventDefault();
 		var element= document.createElement("div");
 		element.innerHTML=e.dataTransfer.getData('text/html');
-		element=element.firstElementChild;
+		//element=element.firstElementChild;
+		element=element.querySelector(".mdc-list-item");
 		var sceneSelected=document.querySelector(".sceneselected").id;
 		CmdManager.moveActorCmd(sceneSelected,element.id,this.position(this.html,this.html.parentNode));
 		this.html.classList.remove("over");

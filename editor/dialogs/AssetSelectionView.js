@@ -60,7 +60,7 @@ class AssetSelectionView {
 		var list = this.html.querySelector(".mdc-image-list");
 		var name = assetView.html.firstChild.nextSibling.textContent;
 		var i=0;
-		while (i<list.childNodes.length && name > list.childNodes[i].firstChild.nextSibling.textContent) i++;
+		while (i<list.childNodes.length && name.toUpperCase() > list.childNodes[i].firstChild.nextSibling.textContent.toUpperCase()) i++;
 		list.insertBefore(assetView.html,list.childNodes[i]);
 	}
 
@@ -106,7 +106,7 @@ class AssetSelectionView {
 		var list =this.html.querySelectorAll(".mdc-image-list__label");
 		for( var i=0; i<files.length;i++){
 			var j=0;
-			while((j<list.length) && (files[i].name!=list[j].innerText)){
+			while((j<list.length) && (files[i].name.toUpperCase()!=list[j].innerText.toUpperCase())){
 				j++;
 			};
 			if (j==list.length) {

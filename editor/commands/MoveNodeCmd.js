@@ -13,7 +13,7 @@ class MoveNodeCmd extends Command {
         var scriptIndex= this.editor.model.sceneList[sceneIndex].actorList[actorIndex].scriptList.findIndex(i=>i.id==scriptID);
         var script = this.editor.model.sceneList[sceneIndex].actorList[actorIndex].scriptList[scriptIndex];
          
-        var founded=script.findNode(script.nodeList,nodeID); 
+        var founded=script.findNode(script.nodeList,nodeID,null,null); 
         this.node= founded.list[founded.position]; // the complete node obtained by ID
         this.remove={"parentID":founded.parentID,"side":founded.side,"position":founded.position};
         
@@ -24,7 +24,7 @@ class MoveNodeCmd extends Command {
     
     execute (){
         this.editor.removeNode(this.sceneID,this.actorID,this.scriptID,this.nodeID);
-        var founded=this.script.findNode(this.script.nodeList,this.insert.parentID);
+        var founded=this.script.findNode(this.script.nodeList,this.insert.parentID,null,null);
         // to avoid add a node that does not exists!
         if (founded!=undefined || this.insert.parentID==null) this.editor.addNode(this.sceneID,this.actorID,this.scriptID,this.insert,this.node);
     }
