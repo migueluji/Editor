@@ -13,16 +13,68 @@
 	"start": 0,
 	"pan": 0,
 	"loop": false,
-	"physicsOn": false,
+	"physicsOn": true,
 	"gravityX": 0,
 	"gravityY": 0,
 	"tagList": [
-		"piece"
+		"piece",
+		"spawnarea"
 	],
 	"sceneList": [
 		{
 			"name": "Scene_1",
 			"actorList": [
+				{
+					"name": "Spawn_Area",
+					"sleeping": false,
+					"x": 0,
+					"y": 375,
+					"width": 554,
+					"height": 50,
+					"scaleX": 11.08,
+					"scaleY": 1,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "spawnarea",
+					"spriteOn": false,
+					"image": "",
+					"color": "#ffffff",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": []
+				},
 				{
 					"name": "floor",
 					"sleeping": false,
@@ -75,9 +127,9 @@
 					"scriptList": []
 				},
 				{
-					"name": "base",
+					"name": "pivot",
 					"sleeping": false,
-					"x": 1.5,
+					"x": 0,
 					"y": 425,
 					"width": 50,
 					"height": 50,
@@ -87,10 +139,10 @@
 					"screen": false,
 					"collider": "Circle",
 					"tags": "",
-					"spriteOn": true,
+					"spriteOn": false,
 					"image": "",
-					"color": "#ff0000",
-					"opacity": 1,
+					"color": "#0000ff",
+					"opacity": 0.5,
 					"flipX": false,
 					"flipY": false,
 					"scrollX": 0,
@@ -98,7 +150,7 @@
 					"tileX": 1,
 					"tileY": 1,
 					"textOn": false,
-					"text": "${Me.angle}",
+					"text": "${Me.sleeping}",
 					"font": "Arial",
 					"size": 30,
 					"fill": "#000000",
@@ -112,7 +164,7 @@
 					"volume": 1,
 					"pan": 0,
 					"loop": false,
-					"physicsOn": true,
+					"physicsOn": false,
 					"type": "Static",
 					"fixedAngle": true,
 					"velocityX": 0,
@@ -125,7 +177,125 @@
 					"dampingAngular": 0,
 					"scriptList": [
 						{
-							"name": "Init_Spawn",
+							"name": "Move",
+							"nodeList": [
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "ArrowRight",
+										"key_Mode": "Down"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.x",
+												"value": "Me.x+50"
+											}
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "ArrowLeft",
+										"key_Mode": "Down"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.x",
+												"value": "Me.x-50"
+											}
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Timer",
+									"parameters": {
+										"seconds": "1/4"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.y",
+												"value": "Me.y-50"
+											}
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "ArrowUp",
+										"key_Mode": "Down"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.angle",
+												"value": "Me.angle+90"
+											}
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "piece"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Timer",
+											"parameters": {
+												"seconds": "Game.deltaTime"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.x",
+														"value": "0"
+													}
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.y",
+														"value": "425"
+													}
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.angle",
+														"value": "0"
+													}
+												},
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.init",
+														"value": true
+													}
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						},
+						{
+							"name": "Spawn",
 							"nodeList": [
 								{
 									"type": "Check",
@@ -144,15 +314,6 @@
 											"type": "Spawn",
 											"parameters": {
 												"actor": "piece",
-												"x": "50",
-												"y": "0",
-												"angle": 0
-											}
-										},
-										{
-											"type": "Spawn",
-											"parameters": {
-												"actor": "piece",
 												"x": "-50",
 												"y": 0,
 												"angle": 0
@@ -162,180 +323,27 @@
 											"type": "Spawn",
 											"parameters": {
 												"actor": "piece",
-												"x": 0,
+												"x": "0",
 												"y": "50",
 												"angle": 0
 											}
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						},
-						{
-							"name": "Rotate",
-							"nodeList": [
-								{
-									"type": "Edit",
-									"parameters": {
-										"property": "Me.rotate",
-										"value": false
-									}
-								},
-								{
-									"type": "Edit",
-									"parameters": {
-										"property": "Me.angle",
-										"value": "0"
-									}
-								},
-								{
-									"type": "Keyboard",
-									"parameters": {
-										"key": "ArrowUp",
-										"key_Mode": "Down"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.rotate",
-												"value": true
-											}
 										},
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.angle",
-												"value": "Me.angle+90"
-											}
-										}
-									],
-									"nodeListFalse": []
-								}
-							]
-						},
-						{
-							"name": "Move",
-							"nodeList": [
-								{
-									"type": "Edit",
-									"parameters": {
-										"property": "Me.movey",
-										"value": "0"
-									}
-								},
-								{
-									"type": "Edit",
-									"parameters": {
-										"property": "Me.movex",
-										"value": "0"
-									}
-								},
-								{
-									"type": "Timer",
-									"parameters": {
-										"seconds": "1/4"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.movey",
-												"value": "-50"
-											}
-										}
-									],
-									"nodeListFalse": []
-								},
-								{
-									"type": "Edit",
-									"parameters": {
-										"property": "Me.y",
-										"value": "Me.y+Me.movey"
-									}
-								},
-								{
-									"type": "Keyboard",
-									"parameters": {
-										"key": "ArrowRight",
-										"key_Mode": "Down"
-									},
-									"nodeListTrue": [
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.movex",
-												"value": "50"
-											}
-										}
-									],
-									"nodeListFalse": [
-										{
-											"type": "Keyboard",
-											"parameters": {
-												"key": "ArrowLeft",
-												"key_Mode": "Down"
-											},
-											"nodeListTrue": [
-												{
-													"type": "Edit",
-													"parameters": {
-														"property": "Me.movex",
-														"value": "-50"
-													}
-												}
-											],
-											"nodeListFalse": []
-										}
-									]
-								},
-								{
-									"type": "Edit",
-									"parameters": {
-										"property": "Me.x",
-										"value": "Me.x+Me.movex"
-									}
-								}
-							]
-						},
-						{
-							"name": "Stop",
-							"nodeList": [
-								{
-									"type": "Collision",
-									"parameters": {
-										"tags": "piece"
-									},
-									"nodeListTrue": [
 										{
 											"type": "Spawn",
 											"parameters": {
-												"actor": "Static_Piece",
+												"actor": "piece",
 												"x": 0,
 												"y": 0,
 												"angle": 0
 											}
 										},
 										{
-											"type": "Edit",
+											"type": "Spawn",
 											"parameters": {
-												"property": "Me.y",
-												"value": "425"
-											}
-										},
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.x",
-												"value": "0"
-											}
-										},
-										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.init",
-												"value": true
+												"actor": "piece",
+												"x": "50",
+												"y": 0,
+												"angle": 0
 											}
 										}
 									],
@@ -344,17 +352,13 @@
 							]
 						}
 					],
-					"rotate": false,
-					"init": true,
-					"stop": false,
-					"movex": 0,
-					"movey": 0
+					"init": true
 				},
 				{
 					"name": "piece",
 					"sleeping": true,
-					"x": -208.26496607385798,
-					"y": 437.735033926142,
+					"x": -208.76496607385798,
+					"y": 438.235033926142,
 					"width": 50,
 					"height": 50,
 					"scaleX": 1,
@@ -374,7 +378,7 @@
 					"tileX": 1,
 					"tileY": 1,
 					"textOn": false,
-					"text": "${Me.y}",
+					"text": "${Me.x}     ${Me.y}",
 					"font": "Arial",
 					"size": 30,
 					"fill": "#000000",
@@ -388,7 +392,7 @@
 					"volume": 1,
 					"pan": 0,
 					"loop": false,
-					"physicsOn": true,
+					"physicsOn": false,
 					"type": "Static",
 					"fixedAngle": true,
 					"velocityX": 0,
@@ -419,11 +423,8 @@
 											}
 										},
 										{
-											"type": "Edit",
-											"parameters": {
-												"property": "Me.sleeping",
-												"value": true
-											}
+											"type": "Delete",
+											"parameters": {}
 										}
 									],
 									"nodeListFalse": []
@@ -434,23 +435,37 @@
 							"name": "Move",
 							"nodeList": [
 								{
-									"type": "Check",
+									"type": "Timer",
 									"parameters": {
-										"property": "base.rotate"
+										"seconds": "Game.deltaTime"
 									},
 									"nodeListTrue": [
 										{
 											"type": "Edit",
 											"parameters": {
+												"property": "Me.y",
+												"value": "pivot.y+Me.y0"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.x",
+												"value": "pivot.x+Me.x0"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
 												"property": "Me.newx",
-												"value": "cos(base.angle*3.1415/180) * (Me.x-base.x) - sin(base.angle*3.1415/180) *(Me.y-base.y) + base.x"
+												"value": "cos(pivot.angle*3.1415/180)*(Me.x-pivot.x)-sin(pivot.angle*3.1415/180)*(Me.y-pivot.y)+pivot.x"
 											}
 										},
 										{
 											"type": "Edit",
 											"parameters": {
 												"property": "Me.y",
-												"value": "sin(base.angle*3.1415/180)*(Me.x-base.x)+cos(base.angle*3.1415/180)*(Me.y-base.y)+base.y"
+												"value": "sin(pivot.angle*3.1415/180)*(Me.x-pivot.x)+cos(pivot.angle*3.1415/180)*(Me.y-pivot.y)+pivot.y"
 											}
 										},
 										{
@@ -462,31 +477,55 @@
 										}
 									],
 									"nodeListFalse": []
-								},
+								}
+							]
+						},
+						{
+							"name": "Init",
+							"nodeList": [
 								{
-									"type": "Edit",
+									"type": "Check",
 									"parameters": {
-										"property": "Me.y",
-										"value": "Me.y+base.movey"
-									}
-								},
-								{
-									"type": "Edit",
-									"parameters": {
-										"property": "Me.x",
-										"value": "Me.x+base.movex"
-									}
+										"property": "Me.init"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.x0",
+												"value": "Me.x-pivot.x"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.y0",
+												"value": "Me.y-pivot.y"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.init",
+												"value": false
+											}
+										}
+									],
+									"nodeListFalse": []
 								}
 							]
 						}
 					],
+					"init": true,
+					"x0": 0,
+					"y0": 0,
 					"newx": 0
 				},
 				{
 					"name": "Static_Piece",
 					"sleeping": true,
 					"x": -148.5,
-					"y": 439.5,
+					"y": 438,
 					"width": 50,
 					"height": 50,
 					"scaleX": 1,
@@ -536,5 +575,7 @@
 			]
 		}
 	],
-	"stop": false
+	"keyup": false,
+	"keyleft": false,
+	"keyright": false
 }
