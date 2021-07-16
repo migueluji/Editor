@@ -1,0 +1,308 @@
+globals [
+  score
+  level
+  lines
+  next-shape   ;; we number the different piece shapes 0 through 6
+  game-over?
+]
+breed [ pieces piece ]   ;; pieces fall through the air...
+breed [ blocks block ]   ;; ...and when they land, they become blocks
+
+pieces-own [
+  x y      ;; these are the piece's offsets relative to turtle 0
+]
+blocks-own [
+  line     ;; the bottom line is line 0, above it is line 1, and so on
+]
+
+;;;;;;;;;;;;;
+;;; Notes ;;;
+;;;;;;;;;;;;;
+
+;  It's a little tricky to make it so that the four turtles that make
+;  up each piece always move together.  There are various possible ways
+;  that you could arrange this, but here's how we chose to make it work.
+;  We only ever make four turtles of the "pieces" breed, and we reuse
+;  those same four turtles to make up each successive piece that falls.
+;  Since they are the first four turtles created, we know that their
+;  "who" numbers will be 0, 1, 2, and 3.  turtle 0 is special; it's
+;  the turtle around which the others rotate when the user rotates
+;  the piece.  The breed variables "x" and "y" hold each turtle's
+;  offsets from turtle 0.
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Setup Procedures ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+to new
+  clear-all
+  set-default-shape turtles "square big"
+  set score 0
+  set level starting-level
+  set lines 0
+  set next-shape random 7
+  set game-over? false
+  ;; make the piece turtles first so they get who numbers of 0 through 3
+  create-pieces 4
+  [ set heading 180 ]
+  ;; draw the board
+  ask patches
+  [ ifelse (pxcor = -9) or (pxcor > 3) or (pycor = min-pycor)
+    [ set pcolor gray ]
+    [ ;; make debris
+      if ((pycor + max-pycor) <= debris-level and
+          (pycor + max-pycor) > 0 and
+          (random 2 = 0))
+      [ sprout-blocks 1
+        [ set line (pycor + max-pycor)
+          set heading 180
+          set color blue ]
+      ]
+    ]
+  ]
+  ;; make the "Next Piece" area
+  ask patch 6 10 [ set plabel "Next" ]
+  ask patches with [((pxcor > 4) and (pxcor < 9) and
+                     (pycor > 5) and (pycor < 11))]
+  [ set pcolor black ]
+  ;; setup the new piece
+  new-piece
+  reset-ticks
+end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Interface Buttons ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+to rotate-right
+  if rotate-right-clear? and not game-over?
+    [ ask pieces [ rotate-me-right ] ]
+end
+
+to rotate-me-right  ;; Piece Procedure
+  let oldx x
+  let oldy y
+  set x oldy
+  set y (- oldx)
+  set xcor ([xcor] of turtle 0) + x
+  set ycor ([ycor] of turtle 0) + y
+end
+
+to rotate-left
+  if rotate-left-clear? and not game-over?
+    [ ask pieces [ rotate-me-left ] ]
+end
+
+to rotate-me-left  ;; Piece Procedure
+  let oldx x
+  let oldy y
+  set x (- oldy)
+  set y oldx
+  set xcor ([xcor] of turtle 0) + x
+  set ycor ([ycor] of turtle 0) + y
+end
+
+to shift-right
+  if (clear-at? 1 0) and not game-over?
+    [ ask pieces [ set xcor xcor + 1 ] ]
+end
+
+to shift-left
+  if (clear-at? -1 0) and not game-over?
+    [ ask pieces [ set xcor xcor - 1 ] ]
+end
+
+to shift-down
+  ifelse (clear-at? 0 -1) and not game-over?
+    [ ask pieces [ fd 1 ] ]
+    [ place-piece ]
+end
+
+to drop-down
+  while [(clear-at? 0 -1) and not game-over?]
+    [ ask pieces [ fd 1 ] display ]
+  place-piece
+end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Runtime Procedures ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+to play
+  if game-over? [ stop ]
+  every (0.01 + 0.12 * (10 - level))
+    [ shift-down
+      check-lines ]
+  display
+end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Overlap prevention Reporters ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+to-report clear? [p]  ;; p is a patch
+  if p = nobody [ report false ]
+  report (not any? blocks-on p) and ([pcolor] of p != gray)
+end
+
+to-report clear-at? [xoff yoff]
+  report all? pieces [clear? patch-at xoff yoff]
+end
+
+to-report rotate-left-clear?
+  report all? pieces [clear? patch-at (- y) x]
+end
+
+to-report rotate-right-clear?
+  report all? pieces [clear? patch-at y (- x)]
+end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Blocks Procedures ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+to check-lines
+  let n 1
+  let line-count 0
+  repeat (2 * max-pycor)
+  [ ifelse (count blocks with [line = n] = 12)
+    [ delete-line n
+      set line-count line-count + 1 ]
+    [ set n n + 1 ]
+  ]
+  score-lines line-count
+  set lines lines + line-count
+  if (floor (lines / 10) > level)
+  [ set level floor (lines / 10) ]
+end
+
+to delete-line [n]
+  ask blocks with [line = n] [ die ]
+  ask blocks with [line > n]
+  [ fd 1
+    set line (pycor + max-pycor) ]
+end
+
+to score-lines [n]
+  let bonus 0
+  if n = 1 [ set bonus 50   * (level + 1) ]
+  if n = 2 [ set bonus 150  * (level + 1) ]
+  if n = 3 [ set bonus 350  * (level + 1) ]
+  if n = 4 [ set bonus 1000 * (level + 1) ]
+  if (not any? blocks) and (n > 0)
+  [ set bonus bonus + 2000 * (level + 1) ]
+  set score score + bonus
+end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Pieces Procedures ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+to place-piece
+  ask pieces
+  [ hatch-blocks 1
+    [ set line (pycor + max-pycor) ]
+  ]
+  set score score + 10 * (level + 1)
+  new-piece
+end
+
+to new-piece
+  let new-shape next-shape
+  set next-shape random 7
+  if (show-next?) [ show-next-piece ]
+  ask turtle 0 [ setxy -3 12 ]
+  ask pieces
+  [ setup-piece new-shape ]
+  if any? pieces with [any? other turtles-here]
+  [ user-message "Game Over"
+    set game-over? true ]
+end
+
+to show-next-piece
+  ask patches with [(pxcor > 4) and (pxcor < 9) and (pycor > 5) and (pycor < 11)]
+  [ set pcolor black ]
+  ask turtle 0 [ setxy 6 8 ]
+  ask pieces
+  [ setup-piece next-shape
+    set pcolor color ]
+end
+
+to setup-piece [s]  ;; Piece Procedure
+  if (s = 0) [ setup-o  set color blue   ]
+  if (s = 1) [ setup-l  set color red    ]
+  if (s = 2) [ setup-j  set color yellow ]
+  if (s = 3) [ setup-t  set color green  ]
+  if (s = 4) [ setup-s  set color orange ]
+  if (s = 5) [ setup-z  set color sky    ]
+  if (s = 6) [ setup-i  set color violet ]
+  setxy ([xcor] of turtle 0) + x
+        ([ycor] of turtle 0) + y
+end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Pieces Setup Procedures ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; The numbers 0123 show the relative positions of turtles
+;; 0, 1, 2, and 3 within the overall shape.
+
+;; O-Block
+;; 01
+;; 23
+to setup-o ;;Piece Procedure
+  if (who = 1) [ set x 1 set y  0 ]
+  if (who = 2) [ set x 0 set y -1 ]
+  if (who = 3) [ set x 1 set y -1 ]
+end
+
+;; L-Block
+;; 201
+;; 3
+to setup-l ;;Piece Procedure
+  if (who = 1) [ set x  1 set y  0 ]
+  if (who = 2) [ set x -1 set y  0 ]
+  if (who = 3) [ set x -1 set y -1 ]
+end
+
+;; J-Block
+;; 102
+;;   3
+to setup-j ;;Piece Procedure
+  if (who = 1) [ set x -1 set y  0 ]
+  if (who = 2) [ set x  1 set y  0 ]
+  if (who = 3) [ set x  1 set y -1 ]
+end
+
+;; T-Block
+;; 201
+;;  3
+to setup-t ;;Piece Procedure
+  if (who = 1) [ set x  1 set y  0 ]
+  if (who = 2) [ set x -1 set y  0 ]
+  if (who = 3) [ set x  0 set y -1 ]
+end
+
+;; S-Block
+;;  01
+;; 23
+to setup-s ;;Piece Procedure
+  if (who = 1) [ set x  1 set y  0 ]
+  if (who = 2) [ set x -1 set y -1 ]
+  if (who = 3) [ set x  0 set y -1 ]
+end
+
+;; Z-block
+;; 10
+;;  32
+to setup-z ;;Piece Procedure
+  if (who = 1) [ set x -1 set y  0 ]
+  if (who = 2) [ set x  1 set y -1 ]
+  if (who = 3) [ set x  0 set y -1 ]
+end
+
+;; I-Block
+;; 1023
+to setup-i ;;Piece Procedure
+  if (who = 1) [ set x -1 set y 0 ]
+  if (who = 2) [ set x  1 set y 0 ]
+  if (who = 3) [ set x  2 set y 0 ]
+end
+
+
+; Copyright 2001 Uri Wilensky.
+; See Info tab for full copyright and license.
