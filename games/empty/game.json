@@ -521,7 +521,7 @@
 					"angle": 0,
 					"screen": false,
 					"collider": "Box",
-					"tags": "block",
+					"tags": "piece,block",
 					"spriteOn": true,
 					"image": "",
 					"color": "#c8c8c8",
@@ -1493,7 +1493,7 @@
 												{
 													"type": "Collision",
 													"parameters": {
-														"tags": "block"
+														"tags": "piece"
 													},
 													"nodeListTrue": [
 														{
@@ -1639,7 +1639,7 @@
 												{
 													"type": "Collision",
 													"parameters": {
-														"tags": "block"
+														"tags": "piece"
 													},
 													"nodeListTrue": [
 														{
@@ -1709,7 +1709,7 @@
 				},
 				{
 					"name": "Destroyer",
-					"sleeping": false,
+					"sleeping": true,
 					"x": -4.9382716049382225,
 					"y": -546.2962962962963,
 					"width": 450,
@@ -1779,7 +1779,7 @@
 				},
 				{
 					"name": "Linedown",
-					"sleeping": false,
+					"sleeping": true,
 					"x": -5.864197530864203,
 					"y": -504.01234567901247,
 					"width": 450,
