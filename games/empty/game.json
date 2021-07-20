@@ -19,7 +19,9 @@
 	"tagList": [
 		"piece",
 		"spawnarea",
-		"block"
+		"block",
+		"destroy",
+		"down"
 	],
 	"sceneList": [
 		{
@@ -49,7 +51,7 @@
 					"tileX": 1,
 					"tileY": 1,
 					"textOn": true,
-					"text": "${Game.pivotx}     ${Game.pivoty}",
+					"text": "${Game.left}${Game.right}${Game.down}",
 					"font": "Arial",
 					"size": 30,
 					"fill": "#000000",
@@ -325,7 +327,7 @@
 					"scrollY": 0,
 					"tileX": 1,
 					"tileY": 1,
-					"textOn": false,
+					"textOn": true,
 					"text": "",
 					"font": "Arial",
 					"size": 30,
@@ -556,7 +558,42 @@
 					"restitution": 0.5,
 					"dampingLinear": 0,
 					"dampingAngular": 0,
-					"scriptList": []
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "destroy"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Delete",
+											"parameters": {}
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Collision",
+									"parameters": {
+										"tags": "down"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.y",
+												"value": "Me.y-50"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					]
 				},
 				{
 					"name": "Down",
@@ -792,6 +829,13 @@
 												"property": "Me.x",
 												"value": "Me.newx"
 											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.move",
+												"value": true
+											}
 										}
 									],
 									"nodeListFalse": []
@@ -825,40 +869,12 @@
 												{
 													"type": "Edit",
 													"parameters": {
-														"property": "Game.right",
-														"value": false
+														"property": "Me.move",
+														"value": true
 													}
 												}
 											],
-											"nodeListFalse": [
-												{
-													"type": "Spawn",
-													"parameters": {
-														"actor": "Left",
-														"x": "-50",
-														"y": "0",
-														"angle": 0
-													}
-												},
-												{
-													"type": "Spawn",
-													"parameters": {
-														"actor": "Right",
-														"x": "50",
-														"y": 0,
-														"angle": 0
-													}
-												},
-												{
-													"type": "Spawn",
-													"parameters": {
-														"actor": "Down",
-														"x": 0,
-														"y": "-50",
-														"angle": 0
-													}
-												}
-											]
+											"nodeListFalse": []
 										}
 									]
 								}
@@ -891,40 +907,12 @@
 												{
 													"type": "Edit",
 													"parameters": {
-														"property": "Game.left",
-														"value": false
+														"property": "Me.move",
+														"value": true
 													}
 												}
 											],
-											"nodeListFalse": [
-												{
-													"type": "Spawn",
-													"parameters": {
-														"actor": "Right",
-														"x": "50",
-														"y": 0,
-														"angle": 0
-													}
-												},
-												{
-													"type": "Spawn",
-													"parameters": {
-														"actor": "Left",
-														"x": "-50",
-														"y": 0,
-														"angle": 0
-													}
-												},
-												{
-													"type": "Spawn",
-													"parameters": {
-														"actor": "Down",
-														"x": 0,
-														"y": "-50",
-														"angle": 0
-													}
-												}
-											]
+											"nodeListFalse": []
 										}
 									]
 								}
@@ -945,6 +933,13 @@
 											"parameters": {
 												"property": "Me.y",
 												"value": "Me.y-50"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.move",
+												"value": true
 											}
 										}
 									],
@@ -1008,6 +1003,75 @@
 									"nodeListFalse": []
 								}
 							]
+						},
+						{
+							"name": "Move",
+							"nodeList": [
+								{
+									"type": "Check",
+									"parameters": {
+										"property": "Me.move"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.move",
+												"value": false
+											}
+										},
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "Left",
+												"x": "-50",
+												"y": 0,
+												"angle": 0
+											}
+										},
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "Right",
+												"x": "50",
+												"y": 0,
+												"angle": 0
+											}
+										},
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "Down",
+												"x": 0,
+												"y": "-50",
+												"angle": 0
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.right",
+												"value": false
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.left",
+												"value": false
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.down",
+												"value": false
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
 						}
 					],
 					"who": 0,
@@ -1015,13 +1079,14 @@
 					"right": false,
 					"down": false,
 					"rotate": false,
-					"newx": 0
+					"newx": 0,
+					"move": false
 				},
 				{
 					"name": "Piece1",
 					"sleeping": true,
-					"x": -69.64814814814815,
-					"y": 415.1172839506173,
+					"x": -34.64814814814815,
+					"y": 443.1172839506173,
 					"width": 50,
 					"height": 50,
 					"scaleX": 1,
@@ -1097,6 +1162,13 @@
 												"property": "Me.x",
 												"value": "Me.newx"
 											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.move",
+												"value": true
+											}
 										}
 									],
 									"nodeListFalse": []
@@ -1130,40 +1202,12 @@
 												{
 													"type": "Edit",
 													"parameters": {
-														"property": "Game.right",
-														"value": false
+														"property": "Me.move",
+														"value": true
 													}
 												}
 											],
-											"nodeListFalse": [
-												{
-													"type": "Spawn",
-													"parameters": {
-														"actor": "Left",
-														"x": "-50",
-														"y": "0",
-														"angle": 0
-													}
-												},
-												{
-													"type": "Spawn",
-													"parameters": {
-														"actor": "Right",
-														"x": "50",
-														"y": 0,
-														"angle": 0
-													}
-												},
-												{
-													"type": "Spawn",
-													"parameters": {
-														"actor": "Down",
-														"x": 0,
-														"y": "-50",
-														"angle": 0
-													}
-												}
-											]
+											"nodeListFalse": []
 										}
 									]
 								}
@@ -1196,40 +1240,12 @@
 												{
 													"type": "Edit",
 													"parameters": {
-														"property": "Game.left",
-														"value": false
+														"property": "Me.move",
+														"value": true
 													}
 												}
 											],
-											"nodeListFalse": [
-												{
-													"type": "Spawn",
-													"parameters": {
-														"actor": "Right",
-														"x": "50",
-														"y": 0,
-														"angle": 0
-													}
-												},
-												{
-													"type": "Spawn",
-													"parameters": {
-														"actor": "Left",
-														"x": "-50",
-														"y": 0,
-														"angle": 0
-													}
-												},
-												{
-													"type": "Spawn",
-													"parameters": {
-														"actor": "Down",
-														"x": 0,
-														"y": "-50",
-														"angle": 0
-													}
-												}
-											]
+											"nodeListFalse": []
 										}
 									]
 								}
@@ -1250,6 +1266,13 @@
 											"parameters": {
 												"property": "Me.y",
 												"value": "Me.y-50"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.move",
+												"value": true
 											}
 										}
 									],
@@ -1313,6 +1336,75 @@
 									"nodeListFalse": []
 								}
 							]
+						},
+						{
+							"name": "Move",
+							"nodeList": [
+								{
+									"type": "Check",
+									"parameters": {
+										"property": "Me.move"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.move",
+												"value": false
+											}
+										},
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "Left",
+												"x": "-50",
+												"y": 0,
+												"angle": 0
+											}
+										},
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "Right",
+												"x": "50",
+												"y": 0,
+												"angle": 0
+											}
+										},
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "Down",
+												"x": 0,
+												"y": "-50",
+												"angle": 0
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.right",
+												"value": false
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.left",
+												"value": false
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Game.down",
+												"value": false
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
 						}
 					],
 					"who": 1,
@@ -1320,7 +1412,434 @@
 					"right": false,
 					"down": false,
 					"rotate": false,
-					"newx": 0
+					"newx": 0,
+					"move": false
+				},
+				{
+					"name": "checker",
+					"sleeping": false,
+					"x": -250,
+					"y": -350,
+					"width": 40,
+					"height": 40,
+					"scaleX": 0.8,
+					"scaleY": 0.8,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "",
+					"color": "#44ebee",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": true,
+					"text": "${Me.blocks}",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 58,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "KeyD",
+										"key_Mode": "Pressed"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "Me.x",
+												"operation": "Less",
+												"value_2": "250"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.x",
+														"value": "Me.x+50"
+													}
+												},
+												{
+													"type": "Collision",
+													"parameters": {
+														"tags": "block"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.blocks",
+																"value": "Me.blocks+1"
+															}
+														}
+													],
+													"nodeListFalse": []
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.blocks",
+										"operation": "Equal",
+										"value_2": "7"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "Destroyer",
+												"x": "-250",
+												"y": 0,
+												"angle": 0
+											}
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "KeyS",
+										"key_Mode": "Down"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.x",
+												"value": "-250"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.blocks",
+												"value": "-1"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					],
+					"blocks": 0
+				},
+				{
+					"name": "checker_copy",
+					"sleeping": false,
+					"x": -250,
+					"y": -300,
+					"width": 40,
+					"height": 40,
+					"scaleX": 0.8,
+					"scaleY": 0.8,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "",
+					"spriteOn": true,
+					"image": "",
+					"color": "#44ebee",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": true,
+					"text": "${Me.blocks}",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 58,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "KeyD",
+										"key_Mode": "Pressed"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Compare",
+											"parameters": {
+												"value_1": "Me.x",
+												"operation": "Less",
+												"value_2": "250"
+											},
+											"nodeListTrue": [
+												{
+													"type": "Edit",
+													"parameters": {
+														"property": "Me.x",
+														"value": "Me.x+50"
+													}
+												},
+												{
+													"type": "Collision",
+													"parameters": {
+														"tags": "block"
+													},
+													"nodeListTrue": [
+														{
+															"type": "Edit",
+															"parameters": {
+																"property": "Me.blocks",
+																"value": "Me.blocks+1"
+															}
+														}
+													],
+													"nodeListFalse": []
+												}
+											],
+											"nodeListFalse": []
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Compare",
+									"parameters": {
+										"value_1": "Me.blocks",
+										"operation": "Equal",
+										"value_2": "7"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Spawn",
+											"parameters": {
+												"actor": "Destroyer",
+												"x": "-250",
+												"y": 0,
+												"angle": 0
+											}
+										}
+									],
+									"nodeListFalse": []
+								},
+								{
+									"type": "Keyboard",
+									"parameters": {
+										"key": "KeyS",
+										"key_Mode": "Down"
+									},
+									"nodeListTrue": [
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.x",
+												"value": "-250"
+											}
+										},
+										{
+											"type": "Edit",
+											"parameters": {
+												"property": "Me.blocks",
+												"value": "-1"
+											}
+										}
+									],
+									"nodeListFalse": []
+								}
+							]
+						}
+					],
+					"blocks": 0
+				},
+				{
+					"name": "Destroyer",
+					"sleeping": false,
+					"x": -4.9382716049382225,
+					"y": -546.2962962962963,
+					"width": 450,
+					"height": 20,
+					"scaleX": 9,
+					"scaleY": 0.4,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "destroy",
+					"spriteOn": true,
+					"image": "",
+					"color": "#f61313",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Spawn",
+									"parameters": {
+										"actor": "Linedown",
+										"x": 0,
+										"y": 0,
+										"angle": 0
+									}
+								},
+								{
+									"type": "Delete",
+									"parameters": {}
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Linedown",
+					"sleeping": false,
+					"x": -5.864197530864203,
+					"y": -504.01234567901247,
+					"width": 450,
+					"height": 20,
+					"scaleX": 9,
+					"scaleY": 0.4,
+					"angle": 0,
+					"screen": false,
+					"collider": "Box",
+					"tags": "down",
+					"spriteOn": true,
+					"image": "",
+					"color": "#00f510",
+					"opacity": 1,
+					"flipX": false,
+					"flipY": false,
+					"scrollX": 0,
+					"scrollY": 0,
+					"tileX": 1,
+					"tileY": 1,
+					"textOn": false,
+					"text": "",
+					"font": "Arial",
+					"size": 30,
+					"fill": "#000000",
+					"style": "Normal",
+					"align": "Center",
+					"offsetX": 0,
+					"offsetY": 0,
+					"soundOn": false,
+					"sound": "",
+					"start": 0,
+					"volume": 1,
+					"pan": 0,
+					"loop": false,
+					"physicsOn": false,
+					"type": "Dynamic",
+					"fixedAngle": false,
+					"velocityX": 0,
+					"velocityY": 0,
+					"angularVelocity": 0,
+					"density": 1,
+					"friction": 0.5,
+					"restitution": 0.5,
+					"dampingLinear": 0,
+					"dampingAngular": 0,
+					"scriptList": [
+						{
+							"name": "Script_1",
+							"nodeList": [
+								{
+									"type": "Edit",
+									"parameters": {
+										"property": "Me.y",
+										"value": "Me.y+50"
+									}
+								}
+							]
+						}
+					]
 				}
 			]
 		},
