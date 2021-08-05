@@ -135,7 +135,7 @@
 	//	gameFolder="alien-invasion";
 	//	gameFolder="babe-plataformer";
 	//  gameFolder="ludumdare46-carlos";
-		gameFolder="empty";
+		gameFolder="tetris";
 	//	gameFolder="prehistoric";
 	//	gameFolder="pirate-bomb";
 

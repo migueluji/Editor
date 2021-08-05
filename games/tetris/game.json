@@ -1,0 +1,37 @@
+{
+	"name": "empty",
+	"displayWidth": 480,
+	"displayHeight": 775,
+	"cameraX": 0,
+	"cameraY": 0,
+	"cameraAngle": 0,
+	"cameraZoom": 1,
+	"backgroundColor": "#ffffff",
+	"soundOn": false,
+	"soundtrack": "",
+	"volume": 1,
+	"start": 0,
+	"pan": 0,
+	"loop": false,
+	"physicsOn": true,
+	"gravityX": 0,
+	"gravityY": 0,
+	"tagList": [
+		"piece",
+		"spawnarea",
+		"block",
+		"destroy",
+		"down"
+	],
+	"sceneList": [
+		{
+			"name": "scene_1",
+			"actorList": []
+		}
+	],
+	"left": false,
+	"right": false,
+	"down": false,
+	"pivotx": 0,
+	"pivoty": 0
+}
